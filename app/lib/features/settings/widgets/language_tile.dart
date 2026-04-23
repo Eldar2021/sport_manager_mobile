@@ -15,36 +15,16 @@ class LanguageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
-    return GestureDetector(
+    return ListTile(
       onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeOut,
-
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: isSelected ? 1.5 : 1,
-          ),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                name,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                ),
-              ),
-            ),
-            AnimatedOpacity(
-              duration: const Duration(milliseconds: 200),
-              opacity: isSelected ? 1 : 0,
-              child: const Icon(Icons.check_circle_rounded),
-            ),
-          ],
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        name,
+        style: theme.textTheme.bodyLarge?.copyWith(
+          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
         ),
       ),
+      trailing: isSelected ? const Icon(Icons.check_circle_rounded) : null,
     );
   }
 }

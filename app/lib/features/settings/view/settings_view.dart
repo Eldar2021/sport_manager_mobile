@@ -21,49 +21,11 @@ class SettingsView extends StatelessWidget {
         builder: (context, state) {
           return ListView(
             children: [
-              SettingsSectionTitle(l10n.settingsAppearance),
-              _ThemeModeSelector(current: state.themeMode),
-              SettingsSectionTitle(l10n.settingsLanguage),
               _LanguageSelector(current: state.locale),
             ],
           );
         },
       ),
-    );
-  }
-}
-
-class _ThemeModeSelector extends StatelessWidget {
-  const _ThemeModeSelector({required this.current});
-
-  final ThemeMode current;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final cubit = context.read<SettingsCubit>();
-
-    return Row(
-      children: [
-        ThemeModeCard(
-          icon: Icons.light_mode_rounded,
-          label: l10n.settingsThemeLight,
-          isSelected: current == ThemeMode.light,
-          onTap: () => cubit.setThemeMode(ThemeMode.light),
-        ),
-        ThemeModeCard(
-          icon: Icons.dark_mode_rounded,
-          label: l10n.settingsThemeDark,
-          isSelected: current == ThemeMode.dark,
-          onTap: () => cubit.setThemeMode(ThemeMode.dark),
-        ),
-        ThemeModeCard(
-          icon: Icons.phone_iphone_rounded,
-          label: l10n.settingsThemeSystem,
-          isSelected: current == ThemeMode.system,
-          onTap: () => cubit.setThemeMode(ThemeMode.system),
-        ),
-      ],
     );
   }
 }
