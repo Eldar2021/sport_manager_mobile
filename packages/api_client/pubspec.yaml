@@ -1,0 +1,23 @@
+name: api_client
+description: Api client
+version: 0.1.0+1
+resolution: workspace
+publish_to: none
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+  dio:
+  connectivity_plus:
+  meta:
+
+dev_dependencies:
+  mocktail:
+  test:
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,9 @@
+{
+  "@@locale": "en",
+  "homeWelcomeBack": "Welcome back",
+  "settingsAppearance": "Appearance",
+  "settingsLanguage": "Language",
+  "settingsThemeLight": "Light",
+  "settingsThemeDark": "Dark",
+  "settingsThemeSystem": "System"
+}

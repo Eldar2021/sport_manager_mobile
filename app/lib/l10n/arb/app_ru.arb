@@ -1,0 +1,9 @@
+{
+  "@@locale": "ru",
+  "homeWelcomeBack": "С возвращением",
+  "settingsAppearance": "Внешний вид",
+  "settingsLanguage": "Язык",
+  "settingsThemeLight": "Светлая",
+  "settingsThemeDark": "Тёмная",
+  "settingsThemeSystem": "Системная"
+}

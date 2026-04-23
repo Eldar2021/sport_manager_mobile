@@ -1,0 +1,91 @@
+name: sport_manager_workspace
+description: A Flutter workspace for the Sport Manager app, containing multiple packages and the main application.
+publish_to: none
+
+environment:
+  sdk: ^3.11.1
+
+workspace:
+  - app
+  - packages/core
+  - packages/api_client
+  - packages/storage_client
+
+dependencies:
+  meta: ^1.17.0
+  cupertino_icons: ^1.0.8
+  intl: ^0.20.2
+  equatable: ^2.0.8
+  flutter_bloc: ^9.1.0
+  json_annotation: ^4.11.0
+  shared_preferences: ^2.5.5
+  dio: ^5.8.0+1
+  connectivity_plus: ^6.1.4
+  collection: ^1.19.0
+  get_it: ^9.2.1
+  # firebase_core: ^4.6.0
+  # firebase_crashlytics: ^5.1.0
+  # firebase_analytics: ^12.2.0
+  # firebase_remote_config: ^6.3.0
+  toastification: ^3.0.3
+  # infinite_scroll_pagination: ^5.1.1
+
+dev_dependencies:
+  melos: ^7.4.0
+  very_good_analysis: ^10.2.0
+  mocktail: ^1.0.4
+  test: ^1.30.0
+  build_runner: ^2.13.1
+  json_serializable: ^6.13.1
+  flutter_gen_runner: ^5.13.0+1
+
+melos:
+  command:
+    bootstrap:
+      runPubGetInParallel: false
+      usePubspecOverrides: true
+
+  scripts:
+    format:
+      run: dart format . --line-length 120
+      description: "Format Dart code for selected package"
+
+    format-check:
+      run: melos exec -c 1 -- dart format . --line-length 120 --set-exit-if-changed
+      description: "Check format for all Dart code"
+
+    analyze:
+      run: flutter analyze
+      description: "Analyze all Dart code"
+
+    analyze-check:
+      run: flutter analyze --fatal-warnings
+      description: "Analyze all Dart code and exit if there are any fatal warnings"
+
+    test:
+      run: melos exec -c 1 -- flutter test
+      select-package:
+        dir-exists: test
+      description: "Run unit tests for a selected package"
+
+    unit-test:
+      run: melos exec -c 1 -- flutter test
+      description: "Run unit tests for all packages"
+
+    run-build-runner:
+      run: |
+        ./scripts/delete_g_files.sh
+        melos exec -c 1 --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs
+        melos format
+      description: "Generate code with build_runner for relevant packages"
+
+    build-apk:
+      run: cd app && flutter build apk
+      description: "Build an APK file for the main application"
+
+    build-ios:
+      run: cd app && flutter build ios --release --no-codesign
+      description: "Build an unsigned release IPA for iOS"
+
+flutter:
+  uses-material-design: true

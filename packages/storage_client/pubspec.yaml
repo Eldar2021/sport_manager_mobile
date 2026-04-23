@@ -1,0 +1,23 @@
+name: storage_client
+description: A starting point for Dart libraries or applications.
+version: 1.0.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+  meta:
+  shared_preferences:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail:
+
+flutter:
+  uses-material-design: true

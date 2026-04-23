@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "spm_flutter",
+      "request": "launch",
+      "type": "dart",
+      "toolArgs": ["--dart-define-from-file", "dev.env"],
+      "program": "app/lib/main.dart"
+    },
+    {
+      "name": "spm_flutter (profile mode)",
+      "request": "launch",
+      "type": "dart",
+      "toolArgs": ["--dart-define-from-file", "dev.env"],
+      "program": "app/lib/main.dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "spm_flutter (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "toolArgs": ["--dart-define-from-file", "dev.env"],
+      "program": "app/lib/main.dart",
+      "flutterMode": "release"
+    }
+  ]
+}

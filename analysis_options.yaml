@@ -1,0 +1,20 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+linter:
+  rules:
+    public_member_api_docs: false
+    lines_longer_than_80_chars: false
+    sort_pub_dependencies: false
+    avoid_positional_boolean_parameters: false
+    one_member_abstracts: false
+    discarded_futures: false
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+  errors:
+    todo: ignore
+
+formatter:
+  trailing_commas: preserve
+  page_width: 120
