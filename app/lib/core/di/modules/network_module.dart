@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:api_client/api_client.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sport_manager_mobile/core/core.dart';

@@ -26,6 +26,7 @@ dependencies:
   cupertino_icons:
   get_it:
   toastification:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:
