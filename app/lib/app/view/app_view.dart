@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:storage_client/storage_client.dart';
 
 class MyAppWrapper extends StatelessWidget {
@@ -48,6 +49,8 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp.router(
           title: 'Sport Manager',
           debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
           themeMode: settings.themeMode,
           locale: settings.locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
