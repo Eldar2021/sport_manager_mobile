@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/features/auth/widgets/auth_text_field.dart';
+import 'package:sport_manager_mobile/features/auth/auth.dart';
 
 class AuthPasswordField extends StatefulWidget {
   const AuthPasswordField({
