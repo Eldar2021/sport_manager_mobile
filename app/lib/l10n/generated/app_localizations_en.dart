@@ -124,4 +124,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authInvalidPhone => 'Enter a valid phone number';
+
+  @override
+  String get authForgotPasswordTitle => 'Password Recovery';
+
+  @override
+  String get authForgotPasswordBanner => 'Enter your login or email — we\'ll send a link to reset your password.';
+
+  @override
+  String get authForgotPasswordLoginEmailPlaceholder => 'e.g., azamat@mail.kg';
+
+  @override
+  String get authForgotPasswordNoLink => 'Link not arriving?';
+
+  @override
+  String get authForgotPasswordContactUs => 'Contact us — WhatsApp, Telegram, email, call';
+
+  @override
+  String get authForgotPasswordSendLink => 'Send link';
+
+  @override
+  String get authContactSupportTitle => 'Contact Support';
+
+  @override
+  String get authContactSupportSubtitle => 'Write or call — we\'ll help restore access.';
+
+  @override
+  String get authContactCallLabel => 'Call';
 }

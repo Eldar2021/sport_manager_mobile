@@ -39,5 +39,16 @@
   "authPasswordMinLength": "Пароль должен содержать не менее 8 символов",
   "authPasswordsDoNotMatch": "Пароли не совпадают",
   "authInvalidEmail": "Введите корректный email",
-  "authInvalidPhone": "Введите корректный номер телефона"
+  "authInvalidPhone": "Введите корректный номер телефона",
+
+  "authForgotPasswordTitle": "Восстановление пароля",
+  "authForgotPasswordBanner": "Введите логин или email — мы отправим ссылку для сброса пароля.",
+  "authForgotPasswordLoginEmailPlaceholder": "например, azamat@mail.kg",
+  "authForgotPasswordNoLink": "Не приходит ссылка?",
+  "authForgotPasswordContactUs": "Свяжитесь с нами — WhatsApp, Telegram, email, звонок",
+  "authForgotPasswordSendLink": "Отправить ссылку",
+
+  "authContactSupportTitle": "Связаться с поддержкой",
+  "authContactSupportSubtitle": "Напишите или позвоните — поможем восстановить доступ.",
+  "authContactCallLabel": "Позвонить"
 }

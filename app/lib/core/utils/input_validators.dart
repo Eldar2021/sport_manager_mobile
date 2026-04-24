@@ -10,6 +10,8 @@ abstract final class InputValidators {
     return val?.trim().isEmpty ?? true ? ctx.l10n.authFieldRequired : null;
   }
 
+  static bool isValidEmail(String email) => _emailRegex.hasMatch(email.trim());
+
   static String? emailValidator(String? val, BuildContext ctx) {
     if (val == null || val.trim().isEmpty) return ctx.l10n.authFieldRequired;
     if (!_emailRegex.hasMatch(val.trim())) return ctx.l10n.authInvalidEmail;

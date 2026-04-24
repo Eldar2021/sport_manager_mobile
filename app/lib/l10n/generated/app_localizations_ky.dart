@@ -124,4 +124,31 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get authInvalidPhone => 'Туура телефон номерин жазыңыз';
+
+  @override
+  String get authForgotPasswordTitle => 'Сырсөздү калыбына келтирүү';
+
+  @override
+  String get authForgotPasswordBanner => 'Логин же email\'иңизди жазыңыз — сырсөздү жаңыртуу үчүн шилтеме жөнөтөбүз.';
+
+  @override
+  String get authForgotPasswordLoginEmailPlaceholder => 'мисалы, azamat@mail.kg';
+
+  @override
+  String get authForgotPasswordNoLink => 'Шилтеме келбей жатабы?';
+
+  @override
+  String get authForgotPasswordContactUs => 'Биз менен байланышыңыз — WhatsApp, Telegram, email, чалуу';
+
+  @override
+  String get authForgotPasswordSendLink => 'Шилтеме жөнөтүү';
+
+  @override
+  String get authContactSupportTitle => 'Колдоо кызматы менен байланышуу';
+
+  @override
+  String get authContactSupportSubtitle => 'Жазыңыз же чалыңыз — кирүүнү калыбына келтирүүгө жардамдашабыз.';
+
+  @override
+  String get authContactCallLabel => 'Чалуу';
 }

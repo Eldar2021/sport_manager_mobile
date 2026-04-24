@@ -326,6 +326,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a valid phone number'**
   String get authInvalidPhone;
+
+  /// No description provided for @authForgotPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Password Recovery'**
+  String get authForgotPasswordTitle;
+
+  /// No description provided for @authForgotPasswordBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your login or email — we\'ll send a link to reset your password.'**
+  String get authForgotPasswordBanner;
+
+  /// No description provided for @authForgotPasswordLoginEmailPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., azamat@mail.kg'**
+  String get authForgotPasswordLoginEmailPlaceholder;
+
+  /// No description provided for @authForgotPasswordNoLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Link not arriving?'**
+  String get authForgotPasswordNoLink;
+
+  /// No description provided for @authForgotPasswordContactUs.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact us — WhatsApp, Telegram, email, call'**
+  String get authForgotPasswordContactUs;
+
+  /// No description provided for @authForgotPasswordSendLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Send link'**
+  String get authForgotPasswordSendLink;
+
+  /// No description provided for @authContactSupportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Support'**
+  String get authContactSupportTitle;
+
+  /// No description provided for @authContactSupportSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Write or call — we\'ll help restore access.'**
+  String get authContactSupportSubtitle;
+
+  /// No description provided for @authContactCallLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get authContactCallLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

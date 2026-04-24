@@ -12,7 +12,6 @@ final class RegisterCubit extends Cubit<DataState<AuthResultModel>> {
     emit(const DataLoading());
     try {
       final response = await _repository.registerOwner(body);
-      await _repository.saveToken(response.token);
       emit(DataSuccess(response));
     } on Object catch (e) {
       emit(DataFailure(e));
@@ -24,7 +23,6 @@ final class RegisterCubit extends Cubit<DataState<AuthResultModel>> {
     emit(const DataLoading());
     try {
       final response = await _repository.registerManager(body);
-      await _repository.saveToken(response.token);
       emit(DataSuccess(response));
     } on Object catch (e) {
       emit(DataFailure(e));

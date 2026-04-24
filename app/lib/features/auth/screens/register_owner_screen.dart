@@ -83,9 +83,6 @@ class _RegisterOwnerViewState extends State<_RegisterOwnerView> {
         return Scaffold(
           appBar: AppBar(
             leading: const BackBtn(),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            scrolledUnderElevation: 0,
           ),
           body: SafeArea(
             child: Form(

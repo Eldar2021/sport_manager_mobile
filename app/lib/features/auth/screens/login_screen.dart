@@ -69,9 +69,6 @@ class _LoginBodyState extends State<_LoginBody> {
         return Scaffold(
           appBar: AppBar(
             leading: const BackBtn(),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            scrolledUnderElevation: 0,
           ),
           body: SafeArea(
             child: Form(
@@ -126,7 +123,7 @@ class _LoginBodyState extends State<_LoginBody> {
                             alignment: Alignment.centerLeft,
                             child: AuthTextButton(
                               label: l10n.authForgotPassword,
-                              onPressed: () {},
+                              onPressed: () => context.push(AppRoutes.forgotPassword),
                             ),
                           ),
                         ],

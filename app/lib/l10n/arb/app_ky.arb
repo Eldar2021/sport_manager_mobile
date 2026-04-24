@@ -39,5 +39,16 @@
   "authPasswordMinLength": "Сырсөз кеминде 8 символдон турушу керек",
   "authPasswordsDoNotMatch": "Сырсөздөр дал келбейт",
   "authInvalidEmail": "Туура email жазыңыз",
-  "authInvalidPhone": "Туура телефон номерин жазыңыз"
+  "authInvalidPhone": "Туура телефон номерин жазыңыз",
+
+  "authForgotPasswordTitle": "Сырсөздү калыбына келтирүү",
+  "authForgotPasswordBanner": "Логин же email'иңизди жазыңыз — сырсөздү жаңыртуу үчүн шилтеме жөнөтөбүз.",
+  "authForgotPasswordLoginEmailPlaceholder": "мисалы, azamat@mail.kg",
+  "authForgotPasswordNoLink": "Шилтеме келбей жатабы?",
+  "authForgotPasswordContactUs": "Биз менен байланышыңыз — WhatsApp, Telegram, email, чалуу",
+  "authForgotPasswordSendLink": "Шилтеме жөнөтүү",
+
+  "authContactSupportTitle": "Колдоо кызматы менен байланышуу",
+  "authContactSupportSubtitle": "Жазыңыз же чалыңыз — кирүүнү калыбына келтирүүгө жардамдашабыз.",
+  "authContactCallLabel": "Чалуу"
 }

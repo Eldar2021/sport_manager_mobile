@@ -1,5 +1,7 @@
+export 'cubits/forgot_password_cubit.dart';
 export 'cubits/login_cubit.dart';
 export 'cubits/register_cubit.dart';
+export 'screens/forgot_password_screen.dart';
 export 'screens/login_screen.dart';
 export 'screens/register_manager_screen.dart';
 export 'screens/register_owner_screen.dart';
@@ -10,6 +12,8 @@ export 'widgets/auth_password_field.dart';
 export 'widgets/auth_submit_button.dart';
 export 'widgets/auth_text_button.dart';
 export 'widgets/auth_text_field.dart';
+export 'widgets/contact_support_sheet.dart';
+export 'widgets/forgot_password_contact_card.dart';
 export 'widgets/language_switcher.dart';
 export 'widgets/pool_table_illustration.dart';
 export 'widgets/register_title_widget.dart';

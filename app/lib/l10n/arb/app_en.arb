@@ -39,5 +39,16 @@
   "authPasswordMinLength": "Password must be at least 8 characters",
   "authPasswordsDoNotMatch": "Passwords do not match",
   "authInvalidEmail": "Enter a valid email address",
-  "authInvalidPhone": "Enter a valid phone number"
+  "authInvalidPhone": "Enter a valid phone number",
+
+  "authForgotPasswordTitle": "Password Recovery",
+  "authForgotPasswordBanner": "Enter your login or email — we'll send a link to reset your password.",
+  "authForgotPasswordLoginEmailPlaceholder": "e.g., azamat@mail.kg",
+  "authForgotPasswordNoLink": "Link not arriving?",
+  "authForgotPasswordContactUs": "Contact us — WhatsApp, Telegram, email, call",
+  "authForgotPasswordSendLink": "Send link",
+
+  "authContactSupportTitle": "Contact Support",
+  "authContactSupportSubtitle": "Write or call — we'll help restore access.",
+  "authContactCallLabel": "Call"
 }

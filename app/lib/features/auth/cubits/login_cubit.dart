@@ -18,14 +18,11 @@ final class LoginCubit extends Cubit<DataState<AuthResultModel>> {
         username: username,
         password: password,
       );
-      await _repository.saveToken(result.token);
       emit(DataSuccess(result));
     } on Object catch (e) {
       emit(DataFailure(e));
     }
   }
 
-  Future<void> logout() async {
-    await _repository.clearToken();
-  }
+
 }

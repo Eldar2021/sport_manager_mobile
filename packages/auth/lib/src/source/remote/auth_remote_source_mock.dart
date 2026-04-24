@@ -1,7 +1,7 @@
 import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 
-final class AuthMockDataSourceImpl implements AuthDataSource {
+final class AuthRemoteSourceMock implements AuthRemoteSource {
   static const _validInviteCode = 'TF-48X2KD';
   static const _mockToken = 'mock-bearer-token-xxxx';
 
@@ -34,10 +34,7 @@ final class AuthMockDataSourceImpl implements AuthDataSource {
   );
 
   @override
-  Future<AuthResultModel> login({
-    required String username,
-    required String password,
-  }) async {
+  Future<AuthResultModel> login({required String username, required String password}) async {
     await Future<void>.delayed(const Duration(milliseconds: 900));
 
     final isOwner = (username == 'bakyt' || username == 'bakyt@example.kg') && password == '12345678';
@@ -80,5 +77,15 @@ final class AuthMockDataSourceImpl implements AuthDataSource {
         role: UserRole.manager,
       ),
     );
+  }
+
+  @override
+  Future<void> forgotPassword(String email) async {
+    await Future<void>.delayed(const Duration(milliseconds: 800));
+  }
+
+  @override
+  Future<void> logout() async {
+    await Future<void>.delayed(const Duration(milliseconds: 400));
   }
 }

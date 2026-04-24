@@ -11,6 +11,7 @@ import 'package:sport_manager_mobile/features/settings/settings.dart';
 const Set<String> _authRoutes = {
   AppRoutes.welcome,
   AppRoutes.login,
+  AppRoutes.forgotPassword,
   AppRoutes.role,
   AppRoutes.registerOwner,
   AppRoutes.registerManager,
@@ -24,10 +25,13 @@ GoRouter appRouter({GlobalKey<NavigatorState>? navigatorKey}) {
     initialLocation: AppRoutes.welcome,
     debugLogDiagnostics: kDebugMode,
     redirect: (context, state) {
-      final isAuthenticated = GetIt.I<AuthRepository>().getToken() != null;
+      final token = GetIt.I<AuthRepository>().getToken();
+      final isAuthenticated = token != null && token.isNotEmpty;
+
       if (isAuthenticated && _authRoutes.contains(state.matchedLocation)) {
         return AppRoutes.home;
       }
+
       if (!isAuthenticated && !_authRoutes.contains(state.matchedLocation)) {
         return AppRoutes.welcome;
       }
@@ -41,6 +45,10 @@ GoRouter appRouter({GlobalKey<NavigatorState>? navigatorKey}) {
       GoRoute(
         path: AppRoutes.login,
         builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.forgotPassword,
+        builder: (context, state) => const ForgotPasswordScreen(),
       ),
       GoRoute(
         path: AppRoutes.role,

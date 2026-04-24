@@ -124,4 +124,31 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get authInvalidPhone => 'Введите корректный номер телефона';
+
+  @override
+  String get authForgotPasswordTitle => 'Восстановление пароля';
+
+  @override
+  String get authForgotPasswordBanner => 'Введите логин или email — мы отправим ссылку для сброса пароля.';
+
+  @override
+  String get authForgotPasswordLoginEmailPlaceholder => 'например, azamat@mail.kg';
+
+  @override
+  String get authForgotPasswordNoLink => 'Не приходит ссылка?';
+
+  @override
+  String get authForgotPasswordContactUs => 'Свяжитесь с нами — WhatsApp, Telegram, email, звонок';
+
+  @override
+  String get authForgotPasswordSendLink => 'Отправить ссылку';
+
+  @override
+  String get authContactSupportTitle => 'Связаться с поддержкой';
+
+  @override
+  String get authContactSupportSubtitle => 'Напишите или позвоните — поможем восстановить доступ.';
+
+  @override
+  String get authContactCallLabel => 'Позвонить';
 }

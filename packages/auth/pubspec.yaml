@@ -15,6 +15,7 @@ dependencies:
   json_annotation:
   meta:
   storage_client:
+  api_client:
 
 dev_dependencies:
   build_runner:

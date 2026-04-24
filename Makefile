@@ -29,3 +29,7 @@ fvm-check:
 build-runner:
 	echo "Running build runner..."
 	melos run run-build-runner
+
+gen-assets:
+	cd app && dart run build_runner build --delete-conflicting-outputs
+	cd packages/core && dart run build_runner build --delete-conflicting-outputs
