@@ -102,17 +102,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authAgreeTerms => 'I agree to the terms';
 
   @override
+  String get authAgreeTermsError => 'You must agree to the terms';
+
+  @override
   String get authCreateAccount => 'Create account';
 
   @override
   String get authInviteCodeHint => 'Get the invite code from the hall owner';
 
   @override
-  String get authFieldRequired => 'All fields must be filled';
+  String get authFieldRequired => 'Field must be filled';
 
   @override
   String get authPasswordMinLength => 'Password must be at least 8 characters';
 
   @override
   String get authPasswordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get authInvalidEmail => 'Enter a valid email address';
+
+  @override
+  String get authInvalidPhone => 'Enter a valid phone number';
 }

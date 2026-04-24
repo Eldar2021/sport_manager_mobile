@@ -102,17 +102,26 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authAgreeTerms => 'Согласен с условиями';
 
   @override
+  String get authAgreeTermsError => 'Необходимо согласиться с условиями';
+
+  @override
   String get authCreateAccount => 'Создать аккаунт';
 
   @override
   String get authInviteCodeHint => 'Получите код приглашения у владельца зала';
 
   @override
-  String get authFieldRequired => 'Все поля должны быть заполнены';
+  String get authFieldRequired => 'Поле обязательно для заполнения';
 
   @override
   String get authPasswordMinLength => 'Пароль должен содержать не менее 8 символов';
 
   @override
   String get authPasswordsDoNotMatch => 'Пароли не совпадают';
+
+  @override
+  String get authInvalidEmail => 'Введите корректный email';
+
+  @override
+  String get authInvalidPhone => 'Введите корректный номер телефона';
 }

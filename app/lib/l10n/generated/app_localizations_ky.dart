@@ -102,17 +102,26 @@ class AppLocalizationsKy extends AppLocalizations {
   String get authAgreeTerms => 'Шарттарга макулмун';
 
   @override
+  String get authAgreeTermsError => 'Шарттарга макул болушуңуз керек';
+
+  @override
   String get authCreateAccount => 'Аккаунт түзүү';
 
   @override
   String get authInviteCodeHint => 'Чакыруу кодун зал ээсинен алыңыз';
 
   @override
-  String get authFieldRequired => 'Бардык талаалар толтурулушу керек';
+  String get authFieldRequired => 'Талаа милдеттүү түрдө толтурулушу керек';
 
   @override
   String get authPasswordMinLength => 'Сырсөз кеминде 8 символдон турушу керек';
 
   @override
   String get authPasswordsDoNotMatch => 'Сырсөздөр дал келбейт';
+
+  @override
+  String get authInvalidEmail => 'Туура email жазыңыз';
+
+  @override
+  String get authInvalidPhone => 'Туура телефон номерин жазыңыз';
 }

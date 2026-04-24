@@ -2,7 +2,7 @@ import 'package:auth/auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 
-class LoginCubit extends Cubit<DataState<AuthResultModel>> {
+final class LoginCubit extends Cubit<DataState<AuthResultModel>> {
   LoginCubit(this._repository) : super(const DataInitial());
 
   final AuthRepository _repository;
@@ -18,9 +18,14 @@ class LoginCubit extends Cubit<DataState<AuthResultModel>> {
         username: username,
         password: password,
       );
+      await _repository.saveToken(result.token);
       emit(DataSuccess(result));
     } on Object catch (e) {
       emit(DataFailure(e));
     }
+  }
+
+  Future<void> logout() async {
+    await _repository.clearToken();
   }
 }

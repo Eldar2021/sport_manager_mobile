@@ -15,15 +15,16 @@ class RoleSelectScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: const BackBtn(),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: AppSpacing.x4),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSpacing.x2),
-              child: BackBtn(),
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSpacing.x6,

@@ -32,9 +32,12 @@
   "authUsernameLabel": "Логин",
   "authConfirmPasswordLabel": "Повторите пароль",
   "authAgreeTerms": "Согласен с условиями",
+  "authAgreeTermsError": "Необходимо согласиться с условиями",
   "authCreateAccount": "Создать аккаунт",
   "authInviteCodeHint": "Получите код приглашения у владельца зала",
-  "authFieldRequired": "Все поля должны быть заполнены",
+  "authFieldRequired": "Поле обязательно для заполнения",
   "authPasswordMinLength": "Пароль должен содержать не менее 8 символов",
-  "authPasswordsDoNotMatch": "Пароли не совпадают"
+  "authPasswordsDoNotMatch": "Пароли не совпадают",
+  "authInvalidEmail": "Введите корректный email",
+  "authInvalidPhone": "Введите корректный номер телефона"
 }

@@ -9,4 +9,10 @@ abstract interface class AuthRepository {
   Future<AuthResultModel> registerOwner(RegisterOwnerBody body);
 
   Future<AuthResultModel> registerManager(RegisterManagerBody body);
+
+  Future<void> saveToken(String token);
+
+  String? getToken();
+
+  Future<void> clearToken();
 }

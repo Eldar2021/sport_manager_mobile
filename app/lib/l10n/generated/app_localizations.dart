@@ -279,6 +279,12 @@ abstract class AppLocalizations {
   /// **'I agree to the terms'**
   String get authAgreeTerms;
 
+  /// No description provided for @authAgreeTermsError.
+  ///
+  /// In en, this message translates to:
+  /// **'You must agree to the terms'**
+  String get authAgreeTermsError;
+
   /// No description provided for @authCreateAccount.
   ///
   /// In en, this message translates to:
@@ -294,7 +300,7 @@ abstract class AppLocalizations {
   /// No description provided for @authFieldRequired.
   ///
   /// In en, this message translates to:
-  /// **'All fields must be filled'**
+  /// **'Field must be filled'**
   String get authFieldRequired;
 
   /// No description provided for @authPasswordMinLength.
@@ -308,6 +314,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Passwords do not match'**
   String get authPasswordsDoNotMatch;
+
+  /// No description provided for @authInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address'**
+  String get authInvalidEmail;
+
+  /// No description provided for @authInvalidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone number'**
+  String get authInvalidPhone;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -383,7 +383,7 @@ abstract final class AppTheme {
 
       // AppBar
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.bgWarm,
+        backgroundColor: AppColors.white,
         foregroundColor: AppColors.ink900,
         elevation: 0,
         scrolledUnderElevation: 0,

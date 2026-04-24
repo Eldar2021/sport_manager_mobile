@@ -32,9 +32,12 @@
   "authUsernameLabel": "Логин",
   "authConfirmPasswordLabel": "Сырсөздү кайталаңыз",
   "authAgreeTerms": "Шарттарга макулмун",
+  "authAgreeTermsError": "Шарттарга макул болушуңуз керек",
   "authCreateAccount": "Аккаунт түзүү",
   "authInviteCodeHint": "Чакыруу кодун зал ээсинен алыңыз",
-  "authFieldRequired": "Бардык талаалар толтурулушу керек",
+  "authFieldRequired": "Талаа милдеттүү түрдө толтурулушу керек",
   "authPasswordMinLength": "Сырсөз кеминде 8 символдон турушу керек",
-  "authPasswordsDoNotMatch": "Сырсөздөр дал келбейт"
+  "authPasswordsDoNotMatch": "Сырсөздөр дал келбейт",
+  "authInvalidEmail": "Туура email жазыңыз",
+  "authInvalidPhone": "Туура телефон номерин жазыңыз"
 }

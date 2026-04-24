@@ -32,9 +32,12 @@
   "authUsernameLabel": "Username",
   "authConfirmPasswordLabel": "Confirm password",
   "authAgreeTerms": "I agree to the terms",
+  "authAgreeTermsError": "You must agree to the terms",
   "authCreateAccount": "Create account",
   "authInviteCodeHint": "Get the invite code from the hall owner",
-  "authFieldRequired": "All fields must be filled",
+  "authFieldRequired": "Field must be filled",
   "authPasswordMinLength": "Password must be at least 8 characters",
-  "authPasswordsDoNotMatch": "Passwords do not match"
+  "authPasswordsDoNotMatch": "Passwords do not match",
+  "authInvalidEmail": "Enter a valid email address",
+  "authInvalidPhone": "Enter a valid phone number"
 }

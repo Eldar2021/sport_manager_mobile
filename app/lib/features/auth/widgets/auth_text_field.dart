@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class AuthTextField extends StatefulWidget {
@@ -14,6 +15,8 @@ class AuthTextField extends StatefulWidget {
     this.suffixIcon,
     this.hintText,
     this.onSubmitted,
+    this.validator,
+    this.inputFormatters,
   });
 
   final String label;
@@ -26,6 +29,8 @@ class AuthTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final String? hintText;
   final VoidCallback? onSubmitted;
+  final FormFieldValidator<String>? validator;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
@@ -34,16 +39,13 @@ class AuthTextField extends StatefulWidget {
 class _AuthTextFieldState extends State<AuthTextField> {
   final _focus = FocusNode();
   bool _focused = false;
-
   @override
   void initState() {
     super.initState();
     _focus.addListener(_onFocusChange);
   }
 
-  void _onFocusChange() {
-    setState(() => _focused = _focus.hasFocus);
-  }
+  void _onFocusChange() => setState(() => _focused = _focus.hasFocus);
 
   @override
   void dispose() {
@@ -55,73 +57,77 @@ class _AuthTextFieldState extends State<AuthTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final hasError = widget.errorText != null;
-    final borderColor = hasError
-        ? AppColors.dangerRed
-        : _focused
-        ? AppColors.brandAmber
-        : AppColors.ink300;
+    return FormField<String>(
+      autovalidateMode: AutovalidateMode.disabled,
+      validator: widget.validator != null ? (_) => widget.validator!(widget.controller?.text ?? '') : null,
+      builder: (field) {
+        final errorText = widget.validator != null ? field.errorText : widget.errorText;
+        final hasError = errorText != null;
+        final borderColor = hasError
+            ? AppColors.dangerRed
+            : _focused
+            ? AppColors.brandAmber
+            : AppColors.ink300;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          widget.label,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        const SizedBox(height: 6),
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 120),
-          height: 48,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainer,
-            borderRadius: AppRadius.inputBorderRadius,
-            border: Border.all(color: borderColor, width: 1.5),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  focusNode: _focus,
-                  controller: widget.controller,
-                  obscureText: widget.obscureText,
-                  keyboardType: widget.keyboardType,
-                  textInputAction: widget.textInputAction,
-                  autofocus: widget.autofocus,
-                  onSubmitted: widget.onSubmitted != null ? (_) => widget.onSubmitted!() : null,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 14),
-                    hintText: widget.hintText,
-                    hintStyle: Theme.of(context).textTheme.bodyMedium,
-                    isDense: true,
-                  ),
-                ),
-              ),
-              if (widget.suffixIcon != null)
-                Padding(
-                  padding: const EdgeInsets.only(right: 4),
-                  child: widget.suffixIcon,
-                ),
-            ],
-          ),
-        ),
-        if (hasError) ...[
-          const SizedBox(height: 4),
-          Text(
-            widget.errorText!,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppColors.dangerRed,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              widget.label,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
             ),
-          ),
-        ],
-      ],
+            const SizedBox(height: 6),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 120),
+              height: 48,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceContainer,
+                borderRadius: AppRadius.inputBorderRadius,
+                border: Border.all(color: borderColor, width: 1.5),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      focusNode: _focus,
+                      controller: widget.controller,
+                      obscureText: widget.obscureText,
+                      keyboardType: widget.keyboardType,
+                      textInputAction: widget.textInputAction,
+                      autofocus: widget.autofocus,
+                      inputFormatters: widget.inputFormatters,
+                      onSubmitted: widget.onSubmitted != null ? (_) => widget.onSubmitted!() : null,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 14),
+                        hintText: widget.hintText,
+                        hintStyle: Theme.of(context).textTheme.bodyMedium,
+                        isDense: true,
+                      ),
+                    ),
+                  ),
+                  if (widget.suffixIcon != null)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4),
+                      child: widget.suffixIcon,
+                    ),
+                ],
+              ),
+            ),
+            if (hasError) ...[
+              const SizedBox(height: 4),
+              Text(
+                errorText,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.dangerRed),
+              ),
+            ],
+          ],
+        );
+      },
     );
   }
 }

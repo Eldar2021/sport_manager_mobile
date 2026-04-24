@@ -17,11 +17,9 @@ class WelcomeScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.x6,
-            AppSpacing.x10,
-            AppSpacing.x6,
-            AppSpacing.x8,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.x6,
+            vertical: AppSpacing.x4,
           ),
           child: Column(
             children: [

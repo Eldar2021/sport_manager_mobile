@@ -14,6 +14,7 @@ dependencies:
   equatable:
   json_annotation:
   meta:
+  storage_client:
 
 dev_dependencies:
   build_runner:
