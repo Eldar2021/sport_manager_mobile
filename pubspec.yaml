@@ -10,6 +10,7 @@ workspace:
   - packages/core
   - packages/api_client
   - packages/storage_client
+  - packages/auth
 
 dependencies:
   meta: ^1.17.0

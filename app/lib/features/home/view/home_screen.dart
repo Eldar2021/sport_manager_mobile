@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
-import 'package:sport_manager_mobile/l10n/l10n.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,16 +10,17 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          context.l10n.homeWelcomeBack,
+          'test',
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        actions: [
+      ),
+      body: Column(
+        children: [
           ElevatedButton.icon(
             icon: const Icon(Icons.settings_outlined),
-            label: Text(context.l10n.settingsThemeSystem),
+            label: const Text('test'),
             onPressed: () => context.push(AppRoutes.settings),
           ),
-          const SizedBox(width: 24),
         ],
       ),
     );

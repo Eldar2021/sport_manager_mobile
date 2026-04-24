@@ -23,6 +23,7 @@ dependencies:
   core:
   api_client:
   storage_client:
+  auth:
   cupertino_icons:
   get_it:
   toastification:

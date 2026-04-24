@@ -128,6 +128,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'System'**
   String get settingsThemeSystem;
+
+  /// No description provided for @authTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital hall management'**
+  String get authTagline;
+
+  /// No description provided for @authSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get authSignIn;
+
+  /// No description provided for @authSignUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get authSignUp;
+
+  /// No description provided for @authSignInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your credentials'**
+  String get authSignInSubtitle;
+
+  /// No description provided for @authUsernameOrEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Username or email'**
+  String get authUsernameOrEmail;
+
+  /// No description provided for @authPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get authPassword;
+
+  /// No description provided for @authForgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get authForgotPassword;
+
+  /// No description provided for @authNoAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'No account?'**
+  String get authNoAccount;
+
+  /// No description provided for @authChooseRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Who are you?'**
+  String get authChooseRole;
+
+  /// No description provided for @authChooseRoleSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This will determine available features'**
+  String get authChooseRoleSubtitle;
+
+  /// No description provided for @authOwnerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hall owner'**
+  String get authOwnerTitle;
+
+  /// No description provided for @authOwnerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'I manage one or more halls'**
+  String get authOwnerSubtitle;
+
+  /// No description provided for @authManagerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hall manager'**
+  String get authManagerTitle;
+
+  /// No description provided for @authManagerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'I work shifts, I need an invite code'**
+  String get authManagerSubtitle;
+
+  /// No description provided for @authRegisterOwnerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner registration'**
+  String get authRegisterOwnerTitle;
+
+  /// No description provided for @authRegisterManagerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manager registration'**
+  String get authRegisterManagerTitle;
+
+  /// No description provided for @authOwnerBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get authOwnerBadge;
+
+  /// No description provided for @authManagerBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Manager'**
+  String get authManagerBadge;
+
+  /// No description provided for @authNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get authNameLabel;
+
+  /// No description provided for @authPhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get authPhoneLabel;
+
+  /// No description provided for @authEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get authEmailLabel;
+
+  /// No description provided for @authInviteCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite code'**
+  String get authInviteCodeLabel;
+
+  /// No description provided for @authUsernameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get authUsernameLabel;
+
+  /// No description provided for @authConfirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get authConfirmPasswordLabel;
+
+  /// No description provided for @authAgreeTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the terms'**
+  String get authAgreeTerms;
+
+  /// No description provided for @authCreateAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get authCreateAccount;
+
+  /// No description provided for @authInviteCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Get the invite code from the hall owner'**
+  String get authInviteCodeHint;
+
+  /// No description provided for @authFieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'All fields must be filled'**
+  String get authFieldRequired;
+
+  /// No description provided for @authPasswordMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get authPasswordMinLength;
+
+  /// No description provided for @authPasswordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get authPasswordsDoNotMatch;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
