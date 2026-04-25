@@ -1,5 +1,5 @@
-export 'cubits/forgot_password_cubit.dart';
-export 'cubits/login_cubit.dart';
+export 'cubits/forgot_password_cubit/forgot_password_cubit.dart';
+export 'cubits/login_cubit/login_cubit.dart';
 export 'cubits/register_cubit.dart';
 export 'screens/forgot_password_screen.dart';
 export 'screens/login_screen.dart';

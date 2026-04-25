@@ -17,6 +17,7 @@ class AuthTextField extends StatefulWidget {
     this.onSubmitted,
     this.validator,
     this.inputFormatters,
+    this.onChanged,
   });
 
   final String label;
@@ -31,6 +32,7 @@ class AuthTextField extends StatefulWidget {
   final VoidCallback? onSubmitted;
   final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
+  final void Function(String)? onChanged;
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
@@ -98,6 +100,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
                       autofocus: widget.autofocus,
                       inputFormatters: widget.inputFormatters,
                       onSubmitted: widget.onSubmitted != null ? (_) => widget.onSubmitted!() : null,
+                      onChanged: widget.onChanged,
                       style: Theme.of(context).textTheme.bodyMedium,
                       decoration: InputDecoration(
                         border: InputBorder.none,

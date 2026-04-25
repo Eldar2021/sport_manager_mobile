@@ -9,6 +9,7 @@ class AuthPasswordField extends StatefulWidget {
     this.textInputAction,
     this.onSubmitted,
     this.validator,
+    this.onChanged,
   });
 
   final String label;
@@ -16,6 +17,7 @@ class AuthPasswordField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final VoidCallback? onSubmitted;
   final FormFieldValidator<String>? validator;
+  final ValueChanged<String>? onChanged;
 
   @override
   State<AuthPasswordField> createState() => _AuthPasswordFieldState();
@@ -33,6 +35,7 @@ class _AuthPasswordFieldState extends State<AuthPasswordField> {
       textInputAction: widget.textInputAction,
       onSubmitted: widget.onSubmitted,
       validator: widget.validator,
+      onChanged: widget.onChanged,
       suffixIcon: IconButton(
         icon: Icon(_show ? Icons.visibility_off_outlined : Icons.visibility_outlined),
         onPressed: () => setState(() => _show = !_show),

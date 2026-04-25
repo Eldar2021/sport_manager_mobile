@@ -10,26 +10,15 @@ import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class RegisterOwnerScreen extends StatelessWidget {
+class RegisterOwnerScreen extends StatefulWidget {
   const RegisterOwnerScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => RegisterCubit(GetIt.I<AuthRepository>()),
-      child: const _RegisterOwnerView(),
-    );
-  }
+  State<RegisterOwnerScreen> createState() => _RegisterOwnerViewState();
 }
 
-class _RegisterOwnerView extends StatefulWidget {
-  const _RegisterOwnerView();
-
-  @override
-  State<_RegisterOwnerView> createState() => _RegisterOwnerViewState();
-}
-
-class _RegisterOwnerViewState extends State<_RegisterOwnerView> {
+class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
+  late final RegisterCubit _registerCubit;
   final _formKey = GlobalKey<FormState>();
   final _nameCtr = TextEditingController();
   final _phoneCtr = TextEditingController();
@@ -42,7 +31,14 @@ class _RegisterOwnerViewState extends State<_RegisterOwnerView> {
   final _confirmCtr = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _registerCubit = RegisterCubit(GetIt.I<AuthRepository>());
+  }
+
+  @override
   void dispose() {
+    _registerCubit.close();
     _nameCtr.dispose();
     _phoneCtr.dispose();
     _emailCtr.dispose();
@@ -51,10 +47,10 @@ class _RegisterOwnerViewState extends State<_RegisterOwnerView> {
     super.dispose();
   }
 
-  void _submit() {
+  void _registerOwner() {
     if (!_formKey.currentState!.validate()) return;
 
-    context.read<RegisterCubit>().registerOwner(
+    _registerCubit.registerOwner(
       RegisterOwnerBody(
         name: _nameCtr.text.trim(),
         phone: _phoneCtr.text.trim(),
@@ -138,7 +134,7 @@ class _RegisterOwnerViewState extends State<_RegisterOwnerView> {
                             label: l10n.authConfirmPasswordLabel,
                             controller: _confirmCtr,
                             textInputAction: TextInputAction.done,
-                            onSubmitted: _submit,
+                            onSubmitted: _registerOwner,
                             validator: (v) => InputValidators.passwordConfirmValidator(
                               v,
                               _passwordCtr.text,
@@ -160,7 +156,7 @@ class _RegisterOwnerViewState extends State<_RegisterOwnerView> {
                     child: AuthSubmitButton(
                       label: l10n.authCreateAccount,
                       isLoading: isLoading,
-                      onPressed: _submit,
+                      onPressed: _registerOwner,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.x1),

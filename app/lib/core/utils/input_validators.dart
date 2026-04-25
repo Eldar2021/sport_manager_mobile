@@ -18,12 +18,16 @@ abstract final class InputValidators {
     return null;
   }
 
+  static bool isValidUsername(String val) => val.trim().isNotEmpty;
+
   static String? phoneValidator(String? val, BuildContext ctx, {required int expectedLength}) {
     if (val == null || val.trim().isEmpty) return ctx.l10n.authFieldRequired;
     final digits = val.replaceAll(RegExp(r'\D'), '');
     if (digits.length < expectedLength) return ctx.l10n.authInvalidPhone;
     return null;
   }
+
+  static bool isValidPassword(String val) => val.trim().isNotEmpty && val.length >= 8;
 
   static String? passwordValidator(String? val, BuildContext ctx) {
     if (val == null || val.trim().isEmpty) return ctx.l10n.authFieldRequired;

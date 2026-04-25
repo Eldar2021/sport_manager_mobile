@@ -8,61 +8,40 @@ import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
+class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ForgotPasswordCubit(GetIt.I<AuthRepository>()),
-      child: const _ForgotPasswordBody(),
-    );
-  }
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _ForgotPasswordBody extends StatefulWidget {
-  const _ForgotPasswordBody();
-
-  @override
-  State<_ForgotPasswordBody> createState() => _ForgotPasswordBodyState();
-}
-
-class _ForgotPasswordBodyState extends State<_ForgotPasswordBody> {
-  final _loginCtr = TextEditingController();
-  final _isEnable = ValueNotifier<bool>(false);
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  late final ForgotPasswordCubit _forgotPasswordCubit;
 
   @override
   void initState() {
     super.initState();
-    _loginCtr.addListener(_onTextChanged);
-  }
-
-  void _onTextChanged() {
-    final email = _loginCtr.text.trim();
-    _isEnable.value = InputValidators.isValidEmail(email);
+    _forgotPasswordCubit = ForgotPasswordCubit(GetIt.I<AuthRepository>());
   }
 
   @override
   void dispose() {
-    _loginCtr
-      ..removeListener(_onTextChanged)
-      ..dispose();
-    _isEnable.dispose();
+    _forgotPasswordCubit.close();
     super.dispose();
   }
-
-  void _submit() => context.read<ForgotPasswordCubit>().send(_loginCtr.text.trim());
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return BlocConsumer<ForgotPasswordCubit, DataState<void>>(
+    return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
+      bloc: _forgotPasswordCubit,
+      listenWhen: (prev, curr) => prev.status != curr.status,
       listener: (context, state) {
-        if (state is DataSuccess<void>) {
+        if (state.status is DataSuccess<void>) {
           context.pop();
-        } else if (state is DataFailure<void>) {
-          context.handleError(state.exception);
+        } else if (state.status is DataFailure<void>) {
+          context.handleError((state.status as DataFailure<void>).exception);
         }
       },
       builder: (context, state) => Scaffold(
@@ -85,13 +64,11 @@ class _ForgotPasswordBodyState extends State<_ForgotPasswordBody> {
                       const SizedBox(height: AppSpacing.x6),
                       AuthTextField(
                         label: l10n.authEmailLabel,
-                        controller: _loginCtr,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.done,
                         hintText: l10n.authForgotPasswordLoginEmailPlaceholder,
-                        onSubmitted: () {
-                          if (_isEnable.value && !state.isLoading) _submit();
-                        },
+                        onChanged: _forgotPasswordCubit.emailChanged,
+                        onSubmitted: state.canSubmit ? _forgotPasswordCubit.send : null,
                       ),
                       const SizedBox(height: AppSpacing.x4),
                       ForgotPasswordContactCard(
@@ -104,14 +81,13 @@ class _ForgotPasswordBodyState extends State<_ForgotPasswordBody> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
-                child: ValueListenableBuilder<bool>(
-                  valueListenable: _isEnable,
-                  builder: (_, enabled, _) => AuthSubmitButton(
-                    label: l10n.authForgotPasswordSendLink,
-                    isLoading: state.isLoading,
-                    onPressed: enabled && !state.isLoading ? _submit : null,
-                  ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.x6,
+                ),
+                child: AuthSubmitButton(
+                  label: l10n.authForgotPasswordSendLink,
+                  isLoading: state.isLoading,
+                  onPressed: state.canSubmit ? _forgotPasswordCubit.send : null,
                 ),
               ),
             ],
