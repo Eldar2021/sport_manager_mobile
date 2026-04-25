@@ -48,9 +48,8 @@ final class AuthRepository {
 
   UserModel? getCachedUser() => _local.getCachedUser();
 
-  Future<void> refresh(String refreshToken) async {
-    final newTokens = await _remote.refresh(refreshToken);
-    await _local.saveTokens(newTokens);
+  void cacheRefreshedTokens(String accessToken, String refreshToken) {
+    _local.saveTokens(AuthTokensModel(accessToken: accessToken, refreshToken: refreshToken));
   }
 
   Future<void> logout() async {

@@ -1,15 +1,37 @@
 import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 
+/// Mock credentials
+/// ─────────────────────────────────────────
+/// Login   │  username: test  │ password: Test1234
+/// Manager │  invite code: INVITE-001
+/// ─────────────────────────────────────────
 final class AuthRemoteSourceMock implements AuthRemoteSource {
-  static const _validInviteCode = 'TF-TEST1';
+  static const _username = 'test';
+  static const _password = 'Test1234';
+  static const _validInviteCode = 'INVITE-001';
 
-  static const _mockTokens = AuthTokensModel(
-    accessToken: 'mock-access-token',
-    refreshToken: 'mock-refresh-token',
+  static const _tokens = AuthTokensModel(
+    accessToken: 'mock_access_token_abc123',
+    refreshToken: 'mock_refresh_token_xyz789',
   );
 
-  static const _invalidInviteCode = BaseMessage(
+  static const _testOwner = UserModel(
+    id: 'user-001',
+    username: _username,
+    name: 'Test Owner',
+    role: UserRole.owner,
+    email: 'test@tableflow.kg',
+    phone: '+996 700 000 001',
+  );
+
+  static const _wrongCredentials = BaseMessage(
+    en: 'Invalid username or password',
+    ru: 'Неверный логин или пароль',
+    ky: 'Логин же сырсөз туура эмес',
+  );
+
+  static const _badInviteCode = BaseMessage(
     en: 'Invalid or expired invite code',
     ru: 'Неверный или истёкший код приглашения',
     ky: 'Жараксыз же мөөнөтү өткөн чакыруу коду',
@@ -20,31 +42,26 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     required String username,
     required String password,
   }) async {
-    await Future<void>.delayed(const Duration(milliseconds: 900));
+    await Future<void>.delayed(const Duration(milliseconds: 800));
 
-    final role = username == 'manager' ? UserRole.manager : UserRole.owner;
-    final user = UserModel(
-      id: 'mock-user-1',
-      username: username,
-      name: role == UserRole.manager ? 'Менеджер' : 'Владелец',
-      role: role,
-      email: role == UserRole.owner ? '$username@example.kg' : null,
-    );
+    if (username.trim() != _username || password != _password) {
+      throw const AuthException('invalid_credentials', message: _wrongCredentials);
+    }
 
     return AuthResultModel(
-      user: user,
-      accessToken: _mockTokens.accessToken,
-      refreshToken: _mockTokens.refreshToken,
+      user: _testOwner,
+      accessToken: _tokens.accessToken,
+      refreshToken: _tokens.refreshToken,
     );
   }
 
   @override
   Future<AuthResultModel> registerOwner(RegisterOwnerBody body) async {
-    await Future<void>.delayed(const Duration(milliseconds: 1100));
+    await Future<void>.delayed(const Duration(milliseconds: 1000));
 
     return AuthResultModel(
-      accessToken: _mockTokens.accessToken,
-      refreshToken: _mockTokens.refreshToken,
+      accessToken: _tokens.accessToken,
+      refreshToken: _tokens.refreshToken,
       user: UserModel(
         id: 'owner-${DateTime.now().millisecondsSinceEpoch}',
         username: body.email.split('@').first,
@@ -58,15 +75,15 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
 
   @override
   Future<AuthResultModel> registerManager(RegisterManagerBody body) async {
-    await Future<void>.delayed(const Duration(milliseconds: 900));
+    await Future<void>.delayed(const Duration(milliseconds: 800));
 
     if (body.inviteCode.trim().toUpperCase() != _validInviteCode) {
-      throw const AuthException('invalid_invite_code', message: _invalidInviteCode);
+      throw const AuthException('invalid_invite_code', message: _badInviteCode);
     }
 
     return AuthResultModel(
-      accessToken: _mockTokens.accessToken,
-      refreshToken: _mockTokens.refreshToken,
+      accessToken: _tokens.accessToken,
+      refreshToken: _tokens.refreshToken,
       user: UserModel(
         id: 'manager-${DateTime.now().millisecondsSinceEpoch}',
         username: body.username,
@@ -78,25 +95,25 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
 
   @override
   Future<AuthTokensModel> refresh(String refreshToken) async {
-    await Future<void>.delayed(const Duration(milliseconds: 500));
-    return _mockTokens;
+    await Future<void>.delayed(const Duration(milliseconds: 400));
+    return _tokens;
   }
 
   @override
   Future<void> forgotPassword(String email) async {
-    await Future<void>.delayed(const Duration(milliseconds: 800));
+    await Future<void>.delayed(const Duration(milliseconds: 600));
   }
 
   @override
   Future<void> logout() async {
-    await Future<void>.delayed(const Duration(milliseconds: 400));
+    await Future<void>.delayed(const Duration(milliseconds: 300));
   }
 
   @override
   Future<InviteCodeModel> getInviteCode() async {
-    await Future<void>.delayed(const Duration(milliseconds: 600));
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     return InviteCodeModel(
-      code: 'TF-TEST1',
+      code: _validInviteCode,
       expiresAt: DateTime.now().add(const Duration(days: 7)),
     );
   }

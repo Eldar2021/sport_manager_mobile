@@ -36,22 +36,38 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
 
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: authCubit.state is AuthAuthenticated ? AppRoutes.home : AppRoutes.welcome,
+    initialLocation: AppRoutes.init,
     debugLogDiagnostics: kDebugMode,
     refreshListenable: _GoRouterAuthListenable(authCubit.stream),
     redirect: (context, state) {
       final authState = authCubit.state;
+      final matchedLocation = state.matchedLocation;
 
-      if (authState is AuthInitial || authState is AuthLoading) return null;
+      if (authState is AuthInitial || authState is AuthLoading) {
+        return null;
+      }
 
       final isAuthenticated = authState is AuthAuthenticated;
-      final isOnAuthRoute = _authRoutes.contains(state.matchedLocation);
+      final isOnAuthRoute = _authRoutes.contains(matchedLocation);
+      final isOnInit = matchedLocation == AppRoutes.init;
 
-      if (isAuthenticated && isOnAuthRoute) return AppRoutes.home;
-      if (!isAuthenticated && !isOnAuthRoute) return AppRoutes.welcome;
+      if (isAuthenticated && (isOnAuthRoute || isOnInit)) {
+        return AppRoutes.home;
+      }
+
+      if (!isAuthenticated && (!isOnAuthRoute || isOnInit)) {
+        return AppRoutes.welcome;
+      }
+
       return null;
     },
     routes: [
+      GoRoute(
+        path: AppRoutes.init,
+        builder: (context, state) => const Scaffold(
+          body: Center(child: CircularProgressIndicator()),
+        ),
+      ),
       GoRoute(
         path: AppRoutes.welcome,
         builder: (context, state) => const WelcomeScreen(),

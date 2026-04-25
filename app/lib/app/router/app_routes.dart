@@ -1,5 +1,6 @@
 abstract final class AppRoutes {
-  static const welcome = '/';
+  static const init = '/';
+  static const welcome = '/welcome';
   static const login = '/login';
   static const role = '/role';
   static const registerOwner = '/register/owner';

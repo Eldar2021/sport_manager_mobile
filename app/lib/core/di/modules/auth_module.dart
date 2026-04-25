@@ -15,12 +15,10 @@ final class AuthModule extends BaseDiModule {
     super.register(sl);
     sl
       ..registerLazySingleton<AuthLocalSource>(
-        () => Env.isMock
-            ? AuthLocalSourceMock()
-            : AuthLocalSourceImpl(
-                secure: const SecureStorage(),
-                preferences: sl<PreferencesStorage>(),
-              ),
+        () => AuthLocalSourceImpl(
+          secure: const SecureStorage(),
+          preferences: sl<PreferencesStorage>(),
+        ),
       )
       ..registerLazySingleton<AuthRemoteSource>(
         () => Env.isMock

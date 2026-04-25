@@ -11,19 +11,18 @@ final class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _repository;
 
   Future<void> checkAuthStatus() async {
-    emit(const AuthLoading());
     try {
       final tokens = await _repository.getTokens();
-      if (tokens == null) {
-        emit(const AuthUnauthenticated());
-        return;
+
+      if (tokens != null && tokens.accessToken.isNotEmpty) {
+        final cachedUser = _repository.getCachedUser();
+        if (cachedUser != null) {
+          emit(AuthAuthenticated(user: cachedUser));
+          return;
+        }
       }
-      final user = _repository.getCachedUser();
-      if (user != null) {
-        emit(AuthAuthenticated(user: user));
-      } else {
-        emit(const AuthUnauthenticated());
-      }
+
+      emit(const AuthUnauthenticated());
     } on Object catch (_) {
       emit(const AuthUnauthenticated());
     }
