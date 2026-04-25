@@ -11,8 +11,8 @@ RegisterOwnerBody _$RegisterOwnerBodyFromJson(Map<String, dynamic> json) => Regi
   phone: json['phone'] as String,
   email: json['email'] as String,
   password: json['password'] as String,
-  venueName: json['venueName'] as String,
-  venueNumber: json['venueNumber'] as String,
+  venueName: json['venueName'] as String?,
+  venueNumber: json['venueNumber'] as String?,
 );
 
 Map<String, dynamic> _$RegisterOwnerBodyToJson(RegisterOwnerBody instance) => <String, dynamic>{

@@ -24,6 +24,9 @@ dependencies:
   api_client:
   storage_client:
   auth:
+  venues:
+  tables:
+  sessions:
   cupertino_icons:
   get_it:
   toastification:

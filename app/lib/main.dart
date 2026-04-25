@@ -11,6 +11,7 @@ void main() async {
     const ErrorModule(),
     const NetworkModule(),
     const AuthModule(),
+    const DataModule(),
   ]);
 
   runApp(const MyAppWrapper());

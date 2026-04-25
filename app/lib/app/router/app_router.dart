@@ -10,7 +10,7 @@ import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
 
-class _GoRouterAuthListenable extends ChangeNotifier {
+final class _GoRouterAuthListenable extends ChangeNotifier {
   _GoRouterAuthListenable(Stream<AuthState> stream) {
     _subscription = stream.listen((_) => notifyListeners());
   }

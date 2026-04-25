@@ -41,7 +41,7 @@ analyzer:
 
 | Тип          | Формат                                   | Пример                          |
 | ------------ | ---------------------------------------- | ------------------------------- |
-| Интерфейс    | `abstract interface class` + `I` префикс | `IVenueRemoteSource`            |
+| Интерфейс    | `abstract interface class`               | `VenueRemoteSource`             |
 | Реализация   | суффикс `Impl`                           | `VenueRemoteSourceImpl`         |
 | Модель       | суффикс `Model`                          | `SessionModel`, `VenueModel`    |
 | Параметр/DTO | суффикс `Param` или `Body`               | `StartSessionParam`             |
@@ -57,7 +57,7 @@ analyzer:
 final class SessionModel extends Equatable { ... }
 
 // Интерфейсы
-abstract interface class IVenueRemoteSource { ... }
+abstract interface class VenueRemoteSource { ... }
 
 // Абстрактные базы
 abstract class BaseDiModule extends DIModule<GetIt> { ... }
