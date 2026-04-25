@@ -1,7 +1,8 @@
+import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
-import 'package:sport_manager_mobile/l10n/l10n.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,19 +11,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          context.l10n.homeWelcomeBack,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        title: Text('home', style: Theme.of(context).textTheme.titleMedium),
         actions: [
-          ElevatedButton.icon(
-            icon: const Icon(Icons.settings_outlined),
-            label: Text(context.l10n.settingsThemeSystem),
-            onPressed: () => context.push(AppRoutes.settings),
+          IconButton(
+            icon: const Icon(Icons.logout_rounded),
+            onPressed: () async {
+              await GetIt.I<AuthRepository>().logout();
+              if (context.mounted) context.go(AppRoutes.welcome);
+            },
           ),
-          const SizedBox(width: 24),
         ],
       ),
+      body: const Center(child: Text('home')),
     );
   }
 }
