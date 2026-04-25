@@ -26,7 +26,7 @@ class AuthInterceptor extends QueuedInterceptor {
         await onLogout();
         return handler.next(err);
       }
-      if (err.requestOptions.path.contains('auth/refresh-token')) {
+      if (err.requestOptions.path.contains('auth/refresh')) {
         return handler.next(err);
       }
       try {
@@ -63,7 +63,7 @@ class AuthInterceptor extends QueuedInterceptor {
   Future<String?> refresh() async {
     try {
       final res = await dio.post<Map<String, dynamic>>(
-        'auth/refresh-token',
+        'auth/refresh',
         data: {
           'refreshToken': getRefreshToken(),
         },
@@ -77,7 +77,7 @@ class AuthInterceptor extends QueuedInterceptor {
         await onLogout();
         throw ApiClientException(
           DioException(
-            requestOptions: RequestOptions(path: 'auth/refresh-token'),
+            requestOptions: RequestOptions(path: 'auth/refresh'),
             response: Response(
               requestOptions: RequestOptions(),
               statusCode: 401,
@@ -90,7 +90,7 @@ class AuthInterceptor extends QueuedInterceptor {
       await onLogout();
       throw ApiClientException(
         DioException(
-          requestOptions: RequestOptions(path: 'auth/refresh-token'),
+          requestOptions: RequestOptions(path: 'auth/refresh'),
           response: Response(
             requestOptions: RequestOptions(),
             statusCode: 401,
