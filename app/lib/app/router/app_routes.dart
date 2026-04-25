@@ -7,5 +7,6 @@ abstract final class AppRoutes {
   static const registerManager = '/register/manager';
   static const forgotPassword = '/forgot-password';
   static const home = '/home';
-  static const settings = '/settings';
+  static const report = '/report';
+  static const profile = '/profile';
 }

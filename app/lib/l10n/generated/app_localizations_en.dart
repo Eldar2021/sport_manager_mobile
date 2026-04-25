@@ -157,4 +157,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authContactCallLabel => 'Call';
+
+  @override
+  String get navHome => 'Home';
+
+  @override
+  String get navReport => 'Reports';
+
+  @override
+  String get navProfile => 'Profile';
 }

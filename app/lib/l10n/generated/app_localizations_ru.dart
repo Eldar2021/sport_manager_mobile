@@ -157,4 +157,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get authContactCallLabel => 'Позвонить';
+
+  @override
+  String get navHome => 'Главная';
+
+  @override
+  String get navReport => 'Отчёты';
+
+  @override
+  String get navProfile => 'Профиль';
 }

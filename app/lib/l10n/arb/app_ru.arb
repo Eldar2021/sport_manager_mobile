@@ -52,5 +52,8 @@
 
   "authContactSupportTitle": "Связаться с поддержкой",
   "authContactSupportSubtitle": "Напишите или позвоните — поможем восстановить доступ.",
-  "authContactCallLabel": "Позвонить"
+  "authContactCallLabel": "Позвонить",
+  "navHome": "Главная",
+  "navReport": "Отчёты",
+  "navProfile": "Профиль"
 }

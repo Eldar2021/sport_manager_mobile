@@ -52,5 +52,8 @@
 
   "authContactSupportTitle": "Колдоо кызматы менен байланышуу",
   "authContactSupportSubtitle": "Жазыңыз же чалыңыз — кирүүнү калыбына келтирүүгө жардамдашабыз.",
-  "authContactCallLabel": "Чалуу"
+  "authContactCallLabel": "Чалуу",
+  "navHome": "Башкы",
+  "navReport": "Отчеттор",
+  "navProfile": "Профиль"
 }

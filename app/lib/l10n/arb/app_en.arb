@@ -52,5 +52,8 @@
 
   "authContactSupportTitle": "Contact Support",
   "authContactSupportSubtitle": "Write or call — we'll help restore access.",
-  "authContactCallLabel": "Call"
+  "authContactCallLabel": "Call",
+  "navHome": "Home",
+  "navReport": "Reports",
+  "navProfile": "Profile"
 }

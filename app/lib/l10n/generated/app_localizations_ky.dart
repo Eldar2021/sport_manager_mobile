@@ -157,4 +157,13 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get authContactCallLabel => 'Чалуу';
+
+  @override
+  String get navHome => 'Башкы';
+
+  @override
+  String get navReport => 'Отчеттор';
+
+  @override
+  String get navProfile => 'Профиль';
 }

@@ -4,9 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
+import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
-import 'package:sport_manager_mobile/features/settings/settings.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 
 class _GoRouterAuthListenable extends ChangeNotifier {
   _GoRouterAuthListenable(Stream<AuthState> stream) {
@@ -92,14 +94,35 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         path: AppRoutes.registerManager,
         builder: (context, state) => const RegisterManagerScreen(),
       ),
-      GoRoute(
-        path: AppRoutes.home,
-        builder: (context, state) => const HomeScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.settings,
-        parentNavigatorKey: rootNavigatorKey,
-        builder: (context, state) => const SettingsView(),
+
+      StatefulShellRoute.indexedStack(
+        builder: (_, _, shell) => MainShell(navigationShell: shell),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.home,
+                builder: (_, _) => const HomeScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.report,
+                builder: (_, _) => const ReportScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.profile,
+                builder: (_, _) => const ProfileScreen(),
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );
