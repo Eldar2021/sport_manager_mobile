@@ -16,7 +16,7 @@ class RegisterOwnerScreen extends StatefulWidget {
 }
 
 class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
-  late final RegisterOwnerCubit _registerCubit;
+  late final RegisterOwnerCubit _registerOwnerCubit;
   final _formKey = GlobalKey<FormState>();
   final _nameCtr = TextEditingController();
   final _phoneCtr = TextEditingController();
@@ -32,7 +32,7 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
   @override
   void initState() {
     super.initState();
-    _registerCubit = RegisterOwnerCubit(
+    _registerOwnerCubit = RegisterOwnerCubit(
       GetIt.I<AuthRepository>(),
       context.read<AuthCubit>(),
     );
@@ -40,7 +40,7 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
 
   @override
   void dispose() {
-    _registerCubit.close();
+    _registerOwnerCubit.close();
     _nameCtr.dispose();
     _phoneCtr.dispose();
     _emailCtr.dispose();
@@ -52,7 +52,7 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
   void _registerOwner() {
     if (!_formKey.currentState!.validate()) return;
 
-    _registerCubit.registerOwner(
+    _registerOwnerCubit.registerOwner(
       RegisterOwnerBody(
         name: _nameCtr.text.trim(),
         phone: _phoneCtr.text.trim(),
@@ -138,7 +138,7 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
                 child: BlocConsumer<RegisterOwnerCubit, DataState<void>>(
-                  bloc: _registerCubit,
+                  bloc: _registerOwnerCubit,
                   listener: (context, state) {
                     if (state.isFailure) {
                       final exception = (state as DataFailure<void>).exception;

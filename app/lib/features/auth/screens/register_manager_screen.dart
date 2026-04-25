@@ -15,7 +15,7 @@ class RegisterManagerScreen extends StatefulWidget {
 }
 
 class _RegisterManagerViewState extends State<RegisterManagerScreen> {
-  late final RegisterManagerCubit _registerCubit;
+  late final RegisterManagerCubit _registerManagerCubit;
   final _formKey = GlobalKey<FormState>();
   final _inviteCodeCtr = TextEditingController();
   final _usernameCtr = TextEditingController();
@@ -25,7 +25,7 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
   @override
   void initState() {
     super.initState();
-    _registerCubit = RegisterManagerCubit(
+    _registerManagerCubit = RegisterManagerCubit(
       GetIt.I<AuthRepository>(),
       context.read<AuthCubit>(),
     );
@@ -33,7 +33,7 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
 
   @override
   void dispose() {
-    _registerCubit.close();
+    _registerManagerCubit.close();
     _inviteCodeCtr.dispose();
     _usernameCtr.dispose();
     _nameCtr.dispose();
@@ -43,7 +43,7 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
 
   void _registerManager() {
     if (!_formKey.currentState!.validate()) return;
-    _registerCubit.registerManager(
+    _registerManagerCubit.registerManager(
       RegisterManagerBody(
         inviteCode: _inviteCodeCtr.text.trim(),
         username: _usernameCtr.text.trim(),
@@ -142,7 +142,7 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
                 child: BlocConsumer<RegisterManagerCubit, DataState<void>>(
-                  bloc: _registerCubit,
+                  bloc: _registerManagerCubit,
                   listener: (context, state) {
                     if (state.isFailure) {
                       final exception = (state as DataFailure<void>).exception;
