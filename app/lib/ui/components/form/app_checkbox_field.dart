@@ -45,9 +45,7 @@ class AppCheckboxField extends StatelessWidget {
                         width: 1.5,
                       ),
                     ),
-                    child: checked
-                        ? Icon(Icons.check_rounded, color: colorScheme.surfaceContainer, size: 16)
-                        : null,
+                    child: checked ? Icon(Icons.check_rounded, color: colorScheme.surfaceContainer, size: 16) : null,
                   ),
                   const SizedBox(width: AppSpacing.x3),
                   Text(label, style: textTheme.bodyMedium),

@@ -1,6 +1,7 @@
+export 'cubits/auth_cubit/auth_cubit.dart';
 export 'cubits/forgot_password_cubit/forgot_password_cubit.dart';
-export 'cubits/login_cubit/login_cubit.dart';
-export 'cubits/register_cubit.dart';
+export 'cubits/register_manager_cubit/register_manager_cubit.dart';
+export 'cubits/register_owner_cubit/register_owner_cubit.dart';
 export 'screens/forgot_password_screen.dart';
 export 'screens/login_screen.dart';
 export 'screens/register_manager_screen.dart';

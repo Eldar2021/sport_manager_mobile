@@ -99,6 +99,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authConfirmPasswordLabel => 'Повторите пароль';
 
   @override
+  String get authVenueNameLabel => 'Название заведения';
+
+  @override
+  String get authVenueNumberLabel => 'Номер заведения';
+
+  @override
   String get authAgreeTerms => 'Согласен с условиями';
 
   @override

@@ -6,11 +6,15 @@ abstract interface class AuthRemoteSource {
     required String password,
   });
 
-  Future<void> forgotPassword(String email);
-
   Future<AuthResultModel> registerOwner(RegisterOwnerBody body);
 
   Future<AuthResultModel> registerManager(RegisterManagerBody body);
 
+  Future<AuthTokensModel> refresh(String refreshToken);
+
   Future<void> logout();
+
+  Future<void> forgotPassword(String email);
+
+  Future<InviteCodeModel> getInviteCode();
 }

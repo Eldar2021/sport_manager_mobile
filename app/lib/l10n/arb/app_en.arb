@@ -31,6 +31,8 @@
   "authInviteCodeLabel": "Invite code",
   "authUsernameLabel": "Username",
   "authConfirmPasswordLabel": "Confirm password",
+  "authVenueNameLabel": "Venue name",
+  "authVenueNumberLabel": "Venue number",
   "authAgreeTerms": "I agree to the terms",
   "authAgreeTermsError": "You must agree to the terms",
   "authCreateAccount": "Create account",

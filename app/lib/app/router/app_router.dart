@@ -1,12 +1,26 @@
-import 'package:auth/auth.dart';
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
+
+class _GoRouterAuthListenable extends ChangeNotifier {
+  _GoRouterAuthListenable(Stream<AuthState> stream) {
+    _subscription = stream.listen((_) => notifyListeners());
+  }
+
+  late final StreamSubscription<AuthState> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}
 
 const Set<String> _authRoutes = {
   AppRoutes.welcome,
@@ -17,24 +31,24 @@ const Set<String> _authRoutes = {
   AppRoutes.registerManager,
 };
 
-GoRouter appRouter({GlobalKey<NavigatorState>? navigatorKey}) {
+GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey}) {
   final rootNavigatorKey = navigatorKey ?? GlobalKey<NavigatorState>(debugLabel: 'root');
 
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: AppRoutes.welcome,
+    initialLocation: authCubit.state is AuthAuthenticated ? AppRoutes.home : AppRoutes.welcome,
     debugLogDiagnostics: kDebugMode,
+    refreshListenable: _GoRouterAuthListenable(authCubit.stream),
     redirect: (context, state) {
-      final token = GetIt.I<AuthRepository>().getToken();
-      final isAuthenticated = token != null && token.isNotEmpty;
+      final authState = authCubit.state;
 
-      if (isAuthenticated && _authRoutes.contains(state.matchedLocation)) {
-        return AppRoutes.home;
-      }
+      if (authState is AuthInitial || authState is AuthLoading) return null;
 
-      if (!isAuthenticated && !_authRoutes.contains(state.matchedLocation)) {
-        return AppRoutes.welcome;
-      }
+      final isAuthenticated = authState is AuthAuthenticated;
+      final isOnAuthRoute = _authRoutes.contains(state.matchedLocation);
+
+      if (isAuthenticated && isOnAuthRoute) return AppRoutes.home;
+      if (!isAuthenticated && !isOnAuthRoute) return AppRoutes.welcome;
       return null;
     },
     routes: [

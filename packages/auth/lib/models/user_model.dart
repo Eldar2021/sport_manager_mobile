@@ -1,4 +1,4 @@
-import 'package:auth/auth.dart';
+import 'package:auth/models/user_role.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
@@ -15,6 +15,7 @@ final class UserModel extends Equatable {
     required this.role,
     this.email,
     this.phone,
+    this.ownerId,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
@@ -25,9 +26,10 @@ final class UserModel extends Equatable {
   final UserRole role;
   final String? email;
   final String? phone;
+  final String? ownerId;
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   @override
-  List<Object?> get props => [id, username, name, role, email, phone];
+  List<Object?> get props => [id, username, name, role, email, phone, ownerId];
 }

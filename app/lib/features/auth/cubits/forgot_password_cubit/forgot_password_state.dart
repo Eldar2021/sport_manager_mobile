@@ -1,6 +1,6 @@
 part of 'forgot_password_cubit.dart';
 
-final class ForgotPasswordState {
+final class ForgotPasswordState extends Equatable {
   const ForgotPasswordState({
     this.email = '',
     this.status = const DataInitial(),
@@ -10,7 +10,7 @@ final class ForgotPasswordState {
   final DataState<void> status;
 
   bool get isEmailValid => InputValidators.isValidEmail(email);
-  bool get isLoading => status == const DataLoading<void>();
+  bool get isLoading => status.isLoading;
   bool get canSubmit => isEmailValid && !isLoading;
 
   ForgotPasswordState copyWith({
@@ -20,4 +20,7 @@ final class ForgotPasswordState {
     email: email ?? this.email,
     status: status ?? this.status,
   );
+
+  @override
+  List<Object?> get props => [email, status];
 }

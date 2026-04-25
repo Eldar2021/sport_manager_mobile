@@ -1,8 +1,10 @@
+import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
+import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -15,6 +17,11 @@ class MyAppWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (_) => AuthCubit(
+            GetIt.I<AuthRepository>(),
+          )..checkAuthStatus(),
+        ),
         BlocProvider(
           create: (_) => SettingsCubit(
             GetIt.I<PreferencesStorage>(),
@@ -39,7 +46,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _router = appRouter();
+    _router = appRouter(context.read<AuthCubit>());
   }
 
   @override

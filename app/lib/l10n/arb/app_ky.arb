@@ -31,6 +31,8 @@
   "authInviteCodeLabel": "Чакыруу коду",
   "authUsernameLabel": "Логин",
   "authConfirmPasswordLabel": "Сырсөздү кайталаңыз",
+  "authVenueNameLabel": "Жайдын аты",
+  "authVenueNumberLabel": "Жайдын номери",
   "authAgreeTerms": "Шарттарга макулмун",
   "authAgreeTermsError": "Шарттарга макул болушуңуз керек",
   "authCreateAccount": "Аккаунт түзүү",

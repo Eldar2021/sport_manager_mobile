@@ -31,6 +31,8 @@
   "authInviteCodeLabel": "Код приглашения",
   "authUsernameLabel": "Логин",
   "authConfirmPasswordLabel": "Повторите пароль",
+  "authVenueNameLabel": "Название заведения",
+  "authVenueNumberLabel": "Номер заведения",
   "authAgreeTerms": "Согласен с условиями",
   "authAgreeTermsError": "Необходимо согласиться с условиями",
   "authCreateAccount": "Создать аккаунт",

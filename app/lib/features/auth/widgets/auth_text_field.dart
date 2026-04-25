@@ -60,10 +60,11 @@ class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return FormField<String>(
+      initialValue: widget.controller?.text ?? '',
       autovalidateMode: AutovalidateMode.disabled,
-      validator: widget.validator != null ? (_) => widget.validator!(widget.controller?.text ?? '') : null,
+      validator: widget.validator,
       builder: (field) {
-        final errorText = widget.validator != null ? field.errorText : widget.errorText;
+        final errorText = field.errorText ?? widget.errorText;
         final hasError = errorText != null;
         final borderColor = hasError
             ? AppColors.dangerRed
@@ -100,7 +101,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
                       autofocus: widget.autofocus,
                       inputFormatters: widget.inputFormatters,
                       onSubmitted: widget.onSubmitted != null ? (_) => widget.onSubmitted!() : null,
-                      onChanged: widget.onChanged,
+                      onChanged: (v) {
+                        field.didChange(v);
+                        widget.onChanged?.call(v);
+                      },
                       style: Theme.of(context).textTheme.bodyMedium,
                       decoration: InputDecoration(
                         border: InputBorder.none,

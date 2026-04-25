@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:api_client/api_client.dart';
+import 'package:auth/auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/env.dart';
@@ -27,14 +28,14 @@ final class NetworkModule extends BaseDiModule {
     bearerDio.interceptors.addAll([
       baseInterceptor,
       BearerInterceptor(
-        getAccessToken: () => null,
-        getRefreshToken: () => null,
+        getAccessToken: () => GetIt.I<AuthRepository>().getAccessTokenSync() ?? '',
+        getRefreshToken: () => GetIt.I<AuthRepository>().getRefreshTokenSync() ?? '',
       ),
       AuthInterceptor(
         dio: bearerDio,
-        getRefreshToken: () => '',
-        onLogout: () async {},
-        onRefreshedToken: (accessToken, refreshToken) async {},
+        getRefreshToken: () => GetIt.I<AuthRepository>().getRefreshTokenSync() ?? '',
+        onLogout: () => GetIt.I<AuthRepository>().logout(),
+        onRefreshedToken: (accessToken, refreshToken) async => GetIt.I<AuthRepository>().refresh(refreshToken),
       ),
     ]);
 

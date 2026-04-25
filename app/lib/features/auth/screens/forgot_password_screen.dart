@@ -38,10 +38,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       bloc: _forgotPasswordCubit,
       listenWhen: (prev, curr) => prev.status != curr.status,
       listener: (context, state) {
-        if (state.status is DataSuccess<void>) {
+        final status = state.status;
+        if (status.isSuccess) {
           context.pop();
-        } else if (state.status is DataFailure<void>) {
-          context.handleError((state.status as DataFailure<void>).exception);
+        } else if (status.isFailure) {
+          final exception = (status as DataFailure).exception;
+          context.handleError(exception);
         }
       },
       builder: (context, state) => Scaffold(

@@ -99,6 +99,12 @@ class AppLocalizationsKy extends AppLocalizations {
   String get authConfirmPasswordLabel => 'Сырсөздү кайталаңыз';
 
   @override
+  String get authVenueNameLabel => 'Жайдын аты';
+
+  @override
+  String get authVenueNumberLabel => 'Жайдын номери';
+
+  @override
   String get authAgreeTerms => 'Шарттарга макулмун';
 
   @override

@@ -99,6 +99,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authConfirmPasswordLabel => 'Confirm password';
 
   @override
+  String get authVenueNameLabel => 'Venue name';
+
+  @override
+  String get authVenueNumberLabel => 'Venue number';
+
+  @override
   String get authAgreeTerms => 'I agree to the terms';
 
   @override

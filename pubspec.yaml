@@ -32,6 +32,7 @@ dependencies:
   google_fonts: ^8.0.2
   mask_text_input_formatter: ^2.9.0
   flutter_svg: ^2.2.4
+  flutter_secure_storage: ^9.2.2
   # infinite_scroll_pagination: ^5.1.1
 
 dev_dependencies:

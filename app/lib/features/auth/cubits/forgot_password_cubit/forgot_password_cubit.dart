@@ -1,4 +1,5 @@
 import 'package:auth/auth.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 

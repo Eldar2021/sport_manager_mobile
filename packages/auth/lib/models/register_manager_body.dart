@@ -16,7 +16,6 @@ final class RegisterManagerBody extends Equatable {
 
   factory RegisterManagerBody.fromJson(Map<String, dynamic> json) => _$RegisterManagerBodyFromJson(json);
 
-  @JsonKey(name: 'invite_code')
   final String inviteCode;
   final String username;
   final String name;

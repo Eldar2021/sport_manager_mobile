@@ -12,6 +12,8 @@ final class RegisterOwnerBody extends Equatable {
     required this.phone,
     required this.email,
     required this.password,
+    this.venueName,
+    this.venueNumber,
   });
 
   factory RegisterOwnerBody.fromJson(Map<String, dynamic> json) => _$RegisterOwnerBodyFromJson(json);
@@ -20,9 +22,11 @@ final class RegisterOwnerBody extends Equatable {
   final String phone;
   final String email;
   final String password;
+  final String? venueName;
+  final String? venueNumber;
 
   Map<String, dynamic> toJson() => _$RegisterOwnerBodyToJson(this);
 
   @override
-  List<Object?> get props => [name, phone, email, password];
+  List<Object?> get props => [name, phone, email, password, venueName, venueNumber];
 }

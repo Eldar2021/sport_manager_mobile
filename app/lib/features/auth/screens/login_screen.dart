@@ -1,7 +1,5 @@
-import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
@@ -13,26 +11,27 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginBodyState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginBodyState extends State<LoginScreen> {
-  late final LoginCubit _loginCubit;
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
   final _usernameCtr = TextEditingController();
   final _passwordCtr = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    _loginCubit = LoginCubit(GetIt.I<AuthRepository>());
-  }
-
-  @override
   void dispose() {
-    _loginCubit.close();
     _usernameCtr.dispose();
     _passwordCtr.dispose();
     super.dispose();
+  }
+
+  void _login() {
+    if (!_formKey.currentState!.validate()) return;
+    context.read<AuthCubit>().login(
+      _usernameCtr.text.trim(),
+      _passwordCtr.text,
+    );
   }
 
   @override
@@ -41,19 +40,11 @@ class _LoginBodyState extends State<LoginScreen> {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return BlocConsumer<LoginCubit, LoginState>(
-      listenWhen: (p, c) => p.status != c.status,
-      listener: (context, state) {
-        if (state.isSuccess) {
-          context.go(AppRoutes.home);
-        } else if (state.isFailure) {
-          context.handleError(state.status);
-        }
-      },
-      buildWhen: (p, c) => p.isLoading != c.isLoading || p.canSubmit != c.canSubmit,
-      builder: (context, state) => Scaffold(
-        appBar: AppBar(leading: const BackBtn()),
-        body: SafeArea(
+    return Scaffold(
+      appBar: AppBar(leading: const BackBtn()),
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -93,15 +84,14 @@ class _LoginBodyState extends State<LoginScreen> {
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         autofocus: true,
-                        onChanged: _loginCubit.usernameChanged,
+                        validator: (v) => InputValidators.emptyValidator(v, context),
                       ),
                       const SizedBox(height: AppSpacing.x4),
                       AuthPasswordField(
                         label: l10n.authPassword,
                         controller: _passwordCtr,
                         textInputAction: TextInputAction.done,
-                        onChanged: _loginCubit.passwordChanged,
-                        onSubmitted: _loginCubit.login,
+                        validator: (v) => InputValidators.passwordValidator(v, context),
                       ),
                       const SizedBox(height: AppSpacing.x3),
                       Align(
@@ -122,10 +112,19 @@ class _LoginBodyState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    AuthSubmitButton(
-                      label: l10n.authSignIn,
-                      isLoading: state.isLoading,
-                      onPressed: state.canSubmit ? _loginCubit.login : null,
+                    BlocConsumer<AuthCubit, AuthState>(
+                      listener: (context, state) {
+                        if (state is AuthError) {
+                          context.handleError(state.exception);
+                        }
+                      },
+                      builder: (context, state) {
+                        return AuthSubmitButton(
+                          label: l10n.authSignIn,
+                          isLoading: state is AuthLoading,
+                          onPressed: _login,
+                        );
+                      },
                     ),
                     const SizedBox(height: AppSpacing.x4),
                     Row(

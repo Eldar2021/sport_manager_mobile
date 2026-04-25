@@ -273,6 +273,18 @@ abstract class AppLocalizations {
   /// **'Confirm password'**
   String get authConfirmPasswordLabel;
 
+  /// No description provided for @authVenueNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Venue name'**
+  String get authVenueNameLabel;
+
+  /// No description provided for @authVenueNumberLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Venue number'**
+  String get authVenueNumberLabel;
+
   /// No description provided for @authAgreeTerms.
   ///
   /// In en, this message translates to:
