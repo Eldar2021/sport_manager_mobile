@@ -28,13 +28,13 @@ class TablesEmptyWidget extends StatelessWidget {
             const SizedBox(height: AppSpacing.x4),
             Text(
               l10n.homeTablesEmpty,
-              style: AppTypography.h2,
+              style: context.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppSpacing.x2),
             Text(
               l10n.homeTablesEmptySub,
-              style: AppTypography.body.copyWith(color: AppColors.ink500),
+              style: context.textTheme.bodyMedium?.copyWith(color: AppColors.ink500),
               textAlign: TextAlign.center,
             ),
             if (onAddTap != null) ...[

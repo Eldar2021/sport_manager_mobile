@@ -39,7 +39,7 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final colorScheme = Theme.of(context).colorScheme;
+    final colors = context.colors;
 
     return Scaffold(
       appBar: AppBar(),
@@ -56,15 +56,15 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
                   children: [
                     Text(
                       l10n.authRegisterOwnerTitle,
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      style: context.textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.x3),
                     RoleBadge(
                       label: l10n.authOwnerBadge,
-                      color: colorScheme.primary,
-                      bg: colorScheme.primary.withValues(alpha: 0.12),
+                      color: colors.primary,
+                      bg: colors.primary.withValues(alpha: AppOpacity.tint),
                       icon: Icons.business_center_rounded,
                     ),
                     const SizedBox(height: AppSpacing.x6),

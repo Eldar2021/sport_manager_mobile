@@ -58,18 +58,18 @@ class AppDestructiveSheet extends StatelessWidget {
             height: 56,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: context.colorScheme.errorContainer,
+                color: context.colors.errorContainer,
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: context.colorScheme.error, size: 24),
+              child: Icon(icon, color: context.colors.error, size: 24),
             ),
           ),
           const SizedBox(height: AppSpacing.x4),
-          Text(title, style: AppTypography.h2, textAlign: TextAlign.center),
+          Text(title, style: context.textTheme.titleLarge, textAlign: TextAlign.center),
           const SizedBox(height: AppSpacing.x2),
           Text(
             subtitle,
-            style: AppTypography.body.copyWith(color: AppColors.ink500),
+            style: context.textTheme.bodyMedium?.copyWith(color: AppColors.ink500),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: AppSpacing.x6),
@@ -80,7 +80,7 @@ class AppDestructiveSheet extends StatelessWidget {
                 Navigator.pop(context);
                 onConfirm();
               },
-              style: FilledButton.styleFrom(backgroundColor: context.colorScheme.error),
+              style: FilledButton.styleFrom(backgroundColor: context.colors.error),
               child: Text(confirmLabel),
             ),
           ),
@@ -88,7 +88,7 @@ class AppDestructiveSheet extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
             child: Text(
               l10n.cancel,
-              style: AppTypography.body.copyWith(color: context.colorScheme.primary),
+              style: context.textTheme.bodyMedium?.copyWith(color: context.colors.primary),
             ),
           ),
         ],

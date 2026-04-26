@@ -11,8 +11,8 @@ class RoleSelectScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = context.textTheme;
+    final colors = context.colors;
 
     return Scaffold(
       appBar: AppBar(),
@@ -31,14 +31,12 @@ class RoleSelectScreen extends StatelessWidget {
           const SizedBox(height: AppSpacing.x1),
           Text(
             l10n.authChooseRoleSubtitle,
-            style: textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
-            ),
+            style: context.appTextStyles.muted.bodyMedium,
           ),
           const SizedBox(height: AppSpacing.x6),
           RoleCard(
             icon: Icons.business_center_rounded,
-            iconBg: colorScheme.surfaceContainerLow,
+            iconBg: colors.surfaceContainerLow,
             title: l10n.authOwnerTitle,
             subtitle: l10n.authOwnerSubtitle,
             onTap: () => context.push(AppRoutes.registerOwner),
@@ -46,7 +44,7 @@ class RoleSelectScreen extends StatelessWidget {
           const SizedBox(height: AppSpacing.x3),
           RoleCard(
             icon: Icons.person_rounded,
-            iconBg: colorScheme.surfaceContainerLow,
+            iconBg: colors.surfaceContainerLow,
             title: l10n.authManagerTitle,
             subtitle: l10n.authManagerSubtitle,
             onTap: () => context.push(AppRoutes.registerManager),

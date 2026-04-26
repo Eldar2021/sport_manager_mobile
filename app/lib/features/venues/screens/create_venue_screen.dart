@@ -32,7 +32,7 @@ class _CreateVenueScreenState extends State<CreateVenueScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final labelStyle = AppTypography.body.copyWith(color: context.colorScheme.onSurfaceVariant);
+    final labelStyle = context.textTheme.bodyMedium?.copyWith(color: context.colors.onSurfaceVariant);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.createVenueTitle)),

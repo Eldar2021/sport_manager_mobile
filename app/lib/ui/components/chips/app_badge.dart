@@ -33,7 +33,7 @@ class AppBadge extends StatelessWidget {
             if (icon != null) ...[Icon(icon, color: color, size: 14), const SizedBox(width: AppSpacing.x1)],
             Text(
               label.toUpperCase(),
-              style: AppTypography.caption.copyWith(color: color, fontWeight: FontWeight.w600),
+              style: context.textTheme.bodySmall?.copyWith(color: color, fontWeight: FontWeight.w600),
             ),
           ],
         ),

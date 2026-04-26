@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({
@@ -10,7 +11,7 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final colors = context.colors;
     return SizedBox(
       width: size,
       height: size,
@@ -21,20 +22,20 @@ class AppLogo extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              colorScheme.primary,
-              colorScheme.onPrimaryContainer,
+              colors.primary,
+              colors.onPrimaryContainer,
             ],
           ),
           boxShadow: [
             BoxShadow(
-              color: colorScheme.primary.withValues(alpha: 0.27),
+              color: colors.primary.withValues(alpha: 0.27),
               blurRadius: 24,
               offset: const Offset(0, 12),
             ),
           ],
         ),
         child: CustomPaint(
-          painter: _CuePainter(colorScheme.onPrimary),
+          painter: _CuePainter(colors.onPrimary),
         ),
       ),
     );

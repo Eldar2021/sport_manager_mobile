@@ -106,7 +106,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
                 Flexible(
                   child: Text(
                     table.name ?? table.number,
-                    style: AppTypography.body.copyWith(fontWeight: FontWeight.w700, color: AppColors.ink900),
+                    style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700, color: AppColors.ink900),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -117,14 +117,14 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
             const SizedBox(height: AppSpacing.x1),
             Text(
               table.description ?? table.number,
-              style: AppTypography.caption.copyWith(color: AppColors.ink500),
+              style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink500),
               overflow: TextOverflow.ellipsis,
             ),
             const Spacer(),
             if (isOccupied && widget.session != null) ...[
               Text(
                 _formatElapsed(DateTime.now().difference(widget.session!.startedAt)),
-                style: AppTypography.h1.copyWith(
+                style: context.textTheme.headlineLarge?.copyWith(
                   color: AppColors.dangerRed,
                   fontWeight: FontWeight.w800,
                   fontFeatures: const [FontFeature.tabularFigures()],
@@ -134,12 +134,12 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
               const SizedBox(height: 2),
               Text(
                 l10n.homeTableOccupied,
-                style: AppTypography.caption.copyWith(color: AppColors.ink500, letterSpacing: 0.5),
+                style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink500, letterSpacing: 0.5),
               ),
             ] else ...[
               Text(
                 isJustFreed ? l10n.homeTableJustFreed : l10n.homeTableFree,
-                style: AppTypography.caption.copyWith(
+                style: context.textTheme.bodySmall?.copyWith(
                   color: AppColors.successGreen,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.5,
@@ -148,7 +148,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
               const SizedBox(height: 2),
               Text(
                 '${table.hourlyRate} сом/ час',
-                style: AppTypography.caption.copyWith(color: AppColors.ink700, fontWeight: FontWeight.w600),
+                style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink700, fontWeight: FontWeight.w600),
               ),
             ],
           ],
@@ -187,8 +187,8 @@ class _StatusDot extends StatelessWidget {
   }
 
   Widget _dot(Color color) => Container(
-        width: 9,
-        height: 9,
-        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-      );
+    width: 9,
+    height: 9,
+    decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+  );
 }

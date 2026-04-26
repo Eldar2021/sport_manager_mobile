@@ -56,7 +56,7 @@ class _CreateTableViewState extends State<CreateTableScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final labelStyle = AppTypography.caption.copyWith(color: AppColors.ink500);
+    final labelStyle = context.textTheme.bodySmall?.copyWith(color: AppColors.ink500);
     return BlocConsumer<CreateTableCubit, CreateTableState>(
       bloc: _cubit,
       listenWhen: _listenWhen,

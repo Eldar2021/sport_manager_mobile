@@ -104,7 +104,7 @@ final class _NavItem extends StatelessWidget {
             const SizedBox(height: AppSpacing.x1),
             Text(
               label,
-              style: AppTypography.caption.copyWith(
+              style: context.textTheme.bodySmall?.copyWith(
                 color: color,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
               ),

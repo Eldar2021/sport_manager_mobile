@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 class LanguageSwitcher extends StatelessWidget {
   const LanguageSwitcher({super.key});
@@ -16,7 +17,7 @@ class LanguageSwitcher extends StatelessWidget {
           children: AppLocalizationHelper.locales.map((locale) {
             return ChoiceChip(
               side: BorderSide.none,
-              backgroundColor: Colors.transparent,
+              backgroundColor: AppColors.transparent,
               showCheckmark: false,
               label: Text(
                 AppLocalizationHelper.getShortName(locale.languageCode),

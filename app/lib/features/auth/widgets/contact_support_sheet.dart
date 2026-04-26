@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sport_manager_mobile/generated/assets.gen.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-// TODO(eldiiar): Fix hardcoded colors and numbers
+/// Channel-specific brand colors. They do not adapt to light/dark — channel
+/// identity stays the same in both modes; only the surrounding tinted bg is
+/// theme-aware (built via `iconColor.withValues(alpha: AppOpacity.tint)`).
+const Color _whatsappBrand = Color(0xFF41D365);
+const Color _telegramBrand = Color(0xFF369ED9);
+
 class ContactSupportSheet extends StatelessWidget {
   const ContactSupportSheet({super.key});
 
@@ -18,8 +22,6 @@ class ContactSupportSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -34,69 +36,44 @@ class ContactSupportSheet extends StatelessWidget {
         children: [
           Text(
             l10n.authContactSupportTitle,
-            style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800),
+            style: context.textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
           ),
           const SizedBox(height: AppSpacing.x2),
           Text(
             l10n.authContactSupportSubtitle,
-            style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant),
+            style: context.appTextStyles.muted.bodySmall,
           ),
           const SizedBox(height: AppSpacing.x4),
           const Divider(),
           _ContactItem(
-            icon: Assets.icons.whatsapp.svg(
-              width: 24,
-              colorFilter: const ColorFilter.mode(
-                Color(0xFF41d365),
-                BlendMode.srcIn,
-              ),
-            ),
-            iconBgColor: const Color(0xFFeefcf4),
+            iconAsset: Assets.icons.whatsapp,
+            iconColor: _whatsappBrand,
             title: 'WhatsApp',
             subtitle: '+996 702 31-36-11',
             onTap: () {},
           ),
           const Divider(),
-
           _ContactItem(
-            icon: Assets.icons.telegram.svg(
-              width: 24,
-              colorFilter: const ColorFilter.mode(
-                Color(0xFF369ed9),
-                BlendMode.srcIn,
-              ),
-            ),
-            iconBgColor: const Color(0xFFeef7fc),
+            iconAsset: Assets.icons.telegram,
+            iconColor: _telegramBrand,
             title: 'Telegram',
             subtitle: '@Duu1at',
             onTap: () {},
           ),
           const Divider(),
-
           _ContactItem(
-            icon: Assets.icons.email.svg(
-              width: 24,
-              colorFilter: ColorFilter.mode(
-                colorScheme.primary,
-                BlendMode.srcIn,
-              ),
-            ),
-            iconBgColor: const Color(0xFFfdf3c7),
+            iconAsset: Assets.icons.email,
+            iconColor: context.colors.primary,
             title: 'Email',
             subtitle: 'dbolsunbekuulu@gmail.com',
             onTap: () {},
           ),
           const Divider(),
-
           _ContactItem(
-            icon: Assets.icons.call.svg(
-              width: 24,
-              colorFilter: const ColorFilter.mode(
-                Color(0xFF65a30d),
-                BlendMode.srcIn,
-              ),
-            ),
-            iconBgColor: const Color(0xFFecfccb),
+            iconAsset: Assets.icons.call,
+            iconColor: context.appColors.success,
             title: l10n.authContactCallLabel,
             subtitle: '+996 702 31-36-11',
             onTap: () {},
@@ -109,48 +86,49 @@ class ContactSupportSheet extends StatelessWidget {
 
 class _ContactItem extends StatelessWidget {
   const _ContactItem({
-    required this.icon,
-    required this.iconBgColor,
+    required this.iconAsset,
+    required this.iconColor,
     required this.title,
     required this.subtitle,
     required this.onTap,
   });
 
-  final SvgPicture icon;
-  final Color iconBgColor;
+  final SvgGenImage iconAsset;
+  final Color iconColor;
   final String title;
   final String subtitle;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
     return ListTile(
       onTap: onTap,
       leading: DecoratedBox(
         decoration: BoxDecoration(
-          color: iconBgColor,
+          color: iconColor.withValues(alpha: AppOpacity.tint),
           borderRadius: AppRadius.cardBorderRadius,
         ),
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.x3),
-          child: icon,
+          child: iconAsset.svg(
+            width: 24,
+            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+          ),
         ),
       ),
       title: Text(
         title,
-        style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+        style: context.textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.w600,
+        ),
       ),
       subtitle: Text(
         subtitle,
-        style: textTheme.bodySmall?.copyWith(
-          color: colorScheme.onSurfaceVariant,
-        ),
+        style: context.appTextStyles.muted.bodySmall,
       ),
       trailing: Icon(
         Icons.chevron_right_rounded,
-        color: colorScheme.onSurfaceVariant,
+        color: context.colors.onSurfaceVariant,
       ),
     );
   }

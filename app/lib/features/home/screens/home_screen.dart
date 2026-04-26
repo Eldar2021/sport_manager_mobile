@@ -117,7 +117,7 @@ class _TablesBody extends StatelessWidget {
                   ),
                   child: Text(
                     'СТОЛЫ · ${state.tables.length}',
-                    style: AppTypography.caption.copyWith(
+                    style: context.textTheme.bodySmall?.copyWith(
                       color: AppColors.ink500,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.8,

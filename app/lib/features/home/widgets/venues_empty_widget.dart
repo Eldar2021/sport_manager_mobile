@@ -38,13 +38,13 @@ class VenuesEmptyWidget extends StatelessWidget {
                   const SizedBox(height: AppSpacing.x5),
                   Text(
                     l10n.homeNoVenuesTitle,
-                    style: AppTypography.h1.copyWith(color: AppColors.ink900),
+                    style: context.textTheme.headlineLarge?.copyWith(color: AppColors.ink900),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: AppSpacing.x2),
                   Text(
                     l10n.homeNoVenuesSubtitle,
-                    style: AppTypography.body.copyWith(color: AppColors.ink500),
+                    style: context.textTheme.bodyMedium?.copyWith(color: AppColors.ink500),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: AppSpacing.x8),

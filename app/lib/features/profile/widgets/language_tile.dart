@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 class LanguageTile extends StatelessWidget {
   const LanguageTile({
@@ -14,13 +15,12 @@ class LanguageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return ListTile(
       onTap: onTap,
       contentPadding: EdgeInsets.zero,
       title: Text(
         name,
-        style: theme.textTheme.bodyLarge?.copyWith(
+        style: context.textTheme.bodyLarge?.copyWith(
           fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
         ),
       ),

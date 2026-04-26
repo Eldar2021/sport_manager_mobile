@@ -24,13 +24,13 @@ class RateSelector extends StatelessWidget {
               label: Text('$rate'),
               selected: selected == rate,
               showCheckmark: false,
-              selectedColor: context.colorScheme.primary,
-              backgroundColor: Colors.transparent,
+              selectedColor: context.colors.primary,
+              backgroundColor: AppColors.transparent,
               side: BorderSide(
-                color: selected == rate ? context.colorScheme.primary : context.colorScheme.onSurfaceVariant,
+                color: selected == rate ? context.colors.primary : context.colors.onSurfaceVariant,
               ),
-              labelStyle: AppTypography.body.copyWith(
-                color: selected == rate ? context.colorScheme.onPrimary : context.colorScheme.onSurface,
+              labelStyle: context.textTheme.bodyMedium?.copyWith(
+                color: selected == rate ? context.colors.onPrimary : context.colors.onSurface,
                 fontWeight: FontWeight.w600,
               ),
               onSelected: (_) => onChanged(rate),

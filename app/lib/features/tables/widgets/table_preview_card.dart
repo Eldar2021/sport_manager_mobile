@@ -46,7 +46,7 @@ class TablePreviewCard extends StatelessWidget {
                 children: [
                   Text(
                     hasName ? name : l10n.createTableNameLabel,
-                    style: AppTypography.bodyBold.copyWith(
+                    style: context.textTheme.bodyLarge?.copyWith(
                       color: hasName ? AppColors.ink900 : AppColors.ink300,
                     ),
                     maxLines: 1,
@@ -56,7 +56,7 @@ class TablePreviewCard extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       hasDesc ? description : l10n.createTableDescPlaceholder,
-                      style: AppTypography.caption.copyWith(color: AppColors.ink300),
+                      style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink300),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -80,11 +80,11 @@ class TablePreviewCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: '$hourlyRate',
-                        style: AppTypography.bodyBold.copyWith(color: AppColors.brandAmber),
+                        style: context.textTheme.bodyLarge?.copyWith(color: AppColors.brandAmber),
                       ),
                       TextSpan(
                         text: ' ${l10n.createTableRateSuffix}',
-                        style: AppTypography.caption.copyWith(color: AppColors.brandAmber),
+                        style: context.textTheme.bodySmall?.copyWith(color: AppColors.brandAmber),
                       ),
                     ],
                   ),

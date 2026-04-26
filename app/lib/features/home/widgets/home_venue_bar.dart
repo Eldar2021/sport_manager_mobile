@@ -44,7 +44,7 @@ class HomeVenueBar extends StatelessWidget {
                   children: [
                     Text(
                       venue.name,
-                      style: AppTypography.body.copyWith(
+                      style: context.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w700,
                         color: AppColors.ink900,
                       ),
@@ -55,7 +55,7 @@ class HomeVenueBar extends StatelessWidget {
                 ),
                 Text(
                   '№ ${venue.number} · ${_numTables(tableCount)}',
-                  style: AppTypography.caption.copyWith(color: AppColors.ink500),
+                  style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink500),
                 ),
               ],
             ),
@@ -124,7 +124,7 @@ class HomeVenuePicker extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(AppSpacing.x5, AppSpacing.x4, AppSpacing.x3, AppSpacing.x2),
           child: Row(
             children: [
-              Text(l10n.homeSelectVenue, style: AppTypography.h2),
+              Text(l10n.homeSelectVenue, style: context.textTheme.titleLarge),
               const Spacer(),
               IconButton(
                 onPressed: () => Navigator.pop(context),
@@ -161,7 +161,7 @@ class HomeVenuePicker extends StatelessWidget {
                   const SizedBox(width: AppSpacing.x3),
                   Text(
                     l10n.homeNewVenue,
-                    style: AppTypography.body.copyWith(
+                    style: context.textTheme.bodyMedium?.copyWith(
                       color: AppColors.brandAmber,
                       fontWeight: FontWeight.w600,
                     ),
@@ -202,20 +202,19 @@ class _VenuePickerItem extends StatelessWidget {
                 children: [
                   Text(
                     venue.name,
-                    style: AppTypography.body.copyWith(
+                    style: context.textTheme.bodyMedium?.copyWith(
                       fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                       color: AppColors.ink900,
                     ),
                   ),
                   Text(
                     '№ ${venue.number}',
-                    style: AppTypography.caption.copyWith(color: AppColors.ink500),
+                    style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink500),
                   ),
                 ],
               ),
             ),
-            if (isSelected)
-              const Icon(Icons.check_rounded, color: AppColors.brandAmber, size: 20),
+            if (isSelected) const Icon(Icons.check_rounded, color: AppColors.brandAmber, size: 20),
           ],
         ),
       ),

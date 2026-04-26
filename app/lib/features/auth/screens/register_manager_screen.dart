@@ -36,8 +36,7 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final textTheme = context.textTheme;
 
     return Scaffold(
       appBar: AppBar(),
@@ -54,47 +53,19 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
                   children: [
                     Text(
                       l10n.authRegisterManagerTitle,
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      style: textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.x3),
                     RoleBadge(
                       label: l10n.authManagerBadge,
-                      color: AppColors.successGreen,
-                      bg: AppColors.successGreen.withValues(alpha: 0.12),
+                      color: context.appColors.success,
+                      bg: context.appColors.success.withValues(alpha: AppOpacity.tint),
                       icon: Icons.badge_outlined,
                     ),
                     const SizedBox(height: AppSpacing.x6),
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: colorScheme.primary.withValues(alpha: 0.08),
-                        borderRadius: AppRadius.cardBorderRadius,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(AppSpacing.x4),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.info_outline_rounded,
-                              color: colorScheme.primary,
-                              size: 18,
-                            ),
-                            const SizedBox(width: AppSpacing.x2),
-                            Expanded(
-                              child: Text(
-                                l10n.authInviteCodeHint,
-                                style: textTheme.bodySmall?.copyWith(
-                                  color: colorScheme.primary,
-                                  height: 1.5,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    AppInfoBanner(l10n.authInviteCodeHint),
                     const SizedBox(height: AppSpacing.x4),
                     AuthTextField(
                       label: l10n.authInviteCodeLabel,
