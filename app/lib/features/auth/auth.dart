@@ -15,6 +15,7 @@ export 'widgets/auth_text_button.dart';
 export 'widgets/auth_text_field.dart';
 export 'widgets/contact_support_sheet.dart';
 export 'widgets/forgot_password_contact_card.dart';
+export 'widgets/info_banner.dart';
 export 'widgets/language_switcher.dart';
 export 'widgets/pool_table_illustration.dart';
 export 'widgets/register_title_widget.dart';

@@ -2,8 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 
 abstract final class InputValidators {
-  const InputValidators._();
-
   static final _emailRegex = RegExp(r'^[\w.+-]+@[\w-]+\.[a-zA-Z]{2,}$');
 
   static String? emptyValidator(String? val, BuildContext ctx) {
@@ -18,16 +16,24 @@ abstract final class InputValidators {
     return null;
   }
 
-  static bool isValidUsername(String val) => val.trim().isNotEmpty;
+  static bool isValidUsername(String val) {
+    return val.trim().isNotEmpty;
+  }
 
-  static String? phoneValidator(String? val, BuildContext ctx, {required int expectedLength}) {
+  static String? phoneValidator(
+    String? val,
+    BuildContext ctx, {
+    required int expectedLength,
+  }) {
     if (val == null || val.trim().isEmpty) return ctx.l10n.authFieldRequired;
     final digits = val.replaceAll(RegExp(r'\D'), '');
     if (digits.length < expectedLength) return ctx.l10n.authInvalidPhone;
     return null;
   }
 
-  static bool isValidPassword(String val) => val.trim().isNotEmpty && val.length >= 8;
+  static bool isValidPassword(String val) {
+    return val.trim().isNotEmpty && val.length >= 8;
+  }
 
   static String? passwordValidator(String? val, BuildContext ctx) {
     if (val == null || val.trim().isEmpty) return ctx.l10n.authFieldRequired;
@@ -35,7 +41,11 @@ abstract final class InputValidators {
     return null;
   }
 
-  static String? passwordConfirmValidator(String? val, String? password, BuildContext ctx) {
+  static String? passwordConfirmValidator(
+    String? val,
+    String? password,
+    BuildContext ctx,
+  ) {
     if (val == null || val.trim().isEmpty) return ctx.l10n.authFieldRequired;
     if (val != password) return ctx.l10n.authPasswordsDoNotMatch;
     return null;
