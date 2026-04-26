@@ -17,46 +17,23 @@ class RegisterOwnerScreen extends StatefulWidget {
 
 class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
   late final RegisterOwnerCubit _registerOwnerCubit;
-  final _formKey = GlobalKey<FormState>();
-  final _nameCtr = TextEditingController();
-  final _phoneCtr = TextEditingController();
-  final _emailCtr = TextEditingController();
-  final _passwordCtr = TextEditingController();
-  final _confirmCtr = TextEditingController();
-
-  final _phoneMask = MaskTextInputFormatter(
-    mask: '+996 ### ## ## ##',
-    filter: {'#': RegExp(r'\d')},
-  );
+  late final GlobalKey<FormState> _formKey;
+  late final TextEditingController _nameCtr;
+  late final TextEditingController _phoneCtr;
+  late final TextEditingController _emailCtr;
+  late final TextEditingController _passwordCtr;
+  late final TextEditingController _confirmCtr;
 
   @override
   void initState() {
     super.initState();
     _registerOwnerCubit = RegisterOwnerCubit(GetIt.I<AuthRepository>());
-  }
-
-  @override
-  void dispose() {
-    _registerOwnerCubit.close();
-    _nameCtr.dispose();
-    _phoneCtr.dispose();
-    _emailCtr.dispose();
-    _passwordCtr.dispose();
-    _confirmCtr.dispose();
-    super.dispose();
-  }
-
-  void _registerOwner() {
-    if (!_formKey.currentState!.validate()) return;
-
-    _registerOwnerCubit.registerOwner(
-      RegisterOwnerBody(
-        name: _nameCtr.text.trim(),
-        phone: _phoneCtr.text.trim(),
-        email: _emailCtr.text.trim(),
-        password: _passwordCtr.text,
-      ),
-    );
+    _formKey = GlobalKey<FormState>();
+    _nameCtr = TextEditingController();
+    _phoneCtr = TextEditingController();
+    _emailCtr = TextEditingController();
+    _passwordCtr = TextEditingController();
+    _confirmCtr = TextEditingController();
   }
 
   @override
@@ -104,7 +81,12 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
                       keyboardType: TextInputType.phone,
                       textInputAction: TextInputAction.next,
                       hintText: '+996 ___ __ __ __',
-                      inputFormatters: [_phoneMask],
+                      inputFormatters: [
+                        MaskTextInputFormatter(
+                          mask: '+996 ### ## ## ##',
+                          filter: {'#': RegExp(r'\d')},
+                        ),
+                      ],
                       validator: (v) => InputValidators.phoneValidator(v, context, expectedLength: 12),
                     ),
                     const SizedBox(height: AppSpacing.x4),
@@ -159,10 +141,33 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
                 },
               ),
             ),
-            const SizedBox(height: AppSpacing.x1),
+            SizedBox(height: AppSpacing.bottom(context)),
           ],
         ),
       ),
     );
+  }
+
+  void _registerOwner() {
+    if (!_formKey.currentState!.validate()) return;
+    _registerOwnerCubit.registerOwner(
+      RegisterOwnerBody(
+        name: _nameCtr.text.trim(),
+        phone: _phoneCtr.text.trim(),
+        email: _emailCtr.text.trim(),
+        password: _passwordCtr.text,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _registerOwnerCubit.close();
+    _nameCtr.dispose();
+    _phoneCtr.dispose();
+    _emailCtr.dispose();
+    _passwordCtr.dispose();
+    _confirmCtr.dispose();
+    super.dispose();
   }
 }
