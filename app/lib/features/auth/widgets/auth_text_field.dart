@@ -81,10 +81,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
               widget.label,
               style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: AppSpacing.x2),
             AnimatedContainer(
               duration: const Duration(milliseconds: 120),
-              height: 48,
+              height: AppSpacing.x12,
               decoration: BoxDecoration(
                 color: colors.surfaceContainer,
                 borderRadius: AppRadius.inputBorderRadius,

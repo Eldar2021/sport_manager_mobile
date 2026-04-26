@@ -70,7 +70,7 @@ final class AppColorsExt extends ThemeExtension<AppColorsExt> {
 
   /// Filled background for info badges / chips.
   /// - light: `#CFFAFE` (`AppColors.infoLight`)
-  /// - dark:  `#0891B2` (`AppColors.infoCyan`)
+  /// - dark:  `#155E75` (`AppColors.infoDark`)
   final Color infoContainer;
 
   /// Soft brand-amber overlay (translucent). Used by NavigationBar indicator.
@@ -120,7 +120,7 @@ final class AppColorsExt extends ThemeExtension<AppColorsExt> {
     warningContainer: AppColors.warningAmber,
     info: AppColors.infoCyan,
     onInfo: AppColors.white,
-    infoContainer: AppColors.infoCyan,
+    infoContainer: AppColors.infoDark,
     brandAmberSoft: AppColors.brandAmberSoftDark,
     shadowSm: AppShadow.smDark,
     shadowMd: AppShadow.mdDark,

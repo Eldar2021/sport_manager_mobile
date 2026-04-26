@@ -6,7 +6,7 @@ abstract final class ChipComponentTheme {
     return ChipThemeData(
       backgroundColor: colors.surfaceContainerHighest,
       selectedColor: colors.primary,
-      disabledColor: colors.onSurface.withValues(alpha: 0.12),
+      disabledColor: colors.onSurface.withValues(alpha: AppOpacity.disabledBackground),
       labelStyle: textTheme.labelMedium?.copyWith(color: colors.onSurfaceVariant),
       secondaryLabelStyle: textTheme.labelMedium?.copyWith(color: colors.onPrimary),
       side: BorderSide(color: colors.outline),

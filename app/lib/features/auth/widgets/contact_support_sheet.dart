@@ -5,7 +5,7 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 
 /// Channel-specific brand colors. They do not adapt to light/dark — channel
 /// identity stays the same in both modes; only the surrounding tinted bg is
-/// theme-aware (built via `iconColor.withValues(alpha: 0.12)`).
+/// theme-aware (built via `iconColor.withValues(alpha: AppOpacity.tint)`).
 const Color _whatsappBrand = Color(0xFF41D365);
 const Color _telegramBrand = Color(0xFF369ED9);
 
@@ -105,7 +105,7 @@ class _ContactItem extends StatelessWidget {
       onTap: onTap,
       leading: DecoratedBox(
         decoration: BoxDecoration(
-          color: iconColor.withValues(alpha: 0.12),
+          color: iconColor.withValues(alpha: AppOpacity.tint),
           borderRadius: AppRadius.cardBorderRadius,
         ),
         child: Padding(

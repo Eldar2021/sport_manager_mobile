@@ -32,7 +32,7 @@ class RoleCard extends StatelessWidget {
         leading: DecoratedBox(
           decoration: BoxDecoration(
             color: iconBg,
-            borderRadius: const BorderRadius.all(Radius.circular(14)),
+            borderRadius: AppRadius.buttonBorderRadius,
           ),
           child: SizedBox(
             width: 56,

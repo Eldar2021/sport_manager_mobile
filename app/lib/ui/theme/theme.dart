@@ -18,6 +18,7 @@ export 'components/snackbar_component_theme.dart';
 export 'components/switch_component_theme.dart';
 export 'components/tooltip_component_theme.dart';
 export 'extension/context_extensions.dart';
+export 'foundations/app_opacity.dart';
 export 'foundations/app_radius.dart';
 export 'foundations/app_shadow.dart';
 export 'foundations/app_spacing.dart';

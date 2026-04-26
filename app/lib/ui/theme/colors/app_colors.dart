@@ -74,6 +74,11 @@ abstract final class AppColors {
   /// → `appColors.info`
   static const Color infoCyan = Color(0xFF0891B2);
 
+  /// Info dark variant (cyan-800).
+  /// → `colorScheme.tertiaryContainer` (dark)
+  /// → `appColors.infoContainer` (dark)
+  static const Color infoDark = Color(0xFF155E75);
+
   /// Info light variant.
   /// → `colorScheme.tertiaryContainer` (light)
   /// → `appColors.infoContainer` (light)

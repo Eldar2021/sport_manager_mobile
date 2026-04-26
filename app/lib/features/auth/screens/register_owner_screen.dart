@@ -64,7 +64,7 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
                     RoleBadge(
                       label: l10n.authOwnerBadge,
                       color: colors.primary,
-                      bg: colors.primary.withValues(alpha: 0.12),
+                      bg: colors.primary.withValues(alpha: AppOpacity.tint),
                       icon: Icons.business_center_rounded,
                     ),
                     const SizedBox(height: AppSpacing.x6),

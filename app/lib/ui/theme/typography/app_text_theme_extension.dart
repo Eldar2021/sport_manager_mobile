@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/ui/theme/typography/app_text_theme.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 /// Pre-baked text style sets for the theme's error / disabled / muted /
 /// onPrimary roles. Use as `context.appTextStyles.error.bodyMedium` so
@@ -17,7 +17,7 @@ final class AppTextThemeExt extends ThemeExtension<AppTextThemeExt> {
   factory AppTextThemeExt.from({required ColorScheme colors}) {
     return AppTextThemeExt(
       error: AppTextTheme.from(colors.error),
-      disabled: AppTextTheme.from(colors.onSurface.withValues(alpha: 0.38)),
+      disabled: AppTextTheme.from(colors.onSurface.withValues(alpha: AppOpacity.disabledForeground)),
       muted: AppTextTheme.from(colors.onSurfaceVariant),
       onPrimary: AppTextTheme.from(colors.onPrimary),
       link: AppTextTheme.from(colors.primary).bodyMedium.copyWith(

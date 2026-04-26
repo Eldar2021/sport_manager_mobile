@@ -32,8 +32,8 @@ class AppCheckboxField extends StatelessWidget {
           checkboxScaleFactor: 1.3,
           side: BorderSide(color: colors.outline),
           isError: field.hasError,
-          checkboxShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
+          checkboxShape: const RoundedRectangleBorder(
+            borderRadius: AppRadius.checkboxBorderRadius,
           ),
           title: Text(label, style: context.textTheme.bodyMedium),
           onChanged: (v) => field.didChange(v),

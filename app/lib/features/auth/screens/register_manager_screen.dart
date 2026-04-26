@@ -36,7 +36,6 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final colors = context.colors;
     final textTheme = context.textTheme;
 
     return Scaffold(
@@ -62,39 +61,11 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
                     RoleBadge(
                       label: l10n.authManagerBadge,
                       color: context.appColors.success,
-                      bg: context.appColors.success.withValues(alpha: 0.12),
+                      bg: context.appColors.success.withValues(alpha: AppOpacity.tint),
                       icon: Icons.badge_outlined,
                     ),
                     const SizedBox(height: AppSpacing.x6),
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: colors.primary.withValues(alpha: 0.08),
-                        borderRadius: AppRadius.cardBorderRadius,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(AppSpacing.x4),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.info_outline_rounded,
-                              color: colors.primary,
-                              size: 18,
-                            ),
-                            const SizedBox(width: AppSpacing.x2),
-                            Expanded(
-                              child: Text(
-                                l10n.authInviteCodeHint,
-                                style: textTheme.bodySmall?.copyWith(
-                                  color: colors.primary,
-                                  height: 1.5,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    HintBanner(l10n.authInviteCodeHint),
                     const SizedBox(height: AppSpacing.x4),
                     AuthTextField(
                       label: l10n.authInviteCodeLabel,

@@ -117,14 +117,15 @@ use `context.appTextStyles.error.X` instead.
 
 ---
 
-## Spacing, radius, shadow
+## Spacing, radius, shadow, opacity
 
-| Need        | Use                                         |
-| ----------- | ------------------------------------------- |
-| Padding     | `AppSpacing.x1 … x16` (4 / 8 / 12 / … / 64) |
-| Bottom safe | `AppSpacing.bottom(context)`                |
-| Radius      | `AppRadius.buttonBorderRadius` etc.         |
-| Shadow      | `context.appColors.shadowMd` (theme-aware)  |
+| Need        | Use                                                |
+| ----------- | -------------------------------------------------- |
+| Padding     | `AppSpacing.x1 … x16` (4 / 8 / 12 / … / 64)        |
+| Bottom safe | `AppSpacing.bottom(context)`                       |
+| Radius      | `AppRadius.buttonBorderRadius` etc.                |
+| Shadow      | `context.appColors.shadowMd` (theme-aware)         |
+| Opacity     | `AppOpacity.tint` (0.12) for tinted backgrounds; `disabledForeground` (0.38) / `disabledBackground` (0.12) for disabled states |
 
 Direct shadow constants `AppShadow.smLight` / `smDark` exist for special
 cases (e.g. you need a known set regardless of theme), but the default is
@@ -153,7 +154,7 @@ Text(errorText, style: context.appTextStyles.error.bodySmall)
 ```dart
 DecoratedBox(
   decoration: BoxDecoration(
-    color: context.appColors.success.withValues(alpha: 0.12),
+    color: context.appColors.success.withValues(alpha: AppOpacity.tint),
     borderRadius: AppRadius.chipBorderRadius,
   ),
   child: Padding(
