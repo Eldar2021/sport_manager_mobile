@@ -18,7 +18,9 @@ final class TableModel extends Equatable {
     this.description,
   });
 
-  factory TableModel.fromJson(Map<String, dynamic> json) => _$TableModelFromJson(json);
+  factory TableModel.fromJson(Map<String, dynamic> json) {
+    return _$TableModelFromJson(json);
+  }
 
   final String id;
   final String venueId;
@@ -30,7 +32,9 @@ final class TableModel extends Equatable {
 
   bool get isAvailable => status == TableStatus.available;
 
-  Map<String, dynamic> toJson() => _$TableModelToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$TableModelToJson(this);
+  }
 
   @override
   List<Object?> get props => [

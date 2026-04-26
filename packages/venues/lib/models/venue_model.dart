@@ -16,7 +16,9 @@ final class VenueModel extends Equatable {
     this.address,
   });
 
-  factory VenueModel.fromJson(Map<String, dynamic> json) => _$VenueModelFromJson(json);
+  factory VenueModel.fromJson(Map<String, dynamic> json) {
+    return _$VenueModelFromJson(json);
+  }
 
   final String id;
   final String ownerId;
@@ -25,8 +27,17 @@ final class VenueModel extends Equatable {
   final bool isActive;
   final String? address;
 
-  Map<String, dynamic> toJson() => _$VenueModelToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$VenueModelToJson(this);
+  }
 
   @override
-  List<Object?> get props => [id, ownerId, name, number, isActive, address];
+  List<Object?> get props => [
+    id,
+    ownerId,
+    name,
+    number,
+    isActive,
+    address,
+  ];
 }

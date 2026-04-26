@@ -22,7 +22,10 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
   }
 
   @override
-  Future<SessionModel> endSession(String id, EndSessionBody body) {
+  Future<SessionModel> endSession(
+    String id,
+    EndSessionBody body,
+  ) {
     return _client.postType<SessionModel>(
       '/sessions/$id/end',
       fromJson: SessionModel.fromJson,

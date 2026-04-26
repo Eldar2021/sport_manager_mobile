@@ -13,14 +13,22 @@ final class CreateVenueBody extends Equatable {
     this.address,
   });
 
-  factory CreateVenueBody.fromJson(Map<String, dynamic> json) => _$CreateVenueBodyFromJson(json);
+  factory CreateVenueBody.fromJson(Map<String, dynamic> json) {
+    return _$CreateVenueBodyFromJson(json);
+  }
 
   final String name;
   final String number;
   final String? address;
 
-  Map<String, dynamic> toJson() => _$CreateVenueBodyToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$CreateVenueBodyToJson(this);
+  }
 
   @override
-  List<Object?> get props => [name, number, address];
+  List<Object?> get props => [
+    name,
+    number,
+    address,
+  ];
 }

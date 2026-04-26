@@ -11,7 +11,11 @@ import 'package:venues/venues.dart';
 part 'home_state.dart';
 
 final class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this._venueRepo, this._tableRepo, this._sessionRepo) : super(const HomeState());
+  HomeCubit(
+    this._venueRepo,
+    this._tableRepo,
+    this._sessionRepo,
+  ) : super(const HomeState());
 
   final VenueRepository _venueRepo;
   final TableRepository _tableRepo;
@@ -19,15 +23,24 @@ final class HomeCubit extends Cubit<HomeState> {
   Timer? _ticker;
 
   Future<void> load() async {
-    emit(state.copyWith(venuesStatus: const RequestLoading()));
+    emit(
+      state.copyWith(venuesStatus: const RequestLoading()),
+    );
     try {
       final venues = await _venueRepo.getVenues();
       if (venues.isEmpty) {
-        emit(state.copyWith(venuesStatus: RequestSuccess(venues)));
+        emit(
+          state.copyWith(venuesStatus: RequestSuccess(venues)),
+        );
         return;
       }
       final selected = venues.first;
-      emit(state.copyWith(venuesStatus: RequestSuccess(venues), selectedVenue: selected));
+      emit(
+        state.copyWith(
+          venuesStatus: RequestSuccess(venues),
+          selectedVenue: selected,
+        ),
+      );
       await _loadTables(selected);
     } on Object catch (e) {
       emit(state.copyWith(venuesStatus: RequestFailure(e)));
@@ -37,11 +50,13 @@ final class HomeCubit extends Cubit<HomeState> {
   Future<void> selectVenue(VenueModel venue) async {
     if (state.selectedVenue?.id == venue.id) return;
     _ticker?.cancel();
-    emit(state.copyWith(
-      selectedVenue: venue,
-      tablesStatus: const RequestLoading(),
-      activeSessions: const {},
-    ));
+    emit(
+      state.copyWith(
+        selectedVenue: venue,
+        tablesStatus: const RequestLoading(),
+        activeSessions: const {},
+      ),
+    );
     await _loadTables(venue);
   }
 
@@ -61,10 +76,17 @@ final class HomeCubit extends Cubit<HomeState> {
       final sessionsMap = {
         for (final s in sessions.where((s) => s.venueId == venue.id)) s.tableId: s,
       };
-      emit(state.copyWith(tablesStatus: RequestSuccess(tables), activeSessions: sessionsMap));
+      emit(
+        state.copyWith(
+          tablesStatus: RequestSuccess(tables),
+          activeSessions: sessionsMap,
+        ),
+      );
       _startTicker();
     } on Object catch (e) {
-      emit(state.copyWith(tablesStatus: RequestFailure(e)));
+      emit(
+        state.copyWith(tablesStatus: RequestFailure(e)),
+      );
     }
   }
 
@@ -76,10 +98,16 @@ final class HomeCubit extends Cubit<HomeState> {
   }
 
   void markTableFreed(String tableId) {
-    emit(state.copyWith(justFreedTableIds: {...state.justFreedTableIds, tableId}));
+    emit(
+      state.copyWith(justFreedTableIds: {...state.justFreedTableIds, tableId}),
+    );
     Future.delayed(const Duration(seconds: 5), () {
       if (!isClosed) {
-        emit(state.copyWith(justFreedTableIds: {...state.justFreedTableIds}..remove(tableId)));
+        emit(
+          state.copyWith(
+            justFreedTableIds: {...state.justFreedTableIds}..remove(tableId),
+          ),
+        );
       }
     });
   }

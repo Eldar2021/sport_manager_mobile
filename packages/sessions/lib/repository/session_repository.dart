@@ -3,7 +3,9 @@ import 'package:sessions/sessions.dart';
 
 @immutable
 final class SessionRepository {
-  const SessionRepository({required SessionRemoteSource remote}) : _remote = remote;
+  const SessionRepository({
+    required SessionRemoteSource remote,
+  }) : _remote = remote;
 
   final SessionRemoteSource _remote;
 
@@ -15,7 +17,10 @@ final class SessionRepository {
     return _remote.cancelSession(id);
   }
 
-  Future<SessionModel> endSession(String id, EndSessionBody body) {
+  Future<SessionModel> endSession(
+    String id,
+    EndSessionBody body,
+  ) {
     return _remote.endSession(id, body);
   }
 

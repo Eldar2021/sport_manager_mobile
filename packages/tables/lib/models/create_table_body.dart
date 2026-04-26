@@ -13,14 +13,22 @@ final class CreateTableBody extends Equatable {
     this.name,
   });
 
-  factory CreateTableBody.fromJson(Map<String, dynamic> json) => _$CreateTableBodyFromJson(json);
+  factory CreateTableBody.fromJson(Map<String, dynamic> json) {
+    return _$CreateTableBodyFromJson(json);
+  }
 
   final String number;
   final String? name;
   final int hourlyRate;
 
-  Map<String, dynamic> toJson() => _$CreateTableBodyToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$CreateTableBodyToJson(this);
+  }
 
   @override
-  List<Object?> get props => [number, name, hourlyRate];
+  List<Object?> get props => [
+    number,
+    name,
+    hourlyRate,
+  ];
 }

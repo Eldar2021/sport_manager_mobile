@@ -1,5 +1,11 @@
 import 'package:core/core.dart';
 
+const _defaultUiMessage = BaseMessage(
+  en: 'Something went wrong. Please try again.',
+  ru: 'Что-то пошло не так. Попробуйте ещё раз.',
+  ky: 'Бир нерсе туура эмес болуп калды. Кайра аракет кылыңыз.',
+);
+
 final class SessionException extends AppException<String> {
   const SessionException(
     super.error, {
@@ -9,26 +15,10 @@ final class SessionException extends AppException<String> {
 
   @override
   ErrorModel getModel() => ErrorModel(
-    title: const BaseMessage(
-      en: 'Session Error',
-      ru: 'Ошибка сессии',
-      ky: 'Сессия катасы',
-    ),
-    message:
-        message ??
-        const BaseMessage(
-          en: 'Something went wrong. Please try again.',
-          ru: 'Что-то пошло не так. Попробуйте ещё раз.',
-          ky: 'Бир нерсе туура эмес болуп калды. Кайра аракет кылыңыз.',
-        ),
+    title: BaseMessage.sessionError,
+    message: message ?? _defaultUiMessage,
   );
 
   @override
-  BaseMessage getUiMessage() =>
-      message ??
-      const BaseMessage(
-        en: 'Something went wrong. Please try again.',
-        ru: 'Что-то пошло не так. Попробуйте ещё раз.',
-        ky: 'Бир нерсе туура эмес болуп калды. Кайра аракет кылыңыз.',
-      );
+  BaseMessage getUiMessage() => message ?? _defaultUiMessage;
 }

@@ -34,7 +34,10 @@ final class VenueRemoteSourceImpl implements VenueRemoteSource {
   }
 
   @override
-  Future<VenueModel> updateVenue(String id, UpdateVenueBody body) {
+  Future<VenueModel> updateVenue(
+    String id,
+    UpdateVenueBody body,
+  ) {
     return _client.patchType<VenueModel>(
       '/venues/$id',
       fromJson: VenueModel.fromJson,

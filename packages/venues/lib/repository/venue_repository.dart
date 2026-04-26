@@ -1,9 +1,9 @@
-import 'package:meta/meta.dart';
 import 'package:venues/venues.dart';
 
-@immutable
-final class VenueRepository {
-  const VenueRepository({required VenueRemoteSource remote}) : _remote = remote;
+class VenueRepository {
+  const VenueRepository({
+    required VenueRemoteSource remote,
+  }) : _remote = remote;
 
   final VenueRemoteSource _remote;
 

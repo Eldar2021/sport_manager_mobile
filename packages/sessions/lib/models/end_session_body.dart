@@ -9,12 +9,16 @@ part 'end_session_body.g.dart';
 final class EndSessionBody extends Equatable {
   const EndSessionBody({this.discountPercent});
 
-  factory EndSessionBody.fromJson(Map<String, dynamic> json) => _$EndSessionBodyFromJson(json);
+  factory EndSessionBody.fromJson(Map<String, dynamic> json) {
+    return _$EndSessionBodyFromJson(json);
+  }
 
   /// 0–100. Если null — скидки нет.
   final int? discountPercent;
 
-  Map<String, dynamic> toJson() => _$EndSessionBodyToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$EndSessionBodyToJson(this);
+  }
 
   @override
   List<Object?> get props => [discountPercent];

@@ -3,7 +3,9 @@ import 'package:tables/tables.dart';
 
 @immutable
 final class TableRepository {
-  const TableRepository({required TableRemoteSource remote}) : _remote = remote;
+  const TableRepository({
+    required TableRemoteSource remote,
+  }) : _remote = remote;
 
   final TableRemoteSource _remote;
 

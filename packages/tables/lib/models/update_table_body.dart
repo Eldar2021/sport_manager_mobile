@@ -13,14 +13,22 @@ final class UpdateTableBody extends Equatable {
     this.hourlyRate,
   });
 
-  factory UpdateTableBody.fromJson(Map<String, dynamic> json) => _$UpdateTableBodyFromJson(json);
+  factory UpdateTableBody.fromJson(Map<String, dynamic> json) {
+    return _$UpdateTableBodyFromJson(json);
+  }
 
   final String? number;
   final String? name;
   final int? hourlyRate;
 
-  Map<String, dynamic> toJson() => _$UpdateTableBodyToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$UpdateTableBodyToJson(this);
+  }
 
   @override
-  List<Object?> get props => [number, name, hourlyRate];
+  List<Object?> get props => [
+    number,
+    name,
+    hourlyRate,
+  ];
 }

@@ -24,7 +24,9 @@ final class SessionModel extends Equatable {
     this.notes,
   });
 
-  factory SessionModel.fromJson(Map<String, dynamic> json) => _$SessionModelFromJson(json);
+  factory SessionModel.fromJson(Map<String, dynamic> json) {
+    return _$SessionModelFromJson(json);
+  }
 
   final String id;
   final String tableId;
@@ -42,7 +44,9 @@ final class SessionModel extends Equatable {
 
   bool get isActive => status == SessionStatus.active;
 
-  Map<String, dynamic> toJson() => _$SessionModelToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$SessionModelToJson(this);
+  }
 
   @override
   List<Object?> get props => [

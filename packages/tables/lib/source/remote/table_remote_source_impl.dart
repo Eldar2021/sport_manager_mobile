@@ -25,7 +25,10 @@ final class TableRemoteSourceImpl implements TableRemoteSource {
   }
 
   @override
-  Future<TableModel> createTable(String venueId, CreateTableBody body) {
+  Future<TableModel> createTable(
+    String venueId,
+    CreateTableBody body,
+  ) {
     return _client.postType<TableModel>(
       '/venues/$venueId/tables',
       fromJson: TableModel.fromJson,
@@ -34,7 +37,10 @@ final class TableRemoteSourceImpl implements TableRemoteSource {
   }
 
   @override
-  Future<TableModel> updateTable(String id, UpdateTableBody body) {
+  Future<TableModel> updateTable(
+    String id,
+    UpdateTableBody body,
+  ) {
     return _client.patchType<TableModel>(
       '/tables/$id',
       fromJson: TableModel.fromJson,

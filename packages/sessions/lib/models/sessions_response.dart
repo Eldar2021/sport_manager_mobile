@@ -15,15 +15,24 @@ final class SessionsResponse extends Equatable {
     required this.limit,
   });
 
-  factory SessionsResponse.fromJson(Map<String, dynamic> json) => _$SessionsResponseFromJson(json);
+  factory SessionsResponse.fromJson(Map<String, dynamic> json) {
+    return _$SessionsResponseFromJson(json);
+  }
 
   final List<SessionModel> items;
   final int total;
   final int page;
   final int limit;
 
-  Map<String, dynamic> toJson() => _$SessionsResponseToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$SessionsResponseToJson(this);
+  }
 
   @override
-  List<Object?> get props => [items, total, page, limit];
+  List<Object?> get props => [
+    items,
+    total,
+    page,
+    limit,
+  ];
 }
