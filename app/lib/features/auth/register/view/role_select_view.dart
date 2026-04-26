@@ -1,3 +1,4 @@
+import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
@@ -39,7 +40,10 @@ class RoleSelectScreen extends StatelessWidget {
             iconBg: colors.surfaceContainerLow,
             title: l10n.authOwnerTitle,
             subtitle: l10n.authOwnerSubtitle,
-            onTap: () => context.push(AppRoutes.registerOwner),
+            onTap: () => context.push(
+              AppRoutes.register,
+              extra: UserRole.owner,
+            ),
           ),
           const SizedBox(height: AppSpacing.x3),
           RoleCard(
@@ -47,7 +51,10 @@ class RoleSelectScreen extends StatelessWidget {
             iconBg: colors.surfaceContainerLow,
             title: l10n.authManagerTitle,
             subtitle: l10n.authManagerSubtitle,
-            onTap: () => context.push(AppRoutes.registerManager),
+            onTap: () => context.push(
+              AppRoutes.register,
+              extra: UserRole.manager,
+            ),
           ),
         ],
       ),

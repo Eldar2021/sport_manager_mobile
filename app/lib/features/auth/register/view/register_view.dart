@@ -8,32 +8,41 @@ import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class RegisterOwnerScreen extends StatefulWidget {
-  const RegisterOwnerScreen({super.key});
+class RegisterView extends StatefulWidget {
+  const RegisterView({
+    required this.role,
+    super.key,
+  });
+
+  final UserRole role;
 
   @override
-  State<RegisterOwnerScreen> createState() => _RegisterOwnerViewState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
-  late final RegisterOwnerCubit _registerOwnerCubit;
+class _RegisterViewState extends State<RegisterView> {
+  late final RegisterCubit _registerCubit;
   late final GlobalKey<FormState> _formKey;
   late final TextEditingController _nameCtr;
   late final TextEditingController _phoneCtr;
   late final TextEditingController _emailCtr;
   late final TextEditingController _passwordCtr;
   late final TextEditingController _confirmCtr;
+  late final TextEditingController _inviteCodeCtr;
+
+  bool get _isOwner => widget.role == UserRole.owner;
 
   @override
   void initState() {
     super.initState();
-    _registerOwnerCubit = RegisterOwnerCubit(GetIt.I<AuthRepository>());
+    _registerCubit = RegisterCubit(GetIt.I<AuthRepository>());
     _formKey = GlobalKey<FormState>();
     _nameCtr = TextEditingController();
     _phoneCtr = TextEditingController();
     _emailCtr = TextEditingController();
     _passwordCtr = TextEditingController();
     _confirmCtr = TextEditingController();
+    _inviteCodeCtr = TextEditingController();
   }
 
   @override
@@ -61,13 +70,34 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
                       ),
                     ),
                     const SizedBox(height: AppSpacing.x3),
-                    RoleBadge(
-                      label: l10n.authOwnerBadge,
-                      color: colors.primary,
-                      bg: colors.primary.withValues(alpha: AppOpacity.tint),
-                      icon: Icons.business_center_rounded,
-                    ),
+                    if (_isOwner)
+                      RoleBadge(
+                        label: l10n.authOwnerBadge,
+                        color: colors.primary,
+                        bg: colors.primary.withValues(alpha: AppOpacity.tint),
+                        icon: Icons.business_center_rounded,
+                      )
+                    else
+                      RoleBadge(
+                        label: l10n.authManagerBadge,
+                        color: context.appColors.success,
+                        bg: context.appColors.success.withValues(alpha: AppOpacity.tint),
+                        icon: Icons.badge_outlined,
+                      ),
                     const SizedBox(height: AppSpacing.x6),
+                    if (_isOwner) ...[
+                      HintBanner(l10n.authInviteCodeHint),
+                      const SizedBox(height: AppSpacing.x4),
+                      AuthTextField(
+                        label: l10n.authInviteCodeLabel,
+                        controller: _inviteCodeCtr,
+                        hintText: 'TF-XXXXX',
+                        textInputAction: TextInputAction.next,
+                        autofocus: true,
+                        validator: (v) => InputValidators.emptyValidator(v, context),
+                      ),
+                      const SizedBox(height: AppSpacing.x4),
+                    ],
                     AuthTextField(
                       label: l10n.authNameLabel,
                       controller: _nameCtr,
@@ -123,8 +153,8 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
-              child: BlocConsumer<RegisterOwnerCubit, DataState<AuthResultModel>>(
-                bloc: _registerOwnerCubit,
+              child: BlocConsumer<RegisterCubit, DataState<AuthResultModel>>(
+                bloc: _registerCubit,
                 listener: (context, state) {
                   if (state is DataSuccess<AuthResultModel>) {
                     context.read<AuthCubit>().setAuthenticated(state.data.user);
@@ -150,19 +180,29 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
 
   void _registerOwner() {
     if (!_formKey.currentState!.validate()) return;
-    _registerOwnerCubit.registerOwner(
-      RegisterOwnerBody(
-        name: _nameCtr.text.trim(),
-        phone: _phoneCtr.text.trim(),
-        email: _emailCtr.text.trim(),
-        password: _passwordCtr.text,
-      ),
-    );
+    final param = _isOwner
+        ? RegisterOwnerParam(
+            name: _nameCtr.text.trim(),
+            phone: _phoneCtr.text.trim(),
+            email: _emailCtr.text.trim(),
+            password: _passwordCtr.text,
+            role: widget.role,
+          )
+        : RegisterManagerParam(
+            name: _nameCtr.text.trim(),
+            phone: _phoneCtr.text.trim(),
+            email: _emailCtr.text.trim(),
+            password: _passwordCtr.text,
+            role: widget.role,
+            inviteCode: _inviteCodeCtr.text.trim(),
+          );
+
+    _registerCubit.register(param);
   }
 
   @override
   void dispose() {
-    _registerOwnerCubit.close();
+    _registerCubit.close();
     _nameCtr.dispose();
     _phoneCtr.dispose();
     _emailCtr.dispose();

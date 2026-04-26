@@ -1,3 +1,4 @@
+import 'package:auth/auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -11,8 +12,7 @@ const Set<String> _authRoutes = {
   AppRoutes.login,
   AppRoutes.forgotPassword,
   AppRoutes.role,
-  AppRoutes.registerOwner,
-  AppRoutes.registerManager,
+  AppRoutes.register,
 };
 
 GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey}) {
@@ -69,12 +69,10 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         builder: (context, state) => const RoleSelectScreen(),
       ),
       GoRoute(
-        path: AppRoutes.registerOwner,
-        builder: (context, state) => const RegisterOwnerScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.registerManager,
-        builder: (context, state) => const RegisterManagerScreen(),
+        path: AppRoutes.register,
+        builder: (context, state) => RegisterView(
+          role: state.extra != null ? state.extra! as UserRole : UserRole.owner,
+        ),
       ),
       GoRoute(
         path: AppRoutes.home,

@@ -27,17 +27,8 @@ class AuthRepository {
     return result;
   }
 
-  Future<AuthResultModel> registerOwner(RegisterOwnerBody body) async {
-    final result = await _remote.registerOwner(body);
-    await Future.wait([
-      _local.saveTokens(result.tokens),
-      _local.saveUser(result.user),
-    ]);
-    return result;
-  }
-
-  Future<AuthResultModel> registerManager(RegisterManagerBody body) async {
-    final result = await _remote.registerManager(body);
+  Future<AuthResultModel> register(RegisterParam body) async {
+    final result = await _remote.register(body);
     await Future.wait([
       _local.saveTokens(result.tokens),
       _local.saveUser(result.user),

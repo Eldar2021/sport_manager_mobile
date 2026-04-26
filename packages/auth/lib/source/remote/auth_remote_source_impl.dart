@@ -21,20 +21,14 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   }
 
   @override
-  Future<AuthResultModel> registerOwner(RegisterOwnerBody body) {
+  Future<AuthResultModel> register(RegisterParam body) {
     return _client.postType<AuthResultModel>(
-      '/auth/register/owner',
+      '/auth/register',
       fromJson: AuthResultModel.fromJson,
-      data: body.toJson(),
-    );
-  }
-
-  @override
-  Future<AuthResultModel> registerManager(RegisterManagerBody body) {
-    return _client.postType<AuthResultModel>(
-      '/auth/register/manager',
-      fromJson: AuthResultModel.fromJson,
-      data: body.toJson(),
+      data: switch (body) {
+        RegisterOwnerParam() => body.toJson(),
+        RegisterManagerParam() => body.toJson(),
+      },
     );
   }
 

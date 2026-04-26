@@ -18,7 +18,6 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
 
   static const _testOwner = UserModel(
     id: 'user-001',
-    username: _username,
     name: 'Test Owner',
     role: UserRole.owner,
     email: 'test@tableflow.kg',
@@ -29,12 +28,6 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     en: 'Invalid username or password',
     ru: 'Неверный логин или пароль',
     ky: 'Логин же сырсөз туура эмес',
-  );
-
-  static const _badInviteCode = BaseMessage(
-    en: 'Invalid or expired invite code',
-    ru: 'Неверный или истёкший код приглашения',
-    ky: 'Жараксыз же мөөнөтү өткөн чакыруу коду',
   );
 
   @override
@@ -56,39 +49,18 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
   }
 
   @override
-  Future<AuthResultModel> registerOwner(RegisterOwnerBody body) async {
+  Future<AuthResultModel> register(RegisterParam body) async {
     await Future<void>.delayed(const Duration(milliseconds: 1000));
 
     return AuthResultModel(
       accessToken: _tokens.accessToken,
       refreshToken: _tokens.refreshToken,
       user: UserModel(
-        id: 'owner-${DateTime.now().millisecondsSinceEpoch}',
-        username: body.email.split('@').first,
+        id: '${body.role.name}-${DateTime.now().millisecondsSinceEpoch}',
         name: body.name,
-        role: UserRole.owner,
+        role: body.role,
         email: body.email,
         phone: body.phone,
-      ),
-    );
-  }
-
-  @override
-  Future<AuthResultModel> registerManager(RegisterManagerBody body) async {
-    await Future<void>.delayed(const Duration(milliseconds: 800));
-
-    if (body.inviteCode.trim().toUpperCase() != _validInviteCode) {
-      throw const AuthException('invalid_invite_code', message: _badInviteCode);
-    }
-
-    return AuthResultModel(
-      accessToken: _tokens.accessToken,
-      refreshToken: _tokens.refreshToken,
-      user: UserModel(
-        id: 'manager-${DateTime.now().millisecondsSinceEpoch}',
-        username: body.username,
-        name: body.name,
-        role: UserRole.manager,
       ),
     );
   }
