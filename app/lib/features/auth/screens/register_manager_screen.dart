@@ -113,7 +113,7 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
                   }
                 },
                 builder: (context, state) {
-                  return AuthSubmitButton(
+                  return AppSubmitButton(
                     label: l10n.authCreateAccount,
                     isLoading: state.isLoading,
                     onPressed: _registerManager,

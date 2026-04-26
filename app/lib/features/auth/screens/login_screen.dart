@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                     builder: (context, state) {
-                      return AuthSubmitButton(
+                      return AppSubmitButton(
                         label: l10n.authSignIn,
                         isLoading: state is AuthLoading,
                         onPressed: _login,

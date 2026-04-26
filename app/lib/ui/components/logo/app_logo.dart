@@ -11,7 +11,6 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.colors;
     return SizedBox(
       width: size,
       height: size,
@@ -22,20 +21,20 @@ class AppLogo extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              colors.primary,
-              colors.onPrimaryContainer,
+              context.colors.primary,
+              context.colors.onPrimaryContainer,
             ],
           ),
           boxShadow: [
             BoxShadow(
-              color: colors.primary.withValues(alpha: 0.27),
+              color: context.colors.primary.withValues(alpha: 0.27),
               blurRadius: 24,
               offset: const Offset(0, 12),
             ),
           ],
         ),
         child: CustomPaint(
-          painter: _CuePainter(colors.onPrimary),
+          painter: _CuePainter(context.colors.onPrimary),
         ),
       ),
     );

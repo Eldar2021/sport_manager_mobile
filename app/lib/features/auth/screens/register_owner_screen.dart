@@ -133,7 +133,7 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
                   }
                 },
                 builder: (context, state) {
-                  return AuthSubmitButton(
+                  return AppSubmitButton(
                     label: l10n.authCreateAccount,
                     isLoading: state.isLoading,
                     onPressed: _registerOwner,

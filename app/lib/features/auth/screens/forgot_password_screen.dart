@@ -73,7 +73,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 bloc: _forgotPasswordCubit,
                 listener: _forgotPasswordListener,
                 builder: (context, state) {
-                  return AuthSubmitButton(
+                  return AppSubmitButton(
                     label: l10n.authForgotPasswordSendLink,
                     isLoading: state.isLoading,
                     onPressed: _submit,

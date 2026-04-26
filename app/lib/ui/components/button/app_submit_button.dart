@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class AuthSubmitButton extends StatelessWidget {
-  const AuthSubmitButton({
+class AppSubmitButton extends StatelessWidget {
+  const AppSubmitButton({
     required this.label,
     required this.onPressed,
     this.isLoading = false,
