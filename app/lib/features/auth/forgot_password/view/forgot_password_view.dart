@@ -8,14 +8,14 @@ import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class ForgotPasswordView extends StatefulWidget {
+  const ForgotPasswordView({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<ForgotPasswordView> createState() => _ForgotPasswordViewState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   late final GlobalKey<FormState> _formKey;
   late final TextEditingController _emailController;
   late final ForgotPasswordCubit _forgotPasswordCubit;
