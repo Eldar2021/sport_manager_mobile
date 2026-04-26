@@ -15,23 +15,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _usernameCtr = TextEditingController();
-  final _passwordCtr = TextEditingController();
+  late final GlobalKey<FormState> _formKey;
+  late final TextEditingController _usernameCtr;
+  late final TextEditingController _passwordCtr;
 
   @override
-  void dispose() {
-    _usernameCtr.dispose();
-    _passwordCtr.dispose();
-    super.dispose();
-  }
-
-  void _login() {
-    if (!_formKey.currentState!.validate()) return;
-    context.read<AuthCubit>().login(
-      _usernameCtr.text.trim(),
-      _passwordCtr.text,
-    );
+  void initState() {
+    super.initState();
+    _formKey = GlobalKey<FormState>();
+    _usernameCtr = TextEditingController();
+    _passwordCtr = TextEditingController();
   }
 
   @override
@@ -41,20 +34,16 @@ class _LoginScreenState extends State<LoginScreen> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(leading: const BackBtn()),
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.x6,
-                  vertical: AppSpacing.x4,
-                ),
+      appBar: AppBar(),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(AppSpacing.x6),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
                       l10n.authSignIn,
@@ -69,87 +58,99 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: colorScheme.onSurfaceVariant,
                       ),
                     ),
+                    const SizedBox(height: AppSpacing.x6),
+                    AuthTextField(
+                      label: l10n.authUsernameOrEmail,
+                      controller: _usernameCtr,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      autofocus: true,
+                      validator: (v) => InputValidators.emptyValidator(v, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AuthPasswordField(
+                      label: l10n.authPassword,
+                      controller: _passwordCtr,
+                      textInputAction: TextInputAction.done,
+                      validator: (v) => InputValidators.passwordValidator(v, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x3),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextButton(
+                        child: Text(
+                          l10n.authForgotPassword,
+                          style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary),
+                        ),
+                        onPressed: () => context.push(AppRoutes.forgotPassword),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(AppSpacing.x6),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  BlocConsumer<AuthCubit, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthError) {
+                        context.handleError(state.exception);
+                      }
+                    },
+                    builder: (context, state) {
+                      return AuthSubmitButton(
+                        label: l10n.authSignIn,
+                        isLoading: state is AuthLoading,
+                        onPressed: _login,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: AppSpacing.x4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AuthTextField(
-                        label: l10n.authUsernameOrEmail,
-                        controller: _usernameCtr,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        autofocus: true,
-                        validator: (v) => InputValidators.emptyValidator(v, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AuthPasswordField(
-                        label: l10n.authPassword,
-                        controller: _passwordCtr,
-                        textInputAction: TextInputAction.done,
-                        validator: (v) => InputValidators.passwordValidator(v, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x3),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: AuthTextButton(
-                          label: l10n.authForgotPassword,
-                          onPressed: () => context.push(AppRoutes.forgotPassword),
+                      Text(
+                        l10n.authNoAccount,
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
                         ),
+                      ),
+                      const SizedBox(width: AppSpacing.x1),
+                      TextButton(
+                        child: Text(
+                          l10n.authSignUp,
+                          style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary),
+                        ),
+                        onPressed: () => context.push(AppRoutes.role),
                       ),
                     ],
                   ),
-                ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.x6,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    BlocConsumer<AuthCubit, AuthState>(
-                      listener: (context, state) {
-                        if (state is AuthError) {
-                          context.handleError(state.exception);
-                        }
-                      },
-                      builder: (context, state) {
-                        return AuthSubmitButton(
-                          label: l10n.authSignIn,
-                          isLoading: state is AuthLoading,
-                          onPressed: _login,
-                        );
-                      },
-                    ),
-                    const SizedBox(height: AppSpacing.x4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          l10n.authNoAccount,
-                          style: textTheme.bodyMedium?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                        const SizedBox(width: AppSpacing.x1),
-                        AuthTextButton(
-                          label: l10n.authSignUp,
-                          onPressed: () => context.push(AppRoutes.role),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(height: AppSpacing.bottom(context)),
+          ],
         ),
       ),
     );
+  }
+
+  void _login() {
+    if (!_formKey.currentState!.validate()) return;
+    context.read<AuthCubit>().login(
+      _usernameCtr.text.trim(),
+      _passwordCtr.text,
+    );
+  }
+
+  @override
+  void dispose() {
+    _usernameCtr.dispose();
+    _passwordCtr.dispose();
+    _formKey.currentState?.reset();
+    super.dispose();
   }
 }

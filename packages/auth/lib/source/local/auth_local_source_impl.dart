@@ -1,10 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:auth/models/auth_tokens_model.dart';
 import 'package:auth/models/user_model.dart';
 import 'package:auth/source/local/auth_local_source.dart';
 import 'package:storage_client/storage_client.dart';
 
-final class AuthLocalSourceImpl implements AuthLocalSource {
+class AuthLocalSourceImpl implements AuthLocalSource {
   AuthLocalSourceImpl({
     required StorageInterface secure,
     required StorageInterfaceSyncRead preferences,
@@ -65,7 +66,8 @@ final class AuthLocalSourceImpl implements AuthLocalSource {
     try {
       final decodedJson = jsonDecode(json) as Map<String, dynamic>;
       return UserModel.fromJson(decodedJson);
-    } on Object catch (_) {
+    } on Object catch (e) {
+      log('getCachedUser error: $e');
       return null;
     }
   }

@@ -14,7 +14,9 @@ final class RegisterManagerBody extends Equatable {
     required this.password,
   });
 
-  factory RegisterManagerBody.fromJson(Map<String, dynamic> json) => _$RegisterManagerBodyFromJson(json);
+  factory RegisterManagerBody.fromJson(Map<String, dynamic> json) {
+    return _$RegisterManagerBodyFromJson(json);
+  }
 
   final String inviteCode;
   final String username;
@@ -24,5 +26,10 @@ final class RegisterManagerBody extends Equatable {
   Map<String, dynamic> toJson() => _$RegisterManagerBodyToJson(this);
 
   @override
-  List<Object?> get props => [inviteCode, username, name, password];
+  List<Object?> get props => [
+    inviteCode,
+    username,
+    name,
+    password,
+  ];
 }

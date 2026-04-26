@@ -90,6 +90,7 @@ abstract final class AppTheme {
         ),
         titleTextStyle: textTheme.titleLarge?.copyWith(color: AppColors.white),
         iconTheme: const IconThemeData(color: AppColors.white),
+        surfaceTintColor: Colors.transparent,
       ),
 
       // Card
@@ -144,6 +145,9 @@ abstract final class AppTheme {
       // TextButton
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           foregroundColor: cs.primary,
           disabledForegroundColor: AppColors.ink500,
           shape: const RoundedRectangleBorder(borderRadius: AppRadius.buttonBorderRadius),
@@ -383,8 +387,7 @@ abstract final class AppTheme {
 
       // AppBar
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.white,
-        foregroundColor: AppColors.ink900,
+        backgroundColor: AppColors.bgWarm,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: true,
@@ -392,7 +395,8 @@ abstract final class AppTheme {
           statusBarColor: AppColors.transparent,
         ),
         titleTextStyle: textTheme.titleLarge?.copyWith(color: AppColors.ink900),
-        iconTheme: const IconThemeData(color: AppColors.ink700),
+        iconTheme: IconThemeData(color: cs.primary),
+        surfaceTintColor: Colors.transparent,
       ),
 
       // Card
@@ -445,6 +449,9 @@ abstract final class AppTheme {
       // TextButton
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           foregroundColor: cs.primary,
           shape: const RoundedRectangleBorder(borderRadius: AppRadius.buttonBorderRadius),
           textStyle: AppTypography.button,

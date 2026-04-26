@@ -11,7 +11,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('home', style: Theme.of(context).textTheme.titleMedium),
+        title: Text(
+          'home',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout_rounded),

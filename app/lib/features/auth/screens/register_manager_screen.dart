@@ -16,18 +16,156 @@ class RegisterManagerScreen extends StatefulWidget {
 
 class _RegisterManagerViewState extends State<RegisterManagerScreen> {
   late final RegisterManagerCubit _registerManagerCubit;
-  final _formKey = GlobalKey<FormState>();
-  final _inviteCodeCtr = TextEditingController();
-  final _usernameCtr = TextEditingController();
-  final _nameCtr = TextEditingController();
-  final _passwordCtr = TextEditingController();
+  late final GlobalKey<FormState> _formKey;
+  late final TextEditingController _inviteCodeCtr;
+  late final TextEditingController _usernameCtr;
+  late final TextEditingController _nameCtr;
+  late final TextEditingController _passwordCtr;
 
   @override
   void initState() {
     super.initState();
-    _registerManagerCubit = RegisterManagerCubit(
-      GetIt.I<AuthRepository>(),
-      context.read<AuthCubit>(),
+    _registerManagerCubit = RegisterManagerCubit(GetIt.I<AuthRepository>());
+    _formKey = GlobalKey<FormState>();
+    _inviteCodeCtr = TextEditingController();
+    _usernameCtr = TextEditingController();
+    _nameCtr = TextEditingController();
+    _passwordCtr = TextEditingController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Scaffold(
+      appBar: AppBar(),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.authRegisterManagerTitle,
+                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.x3),
+                    RoleBadge(
+                      label: l10n.authManagerBadge,
+                      color: AppColors.successGreen,
+                      bg: AppColors.successGreen.withValues(alpha: 0.12),
+                      icon: Icons.badge_outlined,
+                    ),
+                    const SizedBox(height: AppSpacing.x6),
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary.withValues(alpha: 0.08),
+                        borderRadius: AppRadius.cardBorderRadius,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(AppSpacing.x4),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.info_outline_rounded,
+                              color: colorScheme.primary,
+                              size: 18,
+                            ),
+                            const SizedBox(width: AppSpacing.x2),
+                            Expanded(
+                              child: Text(
+                                l10n.authInviteCodeHint,
+                                style: textTheme.bodySmall?.copyWith(
+                                  color: colorScheme.primary,
+                                  height: 1.5,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AuthTextField(
+                      label: l10n.authInviteCodeLabel,
+                      controller: _inviteCodeCtr,
+                      hintText: 'TF-XXXXX',
+                      textInputAction: TextInputAction.next,
+                      autofocus: true,
+                      validator: (v) => InputValidators.emptyValidator(v, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AuthTextField(
+                      label: l10n.authUsernameLabel,
+                      controller: _usernameCtr,
+                      textInputAction: TextInputAction.next,
+                      validator: (v) => InputValidators.emptyValidator(v, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AuthTextField(
+                      label: l10n.authNameLabel,
+                      controller: _nameCtr,
+                      textInputAction: TextInputAction.next,
+                      validator: (v) => InputValidators.emptyValidator(v, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AuthPasswordField(
+                      label: l10n.authPassword,
+                      controller: _passwordCtr,
+                      textInputAction: TextInputAction.done,
+                      validator: (v) => InputValidators.passwordValidator(v, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x6),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+              child: BlocConsumer<RegisterManagerCubit, DataState<AuthResultModel>>(
+                bloc: _registerManagerCubit,
+                listener: (context, state) {
+                  if (state is DataSuccess<AuthResultModel>) {
+                    context.read<AuthCubit>().setAuthenticated(state.data.user);
+                  } else if (state is DataFailure<AuthResultModel>) {
+                    context.handleError(state.exception);
+                  }
+                },
+                builder: (context, state) {
+                  return AuthSubmitButton(
+                    label: l10n.authCreateAccount,
+                    isLoading: state.isLoading,
+                    onPressed: _registerManager,
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: AppSpacing.bottom(context)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _registerManager() {
+    if (!_formKey.currentState!.validate()) return;
+    _registerManagerCubit.registerManager(
+      RegisterManagerBody(
+        inviteCode: _inviteCodeCtr.text.trim(),
+        username: _usernameCtr.text.trim(),
+        name: _nameCtr.text.trim(),
+        password: _passwordCtr.text.trim(),
+      ),
     );
   }
 
@@ -38,131 +176,7 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
     _usernameCtr.dispose();
     _nameCtr.dispose();
     _passwordCtr.dispose();
+    _formKey.currentState?.reset();
     super.dispose();
-  }
-
-  void _registerManager() {
-    if (!_formKey.currentState!.validate()) return;
-    _registerManagerCubit.registerManager(
-      RegisterManagerBody(
-        inviteCode: _inviteCodeCtr.text.trim(),
-        username: _usernameCtr.text.trim(),
-        name: _nameCtr.text.trim(),
-        password: _passwordCtr.text,
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    return Scaffold(
-      appBar: AppBar(leading: const BackBtn()),
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RegisterTitleWidget(
-                title: l10n.authRegisterManagerTitle,
-                badge: l10n.authManagerBadge,
-                icon: Icons.badge_outlined,
-                colorBadge: AppColors.successGreen,
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: colorScheme.primary.withValues(alpha: 0.08),
-                          borderRadius: AppRadius.cardBorderRadius,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(AppSpacing.x4),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(Icons.info_outline_rounded, color: colorScheme.primary, size: 18),
-                              const SizedBox(width: AppSpacing.x2),
-                              Expanded(
-                                child: Text(
-                                  l10n.authInviteCodeHint,
-                                  style: textTheme.bodySmall?.copyWith(
-                                    color: colorScheme.primary,
-                                    height: 1.5,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AuthTextField(
-                        label: l10n.authInviteCodeLabel,
-                        controller: _inviteCodeCtr,
-                        hintText: 'TF-XXXXX',
-                        textInputAction: TextInputAction.next,
-                        autofocus: true,
-                        validator: (v) => InputValidators.emptyValidator(v, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AuthTextField(
-                        label: l10n.authUsernameLabel,
-                        controller: _usernameCtr,
-                        textInputAction: TextInputAction.next,
-                        validator: (v) => InputValidators.emptyValidator(v, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AuthTextField(
-                        label: l10n.authNameLabel,
-                        controller: _nameCtr,
-                        textInputAction: TextInputAction.next,
-                        validator: (v) => InputValidators.emptyValidator(v, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AuthPasswordField(
-                        label: l10n.authPassword,
-                        controller: _passwordCtr,
-                        textInputAction: TextInputAction.done,
-                        validator: (v) => InputValidators.passwordValidator(v, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x6),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
-                child: BlocConsumer<RegisterManagerCubit, DataState<void>>(
-                  bloc: _registerManagerCubit,
-                  listener: (context, state) {
-                    if (state.isFailure) {
-                      final exception = (state as DataFailure<void>).exception;
-                      context.handleError(exception);
-                    }
-                  },
-                  builder: (context, state) {
-                    return AuthSubmitButton(
-                      label: l10n.authCreateAccount,
-                      isLoading: state.isLoading,
-                      onPressed: _registerManager,
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: AppSpacing.x1),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

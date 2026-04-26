@@ -15,7 +15,9 @@ final class AuthResultModel extends Equatable {
     required this.refreshToken,
   });
 
-  factory AuthResultModel.fromJson(Map<String, dynamic> json) => _$AuthResultModelFromJson(json);
+  factory AuthResultModel.fromJson(Map<String, dynamic> json) {
+    return _$AuthResultModelFromJson(json);
+  }
 
   final UserModel user;
   final String accessToken;
@@ -29,5 +31,9 @@ final class AuthResultModel extends Equatable {
   Map<String, dynamic> toJson() => _$AuthResultModelToJson(this);
 
   @override
-  List<Object?> get props => [user, accessToken, refreshToken];
+  List<Object?> get props => [
+    user,
+    accessToken,
+    refreshToken,
+  ];
 }

@@ -12,6 +12,10 @@ abstract final class AppSpacing {
   static const double x10 = 40;
   static const double x12 = 48;
   static const double x16 = 64;
+
+  static double bottom(BuildContext context) {
+    return MediaQuery.of(context).viewPadding.bottom + 16;
+  }
 }
 
 abstract final class AppRadius {

@@ -16,121 +16,98 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  late final GlobalKey<FormState> _formKey;
+  late final TextEditingController _emailController;
   late final ForgotPasswordCubit _forgotPasswordCubit;
 
   @override
   void initState() {
     super.initState();
+    _formKey = GlobalKey<FormState>();
+    _emailController = TextEditingController();
     _forgotPasswordCubit = ForgotPasswordCubit(GetIt.I<AuthRepository>());
-  }
-
-  @override
-  void dispose() {
-    _forgotPasswordCubit.close();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-
-    return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
-      bloc: _forgotPasswordCubit,
-      listenWhen: (prev, curr) => prev.status != curr.status,
-      listener: (context, state) {
-        final status = state.status;
-        if (status.isSuccess) {
-          context.pop();
-        } else if (status.isFailure) {
-          final exception = (status as DataFailure).exception;
-          context.handleError(exception);
-        }
-      },
-      builder: (context, state) => Scaffold(
-        appBar: AppBar(
-          centerTitle: false,
-          leading: const BackBtn(),
-          title: Text(l10n.authForgotPasswordTitle),
-        ),
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(AppSpacing.x6),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      _InfoBanner(text: l10n.authForgotPasswordBanner),
-                      const SizedBox(height: AppSpacing.x6),
-                      AuthTextField(
-                        label: l10n.authEmailLabel,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.done,
-                        hintText: l10n.authForgotPasswordLoginEmailPlaceholder,
-                        onChanged: _forgotPasswordCubit.emailChanged,
-                        onSubmitted: state.canSubmit ? _forgotPasswordCubit.send : null,
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      ForgotPasswordContactCard(
-                        title: l10n.authForgotPasswordNoLink,
-                        subtitle: l10n.authForgotPasswordContactUs,
-                        onTap: () => ContactSupportSheet.show(context),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.x6,
-                ),
-                child: AuthSubmitButton(
-                  label: l10n.authForgotPasswordSendLink,
-                  isLoading: state.isLoading,
-                  onPressed: state.canSubmit ? _forgotPasswordCubit.send : null,
-                ),
-              ),
-            ],
-          ),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        title: Text(l10n.authForgotPasswordTitle),
       ),
-    );
-  }
-}
-
-class _InfoBanner extends StatelessWidget {
-  const _InfoBanner({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: AppColors.brandAmberLight,
-        borderRadius: AppRadius.cardBorderRadius,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.x4),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Icon(Icons.lock_outline_rounded, color: AppColors.brandAmber),
-            const SizedBox(width: AppSpacing.x3),
             Expanded(
-              child: Text(
-                text,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.brandAmberDark,
-                  fontWeight: FontWeight.w400,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(AppSpacing.x6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    InfoBanner(l10n.authForgotPasswordBanner),
+                    const SizedBox(height: AppSpacing.x6),
+                    AuthTextField(
+                      label: l10n.authEmailLabel,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.done,
+                      hintText: l10n.authForgotPasswordLoginEmailPlaceholder,
+                      onSubmitted: _submit,
+                      validator: (value) => InputValidators.emailValidator(value, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    ForgotPasswordContactCard(
+                      title: l10n.authForgotPasswordNoLink,
+                      subtitle: l10n.authForgotPasswordContactUs,
+                      onTap: () => ContactSupportSheet.show(context),
+                    ),
+                  ],
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+              child: BlocConsumer<ForgotPasswordCubit, DataState<void>>(
+                bloc: _forgotPasswordCubit,
+                listener: _forgotPasswordListener,
+                builder: (context, state) {
+                  return AuthSubmitButton(
+                    label: l10n.authForgotPasswordSendLink,
+                    isLoading: state.isLoading,
+                    onPressed: _submit,
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: AppSpacing.bottom(context)),
           ],
         ),
       ),
     );
+  }
+
+  void _submit() {
+    if (_formKey.currentState?.validate() ?? false) {
+      _formKey.currentState?.save();
+      _forgotPasswordCubit.send(_emailController.text.trim());
+    }
+  }
+
+  void _forgotPasswordListener(BuildContext context, DataState<void> state) {
+    if (state is DataSuccess<void>) {
+      context.pop();
+    } else if (state is DataFailure) {
+      context.handleError(state.exception);
+    }
+  }
+
+  @override
+  void dispose() {
+    _formKey.currentState?.reset();
+    _emailController.dispose();
+    _forgotPasswordCubit.close();
+    super.dispose();
   }
 }

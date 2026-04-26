@@ -30,7 +30,10 @@ class SecureStorage implements StorageInterface {
   }
 
   @override
-  Future<void> write({required String key, required String value}) async {
+  Future<void> write({
+    required String key,
+    required String value,
+  }) async {
     try {
       await _secureStorage.write(key: key, value: value);
     } catch (error, stackTrace) {

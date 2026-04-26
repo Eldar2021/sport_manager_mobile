@@ -13,7 +13,9 @@ RegisterManagerBody _$RegisterManagerBodyFromJson(Map<String, dynamic> json) => 
   password: json['password'] as String,
 );
 
-Map<String, dynamic> _$RegisterManagerBodyToJson(RegisterManagerBody instance) => <String, dynamic>{
+Map<String, dynamic> _$RegisterManagerBodyToJson(
+  RegisterManagerBody instance,
+) => <String, dynamic>{
   'inviteCode': instance.inviteCode,
   'username': instance.username,
   'name': instance.name,

@@ -35,8 +35,12 @@ final class NetworkModule extends BaseDiModule {
         dio: bearerDio,
         getRefreshToken: () => GetIt.I<AuthRepository>().getRefreshTokenSync() ?? '',
         onLogout: () => GetIt.I<AuthRepository>().logout(),
-        onRefreshedToken: (accessToken, refreshToken) =>
-            GetIt.I<AuthRepository>().cacheRefreshedTokens(accessToken, refreshToken),
+        onRefreshedToken: (accessToken, refreshToken) {
+          GetIt.I<AuthRepository>().cacheRefreshedTokens(
+            accessToken,
+            refreshToken,
+          );
+        },
       ),
     ]);
 
