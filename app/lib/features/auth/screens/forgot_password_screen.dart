@@ -69,18 +69,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.x6,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
               child: BlocConsumer<ForgotPasswordCubit, DataState<void>>(
                 bloc: _forgotPasswordCubit,
-                listener: (context, state) {
-                  if (state is DataSuccess<void>) {
-                    context.pop();
-                  } else if (state is DataFailure) {
-                    context.handleError(state.exception);
-                  }
-                },
+                listener: _forgotPasswordListener,
                 builder: (context, state) {
                   return AuthSubmitButton(
                     label: l10n.authForgotPasswordSendLink,
@@ -100,6 +92,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       _forgotPasswordCubit.send(_emailController.text.trim());
+    }
+  }
+
+  void _forgotPasswordListener(BuildContext context, DataState<void> state) {
+    if (state is DataSuccess<void>) {
+      context.pop();
+    } else if (state is DataFailure) {
+      context.handleError(state.exception);
     }
   }
 
