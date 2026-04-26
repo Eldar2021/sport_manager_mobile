@@ -81,6 +81,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 },
               ),
             ),
+            SizedBox(height: AppSpacing.bottom(context)),
           ],
         ),
       ),
