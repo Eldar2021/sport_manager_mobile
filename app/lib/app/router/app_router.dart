@@ -27,7 +27,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       final authState = authCubit.state;
       final matchedLocation = state.matchedLocation;
 
-      if (authState is AuthInitial || authState is AuthLoading) {
+      if (authState is AuthInitial || authState is AuthLogoutInProgress) {
         return null;
       }
 
@@ -70,9 +70,8 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       ),
       GoRoute(
         path: AppRoutes.register,
-        builder: (context, state) => RegisterView(
-          role: state.extra != null ? state.extra! as UserRole : UserRole.owner,
-        ),
+        redirect: (context, state) => state.extra is UserRole ? null : AppRoutes.role,
+        builder: (context, state) => RegisterView(role: state.extra! as UserRole),
       ),
       GoRoute(
         path: AppRoutes.home,

@@ -14,8 +14,8 @@ final class AuthInitial extends AuthState {
 }
 
 @immutable
-final class AuthLoading extends AuthState {
-  const AuthLoading();
+final class AuthLogoutInProgress extends AuthState {
+  const AuthLogoutInProgress();
 
   @override
   List<Object?> get props => [];

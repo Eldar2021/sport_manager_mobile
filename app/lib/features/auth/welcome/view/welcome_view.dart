@@ -5,6 +5,8 @@ import 'package:sport_manager_mobile/features/settings/settings.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
+const _brandName = 'TableFlow';
+
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});
 
@@ -27,7 +29,7 @@ class WelcomeView extends StatelessWidget {
                     const AppLogo(),
                     const SizedBox(height: AppSpacing.x6),
                     Text(
-                      'TableFlow',
+                      _brandName,
                       style: context.textTheme.displaySmall,
                     ),
                     const SizedBox(height: AppSpacing.x2),

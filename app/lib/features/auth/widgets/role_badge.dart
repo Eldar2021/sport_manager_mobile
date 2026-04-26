@@ -5,14 +5,12 @@ class RoleBadge extends StatelessWidget {
   const RoleBadge({
     required this.label,
     required this.color,
-    required this.bg,
     required this.icon,
     super.key,
   });
 
   final String label;
   final Color color;
-  final Color bg;
   final IconData icon;
 
   @override
@@ -26,7 +24,7 @@ class RoleBadge extends StatelessWidget {
           fontWeight: FontWeight.w600,
         ),
       ),
-      backgroundColor: bg,
+      backgroundColor: color.withValues(alpha: AppOpacity.tint),
       side: BorderSide.none,
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.x3,

@@ -71,14 +71,12 @@ class _RegisterViewState extends State<RegisterView> {
                       RoleBadge(
                         label: context.l10n.authOwnerBadge,
                         color: context.colors.primary,
-                        bg: context.colors.primary.withValues(alpha: AppOpacity.tint),
                         icon: Icons.business_center_rounded,
                       )
                     else
                       RoleBadge(
                         label: context.l10n.authManagerBadge,
                         color: context.appColors.success,
-                        bg: context.appColors.success.withValues(alpha: AppOpacity.tint),
                         icon: Icons.badge_outlined,
                       ),
                     const SizedBox(height: AppSpacing.x6),
