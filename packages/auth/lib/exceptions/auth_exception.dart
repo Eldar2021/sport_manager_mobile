@@ -1,5 +1,11 @@
 import 'package:core/core.dart';
 
+const _defaultUiMessage = BaseMessage(
+  en: 'Authentication failed. Please try again.',
+  ru: 'Ошибка входа. Повторите попытку.',
+  ky: 'Кирүү катасы. Кайра аракет кылыңыз.',
+);
+
 final class AuthException extends AppException<String> {
   const AuthException(
     super.error, {
@@ -9,26 +15,10 @@ final class AuthException extends AppException<String> {
 
   @override
   ErrorModel getModel() => ErrorModel(
-    title: const BaseMessage(
-      en: 'Authentication Error',
-      ru: 'Ошибка авторизации',
-      ky: 'Авторизация катасы',
-    ),
-    message:
-        message ??
-        const BaseMessage(
-          en: 'Authentication failed. Please try again.',
-          ru: 'Ошибка входа. Повторите попытку.',
-          ky: 'Кирүү катасы. Кайра аракет кылыңыз.',
-        ),
+    title: BaseMessage.authException,
+    message: message ?? _defaultUiMessage,
   );
 
   @override
-  BaseMessage getUiMessage() =>
-      message ??
-      const BaseMessage(
-        en: 'Authentication failed. Please try again.',
-        ru: 'Ошибка входа. Повторите попытку.',
-        ky: 'Кирүү катасы. Кайра аракет кылыңыз.',
-      );
+  BaseMessage getUiMessage() => message ?? _defaultUiMessage;
 }

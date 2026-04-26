@@ -69,4 +69,10 @@ final class BaseMessage {
     ru: 'Сервис недоступен',
     ky: 'Кызмат жеткиликсиз',
   );
+
+  static const authException = BaseMessage(
+    en: 'Authentication Error',
+    ru: 'Ошибка авторизации',
+    ky: 'Авторизация катасы',
+  );
 }

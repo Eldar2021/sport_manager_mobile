@@ -1,8 +1,8 @@
-import 'package:auth/auth.dart';
-import 'package:meta/meta.dart';
+import 'dart:developer';
 
-@immutable
-final class AuthRepository {
+import 'package:auth/auth.dart';
+
+class AuthRepository {
   const AuthRepository({
     required AuthRemoteSource remote,
     required AuthLocalSource local,
@@ -16,23 +16,32 @@ final class AuthRepository {
     required String username,
     required String password,
   }) async {
-    final result = await _remote.login(username: username, password: password);
-    await _local.saveTokens(result.tokens);
-    await _local.saveUser(result.user);
+    final result = await _remote.login(
+      username: username,
+      password: password,
+    );
+    await Future.wait([
+      _local.saveTokens(result.tokens),
+      _local.saveUser(result.user),
+    ]);
     return result;
   }
 
   Future<AuthResultModel> registerOwner(RegisterOwnerBody body) async {
     final result = await _remote.registerOwner(body);
-    await _local.saveTokens(result.tokens);
-    await _local.saveUser(result.user);
+    await Future.wait([
+      _local.saveTokens(result.tokens),
+      _local.saveUser(result.user),
+    ]);
     return result;
   }
 
   Future<AuthResultModel> registerManager(RegisterManagerBody body) async {
     final result = await _remote.registerManager(body);
-    await _local.saveTokens(result.tokens);
-    await _local.saveUser(result.user);
+    await Future.wait([
+      _local.saveTokens(result.tokens),
+      _local.saveUser(result.user),
+    ]);
     return result;
   }
 
@@ -40,23 +49,40 @@ final class AuthRepository {
     return _remote.forgotPassword(email);
   }
 
-  Future<AuthTokensModel?> getTokens() => _local.getTokens();
+  Future<AuthTokensModel?> getTokens() {
+    return _local.getTokens();
+  }
 
-  String? getRefreshTokenSync() => _local.getRefreshTokenSync();
+  String? getRefreshTokenSync() {
+    return _local.getRefreshTokenSync();
+  }
 
-  String? getAccessTokenSync() => _local.getAccessTokenSync();
+  String? getAccessTokenSync() {
+    return _local.getAccessTokenSync();
+  }
 
-  UserModel? getCachedUser() => _local.getCachedUser();
+  UserModel? getCachedUser() {
+    return _local.getCachedUser();
+  }
 
   void cacheRefreshedTokens(String accessToken, String refreshToken) {
-    _local.saveTokens(AuthTokensModel(accessToken: accessToken, refreshToken: refreshToken));
+    _local.saveTokens(
+      AuthTokensModel(
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      ),
+    );
   }
 
   Future<void> logout() async {
     try {
-      await _remote.logout();
-    } finally {
-      await _local.clearAll();
+      await Future.wait([
+        _remote.logout(),
+        _local.clearAll(),
+      ]);
+    } on Object catch (e) {
+      log('logout error: $e');
+      return;
     }
   }
 

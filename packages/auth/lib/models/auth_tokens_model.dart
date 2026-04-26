@@ -20,5 +20,8 @@ final class AuthTokensModel extends Equatable {
   Map<String, dynamic> toJson() => _$AuthTokensModelToJson(this);
 
   @override
-  List<Object?> get props => [accessToken, refreshToken];
+  List<Object?> get props => [
+    accessToken,
+    refreshToken,
+  ];
 }
