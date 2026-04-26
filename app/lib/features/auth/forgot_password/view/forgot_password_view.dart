@@ -58,7 +58,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                       validator: (value) => InputValidators.emailValidator(value, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),
-                    ForgotPasswordContactCard(
+                    ContactCard(
                       title: context.l10n.authForgotPasswordNoLink,
                       subtitle: context.l10n.authForgotPasswordContactUs,
                       onTap: () => ContactSupportSheet.show(context),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/generated/assets.gen.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class ForgotPasswordContactCard extends StatelessWidget {
-  const ForgotPasswordContactCard({
+class ContactCard extends StatelessWidget {
+  const ContactCard({
     required this.title,
     required this.subtitle,
     required this.onTap,
@@ -16,10 +16,8 @@ class ForgotPasswordContactCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.colors;
-
     return CustomPaint(
-      painter: DashedRoundedBorderPainter(colors.outline),
+      painter: DashedRoundedBorderPainter(context.colors.outline),
       child: ListTile(
         onTap: onTap,
         visualDensity: VisualDensity.compact,
@@ -29,7 +27,7 @@ class ForgotPasswordContactCard extends StatelessWidget {
         ),
         leading: DecoratedBox(
           decoration: BoxDecoration(
-            color: colors.primaryContainer,
+            color: context.colors.primaryContainer,
             borderRadius: AppRadius.cardBorderRadius,
           ),
           child: Padding(
@@ -37,7 +35,7 @@ class ForgotPasswordContactCard extends StatelessWidget {
             child: Assets.icons.sms.svg(
               width: 24,
               colorFilter: ColorFilter.mode(
-                colors.primary,
+                context.colors.primary,
                 BlendMode.srcIn,
               ),
             ),
@@ -55,7 +53,7 @@ class ForgotPasswordContactCard extends StatelessWidget {
         ),
         trailing: Icon(
           Icons.chevron_right_rounded,
-          color: colors.onSurfaceVariant,
+          color: context.colors.onSurfaceVariant,
         ),
       ),
     );
