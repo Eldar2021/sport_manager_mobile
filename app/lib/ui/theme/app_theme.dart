@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/ui/theme/colors/app_colors.dart';
-import 'package:sport_manager_mobile/ui/theme/colors/app_colors_extension.dart';
-import 'package:sport_manager_mobile/ui/theme/colors/color_schemes.dart';
-import 'package:sport_manager_mobile/ui/theme/components/components.dart';
-import 'package:sport_manager_mobile/ui/theme/typography/app_text_theme.dart';
-import 'package:sport_manager_mobile/ui/theme/typography/app_text_theme_extension.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 abstract final class AppTheme {
   static ThemeData get light => _build(

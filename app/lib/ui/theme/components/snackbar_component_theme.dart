@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/ui/theme/tokens/app_radius.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 abstract final class SnackbarComponentTheme {
   static SnackBarThemeData build(ColorScheme colors, TextTheme textTheme) {

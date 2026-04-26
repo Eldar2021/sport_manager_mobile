@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/ui/theme/tokens/app_radius.dart';
-import 'package:sport_manager_mobile/ui/theme/tokens/app_spacing.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 abstract final class ChipComponentTheme {
   static ChipThemeData build(ColorScheme colors, TextTheme textTheme) {

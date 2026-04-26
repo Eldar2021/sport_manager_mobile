@@ -11,6 +11,7 @@ abstract final class AppRadius {
   static const inputBorderRadius = BorderRadius.all(Radius.circular(input));
   static const cardBorderRadius = BorderRadius.all(Radius.circular(card));
   static const chipBorderRadius = BorderRadius.all(Radius.circular(chip));
+
   static const modalBorderRadius = BorderRadius.only(
     topLeft: Radius.circular(modal),
     topRight: Radius.circular(modal),

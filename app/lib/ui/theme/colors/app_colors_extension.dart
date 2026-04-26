@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/ui/theme/colors/app_colors.dart';
-import 'package:sport_manager_mobile/ui/theme/tokens/app_shadow.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 /// Material `ColorScheme` dışında kalan, light/dark'a göre değişen renkler ve
 /// gölge token'ları. `Theme.of(context).extension<AppColorsExt>()` ile erişilir

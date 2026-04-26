@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/ui/theme/colors/app_colors_extension.dart';
-import 'package:sport_manager_mobile/ui/theme/typography/app_text_theme_extension.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 extension AppThemeContextExt on BuildContext {
   ThemeData get appTheme => Theme.of(this);

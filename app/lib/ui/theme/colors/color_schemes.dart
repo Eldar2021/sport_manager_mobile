@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/ui/theme/colors/app_colors.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 abstract final class AppColorSchemes {
   static const ColorScheme light = ColorScheme(
