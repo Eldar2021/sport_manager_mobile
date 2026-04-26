@@ -33,10 +33,6 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final textTheme = context.textTheme;
-    final colors = context.colors;
-
     return Scaffold(
       appBar: AppBar(),
       body: Form(
@@ -50,19 +46,19 @@ class _LoginViewState extends State<LoginView> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      l10n.authSignIn,
-                      style: textTheme.headlineLarge?.copyWith(
+                      context.l10n.authSignIn,
+                      style: context.textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.x1),
                     Text(
-                      l10n.authSignInSubtitle,
+                      context.l10n.authSignInSubtitle,
                       style: context.appTextStyles.muted.bodyMedium,
                     ),
                     const SizedBox(height: AppSpacing.x6),
                     AuthTextField(
-                      label: l10n.authUsernameOrEmail,
+                      label: context.l10n.authUsernameOrEmail,
                       controller: _usernameCtr,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
@@ -71,7 +67,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     const SizedBox(height: AppSpacing.x4),
                     AuthPasswordField(
-                      label: l10n.authPassword,
+                      label: context.l10n.authPassword,
                       controller: _passwordCtr,
                       textInputAction: TextInputAction.done,
                       validator: (v) => InputValidators.passwordValidator(v, context),
@@ -81,8 +77,10 @@ class _LoginViewState extends State<LoginView> {
                       alignment: Alignment.centerLeft,
                       child: TextButton(
                         child: Text(
-                          l10n.authForgotPassword,
-                          style: textTheme.bodyMedium?.copyWith(color: colors.primary),
+                          context.l10n.authForgotPassword,
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: context.colors.primary,
+                          ),
                         ),
                         onPressed: () => context.push(AppRoutes.forgotPassword),
                       ),
@@ -106,7 +104,7 @@ class _LoginViewState extends State<LoginView> {
                     },
                     builder: (context, state) {
                       return AppSubmitButton(
-                        label: l10n.authSignIn,
+                        label: context.l10n.authSignIn,
                         isLoading: state.isLoading,
                         onPressed: _login,
                       );
@@ -117,14 +115,16 @@ class _LoginViewState extends State<LoginView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        l10n.authNoAccount,
+                        context.l10n.authNoAccount,
                         style: context.appTextStyles.muted.bodyMedium,
                       ),
                       const SizedBox(width: AppSpacing.x1),
                       TextButton(
                         child: Text(
-                          l10n.authSignUp,
-                          style: textTheme.bodyMedium?.copyWith(color: colors.primary),
+                          context.l10n.authSignUp,
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: context.colors.primary,
+                          ),
                         ),
                         onPressed: () => context.push(AppRoutes.role),
                       ),

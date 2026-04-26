@@ -30,11 +30,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(l10n.authForgotPasswordTitle),
+        title: Text(context.l10n.authForgotPasswordTitle),
       ),
       body: Form(
         key: _formKey,
@@ -47,20 +46,20 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    InfoBanner(l10n.authForgotPasswordBanner),
+                    InfoBanner(context.l10n.authForgotPasswordBanner),
                     const SizedBox(height: AppSpacing.x6),
                     AuthTextField(
-                      label: l10n.authEmailLabel,
+                      label: context.l10n.authEmailLabel,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.done,
-                      hintText: l10n.authForgotPasswordLoginEmailPlaceholder,
+                      hintText: context.l10n.authForgotPasswordLoginEmailPlaceholder,
                       onSubmitted: _submit,
                       validator: (value) => InputValidators.emailValidator(value, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),
                     ForgotPasswordContactCard(
-                      title: l10n.authForgotPasswordNoLink,
-                      subtitle: l10n.authForgotPasswordContactUs,
+                      title: context.l10n.authForgotPasswordNoLink,
+                      subtitle: context.l10n.authForgotPasswordContactUs,
                       onTap: () => ContactSupportSheet.show(context),
                     ),
                   ],
@@ -74,7 +73,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 listener: _forgotPasswordListener,
                 builder: (context, state) {
                   return AppSubmitButton(
-                    label: l10n.authForgotPasswordSendLink,
+                    label: context.l10n.authForgotPasswordSendLink,
                     isLoading: state.isLoading,
                     onPressed: _submit,
                   );

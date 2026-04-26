@@ -47,9 +47,6 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final colors = context.colors;
-
     return Scaffold(
       appBar: AppBar(),
       body: Form(
@@ -64,7 +61,7 @@ class _RegisterViewState extends State<RegisterView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      l10n.authRegisterOwnerTitle,
+                      context.l10n.authRegisterOwnerTitle,
                       style: context.textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
@@ -72,24 +69,24 @@ class _RegisterViewState extends State<RegisterView> {
                     const SizedBox(height: AppSpacing.x3),
                     if (_isOwner)
                       RoleBadge(
-                        label: l10n.authOwnerBadge,
-                        color: colors.primary,
-                        bg: colors.primary.withValues(alpha: AppOpacity.tint),
+                        label: context.l10n.authOwnerBadge,
+                        color: context.colors.primary,
+                        bg: context.colors.primary.withValues(alpha: AppOpacity.tint),
                         icon: Icons.business_center_rounded,
                       )
                     else
                       RoleBadge(
-                        label: l10n.authManagerBadge,
+                        label: context.l10n.authManagerBadge,
                         color: context.appColors.success,
                         bg: context.appColors.success.withValues(alpha: AppOpacity.tint),
                         icon: Icons.badge_outlined,
                       ),
                     const SizedBox(height: AppSpacing.x6),
                     if (_isOwner) ...[
-                      HintBanner(l10n.authInviteCodeHint),
+                      HintBanner(context.l10n.authInviteCodeHint),
                       const SizedBox(height: AppSpacing.x4),
                       AuthTextField(
-                        label: l10n.authInviteCodeLabel,
+                        label: context.l10n.authInviteCodeLabel,
                         controller: _inviteCodeCtr,
                         hintText: 'TF-XXXXX',
                         textInputAction: TextInputAction.next,
@@ -99,14 +96,14 @@ class _RegisterViewState extends State<RegisterView> {
                       const SizedBox(height: AppSpacing.x4),
                     ],
                     AuthTextField(
-                      label: l10n.authNameLabel,
+                      label: context.l10n.authNameLabel,
                       controller: _nameCtr,
                       textInputAction: TextInputAction.next,
                       validator: (v) => InputValidators.emptyValidator(v, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),
                     AuthTextField(
-                      label: l10n.authPhoneLabel,
+                      label: context.l10n.authPhoneLabel,
                       controller: _phoneCtr,
                       keyboardType: TextInputType.phone,
                       textInputAction: TextInputAction.next,
@@ -121,7 +118,7 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     const SizedBox(height: AppSpacing.x4),
                     AuthTextField(
-                      label: l10n.authEmailLabel,
+                      label: context.l10n.authEmailLabel,
                       controller: _emailCtr,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
@@ -129,22 +126,22 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     const SizedBox(height: AppSpacing.x4),
                     AuthPasswordField(
-                      label: l10n.authPassword,
+                      label: context.l10n.authPassword,
                       controller: _passwordCtr,
                       textInputAction: TextInputAction.next,
                       validator: (v) => InputValidators.passwordValidator(v, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),
                     AuthPasswordField(
-                      label: l10n.authConfirmPasswordLabel,
+                      label: context.l10n.authConfirmPasswordLabel,
                       controller: _confirmCtr,
                       textInputAction: TextInputAction.next,
                       validator: (v) => InputValidators.passwordConfirmValidator(v, _passwordCtr.text, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),
                     AppCheckboxField(
-                      label: l10n.authAgreeTerms,
-                      validator: (v) => (v ?? false) ? null : l10n.authAgreeTermsError,
+                      label: context.l10n.authAgreeTerms,
+                      validator: (v) => (v ?? false) ? null : context.l10n.authAgreeTermsError,
                     ),
                     const SizedBox(height: AppSpacing.x6),
                   ],
@@ -164,7 +161,7 @@ class _RegisterViewState extends State<RegisterView> {
                 },
                 builder: (context, state) {
                   return AppSubmitButton(
-                    label: l10n.authCreateAccount,
+                    label: context.l10n.authCreateAccount,
                     isLoading: state.isLoading,
                     onPressed: _registerOwner,
                   );

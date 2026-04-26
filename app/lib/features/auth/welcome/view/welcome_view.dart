@@ -10,9 +10,6 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final textTheme = context.textTheme;
-
     return Scaffold(
       backgroundColor: context.colors.surface,
       body: SafeArea(
@@ -31,12 +28,12 @@ class WelcomeView extends StatelessWidget {
                     const SizedBox(height: AppSpacing.x6),
                     Text(
                       'TableFlow',
-                      style: textTheme.displaySmall,
+                      style: context.textTheme.displaySmall,
                     ),
                     const SizedBox(height: AppSpacing.x2),
                     Text(
-                      l10n.authTagline,
-                      style: textTheme.bodyMedium,
+                      context.l10n.authTagline,
+                      style: context.textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: AppSpacing.x8),
@@ -48,12 +45,12 @@ class WelcomeView extends StatelessWidget {
                 children: [
                   FilledButton(
                     onPressed: () => context.push(AppRoutes.login),
-                    child: Text(l10n.authSignIn),
+                    child: Text(context.l10n.authSignIn),
                   ),
                   const SizedBox(height: AppSpacing.x3),
                   OutlinedButton(
                     onPressed: () => context.push(AppRoutes.role),
-                    child: Text(l10n.authSignUp),
+                    child: Text(context.l10n.authSignUp),
                   ),
                   const SizedBox(height: AppSpacing.x4),
                   const LanguageSwitcher(),

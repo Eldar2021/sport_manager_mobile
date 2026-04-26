@@ -66,7 +66,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       ),
       GoRoute(
         path: AppRoutes.role,
-        builder: (context, state) => const RoleSelectScreen(),
+        builder: (context, state) => const RoleSelectView(),
       ),
       GoRoute(
         path: AppRoutes.register,
