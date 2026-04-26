@@ -4,6 +4,7 @@ import 'package:sport_manager_mobile/generated/assets.gen.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
+// TODO(eldiiar): Fix hardcoded colors and numbers
 class ContactSupportSheet extends StatelessWidget {
   const ContactSupportSheet({super.key});
 
@@ -75,8 +76,8 @@ class ContactSupportSheet extends StatelessWidget {
           _ContactItem(
             icon: Assets.icons.email.svg(
               width: 24,
-              colorFilter: const ColorFilter.mode(
-                Color(0xFFd97706),
+              colorFilter: ColorFilter.mode(
+                colorScheme.primary,
                 BlendMode.srcIn,
               ),
             ),
@@ -125,44 +126,31 @@ class _ContactItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-
-    return InkWell(
+    return ListTile(
       onTap: onTap,
-      borderRadius: AppRadius.cardBorderRadius,
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.x2),
-        child: Row(
-          children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: iconBgColor,
-                borderRadius: AppRadius.cardBorderRadius,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.x3),
-                child: icon,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    subtitle,
-                    style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: AppSpacing.x2),
-            Icon(Icons.chevron_right_rounded, color: colorScheme.onSurfaceVariant),
-          ],
+      leading: DecoratedBox(
+        decoration: BoxDecoration(
+          color: iconBgColor,
+          borderRadius: AppRadius.cardBorderRadius,
         ),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.x3),
+          child: icon,
+        ),
+      ),
+      title: Text(
+        title,
+        style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: textTheme.bodySmall?.copyWith(
+          color: colorScheme.onSurfaceVariant,
+        ),
+      ),
+      trailing: Icon(
+        Icons.chevron_right_rounded,
+        color: colorScheme.onSurfaceVariant,
       ),
     );
   }
