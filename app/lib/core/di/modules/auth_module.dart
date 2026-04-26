@@ -33,7 +33,7 @@ final class AuthModule extends BaseDiModule {
               ),
       )
       ..registerLazySingleton<AuthRepository>(
-        () => AuthRepositoryImpl(
+        () => AuthRepository(
           local: sl<AuthLocalSource>(),
           remote: sl<AuthRemoteSource>(),
         ),

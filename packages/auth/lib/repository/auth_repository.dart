@@ -1,20 +1,59 @@
-import 'package:auth/auth.dart';
+import 'dart:developer';
 
-abstract interface class AuthRepository {
+import 'package:auth/auth.dart';
+import 'package:meta/meta.dart';
+
+@immutable
+final class AuthRepository {
+  const AuthRepository({
+    required AuthRemoteSource remote,
+    required AuthLocalSource local,
+  }) : _remote = remote,
+       _local = local;
+
+  final AuthRemoteSource _remote;
+  final AuthLocalSource _local;
+
   Future<AuthResultModel> login({
     required String username,
     required String password,
-  });
+  }) async {
+    final result = await _remote.login(
+      username: username,
+      password: password,
+    );
+    await Future.wait([
+      _local.saveTokens(result.tokens),
+      _local.saveUser(result.user),
+    ]);
+    return result;
+  }
 
-  Future<AuthResultModel> register(RegisterParam param);
+  Future<AuthResultModel> register(RegisterParam param) async {
+    final result = await _remote.register(param);
+    await Future.wait([
+      _local.saveTokens(result.tokens),
+      _local.saveUser(result.user),
+    ]);
+    return result;
+  }
 
-  Future<void> forgotPassword(String email);
+  Future<void> forgotPassword(String email) {
+    return _remote.forgotPassword(email);
+  }
 
-  Future<AuthTokensModel?> getTokens();
+  Future<AuthTokensModel?> getTokens() => _local.getTokens();
 
-  UserModel? getCachedUser();
+  UserModel? getCachedUser() => _local.getCachedUser();
 
-  Future<void> logout();
+  Future<void> logout() async {
+    await _local.clearAll();
+    try {
+      await _remote.logout();
+    } on Object catch (e) {
+      log('remote logout failed (ignored): $e');
+    }
+  }
 
-  Future<InviteCodeModel> getInviteCode();
+  Future<InviteCodeModel> getInviteCode() => _remote.getInviteCode();
 }
