@@ -6,7 +6,7 @@ import 'package:tables/tables.dart';
 
 part 'create_table_state.dart';
 
-final class CreateTableCubit extends Cubit<CreateTableState> {
+class CreateTableCubit extends Cubit<CreateTableState> {
   CreateTableCubit(
     this._repository,
     this._venueId, {

@@ -32,7 +32,9 @@ class _CreateVenueScreenState extends State<CreateVenueScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final labelStyle = context.textTheme.bodyMedium?.copyWith(color: context.colors.onSurfaceVariant);
+    final labelStyle = context.textTheme.bodyMedium?.copyWith(
+      color: context.colors.onSurfaceVariant,
+    );
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.createVenueTitle)),
@@ -95,7 +97,7 @@ class _CreateVenueScreenState extends State<CreateVenueScreen> {
                       height: 22,
                       child: CircularProgressIndicator(
                         strokeWidth: 2.5,
-                        color: Theme.of(context).colorScheme.surfaceContainer,
+                        color: context.colors.surfaceContainer,
                       ),
                     )
                   : Text(l10n.createVenueButton),

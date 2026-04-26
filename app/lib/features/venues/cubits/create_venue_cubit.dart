@@ -6,13 +6,18 @@ import 'package:venues/venues.dart';
 
 part 'create_venue_state.dart';
 
-final class CreateVenueCubit extends Cubit<CreateVenueState> {
+class CreateVenueCubit extends Cubit<CreateVenueState> {
   CreateVenueCubit(this._repository) : super(const CreateVenueState());
 
   final VenueRepository _repository;
 
-  void updateName(String value) => emit(state.copyWith(name: value));
-  void updateNumber(String value) => emit(state.copyWith(number: value));
+  void updateName(String value) {
+    emit(state.copyWith(name: value));
+  }
+
+  void updateNumber(String value) {
+    emit(state.copyWith(number: value));
+  }
 
   Future<void> createVenue() async {
     if (!state.isValid) return;
