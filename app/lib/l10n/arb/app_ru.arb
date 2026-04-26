@@ -55,5 +55,42 @@
   "authContactCallLabel": "Позвонить",
   "navHome": "Главная",
   "navReport": "Отчёты",
-  "navProfile": "Профиль"
+  "navProfile": "Профиль",
+
+  "homeCreateVenue": "Создать зал",
+  "homeNoVenuesTitle": "У вас пока нет залов",
+  "homeNoVenuesSubtitle": "Создайте первый зал, чтобы начать добавлять столы и принимать сессии.",
+  "homeSelectVenue": "Выберите зал",
+  "homeNewVenue": "Новый зал",
+  "homeAddTable": "Добавить стол",
+  "homeTablesEmpty": "Столов пока нет",
+  "homeTablesEmptySub": "Добавьте первый стол, чтобы менеджеры могли начинать сессии.",
+  "homeTableOccupied": "ЗАНЯТ",
+  "homeTableFree": "СВОБОДЕН",
+  "homeTableJustFreed": "✓ Завершён",
+
+  "createTableTitle": "Новый стол",
+  "createTableNameLabel": "Название стола",
+  "createTableNameHint": "Стол 1",
+  "createTableDescLabel": "Описание (ярлык)",
+  "createTableDescHint": "VIP зал, у окна, снукер...",
+  "createTableDescPlaceholder": "Описание",
+  "createTableRateLabel": "Тариф (сом / час)",
+  "createTableRateSuffix": "сом/ч",
+  "createTableButton": "Создать стол",
+  "editTableTitle": "Редактировать стол",
+  "updateTableButton": "Обновить",
+  "deleteTableButton": "Удалить",
+
+  "createVenueTitle": "Создайте первый зал",
+  "createVenueSubtitle": "Дайте название вашему залу. Столы можно будет добавить позже с главной страницы.",
+  "createVenueNameLabel": "Название зала",
+  "createVenueNameHint": "Центральный филиал",
+  "createVenueNumberLabel": "Короткий код / номер (необязательно)",
+  "createVenueNumberHint": "№ 1 или ЦФ",
+  "createVenueInfoBanner": "После создания зала вы сможете добавлять столы по одному с собственным тарифом.",
+  "createVenueButton": "Создать зал →",
+
+  "cancel": "Отмена",
+  "deleteTableSubtitle": "История сессий сохранится, но стол исчезнет с главной страницы."
 }

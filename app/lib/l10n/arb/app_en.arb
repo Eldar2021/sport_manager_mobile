@@ -55,5 +55,42 @@
   "authContactCallLabel": "Call",
   "navHome": "Home",
   "navReport": "Reports",
-  "navProfile": "Profile"
+  "navProfile": "Profile",
+
+  "homeCreateVenue": "Create venue",
+  "homeNoVenuesTitle": "You have no venues yet",
+  "homeNoVenuesSubtitle": "Create your first venue to start adding tables and accepting sessions.",
+  "homeSelectVenue": "Select venue",
+  "homeNewVenue": "New venue",
+  "homeAddTable": "Add table",
+  "homeTablesEmpty": "No tables yet",
+  "homeTablesEmptySub": "Add the first table so managers can start sessions.",
+  "homeTableOccupied": "OCCUPIED",
+  "homeTableFree": "FREE",
+  "homeTableJustFreed": "✓ Done",
+
+  "createTableTitle": "New table",
+  "createTableNameLabel": "Table name",
+  "createTableNameHint": "Table 1",
+  "createTableDescLabel": "Description (tag)",
+  "createTableDescHint": "VIP room, window seat, snooker...",
+  "createTableDescPlaceholder": "Description",
+  "createTableRateLabel": "Rate (som / hour)",
+  "createTableRateSuffix": "som/h",
+  "createTableButton": "Create table",
+  "editTableTitle": "Edit table",
+  "updateTableButton": "Update table",
+  "deleteTableButton": "Delete",
+
+  "createVenueTitle": "Create your first venue",
+  "createVenueSubtitle": "Give your venue a name. Tables can be added later from the home page.",
+  "createVenueNameLabel": "Venue name",
+  "createVenueNameHint": "Central branch",
+  "createVenueNumberLabel": "Short code / number (optional)",
+  "createVenueNumberHint": "No. 1 or CF",
+  "createVenueInfoBanner": "After creating the venue you will be able to add tables one by one with their own rate.",
+  "createVenueButton": "Create venue →",
+
+  "cancel": "Cancel",
+  "deleteTableSubtitle": "Session history will be preserved, but the table will disappear from the home page."
 }

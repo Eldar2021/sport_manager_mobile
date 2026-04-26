@@ -62,7 +62,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      _InfoBanner(text: l10n.authForgotPasswordBanner),
+                      AppInfoBanner(text: l10n.authForgotPasswordBanner),
                       const SizedBox(height: AppSpacing.x6),
                       AuthTextField(
                         label: l10n.authEmailLabel,
@@ -94,41 +94,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _InfoBanner extends StatelessWidget {
-  const _InfoBanner({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: AppColors.brandAmberLight,
-        borderRadius: AppRadius.cardBorderRadius,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.x4),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Icon(Icons.lock_outline_rounded, color: AppColors.brandAmber),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: Text(
-                text,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.brandAmberDark,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ],
         ),
       ),
     );

@@ -166,4 +166,103 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get navProfile => 'Профиль';
+
+  @override
+  String get homeCreateVenue => 'Создать зал';
+
+  @override
+  String get homeNoVenuesTitle => 'У вас пока нет залов';
+
+  @override
+  String get homeNoVenuesSubtitle => 'Создайте первый зал, чтобы начать добавлять столы и принимать сессии.';
+
+  @override
+  String get homeSelectVenue => 'Выберите зал';
+
+  @override
+  String get homeNewVenue => 'Новый зал';
+
+  @override
+  String get homeAddTable => 'Добавить стол';
+
+  @override
+  String get homeTablesEmpty => 'Столов пока нет';
+
+  @override
+  String get homeTablesEmptySub => 'Добавьте первый стол, чтобы менеджеры могли начинать сессии.';
+
+  @override
+  String get homeTableOccupied => 'ЗАНЯТ';
+
+  @override
+  String get homeTableFree => 'СВОБОДЕН';
+
+  @override
+  String get homeTableJustFreed => '✓ Завершён';
+
+  @override
+  String get createTableTitle => 'Новый стол';
+
+  @override
+  String get createTableNameLabel => 'Название стола';
+
+  @override
+  String get createTableNameHint => 'Стол 1';
+
+  @override
+  String get createTableDescLabel => 'Описание (ярлык)';
+
+  @override
+  String get createTableDescHint => 'VIP зал, у окна, снукер...';
+
+  @override
+  String get createTableDescPlaceholder => 'Описание';
+
+  @override
+  String get createTableRateLabel => 'Тариф (сом / час)';
+
+  @override
+  String get createTableRateSuffix => 'сом/ч';
+
+  @override
+  String get createTableButton => 'Создать стол';
+
+  @override
+  String get editTableTitle => 'Редактировать стол';
+
+  @override
+  String get updateTableButton => 'Обновить';
+
+  @override
+  String get deleteTableButton => 'Удалить';
+
+  @override
+  String get createVenueTitle => 'Создайте первый зал';
+
+  @override
+  String get createVenueSubtitle => 'Дайте название вашему залу. Столы можно будет добавить позже с главной страницы.';
+
+  @override
+  String get createVenueNameLabel => 'Название зала';
+
+  @override
+  String get createVenueNameHint => 'Центральный филиал';
+
+  @override
+  String get createVenueNumberLabel => 'Короткий код / номер (необязательно)';
+
+  @override
+  String get createVenueNumberHint => '№ 1 или ЦФ';
+
+  @override
+  String get createVenueInfoBanner => 'После создания зала вы сможете добавлять столы по одному с собственным тарифом.';
+
+  @override
+  String get createVenueButton => 'Создать зал →';
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get deleteTableSubtitle => 'История сессий сохранится, но стол исчезнет с главной страницы.';
 }

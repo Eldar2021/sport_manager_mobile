@@ -15,6 +15,7 @@ final class TableModel extends Equatable {
     required this.hourlyRate,
     required this.status,
     this.name,
+    this.description,
   });
 
   factory TableModel.fromJson(Map<String, dynamic> json) => _$TableModelFromJson(json);
@@ -25,11 +26,20 @@ final class TableModel extends Equatable {
   final String? name;
   final int hourlyRate;
   final TableStatus status;
+  final String? description;
 
   bool get isAvailable => status == TableStatus.available;
 
   Map<String, dynamic> toJson() => _$TableModelToJson(this);
 
   @override
-  List<Object?> get props => [id, venueId, number, name, hourlyRate, status];
+  List<Object?> get props => [
+    id,
+    venueId,
+    number,
+    name,
+    hourlyRate,
+    status,
+    description,
+  ];
 }

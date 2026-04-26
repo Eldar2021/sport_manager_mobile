@@ -9,6 +9,9 @@ import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
+import 'package:sport_manager_mobile/features/tables/tables.dart';
+import 'package:sport_manager_mobile/features/venues/venues.dart';
+import 'package:tables/tables.dart';
 
 final class _GoRouterAuthListenable extends ChangeNotifier {
   _GoRouterAuthListenable(Stream<AuthState> stream) {
@@ -93,6 +96,26 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       GoRoute(
         path: AppRoutes.registerManager,
         builder: (context, state) => const RegisterManagerScreen(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.createVenue,
+        builder: (context, _) => const CreateVenueScreen(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.createTable,
+        builder: (_, state) => CreateTableScreen(
+          venueId: state.extra as String? ?? '',
+        ),
+      ),
+
+      GoRoute(
+        path: AppRoutes.editTable,
+        builder: (_, state) {
+          final extra = state.extra! as (String, TableModel);
+          return CreateTableScreen(venueId: extra.$1, initialTable: extra.$2);
+        },
       ),
 
       StatefulShellRoute.indexedStack(

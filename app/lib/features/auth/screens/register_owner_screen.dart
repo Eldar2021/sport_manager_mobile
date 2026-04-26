@@ -65,8 +65,6 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Scaffold(
       appBar: AppBar(leading: const BackBtn()),
       body: SafeArea(
@@ -79,7 +77,7 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
                 title: l10n.authRegisterOwnerTitle,
                 badge: l10n.authOwnerBadge,
                 icon: Icons.business_center_rounded,
-                colorBadge: colorScheme.primary,
+                variant: AppBadgeVariant.info,
               ),
               Expanded(
                 child: SingleChildScrollView(

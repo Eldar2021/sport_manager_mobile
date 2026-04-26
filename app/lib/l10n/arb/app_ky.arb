@@ -55,5 +55,42 @@
   "authContactCallLabel": "Чалуу",
   "navHome": "Башкы",
   "navReport": "Отчеттор",
-  "navProfile": "Профиль"
+  "navProfile": "Профиль",
+
+  "homeCreateVenue": "Зал түзүү",
+  "homeNoVenuesTitle": "Азырынча залдарыңыз жок",
+  "homeNoVenuesSubtitle": "Столдорду кошуп, сессияларды кабыл алуу үчүн биринчи залыңызды түзүңүз.",
+  "homeSelectVenue": "Зал тандоо",
+  "homeNewVenue": "Жаңы зал",
+  "homeAddTable": "Стол кошуу",
+  "homeTablesEmpty": "Азырынча столдор жок",
+  "homeTablesEmptySub": "Менеджерлер сессия баштай алышы үчүн биринчи столду кошуңуз.",
+  "homeTableOccupied": "ИШЕНИМДЕ",
+  "homeTableFree": "БОШ",
+  "homeTableJustFreed": "✓ Аяктады",
+
+  "createTableTitle": "Жаңы стол",
+  "createTableNameLabel": "Стол аты",
+  "createTableNameHint": "Стол 1",
+  "createTableDescLabel": "Сыпаттама (белги)",
+  "createTableDescHint": "VIP зал, терезенин жанында, снукер...",
+  "createTableDescPlaceholder": "Сыпаттама",
+  "createTableRateLabel": "Тариф (сом / саат)",
+  "createTableRateSuffix": "сом/саат",
+  "createTableButton": "Стол түзүү",
+  "editTableTitle": "Столду өзгөртүү",
+  "updateTableButton": "Жаңыртуу",
+  "deleteTableButton": "Жок кылуу",
+
+  "createVenueTitle": "Биринчи залды түзүңүз",
+  "createVenueSubtitle": "Залыңызга ат бериңиз. Столдорду кийинчерек башкы баракчадан кошсо болот.",
+  "createVenueNameLabel": "Зал аты",
+  "createVenueNameHint": "Борбордук филиал",
+  "createVenueNumberLabel": "Кыска код / номер (милдеттүү эмес)",
+  "createVenueNumberHint": "№ 1 же БФ",
+  "createVenueInfoBanner": "Зал түзүлгөндөн кийин столдорду бирден өз тарифи менен кошо аласыз.",
+  "createVenueButton": "Зал түзүү →",
+
+  "cancel": "Жокко чыгаруу",
+  "deleteTableSubtitle": "Сессиялардын тарыхы сакталат, бирок стол башкы баракчадан жоголот."
 }

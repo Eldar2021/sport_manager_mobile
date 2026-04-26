@@ -166,4 +166,103 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get navProfile => 'Профиль';
+
+  @override
+  String get homeCreateVenue => 'Зал түзүү';
+
+  @override
+  String get homeNoVenuesTitle => 'Азырынча залдарыңыз жок';
+
+  @override
+  String get homeNoVenuesSubtitle => 'Столдорду кошуп, сессияларды кабыл алуу үчүн биринчи залыңызды түзүңүз.';
+
+  @override
+  String get homeSelectVenue => 'Зал тандоо';
+
+  @override
+  String get homeNewVenue => 'Жаңы зал';
+
+  @override
+  String get homeAddTable => 'Стол кошуу';
+
+  @override
+  String get homeTablesEmpty => 'Азырынча столдор жок';
+
+  @override
+  String get homeTablesEmptySub => 'Менеджерлер сессия баштай алышы үчүн биринчи столду кошуңуз.';
+
+  @override
+  String get homeTableOccupied => 'ИШЕНИМДЕ';
+
+  @override
+  String get homeTableFree => 'БОШ';
+
+  @override
+  String get homeTableJustFreed => '✓ Аяктады';
+
+  @override
+  String get createTableTitle => 'Жаңы стол';
+
+  @override
+  String get createTableNameLabel => 'Стол аты';
+
+  @override
+  String get createTableNameHint => 'Стол 1';
+
+  @override
+  String get createTableDescLabel => 'Сыпаттама (белги)';
+
+  @override
+  String get createTableDescHint => 'VIP зал, терезенин жанында, снукер...';
+
+  @override
+  String get createTableDescPlaceholder => 'Сыпаттама';
+
+  @override
+  String get createTableRateLabel => 'Тариф (сом / саат)';
+
+  @override
+  String get createTableRateSuffix => 'сом/саат';
+
+  @override
+  String get createTableButton => 'Стол түзүү';
+
+  @override
+  String get editTableTitle => 'Столду өзгөртүү';
+
+  @override
+  String get updateTableButton => 'Жаңыртуу';
+
+  @override
+  String get deleteTableButton => 'Жок кылуу';
+
+  @override
+  String get createVenueTitle => 'Биринчи залды түзүңүз';
+
+  @override
+  String get createVenueSubtitle => 'Залыңызга ат бериңиз. Столдорду кийинчерек башкы баракчадан кошсо болот.';
+
+  @override
+  String get createVenueNameLabel => 'Зал аты';
+
+  @override
+  String get createVenueNameHint => 'Борбордук филиал';
+
+  @override
+  String get createVenueNumberLabel => 'Кыска код / номер (милдеттүү эмес)';
+
+  @override
+  String get createVenueNumberHint => '№ 1 же БФ';
+
+  @override
+  String get createVenueInfoBanner => 'Зал түзүлгөндөн кийин столдорду бирден өз тарифи менен кошо аласыз.';
+
+  @override
+  String get createVenueButton => 'Зал түзүү →';
+
+  @override
+  String get cancel => 'Жокко чыгаруу';
+
+  @override
+  String get deleteTableSubtitle => 'Сессиялардын тарыхы сакталат, бирок стол башкы баракчадан жоголот.';
 }

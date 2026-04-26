@@ -6,18 +6,17 @@ class RegisterTitleWidget extends StatelessWidget {
     required this.title,
     required this.badge,
     required this.icon,
-    required this.colorBadge,
+    required this.variant,
     super.key,
   });
 
   final String title;
   final String badge;
   final IconData icon;
-  final Color colorBadge;
+  final AppBadgeVariant variant;
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6, vertical: AppSpacing.x4),
       child: Column(
@@ -25,51 +24,10 @@ class RegisterTitleWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w800),
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: AppSpacing.x3),
-          _RoleBadge(
-            label: badge,
-            color: colorBadge,
-            bg: colorBadge.withValues(alpha: 0.12),
-            icon: icon,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _RoleBadge extends StatelessWidget {
-  const _RoleBadge({
-    required this.label,
-    required this.color,
-    required this.bg,
-    required this.icon,
-  });
-
-  final String label;
-  final Color color;
-  final Color bg;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x3, vertical: AppSpacing.x1),
-      decoration: BoxDecoration(color: bg, borderRadius: AppRadius.chipBorderRadius),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: color, size: 14),
-          const SizedBox(width: AppSpacing.x1),
-          Text(
-            label.toUpperCase(),
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          AppBadge(label: badge, icon: icon, variant: variant),
         ],
       ),
     );
