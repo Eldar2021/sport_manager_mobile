@@ -22,7 +22,7 @@ class TablePreviewCard extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: context.colors.surface,
         borderRadius: AppRadius.cardBorderRadius,
       ),
       child: Padding(
@@ -31,12 +31,12 @@ class TablePreviewCard extends StatelessWidget {
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: AppColors.brandAmberLight,
+                color: context.colors.primaryContainer,
                 borderRadius: BorderRadius.circular(AppSpacing.x3),
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(AppSpacing.x3),
-                child: Icon(Icons.adjust_rounded, color: AppColors.brandAmber, size: 28),
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.x3),
+                child: Icon(Icons.adjust_rounded, color: context.colors.primary, size: 28),
               ),
             ),
             const SizedBox(width: AppSpacing.x3),
@@ -47,7 +47,7 @@ class TablePreviewCard extends StatelessWidget {
                   Text(
                     hasName ? name : l10n.createTableNameLabel,
                     style: context.textTheme.bodyLarge?.copyWith(
-                      color: hasName ? AppColors.ink900 : AppColors.ink300,
+                      color: hasName ? context.colors.onSurface : context.colors.outline,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -56,7 +56,7 @@ class TablePreviewCard extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       hasDesc ? description : l10n.createTableDescPlaceholder,
-                      style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink300),
+                      style: context.textTheme.bodySmall?.copyWith(color: context.colors.outline),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -66,8 +66,8 @@ class TablePreviewCard extends StatelessWidget {
             ),
             const SizedBox(width: AppSpacing.x3),
             DecoratedBox(
-              decoration: const BoxDecoration(
-                color: AppColors.brandAmberLight,
+              decoration: BoxDecoration(
+                color: context.colors.primaryContainer,
                 borderRadius: AppRadius.chipBorderRadius,
               ),
               child: Padding(
@@ -80,11 +80,11 @@ class TablePreviewCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: '$hourlyRate',
-                        style: context.textTheme.bodyLarge?.copyWith(color: AppColors.brandAmber),
+                        style: context.textTheme.bodyLarge?.copyWith(color: context.colors.primary),
                       ),
                       TextSpan(
                         text: ' ${l10n.createTableRateSuffix}',
-                        style: context.textTheme.bodySmall?.copyWith(color: AppColors.brandAmber),
+                        style: context.textTheme.bodySmall?.copyWith(color: context.colors.primary),
                       ),
                     ],
                   ),

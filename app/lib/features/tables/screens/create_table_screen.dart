@@ -56,7 +56,7 @@ class _CreateTableViewState extends State<CreateTableScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final labelStyle = context.textTheme.bodySmall?.copyWith(color: AppColors.ink500);
+    final labelStyle = context.textTheme.bodySmall?.copyWith(color: context.colors.onSurfaceVariant);
     return BlocConsumer<CreateTableCubit, CreateTableState>(
       bloc: _cubit,
       listenWhen: _listenWhen,
@@ -149,7 +149,7 @@ class _CreateTableViewState extends State<CreateTableScreen> {
                       height: 22,
                       child: CircularProgressIndicator(
                         strokeWidth: 2.5,
-                        color: Theme.of(context).colorScheme.surfaceContainer,
+                        color: context.colors.surfaceContainer,
                       ),
                     )
                   : Text(isEdit ? l10n.updateTableButton : l10n.createTableButton),
