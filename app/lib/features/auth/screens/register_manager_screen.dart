@@ -25,10 +25,7 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
   @override
   void initState() {
     super.initState();
-    _registerManagerCubit = RegisterManagerCubit(
-      GetIt.I<AuthRepository>(),
-      context.read<AuthCubit>(),
-    );
+    _registerManagerCubit = RegisterManagerCubit(GetIt.I<AuthRepository>());
   }
 
   @override
@@ -141,12 +138,13 @@ class _RegisterManagerViewState extends State<RegisterManagerScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
-                child: BlocConsumer<RegisterManagerCubit, DataState<void>>(
+                child: BlocConsumer<RegisterManagerCubit, DataState<AuthResultModel>>(
                   bloc: _registerManagerCubit,
                   listener: (context, state) {
-                    if (state.isFailure) {
-                      final exception = (state as DataFailure<void>).exception;
-                      context.handleError(exception);
+                    if (state is DataSuccess<AuthResultModel>) {
+                      context.read<AuthCubit>().setAuthenticated(state.data.user);
+                    } else if (state is DataFailure<AuthResultModel>) {
+                      context.handleError(state.exception);
                     }
                   },
                   builder: (context, state) {
