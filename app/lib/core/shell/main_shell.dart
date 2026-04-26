@@ -19,112 +19,49 @@ final class MainShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final currentIndex = navigationShell.currentIndex;
-    final surfaceColor = Theme.of(context).colorScheme.surface;
+    final primary = context.colors.primary;
+    final muted = context.colors.onSurfaceVariant;
 
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: DecoratedBox(
-        decoration: BoxDecoration(
-          color: surfaceColor,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(AppRadius.modal),
-            topRight: Radius.circular(AppRadius.modal),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: navigationShell.currentIndex,
+        onDestinationSelected: _onTabTap,
+        destinations: [
+          NavigationDestination(
+            icon: Assets.icons.home.svg(
+              width: 24,
+              colorFilter: ColorFilter.mode(muted, BlendMode.srcIn),
+            ),
+            selectedIcon: Assets.icons.home.svg(
+              width: 24,
+              colorFilter: ColorFilter.mode(primary, BlendMode.srcIn),
+            ),
+            label: l10n.navHome,
           ),
-        ),
-        child: SafeArea(
-          top: false,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppSpacing.x2,
+          NavigationDestination(
+            icon: Assets.icons.analytics.svg(
+              width: 24,
+              colorFilter: ColorFilter.mode(muted, BlendMode.srcIn),
             ),
-            child: Row(
-              children: [
-                _NavItem(
-                  iconBuilder: (color) => Assets.icons.home.svg(
-                    width: 24,
-                    colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                  ),
-                  label: l10n.navHome,
-                  isSelected: currentIndex == 0,
-                  onTap: () => _onTabTap(0),
-                ),
-                _NavItem(
-                  iconBuilder: (color) => Assets.icons.analytics.svg(
-                    width: 24,
-                    colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                  ),
-                  label: l10n.navReport,
-                  isSelected: currentIndex == 1,
-                  onTap: () => _onTabTap(1),
-                ),
-                _NavItem(
-                  iconBuilder: (color) => Assets.icons.profile.svg(
-                    width: 24,
-                    colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                  ),
-                  label: l10n.navProfile,
-                  isSelected: currentIndex == 2,
-                  onTap: () => _onTabTap(2),
-                ),
-              ],
+            selectedIcon: Assets.icons.analytics.svg(
+              width: 24,
+              colorFilter: ColorFilter.mode(primary, BlendMode.srcIn),
             ),
+            label: l10n.navReport,
           ),
-        ),
-      ),
-    );
-  }
-}
-
-final class _NavItem extends StatelessWidget {
-  const _NavItem({
-    required this.iconBuilder,
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  final Widget Function(Color color) iconBuilder;
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final color = isSelected ? AppColors.brandAmber : AppColors.ink500;
-
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        behavior: HitTestBehavior.opaque,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            iconBuilder(color),
-            const SizedBox(height: AppSpacing.x1),
-            Text(
-              label,
-              style: context.textTheme.bodySmall?.copyWith(
-                color: color,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-              ),
+          NavigationDestination(
+            icon: Assets.icons.profile.svg(
+              width: 24,
+              colorFilter: ColorFilter.mode(muted, BlendMode.srcIn),
             ),
-            const SizedBox(height: AppSpacing.x1),
-            AnimatedOpacity(
-              duration: const Duration(milliseconds: 200),
-              opacity: isSelected ? 1.0 : 0.0,
-              child: const SizedBox.square(
-                dimension: 4,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: AppColors.brandAmber,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
+            selectedIcon: Assets.icons.profile.svg(
+              width: 24,
+              colorFilter: ColorFilter.mode(primary, BlendMode.srcIn),
             ),
-          ],
-        ),
+            label: l10n.navProfile,
+          ),
+        ],
       ),
     );
   }
