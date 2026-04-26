@@ -95,6 +95,7 @@ class _LoginViewState extends State<LoginView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   BlocConsumer<LoginCubit, DataState<AuthResultModel>>(
+                    bloc: _loginCubit,
                     listener: (context, state) {
                       if (state is DataSuccess<AuthResultModel>) {
                         context.read<AuthCubit>().setAuthenticated(state.data.user);

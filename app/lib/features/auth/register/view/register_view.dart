@@ -82,7 +82,7 @@ class _RegisterViewState extends State<RegisterView> {
                         icon: Icons.badge_outlined,
                       ),
                     const SizedBox(height: AppSpacing.x6),
-                    if (_isOwner) ...[
+                    if (!_isOwner) ...[
                       HintBanner(context.l10n.authInviteCodeHint),
                       const SizedBox(height: AppSpacing.x4),
                       AuthTextField(
