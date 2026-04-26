@@ -77,8 +77,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: AppSpacing.x3),
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: AuthTextButton(
-                        label: l10n.authForgotPassword,
+                      child: TextButton(
+                        child: Text(
+                          l10n.authForgotPassword,
+                          style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary),
+                        ),
                         onPressed: () => context.push(AppRoutes.forgotPassword),
                       ),
                     ),
@@ -116,8 +119,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(width: AppSpacing.x1),
-                      AuthTextButton(
-                        label: l10n.authSignUp,
+                      TextButton(
+                        child: Text(
+                          l10n.authSignUp,
+                          style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary),
+                        ),
                         onPressed: () => context.push(AppRoutes.role),
                       ),
                     ],

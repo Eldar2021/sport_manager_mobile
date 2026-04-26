@@ -11,7 +11,6 @@ export 'screens/welcome_screen.dart';
 export 'widgets/app_logo.dart';
 export 'widgets/auth_password_field.dart';
 export 'widgets/auth_submit_button.dart';
-export 'widgets/auth_text_button.dart';
 export 'widgets/auth_text_field.dart';
 export 'widgets/contact_support_sheet.dart';
 export 'widgets/forgot_password_contact_card.dart';

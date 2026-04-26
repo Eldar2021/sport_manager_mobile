@@ -145,6 +145,9 @@ abstract final class AppTheme {
       // TextButton
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           foregroundColor: cs.primary,
           disabledForegroundColor: AppColors.ink500,
           shape: const RoundedRectangleBorder(borderRadius: AppRadius.buttonBorderRadius),
@@ -446,6 +449,9 @@ abstract final class AppTheme {
       // TextButton
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           foregroundColor: cs.primary,
           shape: const RoundedRectangleBorder(borderRadius: AppRadius.buttonBorderRadius),
           textStyle: AppTypography.button,
