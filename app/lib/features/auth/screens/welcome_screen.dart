@@ -40,7 +40,6 @@ class WelcomeScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: AppSpacing.x8),
-                    const PoolTableIllustration(),
                   ],
                 ),
               ),

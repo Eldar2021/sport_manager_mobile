@@ -85,7 +85,6 @@ class _CreateTableScreenState extends State<CreateTableScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: const BackBtn(),
               title: Text(isEdit ? l10n.editTableTitle : l10n.createTableTitle),
               actions: [
                 if (isEdit) ...[

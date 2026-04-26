@@ -26,8 +26,7 @@ class AuthInterceptor extends QueuedInterceptor {
         await onLogout();
         return handler.next(err);
       }
-      if (err.requestOptions.path.contains('auth/refresh') ||
-          err.requestOptions.path.contains('auth/register')) {
+      if (err.requestOptions.path.contains('auth/refresh')) {
         return handler.next(err);
       }
       try {

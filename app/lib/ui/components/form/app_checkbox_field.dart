@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/ui/theme/theme.dart';
 
 class AppCheckboxField extends StatelessWidget {
   const AppCheckboxField({
@@ -18,48 +17,32 @@ class AppCheckboxField extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    return FormField<bool>(
+    return FormField(
       initialValue: initialValue,
       autovalidateMode: AutovalidateMode.disabled,
       validator: validator,
       builder: (field) {
-        final checked = field.value ?? false;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            GestureDetector(
-              onTap: () => field.didChange(!checked),
-              behavior: HitTestBehavior.opaque,
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
-                    width: 22,
-                    height: 22,
-                    decoration: BoxDecoration(
-                      color: checked ? colorScheme.primary : Colors.transparent,
-                      borderRadius: const BorderRadius.all(Radius.circular(6)),
-                      border: Border.all(
-                        color: checked ? colorScheme.primary : colorScheme.outline,
-                        width: 1.5,
-                      ),
-                    ),
-                    child: checked ? Icon(Icons.check_rounded, color: colorScheme.surfaceContainer, size: 16) : null,
-                  ),
-                  const SizedBox(width: AppSpacing.x3),
-                  Text(label, style: textTheme.bodyMedium),
-                ],
-              ),
-            ),
-            if (field.hasError) ...[
-              const SizedBox(height: 4),
-              Text(
-                field.errorText!,
-                style: textTheme.bodySmall?.copyWith(color: AppColors.dangerRed),
-              ),
-            ],
-          ],
+        return CheckboxListTile(
+          value: field.value,
+          isThreeLine: field.hasError,
+          activeColor: colorScheme.primary,
+          checkColor: colorScheme.onPrimary,
+          contentPadding: const EdgeInsets.symmetric(vertical: 4),
+          controlAffinity: ListTileControlAffinity.leading,
+          checkboxScaleFactor: 1.3,
+          side: BorderSide(color: colorScheme.outline),
+          isError: field.hasError,
+          checkboxShape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+          ),
+          title: Text(label, style: textTheme.bodyMedium),
+          onChanged: (v) => field.didChange(v),
+          subtitle: field.hasError
+              ? Text(
+                  field.errorText!,
+                  style: textTheme.bodySmall?.copyWith(color: colorScheme.error),
+                )
+              : null,
         );
       },
     );

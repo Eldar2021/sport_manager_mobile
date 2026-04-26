@@ -12,7 +12,9 @@ final class InviteCodeModel extends Equatable {
     this.expiresAt,
   });
 
-  factory InviteCodeModel.fromJson(Map<String, dynamic> json) => _$InviteCodeModelFromJson(json);
+  factory InviteCodeModel.fromJson(Map<String, dynamic> json) {
+    return _$InviteCodeModelFromJson(json);
+  }
 
   final String code;
   final DateTime? expiresAt;
@@ -20,5 +22,8 @@ final class InviteCodeModel extends Equatable {
   Map<String, dynamic> toJson() => _$InviteCodeModelToJson(this);
 
   @override
-  List<Object?> get props => [code, expiresAt];
+  List<Object?> get props => [
+    code,
+    expiresAt,
+  ];
 }

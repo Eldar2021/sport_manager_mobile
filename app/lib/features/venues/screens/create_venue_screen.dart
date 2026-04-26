@@ -52,7 +52,6 @@ class _CreateVenueScreenState extends State<CreateVenueScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: const BackBtn(),
               title: Text(l10n.createVenueTitle),
             ),
             body: SingleChildScrollView(

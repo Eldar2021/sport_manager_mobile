@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auth/auth.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +7,7 @@ import 'package:meta/meta.dart';
 
 part 'auth_state.dart';
 
-final class AuthCubit extends Cubit<AuthState> {
+class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._repository) : super(const AuthInitial());
 
   final AuthRepository _repository;
@@ -41,13 +43,17 @@ final class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void setAuthenticated(UserModel user) => emit(AuthAuthenticated(user: user));
+  void setAuthenticated(UserModel user) {
+    emit(AuthAuthenticated(user: user));
+  }
 
   Future<void> logout() async {
     emit(const AuthLoading());
     try {
       await _repository.logout();
-    } finally {
+      emit(const AuthUnauthenticated());
+    } on Object catch (e) {
+      log('logout error', error: e);
       emit(const AuthUnauthenticated());
     }
   }

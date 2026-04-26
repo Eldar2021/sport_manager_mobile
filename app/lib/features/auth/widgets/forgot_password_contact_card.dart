@@ -19,75 +19,54 @@ class ForgotPasswordContactCard extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return _DashedBorderBox(
-      child: InkWell(
+    return CustomPaint(
+      painter: _DashedRoundedBorderPainter(colorScheme.outline),
+      child: ListTile(
         onTap: onTap,
-        borderRadius: AppRadius.cardBorderRadius,
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.x3),
-          child: Row(
-            children: [
-              DecoratedBox(
-                decoration: const BoxDecoration(
-                  color: AppColors.brandAmberLight,
-                  borderRadius: AppRadius.cardBorderRadius,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(AppSpacing.x3),
-                  child: Assets.icons.sms.svg(
-                    width: 24,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFd97706),
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: AppSpacing.x3),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      subtitle,
-                      style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: AppSpacing.x2),
-              Icon(Icons.chevron_right_rounded, color: colorScheme.onSurfaceVariant),
-            ],
+        visualDensity: VisualDensity.compact,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.x2,
+          vertical: AppSpacing.x1,
+        ),
+        leading: DecoratedBox(
+          decoration: BoxDecoration(
+            color: colorScheme.primaryContainer,
+            borderRadius: AppRadius.cardBorderRadius,
           ),
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.x3),
+            child: Assets.icons.sms.svg(
+              width: 24,
+              colorFilter: ColorFilter.mode(
+                colorScheme.primary,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+        ),
+        title: Text(
+          title,
+          style: textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        subtitle: Text(
+          subtitle,
+          style: textTheme.bodySmall?.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
+        ),
+        trailing: Icon(
+          Icons.chevron_right_rounded,
+          color: colorScheme.onSurfaceVariant,
         ),
       ),
     );
   }
 }
 
-class _DashedBorderBox extends StatelessWidget {
-  const _DashedBorderBox({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _DashedRoundedBorderPainter(color: Theme.of(context).colorScheme.outline),
-      child: ClipRRect(
-        borderRadius: AppRadius.cardBorderRadius,
-        child: child,
-      ),
-    );
-  }
-}
-
 class _DashedRoundedBorderPainter extends CustomPainter {
-  const _DashedRoundedBorderPainter({required this.color});
+  const _DashedRoundedBorderPainter(this.color);
 
   final Color color;
 

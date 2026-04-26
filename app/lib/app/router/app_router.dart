@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -12,20 +10,6 @@ import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:tables/tables.dart';
-
-final class _GoRouterAuthListenable extends ChangeNotifier {
-  _GoRouterAuthListenable(Stream<AuthState> stream) {
-    _subscription = stream.listen((_) => notifyListeners());
-  }
-
-  late final StreamSubscription<AuthState> _subscription;
-
-  @override
-  void dispose() {
-    _subscription.cancel();
-    super.dispose();
-  }
-}
 
 const Set<String> _authRoutes = {
   AppRoutes.welcome,
@@ -43,7 +27,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
     navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.init,
     debugLogDiagnostics: kDebugMode,
-    refreshListenable: _GoRouterAuthListenable(authCubit.stream),
+    refreshListenable: GoRouterAuthListenable(authCubit.stream),
     redirect: (context, state) {
       final authState = authCubit.state;
       final matchedLocation = state.matchedLocation;

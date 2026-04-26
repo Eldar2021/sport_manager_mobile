@@ -1,34 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class RegisterTitleWidget extends StatelessWidget {
-  const RegisterTitleWidget({
-    required this.title,
-    required this.badge,
+class RoleBadge extends StatelessWidget {
+  const RoleBadge({
+    required this.label,
+    required this.color,
+    required this.bg,
     required this.icon,
-    required this.variant,
     super.key,
   });
 
-  final String title;
-  final String badge;
+  final String label;
+  final Color color;
+  final Color bg;
   final IconData icon;
-  final AppBadgeVariant variant;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6, vertical: AppSpacing.x4),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w800),
-          ),
-          const SizedBox(height: AppSpacing.x3),
-          AppBadge(label: badge, icon: icon, variant: variant),
-        ],
+    return Chip(
+      avatar: Icon(
+        icon,
+        color: color,
+        size: 14,
+      ),
+      label: Text(
+        label.toUpperCase(),
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+          color: color,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      backgroundColor: bg,
+      side: BorderSide.none,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.x3,
+        vertical: AppSpacing.x1,
       ),
     );
   }
