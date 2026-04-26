@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-/// Material `ColorScheme` dışında kalan, light/dark'a göre değişen renkler ve
-/// gölge token'ları. `Theme.of(context).extension<AppColorsExt>()` ile erişilir
-/// (kısa yol: `context.appColors`).
+/// Theme-aware colors and shadow tokens that fall outside Material's
+/// `ColorScheme`. Read via `Theme.of(context).extension<AppColorsExt>()`
+/// (shortcut: `context.appColors`).
 @immutable
 final class AppColorsExt extends ThemeExtension<AppColorsExt> {
   const AppColorsExt({
@@ -23,23 +23,74 @@ final class AppColorsExt extends ThemeExtension<AppColorsExt> {
     required this.shadowLg,
   });
 
+  /// Success / positive state color.
+  /// - light: `#65A30D` (`AppColors.successGreen`)
+  /// - dark:  `#65A30D` (`AppColors.successGreen`)
   final Color success;
+
+  /// Foreground that goes on top of [success].
+  /// - light: `#FFFFFF` (`AppColors.white`)
+  /// - dark:  `#FFFFFF` (`AppColors.white`)
   final Color onSuccess;
+
+  /// Filled background for success badges / chips.
+  /// - light: `#ECFCCB` (`AppColors.successLight`)
+  /// - dark:  `#4D7C0F` (`AppColors.successDark`)
   final Color successContainer;
+
+  /// Foreground for content placed on [successContainer].
+  /// - light: `#4D7C0F` (`AppColors.successDark`)
+  /// - dark:  `#ECFCCB` (`AppColors.successLight`)
   final Color onSuccessContainer;
 
+  /// Warning color.
+  /// - light: `#F59E0B` (`AppColors.warningAmber`)
+  /// - dark:  `#F59E0B` (`AppColors.warningAmber`)
   final Color warning;
+
+  /// Foreground that goes on top of [warning].
+  /// - light: `#1C1917` (`AppColors.ink900`)
+  /// - dark:  `#1C1917` (`AppColors.ink900`)
   final Color onWarning;
+
+  /// Filled background for warning badges / chips.
+  /// - light: `#FEF3C7` (`AppColors.warningLight`)
+  /// - dark:  `#F59E0B` (`AppColors.warningAmber`)
   final Color warningContainer;
 
+  /// Info color.
+  /// - light: `#0891B2` (`AppColors.infoCyan`)
+  /// - dark:  `#0891B2` (`AppColors.infoCyan`)
   final Color info;
+
+  /// Foreground that goes on top of [info].
+  /// - light: `#FFFFFF` (`AppColors.white`)
+  /// - dark:  `#FFFFFF` (`AppColors.white`)
   final Color onInfo;
+
+  /// Filled background for info badges / chips.
+  /// - light: `#CFFAFE` (`AppColors.infoLight`)
+  /// - dark:  `#0891B2` (`AppColors.infoCyan`)
   final Color infoContainer;
 
+  /// Soft brand-amber overlay (translucent). Used by NavigationBar indicator.
+  /// - light: `#20D97706` (12% alpha, `AppColors.brandAmberSoftLight`)
+  /// - dark:  `#33D97706` (20% alpha, `AppColors.brandAmberSoftDark`)
   final Color brandAmberSoft;
 
+  /// Small shadow (sm).
+  /// - light: black @ 4% alpha (`AppShadow.smLight`)
+  /// - dark:  black @ 20% alpha (`AppShadow.smDark`)
   final List<BoxShadow> shadowSm;
+
+  /// Medium shadow (md).
+  /// - light: black @ 8% alpha (`AppShadow.mdLight`)
+  /// - dark:  black @ 28% alpha (`AppShadow.mdDark`)
   final List<BoxShadow> shadowMd;
+
+  /// Large shadow (lg).
+  /// - light: black @ 12% alpha (`AppShadow.lgLight`)
+  /// - dark:  black @ 40% alpha (`AppShadow.lgDark`)
   final List<BoxShadow> shadowLg;
 
   static const AppColorsExt light = AppColorsExt(

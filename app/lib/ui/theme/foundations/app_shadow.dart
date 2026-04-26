@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:sport_manager_mobile/ui/theme/colors/app_colors.dart';
 
-/// Gölge token'ları. Light ve dark için ayrı setler — koyu yüzeylerde gölge
-/// daha yoğun siyah olmalı, yoksa görünmez kalır.
+/// Drop-shadow tokens. Light and dark have separate sets — on dark surfaces
+/// shadows need a denser black to remain visible.
 ///
-/// Doğrudan kullanım: `AppShadow.mdLight` / `AppShadow.mdDark`.
-/// Theme-aware kullanım: `context.appColors.shadowMd` (önerilen).
+/// Direct use: `AppShadow.mdLight` / `AppShadow.mdDark`.
+/// Theme-aware (recommended): `context.appColors.shadowMd`.
 abstract final class AppShadow {
   static const List<BoxShadow> smLight = [
     BoxShadow(

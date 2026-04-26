@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/theme/typography/app_text_theme.dart';
 
-/// Theme'in error / disabled / muted renkleriyle önceden boyanmış tam metin
-/// stili setleri. `context.appTextStyles.error.bodyMedium` gibi kullanılır —
-/// böylece widget'larda `style.copyWith(color: ...)` zincirleri kalmaz.
+/// Pre-baked text style sets for the theme's error / disabled / muted /
+/// onPrimary roles. Use as `context.appTextStyles.error.bodyMedium` so
+/// widgets stop chaining `style.copyWith(color: ...)` everywhere.
 @immutable
 final class AppTextThemeExt extends ThemeExtension<AppTextThemeExt> {
   const AppTextThemeExt({
@@ -27,19 +27,24 @@ final class AppTextThemeExt extends ThemeExtension<AppTextThemeExt> {
     );
   }
 
-  /// Hata renginde tüm stiller (form errorları, validation mesajları vb.).
+  /// Full text-style set painted with `colorScheme.error`.
+  /// Use for form errors, validation messages, destructive copy.
   final AppTextTheme error;
 
-  /// Disabled durumda tüm stiller (onSurface @ %38 opacity).
+  /// Full text-style set painted with `onSurface @ 38%` opacity.
+  /// Use for disabled controls / placeholder content.
   final AppTextTheme disabled;
 
-  /// Yardımcı / ikincil metin (onSurfaceVariant).
+  /// Full text-style set painted with `colorScheme.onSurfaceVariant`.
+  /// Use for helper text, secondary labels, muted captions.
   final AppTextTheme muted;
 
-  /// Primary üzerine yazılan metin (FilledButton, badge vb.).
+  /// Full text-style set painted with `colorScheme.onPrimary`.
+  /// Use when text sits on top of a primary-colored surface (FilledButton,
+  /// badge, banner).
   final AppTextTheme onPrimary;
 
-  /// Link stili (underline + primary color).
+  /// Underlined body style in `colorScheme.primary` — for tappable links.
   final TextStyle link;
 
   @override

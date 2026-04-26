@@ -5,7 +5,7 @@ abstract final class SwitchComponentTheme {
   static SwitchThemeData build(ColorScheme colors) {
     return SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.selected)) return AppColors.white;
+        if (states.contains(WidgetState.selected)) return colors.onPrimary;
         return colors.onSurfaceVariant;
       }),
       trackColor: WidgetStateProperty.resolveWith((states) {

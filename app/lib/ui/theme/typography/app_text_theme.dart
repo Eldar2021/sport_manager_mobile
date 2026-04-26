@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Uygulamanın tüm metin stilleri. Tek bir renge göre üretilir
-/// (`AppTextTheme.from(color)`); aynı yapı `AppTextThemeExt` içinde
-/// error / disabled / muted varyantları için yeniden kullanılır.
+/// Every text style the app ships with, all built from a single color via
+/// `AppTextTheme.from(color)`. The same shape is reused inside `AppTextThemeExt`
+/// to produce error / disabled / muted variants without duplicating the specs.
 @immutable
 final class AppTextTheme {
   const AppTextTheme({
@@ -67,26 +67,55 @@ final class AppTextTheme {
     );
   }
 
+  /// 56 / 64 · w700 · tabular-nums — biggest number / timer display.
   final TextStyle displayLarge;
+
+  /// 56 / 64 · w700 · tabular-nums — alias of [displayLarge].
   final TextStyle displayMedium;
+
+  /// 32 / 40 · w700 · tabular-nums — large amount (money, stat).
   final TextStyle displaySmall;
+
+  /// 28 / 34 · w700 — screen title (H1).
   final TextStyle headlineLarge;
+
+  /// 22 / 28 · w600 — section title (H2).
   final TextStyle headlineMedium;
+
+  /// 18 / 24 · w600 — subsection title (H3).
   final TextStyle headlineSmall;
+
+  /// 22 / 28 · w600 — AppBar title (Material titleLarge slot).
   final TextStyle titleLarge;
+
+  /// 18 / 24 · w600 — list-tile / row title.
   final TextStyle titleMedium;
+
+  /// 16 / 24 · w600 — emphasized label.
   final TextStyle titleSmall;
+
+  /// 16 / 24 · w600 — bold body text.
   final TextStyle bodyLarge;
+
+  /// 16 / 24 · w400 — default body text.
   final TextStyle bodyMedium;
+
+  /// 13 / 18 · w500 — caption / helper text.
   final TextStyle bodySmall;
+
+  /// 17 / 22 · w600 — button label (Filled / Elevated / Outlined / Text).
   final TextStyle labelLarge;
+
+  /// 13 / 18 · w500 — secondary label (chip, badge).
   final TextStyle labelMedium;
+
+  /// 13 / 18 · w500 — small label (overline-style).
   final TextStyle labelSmall;
 
-  /// Para tutarları için tabular-nums 24px varyantı (Material rollerinde yok).
+  /// 24 / 32 · w700 · tabular-nums — inline money amount (no Material slot).
   final TextStyle amountSmall;
 
-  /// Material 3 [TextTheme]'e dönüştürür — `ThemeData(textTheme: ...)` için.
+  /// Convert to Material 3 [TextTheme] — pass to `ThemeData(textTheme: ...)`.
   TextTheme toMaterialTextTheme() {
     return TextTheme(
       displayLarge: displayLarge,
