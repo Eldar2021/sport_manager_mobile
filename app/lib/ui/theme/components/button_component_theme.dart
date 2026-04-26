@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/theme/tokens/app_radius.dart';
-import 'package:sport_manager_mobile/ui/theme/typography/app_text_styles.dart';
 
 abstract final class ButtonComponentTheme {
   static const Size _minSize = Size(double.infinity, 56);
+
   static const RoundedRectangleBorder _shape = RoundedRectangleBorder(
     borderRadius: AppRadius.buttonBorderRadius,
   );
 
-  static FilledButtonThemeData filled(ColorScheme colors) {
+  static FilledButtonThemeData filled(ColorScheme colors, TextTheme textTheme) {
     return FilledButtonThemeData(
       style: FilledButton.styleFrom(
         backgroundColor: colors.primary,
@@ -18,12 +18,12 @@ abstract final class ButtonComponentTheme {
         elevation: 0,
         shape: _shape,
         minimumSize: _minSize,
-        textStyle: AppTextStyles.button,
+        textStyle: textTheme.labelLarge,
       ),
     );
   }
 
-  static ElevatedButtonThemeData elevated(ColorScheme colors) {
+  static ElevatedButtonThemeData elevated(ColorScheme colors, TextTheme textTheme) {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: colors.primary,
@@ -33,12 +33,12 @@ abstract final class ButtonComponentTheme {
         elevation: 0,
         shape: _shape,
         minimumSize: _minSize,
-        textStyle: AppTextStyles.button,
+        textStyle: textTheme.labelLarge,
       ),
     );
   }
 
-  static OutlinedButtonThemeData outlined(ColorScheme colors) {
+  static OutlinedButtonThemeData outlined(ColorScheme colors, TextTheme textTheme) {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         backgroundColor: colors.surfaceContainerHighest,
@@ -48,12 +48,12 @@ abstract final class ButtonComponentTheme {
         elevation: 0,
         shape: _shape,
         minimumSize: _minSize,
-        textStyle: AppTextStyles.button,
+        textStyle: textTheme.labelLarge,
       ),
     );
   }
 
-  static TextButtonThemeData text(ColorScheme colors) {
+  static TextButtonThemeData text(ColorScheme colors, TextTheme textTheme) {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
         padding: EdgeInsets.zero,
@@ -62,7 +62,7 @@ abstract final class ButtonComponentTheme {
         foregroundColor: colors.primary,
         disabledForegroundColor: colors.onSurface.withValues(alpha: 0.38),
         shape: _shape,
-        textStyle: AppTextStyles.button,
+        textStyle: textTheme.labelLarge,
       ),
     );
   }

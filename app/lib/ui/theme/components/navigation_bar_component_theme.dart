@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/ui/theme/colors/app_colors.dart';
 import 'package:sport_manager_mobile/ui/theme/colors/app_colors_extension.dart';
-import 'package:sport_manager_mobile/ui/theme/colors/neutral_colors.dart';
 
 abstract final class NavigationBarComponentTheme {
   static NavigationBarThemeData build(
@@ -24,7 +24,7 @@ abstract final class NavigationBarComponentTheme {
         return textTheme.labelMedium?.copyWith(color: colors.onSurfaceVariant);
       }),
       elevation: 0,
-      surfaceTintColor: NeutralColors.transparent,
+      surfaceTintColor: AppColors.transparent,
     );
   }
 }
