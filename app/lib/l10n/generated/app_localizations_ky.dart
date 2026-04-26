@@ -25,4 +25,136 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get settingsThemeSystem => 'Система';
+
+  @override
+  String get authTagline => 'Залды санариптик башкаруу';
+
+  @override
+  String get authSignIn => 'Кирүү';
+
+  @override
+  String get authSignUp => 'Катталуу';
+
+  @override
+  String get authSignInSubtitle => 'Кирүү маалыматыңызды жазыңыз';
+
+  @override
+  String get authUsernameOrEmail => 'Логин же email';
+
+  @override
+  String get authPassword => 'Сырсөз';
+
+  @override
+  String get authForgotPassword => 'Сырсөздү унуттуңузбу?';
+
+  @override
+  String get authNoAccount => 'Аккаунт жокпу?';
+
+  @override
+  String get authChooseRole => 'Сиз кимсиз?';
+
+  @override
+  String get authChooseRoleSubtitle => 'Бул жеткиликтүү функцияларды аныктайт';
+
+  @override
+  String get authOwnerTitle => 'Зал ээси';
+
+  @override
+  String get authOwnerSubtitle => 'Бир же бирнече залды башкарам';
+
+  @override
+  String get authManagerTitle => 'Зал менеджери';
+
+  @override
+  String get authManagerSubtitle => 'Кезмеде иштейм, чакыруу коду керек';
+
+  @override
+  String get authRegisterOwnerTitle => 'Ээнин каттоосу';
+
+  @override
+  String get authRegisterManagerTitle => 'Менеджердин каттоосу';
+
+  @override
+  String get authOwnerBadge => 'Ээ';
+
+  @override
+  String get authManagerBadge => 'Менеджер';
+
+  @override
+  String get authNameLabel => 'Аты';
+
+  @override
+  String get authPhoneLabel => 'Телефон';
+
+  @override
+  String get authEmailLabel => 'Email';
+
+  @override
+  String get authInviteCodeLabel => 'Чакыруу коду';
+
+  @override
+  String get authUsernameLabel => 'Логин';
+
+  @override
+  String get authConfirmPasswordLabel => 'Сырсөздү кайталаңыз';
+
+  @override
+  String get authVenueNameLabel => 'Жайдын аты';
+
+  @override
+  String get authVenueNumberLabel => 'Жайдын номери';
+
+  @override
+  String get authAgreeTerms => 'Шарттарга макулмун';
+
+  @override
+  String get authAgreeTermsError => 'Шарттарга макул болушуңуз керек';
+
+  @override
+  String get authCreateAccount => 'Аккаунт түзүү';
+
+  @override
+  String get authInviteCodeHint => 'Чакыруу кодун зал ээсинен алыңыз';
+
+  @override
+  String get authFieldRequired => 'Талаа милдеттүү түрдө толтурулушу керек';
+
+  @override
+  String get authPasswordMinLength => 'Сырсөз кеминде 8 символдон турушу керек';
+
+  @override
+  String get authPasswordsDoNotMatch => 'Сырсөздөр дал келбейт';
+
+  @override
+  String get authInvalidEmail => 'Туура email жазыңыз';
+
+  @override
+  String get authInvalidPhone => 'Туура телефон номерин жазыңыз';
+
+  @override
+  String get authForgotPasswordTitle => 'Сырсөздү калыбына келтирүү';
+
+  @override
+  String get authForgotPasswordBanner => 'Логин же email\'иңизди жазыңыз — сырсөздү жаңыртуу үчүн шилтеме жөнөтөбүз.';
+
+  @override
+  String get authForgotPasswordLoginEmailPlaceholder => 'мисалы, azamat@mail.kg';
+
+  @override
+  String get authForgotPasswordNoLink => 'Шилтеме келбей жатабы?';
+
+  @override
+  String get authForgotPasswordContactUs => 'Биз менен байланышыңыз — WhatsApp, Telegram, email, чалуу';
+
+  @override
+  String get authForgotPasswordSendLink => 'Шилтеме жөнөтүү';
+
+  @override
+  String get authContactSupportTitle => 'Колдоо кызматы менен байланышуу';
+
+  @override
+  String get authContactSupportSubtitle => 'Жазыңыз же чалыңыз — кирүүнү калыбына келтирүүгө жардамдашабыз.';
+
+  @override
+  String get authContactCallLabel => 'Чалуу';
 }

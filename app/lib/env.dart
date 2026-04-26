@@ -3,4 +3,9 @@ abstract final class Env {
     'BASE_URL',
     defaultValue: '---BASE_URL_NOT_PROVIDED---',
   );
+
+  static const bool isMock = bool.fromEnvironment(
+    'IS_MOCK',
+    defaultValue: true,
+  );
 }

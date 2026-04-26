@@ -10,7 +10,11 @@ extension AppLocalizationsX on BuildContext {
 final class AppLocalizationHelper {
   const AppLocalizationHelper._();
 
-  static const locales = <Locale>[Locale('en'), Locale('ky'), Locale('ru')];
+  static const locales = <Locale>[
+    Locale('en'),
+    Locale('ky'),
+    Locale('ru'),
+  ];
 
   static String getName(String? code) {
     return switch (code) {
@@ -23,8 +27,17 @@ final class AppLocalizationHelper {
 
   static bool isSupported(String locale) {
     return switch (locale) {
-      'en' || 'ky' || 'ru' => true,
+      'en' || 'ky' || 'ru' || 'EN' || 'KY' || 'RU' => true,
       _ => false,
+    };
+  }
+
+  static String getShortName(String locale) {
+    return switch (locale) {
+      'ky' || 'KY' || 'Ky' => 'Кыр',
+      'en' || 'EN' || 'En' => 'Eng',
+      'ru' || 'RU' || 'Ru' => 'Рус',
+      _ => 'EN',
     };
   }
 

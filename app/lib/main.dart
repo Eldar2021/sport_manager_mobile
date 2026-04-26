@@ -10,6 +10,7 @@ void main() async {
     const CoreModule(),
     const ErrorModule(),
     const NetworkModule(),
+    const AuthModule(),
   ]);
 
   runApp(const MyAppWrapper());

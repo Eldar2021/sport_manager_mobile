@@ -57,7 +57,7 @@ features/my_feature/
 ├── cubits/
 │   ├── my_feature_cubit.dart
 │   └── my_feature_state.dart
-├── view/
+├── screens/
 │   └── my_feature_screen.dart
 ├── widgets/
 │   └── my_feature_widget.dart
@@ -117,11 +117,11 @@ After adding a model: `make build-runner`
 1. Define the method in the remote source:
 
    ```dart
-   abstract interface class IMyRemoteSource {
+   abstract interface class MyRemoteSource {
      Future<MyModel> fetchData(String id);
    }
 
-   final class MyRemoteSourceImpl implements IMyRemoteSource {
+   final class MyRemoteSourceImpl implements MyRemoteSource {
      const MyRemoteSourceImpl(this._client);
      final ApiClient _client;
 

@@ -39,16 +39,16 @@ analyzer:
 
 ### Классы
 
-| Тип | Формат | Пример |
-|---|---|---|
-| Интерфейс | `abstract interface class` + `I` префикс | `IVenueRemoteSource` |
-| Реализация | суффикс `Impl` | `VenueRemoteSourceImpl` |
-| Модель | суффикс `Model` | `SessionModel`, `VenueModel` |
-| Параметр/DTO | суффикс `Param` или `Body` | `StartSessionParam` |
-| Cubit | суффикс `Cubit` | `VenuesCubit`, `SettingsCubit` |
-| State | суффикс `State` | `VenuesState`, `SettingsState` |
-| Repository | суффикс `Repository` | `SessionRepository` |
-| DI-модуль | суффикс `Module` | `VenuesModule`, `NetworkModule` |
+| Тип          | Формат                                   | Пример                          |
+| ------------ | ---------------------------------------- | ------------------------------- |
+| Интерфейс    | `abstract interface class` + `I` префикс | `IVenueRemoteSource`            |
+| Реализация   | суффикс `Impl`                           | `VenueRemoteSourceImpl`         |
+| Модель       | суффикс `Model`                          | `SessionModel`, `VenueModel`    |
+| Параметр/DTO | суффикс `Param` или `Body`               | `StartSessionParam`             |
+| Cubit        | суффикс `Cubit`                          | `VenuesCubit`, `SettingsCubit`  |
+| State        | суффикс `State`                          | `VenuesState`, `SettingsState`  |
+| Repository   | суффикс `Repository`                     | `SessionRepository`             |
+| DI-модуль    | суффикс `Module`                         | `VenuesModule`, `NetworkModule` |
 
 ### Ключевые слова классов
 
@@ -224,12 +224,12 @@ Cubit → Repository → Remote Source / Local Source
 - Реализации через `final class`
 
 ```dart
-abstract interface class ISessionRepository {
+abstract interface class SessionRepository {
   Future<SessionModel> startSession(StartSessionParam param);
   Future<SessionModel> endSession(String sessionId);
 }
 
-final class SessionRepositoryImpl implements ISessionRepository {
+final class SessionRepositoryImpl implements SessionRepository {
   const SessionRepositoryImpl(this._remote);
   final ISessionRemoteSource _remote;
 
@@ -277,13 +277,13 @@ abstract final class AppRoutes {
 
 Используй более лёгкие альтернативы:
 
-| Нужно | Использовать |
-|---|---|
-| Только цвет | `ColoredBox` |
-| Только размер | `SizedBox` |
-| Только декорация | `DecoratedBox` |
-| Только отступ | `Padding` |
-| Только выравнивание | `Align` |
+| Нужно               | Использовать   |
+| ------------------- | -------------- |
+| Только цвет         | `ColoredBox`   |
+| Только размер       | `SizedBox`     |
+| Только декорация    | `DecoratedBox` |
+| Только отступ       | `Padding`      |
+| Только выравнивание | `Align`        |
 
 ```dart
 // Плохо
