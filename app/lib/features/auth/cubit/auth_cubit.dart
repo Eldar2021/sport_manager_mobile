@@ -30,19 +30,6 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> login(String username, String password) async {
-    emit(const AuthLoading());
-    try {
-      final result = await _repository.login(
-        username: username.trim(),
-        password: password,
-      );
-      emit(AuthAuthenticated(user: result.user));
-    } on Object catch (e) {
-      emit(AuthError(exception: e));
-    }
-  }
-
   void setAuthenticated(UserModel user) {
     emit(AuthAuthenticated(user: user));
   }

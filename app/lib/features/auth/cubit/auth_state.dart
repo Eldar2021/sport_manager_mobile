@@ -40,13 +40,3 @@ final class AuthUnauthenticated extends AuthState {
   @override
   List<Object?> get props => [];
 }
-
-@immutable
-final class AuthError extends AuthState {
-  const AuthError({required this.exception});
-
-  final Object exception;
-
-  @override
-  List<Object?> get props => [exception];
-}

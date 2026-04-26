@@ -1,5 +1,7 @@
+import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
@@ -15,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late final LoginCubit _loginCubit;
   late final GlobalKey<FormState> _formKey;
   late final TextEditingController _usernameCtr;
   late final TextEditingController _passwordCtr;
@@ -22,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    _loginCubit = LoginCubit(GetIt.I<AuthRepository>());
     _formKey = GlobalKey<FormState>();
     _usernameCtr = TextEditingController();
     _passwordCtr = TextEditingController();
@@ -92,16 +96,18 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  BlocConsumer<AuthCubit, AuthState>(
+                  BlocConsumer<LoginCubit, DataState<AuthResultModel>>(
                     listener: (context, state) {
-                      if (state is AuthError) {
+                      if (state is DataSuccess<AuthResultModel>) {
+                        context.read<AuthCubit>().setAuthenticated(state.data.user);
+                      } else if (state is DataFailure<AuthResultModel>) {
                         context.handleError(state.exception);
                       }
                     },
                     builder: (context, state) {
                       return AppSubmitButton(
                         label: l10n.authSignIn,
-                        isLoading: state is AuthLoading,
+                        isLoading: state.isLoading,
                         onPressed: _login,
                       );
                     },
@@ -136,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _login() {
     if (!_formKey.currentState!.validate()) return;
-    context.read<AuthCubit>().login(
+    _loginCubit.login(
       _usernameCtr.text.trim(),
       _passwordCtr.text,
     );
