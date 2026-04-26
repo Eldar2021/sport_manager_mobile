@@ -3,11 +3,13 @@ import 'package:core/core.dart';
 
 /// Mock credentials
 /// ─────────────────────────────────────────
-/// Login   │  username: test  │ password: Test1234
+/// Owner   │  username: test     │ password: Test1234
+/// Manager │  username: manager  │ password: Test1234
 /// Manager │  invite code: INVITE-001
 /// ─────────────────────────────────────────
 final class AuthRemoteSourceMock implements AuthRemoteSource {
-  static const _username = 'test';
+  static const _ownerUsername = 'test';
+  static const _managerUsername = 'manager';
   static const _password = 'Test1234';
   static const _validInviteCode = 'INVITE-001';
 
@@ -22,6 +24,15 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     role: UserRole.owner,
     email: 'test@tableflow.kg',
     phone: '+996 700 000 001',
+  );
+
+  static const _testManager = UserModel(
+    id: 'user-002',
+    name: 'Test Manager',
+    role: UserRole.manager,
+    email: 'manager@tableflow.kg',
+    phone: '+996 700 000 002',
+    ownerId: 'user-001',
   );
 
   static const _wrongCredentials = BaseMessage(
@@ -43,34 +54,40 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
 
-    if (username.trim() != _username || password != _password) {
-      throw const AuthException('invalid_credentials', message: _wrongCredentials);
+    if (password != _password) {
+      throw const AuthException(AuthErrorCode.invalidCredentials, message: _wrongCredentials);
     }
 
+    final user = switch (username.trim()) {
+      _ownerUsername => _testOwner,
+      _managerUsername => _testManager,
+      _ => throw const AuthException(AuthErrorCode.invalidCredentials, message: _wrongCredentials),
+    };
+
     return AuthResultModel(
-      user: _testOwner,
+      user: user,
       accessToken: _tokens.accessToken,
       refreshToken: _tokens.refreshToken,
     );
   }
 
   @override
-  Future<AuthResultModel> register(RegisterParam body) async {
+  Future<AuthResultModel> register(RegisterParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 1000));
 
-    if (body is RegisterManagerParam && body.inviteCode.trim() != _validInviteCode) {
-      throw const AuthException('invalid_invite_code', message: _invalidInviteCode);
+    if (param is RegisterManagerParam && param.inviteCode.trim() != _validInviteCode) {
+      throw const AuthException(AuthErrorCode.invalidInviteCode, message: _invalidInviteCode);
     }
 
     return AuthResultModel(
       accessToken: _tokens.accessToken,
       refreshToken: _tokens.refreshToken,
       user: UserModel(
-        id: '${body.role.name}-${DateTime.now().millisecondsSinceEpoch}',
-        name: body.name,
-        role: body.role,
-        email: body.email,
-        phone: body.phone,
+        id: '${param.role.name}-${DateTime.now().millisecondsSinceEpoch}',
+        name: param.name,
+        role: param.role,
+        email: param.email,
+        phone: param.phone,
       ),
     );
   }

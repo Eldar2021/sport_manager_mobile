@@ -23,6 +23,11 @@ class AuthLocalSourceImpl implements AuthLocalSource {
   static const _userKey = 'auth_user_json';
 
   @override
+  Future<void> init() async {
+    await getTokens();
+  }
+
+  @override
   Future<void> saveTokens(AuthTokensModel tokens) async {
     _cachedAccessToken = tokens.accessToken;
     _cachedRefreshToken = tokens.refreshToken;

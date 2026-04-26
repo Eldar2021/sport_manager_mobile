@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 
 part 'register_param.g.dart';
 
+@immutable
 sealed class RegisterParam extends Equatable {
   const RegisterParam({
     required this.name,
@@ -32,11 +33,9 @@ final class RegisterOwnerParam extends RegisterParam {
     required super.email,
     required super.password,
     super.role = UserRole.owner,
-  });
+  }) : assert(role == UserRole.owner, 'RegisterOwnerParam.role must be UserRole.owner');
 
-  factory RegisterOwnerParam.fromJson(Map<String, dynamic> json) {
-    return _$RegisterOwnerParamFromJson(json);
-  }
+  factory RegisterOwnerParam.fromJson(Map<String, dynamic> json) => _$RegisterOwnerParamFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$RegisterOwnerParamToJson(this);
@@ -61,11 +60,9 @@ final class RegisterManagerParam extends RegisterParam {
     required super.email,
     required super.phone,
     super.role = UserRole.manager,
-  });
+  }) : assert(role == UserRole.manager, 'RegisterManagerParam.role must be UserRole.manager');
 
-  factory RegisterManagerParam.fromJson(Map<String, dynamic> json) {
-    return _$RegisterManagerParamFromJson(json);
-  }
+  factory RegisterManagerParam.fromJson(Map<String, dynamic> json) => _$RegisterManagerParamFromJson(json);
 
   final String inviteCode;
 

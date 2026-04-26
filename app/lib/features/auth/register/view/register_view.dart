@@ -181,14 +181,12 @@ class _RegisterViewState extends State<RegisterView> {
             phone: _phoneCtr.text.trim(),
             email: _emailCtr.text.trim(),
             password: _passwordCtr.text,
-            role: widget.role,
           )
         : RegisterManagerParam(
             name: _nameCtr.text.trim(),
             phone: _phoneCtr.text.trim(),
             email: _emailCtr.text.trim(),
             password: _passwordCtr.text,
-            role: widget.role,
             inviteCode: _inviteCodeCtr.text.trim(),
           );
 

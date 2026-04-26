@@ -6,7 +6,7 @@ abstract interface class AuthRemoteSource {
     required String password,
   });
 
-  Future<AuthResultModel> register(RegisterParam body);
+  Future<AuthResultModel> register(RegisterParam param);
 
   Future<AuthTokensModel> refresh(String refreshToken);
 

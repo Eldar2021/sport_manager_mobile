@@ -28,17 +28,16 @@ final class NetworkModule extends BaseDiModule {
     bearerDio.interceptors.addAll([
       baseInterceptor,
       BearerInterceptor(
-        getAccessToken: () => GetIt.I<AuthRepository>().getAccessTokenSync() ?? '',
-        getRefreshToken: () => GetIt.I<AuthRepository>().getRefreshTokenSync() ?? '',
+        getAccessToken: () => GetIt.I<AuthLocalSource>().getAccessTokenSync() ?? '',
+        getRefreshToken: () => GetIt.I<AuthLocalSource>().getRefreshTokenSync() ?? '',
       ),
       AuthInterceptor(
         dio: bearerDio,
-        getRefreshToken: () => GetIt.I<AuthRepository>().getRefreshTokenSync() ?? '',
+        getRefreshToken: () => GetIt.I<AuthLocalSource>().getRefreshTokenSync() ?? '',
         onLogout: () => GetIt.I<AuthRepository>().logout(),
         onRefreshedToken: (accessToken, refreshToken) {
-          GetIt.I<AuthRepository>().cacheRefreshedTokens(
-            accessToken,
-            refreshToken,
+          GetIt.I<AuthLocalSource>().saveTokens(
+            AuthTokensModel(accessToken: accessToken, refreshToken: refreshToken),
           );
         },
       ),

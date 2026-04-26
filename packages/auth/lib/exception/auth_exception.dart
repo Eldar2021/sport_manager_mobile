@@ -1,3 +1,4 @@
+import 'package:auth/exception/auth_error_code.dart';
 import 'package:core/core.dart';
 
 const _defaultUiMessage = BaseMessage(
@@ -6,7 +7,7 @@ const _defaultUiMessage = BaseMessage(
   ky: 'Кирүү катасы. Кайра аракет кылыңыз.',
 );
 
-final class AuthException extends AppException<String> {
+final class AuthException extends AppException<AuthErrorCode> {
   const AuthException(
     super.error, {
     super.message,
