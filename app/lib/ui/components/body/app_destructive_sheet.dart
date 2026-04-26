@@ -28,13 +28,15 @@ class AppDestructiveSheet extends StatelessWidget {
   }) {
     return showModalBottomSheet(
       context: context,
-      builder: (_) => AppDestructiveSheet(
-        icon: icon,
-        title: title,
-        subtitle: subtitle,
-        confirmLabel: confirmLabel,
-        onConfirm: onConfirm,
-      ),
+      builder: (_) {
+        return AppDestructiveSheet(
+          icon: icon,
+          title: title,
+          subtitle: subtitle,
+          confirmLabel: confirmLabel,
+          onConfirm: onConfirm,
+        );
+      },
     );
   }
 
@@ -52,14 +54,16 @@ class AppDestructiveSheet extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
+          SizedBox(
             width: 56,
             height: 56,
-            decoration: const BoxDecoration(
-              color: AppColors.dangerLight,
-              shape: BoxShape.circle,
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                color: AppColors.dangerLight,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: AppColors.dangerRed, size: 24),
             ),
-            child: Icon(icon, color: AppColors.dangerRed, size: 24),
           ),
           const SizedBox(height: AppSpacing.x4),
           Text(title, style: AppTypography.h2, textAlign: TextAlign.center),

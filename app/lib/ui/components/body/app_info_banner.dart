@@ -2,24 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class AppInfoBanner extends StatelessWidget {
-  const AppInfoBanner({
-    required this.text,
-    super.key,
-    this.icon = Icons.auto_awesome,
-    this.color = AppColors.brandAmber,
-    this.backgroundColor = AppColors.brandAmberLight,
-  });
+  const AppInfoBanner(this.text, {super.key});
 
   final String text;
-  final IconData icon;
-  final Color color;
-  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(
-        color: backgroundColor,
+      decoration: const BoxDecoration(
+        color: AppColors.brandAmberLight,
         borderRadius: AppRadius.cardBorderRadius,
       ),
       child: Padding(
@@ -27,12 +18,15 @@ class AppInfoBanner extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: color, size: 16),
-            const SizedBox(width: AppSpacing.x2),
+            const Icon(Icons.lock_outline_rounded, color: AppColors.brandAmber),
+            const SizedBox(width: AppSpacing.x3),
             Expanded(
               child: Text(
                 text,
-                style: AppTypography.body.copyWith(color: color),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppColors.brandAmberDark,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ],

@@ -47,7 +47,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    InfoBanner(l10n.authForgotPasswordBanner),
+                    AppInfoBanner(l10n.authForgotPasswordBanner),
                     const SizedBox(height: AppSpacing.x6),
                     AuthTextField(
                       label: l10n.authEmailLabel,

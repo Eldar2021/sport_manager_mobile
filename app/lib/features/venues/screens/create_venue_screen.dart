@@ -51,9 +51,7 @@ class _CreateVenueScreenState extends State<CreateVenueScreen> {
         },
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              title: Text(l10n.createVenueTitle),
-            ),
+            appBar: AppBar(title: Text(l10n.createVenueTitle)),
             body: SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(
                 AppSpacing.x4,
@@ -92,7 +90,7 @@ class _CreateVenueScreenState extends State<CreateVenueScreen> {
                     decoration: InputDecoration(hintText: l10n.createVenueNumberHint),
                   ),
                   const SizedBox(height: AppSpacing.x5),
-                  AppInfoBanner(text: l10n.createVenueInfoBanner),
+                  AppInfoBanner(l10n.createVenueInfoBanner),
                 ],
               ),
             ),
