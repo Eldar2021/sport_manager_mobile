@@ -65,96 +65,102 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(leading: const BackBtn()),
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RegisterTitleWidget(
-                title: l10n.authRegisterOwnerTitle,
-                badge: l10n.authOwnerBadge,
-                icon: Icons.business_center_rounded,
-                colorBadge: colorScheme.primary,
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      AuthTextField(
-                        label: l10n.authNameLabel,
-                        controller: _nameCtr,
-                        textInputAction: TextInputAction.next,
-                        validator: (v) => InputValidators.emptyValidator(v, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AuthTextField(
-                        label: l10n.authPhoneLabel,
-                        controller: _phoneCtr,
-                        keyboardType: TextInputType.phone,
-                        textInputAction: TextInputAction.next,
-                        hintText: '+996 ___ __ __ __',
-                        inputFormatters: [_phoneMask],
-                        validator: (v) => InputValidators.phoneValidator(v, context, expectedLength: 12),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AuthTextField(
-                        label: l10n.authEmailLabel,
-                        controller: _emailCtr,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        validator: (v) => InputValidators.emailValidator(v, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AuthPasswordField(
-                        label: l10n.authPassword,
-                        controller: _passwordCtr,
-                        textInputAction: TextInputAction.next,
-                        validator: (v) => InputValidators.passwordValidator(v, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AuthPasswordField(
-                        label: l10n.authConfirmPasswordLabel,
-                        controller: _confirmCtr,
-                        textInputAction: TextInputAction.next,
-                        validator: (v) => InputValidators.passwordConfirmValidator(v, _passwordCtr.text, context),
-                      ),
-                      const SizedBox(height: AppSpacing.x4),
-                      AppCheckboxField(
-                        label: l10n.authAgreeTerms,
-                        validator: (v) => (v ?? false) ? null : l10n.authAgreeTermsError,
-                      ),
-                      const SizedBox(height: AppSpacing.x6),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
+      appBar: AppBar(),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
-                child: BlocConsumer<RegisterOwnerCubit, DataState<AuthResultModel>>(
-                  bloc: _registerOwnerCubit,
-                  listener: (context, state) {
-                    if (state is DataSuccess<AuthResultModel>) {
-                      context.read<AuthCubit>().setAuthenticated(state.data.user);
-                    } else if (state is DataFailure<AuthResultModel>) {
-                      context.handleError(state.exception);
-                    }
-                  },
-                  builder: (context, state) {
-                    return AuthSubmitButton(
-                      label: l10n.authCreateAccount,
-                      isLoading: state.isLoading,
-                      onPressed: _registerOwner,
-                    );
-                  },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.authRegisterOwnerTitle,
+                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.x3),
+                    RoleBadge(
+                      label: l10n.authOwnerBadge,
+                      color: colorScheme.primary,
+                      bg: colorScheme.primary.withValues(alpha: 0.12),
+                      icon: Icons.business_center_rounded,
+                    ),
+                    const SizedBox(height: AppSpacing.x6),
+                    AuthTextField(
+                      label: l10n.authNameLabel,
+                      controller: _nameCtr,
+                      textInputAction: TextInputAction.next,
+                      validator: (v) => InputValidators.emptyValidator(v, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AuthTextField(
+                      label: l10n.authPhoneLabel,
+                      controller: _phoneCtr,
+                      keyboardType: TextInputType.phone,
+                      textInputAction: TextInputAction.next,
+                      hintText: '+996 ___ __ __ __',
+                      inputFormatters: [_phoneMask],
+                      validator: (v) => InputValidators.phoneValidator(v, context, expectedLength: 12),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AuthTextField(
+                      label: l10n.authEmailLabel,
+                      controller: _emailCtr,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      validator: (v) => InputValidators.emailValidator(v, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AuthPasswordField(
+                      label: l10n.authPassword,
+                      controller: _passwordCtr,
+                      textInputAction: TextInputAction.next,
+                      validator: (v) => InputValidators.passwordValidator(v, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AuthPasswordField(
+                      label: l10n.authConfirmPasswordLabel,
+                      controller: _confirmCtr,
+                      textInputAction: TextInputAction.next,
+                      validator: (v) => InputValidators.passwordConfirmValidator(v, _passwordCtr.text, context),
+                    ),
+                    const SizedBox(height: AppSpacing.x4),
+                    AppCheckboxField(
+                      label: l10n.authAgreeTerms,
+                      validator: (v) => (v ?? false) ? null : l10n.authAgreeTermsError,
+                    ),
+                    const SizedBox(height: AppSpacing.x6),
+                  ],
                 ),
               ),
-              const SizedBox(height: AppSpacing.x1),
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+              child: BlocConsumer<RegisterOwnerCubit, DataState<AuthResultModel>>(
+                bloc: _registerOwnerCubit,
+                listener: (context, state) {
+                  if (state is DataSuccess<AuthResultModel>) {
+                    context.read<AuthCubit>().setAuthenticated(state.data.user);
+                  } else if (state is DataFailure<AuthResultModel>) {
+                    context.handleError(state.exception);
+                  }
+                },
+                builder: (context, state) {
+                  return AuthSubmitButton(
+                    label: l10n.authCreateAccount,
+                    isLoading: state.isLoading,
+                    onPressed: _registerOwner,
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: AppSpacing.x1),
+          ],
         ),
       ),
     );
