@@ -21,7 +21,8 @@ sport_manager_mobile/
 └── packages/
     ├── core/                 ← Base abstractions (exception, DI, analytics)
     ├── api_client/           ← Dio HTTP client
-    └── storage_client/       ← SharedPreferences wrapper
+    ├── storage_client/       ← SharedPreferences wrapper
+    └── auth/                 ← Auth data layer (models, sources, repository)
 ```
 
 ---
@@ -38,7 +39,9 @@ sport_manager_mobile/
   api_client    storage_client         core
 ```
 
-**Rule:** `features` depends on `app/core`; `app/core` depends on `packages/*`. Packages don't depend on each other except `api_client` and `storage_client`, which both depend on `packages/core`.
+**Rule:** `features` depends on `app/core`; `app/core` depends on `packages/*`. Packages don't depend on each other, with two exceptions:
+- `api_client` and `storage_client` depend on `packages/core`
+- `auth` depends on `packages/core`, `packages/api_client`, and `packages/storage_client`
 
 ---
 
@@ -82,6 +85,49 @@ Wrapper around `SharedPreferences`.
 | `src/interface/storage_sync_read_interface.dart` | Sync read / async write                            |
 | `src/preferences_storage.dart`                   | `SharedPreferences` implementation                 |
 | `src/secure_storage.dart`                        | `FlutterSecureStorage` placeholder (not yet wired) |
+
+### `packages/auth`
+
+Auth data layer — owns everything between the auth API and the rest of the app.
+
+**When to look here:**
+- Adding/changing an auth endpoint (login, register, refresh, forgot-password, invite-code)
+- Touching auth tokens (access/refresh) — storage, refresh flow, sync access from interceptors
+- Changing the cached user (`UserModel`) shape, role enum, or invite-code model
+- Adding a new role / changing what `RegisterParam` carries
+- Tweaking the dev mock (`AuthRemoteSourceMock`) — test credentials, invite code, fake users
+
+**What it contains:**
+
+| Path                                       | Purpose                                                    |
+| ------------------------------------------ | ---------------------------------------------------------- |
+| `lib/auth.dart`                            | Public barrel — only interfaces + DTOs, no impls           |
+| `exception/auth_error_code.dart`           | `AuthErrorCode` enum (invalidCredentials, sessionExpired…) |
+| `exception/auth_exception.dart`            | `AuthException extends AppException<AuthErrorCode>`        |
+| `models/user_model.dart` + `user_role.dart`| Cached user + `UserRole.{owner,manager}` enum              |
+| `models/auth_tokens_model.dart`            | Access + refresh token pair                                |
+| `models/auth_result_model.dart`            | Login/register response (user + tokens)                    |
+| `models/invite_code_model.dart`            | Manager invite code + expiry                               |
+| `models/register_param.dart`               | Sealed `RegisterParam` (Owner / Manager subclasses)        |
+| `repository/auth_repository.dart`          | Concrete `final class AuthRepository` — single class       |
+| `source/local/`                            | `AuthLocalSource` interface + `Impl` (secure + prefs)      |
+| `source/remote/`                           | `AuthRemoteSource` interface + `Impl` + `Mock`             |
+
+**Key contracts:**
+
+- `AuthLocalSource.init()` is awaited during DI bootstrap to warm the sync token
+  cache before any authenticated request fires (the bearer interceptor reads sync).
+- `AuthRepository` only orchestrates; it has no interface (sources are abstract).
+- `AuthRepository.logout()` clears local state first, then attempts remote logout
+  best-effort (failure is logged and swallowed).
+- The bearer/auth interceptors in `NetworkModule` consume `AuthLocalSource`
+  directly for sync token reads; they only call the repository for `logout()`.
+- The barrel does NOT export `*_impl.dart` / `*_mock.dart` — the DI module
+  imports those via direct paths.
+
+**Mock dev mode:** when `Env.isMock` is true, `AuthRemoteSourceMock` is wired in.
+See the file's header comment for test credentials (owner: `test/Test1234`,
+manager: `manager/Test1234`, invite code `INVITE-001`).
 
 ---
 

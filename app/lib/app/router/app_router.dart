@@ -1,3 +1,4 @@
+import 'package:auth/auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -11,8 +12,7 @@ const Set<String> _authRoutes = {
   AppRoutes.login,
   AppRoutes.forgotPassword,
   AppRoutes.role,
-  AppRoutes.registerOwner,
-  AppRoutes.registerManager,
+  AppRoutes.register,
 };
 
 GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey}) {
@@ -27,7 +27,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       final authState = authCubit.state;
       final matchedLocation = state.matchedLocation;
 
-      if (authState is AuthInitial || authState is AuthLoading) {
+      if (authState is AuthInitial || authState is AuthLogoutInProgress) {
         return null;
       }
 
@@ -54,27 +54,24 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       ),
       GoRoute(
         path: AppRoutes.welcome,
-        builder: (context, state) => const WelcomeScreen(),
+        builder: (context, state) => const WelcomeView(),
       ),
       GoRoute(
         path: AppRoutes.login,
-        builder: (context, state) => const LoginScreen(),
+        builder: (context, state) => const LoginView(),
       ),
       GoRoute(
         path: AppRoutes.forgotPassword,
-        builder: (context, state) => const ForgotPasswordScreen(),
+        builder: (context, state) => const ForgotPasswordView(),
       ),
       GoRoute(
         path: AppRoutes.role,
-        builder: (context, state) => const RoleSelectScreen(),
+        builder: (context, state) => const RoleSelectView(),
       ),
       GoRoute(
-        path: AppRoutes.registerOwner,
-        builder: (context, state) => const RegisterOwnerScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.registerManager,
-        builder: (context, state) => const RegisterManagerScreen(),
+        path: AppRoutes.register,
+        redirect: (context, state) => state.extra is UserRole ? null : AppRoutes.role,
+        builder: (context, state) => RegisterView(role: state.extra! as UserRole),
       ),
       GoRoute(
         path: AppRoutes.home,

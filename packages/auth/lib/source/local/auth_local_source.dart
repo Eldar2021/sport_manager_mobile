@@ -1,6 +1,8 @@
 import 'package:auth/auth.dart';
 
 abstract interface class AuthLocalSource {
+  Future<void> init();
+
   Future<void> saveTokens(AuthTokensModel tokens);
 
   Future<AuthTokensModel?> getTokens();
