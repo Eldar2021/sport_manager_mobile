@@ -19,7 +19,7 @@ class ForgotPasswordContactCard extends StatelessWidget {
     final colors = context.colors;
 
     return CustomPaint(
-      painter: _DashedRoundedBorderPainter(colors.outline),
+      painter: DashedRoundedBorderPainter(colors.outline),
       child: ListTile(
         onTap: onTap,
         visualDensity: VisualDensity.compact,
@@ -60,37 +60,4 @@ class ForgotPasswordContactCard extends StatelessWidget {
       ),
     );
   }
-}
-
-class _DashedRoundedBorderPainter extends CustomPainter {
-  const _DashedRoundedBorderPainter(this.color);
-
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-
-    final path = Path()
-      ..addRRect(
-        RRect.fromRectAndRadius(
-          Rect.fromLTWH(0.75, 0.75, size.width - 1.5, size.height - 1.5),
-          const Radius.circular(AppRadius.card),
-        ),
-      );
-
-    for (final metric in path.computeMetrics()) {
-      var distance = 0.0;
-      while (distance < metric.length) {
-        canvas.drawPath(metric.extractPath(distance, distance + 6), paint);
-        distance += 10;
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(_DashedRoundedBorderPainter oldDelegate) => oldDelegate.color != color;
 }
