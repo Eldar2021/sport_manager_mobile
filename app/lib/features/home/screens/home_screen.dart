@@ -18,9 +18,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => HomeCubit(
-        GetIt.I<VenueRepository>(),
-        GetIt.I<TableRepository>(),
-        GetIt.I<SessionRepository>(),
+        venueRepo: GetIt.I<VenueRepository>(),
+        tableRepo: GetIt.I<TableRepository>(),
+        sessionRepo: GetIt.I<SessionRepository>(),
       )..load(),
       child: const _HomeView(),
     );
@@ -32,9 +32,7 @@ class _HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isOwner = context.select<AuthCubit, bool>(
-      (c) => c.state is AuthAuthenticated && (c.state as AuthAuthenticated).role == UserRole.owner,
-    );
+    final isOwner = context.read<AuthCubit>().state.isOwner;
 
     return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (prev, next) =>
@@ -62,18 +60,20 @@ class _HomeView extends StatelessWidget {
                   )
                 : null,
           ),
-          floatingActionButton: isOwner && state.selectedVenue != null
-              ? FloatingActionButton(
-                  onPressed: () => context.push(AppRoutes.createTable, extra: state.selectedVenue!.id),
-                  backgroundColor: AppColors.brandAmber,
-                  foregroundColor: AppColors.white,
-                  child: const Icon(Icons.add_rounded),
+
+          floatingActionButton: state.selectedVenue != null
+              ? RoleGuard(
+                  roles: const {UserRole.owner},
+                  child: FloatingActionButton(
+                    onPressed: () => context.push(
+                      AppRoutes.createTable,
+                      extra: state.selectedVenue!.id,
+                    ),
+                    child: const Icon(Icons.add_rounded),
+                  ),
                 )
               : null,
-          body: SafeArea(
-            bottom: false,
-            child: _TablesBody(isOwner: isOwner),
-          ),
+          body: _TablesBody(isOwner: isOwner),
         );
       },
     );
@@ -118,7 +118,7 @@ class _TablesBody extends StatelessWidget {
                   child: Text(
                     'СТОЛЫ · ${state.tables.length}',
                     style: context.textTheme.bodySmall?.copyWith(
-                      color: AppColors.ink500,
+                      color: context.colors.onSurfaceVariant,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.8,
                     ),

@@ -18,48 +18,44 @@ class HomeVenueBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4, vertical: AppSpacing.x1),
-        child: Row(
+    return Theme(
+      data: Theme.of(context).copyWith(
+        splashFactory: NoSplash.splashFactory,
+        highlightColor: Colors.transparent,
+      ),
+      child: ListTile(
+        onTap: onTap,
+        contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4, vertical: AppSpacing.x1),
+        leading: SizedBox(
+          width: 44,
+          height: 44,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: context.colors.primaryContainer,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Icon(Icons.location_on_outlined, color: context.colors.primary, size: 24),
+            ),
+          ),
+        ),
+        title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 34,
-              height: 34,
-              decoration: BoxDecoration(
-                color: AppColors.brandAmberLight,
-                borderRadius: BorderRadius.circular(8),
+            Text(
+              venue.name,
+              style: context.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w800,
+                color: context.colors.onSurface,
               ),
-              child: const Icon(Icons.location_on_outlined, color: AppColors.brandAmber, size: 18),
             ),
-            const SizedBox(width: AppSpacing.x2),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      venue.name,
-                      style: context.textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.ink900,
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.ink500, size: 18),
-                  ],
-                ),
-                Text(
-                  '№ ${venue.number} · ${_numTables(tableCount)}',
-                  style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink500),
-                ),
-              ],
-            ),
+            const SizedBox(width: 4),
+            Icon(Icons.keyboard_arrow_down_rounded, color: context.colors.onSurfaceVariant, size: 18),
           ],
+        ),
+        subtitle: Text(
+          '№ ${venue.number} · ${_numTables(tableCount)}',
+          style: context.textTheme.bodySmall?.copyWith(color: context.colors.onSurfaceVariant),
         ),
       ),
     );
@@ -107,22 +103,12 @@ class HomeVenuePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(height: AppSpacing.x2),
-        Container(
-          width: 36,
-          height: 5,
-          decoration: BoxDecoration(
-            color: AppColors.ink300,
-            borderRadius: BorderRadius.circular(999),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(AppSpacing.x5, AppSpacing.x4, AppSpacing.x3, AppSpacing.x2),
-          child: Row(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
             children: [
               Text(l10n.homeSelectVenue, style: context.textTheme.titleLarge),
               const Spacer(),
@@ -130,49 +116,54 @@ class HomeVenuePicker extends StatelessWidget {
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(Icons.close_rounded),
                 style: IconButton.styleFrom(
-                  backgroundColor: AppColors.ink100,
-                  foregroundColor: AppColors.ink700,
+                  backgroundColor: context.colors.surfaceContainerHigh,
+                  foregroundColor: context.colors.onSurfaceVariant,
                 ),
               ),
             ],
           ),
-        ),
-        ...venues.map(
-          (v) => _VenuePickerItem(
-            venue: v,
-            isSelected: selectedVenue?.id == v.id,
-            onTap: () {
-              Navigator.pop(context);
-              onSelect(v);
-            },
-          ),
-        ),
-        if (isOwner)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(AppSpacing.x5, AppSpacing.x2, AppSpacing.x5, AppSpacing.x6),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-                context.push('/venues/create');
-              },
-              child: Row(
-                children: [
-                  const Icon(Icons.add_circle_outline_rounded, color: AppColors.brandAmber, size: 20),
-                  const SizedBox(width: AppSpacing.x3),
-                  Text(
-                    l10n.homeNewVenue,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: AppColors.brandAmber,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+          const SizedBox(height: AppSpacing.x4),
+          ...venues.map(
+            (v) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppSpacing.x1),
+              child: _VenuePickerItem(
+                venue: v,
+                isSelected: selectedVenue?.id == v.id,
+                onTap: () {
+                  Navigator.pop(context);
+                  onSelect(v);
+                },
               ),
             ),
-          )
-        else
-          const SizedBox(height: AppSpacing.x6),
-      ],
+          ),
+          if (isOwner) ...[
+            const SizedBox(height: AppSpacing.x4),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.push('/venues/create');
+                },
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: context.colors.surface,
+                  foregroundColor: context.colors.onSurfaceVariant,
+                  side: BorderSide(color: context.colors.outline, style: BorderStyle.values[1]),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: AppRadius.cardBorderRadius,
+                  ),
+                ),
+                icon: Icon(Icons.add_rounded, color: context.colors.primary),
+                label: Text(
+                  l10n.homeNewVenue,
+                  style: context.textTheme.bodyLarge?.copyWith(color: context.colors.primary),
+                ),
+              ),
+            ),
+          ] else
+            const SizedBox(height: AppSpacing.x6),
+        ],
+      ),
     );
   }
 }
@@ -190,34 +181,39 @@ class _VenuePickerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return ListTile(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x5, vertical: AppSpacing.x3),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    venue.name,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                      color: AppColors.ink900,
-                    ),
-                  ),
-                  Text(
-                    '№ ${venue.number}',
-                    style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink500),
-                  ),
-                ],
-              ),
+      tileColor: isSelected ? context.colors.primaryContainer : null,
+      contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+      leading: SizedBox(
+        width: 40,
+        height: 40,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: isSelected ? context.colors.primary : context.colors.surfaceContainerHigh,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: Icon(
+              Icons.location_on_outlined,
+              color: isSelected ? context.colors.onPrimary : context.colors.onSurfaceVariant,
+              size: 18,
             ),
-            if (isSelected) const Icon(Icons.check_rounded, color: AppColors.brandAmber, size: 20),
-          ],
+          ),
         ),
       ),
+      title: Text(
+        venue.name,
+        style: context.textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.w800,
+          color: context.colors.onSurface,
+        ),
+      ),
+      subtitle: Text(
+        '№ ${venue.number}',
+        style: context.textTheme.bodySmall?.copyWith(color: context.colors.onSurfaceVariant),
+      ),
+      trailing: isSelected ? Icon(Icons.check_rounded, color: context.colors.primary) : null,
     );
   }
 }

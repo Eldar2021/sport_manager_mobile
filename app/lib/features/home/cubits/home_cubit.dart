@@ -11,11 +11,14 @@ import 'package:venues/venues.dart';
 part 'home_state.dart';
 
 final class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(
-    this._venueRepo,
-    this._tableRepo,
-    this._sessionRepo,
-  ) : super(const HomeState());
+  HomeCubit({
+    required VenueRepository venueRepo,
+    required TableRepository tableRepo,
+    required SessionRepository sessionRepo,
+  }) : _venueRepo = venueRepo,
+       _tableRepo = tableRepo,
+       _sessionRepo = sessionRepo,
+       super(const HomeState());
 
   final VenueRepository _venueRepo;
   final TableRepository _tableRepo;
@@ -23,15 +26,11 @@ final class HomeCubit extends Cubit<HomeState> {
   Timer? _ticker;
 
   Future<void> load() async {
-    emit(
-      state.copyWith(venuesStatus: const RequestLoading()),
-    );
+    emit(state.copyWith(venuesStatus: const RequestLoading()));
     try {
       final venues = await _venueRepo.getVenues();
       if (venues.isEmpty) {
-        emit(
-          state.copyWith(venuesStatus: RequestSuccess(venues)),
-        );
+        emit(state.copyWith(venuesStatus: RequestSuccess(venues)));
         return;
       }
       final selected = venues.first;

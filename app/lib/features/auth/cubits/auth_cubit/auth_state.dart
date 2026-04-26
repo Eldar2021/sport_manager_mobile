@@ -50,3 +50,9 @@ final class AuthError extends AuthState {
   @override
   List<Object?> get props => [exception];
 }
+
+extension AuthStateX on AuthState {
+  bool get isOwner => this is AuthAuthenticated && (this as AuthAuthenticated).role == UserRole.owner;
+  bool get isManager => this is AuthAuthenticated && (this as AuthAuthenticated).role == UserRole.manager;
+  UserRole? get role => this is AuthAuthenticated ? (this as AuthAuthenticated).role : null;
+}

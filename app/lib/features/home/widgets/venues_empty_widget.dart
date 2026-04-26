@@ -23,14 +23,14 @@ class VenuesEmptyWidget extends StatelessWidget {
                 children: [
                   DecoratedBox(
                     decoration: BoxDecoration(
-                      color: AppColors.brandAmberLight,
+                      color: context.colors.primaryContainer,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(AppSpacing.x5),
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppSpacing.x5),
                       child: Icon(
                         Icons.location_on_outlined,
-                        color: AppColors.brandAmber,
+                        color: context.colors.primary,
                         size: 36,
                       ),
                     ),
@@ -38,13 +38,13 @@ class VenuesEmptyWidget extends StatelessWidget {
                   const SizedBox(height: AppSpacing.x5),
                   Text(
                     l10n.homeNoVenuesTitle,
-                    style: context.textTheme.headlineLarge?.copyWith(color: AppColors.ink900),
+                    style: context.textTheme.headlineLarge?.copyWith(color: context.colors.onSurface),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: AppSpacing.x2),
                   Text(
                     l10n.homeNoVenuesSubtitle,
-                    style: context.textTheme.bodyMedium?.copyWith(color: AppColors.ink500),
+                    style: context.textTheme.bodyMedium?.copyWith(color: context.colors.onSurfaceVariant),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: AppSpacing.x8),

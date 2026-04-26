@@ -16,14 +16,18 @@ class TablesEmptyWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
+            SizedBox(
               width: 72,
               height: 72,
-              decoration: BoxDecoration(
-                color: AppColors.ink100,
-                borderRadius: BorderRadius.circular(20),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: context.colors.surfaceContainerHigh,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(
+                  child: Icon(Icons.table_restaurant_outlined, color: context.colors.onSurfaceVariant, size: 36),
+                ),
               ),
-              child: const Icon(Icons.table_restaurant_outlined, color: AppColors.ink500, size: 36),
             ),
             const SizedBox(height: AppSpacing.x4),
             Text(
@@ -34,17 +38,9 @@ class TablesEmptyWidget extends StatelessWidget {
             const SizedBox(height: AppSpacing.x2),
             Text(
               l10n.homeTablesEmptySub,
-              style: context.textTheme.bodyMedium?.copyWith(color: AppColors.ink500),
+              style: context.textTheme.bodyMedium?.copyWith(color: context.colors.onSurfaceVariant),
               textAlign: TextAlign.center,
             ),
-            if (onAddTap != null) ...[
-              const SizedBox(height: AppSpacing.x6),
-              FilledButton.icon(
-                onPressed: onAddTap,
-                icon: const Icon(Icons.add_rounded, size: 18),
-                label: Text(l10n.homeAddTable),
-              ),
-            ],
           ],
         ),
       ),

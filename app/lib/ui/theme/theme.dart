@@ -9,6 +9,7 @@ export 'components/card_component_theme.dart';
 export 'components/chip_component_theme.dart';
 export 'components/dialog_component_theme.dart';
 export 'components/divider_component_theme.dart';
+export 'components/floating_action_button_theme.dart';
 export 'components/input_component_theme.dart';
 export 'components/list_tile_component_theme.dart';
 export 'components/navigation_bar_component_theme.dart';

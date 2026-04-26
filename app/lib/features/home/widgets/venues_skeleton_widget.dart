@@ -46,7 +46,7 @@ class _VenuesSkeletonWidgetState extends State<VenuesSkeletonWidget> with Single
             6,
             (_) => DecoratedBox(
               decoration: BoxDecoration(
-                color: AppColors.ink300.withValues(alpha: _opacity.value),
+                color: context.colors.outline.withValues(alpha: _opacity.value),
                 borderRadius: AppRadius.cardBorderRadius,
               ),
             ),

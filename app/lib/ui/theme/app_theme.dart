@@ -30,6 +30,7 @@ abstract final class AppTheme {
       scaffoldBackgroundColor: scaffoldBackground,
       textTheme: textTheme,
       extensions: [appColors, textThemeExt],
+      floatingActionButtonTheme: FloatingActionButtonComponentTheme.build(colors),
       appBarTheme: AppBarComponentTheme.build(colors, textTheme),
       cardTheme: CardComponentTheme.build(colors),
       filledButtonTheme: ButtonComponentTheme.filled(colors, textTheme),

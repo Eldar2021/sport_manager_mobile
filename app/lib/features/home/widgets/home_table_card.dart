@@ -77,14 +77,14 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
     final Color borderColor;
     final Color bgColor;
     if (isOccupied) {
-      borderColor = AppColors.dangerRed;
-      bgColor = AppColors.dangerLight;
+      borderColor = context.colors.error;
+      bgColor = context.colors.errorContainer;
     } else if (isJustFreed) {
-      borderColor = AppColors.successGreen;
-      bgColor = AppColors.successLight;
+      borderColor = context.appColors.success;
+      bgColor = context.appColors.successContainer;
     } else {
-      borderColor = AppColors.ink300;
-      bgColor = AppColors.white;
+      borderColor = context.colors.outline;
+      bgColor = context.colors.surface;
     }
 
     return GestureDetector(
@@ -94,7 +94,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: AppRadius.cardBorderRadius,
           border: Border.all(color: borderColor, width: 1.5),
         ),
         padding: const EdgeInsets.all(14),
@@ -106,7 +106,10 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
                 Flexible(
                   child: Text(
                     table.name ?? table.number,
-                    style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700, color: AppColors.ink900),
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: context.colors.onSurface,
+                    ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -117,7 +120,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
             const SizedBox(height: AppSpacing.x1),
             Text(
               table.description ?? table.number,
-              style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink500),
+              style: context.textTheme.bodySmall?.copyWith(color: context.colors.onSurfaceVariant),
               overflow: TextOverflow.ellipsis,
             ),
             const Spacer(),
@@ -125,7 +128,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
               Text(
                 _formatElapsed(DateTime.now().difference(widget.session!.startedAt)),
                 style: context.textTheme.headlineLarge?.copyWith(
-                  color: AppColors.dangerRed,
+                  color: context.colors.error,
                   fontWeight: FontWeight.w800,
                   fontFeatures: const [FontFeature.tabularFigures()],
                   letterSpacing: -0.5,
@@ -134,13 +137,16 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
               const SizedBox(height: 2),
               Text(
                 l10n.homeTableOccupied,
-                style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink500, letterSpacing: 0.5),
+                style: context.textTheme.bodySmall?.copyWith(
+                  color: context.colors.onSurfaceVariant,
+                  letterSpacing: 0.5,
+                ),
               ),
             ] else ...[
               Text(
                 isJustFreed ? l10n.homeTableJustFreed : l10n.homeTableFree,
                 style: context.textTheme.bodySmall?.copyWith(
-                  color: AppColors.successGreen,
+                  color: context.appColors.success,
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.5,
                 ),
@@ -148,7 +154,10 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
               const SizedBox(height: 2),
               Text(
                 '${table.hourlyRate} сом/ час',
-                style: context.textTheme.bodySmall?.copyWith(color: AppColors.ink700, fontWeight: FontWeight.w600),
+                style: context.textTheme.bodySmall?.copyWith(
+                  color: context.colors.onSurfaceVariant,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ],
@@ -171,7 +180,7 @@ class _StatusDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isOccupied ? AppColors.dangerRed : AppColors.successGreen;
+    final color = isOccupied ? context.colors.error : context.appColors.success;
 
     if (isOccupied) {
       return AnimatedBuilder(
@@ -186,9 +195,8 @@ class _StatusDot extends StatelessWidget {
     return _dot(color);
   }
 
-  Widget _dot(Color color) => Container(
-    width: 9,
-    height: 9,
+  Widget _dot(Color color) => DecoratedBox(
     decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+    child: const SizedBox.square(dimension: 9),
   );
 }
