@@ -18,51 +18,25 @@ class RateSelector extends StatelessWidget {
     return Wrap(
       spacing: AppSpacing.x2,
       runSpacing: AppSpacing.x2,
-      children: _presets.map((rate) => _RateChip(
-        rate: rate,
-        isSelected: selected == rate,
-        onTap: () => onChanged(rate),
-      )).toList(),
-    );
-  }
-}
-
-class _RateChip extends StatelessWidget {
-  const _RateChip({
-    required this.rate,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  final int rate;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.x4,
-          vertical: AppSpacing.x2,
-        ),
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.brandAmber : Colors.transparent,
-          borderRadius: AppRadius.chipBorderRadius,
-          border: Border.all(
-            color: isSelected ? AppColors.brandAmber : AppColors.ink300,
-          ),
-        ),
-        child: Text(
-          '$rate',
-          style: AppTypography.body.copyWith(
-            color: isSelected ? AppColors.white : AppColors.ink700,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
+      children: _presets
+          .map(
+            (rate) => ChoiceChip(
+              label: Text('$rate'),
+              selected: selected == rate,
+              showCheckmark: false,
+              selectedColor: context.colorScheme.primary,
+              backgroundColor: Colors.transparent,
+              side: BorderSide(
+                color: selected == rate ? context.colorScheme.primary : context.colorScheme.onSurfaceVariant,
+              ),
+              labelStyle: AppTypography.body.copyWith(
+                color: selected == rate ? context.colorScheme.onPrimary : context.colorScheme.onSurface,
+                fontWeight: FontWeight.w600,
+              ),
+              onSelected: (_) => onChanged(rate),
+            ),
+          )
+          .toList(),
     );
   }
 }

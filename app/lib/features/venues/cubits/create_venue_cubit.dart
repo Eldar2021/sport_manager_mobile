@@ -12,7 +12,6 @@ final class CreateVenueCubit extends Cubit<CreateVenueState> {
   final VenueRepository _repository;
 
   void updateName(String value) => emit(state.copyWith(name: value));
-
   void updateNumber(String value) => emit(state.copyWith(number: value));
 
   Future<void> createVenue() async {
@@ -20,10 +19,7 @@ final class CreateVenueCubit extends Cubit<CreateVenueState> {
     emit(state.copyWith(submitStatus: const RequestLoading()));
     try {
       final result = await _repository.createVenue(
-        CreateVenueBody(
-          name: state.name.trim(),
-          number: state.number.trim().isEmpty ? state.name.trim() : state.number.trim(),
-        ),
+        CreateVenueBody(name: state.name.trim(), number: state.number.trim()),
       );
       emit(state.copyWith(submitStatus: RequestSuccess(result)));
     } on Object catch (e) {

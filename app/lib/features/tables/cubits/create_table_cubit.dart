@@ -28,11 +28,17 @@ final class CreateTableCubit extends Cubit<CreateTableState> {
 
   bool get isEditMode => _tableId != null;
 
-  void updateName(String value) => emit(state.copyWith(name: value));
+  void updateName(String value) {
+    emit(state.copyWith(name: value));
+  }
 
-  void updateDescription(String value) => emit(state.copyWith(description: value));
+  void updateDescription(String value) {
+    emit(state.copyWith(description: value));
+  }
 
-  void updateRate(int value) => emit(state.copyWith(hourlyRate: value));
+  void updateRate(int value) {
+    emit(state.copyWith(hourlyRate: value));
+  }
 
   Future<void> submit() async {
     if (!state.isValid) return;

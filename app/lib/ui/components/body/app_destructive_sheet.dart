@@ -43,7 +43,6 @@ class AppDestructiveSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(
         AppSpacing.x6,
@@ -58,11 +57,11 @@ class AppDestructiveSheet extends StatelessWidget {
             width: 56,
             height: 56,
             child: DecoratedBox(
-              decoration: const BoxDecoration(
-                color: AppColors.dangerLight,
+              decoration: BoxDecoration(
+                color: context.colorScheme.errorContainer,
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: AppColors.dangerRed, size: 24),
+              child: Icon(icon, color: context.colorScheme.error, size: 24),
             ),
           ),
           const SizedBox(height: AppSpacing.x4),
@@ -81,7 +80,7 @@ class AppDestructiveSheet extends StatelessWidget {
                 Navigator.pop(context);
                 onConfirm();
               },
-              style: FilledButton.styleFrom(backgroundColor: AppColors.dangerRed),
+              style: FilledButton.styleFrom(backgroundColor: context.colorScheme.error),
               child: Text(confirmLabel),
             ),
           ),
@@ -89,7 +88,7 @@ class AppDestructiveSheet extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
             child: Text(
               l10n.cancel,
-              style: AppTypography.body.copyWith(color: AppColors.brandAmber),
+              style: AppTypography.body.copyWith(color: context.colorScheme.primary),
             ),
           ),
         ],

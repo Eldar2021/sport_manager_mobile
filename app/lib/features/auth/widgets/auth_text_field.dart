@@ -59,6 +59,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return FormField<String>(
       initialValue: widget.controller?.text ?? '',
       autovalidateMode: AutovalidateMode.disabled,
@@ -67,10 +68,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
         final errorText = field.errorText ?? widget.errorText;
         final hasError = errorText != null;
         final borderColor = hasError
-            ? AppColors.dangerRed
+            ? colorScheme.error
             : _focused
-            ? AppColors.brandAmber
-            : AppColors.ink300;
+            ? colorScheme.primary
+            : colorScheme.onSurfaceVariant;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +130,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
               const SizedBox(height: 4),
               Text(
                 errorText,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.dangerRed),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.error),
               ),
             ],
           ],

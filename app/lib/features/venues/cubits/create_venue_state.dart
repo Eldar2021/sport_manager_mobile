@@ -12,7 +12,7 @@ final class CreateVenueState extends Equatable {
   final String number;
   final RequestStatus<VenueModel> submitStatus;
 
-  bool get isValid => name.trim().isNotEmpty;
+  bool get isValid => name.trim().isNotEmpty && number.trim().isNotEmpty;
 
   bool get isLoading => submitStatus is RequestLoading;
 

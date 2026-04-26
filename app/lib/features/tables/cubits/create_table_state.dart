@@ -17,9 +17,7 @@ final class CreateTableState extends Equatable {
   final RequestStatus<bool> deleteStatus;
 
   bool get isValid => name.trim().isNotEmpty;
-
   bool get isLoading => submitStatus is RequestLoading;
-
   bool get isDeleting => deleteStatus is RequestLoading;
 
   CreateTableState copyWith({
@@ -37,5 +35,11 @@ final class CreateTableState extends Equatable {
   );
 
   @override
-  List<Object?> get props => [name, description, hourlyRate, submitStatus, deleteStatus];
+  List<Object?> get props => [
+    name,
+    description,
+    hourlyRate,
+    submitStatus,
+    deleteStatus,
+  ];
 }

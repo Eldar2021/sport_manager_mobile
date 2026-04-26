@@ -37,7 +37,7 @@ final class HomeCubit extends Cubit<HomeState> {
       final selected = venues.first;
       emit(
         state.copyWith(
-          venuesStatus: RequestSuccess(venues),
+          venuesStatus: RequestSuccess([]),
           selectedVenue: selected,
         ),
       );

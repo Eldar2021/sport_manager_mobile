@@ -18,23 +18,23 @@ class AppDeleteButton extends StatelessWidget {
     return GestureDetector(
       onTap: isLoading ? null : onTap,
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: AppColors.dangerLight,
+        decoration: BoxDecoration(
+          color: context.colorScheme.errorContainer,
           borderRadius: AppRadius.chipBorderRadius,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x3, vertical: AppSpacing.x2),
           child: isLoading
-              ? const AppActivityIndicator(width: 16, height: 16, color: AppColors.dangerRed)
+              ? AppActivityIndicator(width: 16, height: 16, color: context.colorScheme.error)
               : Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.delete_outline_rounded, color: AppColors.dangerRed, size: 16),
+                    Icon(Icons.delete_outline_rounded, color: context.colorScheme.error, size: 16),
                     const SizedBox(width: AppSpacing.x1),
                     Text(
                       label,
                       style: AppTypography.caption.copyWith(
-                        color: AppColors.dangerRed,
+                        color: context.colorScheme.error,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

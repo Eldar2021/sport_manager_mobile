@@ -45,7 +45,6 @@ class _HomeView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
             automaticallyImplyLeading: false,
             centerTitle: false,
             titleSpacing: 0,
