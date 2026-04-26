@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Flutter monorepo. Dart ^3.11.5 · Flutter 3.41.7 (FVM) · Material 3 · Melos workspace.
 
-Deep references: [docs/architecture.md](docs/architecture.md), [docs/code-rules.md](docs/code-rules.md), [docs/contributing.md](docs/contributing.md).
+Deep references: [docs/architecture.md](docs/architecture.md), [docs/code-rules.md](docs/code-rules.md), [docs/theme-system.md](docs/theme-system.md), [docs/contributing.md](docs/contributing.md). Read `theme-system.md` before writing any UI — it explains how to pick the right color / text / spacing token so the result adapts to light/dark.
 
 ## Structure
 

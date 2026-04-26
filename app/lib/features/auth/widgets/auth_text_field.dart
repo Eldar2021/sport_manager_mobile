@@ -59,6 +59,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return FormField<String>(
       initialValue: widget.controller?.text ?? '',
       autovalidateMode: AutovalidateMode.disabled,
@@ -67,10 +68,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
         final errorText = field.errorText ?? widget.errorText;
         final hasError = errorText != null;
         final borderColor = hasError
-            ? AppColors.dangerRed
+            ? colors.error
             : _focused
-            ? AppColors.brandAmber
-            : AppColors.ink300;
+            ? colors.primary
+            : colors.outline;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,14 +79,14 @@ class _AuthTextFieldState extends State<AuthTextField> {
           children: [
             Text(
               widget.label,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+              style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 6),
             AnimatedContainer(
               duration: const Duration(milliseconds: 120),
               height: 48,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainer,
+                color: colors.surfaceContainer,
                 borderRadius: AppRadius.inputBorderRadius,
                 border: Border.all(color: borderColor, width: 1.5),
               ),
@@ -105,31 +106,31 @@ class _AuthTextFieldState extends State<AuthTextField> {
                         field.didChange(v);
                         widget.onChanged?.call(v);
                       },
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: context.textTheme.bodyMedium,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 14),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
                         hintText: widget.hintText,
-                        hintStyle: Theme.of(context).textTheme.bodyMedium,
+                        hintStyle: context.textTheme.bodyMedium,
                         isDense: true,
                       ),
                     ),
                   ),
                   if (widget.suffixIcon != null)
                     Padding(
-                      padding: const EdgeInsets.only(right: 4),
+                      padding: const EdgeInsets.only(right: AppSpacing.x1),
                       child: widget.suffixIcon,
                     ),
                 ],
               ),
             ),
             if (hasError) ...[
-              const SizedBox(height: 4),
+              const SizedBox(height: AppSpacing.x1),
               Text(
                 errorText,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.dangerRed),
+                style: context.appTextStyles.error.bodySmall,
               ),
             ],
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 class AppCheckboxField extends StatelessWidget {
   const AppCheckboxField({
@@ -14,8 +15,7 @@ class AppCheckboxField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final colors = context.colors;
 
     return FormField(
       initialValue: initialValue,
@@ -25,22 +25,22 @@ class AppCheckboxField extends StatelessWidget {
         return CheckboxListTile(
           value: field.value,
           isThreeLine: field.hasError,
-          activeColor: colorScheme.primary,
-          checkColor: colorScheme.onPrimary,
-          contentPadding: const EdgeInsets.symmetric(vertical: 4),
+          activeColor: colors.primary,
+          checkColor: colors.onPrimary,
+          contentPadding: const EdgeInsets.symmetric(vertical: AppSpacing.x1),
           controlAffinity: ListTileControlAffinity.leading,
           checkboxScaleFactor: 1.3,
-          side: BorderSide(color: colorScheme.outline),
+          side: BorderSide(color: colors.outline),
           isError: field.hasError,
           checkboxShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
-          title: Text(label, style: textTheme.bodyMedium),
+          title: Text(label, style: context.textTheme.bodyMedium),
           onChanged: (v) => field.didChange(v),
           subtitle: field.hasError
               ? Text(
                   field.errorText!,
-                  style: textTheme.bodySmall?.copyWith(color: colorScheme.error),
+                  style: context.appTextStyles.error.bodySmall,
                 )
               : null,
         );

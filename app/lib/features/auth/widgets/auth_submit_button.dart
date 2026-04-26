@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 class AuthSubmitButton extends StatelessWidget {
   const AuthSubmitButton({
@@ -25,7 +26,7 @@ class AuthSubmitButton extends StatelessWidget {
               height: 22,
               child: CircularProgressIndicator(
                 strokeWidth: 2.5,
-                color: Theme.of(context).colorScheme.surfaceContainer,
+                color: context.colors.onPrimary,
               ),
             )
           : Text(label),
