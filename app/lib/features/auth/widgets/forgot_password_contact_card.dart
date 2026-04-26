@@ -21,47 +21,44 @@ class ForgotPasswordContactCard extends StatelessWidget {
 
     return CustomPaint(
       painter: _DashedRoundedBorderPainter(colorScheme.outline),
-      child: ClipRRect(
-        borderRadius: AppRadius.cardBorderRadius,
-        child: ListTile(
-          onTap: onTap,
-          visualDensity: VisualDensity.compact,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.x2,
-            vertical: AppSpacing.x1,
+      child: ListTile(
+        onTap: onTap,
+        visualDensity: VisualDensity.compact,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.x2,
+          vertical: AppSpacing.x1,
+        ),
+        leading: DecoratedBox(
+          decoration: BoxDecoration(
+            color: colorScheme.primaryContainer,
+            borderRadius: AppRadius.cardBorderRadius,
           ),
-          leading: DecoratedBox(
-            decoration: BoxDecoration(
-              color: colorScheme.primaryContainer,
-              borderRadius: AppRadius.cardBorderRadius,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.x3),
-              child: Assets.icons.sms.svg(
-                width: 24,
-                colorFilter: ColorFilter.mode(
-                  colorScheme.primary,
-                  BlendMode.srcIn,
-                ),
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.x3),
+            child: Assets.icons.sms.svg(
+              width: 24,
+              colorFilter: ColorFilter.mode(
+                colorScheme.primary,
+                BlendMode.srcIn,
               ),
             ),
           ),
-          title: Text(
-            title,
-            style: textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+        ),
+        title: Text(
+          title,
+          style: textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w600,
           ),
-          subtitle: Text(
-            subtitle,
-            style: textTheme.bodySmall?.copyWith(
-              color: colorScheme.onSurfaceVariant,
-            ),
-          ),
-          trailing: Icon(
-            Icons.chevron_right_rounded,
+        ),
+        subtitle: Text(
+          subtitle,
+          style: textTheme.bodySmall?.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
+        ),
+        trailing: Icon(
+          Icons.chevron_right_rounded,
+          color: colorScheme.onSurfaceVariant,
         ),
       ),
     );
