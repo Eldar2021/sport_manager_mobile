@@ -1,12 +1,12 @@
 # Code Rules
 
-Правила и стандарты кода для проекта Sport Manager Mobile.
+Code conventions and standards for the Sport Manager Mobile project.
 
-## Общие правила
+## General
 
-- **Линтер:** `very_good_analysis` v10.2.0
-- **Длина строки:** 120 символов
-- **Форматтер:** `dart format . --line-length 120`
+- **Linter:** `very_good_analysis` v10.2.0
+- **Line length:** 120 characters
+- **Formatter:** `dart format . --line-length 120`
 - **Trailing commas:** preserve
 
 ### `analysis_options.yaml`
@@ -30,53 +30,53 @@ analyzer:
 
 ---
 
-## Именование
+## Naming
 
-### Файлы
+### Files
 
-- Формат: `snake_case.dart`
-- Примеры: `venues_cubit.dart`, `session_model.dart`, `table_card.dart`
+- Format: `snake_case.dart`
+- Examples: `venues_cubit.dart`, `session_model.dart`, `table_card.dart`
 
-### Классы
+### Classes
 
-| Тип          | Формат                                   | Пример                          |
-| ------------ | ---------------------------------------- | ------------------------------- |
-| Интерфейс    | `abstract interface class` + `I` префикс | `IVenueRemoteSource`            |
-| Реализация   | суффикс `Impl`                           | `VenueRemoteSourceImpl`         |
-| Модель       | суффикс `Model`                          | `SessionModel`, `VenueModel`    |
-| Параметр/DTO | суффикс `Param` или `Body`               | `StartSessionParam`             |
-| Cubit        | суффикс `Cubit`                          | `VenuesCubit`, `SettingsCubit`  |
-| State        | суффикс `State`                          | `VenuesState`, `SettingsState`  |
-| Repository   | суффикс `Repository`                     | `SessionRepository`             |
-| DI-модуль    | суффикс `Module`                         | `VenuesModule`, `NetworkModule` |
+| Type           | Format                                  | Example                         |
+| -------------- | --------------------------------------- | ------------------------------- |
+| Interface      | `abstract interface class` + `I` prefix | `IVenueRemoteSource`            |
+| Implementation | `Impl` suffix                           | `VenueRemoteSourceImpl`         |
+| Model          | `Model` suffix                          | `SessionModel`, `VenueModel`    |
+| Param / DTO    | `Param` or `Body` suffix                | `StartSessionParam`             |
+| Cubit          | `Cubit` suffix                          | `VenuesCubit`, `SettingsCubit`  |
+| State          | `State` suffix                          | `VenuesState`, `SettingsState`  |
+| Repository     | `Repository` suffix                     | `SessionRepository`             |
+| DI module      | `Module` suffix                         | `VenuesModule`, `NetworkModule` |
 
-### Ключевые слова классов
+### Class keywords
 
 ```dart
-// Неизменяемые data-классы
+// Immutable data classes
 final class SessionModel extends Equatable { ... }
 
-// Интерфейсы
+// Interfaces
 abstract interface class IVenueRemoteSource { ... }
 
-// Абстрактные базы
+// Abstract bases
 abstract class BaseDiModule extends DIModule<GetIt> { ... }
 
-// Sealed-состояния
+// Sealed states
 sealed class AuthState extends Equatable { ... }
 final class AuthSuccess extends AuthState { ... }
 ```
 
-### Переменные и методы
+### Variables and methods
 
 - `camelCase` — `accessToken`, `sessionModel`
-- Приватные члены — `_` префикс: `_storage`, `_client`
-- Константы — `camelCase`, не `SCREAMING_SNAKE`: `static const bearerInstance`
-- Методы — `camelCase`: `loadVenues()`, `startSession()`
+- Private members use `_` prefix: `_storage`, `_client`
+- Constants use `camelCase`, not `SCREAMING_SNAKE`: `static const bearerInstance`
+- Methods use `camelCase`: `loadVenues()`, `startSession()`
 
 ---
 
-## Порядок импортов
+## Import order
 
 ```dart
 // 1. Dart SDK
@@ -86,31 +86,31 @@ import 'dart:io';
 // 2. Flutter SDK
 import 'package:flutter/material.dart';
 
-// 3. Внешние пакеты
+// 3. External packages
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-// 4. Внутренние пакеты монорепо
+// 4. Internal monorepo packages
 import 'package:core/core.dart';
 import 'package:api_client/api_client.dart';
 import 'package:storage_client/storage_client.dart';
 
-// 5. Относительные импорты
+// 5. Relative imports
 import '../widgets/table_card.dart';
 ```
 
 ---
 
-## State Management
+## State management
 
 ### Cubit vs Bloc
 
-- **Cubit** — предпочтителен: простые переходы состояний, формы, toggles
-- **Bloc** — для сложной event-based логики
+- **Cubit** — preferred: simple state transitions, forms, toggles
+- **Bloc** — for complex event-based logic
 
-### Состояния: два подхода
+### Two state shapes
 
-**Sealed-класс** — для взаимоисключающих состояний:
+**Sealed class** — for mutually exclusive states:
 
 ```dart
 sealed class AuthState extends Equatable {
@@ -127,7 +127,7 @@ final class AuthSuccess extends AuthState {
 }
 ```
 
-**Single state + copyWith** — для нескольких независимых полей:
+**Single state + copyWith** — for several independent fields:
 
 ```dart
 final class VenuesState extends Equatable {
@@ -152,9 +152,9 @@ final class VenuesState extends Equatable {
 }
 ```
 
-### Асинхронные операции
+### Async operations
 
-Всегда используем паттерн `RequestStatus` или `DataState`:
+Always use `RequestStatus` or `DataState`:
 
 ```dart
 Future<void> loadVenues() async {
@@ -170,12 +170,12 @@ Future<void> loadVenues() async {
 
 ---
 
-## Модели
+## Models
 
-- Аннотация `@JsonSerializable()` + `@immutable`
-- Расширяют `Equatable`
-- Обязательно: `fromJson`, `toJson`
-- `copyWith` — по необходимости
+- Annotate with `@JsonSerializable()` + `@immutable`
+- Extend `Equatable`
+- Required: `fromJson`, `toJson`
+- `copyWith` — when needed
 
 ```dart
 @JsonSerializable()
@@ -197,7 +197,7 @@ final class SessionModel extends Equatable {
 }
 ```
 
-### Enum-сериализация
+### Enum serialization
 
 ```dart
 @JsonEnum()
@@ -209,19 +209,19 @@ enum SessionStatus {
 
 ---
 
-## Repository
+## Repositories
 
-### Слои
+### Layers
 
 ```
 Cubit → Repository → Remote Source / Local Source
 ```
 
-- Repository содержит бизнес-логику и оркестрирует источники данных
-- Remote source — вызовы API через `ApiClient`
-- Local source — работа с `StorageInterfaceSyncRead`
-- Интерфейсы через `abstract interface class`
-- Реализации через `final class`
+- Repositories own business logic and orchestrate sources
+- Remote source — API calls via `ApiClient`
+- Local source — persistence via `StorageInterfaceSyncRead`
+- Interfaces declared as `abstract interface class`
+- Implementations declared as `final class`
 
 ```dart
 abstract interface class SessionRepository {
@@ -245,11 +245,11 @@ final class SessionRepositoryImpl implements SessionRepository {
 
 ---
 
-## Навигация
+## Navigation
 
-- Маршруты — `static const` в `AppRoutes`
-- Навигация через GoRouter: `context.push()`, `context.go()`, `context.pop()`
-- Передача аргументов через `extra` параметр GoRouter или `queryParameters`
+- Routes are `static const` on `AppRoutes`
+- Navigate with GoRouter: `context.push()`, `context.go()`, `context.pop()`
+- Pass arguments via GoRouter `extra` or `queryParameters`
 
 ```dart
 abstract final class AppRoutes {
@@ -263,74 +263,82 @@ abstract final class AppRoutes {
 
 ## DI
 
-- Каждый модуль расширяет `BaseDiModule`
-- Предпочтительно `registerLazySingleton` для сервисов
-- `registerFactory` для Cubit-ов (новый инстанс на каждый экран)
-- При нескольких инстансах одного типа — `instanceName`
-- Порядок регистрации важен: зависимости регистрируются раньше того, что от них зависит
+- Every module extends `BaseDiModule`
+- Prefer `registerLazySingleton` for services
+- `registerFactory` for Cubits (new instance per screen)
+- For multiple instances of the same type, use `instanceName`
+- Order matters: dependencies must be registered before their dependents
 
 ---
 
-## Виджеты и UI
+## Widgets and UI
 
-### Вместо `Container`
+### Avoid `Container`
 
-Используй более лёгкие альтернативы:
+Prefer the lighter alternatives:
 
-| Нужно               | Использовать   |
-| ------------------- | -------------- |
-| Только цвет         | `ColoredBox`   |
-| Только размер       | `SizedBox`     |
-| Только декорация    | `DecoratedBox` |
-| Только отступ       | `Padding`      |
-| Только выравнивание | `Align`        |
+| Need            | Use            |
+| --------------- | -------------- |
+| Color only      | `ColoredBox`   |
+| Size only       | `SizedBox`     |
+| Decoration only | `DecoratedBox` |
+| Padding only    | `Padding`      |
+| Alignment only  | `Align`        |
 
 ```dart
-// Плохо
+// Bad
 Container(height: 24, color: Colors.white)
 
-// Хорошо
+// Good
 ColoredBox(color: AppColors.darkBgSecondary, child: const SizedBox(height: 24))
 ```
 
-### Цвета
+### Theme system
 
-Никогда не хардкодить цвета. Всегда использовать дизайн-систему:
+The theme system is the single source of truth for colors, typography,
+spacing, radii, and shadows. Read [theme-system.md](theme-system.md) before
+adding new UI — it explains how to pick the right token, when to use
+`context.colors` vs `context.appColors`, and how to add new ones.
+
+The short rule: never inline a hex color or magic font size in a widget.
+Always go through the theme.
 
 ```dart
-// Плохо
+// Bad
 color: Colors.grey[300]
 color: Color(0xFFD97706)
+style: TextStyle(fontSize: 16, color: Colors.red)
 
-// Хорошо
-color: AppColors.brandAmber
-color: AppColors.ink300
-color: Theme.of(context).colorScheme.primary
+// Good
+color: context.colors.outline                 // ColorScheme token
+color: context.appColors.success              // AppColorsExt token
+style: context.textTheme.bodyMedium           // Material text role
+style: context.appTextStyles.error.bodyMedium // pre-baked variant
 ```
 
-### Извлечение виджетов
+### Extracting widgets
 
-Не использовать приватные методы для построения виджетов:
+Don't use private methods to build widgets:
 
 ```dart
-// Плохо
+// Bad
 Widget _buildTableCard() { return ...; }
 
-// Хорошо — отдельный класс в своём файле
+// Good — separate class in its own file
 class TableCard extends StatelessWidget { ... }
 ```
 
-### Размер view-файлов
+### View file size
 
-Держать файлы экранов до ~180 строк. При росте:
+Keep screen files under ~180 lines. When they grow:
 
-1. Извлечь логику выбора/обработки в mixin
-2. Извлечь поля формы в переиспользуемые виджеты
-3. View должен содержать только дерево виджетов и минимальный glue-код
+1. Extract selection / handling logic into a mixin
+2. Extract form fields into reusable widgets
+3. The view should hold only the widget tree and minimal glue
 
-### Типизированные typedef
+### Shared typedefs
 
-Если `typedef` используется в нескольких файлах — выносить в отдельный файл:
+If a `typedef` is used across multiple files, hoist it into its own file:
 
 ```dart
 // types.dart
@@ -339,13 +347,13 @@ typedef FromJson<T> = T Function(Map<String, dynamic>);
 
 ---
 
-## Локализация
+## Localization
 
-- Ключи в `camelCase`
-- Параметризованные строки используют плейсхолдеры ARB-формата: `{count}`, `{name}`
-- 3 языка: `en`, `ru`, `ky`
-- После изменения ARB-файлов запустить `flutter gen-l10n`
-- Использование: `context.l10n.keyName`
+- Keys are `camelCase`
+- Parameterized strings use ARB placeholders: `{count}`, `{name}`
+- Three languages: `en`, `ru`, `ky`
+- After editing ARB files, run `flutter gen-l10n`
+- Read keys via `context.l10n.keyName`
 
 ```dart
 // app_en.arb
@@ -356,15 +364,15 @@ typedef FromJson<T> = T Function(Map<String, dynamic>);
   }
 }
 
-// В коде
+// In code
 context.l10n.tableActive(activeCount)
 ```
 
 ---
 
-## Кодогенерация
+## Code generation
 
-- `.g.dart` файлы коммитятся в репозиторий
-- После изменений запускать: `melos run run-build-runner`
-- Сгенерированные файлы исключены из анализа в `analysis_options.yaml`
-- CI падает, если `.g.dart` файлы не закоммичены
+- `.g.dart` files are committed
+- After editing models run: `melos run run-build-runner`
+- Generated files are excluded from analysis in `analysis_options.yaml`
+- CI fails if `.g.dart` files are not committed

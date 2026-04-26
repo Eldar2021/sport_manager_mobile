@@ -30,8 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = context.textTheme;
+    final colors = context.colors;
 
     return Scaffold(
       appBar: AppBar(),
@@ -54,9 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: AppSpacing.x1),
                     Text(
                       l10n.authSignInSubtitle,
-                      style: textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
+                      style: context.appTextStyles.muted.bodyMedium,
                     ),
                     const SizedBox(height: AppSpacing.x6),
                     AuthTextField(
@@ -80,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: TextButton(
                         child: Text(
                           l10n.authForgotPassword,
-                          style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary),
+                          style: textTheme.bodyMedium?.copyWith(color: colors.primary),
                         ),
                         onPressed: () => context.push(AppRoutes.forgotPassword),
                       ),
@@ -114,15 +112,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text(
                         l10n.authNoAccount,
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
+                        style: context.appTextStyles.muted.bodyMedium,
                       ),
                       const SizedBox(width: AppSpacing.x1),
                       TextButton(
                         child: Text(
                           l10n.authSignUp,
-                          style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary),
+                          style: textTheme.bodyMedium?.copyWith(color: colors.primary),
                         ),
                         onPressed: () => context.push(AppRoutes.role),
                       ),

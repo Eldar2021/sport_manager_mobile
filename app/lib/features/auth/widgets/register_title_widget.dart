@@ -18,14 +18,10 @@ class RoleBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      avatar: Icon(
-        icon,
-        color: color,
-        size: 14,
-      ),
+      avatar: Icon(icon, color: color, size: 14),
       label: Text(
         label.toUpperCase(),
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+        style: context.textTheme.bodySmall?.copyWith(
           color: color,
           fontWeight: FontWeight.w600,
         ),

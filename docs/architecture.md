@@ -1,32 +1,32 @@
-# Архитектура — Sport Manager Mobile
+# Architecture — Sport Manager Mobile
 
-> Стек: Flutter · Dart · Material 3 · BLoC/Cubit · GoRouter · GetIt · Dio
+> Stack: Flutter · Dart · Material 3 · BLoC/Cubit · GoRouter · GetIt · Dio
 
 ---
 
-## Структура монорепо
+## Monorepo layout
 
 ```
 sport_manager_mobile/
-├── pubspec.yaml              ← Melos workspace + общие зависимости
-├── app/                      ← Flutter-приложение
+├── pubspec.yaml              ← Melos workspace + shared dependencies
+├── app/                      ← Flutter application
 │   └── lib/
 │       ├── main.dart
-│       ├── env.dart          ← BASE_URL через --dart-define
-│       ├── app/              ← Корневой виджет + GoRouter
-│       ├── core/             ← DI-модули, DataState, ErrorHandlers
-│       ├── features/         ← Фичи (screen / cubit / state / widgets)
-│       ├── ui/               ← Дизайн-система (theme, components)
-│       └── l10n/             ← ARB-файлы + сгенерированные локализации
+│       ├── env.dart          ← BASE_URL via --dart-define
+│       ├── app/              ← Root widget + GoRouter
+│       ├── core/             ← DI modules, DataState, ErrorHandlers
+│       ├── features/         ← Features (screen / cubit / state / widgets)
+│       ├── ui/               ← Design system (theme, components)
+│       └── l10n/             ← ARB files + generated localizations
 └── packages/
-    ├── core/                 ← Базовые абстракции (exception, DI, analytics)
-    ├── api_client/           ← HTTP-клиент на Dio
-    └── storage_client/       ← Обёртка над SharedPreferences
+    ├── core/                 ← Base abstractions (exception, DI, analytics)
+    ├── api_client/           ← Dio HTTP client
+    └── storage_client/       ← SharedPreferences wrapper
 ```
 
 ---
 
-## Диаграмма слоёв
+## Layering
 
 ```
 ┌──────────────────────────────────────────┐
@@ -38,75 +38,75 @@ sport_manager_mobile/
   api_client    storage_client         core
 ```
 
-**Правило:** `features` зависит от `app/core`, `app/core` — от `packages/*`. Пакеты между собой не зависят, кроме `api_client` и `storage_client`, которые используют `packages/core`.
+**Rule:** `features` depends on `app/core`; `app/core` depends on `packages/*`. Packages don't depend on each other except `api_client` and `storage_client`, which both depend on `packages/core`.
 
 ---
 
-## Пакеты
+## Packages
 
 ### `packages/core`
 
-Базовые абстракции без привязки к фреймворку.
+Framework-agnostic base abstractions.
 
-| Модуль                               | Назначение                                   |
-| ------------------------------------ | -------------------------------------------- |
-| `di/di_module.dart`                  | `DIModule<T>` — контракт для DI-модулей      |
-| `exception/model/app_exception.dart` | `AppException<T>` — базовый класс исключений |
-| `exception/model/error_model.dart`   | `ErrorModel` + `BaseMessage` (en/ru/ky)      |
-| `exception/handle/error_handle.dart` | `ErrorHandler` — абстрактный обработчик      |
-| `request_status/request_status.dart` | `RequestStatus<T>` — sealed-класс состояний  |
-| `analytics/`                         | Интерфейсы аналитики                         |
-| `crashlytics/`                       | Интерфейсы крешлитики                        |
-| `remote_config/`                     | Интерфейс RemoteConfig                       |
+| Module                               | Purpose                                  |
+| ------------------------------------ | ---------------------------------------- |
+| `di/di_module.dart`                  | `DIModule<T>` — contract for DI modules  |
+| `exception/model/app_exception.dart` | `AppException<T>` — base exception class |
+| `exception/model/error_model.dart`   | `ErrorModel` + `BaseMessage` (en/ru/ky)  |
+| `exception/handle/error_handle.dart` | `ErrorHandler` — abstract handler        |
+| `request_status/request_status.dart` | `RequestStatus<T>` — sealed state class  |
+| `analytics/`                         | Analytics interfaces                     |
+| `crashlytics/`                       | Crashlytics interfaces                   |
+| `remote_config/`                     | RemoteConfig interface                   |
 
 ### `packages/api_client`
 
-HTTP-клиент на Dio с типизированными методами.
+Dio HTTP client with typed methods.
 
-| Файл                                   | Назначение                                                      |
+| File                                   | Purpose                                                         |
 | -------------------------------------- | --------------------------------------------------------------- |
-| `clients/api_client.dart`              | Типизированные методы GET/POST/PUT/PATCH/DELETE                 |
-| `request_executor/`                    | `RequestExecutor` (интерфейс) + `DioRequestExecutor`            |
-| `interceptors/base_interceptor.dart`   | Добавляет `Accept-Language`, `versionBuild`, `os`               |
+| `clients/api_client.dart`              | Typed GET/POST/PUT/PATCH/DELETE methods                         |
+| `request_executor/`                    | `RequestExecutor` interface + `DioRequestExecutor`              |
+| `interceptors/base_interceptor.dart`   | Adds `Accept-Language`, `versionBuild`, `os`                    |
 | `interceptors/bearer_interceptor.dart` | `Authorization: Bearer <token>`                                 |
-| `interceptors/auth_interceptor.dart`   | `QueuedInterceptor` — refresh-token flow при 401                |
+| `interceptors/auth_interceptor.dart`   | `QueuedInterceptor` — refresh-token flow on 401                 |
 | `connectivity/`                        | `ConnectionService` + `ConnectivityBasedConnectionChecker`      |
 | `exceptions/`                          | `ApiClientException`, `ConnectionException`, `ConvertException` |
 
 ### `packages/storage_client`
 
-Обёртка над `SharedPreferences`.
+Wrapper around `SharedPreferences`.
 
-| Файл                                             | Назначение                                        |
-| ------------------------------------------------ | ------------------------------------------------- |
-| `src/interface/storage_sync_read_interface.dart` | Синхронное чтение / асинхронная запись            |
-| `src/preferences_storage.dart`                   | Реализация через `SharedPreferences`              |
-| `src/secure_storage.dart`                        | Заготовка под `FlutterSecureStorage` (не активна) |
+| File                                             | Purpose                                            |
+| ------------------------------------------------ | -------------------------------------------------- |
+| `src/interface/storage_sync_read_interface.dart` | Sync read / async write                            |
+| `src/preferences_storage.dart`                   | `SharedPreferences` implementation                 |
+| `src/secure_storage.dart`                        | `FlutterSecureStorage` placeholder (not yet wired) |
 
 ---
 
-## Dependency Injection
+## Dependency injection
 
-GetIt + модульная регистрация через `BaseDiModule`.
+GetIt + modular registration via `BaseDiModule`.
 
 ```
 DIModule<T>            ← packages/core
-    └── BaseDiModule   ← app/core/di (поддержка GetIt scope)
+    └── BaseDiModule   ← app/core/di (GetIt scope support)
             ├── CoreModule      → PreferencesStorage (lazySingleton)
             ├── ErrorModule     → ErrorHandler × 3 + UnauthenticatedHandle
             └── NetworkModule   → Dio × 2 + ConnectionService
 ```
 
-**Два Dio-инстанса:**
+**Two Dio instances:**
 
-| Имя                          | Интерсепторы         | Когда использовать        |
-| ---------------------------- | -------------------- | ------------------------- |
-| `ApiClient.bearerInstance`   | Base + Bearer + Auth | Авторизованные запросы    |
-| `ApiClient.noneAuthInstance` | Base                 | Публичные запросы (логин) |
+| Name                         | Interceptors         | When to use             |
+| ---------------------------- | -------------------- | ----------------------- |
+| `ApiClient.bearerInstance`   | Base + Bearer + Auth | Authenticated requests  |
+| `ApiClient.noneAuthInstance` | Base                 | Public requests (login) |
 
-**Зарегистрированные зависимости:**
+**Registered dependencies:**
 
-| Тип                              | instanceName                 | Режим                        |
+| Type                             | instanceName                 | Mode                         |
 | -------------------------------- | ---------------------------- | ---------------------------- |
 | `PreferencesStorage`             | —                            | lazySingleton                |
 | `ErrorHandler`                   | —                            | singleton (BaseErrorHandler) |
@@ -119,95 +119,99 @@ DIModule<T>            ← packages/core
 
 ---
 
-## Навигация
+## Navigation
 
-GoRouter. Маршруты объявлены в `AppRoutes` как константы, конфигурация в `app_router.dart`.
+GoRouter. Routes are declared as constants on `AppRoutes`; configuration lives in `app_router.dart`.
 
 ---
 
-## State Management
+## State management
 
-Cubit + sealed-классы для состояний.
+Cubit + sealed state classes.
 
-**Структура фичи:**
+**Feature layout:**
 
 ```
 features/<name>/
 ├── cubits/
-│   ├── <name>_cubit.dart   ← логика, emit()
+│   ├── <name>_cubit.dart   ← logic, emit()
 │   └── <name>_state.dart   ← Equatable, immutable, copyWith()
 ├── view/
 │   └── <name>_screen.dart
 └── widgets/
 ```
 
-**`DataState<T>`** — sealed-класс для асинхронных данных в `app/core/state/`:
+**`DataState<T>`** — sealed class for async data, in `app/core/state/`:
 
 ```
-DataInitial<T>             ← до первого запроса
-DataLoading<T>             ← идёт загрузка
-DataSuccess<T>(data)       ← данные получены
-DataFailure<T>(exception)  ← ошибка
+DataInitial<T>             ← before first request
+DataLoading<T>             ← in flight
+DataSuccess<T>(data)       ← loaded
+DataFailure<T>(exception)  ← failed
 ```
 
-**`RequestStatus<T>`** — аналог в `packages/core/request_status/`, дополнительно имеет `dataOrNull` через pattern matching.
+**`RequestStatus<T>`** — analogue in `packages/core/request_status/`. Adds `dataOrNull` via pattern matching.
 
 ---
 
-## Обработка ошибок
+## Error handling
 
 ```
 AppException<T>                  ← packages/core (abstract)
     │  handleType: dialog | snackbar
     │
-BaseErrorHandler                 ← app/core (диспетчер)
-    ├── ErrorHandleSnackBar       → Snackbar с локализованным сообщением
+BaseErrorHandler                 ← app/core (dispatcher)
+    ├── ErrorHandleSnackBar       → Snackbar with localized message
     ├── ErrorHandleDialog         → showAdaptiveDialog
     └── UnauthenticatedExceptionHandle
-            ├── 401 → "Сессия истекла" → навигация на логин
-            └── 423 → "Аккаунт заблокирован"
+            ├── 401 → "Session expired" → navigate to login
+            └── 423 → "Account locked"
 ```
 
-`BaseMessage(en, ru, ky)` — i18n-контейнер для текстов ошибок. Используется как в `AppException`, так и в предустановленных константах (`BaseMessage.sessionExpired`, `BaseMessage.technical`, и др.).
+`BaseMessage(en, ru, ky)` — i18n container for error copy. Used in `AppException` and in pre-built constants (`BaseMessage.sessionExpired`, `BaseMessage.technical`, etc).
 
-Вызов из виджетов — через extension: `context.handleError(error)`.
-
----
-
-## Хранилище
-
-`StorageInterfaceSyncRead` — синхронное чтение, асинхронная запись. `PreferencesStorage` — реализация через `SharedPreferences`, все операции оборачиваются в `StorageException`.
-
-**Ключи:**
-
-| Ключ                  | Тип      | Назначение         |
-| --------------------- | -------- | ------------------ |
-| `settings_theme_mode` | `int`    | Индекс `ThemeMode` |
-| `settings_locale`     | `String` | Код языка          |
+From widgets: `context.handleError(error)`.
 
 ---
 
-## Дизайн-система
+## Storage
+
+`StorageInterfaceSyncRead` — sync read, async write. `PreferencesStorage` is the `SharedPreferences` implementation; every operation wraps failures in `StorageException`.
+
+**Keys:**
+
+| Key                   | Type     | Purpose           |
+| --------------------- | -------- | ----------------- |
+| `settings_theme_mode` | `int`    | `ThemeMode` index |
+| `settings_locale`     | `String` | Language code     |
+
+---
+
+## Design system
 
 ```
 app/lib/ui/theme/
-├── app_colors.dart      ← AppColors (константы)
-├── app_spacing.dart     ← AppSpacing (x1–x16), AppRadius, AppShadow
-├── app_typography.dart  ← AppTypography (Inter + tabular-nums)
-├── app_theme.dart       ← AppTheme.dark / AppTheme.light (Material 3)
-└── theme.dart           ← barrel export
+├── app_theme.dart                ← AppTheme.light / AppTheme.dark assembly
+├── theme.dart                    ← barrel export
+├── colors/                       ← AppColors / AppColorSchemes / AppColorsExt
+├── components/                   ← per-widget theme builders
+├── extension/                    ← BuildContext extensions
+├── foundations/                  ← AppSpacing / AppRadius / AppShadow
+└── typography/                   ← AppTextTheme / AppTextThemeExt
 ```
 
-Текущая тема — **Warm Dark**: primary `#D97706` (amber), success `#65A30D` (olive), danger `#DC2626` (red), нейтралы Stone, фон `#0F0D0B`.
+Current theme — **Warm Dark**: primary `#D97706` (amber), success `#65A30D` (olive), danger `#DC2626` (red), Stone neutrals, dark background `#0F0D0B`.
+
+For the full theme contract (which token to use where, when to reach for `AppColorsExt` vs `ColorScheme`, how to extend it), read [theme-system.md](theme-system.md).
 
 ---
 
-## Локализация
+## Localization
 
-ARB-файлы в `app/lib/l10n/arb/` → авто-генерация через `flutter gen-l10n`. Три языка: `en`, `ru`, `ky`. Доступ в виджетах: `context.l10n.<key>`.
+ARB files in `app/lib/l10n/arb/` → auto-generated via `flutter gen-l10n`. Three languages: `en`, `ru`, `ky`. Read via `context.l10n.<key>`.
 
 ---
 
-## Конфигурация окружения
+## Environment configuration
 
-`BASE_URL` передаётся через `--dart-define=BASE_URL=...` при сборке. Читается через `Env.baseUrl`.
+`BASE_URL` is passed via `--dart-define=BASE_URL=...` at build time and read through `Env.baseUrl`.

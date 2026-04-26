@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class InfoBanner extends StatelessWidget {
-  const InfoBanner(this.text, {super.key});
+/// Soft tinted hint with a leading icon. Sibling of `InfoBanner` but uses a
+/// translucent `primary` overlay rather than a filled `primaryContainer`,
+/// making it suitable for inline help text under form fields.
+class HintBanner extends StatelessWidget {
+  const HintBanner(
+    this.text, {
+    this.icon = Icons.info_outline_rounded,
+    super.key,
+  });
 
   final String text;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: context.colors.primaryContainer,
+        color: colors.primary.withValues(alpha: AppOpacity.tint),
         borderRadius: AppRadius.cardBorderRadius,
       ),
       child: Padding(
@@ -18,17 +27,14 @@ class InfoBanner extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(
-              Icons.lock_outline_rounded,
-              color: context.colors.onPrimaryContainer,
-            ),
-            const SizedBox(width: AppSpacing.x3),
+            Icon(icon, color: colors.primary, size: 18),
+            const SizedBox(width: AppSpacing.x2),
             Expanded(
               child: Text(
                 text,
                 style: context.textTheme.bodySmall?.copyWith(
-                  color: context.colors.onPrimaryContainer,
-                  fontWeight: FontWeight.w400,
+                  color: colors.primary,
+                  height: 1.5,
                 ),
               ),
             ),

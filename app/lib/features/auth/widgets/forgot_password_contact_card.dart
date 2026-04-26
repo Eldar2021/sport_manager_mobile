@@ -16,11 +16,10 @@ class ForgotPasswordContactCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final colors = context.colors;
 
     return CustomPaint(
-      painter: _DashedRoundedBorderPainter(colorScheme.outline),
+      painter: _DashedRoundedBorderPainter(colors.outline),
       child: ListTile(
         onTap: onTap,
         visualDensity: VisualDensity.compact,
@@ -30,7 +29,7 @@ class ForgotPasswordContactCard extends StatelessWidget {
         ),
         leading: DecoratedBox(
           decoration: BoxDecoration(
-            color: colorScheme.primaryContainer,
+            color: colors.primaryContainer,
             borderRadius: AppRadius.cardBorderRadius,
           ),
           child: Padding(
@@ -38,7 +37,7 @@ class ForgotPasswordContactCard extends StatelessWidget {
             child: Assets.icons.sms.svg(
               width: 24,
               colorFilter: ColorFilter.mode(
-                colorScheme.primary,
+                colors.primary,
                 BlendMode.srcIn,
               ),
             ),
@@ -46,19 +45,17 @@ class ForgotPasswordContactCard extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: textTheme.bodyMedium?.copyWith(
+          style: context.textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w600,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: textTheme.bodySmall?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
+          style: context.appTextStyles.muted.bodySmall,
         ),
         trailing: Icon(
           Icons.chevron_right_rounded,
-          color: colorScheme.onSurfaceVariant,
+          color: colors.onSurfaceVariant,
         ),
       ),
     );

@@ -19,13 +19,12 @@ class RoleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final colors = context.colors;
     return Card(
-      color: colorScheme.surface,
+      color: colors.surface,
       shape: RoundedRectangleBorder(
         borderRadius: AppRadius.cardBorderRadius,
-        side: BorderSide(color: colorScheme.outline),
+        side: BorderSide(color: colors.outline),
       ),
       child: ListTile(
         onTap: onTap,
@@ -33,7 +32,7 @@ class RoleCard extends StatelessWidget {
         leading: DecoratedBox(
           decoration: BoxDecoration(
             color: iconBg,
-            borderRadius: const BorderRadius.all(Radius.circular(14)),
+            borderRadius: AppRadius.buttonBorderRadius,
           ),
           child: SizedBox(
             width: 56,
@@ -41,16 +40,14 @@ class RoleCard extends StatelessWidget {
             child: Icon(
               icon,
               size: 28,
-              color: colorScheme.primary,
+              color: colors.primary,
             ),
           ),
         ),
         title: Text(title),
         subtitle: Text(
           subtitle,
-          style: textTheme.bodySmall?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
+          style: context.appTextStyles.muted.bodySmall,
         ),
         trailing: const Icon(Icons.chevron_right_rounded),
       ),
