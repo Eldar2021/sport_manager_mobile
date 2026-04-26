@@ -19,6 +19,8 @@ sealed class RegisterParam extends Equatable {
   final String phone;
   final String password;
   final UserRole role;
+
+  Map<String, dynamic> toJson();
 }
 
 @immutable
@@ -36,6 +38,7 @@ final class RegisterOwnerParam extends RegisterParam {
     return _$RegisterOwnerParamFromJson(json);
   }
 
+  @override
   Map<String, dynamic> toJson() => _$RegisterOwnerParamToJson(this);
 
   @override
@@ -66,6 +69,7 @@ final class RegisterManagerParam extends RegisterParam {
 
   final String inviteCode;
 
+  @override
   Map<String, dynamic> toJson() => _$RegisterManagerParamToJson(this);
 
   @override

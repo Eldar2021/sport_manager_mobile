@@ -61,7 +61,7 @@ class _RegisterViewState extends State<RegisterView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      context.l10n.authRegisterOwnerTitle,
+                      _isOwner ? context.l10n.authRegisterOwnerTitle : context.l10n.authRegisterManagerTitle,
                       style: context.textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
@@ -163,7 +163,7 @@ class _RegisterViewState extends State<RegisterView> {
                   return AppSubmitButton(
                     label: context.l10n.authCreateAccount,
                     isLoading: state.isLoading,
-                    onPressed: _registerOwner,
+                    onPressed: _register,
                   );
                 },
               ),
@@ -175,7 +175,7 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  void _registerOwner() {
+  void _register() {
     if (!_formKey.currentState!.validate()) return;
     final param = _isOwner
         ? RegisterOwnerParam(
@@ -205,6 +205,7 @@ class _RegisterViewState extends State<RegisterView> {
     _emailCtr.dispose();
     _passwordCtr.dispose();
     _confirmCtr.dispose();
+    _inviteCodeCtr.dispose();
     super.dispose();
   }
 }

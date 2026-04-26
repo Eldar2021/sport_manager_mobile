@@ -50,6 +50,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                     const SizedBox(height: AppSpacing.x6),
                     AuthTextField(
                       label: context.l10n.authEmailLabel,
+                      controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.done,
                       hintText: context.l10n.authForgotPasswordLoginEmailPlaceholder,
@@ -104,7 +105,6 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
   @override
   void dispose() {
-    _formKey.currentState?.reset();
     _emailController.dispose();
     _forgotPasswordCubit.close();
     super.dispose();

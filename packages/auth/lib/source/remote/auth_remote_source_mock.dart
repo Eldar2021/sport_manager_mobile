@@ -30,6 +30,12 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     ky: 'Логин же сырсөз туура эмес',
   );
 
+  static const _invalidInviteCode = BaseMessage(
+    en: 'Invalid invite code',
+    ru: 'Неверный код приглашения',
+    ky: 'Чакыруу коду туура эмес',
+  );
+
   @override
   Future<AuthResultModel> login({
     required String username,
@@ -51,6 +57,10 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
   @override
   Future<AuthResultModel> register(RegisterParam body) async {
     await Future<void>.delayed(const Duration(milliseconds: 1000));
+
+    if (body is RegisterManagerParam && body.inviteCode.trim() != _validInviteCode) {
+      throw const AuthException('invalid_invite_code', message: _invalidInviteCode);
+    }
 
     return AuthResultModel(
       accessToken: _tokens.accessToken,

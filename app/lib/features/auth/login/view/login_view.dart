@@ -153,7 +153,7 @@ class _LoginViewState extends State<LoginView> {
   void dispose() {
     _usernameCtr.dispose();
     _passwordCtr.dispose();
-    _formKey.currentState?.reset();
+    _loginCubit.close();
     super.dispose();
   }
 }

@@ -25,10 +25,7 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
     return _client.postType<AuthResultModel>(
       '/auth/register',
       fromJson: AuthResultModel.fromJson,
-      data: switch (body) {
-        RegisterOwnerParam() => body.toJson(),
-        RegisterManagerParam() => body.toJson(),
-      },
+      data: body.toJson(),
     );
   }
 
