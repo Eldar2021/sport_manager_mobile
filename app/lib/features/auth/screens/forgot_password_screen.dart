@@ -34,7 +34,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        leading: const BackBtn(),
         title: Text(l10n.authForgotPasswordTitle),
       ),
       body: Form(
