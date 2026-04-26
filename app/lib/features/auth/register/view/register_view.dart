@@ -83,7 +83,7 @@ class _RegisterViewState extends State<RegisterView> {
                     if (!_isOwner) ...[
                       HintBanner(context.l10n.authInviteCodeHint),
                       const SizedBox(height: AppSpacing.x4),
-                      AuthTextField(
+                      AppTextField(
                         label: context.l10n.authInviteCodeLabel,
                         controller: _inviteCodeCtr,
                         hintText: 'TF-XXXXX',
@@ -93,14 +93,14 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       const SizedBox(height: AppSpacing.x4),
                     ],
-                    AuthTextField(
+                    AppTextField(
                       label: context.l10n.authNameLabel,
                       controller: _nameCtr,
                       textInputAction: TextInputAction.next,
                       validator: (v) => InputValidators.emptyValidator(v, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),
-                    AuthTextField(
+                    AppTextField(
                       label: context.l10n.authPhoneLabel,
                       controller: _phoneCtr,
                       keyboardType: TextInputType.phone,
@@ -115,7 +115,7 @@ class _RegisterViewState extends State<RegisterView> {
                       validator: (v) => InputValidators.phoneValidator(v, context, expectedLength: 12),
                     ),
                     const SizedBox(height: AppSpacing.x4),
-                    AuthTextField(
+                    AppTextField(
                       label: context.l10n.authEmailLabel,
                       controller: _emailCtr,
                       keyboardType: TextInputType.emailAddress,
@@ -123,14 +123,14 @@ class _RegisterViewState extends State<RegisterView> {
                       validator: (v) => InputValidators.emailValidator(v, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),
-                    AuthPasswordField(
+                    AppPasswordField(
                       label: context.l10n.authPassword,
                       controller: _passwordCtr,
                       textInputAction: TextInputAction.next,
                       validator: (v) => InputValidators.passwordValidator(v, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),
-                    AuthPasswordField(
+                    AppPasswordField(
                       label: context.l10n.authConfirmPasswordLabel,
                       controller: _confirmCtr,
                       textInputAction: TextInputAction.next,

@@ -48,13 +48,13 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                   children: [
                     InfoBanner(context.l10n.authForgotPasswordBanner),
                     const SizedBox(height: AppSpacing.x6),
-                    AuthTextField(
+                    AppTextField(
                       label: context.l10n.authEmailLabel,
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.done,
                       hintText: context.l10n.authForgotPasswordLoginEmailPlaceholder,
-                      onSubmitted: _submit,
+                      onSubmitted: (_) => _submit(),
                       validator: (value) => InputValidators.emailValidator(value, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),

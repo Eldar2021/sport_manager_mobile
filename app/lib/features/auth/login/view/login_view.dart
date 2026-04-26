@@ -57,7 +57,7 @@ class _LoginViewState extends State<LoginView> {
                       style: context.appTextStyles.muted.bodyMedium,
                     ),
                     const SizedBox(height: AppSpacing.x6),
-                    AuthTextField(
+                    AppTextField(
                       label: context.l10n.authUsernameOrEmail,
                       controller: _usernameCtr,
                       keyboardType: TextInputType.emailAddress,
@@ -66,7 +66,7 @@ class _LoginViewState extends State<LoginView> {
                       validator: (v) => InputValidators.emptyValidator(v, context),
                     ),
                     const SizedBox(height: AppSpacing.x4),
-                    AuthPasswordField(
+                    AppPasswordField(
                       label: context.l10n.authPassword,
                       controller: _passwordCtr,
                       textInputAction: TextInputAction.done,
