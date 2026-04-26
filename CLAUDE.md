@@ -22,10 +22,10 @@ packages/
   core/           # AppException, RequestStatus, DIModule contract, analytics/crashlytics/remote_config interfaces
   api_client/     # Dio HTTP client, interceptors, ConnectionService
   storage_client/ # SharedPreferences wrapper (sync read / async write)
-  auth/           # auth feature package
+  auth/           # auth data layer — models, sources, AuthRepository (see docs/architecture.md)
 ```
 
-Layering: `features → app/core → packages/*`. Packages do not depend on each other except `api_client` and `storage_client`, which depend on `packages/core`.
+Layering: `features → app/core → packages/*`. Packages do not depend on each other except: `api_client`/`storage_client` depend on `packages/core`; `auth` depends on `core`, `api_client`, and `storage_client`.
 
 ## Commands
 
@@ -52,11 +52,11 @@ Run app: `cd app && flutter run --dart-define=BASE_URL=https://...` (required �
 
 **State** — Cubit + sealed `DataState<T>` (`DataInitial / DataLoading / DataSuccess / DataFailure`) for single-field async, or `RequestStatus<T>` from `packages/core` inside a `copyWith`-style state class for multiple independent fields. States extend `Equatable`, are `@immutable`.
 
-**Layers** — `Cubit → Repository → Remote / Local Source`. Interfaces declared as `abstract interface class` (with `I` prefix for sources, e.g. `IVenueRemoteSource`); implementations as `final class` with `Impl` suffix.
+**Layers** — `Cubit → Repository → Remote / Local Source`. Sources declared as `abstract interface class` (no `I` prefix — `Impl` suffix on implementations is sufficient); implementations as `final class` with `Impl` suffix (or `Mock` for dev mocks). Repository is a single concrete `final class` — do NOT split it into interface + `Impl`; the variation point lives in the data sources.
 
 **Models** — `@JsonSerializable() @immutable final class` extending `Equatable`. Suffixes: `Model` for entities, `Param` / `Body` for request DTOs.
 
-**DI** — GetIt + `BaseDiModule`. Register modules in `app/lib/core/di/`. `registerLazySingleton` for services, `registerFactory` for Cubits. Two Dio instances: `ApiClient.bearerInstance` (auth + refresh-token flow) and `ApiClient.noneAuthInstance` (public). When multiple instances of the same type are registered, use `instanceName` (e.g. `'snackbar'`, `'dialog'`, `'unauthenticated'` for `ErrorHandler`).
+**DI** — GetIt + `BaseDiModule`. Register modules in `app/lib/core/di/`. `registerLazySingleton` for services (repositories, sources, clients). Cubits are NOT registered in DI: single-page cubits (e.g. `LoginCubit`, `RegisterCubit`) live as `late final` fields in the page's `StatefulWidget`, instantiated in `initState` via `GetIt.I<XRepository>()`, passed to `BlocConsumer` via `bloc:`, and `close()`'d in `dispose()` — don't wrap in `BlocProvider`. App-/feature-level cubits (`AuthCubit`, `SettingsCubit`) use `BlocProvider` at the app root. Two Dio instances: `ApiClient.bearerInstance` (auth + refresh-token flow) and `ApiClient.noneAuthInstance` (public). When multiple instances of the same type are registered, use `instanceName` (e.g. `'snackbar'`, `'dialog'`, `'unauthenticated'` for `ErrorHandler`).
 
 **Navigation** — GoRouter. Routes as `static const` on `AppRoutes`. Configure in `app_router.dart`.
 

@@ -39,16 +39,22 @@ analyzer:
 
 ### Classes
 
-| Type           | Format                                  | Example                         |
-| -------------- | --------------------------------------- | ------------------------------- |
-| Interface      | `abstract interface class` + `I` prefix | `IVenueRemoteSource`            |
-| Implementation | `Impl` suffix                           | `VenueRemoteSourceImpl`         |
-| Model          | `Model` suffix                          | `SessionModel`, `VenueModel`    |
-| Param / DTO    | `Param` or `Body` suffix                | `StartSessionParam`             |
-| Cubit          | `Cubit` suffix                          | `VenuesCubit`, `SettingsCubit`  |
-| State          | `State` suffix                          | `VenuesState`, `SettingsState`  |
-| Repository     | `Repository` suffix                     | `SessionRepository`             |
-| DI module      | `Module` suffix                         | `VenuesModule`, `NetworkModule` |
+| Type           | Format                     | Example                         |
+| -------------- | -------------------------- | ------------------------------- |
+| Interface      | `abstract interface class` | `VenueRemoteSource`             |
+| Implementation | `Impl` suffix              | `VenueRemoteSourceImpl`         |
+| Mock           | `Mock` suffix              | `AuthRemoteSourceMock`          |
+| Model          | `Model` suffix             | `SessionModel`, `VenueModel`    |
+| Param / DTO    | `Param` or `Body` suffix   | `StartSessionParam`             |
+| Cubit          | `Cubit` suffix             | `VenuesCubit`, `SettingsCubit`  |
+| State          | `State` suffix             | `VenuesState`, `SettingsState`  |
+| Repository     | `Repository` suffix        | `AuthRepository`                |
+| DI module      | `Module` suffix            | `VenuesModule`, `NetworkModule` |
+
+> **Don't add `I` prefix to interfaces.** The `Impl` suffix on the
+> implementation already conveys the interface/impl relationship; `I`
+> in front of the abstract class is redundant. Interfaces stay with
+> their bare name (`AuthRemoteSource`, `VenueRemoteSource`).
 
 ### Class keywords
 
@@ -56,8 +62,8 @@ analyzer:
 // Immutable data classes
 final class SessionModel extends Equatable { ... }
 
-// Interfaces
-abstract interface class IVenueRemoteSource { ... }
+// Interfaces (no `I` prefix)
+abstract interface class VenueRemoteSource { ... }
 
 // Abstract bases
 abstract class BaseDiModule extends DIModule<GetIt> { ... }
@@ -218,29 +224,50 @@ Cubit → Repository → Remote Source / Local Source
 ```
 
 - Repositories own business logic and orchestrate sources
-- Remote source — API calls via `ApiClient`
-- Local source — persistence via `StorageInterfaceSyncRead`
-- Interfaces declared as `abstract interface class`
-- Implementations declared as `final class`
+- Remote source — API calls via `ApiClient`, declared as `abstract interface class` + `Impl`/`Mock`
+- Local source — persistence via `StorageInterfaceSyncRead`, declared as `abstract interface class` + `Impl`
+- **Repository is a single concrete `final class` — do NOT split it into interface + `Impl`.**
+  The variation point lives in the data sources, which are already abstract. Adding a
+  second interface layer on the repository is redundant.
 
 ```dart
-abstract interface class SessionRepository {
-  Future<SessionModel> startSession(StartSessionParam param);
-  Future<SessionModel> endSession(String sessionId);
+@immutable
+final class AuthRepository {
+  const AuthRepository({
+    required AuthRemoteSource remote,
+    required AuthLocalSource local,
+  }) : _remote = remote, _local = local;
+
+  final AuthRemoteSource _remote;
+  final AuthLocalSource _local;
+
+  Future<AuthResultModel> login({required String username, required String password}) async {
+    final result = await _remote.login(username: username, password: password);
+    await Future.wait([_local.saveTokens(result.tokens), _local.saveUser(result.user)]);
+    return result;
+  }
+
+  Future<void> logout() async {
+    await _local.clearAll();
+    try {
+      await _remote.logout();
+    } on Object catch (e) {
+      log('remote logout failed (ignored): $e');
+    }
+  }
+}
+```
+
+The sources, by contrast, ARE split:
+
+```dart
+abstract interface class AuthRemoteSource {
+  Future<AuthResultModel> login({required String username, required String password});
+  Future<void> logout();
 }
 
-final class SessionRepositoryImpl implements SessionRepository {
-  const SessionRepositoryImpl(this._remote);
-  final ISessionRemoteSource _remote;
-
-  @override
-  Future<SessionModel> startSession(StartSessionParam param) =>
-      _remote.startSession(param);
-
-  @override
-  Future<SessionModel> endSession(String sessionId) =>
-      _remote.endSession(sessionId);
-}
+final class AuthRemoteSourceImpl implements AuthRemoteSource { ... }   // real
+final class AuthRemoteSourceMock implements AuthRemoteSource { ... }   // dev mode
 ```
 
 ---
@@ -264,10 +291,58 @@ abstract final class AppRoutes {
 ## DI
 
 - Every module extends `BaseDiModule`
-- Prefer `registerLazySingleton` for services
-- `registerFactory` for Cubits (new instance per screen)
-- For multiple instances of the same type, use `instanceName`
+- Prefer `registerLazySingleton` for services (repositories, sources, clients)
+- For multiple instances of the same type, use `instanceName` (e.g. `'snackbar'`, `'dialog'`, `'unauthenticated'`)
 - Order matters: dependencies must be registered before their dependents
+- Cubits are NOT registered in DI modules — see "Cubit ownership" below
+
+### Cubit ownership
+
+There are two patterns depending on cubit scope. Pick the one that matches.
+
+**Single-page cubit** (only one screen uses it — e.g. `LoginCubit`, `RegisterCubit`,
+`ForgotPasswordCubit`):
+
+- Declare as `late final` field inside the page's `StatefulWidget` state
+- Init in `initState` with `GetIt.I<XRepository>()`
+- Pass explicitly via `bloc:` to `BlocConsumer` / `BlocBuilder`
+- `close()` it in `dispose()`
+- **Do NOT wrap the page in a `BlocProvider`.** Keeping it local makes ownership
+  obvious and avoids putting the cubit in the inherited-widget tree where nothing
+  else can reach it anyway.
+
+```dart
+class _LoginViewState extends State<LoginView> {
+  late final LoginCubit _loginCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _loginCubit = LoginCubit(GetIt.I<AuthRepository>());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<LoginCubit, DataState<AuthResultModel>>(
+      bloc: _loginCubit,
+      listener: ...,
+      builder: ...,
+    );
+  }
+
+  @override
+  void dispose() {
+    _loginCubit.close();
+    super.dispose();
+  }
+}
+```
+
+**App- or feature-level cubit** (shared across multiple widgets — e.g. `AuthCubit`,
+`SettingsCubit`):
+
+- Wrap the relevant subtree in `BlocProvider(create: ...)` (typically at the app root)
+- Consume via `context.read<X>()` / `context.watch<X>()` / `BlocBuilder`
 
 ---
 
