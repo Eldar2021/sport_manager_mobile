@@ -32,10 +32,7 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
   @override
   void initState() {
     super.initState();
-    _registerOwnerCubit = RegisterOwnerCubit(
-      GetIt.I<AuthRepository>(),
-      context.read<AuthCubit>(),
-    );
+    _registerOwnerCubit = RegisterOwnerCubit(GetIt.I<AuthRepository>());
   }
 
   @override
@@ -137,19 +134,20 @@ class _RegisterOwnerViewState extends State<RegisterOwnerScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
-                child: BlocConsumer<RegisterOwnerCubit, DataState<void>>(
+                child: BlocConsumer<RegisterOwnerCubit, DataState<AuthResultModel>>(
                   bloc: _registerOwnerCubit,
                   listener: (context, state) {
-                    if (state.isFailure) {
-                      final exception = (state as DataFailure<void>).exception;
-                      context.handleError(exception);
+                    if (state is DataSuccess<AuthResultModel>) {
+                      context.read<AuthCubit>().setAuthenticated(state.data.user);
+                    } else if (state is DataFailure<AuthResultModel>) {
+                      context.handleError(state.exception);
                     }
                   },
                   builder: (context, state) {
                     return AuthSubmitButton(
                       label: l10n.authCreateAccount,
                       isLoading: state.isLoading,
-                      onPressed: state.isLoading ? null : _registerOwner,
+                      onPressed: _registerOwner,
                     );
                   },
                 ),

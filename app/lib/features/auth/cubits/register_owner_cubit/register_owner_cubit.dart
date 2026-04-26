@@ -1,22 +1,22 @@
+import 'dart:developer';
+
 import 'package:auth/auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_manager_mobile/core/core.dart';
-import 'package:sport_manager_mobile/features/auth/auth.dart';
 
-final class RegisterOwnerCubit extends Cubit<DataState<void>> {
-  RegisterOwnerCubit(this._repository, this._authCubit) : super(const DataInitial());
+class RegisterOwnerCubit extends Cubit<DataState<AuthResultModel>> {
+  RegisterOwnerCubit(this._repository) : super(const DataInitial());
 
   final AuthRepository _repository;
-  final AuthCubit _authCubit;
 
   Future<void> registerOwner(RegisterOwnerBody body) async {
     if (state.isLoading) return;
     emit(const DataLoading());
     try {
       final result = await _repository.registerOwner(body);
-      _authCubit.setAuthenticated(result.user);
-      emit(const DataSuccess(null));
+      emit(DataSuccess(result));
     } on Object catch (e) {
+      log('Failed to register owner', error: e);
       emit(DataFailure(e));
     }
   }
