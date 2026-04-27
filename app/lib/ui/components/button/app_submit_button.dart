@@ -6,30 +6,45 @@ class AppSubmitButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     this.isLoading = false,
+    this.leadingIcon,
     super.key,
   });
 
   final String label;
   final VoidCallback? onPressed;
   final bool isLoading;
+  final Widget? leadingIcon;
+
+  static const double _spinnerSize = 22;
+  static const double _spinnerStrokeWidth = 2.5;
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: isLoading ? null : onPressed,
       style: FilledButton.styleFrom(
-        minimumSize: const Size.fromHeight(56),
+        minimumSize: const Size.fromHeight(AppSpacing.x14),
       ),
       child: isLoading
           ? SizedBox(
-              width: 22,
-              height: 22,
+              width: _spinnerSize,
+              height: _spinnerSize,
               child: CircularProgressIndicator(
-                strokeWidth: 2.5,
+                strokeWidth: _spinnerStrokeWidth,
                 color: context.colors.onPrimary,
               ),
             )
-          : Text(label),
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (leadingIcon != null) ...[
+                  leadingIcon!,
+                  const SizedBox(width: AppSpacing.x2),
+                ],
+                Text(label),
+              ],
+            ),
     );
   }
 }

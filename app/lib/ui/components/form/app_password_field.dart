@@ -11,6 +11,7 @@ class AppPasswordField extends StatefulWidget {
     this.validator,
     this.onChanged,
     this.hintText,
+    this.initiallyObscured = true,
   });
 
   final String label;
@@ -20,13 +21,14 @@ class AppPasswordField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChanged;
   final String? hintText;
+  final bool initiallyObscured;
 
   @override
   State<AppPasswordField> createState() => _AppPasswordFieldState();
 }
 
 class _AppPasswordFieldState extends State<AppPasswordField> {
-  bool _obscure = true;
+  late bool _obscure = widget.initiallyObscured;
 
   @override
   Widget build(BuildContext context) {

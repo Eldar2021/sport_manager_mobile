@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/core/constants/support_contacts.dart';
 import 'package:sport_manager_mobile/generated/assets.gen.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -51,7 +52,7 @@ class ContactSupportSheet extends StatelessWidget {
             iconAsset: Assets.icons.whatsapp,
             iconColor: _whatsappBrand,
             title: 'WhatsApp',
-            subtitle: '+996 702 31-36-11',
+            subtitle: SupportContacts.whatsappPhone,
             onTap: () {},
           ),
           const Divider(),
@@ -59,7 +60,7 @@ class ContactSupportSheet extends StatelessWidget {
             iconAsset: Assets.icons.telegram,
             iconColor: _telegramBrand,
             title: 'Telegram',
-            subtitle: '@Duu1at',
+            subtitle: SupportContacts.telegramHandle,
             onTap: () {},
           ),
           const Divider(),
@@ -67,7 +68,7 @@ class ContactSupportSheet extends StatelessWidget {
             iconAsset: Assets.icons.email,
             iconColor: context.colors.primary,
             title: 'Email',
-            subtitle: 'dbolsunbekuulu@gmail.com',
+            subtitle: SupportContacts.supportEmail,
             onTap: () {},
           ),
           const Divider(),
@@ -75,7 +76,7 @@ class ContactSupportSheet extends StatelessWidget {
             iconAsset: Assets.icons.call,
             iconColor: context.appColors.success,
             title: l10n.authContactCallLabel,
-            subtitle: '+996 702 31-36-11',
+            subtitle: SupportContacts.callPhone,
             onTap: () {},
           ),
         ],

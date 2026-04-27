@@ -46,7 +46,11 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    InfoBanner(context.l10n.authForgotPasswordBanner),
+                    AppBanner(
+                      context.l10n.authForgotPasswordBanner,
+                      variant: AppBannerVariant.info,
+                      icon: Icons.lock_outline_rounded,
+                    ),
                     const SizedBox(height: AppSpacing.x6),
                     AppTextField(
                       label: context.l10n.authEmailLabel,
