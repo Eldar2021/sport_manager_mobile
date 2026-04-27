@@ -81,7 +81,7 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     const SizedBox(height: AppSpacing.x6),
                     if (!_isOwner) ...[
-                      HintBanner(context.l10n.authInviteCodeHint),
+                      AppBanner(context.l10n.authInviteCodeHint),
                       const SizedBox(height: AppSpacing.x4),
                       AppTextField(
                         label: context.l10n.authInviteCodeLabel,
