@@ -36,6 +36,7 @@ dev_dependencies:
     sdk: flutter
   mocktail:
   flutter_gen_runner:
+  flutter_launcher_icons:
 
 flutter:
   uses-material-design: true
@@ -52,3 +53,10 @@ flutter_gen:
     flutter_svg: true
     rive: false
     lottie: false
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
