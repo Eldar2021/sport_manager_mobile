@@ -8,7 +8,6 @@ abstract final class FloatingActionButtonComponentTheme {
       extendedIconLabelSpacing: 10,
       iconSize: 36,
       extendedTextStyle: TextStyle(color: colors.primary),
-      shape: const CircleBorder(),
     );
   }
 }
