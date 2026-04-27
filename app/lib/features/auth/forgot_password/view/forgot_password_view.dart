@@ -38,39 +38,36 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
         ),
         body: Form(
           key: _formKey,
-          child: SingleChildScrollView(
+          child: ListView(
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.x6,
               AppSpacing.x6,
               AppSpacing.x6,
               AppSpacing.x6 + AppSpacing.x16,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                AppBanner(
-                  context.l10n.authForgotPasswordBanner,
-                  variant: AppBannerVariant.info,
-                  icon: Icons.lock_outline_rounded,
-                ),
-                const SizedBox(height: AppSpacing.x6),
-                AppTextField(
-                  label: context.l10n.authEmailLabel,
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.done,
-                  hintText: context.l10n.authForgotPasswordLoginEmailPlaceholder,
-                  onSubmitted: (_) => _submit(),
-                  validator: (value) => InputValidators.emailValidator(value, context),
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                ContactCard(
-                  title: context.l10n.authForgotPasswordNoLink,
-                  subtitle: context.l10n.authForgotPasswordContactUs,
-                  onTap: () => ContactSupportSheet.show(context),
-                ),
-              ],
-            ),
+            children: [
+              AppBanner(
+                context.l10n.authForgotPasswordBanner,
+                variant: AppBannerVariant.info,
+                icon: Icons.lock_outline_rounded,
+              ),
+              const SizedBox(height: AppSpacing.x6),
+              AppTextField(
+                label: context.l10n.authEmailLabel,
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.done,
+                hintText: context.l10n.authForgotPasswordLoginEmailPlaceholder,
+                onSubmitted: (_) => _submit(),
+                validator: (value) => InputValidators.emailValidator(value, context),
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              ContactCard(
+                title: context.l10n.authForgotPasswordNoLink,
+                subtitle: context.l10n.authForgotPasswordContactUs,
+                onTap: () => ContactSupportSheet.show(context),
+              ),
+            ],
           ),
         ),
         floatingActionButton: Padding(
@@ -88,7 +85,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
             },
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: kAppButtonFabLocation,
       ),
     );
   }

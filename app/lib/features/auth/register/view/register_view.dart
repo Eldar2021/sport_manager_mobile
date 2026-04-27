@@ -52,99 +52,98 @@ class _RegisterViewState extends State<RegisterView> {
         appBar: AppBar(),
         body: Form(
           key: _formKey,
-          child: SingleChildScrollView(
+          child: ListView(
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.x6,
               AppSpacing.x6,
               AppSpacing.x6,
               AppSpacing.x6 + AppSpacing.x16,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _isOwner ? context.l10n.authRegisterOwnerTitle : context.l10n.authRegisterManagerTitle,
-                  style: context.textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
+            children: [
+              Text(
+                _isOwner ? context.l10n.authRegisterOwnerTitle : context.l10n.authRegisterManagerTitle,
+                style: context.textTheme.headlineLarge?.copyWith(
+                  fontWeight: FontWeight.w800,
                 ),
-                const SizedBox(height: AppSpacing.x3),
-                if (_isOwner)
-                  RoleBadge(
-                    label: context.l10n.authOwnerBadge,
-                    color: context.colors.primary,
-                    icon: Icons.business_center_rounded,
-                  )
-                else
-                  RoleBadge(
-                    label: context.l10n.authManagerBadge,
-                    color: context.appColors.success,
-                    icon: Icons.badge_outlined,
-                  ),
-                const SizedBox(height: AppSpacing.x6),
-                if (!_isOwner) ...[
-                  AppBanner(context.l10n.authInviteCodeHint),
-                  const SizedBox(height: AppSpacing.x4),
-                  AppTextField(
-                    label: context.l10n.authInviteCodeLabel,
-                    controller: _inviteCodeCtr,
-                    hintText: 'TF-XXXXX',
-                    textInputAction: TextInputAction.next,
-                    autofocus: true,
-                    validator: (v) => InputValidators.emptyValidator(v, context),
-                  ),
-                  const SizedBox(height: AppSpacing.x4),
-                ],
+              ),
+              const SizedBox(height: AppSpacing.x3),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: _isOwner
+                    ? RoleBadge(
+                        label: context.l10n.authOwnerBadge,
+                        color: context.colors.primary,
+                        icon: Icons.business_center_rounded,
+                      )
+                    : RoleBadge(
+                        label: context.l10n.authManagerBadge,
+                        color: context.appColors.success,
+                        icon: Icons.badge_outlined,
+                      ),
+              ),
+              const SizedBox(height: AppSpacing.x6),
+              if (!_isOwner) ...[
+                AppBanner(context.l10n.authInviteCodeHint),
+                const SizedBox(height: AppSpacing.x4),
                 AppTextField(
-                  label: context.l10n.authNameLabel,
-                  controller: _nameCtr,
+                  label: context.l10n.authInviteCodeLabel,
+                  controller: _inviteCodeCtr,
+                  hintText: 'TF-XXXXX',
                   textInputAction: TextInputAction.next,
+                  autofocus: true,
                   validator: (v) => InputValidators.emptyValidator(v, context),
                 ),
                 const SizedBox(height: AppSpacing.x4),
-                AppTextField(
-                  label: context.l10n.authPhoneLabel,
-                  controller: _phoneCtr,
-                  keyboardType: TextInputType.phone,
-                  textInputAction: TextInputAction.next,
-                  hintText: '+996 ___ __ __ __',
-                  inputFormatters: [
-                    MaskTextInputFormatter(
-                      mask: '+996 ### ## ## ##',
-                      filter: {'#': RegExp(r'\d')},
-                    ),
-                  ],
-                  validator: (v) => InputValidators.phoneValidator(v, context, expectedLength: 12),
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                AppTextField(
-                  label: context.l10n.authEmailLabel,
-                  controller: _emailCtr,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  validator: (v) => InputValidators.emailValidator(v, context),
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                AppPasswordField(
-                  label: context.l10n.authPassword,
-                  controller: _passwordCtr,
-                  textInputAction: TextInputAction.next,
-                  validator: (v) => InputValidators.passwordValidator(v, context),
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                AppPasswordField(
-                  label: context.l10n.authConfirmPasswordLabel,
-                  controller: _confirmCtr,
-                  textInputAction: TextInputAction.next,
-                  validator: (v) => InputValidators.passwordConfirmValidator(v, _passwordCtr.text, context),
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                AppCheckboxField(
-                  label: context.l10n.authAgreeTerms,
-                  validator: (v) => (v ?? false) ? null : context.l10n.authAgreeTermsError,
-                ),
               ],
-            ),
+              AppTextField(
+                label: context.l10n.authNameLabel,
+                controller: _nameCtr,
+                textInputAction: TextInputAction.next,
+                validator: (v) => InputValidators.emptyValidator(v, context),
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              AppTextField(
+                label: context.l10n.authPhoneLabel,
+                controller: _phoneCtr,
+                keyboardType: TextInputType.phone,
+                textInputAction: TextInputAction.next,
+                hintText: '+996 ___ __ __ __',
+                inputFormatters: [
+                  MaskTextInputFormatter(
+                    mask: '+996 ### ## ## ##',
+                    filter: {'#': RegExp(r'\d')},
+                  ),
+                ],
+                validator: (v) => InputValidators.phoneValidator(v, context, expectedLength: 12),
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              AppTextField(
+                label: context.l10n.authEmailLabel,
+                controller: _emailCtr,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                validator: (v) => InputValidators.emailValidator(v, context),
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              AppPasswordField(
+                label: context.l10n.authPassword,
+                controller: _passwordCtr,
+                textInputAction: TextInputAction.next,
+                validator: (v) => InputValidators.passwordValidator(v, context),
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              AppPasswordField(
+                label: context.l10n.authConfirmPasswordLabel,
+                controller: _confirmCtr,
+                textInputAction: TextInputAction.next,
+                validator: (v) => InputValidators.passwordConfirmValidator(v, _passwordCtr.text, context),
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              AppCheckboxField(
+                label: context.l10n.authAgreeTerms,
+                validator: (v) => (v ?? false) ? null : context.l10n.authAgreeTermsError,
+              ),
+            ],
           ),
         ),
         floatingActionButton: Padding(
@@ -168,7 +167,7 @@ class _RegisterViewState extends State<RegisterView> {
             },
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: kAppButtonFabLocation,
       ),
     );
   }

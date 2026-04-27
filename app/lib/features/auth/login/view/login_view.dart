@@ -38,78 +38,75 @@ class _LoginViewState extends State<LoginView> {
         appBar: AppBar(),
         body: Form(
           key: _formKey,
-          child: SingleChildScrollView(
+          child: ListView(
             padding: const EdgeInsets.fromLTRB(
               AppSpacing.x6,
               AppSpacing.x6,
               AppSpacing.x6,
               AppSpacing.x6 + AppSpacing.x16,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  context.l10n.authSignIn,
-                  style: context.textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
+            children: [
+              Text(
+                context.l10n.authSignIn,
+                style: context.textTheme.headlineLarge?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.x1),
+              Text(
+                context.l10n.authSignInSubtitle,
+                style: context.appTextStyles.muted.bodyMedium,
+              ),
+              const SizedBox(height: AppSpacing.x6),
+              AppTextField(
+                label: context.l10n.authUsernameOrEmail,
+                controller: _usernameCtr,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                autofocus: true,
+                validator: (v) => InputValidators.emptyValidator(v, context),
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              AppPasswordField(
+                label: context.l10n.authPassword,
+                controller: _passwordCtr,
+                textInputAction: TextInputAction.done,
+                validator: (v) => InputValidators.passwordValidator(v, context),
+              ),
+              const SizedBox(height: AppSpacing.x3),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  child: Text(
+                    context.l10n.authForgotPassword,
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color: context.colors.primary,
+                    ),
                   ),
+                  onPressed: () => context.push(AppRoutes.forgotPassword),
                 ),
-                const SizedBox(height: AppSpacing.x1),
-                Text(
-                  context.l10n.authSignInSubtitle,
-                  style: context.appTextStyles.muted.bodyMedium,
-                ),
-                const SizedBox(height: AppSpacing.x6),
-                AppTextField(
-                  label: context.l10n.authUsernameOrEmail,
-                  controller: _usernameCtr,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  autofocus: true,
-                  validator: (v) => InputValidators.emptyValidator(v, context),
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                AppPasswordField(
-                  label: context.l10n.authPassword,
-                  controller: _passwordCtr,
-                  textInputAction: TextInputAction.done,
-                  validator: (v) => InputValidators.passwordValidator(v, context),
-                ),
-                const SizedBox(height: AppSpacing.x3),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
+              ),
+              const SizedBox(height: AppSpacing.x6),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    context.l10n.authNoAccount,
+                    style: context.appTextStyles.muted.bodyMedium,
+                  ),
+                  const SizedBox(width: AppSpacing.x1),
+                  TextButton(
                     child: Text(
-                      context.l10n.authForgotPassword,
+                      context.l10n.authSignUp,
                       style: context.textTheme.bodyMedium?.copyWith(
                         color: context.colors.primary,
                       ),
                     ),
-                    onPressed: () => context.push(AppRoutes.forgotPassword),
+                    onPressed: () => context.push(AppRoutes.role),
                   ),
-                ),
-                const SizedBox(height: AppSpacing.x6),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      context.l10n.authNoAccount,
-                      style: context.appTextStyles.muted.bodyMedium,
-                    ),
-                    const SizedBox(width: AppSpacing.x1),
-                    TextButton(
-                      child: Text(
-                        context.l10n.authSignUp,
-                        style: context.textTheme.bodyMedium?.copyWith(
-                          color: context.colors.primary,
-                        ),
-                      ),
-                      onPressed: () => context.push(AppRoutes.role),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
         ),
         floatingActionButton: Padding(
@@ -133,7 +130,7 @@ class _LoginViewState extends State<LoginView> {
             },
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: kAppButtonFabLocation,
       ),
     );
   }

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+/// Default `Scaffold.floatingActionButtonLocation` for screens that pair an
+/// `AppButton` with an [AppButtonScope]. `centerDocked` keeps the expanded
+/// button flush with the bottom edge and places the collapsed FAB at the
+/// bottom-right (after the button's own `Align(centerRight)`).
+const FloatingActionButtonLocation kAppButtonFabLocation = FloatingActionButtonLocation.centerDocked;
+
 /// Screen-level coordinator for collapsible `AppButton`s.
 ///
 /// Wrap any subtree (typically a [Scaffold]) with this widget. It registers
