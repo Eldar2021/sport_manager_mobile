@@ -13,13 +13,15 @@ final class AuthModule extends BaseDiModule {
   @override
   FutureOr<void> register(GetIt sl) async {
     super.register(sl);
+
+    final localSource = AuthLocalSourceImpl(
+      secure: const SecureStorage(),
+      preferences: sl<PreferencesStorage>(),
+    );
+    await localSource.init();
+
     sl
-      ..registerLazySingleton<AuthLocalSource>(
-        () => AuthLocalSourceImpl(
-          secure: const SecureStorage(),
-          preferences: sl<PreferencesStorage>(),
-        ),
-      )
+      ..registerLazySingleton<AuthLocalSource>(() => localSource)
       ..registerLazySingleton<AuthRemoteSource>(
         () => Env.isMock
             ? AuthRemoteSourceMock()

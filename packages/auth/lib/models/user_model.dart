@@ -10,7 +10,6 @@ part 'user_model.g.dart';
 final class UserModel extends Equatable {
   const UserModel({
     required this.id,
-    required this.username,
     required this.name,
     required this.role,
     this.email,
@@ -23,7 +22,6 @@ final class UserModel extends Equatable {
   }
 
   final String id;
-  final String username;
   final String name;
   final UserRole role;
   final String? email;
@@ -35,7 +33,6 @@ final class UserModel extends Equatable {
   @override
   List<Object?> get props => [
     id,
-    username,
     name,
     role,
     email,

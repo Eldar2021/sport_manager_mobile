@@ -3,11 +3,13 @@ import 'package:core/core.dart';
 
 /// Mock credentials
 /// ─────────────────────────────────────────
-/// Login   │  username: test  │ password: Test1234
+/// Owner   │  username: test     │ password: Test1234
+/// Manager │  username: manager  │ password: Test1234
 /// Manager │  invite code: INVITE-001
 /// ─────────────────────────────────────────
 final class AuthRemoteSourceMock implements AuthRemoteSource {
-  static const _username = 'test';
+  static const _ownerUsername = 'test';
+  static const _managerUsername = 'manager';
   static const _password = 'Test1234';
   static const _validInviteCode = 'INVITE-001';
 
@@ -18,11 +20,19 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
 
   static const _testOwner = UserModel(
     id: 'user-001',
-    username: _username,
     name: 'Test Owner',
     role: UserRole.owner,
     email: 'test@tableflow.kg',
     phone: '+996 700 000 001',
+  );
+
+  static const _testManager = UserModel(
+    id: 'user-002',
+    name: 'Test Manager',
+    role: UserRole.manager,
+    email: 'manager@tableflow.kg',
+    phone: '+996 700 000 002',
+    ownerId: 'user-001',
   );
 
   static const _wrongCredentials = BaseMessage(
@@ -31,10 +41,10 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     ky: 'Логин же сырсөз туура эмес',
   );
 
-  static const _badInviteCode = BaseMessage(
-    en: 'Invalid or expired invite code',
-    ru: 'Неверный или истёкший код приглашения',
-    ky: 'Жараксыз же мөөнөтү өткөн чакыруу коду',
+  static const _invalidInviteCode = BaseMessage(
+    en: 'Invalid invite code',
+    ru: 'Неверный код приглашения',
+    ky: 'Чакыруу коду туура эмес',
   );
 
   @override
@@ -44,51 +54,40 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
 
-    if (username.trim() != _username || password != _password) {
-      throw const AuthException('invalid_credentials', message: _wrongCredentials);
+    if (password != _password) {
+      throw const AuthException(AuthErrorCode.invalidCredentials, message: _wrongCredentials);
     }
 
+    final user = switch (username.trim()) {
+      _ownerUsername => _testOwner,
+      _managerUsername => _testManager,
+      _ => throw const AuthException(AuthErrorCode.invalidCredentials, message: _wrongCredentials),
+    };
+
     return AuthResultModel(
-      user: _testOwner,
+      user: user,
       accessToken: _tokens.accessToken,
       refreshToken: _tokens.refreshToken,
     );
   }
 
   @override
-  Future<AuthResultModel> registerOwner(RegisterOwnerBody body) async {
+  Future<AuthResultModel> register(RegisterParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 1000));
 
-    return AuthResultModel(
-      accessToken: _tokens.accessToken,
-      refreshToken: _tokens.refreshToken,
-      user: UserModel(
-        id: 'owner-${DateTime.now().millisecondsSinceEpoch}',
-        username: body.email.split('@').first,
-        name: body.name,
-        role: UserRole.owner,
-        email: body.email,
-        phone: body.phone,
-      ),
-    );
-  }
-
-  @override
-  Future<AuthResultModel> registerManager(RegisterManagerBody body) async {
-    await Future<void>.delayed(const Duration(milliseconds: 800));
-
-    if (body.inviteCode.trim().toUpperCase() != _validInviteCode) {
-      throw const AuthException('invalid_invite_code', message: _badInviteCode);
+    if (param is RegisterManagerParam && param.inviteCode.trim() != _validInviteCode) {
+      throw const AuthException(AuthErrorCode.invalidInviteCode, message: _invalidInviteCode);
     }
 
     return AuthResultModel(
       accessToken: _tokens.accessToken,
       refreshToken: _tokens.refreshToken,
       user: UserModel(
-        id: 'manager-${DateTime.now().millisecondsSinceEpoch}',
-        username: body.username,
-        name: body.name,
-        role: UserRole.manager,
+        id: '${param.role.name}-${DateTime.now().millisecondsSinceEpoch}',
+        name: param.name,
+        role: param.role,
+        email: param.email,
+        phone: param.phone,
       ),
     );
   }

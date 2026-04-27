@@ -1,4 +1,3 @@
-import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -61,16 +60,13 @@ class _HomeView extends StatelessWidget {
                 : null,
           ),
 
-          floatingActionButton: state.selectedVenue != null
-              ? RoleGuard(
-                  roles: const {UserRole.owner},
-                  child: FloatingActionButton(
-                    onPressed: () => context.push(
-                      AppRoutes.createTable,
-                      extra: state.selectedVenue!.id,
-                    ),
-                    child: const Icon(Icons.add_rounded),
+          floatingActionButton: state.selectedVenue != null && isOwner
+              ? FloatingActionButton(
+                  onPressed: () => context.push(
+                    AppRoutes.createTable,
+                    extra: state.selectedVenue!.id,
                   ),
+                  child: const Icon(Icons.add_rounded),
                 )
               : null,
           body: _TablesBody(isOwner: isOwner),

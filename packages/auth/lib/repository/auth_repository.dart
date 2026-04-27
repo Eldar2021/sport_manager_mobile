@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:auth/auth.dart';
+import 'package:meta/meta.dart';
 
-class AuthRepository {
+@immutable
+final class AuthRepository {
   const AuthRepository({
     required AuthRemoteSource remote,
     required AuthLocalSource local,
@@ -27,17 +29,8 @@ class AuthRepository {
     return result;
   }
 
-  Future<AuthResultModel> registerOwner(RegisterOwnerBody body) async {
-    final result = await _remote.registerOwner(body);
-    await Future.wait([
-      _local.saveTokens(result.tokens),
-      _local.saveUser(result.user),
-    ]);
-    return result;
-  }
-
-  Future<AuthResultModel> registerManager(RegisterManagerBody body) async {
-    final result = await _remote.registerManager(body);
+  Future<AuthResultModel> register(RegisterParam param) async {
+    final result = await _remote.register(param);
     await Future.wait([
       _local.saveTokens(result.tokens),
       _local.saveUser(result.user),
@@ -49,44 +42,18 @@ class AuthRepository {
     return _remote.forgotPassword(email);
   }
 
-  Future<AuthTokensModel?> getTokens() {
-    return _local.getTokens();
-  }
+  Future<AuthTokensModel?> getTokens() => _local.getTokens();
 
-  String? getRefreshTokenSync() {
-    return _local.getRefreshTokenSync();
-  }
-
-  String? getAccessTokenSync() {
-    return _local.getAccessTokenSync();
-  }
-
-  UserModel? getCachedUser() {
-    return _local.getCachedUser();
-  }
-
-  void cacheRefreshedTokens(String accessToken, String refreshToken) {
-    _local.saveTokens(
-      AuthTokensModel(
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-      ),
-    );
-  }
+  UserModel? getCachedUser() => _local.getCachedUser();
 
   Future<void> logout() async {
+    await _local.clearAll();
     try {
-      await Future.wait([
-        _remote.logout(),
-        _local.clearAll(),
-      ]);
+      await _remote.logout();
     } on Object catch (e) {
-      log('logout error: $e');
-      return;
+      log('remote logout failed (ignored): $e');
     }
   }
 
-  Future<InviteCodeModel> getInviteCode() {
-    return _remote.getInviteCode();
-  }
+  Future<InviteCodeModel> getInviteCode() => _remote.getInviteCode();
 }

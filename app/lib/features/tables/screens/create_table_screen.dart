@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
+import 'package:sport_manager_mobile/ui/components/body/app_destructive_sheet.dart';
+import 'package:sport_manager_mobile/ui/components/button/app_delete_button.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:tables/tables.dart';
 
