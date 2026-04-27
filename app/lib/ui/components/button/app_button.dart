@@ -157,6 +157,7 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
         builder: (context, _) {
           return Align(
             alignment: Alignment.centerRight,
+            heightFactor: 1,
             child: _SizedFrame(
               t: _animation.value,
               height: spec.height,
