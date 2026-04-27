@@ -155,20 +155,23 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
       child: AnimatedBuilder(
         animation: _animation,
         builder: (context, _) {
-          return _SizedFrame(
-            t: _animation.value,
-            height: spec.height,
-            expand: widget.expand,
-            child: _MaterialFor(
-              variant: widget.variant,
-              style: style,
-              onPressed: _effectiveOnPressed,
-              autofocus: widget.autofocus,
-              focusNode: widget.focusNode,
-              child: _CrossfadeContent(
-                t: _animation.value,
-                expanded: _expandedChild(spec),
-                collapsed: _collapsedChild(spec),
+          return Align(
+            alignment: Alignment.centerRight,
+            child: _SizedFrame(
+              t: _animation.value,
+              height: spec.height,
+              expand: widget.expand,
+              child: _MaterialFor(
+                variant: widget.variant,
+                style: style,
+                onPressed: _effectiveOnPressed,
+                autofocus: widget.autofocus,
+                focusNode: widget.focusNode,
+                child: _CrossfadeContent(
+                  t: _animation.value,
+                  expanded: _expandedChild(spec),
+                  collapsed: _collapsedChild(spec),
+                ),
               ),
             ),
           );
