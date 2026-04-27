@@ -36,6 +36,7 @@ dev_dependencies:
     sdk: flutter
   mocktail:
   flutter_gen_runner:
+  flutter_launcher_icons:
 
 flutter:
   uses-material-design: true

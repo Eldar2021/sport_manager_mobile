@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="sport_manager_mobile"
+        android:label="Sport X"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
