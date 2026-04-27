@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:venues/venues.dart';
@@ -143,7 +144,7 @@ class HomeVenuePicker extends StatelessWidget {
               child: OutlinedButton.icon(
                 onPressed: () {
                   Navigator.pop(context);
-                  context.push('/venues/create');
+                  context.push(AppRoutes.venueForm);
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: context.colors.surface,

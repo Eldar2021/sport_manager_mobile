@@ -6,12 +6,13 @@ import 'package:sessions/sessions.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
+import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:tables/tables.dart';
 import 'package:venues/venues.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +64,8 @@ class _HomeView extends StatelessWidget {
           floatingActionButton: state.selectedVenue != null && isOwner
               ? FloatingActionButton(
                   onPressed: () => context.push(
-                    AppRoutes.createTable,
-                    extra: state.selectedVenue!.id,
+                    AppRoutes.tableForm,
+                    extra: TableFormExtra(venueId: state.selectedVenue!.id),
                   ),
                   child: const Icon(Icons.add_rounded),
                 )
@@ -88,14 +89,19 @@ class _TablesBody extends StatelessWidget {
         if (state.isInitialLoading) return const VenuesSkeletonWidget();
 
         if (state.venues.isEmpty) {
-          return VenuesEmptyWidget(onCreateTap: () => context.push(AppRoutes.createVenue));
+          return VenuesEmptyWidget(onCreateTap: () => context.push(AppRoutes.venueForm));
         }
 
         if (state.isTablesLoading) return const VenuesSkeletonWidget();
 
         if (state.tables.isEmpty) {
           return TablesEmptyWidget(
-            onAddTap: isOwner ? () => context.push(AppRoutes.createTable, extra: state.selectedVenue!.id) : null,
+            onAddTap: isOwner
+                ? () => context.push(
+                    AppRoutes.tableForm,
+                    extra: TableFormExtra(venueId: state.selectedVenue!.id),
+                  )
+                : null,
           );
         }
 
@@ -105,12 +111,7 @@ class _TablesBody extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    AppSpacing.x4,
-                    AppSpacing.x4,
-                    AppSpacing.x4,
-                    AppSpacing.x3,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(AppSpacing.x4, AppSpacing.x4, AppSpacing.x4, AppSpacing.x3),
                   child: Text(
                     'СТОЛЫ · ${state.tables.length}',
                     style: context.textTheme.bodySmall?.copyWith(

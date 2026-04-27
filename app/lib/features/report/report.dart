@@ -1,1 +1,1 @@
-export 'screens/report_screen.dart';
+export 'view/report_screen.dart';

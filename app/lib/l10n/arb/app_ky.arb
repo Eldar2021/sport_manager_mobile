@@ -79,7 +79,7 @@
   "updateTableButton": "Жаңыртуу",
   "deleteTableButton": "Жок кылуу",
 
-  "createVenueTitle": "Биринчи залды түзүңүз",
+  "createVenueTitle": "Залды түзүңүз",
   "createVenueSubtitle": "Залыңызга ат бериңиз. Столдорду кийинчерек башкы баракчадан кошсо болот.",
   "createVenueNameLabel": "Зал аты",
   "createVenueNameHint": "Борбордук филиал",
@@ -87,6 +87,10 @@
   "createVenueNumberHint": "№ 1 же БФ",
   "createVenueInfoBanner": "Зал түзүлгөндөн кийин столдорду бирден өз тарифи менен кошо аласыз.",
   "createVenueButton": "Зал түзүү →",
+  "editVenueTitle": "Залды өзгөртүү",
+  "updateVenueButton": "Жаңыртуу",
+  "deleteVenueButton": "Жок кылуу",
+  "deleteVenueSubtitle": "Бардык столдор жана сессиялардын тарыхы сакталат, бирок зал жок кылынат.",
 
   "cancel": "Жокко чыгаруу",
   "deleteTableSubtitle": "Сессиялардын тарыхы сакталат, бирок стол башкы баракчадан жоголот."

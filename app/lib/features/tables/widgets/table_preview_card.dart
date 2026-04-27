@@ -16,7 +16,6 @@ class TablePreviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final hasName = name.trim().isNotEmpty;
     final hasDesc = description.trim().isNotEmpty;
 
@@ -45,7 +44,7 @@ class TablePreviewCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    hasName ? name : l10n.createTableNameLabel,
+                    hasName ? name : context.l10n.createTableNameLabel,
                     style: context.textTheme.bodyLarge?.copyWith(
                       color: hasName ? context.colors.onSurface : context.colors.outline,
                     ),
@@ -55,7 +54,7 @@ class TablePreviewCard extends StatelessWidget {
                   if (hasDesc || !hasName) ...[
                     const SizedBox(height: 2),
                     Text(
-                      hasDesc ? description : l10n.createTableDescPlaceholder,
+                      hasDesc ? description : context.l10n.createTableDescPlaceholder,
                       style: context.textTheme.bodySmall?.copyWith(color: context.colors.outline),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -83,7 +82,7 @@ class TablePreviewCard extends StatelessWidget {
                         style: context.textTheme.bodyLarge?.copyWith(color: context.colors.primary),
                       ),
                       TextSpan(
-                        text: ' ${l10n.createTableRateSuffix}',
+                        text: ' ${context.l10n.createTableRateSuffix}',
                         style: context.textTheme.bodySmall?.copyWith(color: context.colors.primary),
                       ),
                     ],

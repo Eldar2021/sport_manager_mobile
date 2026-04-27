@@ -15,32 +15,23 @@ class AppDeleteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: isLoading ? null : onTap,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: context.colors.errorContainer,
-          borderRadius: AppRadius.chipBorderRadius,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x3, vertical: AppSpacing.x2),
-          child: isLoading
-              ? AppActivityIndicator(width: 16, height: 16, color: context.colors.error)
-              : Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.delete_outline_rounded, color: context.colors.error, size: 16),
-                    const SizedBox(width: AppSpacing.x1),
-                    Text(
-                      label,
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: context.colors.error,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-        ),
+    return TextButton.icon(
+      onPressed: isLoading ? null : onTap,
+      icon: isLoading
+          ? SizedBox(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(strokeWidth: 2, color: context.colors.error),
+            )
+          : const Icon(Icons.delete_outline_rounded),
+      label: isLoading ? const SizedBox.shrink() : Text(label),
+      style: TextButton.styleFrom(
+        foregroundColor: context.colors.error,
+        backgroundColor: context.colors.errorContainer,
+        iconSize: 16,
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.buttonBorderRadius),
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x3, vertical: AppSpacing.x2),
+        textStyle: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
       ),
     );
   }

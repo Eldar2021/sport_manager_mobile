@@ -26,9 +26,7 @@ class RateSelector extends StatelessWidget {
               showCheckmark: false,
               selectedColor: context.colors.primary,
               backgroundColor: AppColors.transparent,
-              side: BorderSide(
-                color: selected == rate ? context.colors.primary : context.colors.onSurfaceVariant,
-              ),
+              side: BorderSide.none,
               labelStyle: context.textTheme.bodyMedium?.copyWith(
                 color: selected == rate ? context.colors.onPrimary : context.colors.onSurface,
                 fontWeight: FontWeight.w600,

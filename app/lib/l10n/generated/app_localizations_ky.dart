@@ -237,7 +237,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get deleteTableButton => 'Жок кылуу';
 
   @override
-  String get createVenueTitle => 'Биринчи залды түзүңүз';
+  String get createVenueTitle => 'Залды түзүңүз';
 
   @override
   String get createVenueSubtitle => 'Залыңызга ат бериңиз. Столдорду кийинчерек башкы баракчадан кошсо болот.';
@@ -259,6 +259,18 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get createVenueButton => 'Зал түзүү →';
+
+  @override
+  String get editVenueTitle => 'Залды өзгөртүү';
+
+  @override
+  String get updateVenueButton => 'Жаңыртуу';
+
+  @override
+  String get deleteVenueButton => 'Жок кылуу';
+
+  @override
+  String get deleteVenueSubtitle => 'Бардык столдор жана сессиялардын тарыхы сакталат, бирок зал жок кылынат.';
 
   @override
   String get cancel => 'Жокко чыгаруу';

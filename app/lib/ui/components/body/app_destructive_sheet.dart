@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -44,12 +45,7 @@ class AppDestructiveSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.x6,
-        AppSpacing.x6,
-        AppSpacing.x6,
-        AppSpacing.x8,
-      ),
+      padding: const EdgeInsets.fromLTRB(AppSpacing.x6, AppSpacing.x6, AppSpacing.x6, AppSpacing.x8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -67,30 +63,28 @@ class AppDestructiveSheet extends StatelessWidget {
           const SizedBox(height: AppSpacing.x4),
           Text(title, style: context.textTheme.titleLarge, textAlign: TextAlign.center),
           const SizedBox(height: AppSpacing.x2),
-          Text(
-            subtitle,
-            style: context.textTheme.bodyMedium?.copyWith(color: AppColors.ink500),
-            textAlign: TextAlign.center,
-          ),
+          Text(subtitle, style: context.textTheme.bodyMedium, textAlign: TextAlign.center),
           const SizedBox(height: AppSpacing.x6),
           SizedBox(
             width: double.infinity,
             child: FilledButton(
               onPressed: () {
-                Navigator.pop(context);
+                context.pop();
                 onConfirm();
               },
               style: FilledButton.styleFrom(backgroundColor: context.colors.error),
               child: Text(confirmLabel),
             ),
           ),
+          const SizedBox(height: AppSpacing.x5),
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => context.pop(),
             child: Text(
               l10n.cancel,
               style: context.textTheme.bodyMedium?.copyWith(color: context.colors.primary),
             ),
           ),
+          SizedBox(height: AppSpacing.bottom(context)),
         ],
       ),
     );

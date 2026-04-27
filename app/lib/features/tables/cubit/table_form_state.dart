@@ -1,8 +1,8 @@
-part of 'create_table_cubit.dart';
+part of 'table_form_cubit.dart';
 
 @immutable
-final class CreateTableState extends Equatable {
-  const CreateTableState({
+final class TableFormState extends Equatable {
+  const TableFormState({
     this.name = '',
     this.description = '',
     this.hourlyRate = 200,
@@ -20,13 +20,13 @@ final class CreateTableState extends Equatable {
   bool get isLoading => submitStatus is RequestLoading;
   bool get isDeleting => deleteStatus is RequestLoading;
 
-  CreateTableState copyWith({
+  TableFormState copyWith({
     String? name,
     String? description,
     int? hourlyRate,
     RequestStatus<TableModel>? submitStatus,
     RequestStatus<bool>? deleteStatus,
-  }) => CreateTableState(
+  }) => TableFormState(
     name: name ?? this.name,
     description: description ?? this.description,
     hourlyRate: hourlyRate ?? this.hourlyRate,

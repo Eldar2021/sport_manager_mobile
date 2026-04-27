@@ -7,27 +7,29 @@ import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
-import 'package:sport_manager_mobile/ui/components/body/app_destructive_sheet.dart';
-import 'package:sport_manager_mobile/ui/components/button/app_delete_button.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:tables/tables.dart';
 
-class CreateTableScreen extends StatefulWidget {
-  const CreateTableScreen({
+final class TableFormExtra {
+  const TableFormExtra({
     required this.venueId,
-    this.initialTable,
-    super.key,
+    this.table,
   });
 
   final String venueId;
-  final TableModel? initialTable;
-
-  @override
-  State<CreateTableScreen> createState() => _CreateTableViewState();
+  final TableModel? table;
 }
 
-class _CreateTableViewState extends State<CreateTableScreen> {
-  late final CreateTableCubit _cubit;
+class TableFormView extends StatefulWidget {
+  const TableFormView(this.extra, {super.key});
+
+  final TableFormExtra extra;
+  @override
+  State<TableFormView> createState() => _TableFormViewState();
+}
+
+class _TableFormViewState extends State<TableFormView> {
+  late final TableFormCubit _cubit;
   late final TextEditingController _nameCtr;
   late final TextEditingController _descCtr;
   late final TextEditingController _rateCtr;
@@ -35,12 +37,12 @@ class _CreateTableViewState extends State<CreateTableScreen> {
   @override
   void initState() {
     super.initState();
-    _cubit = CreateTableCubit(
+    _cubit = TableFormCubit(
       GetIt.I<TableRepository>(),
-      widget.venueId,
-      initialTable: widget.initialTable,
+      widget.extra.venueId,
+      initialTable: widget.extra.table,
     );
-    final table = widget.initialTable;
+    final table = widget.extra.table;
     _nameCtr = TextEditingController(text: table?.name ?? '');
     _descCtr = TextEditingController(text: table?.description ?? '');
     _rateCtr = TextEditingController(text: (table?.hourlyRate ?? 200).toString());
@@ -59,10 +61,8 @@ class _CreateTableViewState extends State<CreateTableScreen> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final labelStyle = context.textTheme.bodySmall?.copyWith(color: context.colors.onSurfaceVariant);
-    return BlocConsumer<CreateTableCubit, CreateTableState>(
+    return BlocBuilder<TableFormCubit, TableFormState>(
       bloc: _cubit,
-      listenWhen: _listenWhen,
-      listener: _listener,
       builder: (context, state) {
         final isEdit = _cubit.isEditMode;
         return Scaffold(
@@ -97,34 +97,31 @@ class _CreateTableViewState extends State<CreateTableScreen> {
                   hourlyRate: state.hourlyRate,
                 ),
                 const SizedBox(height: AppSpacing.x5),
-                Text(l10n.createTableNameLabel, style: labelStyle),
-                const SizedBox(height: AppSpacing.x2),
-                TextField(
+                AppTextField(
                   controller: _nameCtr,
                   onChanged: _cubit.updateName,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: InputDecoration(hintText: l10n.createTableNameHint),
+                  label: context.l10n.createTableNameLabel,
+                  hintText: context.l10n.createTableNameHint,
                 ),
                 const SizedBox(height: AppSpacing.x4),
-                Text(l10n.createTableDescLabel, style: labelStyle),
-                const SizedBox(height: AppSpacing.x2),
-                TextField(
+                AppTextField(
                   controller: _descCtr,
                   onChanged: _cubit.updateDescription,
-                  decoration: InputDecoration(hintText: l10n.createTableDescHint),
+                  hintText: context.l10n.createTableDescHint,
+                  label: context.l10n.createTableDescLabel,
                 ),
                 const SizedBox(height: AppSpacing.x4),
                 Text(l10n.createTableRateLabel, style: labelStyle),
-                const SizedBox(height: AppSpacing.x3),
+                const SizedBox(height: AppSpacing.x2),
                 RateSelector(
                   selected: state.hourlyRate,
                   onChanged: (rate) => _onRateChipTap(context, rate),
                 ),
-                const SizedBox(height: AppSpacing.x3),
-                TextField(
+                AppTextField(
                   controller: _rateCtr,
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  label: '',
                   onChanged: (v) {
                     final parsed = int.tryParse(v);
                     if (parsed != null && parsed > 0) {
@@ -137,24 +134,16 @@ class _CreateTableViewState extends State<CreateTableScreen> {
             ),
           ),
           bottomNavigationBar: Padding(
-            padding: EdgeInsets.only(
-              left: AppSpacing.x4,
-              right: AppSpacing.x4,
-              bottom: AppSpacing.bottom(context),
-              top: AppSpacing.x4,
-            ),
-            child: FilledButton(
-              onPressed: state.isValid && !state.isLoading ? _cubit.submit : null,
-              child: state.isLoading
-                  ? SizedBox(
-                      width: 22,
-                      height: 22,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2.5,
-                        color: context.colors.surfaceContainer,
-                      ),
-                    )
-                  : Text(isEdit ? l10n.updateTableButton : l10n.createTableButton),
+            padding: EdgeInsets.fromLTRB(AppSpacing.x4, 0, AppSpacing.x4, AppSpacing.bottom(context)),
+            child: BlocListener<TableFormCubit, TableFormState>(
+              bloc: _cubit,
+              listenWhen: _listenWhen,
+              listener: _listener,
+              child: AppSubmitButton(
+                onPressed: state.isValid && !state.isLoading ? _cubit.submit : null,
+                isLoading: state.isLoading,
+                label: isEdit ? l10n.updateTableButton : l10n.createTableButton,
+              ),
             ),
           ),
         );
@@ -162,11 +151,11 @@ class _CreateTableViewState extends State<CreateTableScreen> {
     );
   }
 
-  bool _listenWhen(CreateTableState prev, CreateTableState next) {
+  bool _listenWhen(TableFormState prev, TableFormState next) {
     return prev.submitStatus != next.submitStatus || prev.deleteStatus != next.deleteStatus;
   }
 
-  void _listener(BuildContext context, CreateTableState state) {
+  void _listener(BuildContext context, TableFormState state) {
     if (state.submitStatus.isSuccess || state.deleteStatus.isSuccess) {
       context.pop();
     } else if (state.submitStatus.isFailure) {

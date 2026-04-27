@@ -6,11 +6,11 @@ import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
-import 'package:sport_manager_mobile/features/profile/screens/profile_screen.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
-import 'package:tables/tables.dart';
+import 'package:venues/venues.dart';
 
 const Set<String> _authRoutes = {
   AppRoutes.welcome,
@@ -80,25 +80,14 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       ),
 
       GoRoute(
-        path: AppRoutes.createVenue,
-        builder: (context, _) => const CreateVenueScreen(),
+        path: AppRoutes.venueForm,
+        builder: (context, state) => VenueFormView(venue: state.extra as VenueModel?),
       ),
 
       GoRoute(
-        path: AppRoutes.createTable,
-        builder: (_, state) => CreateTableScreen(
-          venueId: state.extra as String? ?? '',
-        ),
+        path: AppRoutes.tableForm,
+        builder: (_, state) => TableFormView(state.extra! as TableFormExtra),
       ),
-
-      GoRoute(
-        path: AppRoutes.editTable,
-        builder: (_, state) {
-          final extra = state.extra! as (String, TableModel);
-          return CreateTableScreen(venueId: extra.$1, initialTable: extra.$2);
-        },
-      ),
-
       StatefulShellRoute.indexedStack(
         builder: (_, _, shell) => MainShell(navigationShell: shell),
         branches: [
@@ -106,7 +95,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
             routes: [
               GoRoute(
                 path: AppRoutes.home,
-                builder: (_, _) => const HomeScreen(),
+                builder: (_, _) => const HomeView(),
               ),
             ],
           ),
@@ -114,7 +103,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
             routes: [
               GoRoute(
                 path: AppRoutes.report,
-                builder: (_, _) => const ReportScreen(),
+                builder: (_, _) => const ReportView(),
               ),
             ],
           ),
@@ -122,7 +111,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
             routes: [
               GoRoute(
                 path: AppRoutes.profile,
-                builder: (_, _) => const ProfileScreen(),
+                builder: (_, _) => const ProfileView(),
               ),
             ],
           ),

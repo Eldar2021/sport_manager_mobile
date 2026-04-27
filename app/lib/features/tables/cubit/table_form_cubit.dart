@@ -4,22 +4,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:tables/tables.dart';
 
-part 'create_table_state.dart';
+part 'table_form_state.dart';
 
-class CreateTableCubit extends Cubit<CreateTableState> {
-  CreateTableCubit(
+class TableFormCubit extends Cubit<TableFormState> {
+  TableFormCubit(
     this._repository,
     this._venueId, {
     TableModel? initialTable,
   }) : _tableId = initialTable?.id,
        super(
          initialTable != null
-             ? CreateTableState(
+             ? TableFormState(
                  name: initialTable.name ?? '',
                  description: initialTable.description ?? '',
                  hourlyRate: initialTable.hourlyRate,
                )
-             : const CreateTableState(),
+             : const TableFormState(),
        );
 
   final TableRepository _repository;

@@ -4,8 +4,8 @@ import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProfileView extends StatelessWidget {
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {

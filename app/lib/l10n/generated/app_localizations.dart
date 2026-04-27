@@ -552,7 +552,7 @@ abstract class AppLocalizations {
   /// No description provided for @createVenueTitle.
   ///
   /// In en, this message translates to:
-  /// **'Create your first venue'**
+  /// **'Create your venue'**
   String get createVenueTitle;
 
   /// No description provided for @createVenueSubtitle.
@@ -596,6 +596,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create venue →'**
   String get createVenueButton;
+
+  /// No description provided for @editVenueTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit venue'**
+  String get editVenueTitle;
+
+  /// No description provided for @updateVenueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get updateVenueButton;
+
+  /// No description provided for @deleteVenueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteVenueButton;
+
+  /// No description provided for @deleteVenueSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All tables and session history will be preserved, but the venue will be removed.'**
+  String get deleteVenueSubtitle;
 
   /// No description provided for @cancel.
   ///

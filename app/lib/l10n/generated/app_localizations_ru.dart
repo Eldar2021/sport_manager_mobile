@@ -237,7 +237,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get deleteTableButton => 'Удалить';
 
   @override
-  String get createVenueTitle => 'Создайте первый зал';
+  String get createVenueTitle => 'Создайте зал';
 
   @override
   String get createVenueSubtitle => 'Дайте название вашему залу. Столы можно будет добавить позже с главной страницы.';
@@ -259,6 +259,18 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get createVenueButton => 'Создать зал →';
+
+  @override
+  String get editVenueTitle => 'Редактировать зал';
+
+  @override
+  String get updateVenueButton => 'Обновить';
+
+  @override
+  String get deleteVenueButton => 'Удалить';
+
+  @override
+  String get deleteVenueSubtitle => 'Все столы и история сессий сохранятся, но зал будет удалён.';
 
   @override
   String get cancel => 'Отмена';

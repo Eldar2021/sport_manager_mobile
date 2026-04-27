@@ -237,7 +237,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteTableButton => 'Delete';
 
   @override
-  String get createVenueTitle => 'Create your first venue';
+  String get createVenueTitle => 'Create your venue';
 
   @override
   String get createVenueSubtitle => 'Give your venue a name. Tables can be added later from the home page.';
@@ -260,6 +260,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createVenueButton => 'Create venue →';
+
+  @override
+  String get editVenueTitle => 'Edit venue';
+
+  @override
+  String get updateVenueButton => 'Update';
+
+  @override
+  String get deleteVenueButton => 'Delete';
+
+  @override
+  String get deleteVenueSubtitle => 'All tables and session history will be preserved, but the venue will be removed.';
 
   @override
   String get cancel => 'Cancel';

@@ -79,7 +79,7 @@
   "updateTableButton": "Обновить",
   "deleteTableButton": "Удалить",
 
-  "createVenueTitle": "Создайте первый зал",
+  "createVenueTitle": "Создайте зал",
   "createVenueSubtitle": "Дайте название вашему залу. Столы можно будет добавить позже с главной страницы.",
   "createVenueNameLabel": "Название зала",
   "createVenueNameHint": "Центральный филиал",
@@ -87,6 +87,10 @@
   "createVenueNumberHint": "№ 1 или ЦФ",
   "createVenueInfoBanner": "После создания зала вы сможете добавлять столы по одному с собственным тарифом.",
   "createVenueButton": "Создать зал →",
+  "editVenueTitle": "Редактировать зал",
+  "updateVenueButton": "Обновить",
+  "deleteVenueButton": "Удалить",
+  "deleteVenueSubtitle": "Все столы и история сессий сохранятся, но зал будет удалён.",
 
   "cancel": "Отмена",
   "deleteTableSubtitle": "История сессий сохранится, но стол исчезнет с главной страницы."
