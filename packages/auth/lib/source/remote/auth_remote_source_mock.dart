@@ -32,7 +32,6 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     role: UserRole.manager,
     email: 'manager@tableflow.kg',
     phone: '+996 700 000 002',
-    ownerId: 'user-001',
   );
 
   static const _wrongCredentials = BaseMessage(

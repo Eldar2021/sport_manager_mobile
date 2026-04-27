@@ -14,7 +14,6 @@ final class UserModel extends Equatable {
     required this.role,
     this.email,
     this.phone,
-    this.ownerId,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -26,7 +25,6 @@ final class UserModel extends Equatable {
   final UserRole role;
   final String? email;
   final String? phone;
-  final String? ownerId;
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
@@ -37,6 +35,5 @@ final class UserModel extends Equatable {
     role,
     email,
     phone,
-    ownerId,
   ];
 }
