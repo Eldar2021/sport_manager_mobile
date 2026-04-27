@@ -69,7 +69,6 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     final table = widget.table;
     final isOccupied = table.status == TableStatus.occupied;
     final isJustFreed = widget.isJustFreed;
@@ -136,7 +135,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
               ),
               const SizedBox(height: 2),
               Text(
-                l10n.homeTableOccupied,
+                context.l10n.homeTableOccupied,
                 style: context.textTheme.bodySmall?.copyWith(
                   color: context.colors.onSurfaceVariant,
                   letterSpacing: 0.5,
@@ -144,7 +143,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
               ),
             ] else ...[
               Text(
-                isJustFreed ? l10n.homeTableJustFreed : l10n.homeTableFree,
+                isJustFreed ? context.l10n.homeTableJustFreed : context.l10n.homeTableFree,
                 style: context.textTheme.bodySmall?.copyWith(
                   color: context.appColors.success,
                   fontWeight: FontWeight.w700,

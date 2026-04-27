@@ -9,8 +9,6 @@ class VenuesEmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,13 +35,13 @@ class VenuesEmptyWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: AppSpacing.x5),
                   Text(
-                    l10n.homeNoVenuesTitle,
+                    context.l10n.homeNoVenuesTitle,
                     style: context.textTheme.headlineLarge?.copyWith(color: context.colors.onSurface),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: AppSpacing.x2),
                   Text(
-                    l10n.homeNoVenuesSubtitle,
+                    context.l10n.homeNoVenuesSubtitle,
                     style: context.textTheme.bodyMedium?.copyWith(color: context.colors.onSurfaceVariant),
                     textAlign: TextAlign.center,
                   ),
@@ -52,7 +50,7 @@ class VenuesEmptyWidget extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x5),
                     child: FilledButton(
                       onPressed: onCreateTap,
-                      child: Text(l10n.homeCreateVenue),
+                      child: Text(context.l10n.homeCreateVenue),
                     ),
                   ),
                 ],

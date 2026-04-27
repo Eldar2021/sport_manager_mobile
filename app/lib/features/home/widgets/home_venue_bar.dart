@@ -103,7 +103,6 @@ class HomeVenuePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
       child: Column(
@@ -111,7 +110,7 @@ class HomeVenuePicker extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(l10n.homeSelectVenue, style: context.textTheme.titleLarge),
+              Text(context.l10n.homeSelectVenue, style: context.textTheme.titleLarge),
               const Spacer(),
               IconButton(
                 onPressed: () => Navigator.pop(context),
@@ -156,7 +155,7 @@ class HomeVenuePicker extends StatelessWidget {
                 ),
                 icon: Icon(Icons.add_rounded, color: context.colors.primary),
                 label: Text(
-                  l10n.homeNewVenue,
+                  context.l10n.homeNewVenue,
                   style: context.textTheme.bodyLarge?.copyWith(color: context.colors.primary),
                 ),
               ),

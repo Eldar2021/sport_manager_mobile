@@ -9,7 +9,6 @@ class TablesEmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x12),
@@ -31,13 +30,13 @@ class TablesEmptyWidget extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.x4),
             Text(
-              l10n.homeTablesEmpty,
+              context.l10n.homeTablesEmpty,
               style: context.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppSpacing.x2),
             Text(
-              l10n.homeTablesEmptySub,
+              context.l10n.homeTablesEmptySub,
               style: context.textTheme.bodyMedium?.copyWith(color: context.colors.onSurfaceVariant),
               textAlign: TextAlign.center,
             ),

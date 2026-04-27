@@ -59,95 +59,104 @@ class _TableFormViewState extends State<TableFormView> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
+    final isEdit = widget.extra.table != null;
     final labelStyle = context.textTheme.bodySmall?.copyWith(color: context.colors.onSurfaceVariant);
-    return BlocBuilder<TableFormCubit, TableFormState>(
-      bloc: _cubit,
-      builder: (context, state) {
-        final isEdit = _cubit.isEditMode;
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(isEdit ? l10n.editTableTitle : l10n.createTableTitle),
-            actions: [
-              if (isEdit) ...[
-                AppDeleteButton(
-                  label: l10n.deleteTableButton,
-                  isLoading: state.isDeleting,
-                  onTap: () => AppDestructiveSheet.show(
-                    context,
-                    icon: Icons.delete_outline_rounded,
-                    title: '${l10n.deleteTableButton} ${state.name}?',
-                    subtitle: l10n.deleteTableSubtitle,
-                    confirmLabel: l10n.deleteTableButton,
-                    onConfirm: _cubit.deleteTable,
-                  ),
+    return AppButtonScope(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(isEdit ? context.l10n.editTableTitle : context.l10n.createTableTitle),
+          actions: [
+            if (isEdit) ...[
+              AppDeleteButton(
+                label: context.l10n.deleteTableButton,
+                isLoading: _cubit.state.isDeleting,
+                onTap: () => AppDestructiveSheet.show(
+                  context,
+                  icon: Icons.delete_outline_rounded,
+                  title: '${context.l10n.deleteTableButton} ${_cubit.state.name}?',
+                  subtitle: context.l10n.deleteTableSubtitle,
+                  confirmLabel: context.l10n.deleteTableButton,
+                  onConfirm: _cubit.deleteTable,
                 ),
-                const SizedBox(width: AppSpacing.x4),
-              ],
+              ),
+              const SizedBox(width: AppSpacing.x4),
+            ],
+          ],
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(AppSpacing.x4),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BlocBuilder<TableFormCubit, TableFormState>(
+                bloc: _cubit,
+                buildWhen: (prev, next) =>
+                    prev.name != next.name ||
+                    prev.description != next.description ||
+                    prev.hourlyRate != next.hourlyRate,
+                builder: (context, state) {
+                  return TablePreviewCard(
+                    name: state.name,
+                    description: state.description,
+                    hourlyRate: state.hourlyRate,
+                  );
+                },
+              ),
+              const SizedBox(height: AppSpacing.x5),
+              AppTextField(
+                controller: _nameCtr,
+                onChanged: _cubit.updateName,
+                label: context.l10n.createTableNameLabel,
+                hintText: context.l10n.createTableNameHint,
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              AppTextField(
+                controller: _descCtr,
+                onChanged: _cubit.updateDescription,
+                hintText: context.l10n.createTableDescHint,
+                label: context.l10n.createTableDescLabel,
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              Text(context.l10n.createTableRateLabel, style: labelStyle),
+              const SizedBox(height: AppSpacing.x2),
+              RateSelector(
+                selected: _cubit.state.hourlyRate,
+                onChanged: (rate) => _onRateChipTap(context, rate),
+              ),
+              AppTextField(
+                controller: _rateCtr,
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                label: '',
+                onChanged: (v) {
+                  final parsed = int.tryParse(v);
+                  if (parsed != null && parsed > 0) {
+                    _cubit.updateRate(parsed);
+                  }
+                },
+              ),
+              const SizedBox(height: AppSpacing.x10),
             ],
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppSpacing.x4),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TablePreviewCard(
-                  name: state.name,
-                  description: state.description,
-                  hourlyRate: state.hourlyRate,
-                ),
-                const SizedBox(height: AppSpacing.x5),
-                AppTextField(
-                  controller: _nameCtr,
-                  onChanged: _cubit.updateName,
-                  label: context.l10n.createTableNameLabel,
-                  hintText: context.l10n.createTableNameHint,
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                AppTextField(
-                  controller: _descCtr,
-                  onChanged: _cubit.updateDescription,
-                  hintText: context.l10n.createTableDescHint,
-                  label: context.l10n.createTableDescLabel,
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                Text(l10n.createTableRateLabel, style: labelStyle),
-                const SizedBox(height: AppSpacing.x2),
-                RateSelector(
-                  selected: state.hourlyRate,
-                  onChanged: (rate) => _onRateChipTap(context, rate),
-                ),
-                AppTextField(
-                  controller: _rateCtr,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  label: '',
-                  onChanged: (v) {
-                    final parsed = int.tryParse(v);
-                    if (parsed != null && parsed > 0) {
-                      _cubit.updateRate(parsed);
-                    }
-                  },
-                ),
-                const SizedBox(height: AppSpacing.x10),
-              ],
-            ),
-          ),
-          bottomNavigationBar: Padding(
-            padding: EdgeInsets.fromLTRB(AppSpacing.x4, 0, AppSpacing.x4, AppSpacing.bottom(context)),
-            child: BlocListener<TableFormCubit, TableFormState>(
-              bloc: _cubit,
-              listenWhen: _listenWhen,
-              listener: _listener,
-              child: AppSubmitButton(
-                onPressed: state.isValid && !state.isLoading ? _cubit.submit : null,
+        ),
+        floatingActionButtonLocation: kAppButtonFabLocation,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          child: BlocConsumer<TableFormCubit, TableFormState>(
+            bloc: _cubit,
+            listenWhen: _listenWhen,
+            listener: _listener,
+            builder: (_, state) {
+              return AppButton(
+                collapseOnScroll: true,
+                onPressed: state.isValid ? _cubit.submit : null,
                 isLoading: state.isLoading,
-                label: isEdit ? l10n.updateTableButton : l10n.createTableButton,
-              ),
-            ),
+                child: Text(isEdit ? context.l10n.updateTableButton : context.l10n.createTableButton),
+              );
+            },
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 

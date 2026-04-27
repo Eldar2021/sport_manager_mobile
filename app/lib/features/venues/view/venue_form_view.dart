@@ -40,61 +40,65 @@ class _VenueFormViewState extends State<VenueFormView> {
   Widget build(BuildContext context) {
     final isEdit = widget.venue != null;
 
-    return Scaffold(
-      appBar: AppBar(title: Text(isEdit ? context.l10n.editVenueTitle : context.l10n.createVenueTitle)),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(
-          AppSpacing.x4,
-          AppSpacing.x4,
-          AppSpacing.x4,
-          AppSpacing.x10,
-        ),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppTextField(
-                controller: _nameCtr,
-                label: context.l10n.createVenueNameLabel,
-                hintText: context.l10n.createVenueNameHint,
-                validator: (v) => InputValidators.emptyValidator(v, context),
-              ),
-              const SizedBox(height: AppSpacing.x4),
-              AppTextField(
-                controller: _numberCtr,
-                label: context.l10n.createVenueNumberLabel,
-                hintText: context.l10n.createVenueNumberHint,
-                validator: (v) => InputValidators.emptyValidator(v, context),
-                keyboardType: TextInputType.number,
-              ),
-              if (!isEdit) ...[
-                const SizedBox(height: AppSpacing.x5),
-                InfoBanner(context.l10n.createVenueInfoBanner),
+    return AppButtonScope(
+      child: Scaffold(
+        appBar: AppBar(title: Text(isEdit ? context.l10n.editVenueTitle : context.l10n.createVenueTitle)),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.x4,
+            AppSpacing.x4,
+            AppSpacing.x4,
+            AppSpacing.x10,
+          ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppTextField(
+                  controller: _nameCtr,
+                  label: context.l10n.createVenueNameLabel,
+                  hintText: context.l10n.createVenueNameHint,
+                  validator: (v) => InputValidators.emptyValidator(v, context),
+                ),
+                const SizedBox(height: AppSpacing.x4),
+                AppTextField(
+                  controller: _numberCtr,
+                  label: context.l10n.createVenueNumberLabel,
+                  hintText: context.l10n.createVenueNumberHint,
+                  validator: (v) => InputValidators.emptyValidator(v, context),
+                  keyboardType: TextInputType.number,
+                ),
+                if (!isEdit) ...[
+                  const SizedBox(height: AppSpacing.x5),
+                  AppBanner(context.l10n.createVenueInfoBanner),
+                ],
               ],
-            ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.fromLTRB(AppSpacing.x4, 0, AppSpacing.x4, AppSpacing.bottom(context)),
-        child: BlocConsumer<VenueFormCubit, VenueFormState>(
-          bloc: _cubit,
-          listenWhen: (prev, next) => prev.reqStatus != next.reqStatus,
-          listener: (context, state) {
-            if (state.reqStatus.isSuccess) {
-              context.pop();
-            } else if (state.reqStatus.isFailure) {
-              context.handleError((state.reqStatus as RequestFailure).exception);
-            }
-          },
-          builder: (context, state) {
-            return AppSubmitButton(
-              onPressed: state.isLoading ? null : _submitForm,
-              isLoading: state.isLoading,
-              label: isEdit ? context.l10n.updateVenueButton : context.l10n.createVenueButton,
-            );
-          },
+        floatingActionButtonLocation: kAppButtonFabLocation,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          child: BlocConsumer<VenueFormCubit, VenueFormState>(
+            bloc: _cubit,
+            listenWhen: (prev, next) => prev.reqStatus != next.reqStatus,
+            listener: (context, state) {
+              if (state.reqStatus.isSuccess) {
+                context.pop();
+              } else if (state.reqStatus.isFailure) {
+                context.handleError((state.reqStatus as RequestFailure).exception);
+              }
+            },
+            builder: (context, state) {
+              return AppButton(
+                collapseOnScroll: true,
+                onPressed: _submitForm,
+                isLoading: state.isLoading,
+                child: Text(isEdit ? context.l10n.updateVenueButton : context.l10n.createVenueButton),
+              );
+            },
+          ),
         ),
       ),
     );
