@@ -43,7 +43,7 @@ class _LoginViewState extends State<LoginView> {
               AppSpacing.x6,
               AppSpacing.x6,
               AppSpacing.x6,
-              AppSpacing.x6 + AppSpacing.x16,
+              kAppButtonFabClearance,
             ),
             children: [
               Text(

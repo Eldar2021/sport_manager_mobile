@@ -48,6 +48,9 @@ class AppButton extends StatefulWidget {
     super.key,
   }) : assert(
          !collapseOnScroll || expand,
+         // Collapse animates the button width from full → height (square),
+         // so we need a measurable starting width — only `expand: true`
+         // gives us one (the button stretches to its parent's max width).
          'collapseOnScroll requires expand=true so the button has a width to collapse from.',
        );
 
@@ -55,13 +58,15 @@ class AppButton extends StatefulWidget {
   final Widget child;
 
   /// Tap callback. `null` puts the button in its disabled state. Calls are
-  /// also suppressed while [isLoading] is `true`.
+  /// also suppressed (without the disabled visual) while [isLoading] is `true`.
   final VoidCallback? onPressed;
 
   final AppButtonVariant variant;
   final AppButtonSize size;
 
-  /// Replaces [child] with a sized circular spinner; suppresses [onPressed].
+  /// Replaces [child] with a sized circular spinner and absorbs taps. The
+  /// button keeps its enabled visual state (so the spinner uses the active
+  /// foreground color, not the faded disabled one).
   final bool isLoading;
 
   /// Optional widgets shown inside the row, on either side of [child].
@@ -73,13 +78,13 @@ class AppButton extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// `true` stretches the button to the parent's max width; `false` hugs the
-  /// content.
+  /// content. Required to be `true` when [collapseOnScroll] is `true`.
   final bool expand;
 
   /// When `true`, the button shrinks to a square FAB-like shape while the
   /// nearest `AppButtonScope` reports `collapsed: true` (the keyboard is open
-  /// or its scrollable scrolled past the threshold). No-op without an ambient
-  /// scope.
+  /// or its scrollable scrolled past the threshold). Asserts (debug only) that
+  /// an ancestor `AppButtonScope` is present.
   final bool collapseOnScroll;
 
   /// Widget shown in the collapsed state. Defaults to [Icons.arrow_forward].
@@ -125,8 +130,13 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
       _animationController.reverse();
       return;
     }
-    final collapsed = AppButtonScope.maybeCollapsedOf(context) ?? false;
-    if (collapsed) {
+    final collapsed = AppButtonScope.maybeCollapsedOf(context);
+    assert(
+      collapsed != null,
+      'AppButton(collapseOnScroll: true) requires an ancestor AppButtonScope. '
+      'Wrap the screen in `AppButtonScope` or set `collapseOnScroll: false`.',
+    );
+    if (collapsed ?? false) {
       _animationController.forward();
     } else {
       _animationController.reverse();
@@ -139,18 +149,16 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
     super.dispose();
   }
 
-  VoidCallback? get _effectiveOnPressed => widget.isLoading ? null : widget.onPressed;
-
   @override
   Widget build(BuildContext context) {
-    final spec = _SizeSpec.of(widget.size);
-    final textStyle = _textStyleFor(widget.size, context.textTheme);
+    final spec = widget.size.spec;
+    final textStyle = widget.size.textStyleOf(context.textTheme);
     final style = _buildStyle(spec, textStyle);
 
     return Semantics(
       container: true,
       button: true,
-      enabled: _effectiveOnPressed != null,
+      enabled: widget.onPressed != null,
       label: widget.semanticLabel,
       child: AnimatedBuilder(
         animation: _animation,
@@ -162,16 +170,19 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
               t: _animation.value,
               height: spec.height,
               expand: widget.expand,
-              child: _MaterialFor(
-                variant: widget.variant,
-                style: style,
-                onPressed: _effectiveOnPressed,
-                autofocus: widget.autofocus,
-                focusNode: widget.focusNode,
-                child: _CrossfadeContent(
-                  t: _animation.value,
-                  expanded: _expandedChild(spec),
-                  collapsed: _collapsedChild(spec),
+              child: AbsorbPointer(
+                absorbing: widget.isLoading,
+                child: _MaterialFor(
+                  variant: widget.variant,
+                  style: style,
+                  onPressed: widget.onPressed,
+                  autofocus: widget.autofocus,
+                  focusNode: widget.focusNode,
+                  child: _CrossfadeContent(
+                    t: _animation.value,
+                    expanded: _expandedChild(spec),
+                    collapsed: _collapsedChild(spec),
+                  ),
                 ),
               ),
             ),
@@ -243,16 +254,16 @@ enum _SizeSpec {
   final double iconSize;
   final double iconGap;
   final double loadingSize;
+}
 
-  static _SizeSpec of(AppButtonSize size) => switch (size) {
+extension on AppButtonSize {
+  _SizeSpec get spec => switch (this) {
     AppButtonSize.small => _SizeSpec.small,
     AppButtonSize.medium => _SizeSpec.medium,
     AppButtonSize.large => _SizeSpec.large,
   };
-}
 
-TextStyle? _textStyleFor(AppButtonSize size, TextTheme textTheme) {
-  return switch (size) {
+  TextStyle? textStyleOf(TextTheme textTheme) => switch (this) {
     AppButtonSize.small => textTheme.labelMedium,
     AppButtonSize.medium || AppButtonSize.large => textTheme.labelLarge,
   };

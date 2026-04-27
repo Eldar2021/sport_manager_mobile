@@ -43,7 +43,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               AppSpacing.x6,
               AppSpacing.x6,
               AppSpacing.x6,
-              AppSpacing.x6 + AppSpacing.x16,
+              kAppButtonFabClearance,
             ),
             children: [
               AppBanner(

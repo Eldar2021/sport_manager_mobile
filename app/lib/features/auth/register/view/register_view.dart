@@ -47,6 +47,18 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
+    final roleBadge = _isOwner
+        ? RoleBadge(
+            label: context.l10n.authOwnerBadge,
+            color: context.colors.primary,
+            icon: Icons.business_center_rounded,
+          )
+        : RoleBadge(
+            label: context.l10n.authManagerBadge,
+            color: context.appColors.success,
+            icon: Icons.badge_outlined,
+          );
+
     return AppButtonScope(
       child: Scaffold(
         appBar: AppBar(),
@@ -57,7 +69,7 @@ class _RegisterViewState extends State<RegisterView> {
               AppSpacing.x6,
               AppSpacing.x6,
               AppSpacing.x6,
-              AppSpacing.x6 + AppSpacing.x16,
+              kAppButtonFabClearance,
             ),
             children: [
               Text(
@@ -69,17 +81,7 @@ class _RegisterViewState extends State<RegisterView> {
               const SizedBox(height: AppSpacing.x3),
               Align(
                 alignment: Alignment.centerLeft,
-                child: _isOwner
-                    ? RoleBadge(
-                        label: context.l10n.authOwnerBadge,
-                        color: context.colors.primary,
-                        icon: Icons.business_center_rounded,
-                      )
-                    : RoleBadge(
-                        label: context.l10n.authManagerBadge,
-                        color: context.appColors.success,
-                        icon: Icons.badge_outlined,
-                      ),
+                child: roleBadge,
               ),
               const SizedBox(height: AppSpacing.x6),
               if (!_isOwner) ...[

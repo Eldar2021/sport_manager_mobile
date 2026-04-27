@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/ui/theme/foundations/app_spacing.dart';
 
 /// Default `Scaffold.floatingActionButtonLocation` for screens that pair an
 /// `AppButton` with an [AppButtonScope]. `centerDocked` keeps the expanded
 /// button flush with the bottom edge and places the collapsed FAB at the
 /// bottom-right (after the button's own `Align(centerRight)`).
 const FloatingActionButtonLocation kAppButtonFabLocation = FloatingActionButtonLocation.centerDocked;
+
+/// Bottom padding to apply to scrollable content (e.g. `ListView.padding`)
+/// so the form's last item isn't hidden behind a Scaffold-mounted `AppButton`
+/// FAB. Sized to clear the FAB (`AppSpacing.x14` height) plus comfortable
+/// breathing room.
+const double kAppButtonFabClearance = AppSpacing.x6 + AppSpacing.x16;
 
 /// Screen-level coordinator for collapsible `AppButton`s.
 ///
@@ -21,15 +28,23 @@ const FloatingActionButtonLocation kAppButtonFabLocation = FloatingActionButtonL
 /// ```dart
 /// AppButtonScope(
 ///   child: Scaffold(
-///     body: Form(...),
-///     bottomNavigationBar: Padding(
-///       padding: const EdgeInsets.all(AppSpacing.x4),
+///     body: Form(
+///       child: ListView(
+///         padding: const EdgeInsets.fromLTRB(
+///           AppSpacing.x6, AppSpacing.x6, AppSpacing.x6, kAppButtonFabClearance,
+///         ),
+///         children: [/* form fields */],
+///       ),
+///     ),
+///     floatingActionButton: Padding(
+///       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
 ///       child: AppButton(
 ///         collapseOnScroll: true,
 ///         onPressed: _submit,
 ///         child: const Text('Continue'),
 ///       ),
 ///     ),
+///     floatingActionButtonLocation: kAppButtonFabLocation,
 ///   ),
 /// )
 /// ```

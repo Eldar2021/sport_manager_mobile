@@ -118,9 +118,16 @@ small screens.
 ```dart
 AppButtonScope(
   child: Scaffold(
-    body: Form(...),
-    bottomNavigationBar: Padding(
-      padding: const EdgeInsets.all(AppSpacing.x6),
+    body: Form(
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.x6, AppSpacing.x6, AppSpacing.x6, kAppButtonFabClearance,
+        ),
+        children: [/* form fields */],
+      ),
+    ),
+    floatingActionButton: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
       child: AppButton(
         collapseOnScroll: true,
         isLoading: state.isLoading,
@@ -128,15 +135,20 @@ AppButtonScope(
         child: Text(context.l10n.authSignIn),
       ),
     ),
+    floatingActionButtonLocation: kAppButtonFabLocation,
   ),
 )
 ```
 
+(`kAppButtonFabLocation` and `kAppButtonFabClearance` are exported alongside
+the scope. The clearance is the bottom padding form content needs so its last
+items aren't hidden behind the FAB.)
+
 **Don't** roll a parallel `FilledButton(..., child: isLoading ? Spinner : Text(...))`
 in feature code — use this. **Don't** override colors at the call site;
-that's what `ButtonComponentTheme` is for. **Don't** introduce a new
-`ThemeExtension` just for buttons; variants come from the Material widget
-mapping above.
+that's what `ButtonComponentTheme` is for. If global button styling needs to
+change, extend `ButtonComponentTheme` rather than introducing a separate
+`ThemeExtension` — variants come from the Material widget mapping above.
 
 ---
 
