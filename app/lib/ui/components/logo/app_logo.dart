@@ -27,9 +27,9 @@ class AppLogo extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: context.colors.primary.withValues(alpha: 0.27),
-              blurRadius: 24,
-              offset: const Offset(0, 12),
+              color: context.colors.primary.withValues(alpha: AppOpacity.brandGlow),
+              blurRadius: AppSpacing.x6,
+              offset: const Offset(0, AppSpacing.x3),
             ),
           ],
         ),
@@ -41,6 +41,9 @@ class AppLogo extends StatelessWidget {
   }
 }
 
+/// Draws the brand mark: a billiard cue (diagonal line) plus a cue ball
+/// (small filled circle at the bottom-left), in a 24×24 reference grid that
+/// scales to the surrounding box.
 class _CuePainter extends CustomPainter {
   _CuePainter(this.color);
 

@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Flutter monorepo. Dart ^3.11.5 · Flutter 3.41.7 (FVM) · Material 3 · Melos workspace.
 
-Deep references: [docs/architecture.md](docs/architecture.md), [docs/code-rules.md](docs/code-rules.md), [docs/theme-system.md](docs/theme-system.md), [docs/contributing.md](docs/contributing.md). Read `theme-system.md` before writing any UI — it explains how to pick the right color / text / spacing token so the result adapts to light/dark.
+Deep references: [docs/architecture.md](docs/architecture.md), [docs/code-rules.md](docs/code-rules.md), [docs/theme-system.md](docs/theme-system.md), [docs/ui-components.md](docs/ui-components.md), [docs/contributing.md](docs/contributing.md). Read `theme-system.md` before writing any UI — it explains how to pick the right color / text / spacing token so the result adapts to light/dark. Read `ui-components.md` before adding a new widget — most "obvious" widgets (text field, password field, banner, submit button, spinner, checkbox, logo) already exist; reuse before re-implementing.
 
 ## Structure
 

@@ -13,4 +13,8 @@ abstract final class AppOpacity {
 
   /// Material 3 disabled-background / track convention.
   static const double disabledBackground = 0.12;
+
+  /// Glow drop-shadow under the brand logo. Stronger than `tint` to make
+  /// the gradient pop against neutral backgrounds.
+  static const double brandGlow = 0.27;
 }
