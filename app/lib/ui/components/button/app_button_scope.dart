@@ -1,27 +1,27 @@
-part of 'app_button.dart';
+import 'package:flutter/material.dart';
 
-/// Screen-level coordinator for collapsible [AppButton]s.
+/// Screen-level coordinator for collapsible `AppButton`s.
 ///
-/// Wrap any subtree (usually a [Scaffold]) with this widget. It registers
+/// Wrap any subtree (typically a [Scaffold]) with this widget. It registers
 /// **one** [WidgetsBindingObserver] and **one** scroll listener for the whole
-/// subtree, and publishes a single `collapsed` boolean that descendant
-/// [AppButton]s with `collapseOnScroll: true` automatically consume — instead
-/// of each button registering its own observers.
+/// subtree, then publishes a single `collapsed` boolean that descendant
+/// `AppButton`s with `collapseOnScroll: true` consume — instead of every
+/// button registering its own observers.
 ///
-/// When present, the scope drives collapse on:
-///   - Scroll offset exceeding [scrollThreshold] (with [hysteresis])
-///   - Keyboard becoming visible (if [observeKeyboard] is `true`)
+/// The scope flips `collapsed` to `true` when:
+///   - the scroll offset exceeds [scrollThreshold] (with [hysteresis]), OR
+///   - the soft keyboard becomes visible (when [observeKeyboard] is true).
 ///
 /// ```dart
 /// AppButtonScope(
 ///   child: Scaffold(
-///     body: ListView.builder(...),
+///     body: Form(...),
 ///     bottomNavigationBar: Padding(
-///       padding: const EdgeInsets.all(16),
+///       padding: const EdgeInsets.all(AppSpacing.x4),
 ///       child: AppButton(
 ///         collapseOnScroll: true,
-///         child: const Text('Devam'),
-///         onPressed: _next,
+///         onPressed: _submit,
+///         child: const Text('Continue'),
 ///       ),
 ///     ),
 ///   ),
@@ -44,14 +44,13 @@ class AppButtonScope extends StatefulWidget {
   /// [PrimaryScrollController] is used.
   final ScrollController? scrollController;
 
-  /// Scroll offset above which the scope enters the collapsed state.
+  /// Scroll offset above which the scope enters its collapsed state.
   final double scrollThreshold;
 
   /// Hysteresis around [scrollThreshold] to prevent flicker near the edge.
   final double hysteresis;
 
-  /// When `true`, the scope also collapses while the software keyboard is
-  /// visible.
+  /// When `true`, the scope also collapses while the soft keyboard is visible.
   final bool observeKeyboard;
 
   /// Minimum `viewInsets.bottom`, in logical pixels, to treat as
@@ -71,7 +70,7 @@ class AppButtonScope extends StatefulWidget {
 }
 
 class _AppButtonScopeState extends State<AppButtonScope> with WidgetsBindingObserver {
-  late final AppButtonCollapseController _scrollCollapse;
+  late final _CollapseController _scrollCollapse;
   ScrollController? _boundController;
   bool _keyboardVisible = false;
   bool _collapsed = false;
@@ -79,7 +78,7 @@ class _AppButtonScopeState extends State<AppButtonScope> with WidgetsBindingObse
   @override
   void initState() {
     super.initState();
-    _scrollCollapse = AppButtonCollapseController(
+    _scrollCollapse = _CollapseController(
       threshold: widget.scrollThreshold,
       hysteresis: widget.hysteresis,
     )..addListener(_recompute);
@@ -92,9 +91,7 @@ class _AppButtonScopeState extends State<AppButtonScope> with WidgetsBindingObse
   void didChangeDependencies() {
     super.didChangeDependencies();
     _bindScrollController();
-    if (widget.observeKeyboard) {
-      _checkKeyboard();
-    }
+    if (widget.observeKeyboard) _checkKeyboard();
   }
 
   @override
@@ -161,10 +158,7 @@ class _AppButtonScopeState extends State<AppButtonScope> with WidgetsBindingObse
 
   @override
   Widget build(BuildContext context) {
-    return _AppButtonScopeInherited(
-      collapsed: _collapsed,
-      child: widget.child,
-    );
+    return _AppButtonScopeInherited(collapsed: _collapsed, child: widget.child);
   }
 }
 
@@ -177,7 +171,52 @@ class _AppButtonScopeInherited extends InheritedWidget {
   final bool collapsed;
 
   @override
-  bool updateShouldNotify(_AppButtonScopeInherited oldWidget) {
-    return collapsed != oldWidget.collapsed;
+  bool updateShouldNotify(_AppButtonScopeInherited oldWidget) => collapsed != oldWidget.collapsed;
+}
+
+/// Listens to a [ScrollController] and toggles a boolean when the user scrolls
+/// past [threshold] (with [hysteresis] to prevent flicker near the edge).
+class _CollapseController extends ValueNotifier<bool> {
+  _CollapseController({
+    this.threshold = 50,
+    this.hysteresis = 8,
+  }) : super(false);
+
+  final double threshold;
+  final double hysteresis;
+
+  ScrollController? _controller;
+
+  bool get isCollapsed => value;
+
+  void attach(ScrollController? controller) {
+    if (identical(_controller, controller)) return;
+    detach();
+    _controller = controller;
+    _controller?.addListener(_onScroll);
+    _onScroll();
+  }
+
+  void detach() {
+    _controller?.removeListener(_onScroll);
+    _controller = null;
+  }
+
+  void _onScroll() {
+    final controller = _controller;
+    if (controller == null || !controller.hasClients) return;
+
+    final offset = controller.offset;
+    if (!value && offset > threshold + hysteresis) {
+      value = true;
+    } else if (value && offset < threshold - hysteresis) {
+      value = false;
+    }
+  }
+
+  @override
+  void dispose() {
+    detach();
+    super.dispose();
   }
 }

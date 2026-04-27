@@ -19,7 +19,8 @@ components, see [theme-system.md](theme-system.md).
 | Component                       | Use it for                                                |
 | ------------------------------- | --------------------------------------------------------- |
 | [AppBanner](#appbanner)         | Tinted notice with icon (hint or filled info)             |
-| [AppSubmitButton](#appsubmitbutton) | Form submit / primary CTA with loading state         |
+| [AppButton](#appbutton)         | Primary / secondary / outline button — variants, sizes, loading, optional collapse-on-keyboard |
+| [AppButtonScope](#appbuttonscope) | Wrapper that drives `collapseOnScroll` behavior (keyboard / scroll) |
 | [AppTextField](#apptextfield)   | Text input with label above, validator, helper text       |
 | [AppPasswordField](#apppasswordfield) | Password input with show/hide toggle                |
 | [AppCheckboxField](#appcheckboxfield) | Checkbox tied to `Form` validation                  |
@@ -58,35 +59,115 @@ AppBanner(
 
 ---
 
-## AppSubmitButton
+## AppButton
 
-[button/app_submit_button.dart](../app/lib/ui/components/button/app_submit_button.dart)
+[button/app_button.dart](../app/lib/ui/components/button/app_button.dart)
 
-Primary `FilledButton` with a built-in loading spinner and an optional leading
-icon. Height fixed to `AppSpacing.x14` (56px) so primary CTAs stay consistent
-across forms.
+The single button component for the app. Three visual variants × three sizes,
+loading state, disabled state, optional `leading` / `trailing` slots, and
+optional collapse-on-keyboard behavior driven by [AppButtonScope](#appbuttonscope).
+
+**Variants** (color/look pulled from `ButtonComponentTheme` — no per-call overrides):
+- `AppButtonVariant.primary` *(default)* → `FilledButton` (high-emphasis CTA)
+- `AppButtonVariant.secondary` → `FilledButton.tonal` (mid-emphasis)
+- `AppButtonVariant.outline` → `OutlinedButton` (low-emphasis with rim)
+
+**Sizes** (heights map to design tokens):
+- `AppButtonSize.small` — `AppSpacing.x10` (40)
+- `AppButtonSize.medium` — `AppSpacing.x12` (48)
+- `AppButtonSize.large` *(default)* — `AppSpacing.x14` (56)
 
 ```dart
-AppSubmitButton(
-  label: context.l10n.authSignIn,
+// Form submit (primary, large, full-width)
+AppButton(
   isLoading: state.isLoading,
   onPressed: _login,
+  child: Text(context.l10n.authSignIn),
 )
 
-// With a leading icon (e.g. social sign-in)
-AppSubmitButton(
-  label: 'Continue with Google',
+// Secondary action with a leading icon, hugs content
+AppButton(
+  variant: AppButtonVariant.secondary,
+  size: AppButtonSize.medium,
+  expand: false,
+  leading: Assets.icons.google.svg(width: 20),
   onPressed: _signInWithGoogle,
-  leadingIcon: Assets.icons.google.svg(width: 20),
+  child: const Text('Continue with Google'),
+)
+
+// Outline, small, inline action
+AppButton(
+  variant: AppButtonVariant.outline,
+  size: AppButtonSize.small,
+  expand: false,
+  onPressed: _cancel,
+  child: const Text('Cancel'),
 )
 ```
 
-While `isLoading` is true the button auto-disables and shows a 22px
-`CircularProgressIndicator` in `onPrimary` color.
+While `isLoading` is true the button auto-disables and shows a sized
+`CircularProgressIndicator` (color inherits from the button's foreground).
+Pass `null` to `onPressed` to put the button in its disabled state.
 
-**Don't** wrap raw `FilledButton(..., child: isLoading ? Spinner : Text(...))`
-in feature code — call this. **Don't** override `minimumSize` or button colors
-at the call site; that's what the theme is for.
+**Collapse on keyboard.** Wrap the screen in [AppButtonScope](#appbuttonscope)
+and set `collapseOnScroll: true` — the button shrinks to a square FAB
+(`collapsedIcon`, default `Icons.arrow_forward`) while the keyboard is open
+or its scrollable scrolls past the threshold. Keeps form fields visible on
+small screens.
+
+```dart
+AppButtonScope(
+  child: Scaffold(
+    body: Form(...),
+    bottomNavigationBar: Padding(
+      padding: const EdgeInsets.all(AppSpacing.x6),
+      child: AppButton(
+        collapseOnScroll: true,
+        isLoading: state.isLoading,
+        onPressed: _submit,
+        child: Text(context.l10n.authSignIn),
+      ),
+    ),
+  ),
+)
+```
+
+**Don't** roll a parallel `FilledButton(..., child: isLoading ? Spinner : Text(...))`
+in feature code — use this. **Don't** override colors at the call site;
+that's what `ButtonComponentTheme` is for. **Don't** introduce a new
+`ThemeExtension` just for buttons; variants come from the Material widget
+mapping above.
+
+---
+
+## AppButtonScope
+
+[button/app_button_scope.dart](../app/lib/ui/components/button/app_button_scope.dart)
+
+Wraps a screen subtree (typically a `Scaffold`) and publishes a single
+`collapsed: bool` that descendant `AppButton`s with `collapseOnScroll: true`
+consume. Registers **one** `WidgetsBindingObserver` (for keyboard) and
+**one** scroll listener for the whole subtree — buttons don't each need
+their own.
+
+The scope flips `collapsed` to `true` when:
+- the soft keyboard is visible (`viewInsets.bottom > keyboardMinHeight`), or
+- the bound scrollable scrolls past `scrollThreshold` (with `hysteresis` to
+  prevent flicker).
+
+```dart
+AppButtonScope(
+  // Defaults: observeKeyboard=true, scrollThreshold=50, hysteresis=8.
+  child: Scaffold(...),
+)
+```
+
+Without a scope, `collapseOnScroll: true` on a button is a no-op. Most form
+screens want the scope at the `Scaffold` level so the keyboard behavior just
+works.
+
+**Don't** add this to non-form screens — it's free until something inside
+opts in, but extra observers are still wasteful.
 
 ---
 
