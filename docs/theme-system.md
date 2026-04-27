@@ -6,6 +6,11 @@
 > **Audience:** developers and AI agents writing UI code. Read this before
 > adding any new screen or widget so the result adapts correctly to light /
 > dark mode and matches the design system.
+>
+> **Looking for pre-built widgets?** See [ui-components.md](ui-components.md)
+> first — text fields, banners, submit buttons, spinners, etc. already exist
+> and use the tokens documented here. This file covers the tokens; that file
+> covers the widgets that consume them.
 
 ---
 

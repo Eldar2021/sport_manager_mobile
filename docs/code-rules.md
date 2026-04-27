@@ -348,6 +348,17 @@ class _LoginViewState extends State<LoginView> {
 
 ## Widgets and UI
 
+### Reuse pre-built components
+
+Before writing a new widget, check [ui-components.md](ui-components.md). Text
+fields, password fields, banners, submit buttons, checkboxes, spinners, the
+brand logo — these already exist and are themed. Reuse or extend them rather
+than introducing parallel widgets that drift from the design system.
+
+If a component is **feature-specific** (uses feature l10n keys, hardcodes
+business data, or only one screen consumes it), put it in
+`features/<name>/widgets/`, not `ui/components/`.
+
 ### Avoid `Container`
 
 Prefer the lighter alternatives:

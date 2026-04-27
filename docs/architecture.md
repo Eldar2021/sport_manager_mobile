@@ -248,7 +248,7 @@ app/lib/ui/theme/
 
 Current theme — **Warm Dark**: primary `#D97706` (amber), success `#65A30D` (olive), danger `#DC2626` (red), Stone neutrals, dark background `#0F0D0B`.
 
-For the full theme contract (which token to use where, when to reach for `AppColorsExt` vs `ColorScheme`, how to extend it), read [theme-system.md](theme-system.md).
+For the full theme contract (which token to use where, when to reach for `AppColorsExt` vs `ColorScheme`, how to extend it), read [theme-system.md](theme-system.md). For the catalog of pre-built widgets that consume those tokens (text fields, banners, submit buttons, spinners, …), read [ui-components.md](ui-components.md) — check it before introducing a new widget.
 
 ---
 
