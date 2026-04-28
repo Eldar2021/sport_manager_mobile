@@ -42,34 +42,40 @@ class _VenueFormViewState extends State<VenueFormView> {
 
     return AppButtonScope(
       child: Scaffold(
-        appBar: AppBar(title: Text(isEdit ? context.l10n.editVenueTitle : context.l10n.createVenueTitle)),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(AppSpacing.x4, AppSpacing.x4, AppSpacing.x4, AppSpacing.x10),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppTextField(
-                  controller: _nameCtr,
-                  label: context.l10n.createVenueNameLabel,
-                  hintText: context.l10n.createVenueNameHint,
-                  validator: (v) => InputValidators.emptyValidator(v, context),
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                AppTextField(
-                  controller: _numberCtr,
-                  label: context.l10n.createVenueNumberLabel,
-                  hintText: context.l10n.createVenueNumberHint,
-                  validator: (v) => InputValidators.emptyValidator(v, context),
-                  keyboardType: TextInputType.number,
-                ),
-                if (!isEdit) ...[
-                  const SizedBox(height: AppSpacing.x5),
-                  AppBanner(context.l10n.createVenueInfoBanner),
-                ],
-              ],
+        appBar: AppBar(
+          title: Text(
+            isEdit ? context.l10n.editVenueTitle : context.l10n.createVenueTitle,
+          ),
+        ),
+        body: Form(
+          key: _formKey,
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.x4,
+              AppSpacing.x4,
+              AppSpacing.x4,
+              AppSpacing.x10,
             ),
+            children: [
+              AppTextField(
+                controller: _nameCtr,
+                label: context.l10n.createVenueNameLabel,
+                hintText: context.l10n.createVenueNameHint,
+                validator: (v) => InputValidators.emptyValidator(v, context),
+              ),
+              const SizedBox(height: AppSpacing.x4),
+              AppTextField(
+                controller: _numberCtr,
+                label: context.l10n.createVenueNumberLabel,
+                hintText: context.l10n.createVenueNumberHint,
+                validator: (v) => InputValidators.emptyValidator(v, context),
+                keyboardType: TextInputType.number,
+              ),
+              if (!isEdit) ...[
+                const SizedBox(height: AppSpacing.x5),
+                AppBanner(context.l10n.createVenueInfoBanner),
+              ],
+            ],
           ),
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
@@ -90,7 +96,9 @@ class _VenueFormViewState extends State<VenueFormView> {
                 collapseOnScroll: true,
                 onPressed: _submitForm,
                 isLoading: state.isLoading,
-                child: Text(isEdit ? context.l10n.updateVenueButton : context.l10n.createVenueButton),
+                child: Text(
+                  isEdit ? context.l10n.updateVenueButton : context.l10n.createVenueButton,
+                ),
               );
             },
           ),

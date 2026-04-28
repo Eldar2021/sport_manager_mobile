@@ -16,11 +16,16 @@ final class VenueFormState extends Equatable {
   VenueFormState copyWith({
     RequestStatus<VenueModel>? reqStatus,
     RequestStatus<bool>? deleteStatus,
-  }) => VenueFormState(
-    reqStatus: reqStatus ?? this.reqStatus,
-    deleteStatus: deleteStatus ?? this.deleteStatus,
-  );
+  }) {
+    return VenueFormState(
+      reqStatus: reqStatus ?? this.reqStatus,
+      deleteStatus: deleteStatus ?? this.deleteStatus,
+    );
+  }
 
   @override
-  List<Object?> get props => [reqStatus, deleteStatus];
+  List<Object?> get props => [
+    reqStatus,
+    deleteStatus,
+  ];
 }

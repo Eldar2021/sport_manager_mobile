@@ -53,7 +53,6 @@
   "navHome": "Главная",
   "navReport": "Отчёты",
   "navProfile": "Профиль",
-
   "homeCreateVenue": "Создать зал",
   "homeNoVenuesTitle": "У вас пока нет залов",
   "homeNoVenuesSubtitle": "Создайте первый зал, чтобы начать добавлять столы и принимать сессии.",
@@ -65,7 +64,6 @@
   "homeTableOccupied": "ЗАНЯТ",
   "homeTableFree": "СВОБОДЕН",
   "homeTableJustFreed": "✓ Завершён",
-
   "createTableTitle": "Новый стол",
   "createTableNumberLabel": "Номер стола",
   "createTableNumberHint": "1",
@@ -80,7 +78,6 @@
   "editTableTitle": "Редактировать стол",
   "updateTableButton": "Обновить",
   "deleteTableButton": "Удалить",
-
   "createVenueTitle": "Создайте зал",
   "createVenueSubtitle": "Дайте название вашему залу. Столы можно будет добавить позже с главной страницы.",
   "createVenueNameLabel": "Название зала",
@@ -93,12 +90,9 @@
   "updateVenueButton": "Обновить",
   "deleteVenueButton": "Удалить",
   "deleteVenueSubtitle": "Все столы и история сессий сохранятся, но зал будет удалён.",
-
   "cancel": "Отмена",
   "deleteTableSubtitle": "История сессий сохранится, но стол исчезнет с главной страницы.",
-
   "generalRetry": "Повторить",
-
   "createTableTarifTypeLabel": "Тип тарифа",
   "tarifTypeMinute": "Минута",
   "tarifTypeHour": "Час",
