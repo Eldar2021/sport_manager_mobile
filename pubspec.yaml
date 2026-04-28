@@ -86,6 +86,10 @@ melos:
         melos format
       description: "Generate code with build_runner for relevant packages"
 
+    gen-splash:
+      run: cd app && dart run flutter_native_splash:create --path=flutter_native_splash.yaml
+      description: "Regenerate native splash assets from app/flutter_native_splash.yaml"
+
     build-apk:
       run: cd app && flutter build apk
       description: "Build an APK file for the main application"

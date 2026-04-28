@@ -198,6 +198,12 @@ If you made changes to models:
 make build-runner
 ```
 
+If you changed the splash icon or [`app/flutter_native_splash.yaml`](../app/flutter_native_splash.yaml), regenerate the native splash assets (Android `drawable*/`, `values*/styles.xml`, iOS `LaunchScreen.storyboard`, `LaunchImage.imageset/`):
+
+```bash
+make gen-splash
+```
+
 ### 5. Write Tests
 
 Tests are located in the `test/` directory of each package. The `mocktail` library is used for mocking.
@@ -263,13 +269,14 @@ Open a pull request to the `main` branch on GitHub.
 
 ## Makefile Commands
 
-| Command             | Description                    |
-| ------------------- | ------------------------------ |
-| `make build-runner` | Code generation (all packages) |
-| `make clean`        | Clean build cache              |
-| `make pod-install`  | Clean and reinstall iOS pods   |
-| `make git-update`   | Update git, clean old branches |
-| `make fvm-check`    | Verify FVM Flutter version     |
+| Command             | Description                     |
+| ------------------- | ------------------------------- |
+| `make build-runner` | Code generation (all packages)  |
+| `make gen-splash`   | Regenerate native splash assets |
+| `make clean`        | Clean build cache               |
+| `make pod-install`  | Clean and reinstall iOS pods    |
+| `make git-update`   | Update git, clean old branches  |
+| `make fvm-check`    | Verify FVM Flutter version      |
 
 ## Melos Commands
 
@@ -283,5 +290,6 @@ Open a pull request to the `main` branch on GitHub.
 | `melos run unit-test`        | All unit tests                      |
 | `melos run test`             | Tests for selected package          |
 | `melos run run-build-runner` | Code generation (via melos)         |
+| `melos run gen-splash`       | Regenerate native splash assets     |
 | `melos run build-apk`        | Android APK                         |
 | `melos run build-ios`        | iOS unsigned release                |
