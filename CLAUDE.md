@@ -32,6 +32,7 @@ Layering: `features → app/core → packages/*`. Packages do not depend on each
 ```bash
 melos bootstrap              # install + link packages
 make build-runner            # melos run run-build-runner (regenerates .g.dart, formats)
+make gen-splash              # melos run gen-splash (regenerates native splash from app/flutter_native_splash.yaml)
 flutter gen-l10n             # regenerate localization (after editing arb/)
 make pod-install             # iOS pods (clean reinstall)
 melos run format             # dart format --line-length 120
