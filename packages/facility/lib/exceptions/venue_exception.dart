@@ -1,6 +1,12 @@
 import 'package:core/core.dart';
 
-enum VenueErrorCode { notFound, numberTaken, hasTables, forbidden, unknown }
+enum VenueErrorCode {
+  notFound,
+  numberTaken,
+  hasTables,
+  forbidden,
+  unknown,
+}
 
 final class VenueException extends AppException<VenueErrorCode> {
   const VenueException(

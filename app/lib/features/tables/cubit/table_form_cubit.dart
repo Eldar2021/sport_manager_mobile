@@ -9,10 +9,9 @@ part 'table_form_state.dart';
 class TableFormCubit extends Cubit<TableFormState> {
   TableFormCubit(
     this._repository,
-    this._venueId, {
-    TableModel? initialTable,
-  }) : _tableId = initialTable?.id,
-       super(const TableFormState());
+    this._venueId,
+    this._tableId,
+  ) : super(const TableFormState());
 
   final FacilityRepository _repository;
   final String _venueId;

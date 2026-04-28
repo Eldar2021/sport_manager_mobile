@@ -53,7 +53,6 @@
   "navHome": "Башкы",
   "navReport": "Отчеттор",
   "navProfile": "Профиль",
-
   "homeCreateVenue": "Зал түзүү",
   "homeNoVenuesTitle": "Азырынча залдарыңыз жок",
   "homeNoVenuesSubtitle": "Столдорду кошуп, сессияларды кабыл алуу үчүн биринчи залыңызды түзүңүз.",
@@ -65,7 +64,6 @@
   "homeTableOccupied": "ИШЕНИМДЕ",
   "homeTableFree": "БОШ",
   "homeTableJustFreed": "✓ Аяктады",
-
   "createTableTitle": "Жаңы стол",
   "createTableNumberLabel": "Стол номери",
   "createTableNumberHint": "1",
@@ -80,7 +78,6 @@
   "editTableTitle": "Столду өзгөртүү",
   "updateTableButton": "Жаңыртуу",
   "deleteTableButton": "Жок кылуу",
-
   "createVenueTitle": "Залды түзүңүз",
   "createVenueSubtitle": "Залыңызга ат бериңиз. Столдорду кийинчерек башкы баракчадан кошсо болот.",
   "createVenueNameLabel": "Зал аты",
@@ -93,12 +90,9 @@
   "updateVenueButton": "Жаңыртуу",
   "deleteVenueButton": "Жок кылуу",
   "deleteVenueSubtitle": "Бардык столдор жана сессиялардын тарыхы сакталат, бирок зал жок кылынат.",
-
   "cancel": "Жокко чыгаруу",
   "deleteTableSubtitle": "Сессиялардын тарыхы сакталат, бирок стол башкы баракчадан жоголот.",
-
   "generalRetry": "Кайталоо",
-
   "createTableTarifTypeLabel": "Тариф түрү",
   "tarifTypeMinute": "Мүнөт",
   "tarifTypeHour": "Саат",

@@ -16,7 +16,6 @@ class CurrencySelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       spacing: AppSpacing.x2,
-      runSpacing: AppSpacing.x2,
       children: Currency.values.map((currency) {
         final isSelected = selected == currency;
         return ChoiceChip(

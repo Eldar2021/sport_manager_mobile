@@ -25,12 +25,6 @@ class _VenuesSkeletonWidgetState extends State<VenuesSkeletonWidget> with Single
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.x4),
@@ -54,5 +48,11 @@ class _VenuesSkeletonWidgetState extends State<VenuesSkeletonWidget> with Single
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

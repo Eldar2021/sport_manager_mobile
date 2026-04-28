@@ -8,7 +8,6 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
 
   final ApiClient _client;
 
-  //Venue
   @override
   Future<List<VenueModel>> getVenues() {
     return _client.getListOfType<VenueModel>(
@@ -57,7 +56,6 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
     return _client.delete('/api/v1/venue/$id');
   }
 
-  //Table
   @override
   Future<TableModel> createTable(String venueId, TableFormParam param) {
     return _client.postType<TableModel>(
