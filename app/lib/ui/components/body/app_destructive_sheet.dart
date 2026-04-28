@@ -45,7 +45,12 @@ class AppDestructiveSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(AppSpacing.x6, AppSpacing.x6, AppSpacing.x6, AppSpacing.x8),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.x6,
+        AppSpacing.x6,
+        AppSpacing.x6,
+        AppSpacing.x8,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -57,13 +62,25 @@ class AppDestructiveSheet extends StatelessWidget {
                 color: context.colors.errorContainer,
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: context.colors.error, size: 24),
+              child: Icon(
+                icon,
+                color: context.colors.error,
+                size: 24,
+              ),
             ),
           ),
           const SizedBox(height: AppSpacing.x4),
-          Text(title, style: context.textTheme.titleLarge, textAlign: TextAlign.center),
+          Text(
+            title,
+            style: context.textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: AppSpacing.x2),
-          Text(subtitle, style: context.textTheme.bodyMedium, textAlign: TextAlign.center),
+          Text(
+            subtitle,
+            style: context.textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: AppSpacing.x6),
           SizedBox(
             width: double.infinity,
@@ -72,7 +89,9 @@ class AppDestructiveSheet extends StatelessWidget {
                 context.pop();
                 onConfirm();
               },
-              style: FilledButton.styleFrom(backgroundColor: context.colors.error),
+              style: FilledButton.styleFrom(
+                backgroundColor: context.colors.error,
+              ),
               child: Text(confirmLabel),
             ),
           ),
@@ -81,7 +100,9 @@ class AppDestructiveSheet extends StatelessWidget {
             onPressed: () => context.pop(),
             child: Text(
               l10n.cancel,
-              style: context.textTheme.bodyMedium?.copyWith(color: context.colors.primary),
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: context.colors.primary,
+              ),
             ),
           ),
           SizedBox(height: AppSpacing.bottom(context)),

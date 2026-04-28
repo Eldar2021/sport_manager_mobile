@@ -33,7 +33,10 @@ class AppBanner extends StatelessWidget {
         colors.primary.withValues(alpha: AppOpacity.tint),
         colors.primary,
       ),
-      AppBannerVariant.info => (colors.primaryContainer, colors.onPrimaryContainer),
+      AppBannerVariant.info => (
+        colors.primaryContainer,
+        colors.onPrimaryContainer,
+      ),
     };
 
     return DecoratedBox(

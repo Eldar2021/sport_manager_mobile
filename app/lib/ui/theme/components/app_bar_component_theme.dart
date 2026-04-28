@@ -6,7 +6,7 @@ abstract final class AppBarComponentTheme {
   static AppBarTheme build(ColorScheme colors, TextTheme textTheme) {
     final isDark = colors.brightness == Brightness.dark;
     return AppBarTheme(
-      backgroundColor: colors.surface,
+      backgroundColor: colors.surfaceContainerLow,
       foregroundColor: colors.onSurface,
       elevation: 0,
       scrolledUnderElevation: 0,

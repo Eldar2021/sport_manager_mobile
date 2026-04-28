@@ -18,10 +18,10 @@ class AppDeleteButton extends StatelessWidget {
     return TextButton.icon(
       onPressed: isLoading ? null : onTap,
       icon: isLoading
-          ? SizedBox(
+          ? const SizedBox(
               width: 16,
               height: 16,
-              child: CircularProgressIndicator(strokeWidth: 2, color: context.colors.error),
+              child: CircularProgressIndicator.adaptive(strokeWidth: 2),
             )
           : const Icon(Icons.delete_outline_rounded),
       label: isLoading ? const SizedBox.shrink() : Text(label),
@@ -29,9 +29,16 @@ class AppDeleteButton extends StatelessWidget {
         foregroundColor: context.colors.error,
         backgroundColor: context.colors.errorContainer,
         iconSize: 16,
-        shape: const RoundedRectangleBorder(borderRadius: AppRadius.buttonBorderRadius),
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x3, vertical: AppSpacing.x2),
-        textStyle: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+        shape: const RoundedRectangleBorder(
+          borderRadius: AppRadius.buttonBorderRadius,
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.x3,
+          vertical: AppSpacing.x2,
+        ),
+        textStyle: context.textTheme.bodySmall?.copyWith(
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

@@ -1,6 +1,12 @@
 import 'package:core/core.dart';
 
-enum TableErrorCode { notFound, numberTaken, hasActiveSession, forbidden, unknown }
+enum TableErrorCode {
+  notFound,
+  numberTaken,
+  hasActiveSession,
+  forbidden,
+  unknown,
+}
 
 final class TableException extends AppException<TableErrorCode> {
   const TableException(
