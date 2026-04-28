@@ -75,4 +75,28 @@ final class BaseMessage {
     ru: 'Ошибка авторизации',
     ky: 'Авторизация катасы',
   );
+
+  static const venueError = BaseMessage(
+    en: 'Venue Error',
+    ru: 'Ошибка заведения',
+    ky: 'Жай катасы',
+  );
+
+  static const tableError = BaseMessage(
+    en: 'Table Error',
+    ru: 'Ошибка стола',
+    ky: 'Стол катасы',
+  );
+
+  static const sessionError = BaseMessage(
+    en: 'Session Error',
+    ru: 'Ошибка сессии',
+    ky: 'Сессия катасы',
+  );
+
+  static const defaultUiMessage = BaseMessage(
+    en: 'Something went wrong. Please try again.',
+    ru: 'Что-то пошло не так. Попробуйте ещё раз.',
+    ky: 'Бир нерсе туура эмес болуп калды. Кайра аракет кылыңыз.',
+  );
 }

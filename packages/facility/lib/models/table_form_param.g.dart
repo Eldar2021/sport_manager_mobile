@@ -1,0 +1,39 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'table_form_param.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+TableFormParam _$TableFormParamFromJson(Map<String, dynamic> json) => TableFormParam(
+  number: (json['number'] as num).toInt(),
+  tarifAmount: (json['tarifAmount'] as num).toInt(),
+  currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
+  tarifType: $enumDecode(_$TarifTypeEnumMap, json['tarifType']),
+  name: json['name'] as String?,
+  description: json['description'] as String?,
+);
+
+Map<String, dynamic> _$TableFormParamToJson(TableFormParam instance) => <String, dynamic>{
+  'number': instance.number,
+  'name': ?instance.name,
+  'description': ?instance.description,
+  'tarifAmount': instance.tarifAmount,
+  'currency': _$CurrencyEnumMap[instance.currency]!,
+  'tarifType': _$TarifTypeEnumMap[instance.tarifType]!,
+};
+
+const _$CurrencyEnumMap = {
+  Currency.kgs: 'KGS',
+  Currency.usd: 'USD',
+  Currency.rub: 'RUB',
+  Currency.kzt: 'KZT',
+  Currency.tryLira: 'TRY',
+};
+
+const _$TarifTypeEnumMap = {
+  TarifType.minute: 'MINUTE',
+  TarifType.hour: 'HOUR',
+  TarifType.day: 'DAY',
+};

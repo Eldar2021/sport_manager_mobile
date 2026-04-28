@@ -15,14 +15,19 @@ sport_manager_mobile/
 │       ├── env.dart          ← BASE_URL via --dart-define
 │       ├── app/              ← Root widget + GoRouter
 │       ├── core/             ← DI modules, DataState, ErrorHandlers
-│       ├── features/         ← Features (screen / cubit / state / widgets)
+│       ├── features/         ← Features (views / cubits / widgets)
+│          auth/
+│          home/
+│
 │       ├── ui/               ← Design system (theme, components)
 │       └── l10n/             ← ARB files + generated localizations
 └── packages/
     ├── core/                 ← Base abstractions (exception, DI, analytics)
     ├── api_client/           ← Dio HTTP client
     ├── storage_client/       ← SharedPreferences wrapper
-    └── auth/                 ← Auth data layer (models, sources, repository)
+    ├── auth/                 ← Auth data layer (models, sources, repository)
+    └── facility/             ← Facility data layer — venues, tables, sessions (models, sources, repositories)
+
 ```
 
 ---
@@ -40,6 +45,7 @@ sport_manager_mobile/
 ```
 
 **Rule:** `features` depends on `app/core`; `app/core` depends on `packages/*`. Packages don't depend on each other, with two exceptions:
+
 - `api_client` and `storage_client` depend on `packages/core`
 - `auth` depends on `packages/core`, `packages/api_client`, and `packages/storage_client`
 
@@ -91,6 +97,7 @@ Wrapper around `SharedPreferences`.
 Auth data layer — owns everything between the auth API and the rest of the app.
 
 **When to look here:**
+
 - Adding/changing an auth endpoint (login, register, refresh, forgot-password, invite-code)
 - Touching auth tokens (access/refresh) — storage, refresh flow, sync access from interceptors
 - Changing the cached user (`UserModel`) shape, role enum, or invite-code model
@@ -99,19 +106,19 @@ Auth data layer — owns everything between the auth API and the rest of the app
 
 **What it contains:**
 
-| Path                                       | Purpose                                                    |
-| ------------------------------------------ | ---------------------------------------------------------- |
-| `lib/auth.dart`                            | Public barrel — only interfaces + DTOs, no impls           |
-| `exception/auth_error_code.dart`           | `AuthErrorCode` enum (invalidCredentials, sessionExpired…) |
-| `exception/auth_exception.dart`            | `AuthException extends AppException<AuthErrorCode>`        |
-| `models/user_model.dart` + `user_role.dart`| Cached user + `UserRole.{owner,manager}` enum              |
-| `models/auth_tokens_model.dart`            | Access + refresh token pair                                |
-| `models/auth_result_model.dart`            | Login/register response (user + tokens)                    |
-| `models/invite_code_model.dart`            | Manager invite code + expiry                               |
-| `models/register_param.dart`               | Sealed `RegisterParam` (Owner / Manager subclasses)        |
-| `repository/auth_repository.dart`          | Concrete `final class AuthRepository` — single class       |
-| `source/local/`                            | `AuthLocalSource` interface + `Impl` (secure + prefs)      |
-| `source/remote/`                           | `AuthRemoteSource` interface + `Impl` + `Mock`             |
+| Path                                        | Purpose                                                    |
+| ------------------------------------------- | ---------------------------------------------------------- |
+| `lib/auth.dart`                             | Public barrel — only interfaces + DTOs, no impls           |
+| `exception/auth_error_code.dart`            | `AuthErrorCode` enum (invalidCredentials, sessionExpired…) |
+| `exception/auth_exception.dart`             | `AuthException extends AppException<AuthErrorCode>`        |
+| `models/user_model.dart` + `user_role.dart` | Cached user + `UserRole.{owner,manager}` enum              |
+| `models/auth_tokens_model.dart`             | Access + refresh token pair                                |
+| `models/auth_result_model.dart`             | Login/register response (user + tokens)                    |
+| `models/invite_code_model.dart`             | Manager invite code + expiry                               |
+| `models/register_param.dart`                | Sealed `RegisterParam` (Owner / Manager subclasses)        |
+| `repository/auth_repository.dart`           | Concrete `final class AuthRepository` — single class       |
+| `source/local/`                             | `AuthLocalSource` interface + `Impl` (secure + prefs)      |
+| `source/remote/`                            | `AuthRemoteSource` interface + `Impl` + `Mock`             |
 
 **Key contracts:**
 

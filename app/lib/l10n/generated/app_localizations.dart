@@ -392,6 +392,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Call'**
   String get authContactCallLabel;
+
+  /// No description provided for @navHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navHome;
+
+  /// No description provided for @navReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get navReport;
+
+  /// No description provided for @navProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get navProfile;
+
+  /// No description provided for @homeCreateVenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Create venue'**
+  String get homeCreateVenue;
+
+  /// No description provided for @homeNoVenuesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no venues yet'**
+  String get homeNoVenuesTitle;
+
+  /// No description provided for @homeNoVenuesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your first venue to start adding tables and accepting sessions.'**
+  String get homeNoVenuesSubtitle;
+
+  /// No description provided for @homeSelectVenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Select venue'**
+  String get homeSelectVenue;
+
+  /// No description provided for @homeNewVenue.
+  ///
+  /// In en, this message translates to:
+  /// **'New venue'**
+  String get homeNewVenue;
+
+  /// No description provided for @homeAddTable.
+  ///
+  /// In en, this message translates to:
+  /// **'Add table'**
+  String get homeAddTable;
+
+  /// No description provided for @homeTablesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tables yet'**
+  String get homeTablesEmpty;
+
+  /// No description provided for @homeTablesEmptySub.
+  ///
+  /// In en, this message translates to:
+  /// **'Add the first table so managers can start sessions.'**
+  String get homeTablesEmptySub;
+
+  /// No description provided for @homeTableOccupied.
+  ///
+  /// In en, this message translates to:
+  /// **'OCCUPIED'**
+  String get homeTableOccupied;
+
+  /// No description provided for @homeTableFree.
+  ///
+  /// In en, this message translates to:
+  /// **'FREE'**
+  String get homeTableFree;
+
+  /// No description provided for @homeTableJustFreed.
+  ///
+  /// In en, this message translates to:
+  /// **'✓ Done'**
+  String get homeTableJustFreed;
+
+  /// No description provided for @createTableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New table'**
+  String get createTableTitle;
+
+  /// No description provided for @createTableNumberLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Table number'**
+  String get createTableNumberLabel;
+
+  /// No description provided for @createTableNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'1'**
+  String get createTableNumberHint;
+
+  /// No description provided for @createTableNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Table name'**
+  String get createTableNameLabel;
+
+  /// No description provided for @createTableNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Table 1'**
+  String get createTableNameHint;
+
+  /// No description provided for @createTableDescLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (tag)'**
+  String get createTableDescLabel;
+
+  /// No description provided for @createTableDescHint.
+  ///
+  /// In en, this message translates to:
+  /// **'VIP room, window seat, snooker...'**
+  String get createTableDescHint;
+
+  /// No description provided for @createTableDescPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get createTableDescPlaceholder;
+
+  /// No description provided for @createTableRateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate'**
+  String get createTableRateLabel;
+
+  /// No description provided for @createTableRateSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'{currency}/{time_unit}'**
+  String createTableRateSuffix(Object currency, Object time_unit);
+
+  /// No description provided for @createTableButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create table'**
+  String get createTableButton;
+
+  /// No description provided for @editTableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit table'**
+  String get editTableTitle;
+
+  /// No description provided for @updateTableButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Update table'**
+  String get updateTableButton;
+
+  /// No description provided for @deleteTableButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteTableButton;
+
+  /// No description provided for @createVenueTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your venue'**
+  String get createVenueTitle;
+
+  /// No description provided for @createVenueSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Give your venue a name. Tables can be added later from the home page.'**
+  String get createVenueSubtitle;
+
+  /// No description provided for @createVenueNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Venue name'**
+  String get createVenueNameLabel;
+
+  /// No description provided for @createVenueNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Central branch'**
+  String get createVenueNameHint;
+
+  /// No description provided for @createVenueNumberLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Short code / number (optional)'**
+  String get createVenueNumberLabel;
+
+  /// No description provided for @createVenueNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'No. 1 or CF'**
+  String get createVenueNumberHint;
+
+  /// No description provided for @createVenueInfoBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'After creating the venue you will be able to add tables one by one with their own rate.'**
+  String get createVenueInfoBanner;
+
+  /// No description provided for @createVenueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create venue →'**
+  String get createVenueButton;
+
+  /// No description provided for @editVenueTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit venue'**
+  String get editVenueTitle;
+
+  /// No description provided for @updateVenueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get updateVenueButton;
+
+  /// No description provided for @deleteVenueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteVenueButton;
+
+  /// No description provided for @deleteVenueSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All tables and session history will be preserved, but the venue will be removed.'**
+  String get deleteVenueSubtitle;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @deleteTableSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Session history will be preserved, but the table will disappear from the home page.'**
+  String get deleteTableSubtitle;
+
+  /// No description provided for @generalRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get generalRetry;
+
+  /// No description provided for @createTableTarifTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tariff type'**
+  String get createTableTarifTypeLabel;
+
+  /// No description provided for @tarifTypeMinute.
+  ///
+  /// In en, this message translates to:
+  /// **'Minute'**
+  String get tarifTypeMinute;
+
+  /// No description provided for @tarifTypeHour.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour'**
+  String get tarifTypeHour;
+
+  /// No description provided for @tarifTypeDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get tarifTypeDay;
+
+  /// No description provided for @createTableCurrencyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get createTableCurrencyLabel;
+
+  /// No description provided for @currencyKgs.
+  ///
+  /// In en, this message translates to:
+  /// **'Som'**
+  String get currencyKgs;
+
+  /// No description provided for @currencyUsd.
+  ///
+  /// In en, this message translates to:
+  /// **'Dollar'**
+  String get currencyUsd;
+
+  /// No description provided for @currencyRub.
+  ///
+  /// In en, this message translates to:
+  /// **'Ruble'**
+  String get currencyRub;
+
+  /// No description provided for @currencyKzt.
+  ///
+  /// In en, this message translates to:
+  /// **'Tenge'**
+  String get currencyKzt;
+
+  /// No description provided for @currencyTry.
+  ///
+  /// In en, this message translates to:
+  /// **'Lira'**
+  String get currencyTry;
+
+  /// No description provided for @venueTablesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{no tables} =1{1 table} other{{count} tables}}'**
+  String venueTablesCount(int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

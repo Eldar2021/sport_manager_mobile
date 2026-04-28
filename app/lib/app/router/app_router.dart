@@ -1,11 +1,16 @@
 import 'package:auth/auth.dart';
+import 'package:facility/facility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
-import 'package:sport_manager_mobile/features/settings/settings.dart';
+import 'package:sport_manager_mobile/features/main/main.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
+import 'package:sport_manager_mobile/features/tables/tables.dart';
+import 'package:sport_manager_mobile/features/venues/venues.dart';
 
 const Set<String> _authRoutes = {
   AppRoutes.welcome,
@@ -73,14 +78,44 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         redirect: (context, state) => state.extra is UserRole ? null : AppRoutes.role,
         builder: (context, state) => RegisterView(role: state.extra! as UserRole),
       ),
+
       GoRoute(
-        path: AppRoutes.home,
-        builder: (context, state) => const HomeScreen(),
+        path: AppRoutes.venueForm,
+        builder: (context, state) => VenueFormView(venue: state.extra as VenueModel?),
       ),
+
       GoRoute(
-        path: AppRoutes.settings,
-        parentNavigatorKey: rootNavigatorKey,
-        builder: (context, state) => const SettingsView(),
+        path: AppRoutes.tableForm,
+        builder: (_, state) => TableFormView(state.extra! as TableFormExtra),
+      ),
+      StatefulShellRoute.indexedStack(
+        builder: (_, _, shell) => MainView(shell),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.home,
+                builder: (_, _) => const HomeView(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.report,
+                builder: (_, _) => const ReportView(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.profile,
+                builder: (_, _) => const ProfileView(),
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );

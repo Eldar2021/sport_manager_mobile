@@ -157,4 +157,179 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get authContactCallLabel => 'Позвонить';
+
+  @override
+  String get navHome => 'Главная';
+
+  @override
+  String get navReport => 'Отчёты';
+
+  @override
+  String get navProfile => 'Профиль';
+
+  @override
+  String get homeCreateVenue => 'Создать зал';
+
+  @override
+  String get homeNoVenuesTitle => 'У вас пока нет залов';
+
+  @override
+  String get homeNoVenuesSubtitle => 'Создайте первый зал, чтобы начать добавлять столы и принимать сессии.';
+
+  @override
+  String get homeSelectVenue => 'Выберите зал';
+
+  @override
+  String get homeNewVenue => 'Новый зал';
+
+  @override
+  String get homeAddTable => 'Добавить стол';
+
+  @override
+  String get homeTablesEmpty => 'Столов пока нет';
+
+  @override
+  String get homeTablesEmptySub => 'Добавьте первый стол, чтобы менеджеры могли начинать сессии.';
+
+  @override
+  String get homeTableOccupied => 'ЗАНЯТ';
+
+  @override
+  String get homeTableFree => 'СВОБОДЕН';
+
+  @override
+  String get homeTableJustFreed => '✓ Завершён';
+
+  @override
+  String get createTableTitle => 'Новый стол';
+
+  @override
+  String get createTableNumberLabel => 'Номер стола';
+
+  @override
+  String get createTableNumberHint => '1';
+
+  @override
+  String get createTableNameLabel => 'Название стола';
+
+  @override
+  String get createTableNameHint => 'Стол 1';
+
+  @override
+  String get createTableDescLabel => 'Описание (ярлык)';
+
+  @override
+  String get createTableDescHint => 'VIP зал, у окна, снукер...';
+
+  @override
+  String get createTableDescPlaceholder => 'Описание';
+
+  @override
+  String get createTableRateLabel => 'Тариф';
+
+  @override
+  String createTableRateSuffix(Object currency, Object time_unit) {
+    return '$currency/$time_unit';
+  }
+
+  @override
+  String get createTableButton => 'Создать стол';
+
+  @override
+  String get editTableTitle => 'Редактировать стол';
+
+  @override
+  String get updateTableButton => 'Обновить';
+
+  @override
+  String get deleteTableButton => 'Удалить';
+
+  @override
+  String get createVenueTitle => 'Создайте зал';
+
+  @override
+  String get createVenueSubtitle => 'Дайте название вашему залу. Столы можно будет добавить позже с главной страницы.';
+
+  @override
+  String get createVenueNameLabel => 'Название зала';
+
+  @override
+  String get createVenueNameHint => 'Центральный филиал';
+
+  @override
+  String get createVenueNumberLabel => 'Короткий код / номер (необязательно)';
+
+  @override
+  String get createVenueNumberHint => '№ 1 или ЦФ';
+
+  @override
+  String get createVenueInfoBanner => 'После создания зала вы сможете добавлять столы по одному с собственным тарифом.';
+
+  @override
+  String get createVenueButton => 'Создать зал →';
+
+  @override
+  String get editVenueTitle => 'Редактировать зал';
+
+  @override
+  String get updateVenueButton => 'Обновить';
+
+  @override
+  String get deleteVenueButton => 'Удалить';
+
+  @override
+  String get deleteVenueSubtitle => 'Все столы и история сессий сохранятся, но зал будет удалён.';
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get deleteTableSubtitle => 'История сессий сохранится, но стол исчезнет с главной страницы.';
+
+  @override
+  String get generalRetry => 'Повторить';
+
+  @override
+  String get createTableTarifTypeLabel => 'Тип тарифа';
+
+  @override
+  String get tarifTypeMinute => 'Минута';
+
+  @override
+  String get tarifTypeHour => 'Час';
+
+  @override
+  String get tarifTypeDay => 'День';
+
+  @override
+  String get createTableCurrencyLabel => 'Валюта';
+
+  @override
+  String get currencyKgs => 'Сом';
+
+  @override
+  String get currencyUsd => 'Доллар';
+
+  @override
+  String get currencyRub => 'Рубль';
+
+  @override
+  String get currencyKzt => 'Тенге';
+
+  @override
+  String get currencyTry => 'Лира';
+
+  @override
+  String venueTablesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count столов',
+      many: '$count столов',
+      few: '$count стола',
+      one: '$count стол',
+      zero: 'нет столов',
+    );
+    return '$_temp0';
+  }
 }
