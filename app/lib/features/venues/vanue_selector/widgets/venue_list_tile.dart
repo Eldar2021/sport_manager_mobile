@@ -2,8 +2,8 @@ import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class HomeVenueBar extends StatelessWidget {
-  const HomeVenueBar({
+class VenueListTile extends StatelessWidget {
+  const VenueListTile({
     required this.venue,
     required this.tableCount,
     required this.onTap,
@@ -23,7 +23,10 @@ class HomeVenueBar extends StatelessWidget {
       ),
       child: ListTile(
         onTap: onTap,
-        contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4, vertical: AppSpacing.x1),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.x4,
+          vertical: AppSpacing.x1,
+        ),
         leading: SizedBox(
           width: 44,
           height: 44,
@@ -33,7 +36,11 @@ class HomeVenueBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
-              child: Icon(Icons.location_on_outlined, color: context.colors.primary, size: 24),
+              child: Icon(
+                Icons.location_on_outlined,
+                color: context.colors.primary,
+                size: 24,
+              ),
             ),
           ),
         ),
@@ -48,12 +55,18 @@ class HomeVenueBar extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 4),
-            Icon(Icons.keyboard_arrow_down_rounded, color: context.colors.onSurfaceVariant, size: 18),
+            Icon(
+              Icons.keyboard_arrow_down_rounded,
+              color: context.colors.onSurfaceVariant,
+              size: 18,
+            ),
           ],
         ),
         subtitle: Text(
           '№ ${venue.number}',
-          style: context.textTheme.bodySmall?.copyWith(color: context.colors.onSurfaceVariant),
+          style: context.textTheme.bodySmall?.copyWith(
+            color: context.colors.onSurfaceVariant,
+          ),
         ),
       ),
     );

@@ -680,6 +680,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Currency'**
   String get createTableCurrencyLabel;
+
+  /// No description provided for @venueTablesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{no tables} =1{1 table} other{{count} tables}}'**
+  String venueTablesCount(int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

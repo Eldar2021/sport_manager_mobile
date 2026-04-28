@@ -103,5 +103,7 @@
   "tarifTypeMinute": "Мүнөт",
   "tarifTypeHour": "Саат",
   "tarifTypeDay": "Күн",
-  "createTableCurrencyLabel": "Валюта"
+  "createTableCurrencyLabel": "Валюта",
+
+  "venueTablesCount": "{count, plural, =0{стол жок} other{{count} стол}}"
 }

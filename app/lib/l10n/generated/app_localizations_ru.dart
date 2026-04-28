@@ -303,4 +303,18 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get createTableCurrencyLabel => 'Валюта';
+
+  @override
+  String venueTablesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count столов',
+      many: '$count столов',
+      few: '$count стола',
+      one: '$count стол',
+      zero: 'нет столов',
+    );
+    return '$_temp0';
+  }
 }

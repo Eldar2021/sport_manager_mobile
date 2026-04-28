@@ -15,33 +15,33 @@ class TarifTypeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: TarifType.values.map((type) {
-        final isSelected = selected == type;
-        return Expanded(
-          child: ChoiceChip(
-            label: Center(child: Text(type._label(context))),
-            selected: isSelected,
-            showCheckmark: false,
-            selectedColor: context.colors.primary,
-            backgroundColor: AppColors.transparent,
-            side: BorderSide.none,
-            labelStyle: context.textTheme.bodyMedium?.copyWith(
-              color: isSelected ? context.colors.onPrimary : context.colors.onSurface,
-              fontWeight: FontWeight.w600,
-            ),
-            onSelected: (_) => onChanged(type),
+    return SizedBox(
+      width: double.infinity,
+      child: SegmentedButton<TarifType>(
+        style: SegmentedButton.styleFrom(
+          selectedBackgroundColor: context.colors.primary,
+          selectedForegroundColor: context.colors.onPrimary,
+          foregroundColor: context.colors.onSurface,
+          textStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+        ),
+        segments: [
+          ButtonSegment(
+            value: TarifType.minute,
+            label: Text(context.l10n.tarifTypeMinute),
           ),
-        );
-      }).toList(),
+          ButtonSegment(
+            value: TarifType.hour,
+            label: Text(context.l10n.tarifTypeHour),
+          ),
+          ButtonSegment(
+            value: TarifType.day,
+            label: Text(context.l10n.tarifTypeDay),
+          ),
+        ],
+        selected: {selected},
+        onSelectionChanged: (selection) => onChanged(selection.first),
+        showSelectedIcon: false,
+      ),
     );
   }
-}
-
-extension on TarifType {
-  String _label(BuildContext context) => switch (this) {
-    TarifType.minute => context.l10n.tarifTypeMinute,
-    TarifType.hour => context.l10n.tarifTypeHour,
-    TarifType.day => context.l10n.tarifTypeDay,
-  };
 }

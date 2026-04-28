@@ -305,4 +305,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createTableCurrencyLabel => 'Currency';
+
+  @override
+  String venueTablesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tables',
+      one: '1 table',
+      zero: 'no tables',
+    );
+    return '$_temp0';
+  }
 }

@@ -103,5 +103,7 @@
   "tarifTypeMinute": "Минута",
   "tarifTypeHour": "Час",
   "tarifTypeDay": "День",
-  "createTableCurrencyLabel": "Валюта"
+  "createTableCurrencyLabel": "Валюта",
+
+  "venueTablesCount": "{count, plural, =0{нет столов} one{{count} стол} few{{count} стола} many{{count} столов} other{{count} столов}}"
 }

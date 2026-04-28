@@ -303,4 +303,15 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get createTableCurrencyLabel => 'Валюта';
+
+  @override
+  String venueTablesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count стол',
+      zero: 'стол жок',
+    );
+    return '$_temp0';
+  }
 }
