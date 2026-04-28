@@ -17,7 +17,6 @@ class RateSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       spacing: AppSpacing.x2,
-      runSpacing: AppSpacing.x2,
       children: _presets
           .map(
             (rate) => ChoiceChip(
