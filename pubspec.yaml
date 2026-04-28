@@ -44,6 +44,8 @@ dev_dependencies:
   build_runner: ^2.13.1
   json_serializable: ^6.13.1
   flutter_gen_runner: ^5.13.0+1
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
 
 melos:
   command:
@@ -84,6 +86,10 @@ melos:
         melos exec -c 1 --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs
         melos format
       description: "Generate code with build_runner for relevant packages"
+
+    gen-splash:
+      run: cd app && dart run flutter_native_splash:create --path=flutter_native_splash.yaml
+      description: "Regenerate native splash assets from app/flutter_native_splash.yaml"
 
     build-apk:
       run: cd app && flutter build apk

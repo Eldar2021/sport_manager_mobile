@@ -20,6 +20,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/analytics.svg
   SvgGenImage get analytics => const SvgGenImage('assets/icons/analytics.svg');
 
+  /// File path: assets/icons/app_icon.svg
+  SvgGenImage get appIcon => const SvgGenImage('assets/icons/app_icon.svg');
+
+  /// File path: assets/icons/app_logo.svg
+  SvgGenImage get appLogo => const SvgGenImage('assets/icons/app_logo.svg');
+
   /// File path: assets/icons/call.svg
   SvgGenImage get call => const SvgGenImage('assets/icons/call.svg');
 
@@ -45,18 +51,32 @@ class $AssetsIconsGen {
   SvgGenImage get whatsapp02 => const SvgGenImage('assets/icons/whatsapp02.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [analytics, call, email, home, profile, sms, telegram, whatsapp, whatsapp02];
+  List<SvgGenImage> get values => [
+    analytics,
+    appIcon,
+    appLogo,
+    call,
+    email,
+    home,
+    profile,
+    sms,
+    telegram,
+    whatsapp,
+    whatsapp02,
+  ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/Screenshot 2026-04-24 at 16.16.28.png
-  AssetGenImage get screenshot20260424At161628 =>
-      const AssetGenImage('assets/images/Screenshot 2026-04-24 at 16.16.28.png');
+  /// File path: assets/images/app_icon.png
+  AssetGenImage get appIcon => const AssetGenImage('assets/images/app_icon.png');
+
+  /// File path: assets/images/app_logo.png
+  AssetGenImage get appLogo => const AssetGenImage('assets/images/app_logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [screenshot20260424At161628];
+  List<AssetGenImage> get values => [appIcon, appLogo];
 }
 
 class Assets {
