@@ -29,14 +29,15 @@ class TableFormView extends StatefulWidget {
 }
 
 class _TableFormViewState extends State<TableFormView> {
-  static const _defaultTarifAmount = 200;
+  static const _defaultTarif = 200;
   late final TableFormCubit _cubit;
   late final GlobalKey<FormState> _formKey;
   late final TextEditingController _numberCtr;
   late final TextEditingController _nameCtr;
   late final TextEditingController _descCtr;
   late final TextEditingController _rateCtr;
-  late final ValueNotifier<TableFormParam> _previewNotifier;
+  late final Currency _currency;
+  late final TarifType _tarifType;
 
   @override
   void initState() {
@@ -51,33 +52,9 @@ class _TableFormViewState extends State<TableFormView> {
     _nameCtr = TextEditingController(text: table?.name ?? '');
     _numberCtr = TextEditingController(text: table?.number.toString() ?? '');
     _descCtr = TextEditingController(text: table?.description ?? '');
-    _rateCtr = TextEditingController(text: (table?.tarifAmount ?? 200).toString());
-    _previewNotifier = ValueNotifier(
-      TableFormParam(
-        name: table?.name ?? '',
-        description: table?.description ?? '',
-        tarifAmount: table?.tarifAmount ?? _defaultTarifAmount,
-        currency: table?.currency ?? Currency.kgs,
-        tarifType: table?.tarifType ?? TarifType.hour,
-        number: int.tryParse(_numberCtr.text.trim()) ?? 0,
-      ),
-    );
-    _nameCtr.addListener(_updatePreview);
-    _numberCtr.addListener(_updatePreview);
-    _descCtr.addListener(_updatePreview);
-    _rateCtr.addListener(_updatePreview);
-  }
-
-  void _updatePreview() {
-    final parsedRate = int.tryParse(_rateCtr.text.trim()) ?? _defaultTarifAmount;
-    final parsedNumber = int.tryParse(_numberCtr.text.trim()) ?? 0;
-    final p = _previewNotifier.value;
-    _previewNotifier.value = p.copyWith(
-      number: parsedNumber > 0 ? parsedNumber : 0,
-      name: _nameCtr.text,
-      description: _descCtr.text,
-      tarifAmount: parsedRate > 0 ? parsedRate : _defaultTarifAmount,
-    );
+    _rateCtr = TextEditingController(text: (table?.tarifAmount ?? _defaultTarif).toString());
+    _currency = table?.currency ?? Currency.kgs;
+    _tarifType = table?.tarifType ?? TarifType.hour;
   }
 
   @override
@@ -130,19 +107,6 @@ class _TableFormViewState extends State<TableFormView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ValueListenableBuilder(
-                  valueListenable: _previewNotifier,
-                  builder: (_, p, _) {
-                    return TablePreviewCard(
-                      name: p.name ?? '',
-                      description: p.description ?? '',
-                      tarifAmount: p.tarifAmount,
-                      currency: p.currency,
-                      tarifType: p.tarifType,
-                    );
-                  },
-                ),
-                const SizedBox(height: AppSpacing.x5),
                 AppTextField(
                   controller: _numberCtr,
                   label: context.l10n.createTableNumberLabel,
@@ -168,31 +132,19 @@ class _TableFormViewState extends State<TableFormView> {
                 const SizedBox(height: AppSpacing.x4),
                 Text(context.l10n.createTableTarifTypeLabel, style: labelStyle),
                 const SizedBox(height: AppSpacing.x2),
-                ValueListenableBuilder(
-                  valueListenable: _previewNotifier,
-                  builder: (_, preview, _) {
-                    return TarifTypeSelector(
-                      selected: preview.tarifType,
-                      onChanged: (tarifType) {
-                        _previewNotifier.value = preview.copyWith(tarifType: tarifType);
-                      },
-                    );
+                TarifTypeSelector(
+                  selected: _tarifType,
+                  onChanged: (value) {
+                    setState(() {});
+                    _tarifType = value;
                   },
                 ),
                 const SizedBox(height: AppSpacing.x4),
                 Text(context.l10n.createTableRateLabel, style: labelStyle),
                 const SizedBox(height: AppSpacing.x2),
-                ValueListenableBuilder(
-                  valueListenable: _previewNotifier,
-                  builder: (_, p, _) {
-                    return RateSelector(
-                      selected: p.tarifAmount,
-                      onChanged: (tarif) {
-                        _previewNotifier.value = p.copyWith(tarifAmount: tarif);
-                        _rateCtr.text = tarif.toString();
-                      },
-                    );
-                  },
+                RateSelector(
+                  selected: _rateCtr.text,
+                  onChanged: (value) => _rateCtr.text = value,
                 ),
                 AppTextField(
                   controller: _rateCtr,
@@ -204,15 +156,11 @@ class _TableFormViewState extends State<TableFormView> {
                 const SizedBox(height: AppSpacing.x4),
                 Text(context.l10n.createTableCurrencyLabel, style: labelStyle),
                 const SizedBox(height: AppSpacing.x2),
-                ValueListenableBuilder(
-                  valueListenable: _previewNotifier,
-                  builder: (_, p, _) {
-                    return CurrencySelector(
-                      selected: p.currency,
-                      onChanged: (cur) {
-                        _previewNotifier.value = p.copyWith(currency: cur);
-                      },
-                    );
+                CurrencySelector(
+                  selected: _currency,
+                  onChanged: (currency) {
+                    _currency = currency;
+                    setState(() {});
                   },
                 ),
                 SizedBox(height: AppSpacing.bottom(context) + AppSpacing.x16),
@@ -251,12 +199,12 @@ class _TableFormViewState extends State<TableFormView> {
     if (!_formKey.currentState!.validate()) return;
 
     final param = TableFormParam(
-      number: _previewNotifier.value.number,
+      number: int.tryParse(_numberCtr.text) ?? 0,
       name: _nameCtr.text.trim(),
       description: _descCtr.text.trim(),
-      tarifAmount: _previewNotifier.value.tarifAmount,
-      currency: _previewNotifier.value.currency,
-      tarifType: _previewNotifier.value.tarifType,
+      tarifAmount: int.tryParse(_rateCtr.text) ?? _defaultTarif,
+      currency: _currency,
+      tarifType: _tarifType,
     );
 
     _cubit.submit(param);
@@ -264,11 +212,6 @@ class _TableFormViewState extends State<TableFormView> {
 
   @override
   void dispose() {
-    _nameCtr.removeListener(_updatePreview);
-    _numberCtr.removeListener(_updatePreview);
-    _descCtr.removeListener(_updatePreview);
-    _rateCtr.removeListener(_updatePreview);
-    _previewNotifier.dispose();
     _cubit.close();
     _nameCtr.dispose();
     _numberCtr.dispose();

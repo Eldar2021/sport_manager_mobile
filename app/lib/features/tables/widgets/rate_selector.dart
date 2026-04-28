@@ -8,8 +8,8 @@ class RateSelector extends StatelessWidget {
     super.key,
   });
 
-  final int selected;
-  final ValueChanged<int> onChanged;
+  final String selected;
+  final ValueChanged<String> onChanged;
 
   static const _presets = [200, 250, 300, 350, 400];
 
@@ -22,16 +22,16 @@ class RateSelector extends StatelessWidget {
           .map(
             (rate) => ChoiceChip(
               label: Text('$rate'),
-              selected: selected == rate,
+              selected: selected == rate.toString(),
               showCheckmark: false,
               selectedColor: context.colors.primary,
               backgroundColor: AppColors.transparent,
               side: BorderSide.none,
               labelStyle: context.textTheme.bodyMedium?.copyWith(
-                color: selected == rate ? context.colors.onPrimary : context.colors.onSurface,
+                color: selected == rate.toString() ? context.colors.onPrimary : context.colors.onSurface,
                 fontWeight: FontWeight.w600,
               ),
-              onSelected: (_) => onChanged(rate),
+              onSelected: (_) => onChanged(rate.toString()),
             ),
           )
           .toList(),
