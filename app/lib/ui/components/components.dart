@@ -3,6 +3,7 @@ export 'body/app_destructive_sheet.dart';
 export 'button/app_button.dart';
 export 'button/app_button_scope.dart';
 export 'button/app_delete_button.dart';
+export 'button/app_outline_button.dart';
 export 'form/app_checkbox_field.dart';
 export 'form/app_password_field.dart';
 export 'form/app_text_field.dart';

@@ -1,4 +1,5 @@
 import 'package:auth/auth.dart';
+import 'package:facility/facility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +11,6 @@ import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
-import 'package:venues/venues.dart';
 
 const Set<String> _authRoutes = {
   AppRoutes.welcome,

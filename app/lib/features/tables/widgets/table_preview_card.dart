@@ -1,3 +1,4 @@
+import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -6,13 +7,17 @@ class TablePreviewCard extends StatelessWidget {
   const TablePreviewCard({
     required this.name,
     required this.description,
-    required this.hourlyRate,
+    required this.tarifAmount,
+    required this.tarifType,
+    required this.currency,
     super.key,
   });
 
   final String name;
   final String description;
-  final int hourlyRate;
+  final int tarifAmount;
+  final TarifType tarifType;
+  final Currency currency;
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +83,11 @@ class TablePreviewCard extends StatelessWidget {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: '$hourlyRate',
+                        text: '$tarifAmount',
                         style: context.textTheme.bodyLarge?.copyWith(color: context.colors.primary),
                       ),
                       TextSpan(
-                        text: ' ${context.l10n.createTableRateSuffix}',
+                        text: ' ${context.l10n.createTableRateSuffix(currency.label, tarifType.label)}',
                         style: context.textTheme.bodySmall?.copyWith(color: context.colors.primary),
                       ),
                     ],

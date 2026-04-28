@@ -11,7 +11,7 @@ class RateSelector extends StatelessWidget {
   final int selected;
   final ValueChanged<int> onChanged;
 
-  static const _presets = [150, 200, 250, 300, 350, 400];
+  static const _presets = [200, 250, 300, 350, 400];
 
   @override
   Widget build(BuildContext context) {

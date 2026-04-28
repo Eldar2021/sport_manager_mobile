@@ -204,6 +204,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createTableTitle => 'New table';
 
   @override
+  String get createTableNumberLabel => 'Table number';
+
+  @override
+  String get createTableNumberHint => '1';
+
+  @override
   String get createTableNameLabel => 'Table name';
 
   @override
@@ -219,10 +225,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createTableDescPlaceholder => 'Description';
 
   @override
-  String get createTableRateLabel => 'Rate (som / hour)';
+  String get createTableRateLabel => 'Rate';
 
   @override
-  String get createTableRateSuffix => 'som/h';
+  String createTableRateSuffix(Object currency, Object time_unit) {
+    return '$currency/$time_unit';
+  }
 
   @override
   String get createTableButton => 'Create table';
@@ -279,4 +287,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deleteTableSubtitle =>
       'Session history will be preserved, but the table will disappear from the home page.';
+
+  @override
+  String get generalRetry => 'Retry';
+
+  @override
+  String get createTableTarifTypeLabel => 'Tariff type';
+
+  @override
+  String get tarifTypeMinute => 'Minute';
+
+  @override
+  String get tarifTypeHour => 'Hour';
+
+  @override
+  String get tarifTypeDay => 'Day';
+
+  @override
+  String get createTableCurrencyLabel => 'Currency';
 }

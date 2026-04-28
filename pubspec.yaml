@@ -11,9 +11,7 @@ workspace:
   - packages/api_client
   - packages/storage_client
   - packages/auth
-  - packages/venues
-  - packages/tables
-  - packages/sessions
+  - packages/facility
 
 dependencies:
   meta: ^1.17.0

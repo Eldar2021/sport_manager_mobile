@@ -67,13 +67,15 @@
   "homeTableJustFreed": "✓ Done",
 
   "createTableTitle": "New table",
+  "createTableNumberLabel": "Table number",
+  "createTableNumberHint": "1",
   "createTableNameLabel": "Table name",
   "createTableNameHint": "Table 1",
   "createTableDescLabel": "Description (tag)",
   "createTableDescHint": "VIP room, window seat, snooker...",
   "createTableDescPlaceholder": "Description",
-  "createTableRateLabel": "Rate (som / hour)",
-  "createTableRateSuffix": "som/h",
+  "createTableRateLabel": "Rate",
+  "createTableRateSuffix": "{currency}/{time_unit}",
   "createTableButton": "Create table",
   "editTableTitle": "Edit table",
   "updateTableButton": "Update table",
@@ -93,5 +95,13 @@
   "deleteVenueSubtitle": "All tables and session history will be preserved, but the venue will be removed.",
 
   "cancel": "Cancel",
-  "deleteTableSubtitle": "Session history will be preserved, but the table will disappear from the home page."
+  "deleteTableSubtitle": "Session history will be preserved, but the table will disappear from the home page.",
+
+  "generalRetry": "Retry",
+
+  "createTableTarifTypeLabel": "Tariff type",
+  "tarifTypeMinute": "Minute",
+  "tarifTypeHour": "Hour",
+  "tarifTypeDay": "Day",
+  "createTableCurrencyLabel": "Currency"
 }

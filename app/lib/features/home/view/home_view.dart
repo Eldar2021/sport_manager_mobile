@@ -1,15 +1,15 @@
+import 'package:core/core.dart';
+import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sessions/sessions.dart';
 import 'package:sport_manager_mobile/app/app.dart';
+import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
-import 'package:tables/tables.dart';
-import 'package:venues/venues.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -17,11 +17,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HomeCubit(
-        venueRepo: GetIt.I<VenueRepository>(),
-        tableRepo: GetIt.I<TableRepository>(),
-        sessionRepo: GetIt.I<SessionRepository>(),
-      )..load(),
+      create: (_) => HomeCubit(GetIt.I<FacilityRepository>())..load(),
       child: const _HomeView(),
     );
   }
@@ -36,8 +32,7 @@ class _HomeView extends StatelessWidget {
 
     return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (prev, next) =>
-          prev.isInitialLoading != next.isInitialLoading ||
-          prev.venues.isEmpty != next.venues.isEmpty ||
+          prev.isLoading != next.isLoading ||
           prev.selectedVenue != next.selectedVenue ||
           prev.tables.length != next.tables.length,
       builder: (context, state) {
@@ -50,9 +45,8 @@ class _HomeView extends StatelessWidget {
                 ? HomeVenueBar(
                     venue: state.selectedVenue!,
                     tableCount: state.tables.length,
-                    onTap: () => HomeVenuePicker.show(
+                    onTap: () => VenueSelectorSheet.show(
                       context,
-                      venues: state.venues,
                       selectedVenue: state.selectedVenue,
                       isOwner: isOwner,
                       onSelect: context.read<HomeCubit>().selectVenue,
@@ -60,7 +54,6 @@ class _HomeView extends StatelessWidget {
                   )
                 : null,
           ),
-
           floatingActionButton: state.selectedVenue != null && isOwner
               ? FloatingActionButton(
                   onPressed: () => context.push(
@@ -86,13 +79,16 @@ class _TablesBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        if (state.isInitialLoading) return const VenuesSkeletonWidget();
+        if (state.isLoading) return const VenuesSkeletonWidget();
 
-        if (state.venues.isEmpty) {
-          return VenuesEmptyWidget(onCreateTap: () => context.push(AppRoutes.venueForm));
+        final status = state.selectedStatus;
+        if (status is RequestFailure<SelectedVenueModel>) {
+          final err = status.exception;
+          if (err is VenueException && err.error == VenueErrorCode.notFound) {
+            return VenuesEmptyWidget(onCreateTap: () => context.push(AppRoutes.venueForm));
+          }
+          return ErrorBodyWidget(err, onRetryPressed: context.read<HomeCubit>().load);
         }
-
-        if (state.isTablesLoading) return const VenuesSkeletonWidget();
 
         if (state.tables.isEmpty) {
           return TablesEmptyWidget(
@@ -139,7 +135,6 @@ class _TablesBody extends StatelessWidget {
                         (table) => HomeTableCard(
                           key: ValueKey(table.id),
                           table: table,
-                          session: state.activeSessions[table.id],
                           isJustFreed: state.justFreedTableIds.contains(table.id),
                           onTap: () {},
                         ),

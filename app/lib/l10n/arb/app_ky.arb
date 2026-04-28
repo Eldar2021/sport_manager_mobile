@@ -67,13 +67,15 @@
   "homeTableJustFreed": "✓ Аяктады",
 
   "createTableTitle": "Жаңы стол",
+  "createTableNumberLabel": "Стол номери",
+  "createTableNumberHint": "1",
   "createTableNameLabel": "Стол аты",
   "createTableNameHint": "Стол 1",
   "createTableDescLabel": "Сыпаттама (белги)",
   "createTableDescHint": "VIP зал, терезенин жанында, снукер...",
   "createTableDescPlaceholder": "Сыпаттама",
-  "createTableRateLabel": "Тариф (сом / саат)",
-  "createTableRateSuffix": "сом/саат",
+  "createTableRateLabel": "Тариф",
+  "createTableRateSuffix": "{currency}/{time_unit}",
   "createTableButton": "Стол түзүү",
   "editTableTitle": "Столду өзгөртүү",
   "updateTableButton": "Жаңыртуу",
@@ -93,5 +95,13 @@
   "deleteVenueSubtitle": "Бардык столдор жана сессиялардын тарыхы сакталат, бирок зал жок кылынат.",
 
   "cancel": "Жокко чыгаруу",
-  "deleteTableSubtitle": "Сессиялардын тарыхы сакталат, бирок стол башкы баракчадан жоголот."
+  "deleteTableSubtitle": "Сессиялардын тарыхы сакталат, бирок стол башкы баракчадан жоголот.",
+
+  "generalRetry": "Кайталоо",
+
+  "createTableTarifTypeLabel": "Тариф түрү",
+  "tarifTypeMinute": "Мүнөт",
+  "tarifTypeHour": "Саат",
+  "tarifTypeDay": "Күн",
+  "createTableCurrencyLabel": "Валюта"
 }

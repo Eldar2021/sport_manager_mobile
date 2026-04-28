@@ -14,8 +14,6 @@ final class VenueFormState extends Equatable {
   bool get isDeleting => deleteStatus is RequestLoading;
 
   VenueFormState copyWith({
-    String? name,
-    String? number,
     RequestStatus<VenueModel>? reqStatus,
     RequestStatus<bool>? deleteStatus,
   }) => VenueFormState(

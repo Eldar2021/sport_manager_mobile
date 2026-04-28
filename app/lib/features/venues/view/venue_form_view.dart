@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -7,7 +8,6 @@ import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
-import 'package:venues/venues.dart';
 
 class VenueFormView extends StatefulWidget {
   const VenueFormView({this.venue, super.key});
@@ -28,12 +28,12 @@ class _VenueFormViewState extends State<VenueFormView> {
   void initState() {
     super.initState();
     _cubit = VenueFormCubit(
-      GetIt.I<VenueRepository>(),
+      repository: GetIt.I<FacilityRepository>(),
       venueId: widget.venue?.id,
     );
     _formKey = GlobalKey<FormState>();
     _nameCtr = TextEditingController(text: widget.venue?.name ?? '');
-    _numberCtr = TextEditingController(text: widget.venue?.number ?? '');
+    _numberCtr = TextEditingController(text: widget.venue?.number.toString() ?? '');
   }
 
   @override
@@ -106,9 +106,13 @@ class _VenueFormViewState extends State<VenueFormView> {
 
   void _submitForm() {
     if (!_formKey.currentState!.validate()) return;
+
+    final number = int.tryParse(_numberCtr.text.trim()) ?? 0;
     _cubit.submit(
-      _nameCtr.text,
-      _numberCtr.text,
+      VenueFormParam(
+        name: _nameCtr.text,
+        number: number,
+      ),
     );
   }
 

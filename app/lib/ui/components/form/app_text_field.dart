@@ -77,6 +77,7 @@ class AppTextField extends StatelessWidget {
           maxLines: obscureText ? 1 : maxLines,
           style: context.textTheme.bodyMedium,
           decoration: InputDecoration(
+            counterText: '',
             hintText: hintText,
             helperText: helperText,
             suffixIcon: suffixIcon,

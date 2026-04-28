@@ -67,13 +67,15 @@
   "homeTableJustFreed": "✓ Завершён",
 
   "createTableTitle": "Новый стол",
+  "createTableNumberLabel": "Номер стола",
+  "createTableNumberHint": "1",
   "createTableNameLabel": "Название стола",
   "createTableNameHint": "Стол 1",
   "createTableDescLabel": "Описание (ярлык)",
   "createTableDescHint": "VIP зал, у окна, снукер...",
   "createTableDescPlaceholder": "Описание",
-  "createTableRateLabel": "Тариф (сом / час)",
-  "createTableRateSuffix": "сом/ч",
+  "createTableRateLabel": "Тариф",
+  "createTableRateSuffix": "{currency}/{time_unit}",
   "createTableButton": "Создать стол",
   "editTableTitle": "Редактировать стол",
   "updateTableButton": "Обновить",
@@ -93,5 +95,13 @@
   "deleteVenueSubtitle": "Все столы и история сессий сохранятся, но зал будет удалён.",
 
   "cancel": "Отмена",
-  "deleteTableSubtitle": "История сессий сохранится, но стол исчезнет с главной страницы."
+  "deleteTableSubtitle": "История сессий сохранится, но стол исчезнет с главной страницы.",
+
+  "generalRetry": "Повторить",
+
+  "createTableTarifTypeLabel": "Тип тарифа",
+  "tarifTypeMinute": "Минута",
+  "tarifTypeHour": "Час",
+  "tarifTypeDay": "День",
+  "createTableCurrencyLabel": "Валюта"
 }

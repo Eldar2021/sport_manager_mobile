@@ -204,6 +204,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get createTableTitle => 'Новый стол';
 
   @override
+  String get createTableNumberLabel => 'Номер стола';
+
+  @override
+  String get createTableNumberHint => '1';
+
+  @override
   String get createTableNameLabel => 'Название стола';
 
   @override
@@ -219,10 +225,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get createTableDescPlaceholder => 'Описание';
 
   @override
-  String get createTableRateLabel => 'Тариф (сом / час)';
+  String get createTableRateLabel => 'Тариф';
 
   @override
-  String get createTableRateSuffix => 'сом/ч';
+  String createTableRateSuffix(Object currency, Object time_unit) {
+    return '$currency/$time_unit';
+  }
 
   @override
   String get createTableButton => 'Создать стол';
@@ -277,4 +285,22 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get deleteTableSubtitle => 'История сессий сохранится, но стол исчезнет с главной страницы.';
+
+  @override
+  String get generalRetry => 'Повторить';
+
+  @override
+  String get createTableTarifTypeLabel => 'Тип тарифа';
+
+  @override
+  String get tarifTypeMinute => 'Минута';
+
+  @override
+  String get tarifTypeHour => 'Час';
+
+  @override
+  String get tarifTypeDay => 'День';
+
+  @override
+  String get createTableCurrencyLabel => 'Валюта';
 }

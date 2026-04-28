@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
+import 'package:facility/facility.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:tables/tables.dart';
 
 part 'table_form_state.dart';
 
@@ -12,57 +12,20 @@ class TableFormCubit extends Cubit<TableFormState> {
     this._venueId, {
     TableModel? initialTable,
   }) : _tableId = initialTable?.id,
-       super(
-         initialTable != null
-             ? TableFormState(
-                 name: initialTable.name ?? '',
-                 description: initialTable.description ?? '',
-                 hourlyRate: initialTable.hourlyRate,
-               )
-             : const TableFormState(),
-       );
+       super(const TableFormState());
 
-  final TableRepository _repository;
+  final FacilityRepository _repository;
   final String _venueId;
   final String? _tableId;
 
-  bool get isEditMode => _tableId != null;
-
-  void updateName(String value) {
-    emit(state.copyWith(name: value));
-  }
-
-  void updateDescription(String value) {
-    emit(state.copyWith(description: value));
-  }
-
-  void updateRate(int value) {
-    emit(state.copyWith(hourlyRate: value));
-  }
-
-  Future<void> submit() async {
-    if (!state.isValid) return;
+  Future<void> submit(TableFormParam param) async {
     emit(state.copyWith(submitStatus: const RequestLoading()));
     try {
       final TableModel result;
       if (_tableId != null) {
-        result = await _repository.updateTable(
-          _tableId,
-          UpdateTableBody(
-            name: state.name.trim(),
-            number: state.name.trim(),
-            hourlyRate: state.hourlyRate,
-          ),
-        );
+        result = await _repository.updateTable(_tableId, param);
       } else {
-        result = await _repository.createTable(
-          _venueId,
-          CreateTableBody(
-            number: state.name.trim(),
-            name: state.name.trim(),
-            hourlyRate: state.hourlyRate,
-          ),
-        );
+        result = await _repository.createTable(_venueId, param);
       }
       emit(state.copyWith(submitStatus: RequestSuccess(result)));
     } on Object catch (e) {

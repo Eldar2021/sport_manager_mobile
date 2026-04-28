@@ -483,6 +483,18 @@ abstract class AppLocalizations {
   /// **'New table'**
   String get createTableTitle;
 
+  /// No description provided for @createTableNumberLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Table number'**
+  String get createTableNumberLabel;
+
+  /// No description provided for @createTableNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'1'**
+  String get createTableNumberHint;
+
   /// No description provided for @createTableNameLabel.
   ///
   /// In en, this message translates to:
@@ -516,14 +528,14 @@ abstract class AppLocalizations {
   /// No description provided for @createTableRateLabel.
   ///
   /// In en, this message translates to:
-  /// **'Rate (som / hour)'**
+  /// **'Rate'**
   String get createTableRateLabel;
 
   /// No description provided for @createTableRateSuffix.
   ///
   /// In en, this message translates to:
-  /// **'som/h'**
-  String get createTableRateSuffix;
+  /// **'{currency}/{time_unit}'**
+  String createTableRateSuffix(Object currency, Object time_unit);
 
   /// No description provided for @createTableButton.
   ///
@@ -632,6 +644,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Session history will be preserved, but the table will disappear from the home page.'**
   String get deleteTableSubtitle;
+
+  /// No description provided for @generalRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get generalRetry;
+
+  /// No description provided for @createTableTarifTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tariff type'**
+  String get createTableTarifTypeLabel;
+
+  /// No description provided for @tarifTypeMinute.
+  ///
+  /// In en, this message translates to:
+  /// **'Minute'**
+  String get tarifTypeMinute;
+
+  /// No description provided for @tarifTypeHour.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour'**
+  String get tarifTypeHour;
+
+  /// No description provided for @tarifTypeDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get tarifTypeDay;
+
+  /// No description provided for @createTableCurrencyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get createTableCurrencyLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

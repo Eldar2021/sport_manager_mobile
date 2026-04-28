@@ -204,6 +204,12 @@ class AppLocalizationsKy extends AppLocalizations {
   String get createTableTitle => 'Жаңы стол';
 
   @override
+  String get createTableNumberLabel => 'Стол номери';
+
+  @override
+  String get createTableNumberHint => '1';
+
+  @override
   String get createTableNameLabel => 'Стол аты';
 
   @override
@@ -219,10 +225,12 @@ class AppLocalizationsKy extends AppLocalizations {
   String get createTableDescPlaceholder => 'Сыпаттама';
 
   @override
-  String get createTableRateLabel => 'Тариф (сом / саат)';
+  String get createTableRateLabel => 'Тариф';
 
   @override
-  String get createTableRateSuffix => 'сом/саат';
+  String createTableRateSuffix(Object currency, Object time_unit) {
+    return '$currency/$time_unit';
+  }
 
   @override
   String get createTableButton => 'Стол түзүү';
@@ -277,4 +285,22 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get deleteTableSubtitle => 'Сессиялардын тарыхы сакталат, бирок стол башкы баракчадан жоголот.';
+
+  @override
+  String get generalRetry => 'Кайталоо';
+
+  @override
+  String get createTableTarifTypeLabel => 'Тариф түрү';
+
+  @override
+  String get tarifTypeMinute => 'Мүнөт';
+
+  @override
+  String get tarifTypeHour => 'Саат';
+
+  @override
+  String get tarifTypeDay => 'Күн';
+
+  @override
+  String get createTableCurrencyLabel => 'Валюта';
 }

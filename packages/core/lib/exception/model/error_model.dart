@@ -93,4 +93,10 @@ final class BaseMessage {
     ru: 'Ошибка сессии',
     ky: 'Сессия катасы',
   );
+
+  static const defaultUiMessage = BaseMessage(
+    en: 'Something went wrong. Please try again.',
+    ru: 'Что-то пошло не так. Попробуйте ещё раз.',
+    ky: 'Бир нерсе туура эмес болуп калды. Кайра аракет кылыңыз.',
+  );
 }

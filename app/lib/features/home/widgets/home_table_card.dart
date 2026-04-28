@@ -1,20 +1,17 @@
+import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
-import 'package:sessions/sessions.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
-import 'package:tables/tables.dart';
 
 class HomeTableCard extends StatefulWidget {
   const HomeTableCard({
     required this.table,
     required this.onTap,
-    this.session,
     this.isJustFreed = false,
     super.key,
   });
 
   final TableModel table;
-  final SessionModel? session;
   final bool isJustFreed;
   final VoidCallback onTap;
 
@@ -33,18 +30,17 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
     _pulseAnim = Tween<double>(begin: 0.4, end: 1).animate(
       CurvedAnimation(parent: _pulseCtrl, curve: Curves.easeInOut),
     );
-    if (widget.table.status == TableStatus.occupied) _pulseCtrl.repeat(reverse: true);
+    if (widget.table.isOccupied) _pulseCtrl.repeat(reverse: true);
   }
 
   @override
   void didUpdateWidget(HomeTableCard oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final isOccupied = widget.table.status == TableStatus.occupied;
-    if (isOccupied && !_pulseCtrl.isAnimating) {
+    if (widget.table.isOccupied && !_pulseCtrl.isAnimating) {
       _pulseCtrl
         ..stop()
         ..repeat(reverse: true);
-    } else if (!isOccupied && _pulseCtrl.isAnimating) {
+    } else if (!widget.table.isOccupied && _pulseCtrl.isAnimating) {
       _pulseCtrl
         ..stop()
         ..value = 1;
@@ -70,7 +66,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     final table = widget.table;
-    final isOccupied = table.status == TableStatus.occupied;
+    final isOccupied = table.isOccupied;
     final isJustFreed = widget.isJustFreed;
 
     final Color borderColor;
@@ -104,7 +100,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
               children: [
                 Flexible(
                   child: Text(
-                    table.name ?? table.number,
+                    table.name ?? '№ ${table.number}',
                     style: context.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                       color: context.colors.onSurface,
@@ -118,14 +114,14 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
             ),
             const SizedBox(height: AppSpacing.x1),
             Text(
-              table.description ?? table.number,
+              table.description ?? '№ ${table.number}',
               style: context.textTheme.bodySmall?.copyWith(color: context.colors.onSurfaceVariant),
               overflow: TextOverflow.ellipsis,
             ),
             const Spacer(),
-            if (isOccupied && widget.session != null) ...[
+            if (isOccupied && table.session != null) ...[
               Text(
-                _formatElapsed(DateTime.now().difference(widget.session!.startedAt)),
+                _formatElapsed(DateTime.now().difference(table.session!.startedAt)),
                 style: context.textTheme.headlineLarge?.copyWith(
                   color: context.colors.error,
                   fontWeight: FontWeight.w800,
@@ -152,7 +148,7 @@ class _HomeTableCardState extends State<HomeTableCard> with SingleTickerProvider
               ),
               const SizedBox(height: 2),
               Text(
-                '${table.hourlyRate} сом/ час',
+                '${table.tarifAmount} ${table.currency.name.toUpperCase()}/${table.tarifType.name}',
                 style: context.textTheme.bodySmall?.copyWith(
                   color: context.colors.onSurfaceVariant,
                   fontWeight: FontWeight.w600,

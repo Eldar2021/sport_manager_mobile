@@ -1,12 +1,9 @@
 import 'dart:async';
-
 import 'package:api_client/api_client.dart';
+import 'package:facility/facility.dart';
 import 'package:get_it/get_it.dart';
-import 'package:sessions/sessions.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/env.dart';
-import 'package:tables/tables.dart';
-import 'package:venues/venues.dart';
 
 final class DataModule extends BaseDiModule {
   const DataModule({super.scope});
@@ -16,7 +13,6 @@ final class DataModule extends BaseDiModule {
     super.register(sl);
 
     sl
-      // Shared authenticated API client
       ..registerLazySingleton<ApiClient>(
         () => ApiClient.fromDio(
           dio: sl<Dio>(instanceName: ApiClient.bearerInstance),
@@ -24,32 +20,13 @@ final class DataModule extends BaseDiModule {
         ),
         instanceName: ApiClient.bearerInstance,
       )
-      // ── Venues ──────────────────────────────────────────────────────────
-      ..registerLazySingleton<VenueRemoteSource>(
+      ..registerLazySingleton<FacilityRemoteSource>(
         () => Env.isMock
-            ? VenueRemoteSourceMock()
-            : VenueRemoteSourceImpl(sl<ApiClient>(instanceName: ApiClient.bearerInstance)),
+            ? FacilityRemoteSourceMock()
+            : FacilityRemoteSourceImpl(sl<ApiClient>(instanceName: ApiClient.bearerInstance)),
       )
-      ..registerLazySingleton<VenueRepository>(
-        () => VenueRepository(remote: sl<VenueRemoteSource>()),
-      )
-      // ── Tables ──────────────────────────────────────────────────────────
-      ..registerLazySingleton<TableRemoteSource>(
-        () => Env.isMock
-            ? TableRemoteSourceMock()
-            : TableRemoteSourceImpl(sl<ApiClient>(instanceName: ApiClient.bearerInstance)),
-      )
-      ..registerLazySingleton<TableRepository>(
-        () => TableRepository(remote: sl<TableRemoteSource>()),
-      )
-      // ── Sessions ─────────────────────────────────────────────────────────
-      ..registerLazySingleton<SessionRemoteSource>(
-        () => Env.isMock
-            ? SessionRemoteSourceMock()
-            : SessionRemoteSourceImpl(sl<ApiClient>(instanceName: ApiClient.bearerInstance)),
-      )
-      ..registerLazySingleton<SessionRepository>(
-        () => SessionRepository(remote: sl<SessionRemoteSource>()),
+      ..registerLazySingleton<FacilityRepository>(
+        () => FacilityRepository(sl<FacilityRemoteSource>()),
       );
   }
 }
