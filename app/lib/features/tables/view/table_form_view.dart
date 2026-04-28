@@ -1,10 +1,7 @@
-import 'package:core/core.dart';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
@@ -28,35 +25,7 @@ class TableFormView extends StatefulWidget {
   State<TableFormView> createState() => _TableFormViewState();
 }
 
-class _TableFormViewState extends State<TableFormView> {
-  static const _defaultTarif = 200;
-  late final TableFormCubit _cubit;
-  late final GlobalKey<FormState> _formKey;
-  late final TextEditingController _numberCtr;
-  late final TextEditingController _nameCtr;
-  late final TextEditingController _descCtr;
-  late final TextEditingController _rateCtr;
-  late final Currency _currency;
-  late final TarifType _tarifType;
-
-  @override
-  void initState() {
-    super.initState();
-    final table = widget.extra.table;
-    _cubit = TableFormCubit(
-      GetIt.I<FacilityRepository>(),
-      widget.extra.venueId,
-      initialTable: table,
-    );
-    _formKey = GlobalKey<FormState>();
-    _nameCtr = TextEditingController(text: table?.name ?? '');
-    _numberCtr = TextEditingController(text: table?.number.toString() ?? '');
-    _descCtr = TextEditingController(text: table?.description ?? '');
-    _rateCtr = TextEditingController(text: (table?.tarifAmount ?? _defaultTarif).toString());
-    _currency = table?.currency ?? Currency.kgs;
-    _tarifType = table?.tarifType ?? TarifType.hour;
-  }
-
+class _TableFormViewState extends State<TableFormView> with TableFormViewMixin {
   @override
   Widget build(BuildContext context) {
     final isEdit = widget.extra.table != null;
@@ -71,27 +40,21 @@ class _TableFormViewState extends State<TableFormView> {
           actions: [
             if (isEdit) ...[
               BlocConsumer<TableFormCubit, TableFormState>(
-                bloc: _cubit,
+                bloc: cubit,
                 listenWhen: (p, n) => p.deleteStatus != n.deleteStatus,
-                listener: (context, state) {
-                  if (state.deleteStatus.isSuccess) {
-                    context.pop();
-                  } else if (state.deleteStatus.isFailure) {
-                    context.handleError((state.deleteStatus as RequestFailure).exception);
-                  }
-                },
-                buildWhen: (p, n) => p.isDeleting != n.isDeleting,
+                listener: listenerDelete,
+                buildWhen: (p, n) => p.deleteStatus.isLoading != n.deleteStatus.isLoading,
                 builder: (_, state) {
                   return AppDeleteButton(
                     label: context.l10n.deleteTableButton,
-                    isLoading: state.isDeleting,
+                    isLoading: state.deleteStatus.isLoading,
                     onTap: () => AppDestructiveSheet.show(
                       context,
                       icon: Icons.delete_outline_rounded,
                       title: context.l10n.deleteTableButton,
                       subtitle: context.l10n.deleteTableSubtitle,
                       confirmLabel: context.l10n.deleteTableButton,
-                      onConfirm: _cubit.deleteTable,
+                      onConfirm: cubit.deleteTable,
                     ),
                   );
                 },
@@ -103,12 +66,12 @@ class _TableFormViewState extends State<TableFormView> {
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(AppSpacing.x4),
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppTextField(
-                  controller: _numberCtr,
+                  controller: numberCtr,
                   label: context.l10n.createTableNumberLabel,
                   hintText: context.l10n.createTableNumberHint,
                   keyboardType: TextInputType.number,
@@ -117,14 +80,14 @@ class _TableFormViewState extends State<TableFormView> {
                 ),
                 const SizedBox(height: AppSpacing.x4),
                 AppTextField(
-                  controller: _nameCtr,
+                  controller: nameCtr,
                   label: context.l10n.createTableNameLabel,
                   hintText: context.l10n.createTableNameHint,
                   validator: (name) => InputValidators.emptyValidator(name, context),
                 ),
                 const SizedBox(height: AppSpacing.x4),
                 AppTextField(
-                  controller: _descCtr,
+                  controller: descCtr,
                   hintText: context.l10n.createTableDescHint,
                   label: context.l10n.createTableDescLabel,
                   validator: (desc) => InputValidators.emptyValidator(desc, context),
@@ -132,22 +95,29 @@ class _TableFormViewState extends State<TableFormView> {
                 const SizedBox(height: AppSpacing.x4),
                 Text(context.l10n.createTableTarifTypeLabel, style: labelStyle),
                 const SizedBox(height: AppSpacing.x2),
-                TarifTypeSelector(
-                  selected: _tarifType,
-                  onChanged: (value) {
-                    setState(() {});
-                    _tarifType = value;
+                ValueListenableBuilder<TarifType>(
+                  valueListenable: tarifType,
+                  builder: (_, value, _) {
+                    return TarifTypeSelector(
+                      selected: value,
+                      onChanged: (v) => tarifType.value = v,
+                    );
                   },
                 ),
                 const SizedBox(height: AppSpacing.x4),
                 Text(context.l10n.createTableRateLabel, style: labelStyle),
                 const SizedBox(height: AppSpacing.x2),
-                RateSelector(
-                  selected: _rateCtr.text,
-                  onChanged: (value) => _rateCtr.text = value,
+                ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: rateCtr,
+                  builder: (_, rate, _) {
+                    return RateSelector(
+                      selected: int.tryParse(rate.text) ?? 200,
+                      onChanged: (v) => rateCtr.text = v.toString(),
+                    );
+                  },
                 ),
                 AppTextField(
-                  controller: _rateCtr,
+                  controller: rateCtr,
                   keyboardType: TextInputType.number,
                   maxLength: 7,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -156,11 +126,13 @@ class _TableFormViewState extends State<TableFormView> {
                 const SizedBox(height: AppSpacing.x4),
                 Text(context.l10n.createTableCurrencyLabel, style: labelStyle),
                 const SizedBox(height: AppSpacing.x2),
-                CurrencySelector(
-                  selected: _currency,
-                  onChanged: (currency) {
-                    _currency = currency;
-                    setState(() {});
+                ValueListenableBuilder<Currency>(
+                  valueListenable: currency,
+                  builder: (_, value, _) {
+                    return CurrencySelector(
+                      selected: value,
+                      onChanged: (v) => currency.value = v,
+                    );
                   },
                 ),
                 SizedBox(height: AppSpacing.bottom(context) + AppSpacing.x16),
@@ -172,51 +144,20 @@ class _TableFormViewState extends State<TableFormView> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
           child: BlocConsumer<TableFormCubit, TableFormState>(
-            bloc: _cubit,
+            bloc: cubit,
             listenWhen: (p, n) => p.submitStatus != n.submitStatus,
-            listener: (context, state) {
-              if (state.submitStatus.isSuccess) {
-                context.pop();
-              } else if (state.submitStatus.isFailure) {
-                context.handleError((state.submitStatus as RequestFailure).exception);
-              }
+            listener: listenerSubmit,
+            builder: (_, state) {
+              return AppButton(
+                collapseOnScroll: true,
+                isLoading: state.submitStatus.isLoading,
+                onPressed: onSubmit,
+                child: Text(isEdit ? context.l10n.updateTableButton : context.l10n.createTableButton),
+              );
             },
-            builder: (_, state) => AppButton(
-              collapseOnScroll: true,
-              isLoading: state.isLoading,
-              onPressed: _onSubmit,
-              child: Text(
-                isEdit ? context.l10n.updateTableButton : context.l10n.createTableButton,
-              ),
-            ),
           ),
         ),
       ),
     );
-  }
-
-  void _onSubmit() {
-    if (!_formKey.currentState!.validate()) return;
-
-    final param = TableFormParam(
-      number: int.tryParse(_numberCtr.text) ?? 0,
-      name: _nameCtr.text.trim(),
-      description: _descCtr.text.trim(),
-      tarifAmount: int.tryParse(_rateCtr.text) ?? _defaultTarif,
-      currency: _currency,
-      tarifType: _tarifType,
-    );
-
-    _cubit.submit(param);
-  }
-
-  @override
-  void dispose() {
-    _cubit.close();
-    _nameCtr.dispose();
-    _numberCtr.dispose();
-    _descCtr.dispose();
-    _rateCtr.dispose();
-    super.dispose();
   }
 }

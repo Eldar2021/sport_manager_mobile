@@ -33,7 +33,7 @@ class _VenueFormViewState extends State<VenueFormView> {
     );
     _formKey = GlobalKey<FormState>();
     _nameCtr = TextEditingController(text: widget.venue?.name ?? '');
-    _numberCtr = TextEditingController(text: widget.venue?.number.toString() ?? '');
+    _numberCtr = TextEditingController(text: (widget.venue?.number ?? 0).toString());
   }
 
   @override
@@ -44,12 +44,7 @@ class _VenueFormViewState extends State<VenueFormView> {
       child: Scaffold(
         appBar: AppBar(title: Text(isEdit ? context.l10n.editVenueTitle : context.l10n.createVenueTitle)),
         body: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.x4,
-            AppSpacing.x4,
-            AppSpacing.x4,
-            AppSpacing.x10,
-          ),
+          padding: const EdgeInsets.fromLTRB(AppSpacing.x4, AppSpacing.x4, AppSpacing.x4, AppSpacing.x10),
           child: Form(
             key: _formKey,
             child: Column(

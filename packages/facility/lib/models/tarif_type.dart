@@ -7,14 +7,5 @@ enum TarifType {
   @JsonValue('HOUR')
   hour,
   @JsonValue('DAY')
-  day
-  ;
-
-  String get label {
-    return switch (this) {
-      TarifType.minute => 'Minute',
-      TarifType.hour => 'Hour',
-      TarifType.day => 'Day',
-    };
-  }
+  day,
 }

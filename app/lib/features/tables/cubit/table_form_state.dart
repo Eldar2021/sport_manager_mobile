@@ -10,9 +10,6 @@ final class TableFormState extends Equatable {
   final RequestStatus<TableModel> submitStatus;
   final RequestStatus<bool> deleteStatus;
 
-  bool get isLoading => submitStatus is RequestLoading;
-  bool get isDeleting => deleteStatus is RequestLoading;
-
   TableFormState copyWith({
     RequestStatus<TableModel>? submitStatus,
     RequestStatus<bool>? deleteStatus,

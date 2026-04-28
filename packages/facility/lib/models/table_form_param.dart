@@ -33,24 +33,6 @@ final class TableFormParam extends Equatable {
     return _$TableFormParamToJson(this);
   }
 
-  TableFormParam copyWith({
-    int? number,
-    String? name,
-    String? description,
-    int? tarifAmount,
-    Currency? currency,
-    TarifType? tarifType,
-  }) {
-    return TableFormParam(
-      number: number ?? this.number,
-      name: name ?? this.name,
-      description: description ?? this.description,
-      tarifAmount: tarifAmount ?? this.tarifAmount,
-      currency: currency ?? this.currency,
-      tarifType: tarifType ?? this.tarifType,
-    );
-  }
-
   @override
   List<Object?> get props => [
     number,
