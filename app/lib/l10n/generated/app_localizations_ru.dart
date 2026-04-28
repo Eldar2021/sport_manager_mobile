@@ -305,6 +305,21 @@ class AppLocalizationsRu extends AppLocalizations {
   String get createTableCurrencyLabel => 'Валюта';
 
   @override
+  String get currencyKgs => 'Сом';
+
+  @override
+  String get currencyUsd => 'Доллар';
+
+  @override
+  String get currencyRub => 'Рубль';
+
+  @override
+  String get currencyKzt => 'Тенге';
+
+  @override
+  String get currencyTry => 'Лира';
+
+  @override
   String venueTablesCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,

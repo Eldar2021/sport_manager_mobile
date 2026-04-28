@@ -681,6 +681,36 @@ abstract class AppLocalizations {
   /// **'Currency'**
   String get createTableCurrencyLabel;
 
+  /// No description provided for @currencyKgs.
+  ///
+  /// In en, this message translates to:
+  /// **'Som'**
+  String get currencyKgs;
+
+  /// No description provided for @currencyUsd.
+  ///
+  /// In en, this message translates to:
+  /// **'Dollar'**
+  String get currencyUsd;
+
+  /// No description provided for @currencyRub.
+  ///
+  /// In en, this message translates to:
+  /// **'Ruble'**
+  String get currencyRub;
+
+  /// No description provided for @currencyKzt.
+  ///
+  /// In en, this message translates to:
+  /// **'Tenge'**
+  String get currencyKzt;
+
+  /// No description provided for @currencyTry.
+  ///
+  /// In en, this message translates to:
+  /// **'Lira'**
+  String get currencyTry;
+
   /// No description provided for @venueTablesCount.
   ///
   /// In en, this message translates to:

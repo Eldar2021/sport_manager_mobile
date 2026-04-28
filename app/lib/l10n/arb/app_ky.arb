@@ -98,5 +98,10 @@
   "tarifTypeHour": "Саат",
   "tarifTypeDay": "Күн",
   "createTableCurrencyLabel": "Валюта",
+  "currencyKgs": "Сом",
+  "currencyUsd": "Доллар",
+  "currencyRub": "Рубль",
+  "currencyKzt": "Теңге",
+  "currencyTry": "Лира",
   "venueTablesCount": "{count, plural, =0{стол жок} other{{count} стол}}"
 }

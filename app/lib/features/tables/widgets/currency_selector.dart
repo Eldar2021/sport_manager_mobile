@@ -1,5 +1,7 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class CurrencySelector extends StatelessWidget {
@@ -19,7 +21,7 @@ class CurrencySelector extends StatelessWidget {
       children: Currency.values.map((currency) {
         final isSelected = selected == currency;
         return ChoiceChip(
-          label: Text(currency._code),
+          label: Text(currency.localizedName(context.l10n)),
           selected: isSelected,
           showCheckmark: false,
           selectedColor: context.colors.primary,
@@ -34,14 +36,4 @@ class CurrencySelector extends StatelessWidget {
       }).toList(),
     );
   }
-}
-
-extension on Currency {
-  String get _code => switch (this) {
-    Currency.kgs => 'KGS',
-    Currency.usd => 'USD',
-    Currency.rub => 'RUB',
-    Currency.kzt => 'KZT',
-    Currency.tryLira => 'TRY',
-  };
 }
