@@ -7,11 +7,9 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
-      body: Column(
-        children: [],
-      ),
+      body: const Column(),
     );
   }
 }
