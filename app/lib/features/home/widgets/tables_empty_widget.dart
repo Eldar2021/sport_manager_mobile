@@ -24,7 +24,11 @@ class TablesEmptyWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Center(
-                  child: Icon(Icons.table_restaurant_outlined, color: context.colors.onSurfaceVariant, size: 36),
+                  child: Icon(
+                    Icons.table_restaurant_outlined,
+                    color: context.colors.onSurfaceVariant,
+                    size: 36,
+                  ),
                 ),
               ),
             ),
@@ -37,7 +41,9 @@ class TablesEmptyWidget extends StatelessWidget {
             const SizedBox(height: AppSpacing.x2),
             Text(
               context.l10n.homeTablesEmptySub,
-              style: context.textTheme.bodyMedium?.copyWith(color: context.colors.onSurfaceVariant),
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: context.colors.onSurfaceVariant,
+              ),
               textAlign: TextAlign.center,
             ),
           ],

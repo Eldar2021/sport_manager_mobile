@@ -22,12 +22,9 @@ class VenueFormCubit extends Cubit<VenueFormState> {
     emit(state.copyWith(reqStatus: const RequestLoading()));
 
     try {
-      final VenueModel result;
-      if (_venueId != null) {
-        result = await _repository.updateVenue(_venueId, param);
-      } else {
-        result = await _repository.createVenue(param);
-      }
+      final result = _venueId != null
+          ? await _repository.updateVenue(_venueId, param)
+          : await _repository.createVenue(param);
 
       emit(state.copyWith(reqStatus: RequestSuccess(result)));
     } on Object catch (e) {

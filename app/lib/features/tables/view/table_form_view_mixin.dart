@@ -25,7 +25,7 @@ mixin TableFormViewMixin on State<TableFormView> {
     cubit = TableFormCubit(
       GetIt.I<FacilityRepository>(),
       widget.extra.venueId,
-      initialTable: table,
+      table?.id,
     );
     formKey = GlobalKey<FormState>();
     nameCtr = TextEditingController(text: table?.name ?? '');
@@ -50,7 +50,7 @@ mixin TableFormViewMixin on State<TableFormView> {
     );
   }
 
-  void listenerSubmit(BuildContext context, TableFormState state) {
+  void tableCubitListener(BuildContext context, TableFormState state) {
     if (state.submitStatus.isSuccess) {
       context.pop();
     } else if (state.submitStatus.isFailure) {

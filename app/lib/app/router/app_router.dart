@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
-import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
+import 'package:sport_manager_mobile/features/main/main.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
@@ -89,7 +89,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         builder: (_, state) => TableFormView(state.extra! as TableFormExtra),
       ),
       StatefulShellRoute.indexedStack(
-        builder: (_, _, shell) => MainShell(navigationShell: shell),
+        builder: (_, _, shell) => MainView(shell),
         branches: [
           StatefulShellBranch(
             routes: [

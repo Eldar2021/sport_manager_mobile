@@ -4,8 +4,8 @@ import 'package:sport_manager_mobile/generated/assets.gen.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-final class MainShell extends StatelessWidget {
-  const MainShell({required this.navigationShell, super.key});
+class MainView extends StatelessWidget {
+  const MainView(this.navigationShell, {super.key});
 
   final StatefulNavigationShell navigationShell;
 

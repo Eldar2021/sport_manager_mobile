@@ -22,15 +22,23 @@ class AppOutlinedButton extends StatelessWidget {
         style: OutlinedButton.styleFrom(
           backgroundColor: context.colors.surface,
           foregroundColor: context.colors.onSurfaceVariant,
-          side: BorderSide(color: context.colors.outline, style: BorderStyle.values[1]),
+          side: BorderSide(
+            color: context.colors.outline,
+            style: BorderStyle.values[1],
+          ),
           shape: const RoundedRectangleBorder(
             borderRadius: AppRadius.cardBorderRadius,
           ),
         ),
-        icon: Icon(icon ?? Icons.add_rounded, color: context.colors.primary),
+        icon: Icon(
+          icon ?? Icons.add_rounded,
+          color: context.colors.primary,
+        ),
         label: Text(
           title,
-          style: context.textTheme.bodyLarge?.copyWith(color: context.colors.primary),
+          style: context.textTheme.bodyLarge?.copyWith(
+            color: context.colors.primary,
+          ),
         ),
       ),
     );

@@ -24,16 +24,28 @@ class AppBadge extends StatelessWidget {
     };
 
     return DecoratedBox(
-      decoration: BoxDecoration(color: bg, borderRadius: AppRadius.chipBorderRadius),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: AppRadius.chipBorderRadius,
+      ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x3, vertical: AppSpacing.x1),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.x3,
+          vertical: AppSpacing.x1,
+        ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (icon != null) ...[Icon(icon, color: color, size: 14), const SizedBox(width: AppSpacing.x1)],
+            if (icon != null) ...[
+              Icon(icon, color: color, size: 14),
+              const SizedBox(width: AppSpacing.x1),
+            ],
             Text(
               label.toUpperCase(),
-              style: context.textTheme.bodySmall?.copyWith(color: color, fontWeight: FontWeight.w600),
+              style: context.textTheme.bodySmall?.copyWith(
+                color: color,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),

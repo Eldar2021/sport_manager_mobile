@@ -5,8 +5,8 @@ import 'package:get_it/get_it.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/env.dart';
 
-final class DataModule extends BaseDiModule {
-  const DataModule({super.scope});
+final class FacilityModule extends BaseDiModule {
+  const FacilityModule({super.scope});
 
   @override
   FutureOr<void> register(GetIt sl) async {
@@ -23,7 +23,9 @@ final class DataModule extends BaseDiModule {
       ..registerLazySingleton<FacilityRemoteSource>(
         () => Env.isMock
             ? FacilityRemoteSourceMock()
-            : FacilityRemoteSourceImpl(sl<ApiClient>(instanceName: ApiClient.bearerInstance)),
+            : FacilityRemoteSourceImpl(
+                sl<ApiClient>(instanceName: ApiClient.bearerInstance),
+              ),
       )
       ..registerLazySingleton<FacilityRepository>(
         () => FacilityRepository(sl<FacilityRemoteSource>()),

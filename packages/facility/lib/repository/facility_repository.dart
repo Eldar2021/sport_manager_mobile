@@ -4,9 +4,9 @@ import 'package:meta/meta.dart';
 @immutable
 final class FacilityRepository {
   const FacilityRepository(this._remote);
+
   final FacilityRemoteSource _remote;
 
-  //Venue
   Future<List<VenueModel>> getVenues() {
     return _remote.getVenues();
   }
@@ -23,7 +23,10 @@ final class FacilityRepository {
     return _remote.createVenue(param);
   }
 
-  Future<VenueModel> updateVenue(String id, VenueFormParam param) {
+  Future<VenueModel> updateVenue(
+    String id,
+    VenueFormParam param,
+  ) {
     return _remote.updateVenue(id, param);
   }
 
@@ -31,13 +34,17 @@ final class FacilityRepository {
     return _remote.deleteVenue(id);
   }
 
-  //Table
-
-  Future<TableModel> createTable(String venueId, TableFormParam param) {
+  Future<TableModel> createTable(
+    String venueId,
+    TableFormParam param,
+  ) {
     return _remote.createTable(venueId, param);
   }
 
-  Future<TableModel> updateTable(String tableId, TableFormParam param) {
+  Future<TableModel> updateTable(
+    String tableId,
+    TableFormParam param,
+  ) {
     return _remote.updateTable(tableId, param);
   }
 

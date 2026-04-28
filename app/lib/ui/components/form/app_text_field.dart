@@ -27,6 +27,7 @@ class AppTextField extends StatelessWidget {
     this.enabled = true,
     this.maxLength,
     this.maxLines = 1,
+    this.counterText = '',
   });
 
   final String label;
@@ -47,6 +48,7 @@ class AppTextField extends StatelessWidget {
   final bool enabled;
   final int? maxLength;
   final int? maxLines;
+  final String? counterText;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,7 @@ class AppTextField extends StatelessWidget {
           maxLines: obscureText ? 1 : maxLines,
           style: context.textTheme.bodyMedium,
           decoration: InputDecoration(
-            counterText: '',
+            counterText: counterText,
             hintText: hintText,
             helperText: helperText,
             suffixIcon: suffixIcon,

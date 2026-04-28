@@ -5,13 +5,11 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 class VenueListTile extends StatelessWidget {
   const VenueListTile({
     required this.venue,
-    required this.tableCount,
     required this.onTap,
     super.key,
   });
 
   final VenueModel venue;
-  final int tableCount;
   final VoidCallback onTap;
 
   @override

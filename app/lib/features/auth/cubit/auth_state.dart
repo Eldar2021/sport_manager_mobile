@@ -3,6 +3,10 @@ part of 'auth_cubit.dart';
 @immutable
 sealed class AuthState extends Equatable {
   const AuthState();
+
+  bool get isOwner => this is AuthAuthenticated && (this as AuthAuthenticated).role == UserRole.owner;
+  bool get isManager => this is AuthAuthenticated && (this as AuthAuthenticated).role == UserRole.manager;
+  UserRole? get role => this is AuthAuthenticated ? (this as AuthAuthenticated).role : null;
 }
 
 @immutable
@@ -27,6 +31,7 @@ final class AuthAuthenticated extends AuthState {
 
   final UserModel user;
 
+  @override
   UserRole get role => user.role;
 
   @override
@@ -49,10 +54,4 @@ final class AuthError extends AuthState {
 
   @override
   List<Object?> get props => [exception];
-}
-
-extension AuthStateX on AuthState {
-  bool get isOwner => this is AuthAuthenticated && (this as AuthAuthenticated).role == UserRole.owner;
-  bool get isManager => this is AuthAuthenticated && (this as AuthAuthenticated).role == UserRole.manager;
-  UserRole? get role => this is AuthAuthenticated ? (this as AuthAuthenticated).role : null;
 }
