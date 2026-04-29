@@ -6,7 +6,7 @@ class ProfileItemTile extends StatelessWidget {
     required this.icon,
     required this.iconBgColor,
     required this.title,
-    required this.subtitle,
+    this.subtitle,
     this.onTap,
     super.key,
   });
@@ -14,7 +14,7 @@ class ProfileItemTile extends StatelessWidget {
   final Widget icon;
   final Color iconBgColor;
   final String title;
-  final String subtitle;
+  final String? subtitle;
   final VoidCallback? onTap;
 
   @override
@@ -32,7 +32,7 @@ class ProfileItemTile extends StatelessWidget {
         ),
       ),
       title: Text(title),
-      subtitle: Text(subtitle),
+      subtitle: subtitle != null ? Text(subtitle!) : null,
       trailing: const Icon(
         Icons.arrow_forward_ios,
         size: AppSpacing.x4,
