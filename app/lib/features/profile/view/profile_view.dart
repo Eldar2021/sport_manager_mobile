@@ -24,9 +24,13 @@ class _ProfileViewState extends State<ProfileView> {
     _profileCubit.fetchProfile();
   }
 
-  Future<void> _refreshProfile() async {
-    await _profileCubit.fetchProfile();
+  @override
+  void dispose() {
+    _profileCubit.close();
+    super.dispose();
   }
+
+  Future<void> _refreshProfile() => _profileCubit.fetchProfile();
 
   @override
   Widget build(BuildContext context) {
@@ -37,33 +41,17 @@ class _ProfileViewState extends State<ProfileView> {
       body: RefreshIndicator.adaptive(
         onRefresh: _refreshProfile,
         child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(AppSpacing.x4),
           children: [
             BlocBuilder<ProfileCubit, DataState<ProfileModel>>(
               bloc: _profileCubit,
               builder: (context, state) {
-                if (state is DataSuccess<ProfileModel>) {
-                  return UserProfileCard(state.data.user);
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-            BlocBuilder<ProfileCubit, DataState<ProfileModel>>(
-              bloc: _profileCubit,
-              builder: (context, state) {
-                if (state is DataSuccess<ProfileModel> && state.data.user.role == UserRole.owner) {
-                  return OwnerProfileExtraData(state.data);
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-            BlocBuilder<ProfileCubit, DataState<ProfileModel>>(
-              bloc: _profileCubit,
-              builder: (context, state) {
-                if (state is DataSuccess<ProfileModel>) {
-                  return UserProfileExtraData(state.data);
-                }
-                return const SizedBox.shrink();
+                return switch (state) {
+                  DataLoading<ProfileModel>() || DataInitial<ProfileModel>() => const _ProfileLoading(),
+                  DataFailure<ProfileModel>() => ProfileErrorView(onRetry: _refreshProfile),
+                  DataSuccess<ProfileModel>(:final data) => _ProfileLoaded(data: data),
+                };
               },
             ),
             const SizedBox(height: AppSpacing.x6),
@@ -74,7 +62,7 @@ class _ProfileViewState extends State<ProfileView> {
               ),
               onPressed: () {},
               icon: const Icon(Icons.logout),
-              label: const Text('Выйти'),
+              label: Text(context.l10n.profileLogout),
             ),
             const SizedBox(height: AppSpacing.x3),
             OutlinedButton.icon(
@@ -87,7 +75,7 @@ class _ProfileViewState extends State<ProfileView> {
               ),
               onPressed: () {},
               icon: const Icon(Icons.delete),
-              label: const Text('Удалить аккаунт'),
+              label: Text(context.l10n.profileDeleteAccount),
             ),
             const SizedBox(height: AppSpacing.x6),
             Align(
@@ -99,6 +87,40 @@ class _ProfileViewState extends State<ProfileView> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ProfileLoading extends StatelessWidget {
+  const _ProfileLoading();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        UserProfileCardSkeleton(),
+        OwnerProfileExtraDataSkeleton(),
+        UserProfileExtraDataSkeleton(),
+      ],
+    );
+  }
+}
+
+class _ProfileLoaded extends StatelessWidget {
+  const _ProfileLoaded({required this.data});
+
+  final ProfileModel data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        UserProfileCard(data.user),
+        if (data.user.role == UserRole.owner) OwnerProfileExtraData(data),
+        UserProfileExtraData(data),
+      ],
     );
   }
 }

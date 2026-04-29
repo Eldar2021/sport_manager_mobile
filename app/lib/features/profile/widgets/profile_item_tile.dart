@@ -20,6 +20,7 @@ class ProfileItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       leading: DecoratedBox(
         decoration: BoxDecoration(
           color: iconBgColor,

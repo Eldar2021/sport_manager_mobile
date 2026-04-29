@@ -120,5 +120,18 @@
         "type": "int"
       }
     }
-  }
+  },
+  "profileSectionManagement": "Башкаруу",
+  "profileManageVenuesTitle": "Залдарды башкаруу",
+  "profileManageVenuesSubtitle": "{count, plural, =0{зал жок} other{{count} зал}}",
+  "profileManagersTitle": "Менеджерлер",
+  "profileManagersSubtitle": "{count, plural, =0{менеджер жок} other{{count} менеджер}}",
+  "profileSectionAccount": "Аккаунт",
+  "profileSubscriptionTitle": "Жазылуу",
+  "profileSubscriptionActiveUntil": "Активдүү · {date} чейин",
+  "profileChangePasswordTitle": "Сырсөздү өзгөртүү",
+  "profileLogout": "Чыгуу",
+  "profileDeleteAccount": "Аккаунтту өчүрүү",
+  "profileErrorTitle": "Профилди жүктөө мүмкүн болбоду",
+  "profileErrorSubtitle": "Туташууну текшерип, кайра аракет кылыңыз."
 }

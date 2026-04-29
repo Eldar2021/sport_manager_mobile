@@ -342,4 +342,61 @@ class AppLocalizationsKy extends AppLocalizations {
   String homeTablesSection(int count) {
     return 'СТОЛДОР · $count';
   }
+
+  @override
+  String get profileSectionManagement => 'Башкаруу';
+
+  @override
+  String get profileManageVenuesTitle => 'Залдарды башкаруу';
+
+  @override
+  String profileManageVenuesSubtitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count зал',
+      zero: 'зал жок',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileManagersTitle => 'Менеджерлер';
+
+  @override
+  String profileManagersSubtitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count менеджер',
+      zero: 'менеджер жок',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileSectionAccount => 'Аккаунт';
+
+  @override
+  String get profileSubscriptionTitle => 'Жазылуу';
+
+  @override
+  String profileSubscriptionActiveUntil(String date) {
+    return 'Активдүү · $date чейин';
+  }
+
+  @override
+  String get profileChangePasswordTitle => 'Сырсөздү өзгөртүү';
+
+  @override
+  String get profileLogout => 'Чыгуу';
+
+  @override
+  String get profileDeleteAccount => 'Аккаунтту өчүрүү';
+
+  @override
+  String get profileErrorTitle => 'Профилди жүктөө мүмкүн болбоду';
+
+  @override
+  String get profileErrorSubtitle => 'Туташууну текшерип, кайра аракет кылыңыз.';
 }
