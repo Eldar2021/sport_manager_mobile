@@ -4,16 +4,16 @@ import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class SessionTimerWidget extends StatefulWidget {
-  const SessionTimerWidget({required this.session, super.key});
+class SessionTimer extends StatefulWidget {
+  const SessionTimer({required this.session, super.key});
 
   final SessionModel session;
 
   @override
-  State<SessionTimerWidget> createState() => _SessionTimerWidgetState();
+  State<SessionTimer> createState() => _SessionTimerState();
 }
 
-class _SessionTimerWidgetState extends State<SessionTimerWidget> {
+class _SessionTimerState extends State<SessionTimer> {
   Timer? _timer;
   Duration _elapsed = Duration.zero;
 
@@ -24,7 +24,7 @@ class _SessionTimerWidgetState extends State<SessionTimerWidget> {
   }
 
   @override
-  void didUpdateWidget(SessionTimerWidget oldWidget) {
+  void didUpdateWidget(SessionTimer oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.session.isPaused != widget.session.isPaused || oldWidget.session.id != widget.session.id) {
       _timer?.cancel();

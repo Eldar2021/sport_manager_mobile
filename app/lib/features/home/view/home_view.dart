@@ -62,13 +62,13 @@ class _HomeViewState extends State<HomeView> {
           body: RefreshIndicator.adaptive(
             onRefresh: () => _cubit.load(),
             child: switch (state) {
-              HomeNoVenue() => const VenuesEmptyWidget(),
-              HomeNoTables() => const TablesEmptyWidget(),
-              HomeLoaded(:final venue, :final tables) => HomeLoadedWidget(
+              HomeNoVenue() => const VenuesEmpty(),
+              HomeNoTables() => const TablesEmpty(),
+              HomeLoaded(:final venue, :final tables) => HomeSuccess(
                 venue: venue,
                 tables: tables,
               ),
-              HomeLoading() => const HomeLoadingWidget(),
+              HomeLoading() => const HomeSkeleton(),
               HomeFailure(:final exception) => ErrorBodyWidget(
                 exception,
                 onRetryPressed: _cubit.load,

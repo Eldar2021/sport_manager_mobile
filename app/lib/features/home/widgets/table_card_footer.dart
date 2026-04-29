@@ -2,7 +2,7 @@ import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/core/exeptions/extension/currency_extension.dart';
 import 'package:sport_manager_mobile/core/exeptions/extension/tarif_type_extension.dart';
-import 'package:sport_manager_mobile/features/home/widgets/session_timer_widget.dart';
+import 'package:sport_manager_mobile/features/home/widgets/session_timer.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -21,7 +21,7 @@ class TableCardFooter extends StatelessWidget {
         dense: true,
         contentPadding: EdgeInsets.zero,
         minTileHeight: 0,
-        title: SessionTimerWidget(session: table.session!),
+        title: SessionTimer(session: table.session!),
         subtitle: Text(
           context.l10n.homeTableOccupied,
           style: context.textTheme.labelMedium?.copyWith(

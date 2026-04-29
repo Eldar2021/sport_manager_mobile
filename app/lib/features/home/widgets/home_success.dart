@@ -4,8 +4,8 @@ import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class HomeLoadedWidget extends StatelessWidget {
-  const HomeLoadedWidget({
+class HomeSuccess extends StatelessWidget {
+  const HomeSuccess({
     required this.venue,
     required this.tables,
     super.key,
@@ -48,7 +48,7 @@ class HomeLoadedWidget extends StatelessWidget {
             itemCount: tables.length,
             itemBuilder: (context, index) {
               final table = tables[index];
-              return TableCardWidget(
+              return TableCard(
                 key: ValueKey(table.id),
                 table: table,
               );

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class HomeLoadingWidget extends StatefulWidget {
-  const HomeLoadingWidget({super.key});
+class HomeSkeleton extends StatefulWidget {
+  const HomeSkeleton({super.key});
 
   @override
-  State<HomeLoadingWidget> createState() => _HomeLoadingWidgetState();
+  State<HomeSkeleton> createState() => _HomeSkeletonState();
 }
 
-class _HomeLoadingWidgetState extends State<HomeLoadingWidget> with SingleTickerProviderStateMixin {
+class _HomeSkeletonState extends State<HomeSkeleton> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _opacity;
 

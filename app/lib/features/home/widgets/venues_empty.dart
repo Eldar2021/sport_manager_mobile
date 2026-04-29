@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class TablesEmptyWidget extends StatelessWidget {
-  const TablesEmptyWidget({super.key});
+class VenuesEmpty extends StatelessWidget {
+  const VenuesEmpty({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x12),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -20,15 +22,15 @@ class TablesEmptyWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.x5),
               child: Icon(
-                Icons.table_restaurant_outlined,
+                Icons.location_on_outlined,
                 color: context.colors.primary,
                 size: 36,
               ),
             ),
           ),
-          const SizedBox(height: AppSpacing.x4),
+          const SizedBox(height: AppSpacing.x5),
           Text(
-            context.l10n.homeTablesEmpty,
+            context.l10n.homeNoVenuesTitle,
             style: context.textTheme.headlineLarge?.copyWith(
               color: context.colors.onSurface,
             ),
@@ -36,11 +38,19 @@ class TablesEmptyWidget extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.x2),
           Text(
-            context.l10n.homeTablesEmptySub,
+            context.l10n.homeNoVenuesSubtitle,
             style: context.textTheme.bodyMedium?.copyWith(
               color: context.colors.onSurfaceVariant,
             ),
             textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: AppSpacing.x8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x14),
+            child: FilledButton(
+              onPressed: () => context.push(AppRoutes.venueForm),
+              child: Text(context.l10n.homeCreateVenue),
+            ),
           ),
         ],
       ),
