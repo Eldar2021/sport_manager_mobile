@@ -52,8 +52,7 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
       session: SessionModel(
         id: 'session-001',
         tableId: 'table-002',
-        isActive: true,
-        isPaused: false,
+        status: SessionStatus.active,
         startedAt: _now.subtract(const Duration(minutes: 45)),
         totalPausedSeconds: 0,
         tarifAmountSnapshot: 800,
@@ -92,8 +91,7 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
       session: SessionModel(
         id: 'session-002',
         tableId: 'table-005',
-        isActive: true,
-        isPaused: false,
+        status: SessionStatus.active,
         startedAt: _now.subtract(const Duration(minutes: 20)),
         totalPausedSeconds: 0,
         tarifAmountSnapshot: 600,

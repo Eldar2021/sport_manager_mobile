@@ -195,6 +195,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeTableOccupied => 'ЗАНЯТ';
 
   @override
+  String get homeTablePaused => 'НА ПАУЗЕ';
+
+  @override
   String get homeTableFree => 'СВОБОДЕН';
 
   @override
@@ -331,5 +334,15 @@ class AppLocalizationsRu extends AppLocalizations {
       zero: 'нет столов',
     );
     return '$_temp0';
+  }
+
+  @override
+  String homeTableTitle(int number) {
+    return 'Стол $number';
+  }
+
+  @override
+  String homeTablesSection(int count) {
+    return 'СТОЛЫ · $count';
   }
 }

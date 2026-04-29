@@ -195,6 +195,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get homeTableOccupied => 'ИШЕНИМДЕ';
 
   @override
+  String get homeTablePaused => 'ТЫНЫГУУ';
+
+  @override
   String get homeTableFree => 'БОШ';
 
   @override
@@ -328,5 +331,15 @@ class AppLocalizationsKy extends AppLocalizations {
       zero: 'стол жок',
     );
     return '$_temp0';
+  }
+
+  @override
+  String homeTableTitle(int number) {
+    return 'Стол $number';
+  }
+
+  @override
+  String homeTablesSection(int count) {
+    return 'СТОЛДОР · $count';
   }
 }

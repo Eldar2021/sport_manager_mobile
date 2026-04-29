@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class VenuesEmptyWidget extends StatelessWidget {
-  const VenuesEmptyWidget(this.onCreateTap, {super.key});
-
-  final VoidCallback onCreateTap;
+class VenuesEmpty extends StatelessWidget {
+  const VenuesEmpty({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x12),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x8),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
         children: [
           DecoratedBox(
             decoration: BoxDecoration(
@@ -48,9 +46,9 @@ class VenuesEmptyWidget extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.x8),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x5),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x14),
             child: FilledButton(
-              onPressed: onCreateTap,
+              onPressed: () => context.push(AppRoutes.venueForm),
               child: Text(context.l10n.homeCreateVenue),
             ),
           ),

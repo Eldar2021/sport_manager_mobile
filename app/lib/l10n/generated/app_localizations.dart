@@ -465,6 +465,12 @@ abstract class AppLocalizations {
   /// **'OCCUPIED'**
   String get homeTableOccupied;
 
+  /// No description provided for @homeTablePaused.
+  ///
+  /// In en, this message translates to:
+  /// **'PAUSED'**
+  String get homeTablePaused;
+
   /// No description provided for @homeTableFree.
   ///
   /// In en, this message translates to:
@@ -716,6 +722,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =0{no tables} =1{1 table} other{{count} tables}}'**
   String venueTablesCount(int count);
+
+  /// No description provided for @homeTableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Table {number}'**
+  String homeTableTitle(int number);
+
+  /// No description provided for @homeTablesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'TABLES · {count}'**
+  String homeTablesSection(int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

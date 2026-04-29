@@ -195,6 +195,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeTableOccupied => 'OCCUPIED';
 
   @override
+  String get homeTablePaused => 'PAUSED';
+
+  @override
   String get homeTableFree => 'FREE';
 
   @override
@@ -331,5 +334,15 @@ class AppLocalizationsEn extends AppLocalizations {
       zero: 'no tables',
     );
     return '$_temp0';
+  }
+
+  @override
+  String homeTableTitle(int number) {
+    return 'Table $number';
+  }
+
+  @override
+  String homeTablesSection(int count) {
+    return 'TABLES · $count';
   }
 }

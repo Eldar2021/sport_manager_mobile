@@ -4,21 +4,21 @@ sealed class HomeState extends Equatable {
   const HomeState();
 }
 
-class HomeLoading extends HomeState {
+final class HomeLoading extends HomeState {
   const HomeLoading();
 
   @override
   List<Object?> get props => [];
 }
 
-class HomeNoVenue extends HomeState {
+final class HomeNoVenue extends HomeState {
   const HomeNoVenue();
 
   @override
   List<Object?> get props => [];
 }
 
-class HomeNoTables extends HomeState {
+final class HomeNoTables extends HomeState {
   const HomeNoTables(this.venue);
 
   final VenueModel venue;
@@ -27,7 +27,7 @@ class HomeNoTables extends HomeState {
   List<Object?> get props => [venue];
 }
 
-class HomeLoaded extends HomeState {
+final class HomeLoaded extends HomeState {
   const HomeLoaded({
     required this.venue,
     required this.tables,
@@ -40,7 +40,7 @@ class HomeLoaded extends HomeState {
   List<Object?> get props => [venue, tables];
 }
 
-class HomeFailure extends HomeState {
+final class HomeFailure extends HomeState {
   const HomeFailure(this.exception);
   final Object exception;
 
