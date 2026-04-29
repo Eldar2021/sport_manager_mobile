@@ -108,13 +108,17 @@
   "homeTableTitle": "Стол {number}",
   "@homeTableTitle": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "homeTablesSection": "СТОЛДОР · {count}",
   "@homeTablesSection": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   }
 }

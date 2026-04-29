@@ -64,8 +64,14 @@ class _StatusDotState extends State<StatusDot> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     if (!widget.pulse) {
       return DecoratedBox(
-        decoration: BoxDecoration(color: widget.color, shape: BoxShape.circle),
-        child: const SizedBox(width: _dotSize, height: _dotSize),
+        decoration: BoxDecoration(
+          color: widget.color,
+          shape: BoxShape.circle,
+        ),
+        child: const SizedBox(
+          width: _dotSize,
+          height: _dotSize,
+        ),
       );
     }
     return AnimatedBuilder(
@@ -81,13 +87,24 @@ class _StatusDotState extends State<StatusDot> with SingleTickerProviderStateMix
               DecoratedBox(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: widget.color.withValues(alpha: _ringOpacity.value),
+                  color: widget.color.withValues(
+                    alpha: _ringOpacity.value,
+                  ),
                 ),
-                child: SizedBox(width: ringSize, height: ringSize),
+                child: SizedBox(
+                  width: ringSize,
+                  height: ringSize,
+                ),
               ),
               DecoratedBox(
-                decoration: BoxDecoration(shape: BoxShape.circle, color: widget.color),
-                child: const SizedBox(width: _dotSize, height: _dotSize),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: widget.color,
+                ),
+                child: const SizedBox(
+                  width: _dotSize,
+                  height: _dotSize,
+                ),
               ),
             ],
           ),

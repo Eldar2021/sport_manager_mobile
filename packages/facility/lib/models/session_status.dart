@@ -6,4 +6,8 @@ enum SessionStatus {
   active,
   @JsonValue('PAUSED')
   paused,
+  @JsonValue('CANCELLED')
+  cancelled,
+  @JsonValue('COMPLETED')
+  completed,
 }
