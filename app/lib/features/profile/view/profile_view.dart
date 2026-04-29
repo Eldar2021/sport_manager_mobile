@@ -49,8 +49,11 @@ class _ProfileViewState extends State<ProfileView> {
               builder: (context, state) {
                 return switch (state) {
                   DataLoading<ProfileModel>() || DataInitial<ProfileModel>() => const _ProfileLoading(),
-                  DataFailure<ProfileModel>() => ProfileErrorView(onRetry: _refreshProfile),
-                  DataSuccess<ProfileModel>(:final data) => _ProfileLoaded(data: data),
+                  DataFailure<ProfileModel>() => ProfileErrorView(
+                    error: state.exception,
+                    onRetry: _refreshProfile,
+                  ),
+                  DataSuccess<ProfileModel>(:final data) => _ProfileLoaded(data),
                 };
               },
             ),
@@ -108,7 +111,7 @@ class _ProfileLoading extends StatelessWidget {
 }
 
 class _ProfileLoaded extends StatelessWidget {
-  const _ProfileLoaded({required this.data});
+  const _ProfileLoaded(this.data);
 
   final ProfileModel data;
 

@@ -1,14 +1,23 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class ProfileErrorView extends StatelessWidget {
-  const ProfileErrorView({required this.onRetry, super.key});
+  const ProfileErrorView({
+    required this.error,
+    required this.onRetry,
+    super.key,
+  });
 
+  final Object error;
   final VoidCallback onRetry;
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context).languageCode;
+    final errorModel = GetIt.I<ErrorHandler>().parseErrorModel(error);
     return Card(
       color: context.colors.surface,
       margin: EdgeInsets.zero,
@@ -35,13 +44,13 @@ class ProfileErrorView extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.x4),
             Text(
-              context.l10n.profileErrorTitle,
+              errorModel.title.getMessage(locale),
               textAlign: TextAlign.center,
               style: context.textTheme.titleMedium,
             ),
             const SizedBox(height: AppSpacing.x2),
             Text(
-              context.l10n.profileErrorSubtitle,
+              errorModel.message.getMessage(locale),
               textAlign: TextAlign.center,
               style: context.appTextStyles.muted.bodyMedium,
             ),
@@ -49,9 +58,11 @@ class ProfileErrorView extends StatelessWidget {
             AppButton(
               variant: AppButtonVariant.secondary,
               size: AppButtonSize.medium,
-              expand: false,
-              leading: const Icon(Icons.refresh_rounded, size: AppSpacing.x5),
               onPressed: onRetry,
+              leading: const Icon(
+                Icons.refresh_rounded,
+                size: AppSpacing.x5,
+              ),
               child: Text(context.l10n.generalRetry),
             ),
           ],
