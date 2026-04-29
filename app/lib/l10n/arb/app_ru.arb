@@ -62,6 +62,7 @@
   "homeTablesEmpty": "Столов пока нет",
   "homeTablesEmptySub": "Добавьте первый стол, чтобы менеджеры могли начинать сессии.",
   "homeTableOccupied": "ЗАНЯТ",
+  "homeTablePaused": "НА ПАУЗЕ",
   "homeTableFree": "СВОБОДЕН",
   "homeTableJustFreed": "✓ Завершён",
   "createTableTitle": "Новый стол",

@@ -62,6 +62,7 @@
   "homeTablesEmpty": "No tables yet",
   "homeTablesEmptySub": "Add the first table so managers can start sessions.",
   "homeTableOccupied": "OCCUPIED",
+  "homeTablePaused": "PAUSED",
   "homeTableFree": "FREE",
   "homeTableJustFreed": "✓ Done",
   "createTableTitle": "New table",

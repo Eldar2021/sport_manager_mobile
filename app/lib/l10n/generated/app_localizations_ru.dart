@@ -195,6 +195,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeTableOccupied => 'ЗАНЯТ';
 
   @override
+  String get homeTablePaused => 'НА ПАУЗЕ';
+
+  @override
   String get homeTableFree => 'СВОБОДЕН';
 
   @override

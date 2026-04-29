@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class SessionTimer extends StatefulWidget {
-  const SessionTimer({required this.session, super.key});
+  const SessionTimer(this.session, {super.key});
 
   final SessionModel session;
 
@@ -14,33 +14,52 @@ class SessionTimer extends StatefulWidget {
 }
 
 class _SessionTimerState extends State<SessionTimer> {
-  Timer? _timer;
-  Duration _elapsed = Duration.zero;
+  final _elapsed = ValueNotifier<Duration>(Duration.zero);
+  StreamSubscription<void>? _subscription;
+  TextStyle? _style;
 
   @override
   void initState() {
     super.initState();
-    _startOrFreezeTimer();
+    _sync();
   }
 
   @override
-  void didUpdateWidget(SessionTimer oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.session.isPaused != widget.session.isPaused || oldWidget.session.id != widget.session.id) {
-      _timer?.cancel();
-      _timer = null;
-      _startOrFreezeTimer();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _style = context.textTheme.titleLarge?.copyWith(
+      color: context.colors.error,
+      fontWeight: FontWeight.w700,
+      height: 1,
+    );
+  }
+
+  @override
+  void didUpdateWidget(SessionTimer old) {
+    super.didUpdateWidget(old);
+    if (old.session.id != widget.session.id || old.session.isPaused != widget.session.isPaused) {
+      _sync();
     }
   }
 
-  void _startOrFreezeTimer() {
-    _updateElapsed();
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    _elapsed.dispose();
+    super.dispose();
+  }
+
+  void _sync() {
+    _subscription?.cancel();
+    _tick();
     if (!widget.session.isPaused) {
-      _timer = Timer.periodic(const Duration(seconds: 1), (_) => _updateElapsed());
+      _subscription = Stream<void>.periodic(const Duration(seconds: 1)).listen(
+        (_) => _tick(),
+      );
     }
   }
 
-  void _updateElapsed() {
+  void _tick() {
     final Duration raw;
     if (widget.session.isPaused && widget.session.pausedAt != null) {
       raw =
@@ -49,28 +68,20 @@ class _SessionTimerState extends State<SessionTimer> {
     } else {
       raw = DateTime.now().difference(widget.session.startedAt) - Duration(seconds: widget.session.totalPausedSeconds);
     }
-    final elapsed = raw.isNegative ? Duration.zero : raw;
-    if (mounted) setState(() => _elapsed = elapsed);
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
+    _elapsed.value = raw.isNegative ? Duration.zero : raw;
   }
 
   @override
   Widget build(BuildContext context) {
-    final h = _elapsed.inHours.toString().padLeft(2, '0');
-    final m = (_elapsed.inMinutes % 60).toString().padLeft(2, '0');
-    final s = (_elapsed.inSeconds % 60).toString().padLeft(2, '0');
-    return Text(
-      '$h:$m:$s',
-      style: context.textTheme.titleLarge?.copyWith(
-        color: context.colors.error,
-        fontWeight: FontWeight.w700,
-        height: 1,
-      ),
+    return ListenableBuilder(
+      listenable: _elapsed,
+      builder: (context, _) {
+        final elapsed = _elapsed.value;
+        final h = elapsed.inHours.toString().padLeft(2, '0');
+        final m = (elapsed.inMinutes % 60).toString().padLeft(2, '0');
+        final s = (elapsed.inSeconds % 60).toString().padLeft(2, '0');
+        return Text('$h:$m:$s', style: _style);
+      },
     );
   }
 }

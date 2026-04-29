@@ -15,7 +15,7 @@ class TablesEmpty extends StatelessWidget {
           DecoratedBox(
             decoration: BoxDecoration(
               color: context.colors.primaryContainer,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppRadius.modal),
             ),
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.x5),

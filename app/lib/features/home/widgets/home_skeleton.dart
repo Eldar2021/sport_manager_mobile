@@ -9,6 +9,8 @@ class HomeSkeleton extends StatefulWidget {
 }
 
 class _HomeSkeletonState extends State<HomeSkeleton> with SingleTickerProviderStateMixin {
+  final List<_SkeletonCell> _items = List.generate(6, (_) => const _SkeletonCell());
+
   late final AnimationController _controller;
   late final Animation<double> _opacity;
 
@@ -25,6 +27,12 @@ class _HomeSkeletonState extends State<HomeSkeleton> with SingleTickerProviderSt
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.x4),
@@ -38,25 +46,25 @@ class _HomeSkeletonState extends State<HomeSkeleton> with SingleTickerProviderSt
             mainAxisSpacing: AppSpacing.x3,
             crossAxisSpacing: AppSpacing.x3,
             childAspectRatio: 1.4,
-            children: List.generate(
-              6,
-              (_) => DecoratedBox(
-                decoration: BoxDecoration(
-                  color: context.colors.outline,
-                  borderRadius: AppRadius.cardBorderRadius,
-                ),
-                child: const SizedBox.expand(),
-              ),
-            ),
+            children: _items,
           ),
         ),
       ),
     );
   }
+}
+
+class _SkeletonCell extends StatelessWidget {
+  const _SkeletonCell();
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: context.colors.outline,
+        borderRadius: AppRadius.cardBorderRadius,
+      ),
+      child: const SizedBox.expand(),
+    );
   }
 }

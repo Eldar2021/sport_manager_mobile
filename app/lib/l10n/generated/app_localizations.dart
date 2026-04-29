@@ -465,6 +465,12 @@ abstract class AppLocalizations {
   /// **'OCCUPIED'**
   String get homeTableOccupied;
 
+  /// No description provided for @homeTablePaused.
+  ///
+  /// In en, this message translates to:
+  /// **'PAUSED'**
+  String get homeTablePaused;
+
   /// No description provided for @homeTableFree.
   ///
   /// In en, this message translates to:

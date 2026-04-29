@@ -1,8 +1,7 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/core/exeptions/extension/currency_extension.dart';
-import 'package:sport_manager_mobile/core/exeptions/extension/tarif_type_extension.dart';
-import 'package:sport_manager_mobile/features/home/widgets/session_timer.dart';
+import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -17,13 +16,14 @@ class TableCardFooter extends StatelessWidget {
         '${table.tarifAmount} ${table.currency.localizedName(context.l10n).toLowerCase()}'
         ' ${table.tarifType.localizedUnit(context.l10n).toLowerCase()}';
     if (table.isOccupied) {
+      final isPaused = table.session!.isPaused;
       return ListTile(
         dense: true,
         contentPadding: EdgeInsets.zero,
         minTileHeight: 0,
-        title: SessionTimer(session: table.session!),
+        title: SessionTimer(table.session!),
         subtitle: Text(
-          context.l10n.homeTableOccupied,
+          isPaused ? context.l10n.homeTablePaused : context.l10n.homeTableOccupied,
           style: context.textTheme.labelMedium?.copyWith(
             color: context.colors.error,
             fontWeight: FontWeight.w600,

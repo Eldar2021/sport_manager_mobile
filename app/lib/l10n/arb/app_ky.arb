@@ -62,6 +62,7 @@
   "homeTablesEmpty": "Азырынча столдор жок",
   "homeTablesEmptySub": "Менеджерлер сессия баштай алышы үчүн биринчи столду кошуңуз.",
   "homeTableOccupied": "ИШЕНИМДЕ",
+  "homeTablePaused": "ТЫНЫГУУ",
   "homeTableFree": "БОШ",
   "homeTableJustFreed": "✓ Аяктады",
   "createTableTitle": "Жаңы стол",

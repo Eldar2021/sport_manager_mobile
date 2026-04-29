@@ -1,7 +1,6 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/features/home/widgets/table_card_footer.dart';
-import 'package:sport_manager_mobile/features/home/widgets/table_card_title.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class TableCard extends StatelessWidget {

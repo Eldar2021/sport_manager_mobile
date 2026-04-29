@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:facility/models/session_status.dart';
 import 'package:facility/models/tarif_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
@@ -11,14 +12,12 @@ final class SessionModel extends Equatable {
   const SessionModel({
     required this.id,
     required this.tableId,
-    required this.isActive,
-    required this.isPaused,
+    required this.status,
     required this.startedAt,
     required this.totalPausedSeconds,
     required this.tarifAmountSnapshot,
     required this.tarifTypeSnapshot,
     this.pausedAt,
-    this.resumedAt,
   });
 
   factory SessionModel.fromJson(Map<String, dynamic> json) {
@@ -27,14 +26,15 @@ final class SessionModel extends Equatable {
 
   final String id;
   final String tableId;
-  final bool isActive;
-  final bool isPaused;
+  final SessionStatus status;
   final DateTime startedAt;
   final DateTime? pausedAt;
-  final DateTime? resumedAt;
   final int totalPausedSeconds;
   final int tarifAmountSnapshot;
   final TarifType tarifTypeSnapshot;
+
+  bool get isPaused => status == SessionStatus.paused;
+  bool get isActive => status == SessionStatus.active;
 
   Map<String, dynamic> toJson() {
     return _$SessionModelToJson(this);
@@ -44,11 +44,9 @@ final class SessionModel extends Equatable {
   List<Object?> get props => [
     id,
     tableId,
-    isActive,
-    isPaused,
+    status,
     startedAt,
     pausedAt,
-    resumedAt,
     totalPausedSeconds,
     tarifAmountSnapshot,
     tarifTypeSnapshot,

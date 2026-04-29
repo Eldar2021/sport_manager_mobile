@@ -27,7 +27,12 @@ class HomeCubit extends Cubit<HomeState> {
       emit(const HomeLoading());
       final response = await action();
       if (response.tables.isNotEmpty) {
-        emit(HomeLoaded(venue: response.venue, tables: response.tables));
+        emit(
+          HomeLoaded(
+            venue: response.venue,
+            tables: response.tables,
+          ),
+        );
       } else {
         emit(HomeNoTables(response.venue));
       }

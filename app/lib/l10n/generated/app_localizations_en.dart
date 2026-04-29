@@ -195,6 +195,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeTableOccupied => 'OCCUPIED';
 
   @override
+  String get homeTablePaused => 'PAUSED';
+
+  @override
   String get homeTableFree => 'FREE';
 
   @override
