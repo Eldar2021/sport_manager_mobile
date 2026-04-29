@@ -10,7 +10,6 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.repository) : super(const HomeLoading());
 
   final FacilityRepository repository;
-  bool _loading = false;
 
   Future<void> load() {
     return _fetch(repository.getSelected);
@@ -21,8 +20,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> _fetch(Future<SelectedVenueModel> Function() action) async {
-    if (_loading) return;
-    _loading = true;
+    if (state is HomeLoading) return;
     try {
       emit(const HomeLoading());
       final response = await action();
@@ -44,8 +42,6 @@ class HomeCubit extends Cubit<HomeState> {
       }
     } on Object catch (e) {
       emit(HomeFailure(e));
-    } finally {
-      _loading = false;
     }
   }
 }

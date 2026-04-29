@@ -50,7 +50,7 @@ class HomeSuccess extends StatelessWidget {
               final table = tables[index];
               return TableCard(
                 key: ValueKey(table.id),
-                table: table,
+                table,
               );
             },
           ),

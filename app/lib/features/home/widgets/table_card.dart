@@ -4,7 +4,7 @@ import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class TableCard extends StatelessWidget {
-  const TableCard({required this.table, super.key});
+  const TableCard(this.table, {super.key});
 
   final TableModel table;
 
