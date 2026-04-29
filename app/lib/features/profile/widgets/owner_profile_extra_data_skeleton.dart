@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/features/profile/widgets/profile_section_skeleton_tile.dart';
-import 'package:sport_manager_mobile/features/profile/widgets/shimmer_box.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class OwnerProfileExtraDataSkeleton extends StatelessWidget {
