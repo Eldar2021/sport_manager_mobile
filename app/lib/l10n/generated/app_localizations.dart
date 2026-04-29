@@ -734,6 +734,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'TABLES · {count}'**
   String homeTablesSection(int count);
+
+  /// No description provided for @profileSectionManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Management'**
+  String get profileSectionManagement;
+
+  /// No description provided for @profileManageVenuesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage venues'**
+  String get profileManageVenuesTitle;
+
+  /// No description provided for @profileManageVenuesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No venues} =1{1 venue} other{{count} venues}}'**
+  String profileManageVenuesSubtitle(int count);
+
+  /// No description provided for @profileManagersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Managers'**
+  String get profileManagersTitle;
+
+  /// No description provided for @profileManagersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No managers} =1{1 manager} other{{count} managers}}'**
+  String profileManagersSubtitle(int count);
+
+  /// No description provided for @profileSectionAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get profileSectionAccount;
+
+  /// No description provided for @profileSubscriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get profileSubscriptionTitle;
+
+  /// No description provided for @profileSubscriptionActiveUntil.
+  ///
+  /// In en, this message translates to:
+  /// **'Active · until {date}'**
+  String profileSubscriptionActiveUntil(String date);
+
+  /// No description provided for @profileChangePasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get profileChangePasswordTitle;
+
+  /// No description provided for @profileLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get profileLogout;
+
+  /// No description provided for @profileDeleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get profileDeleteAccount;
+
+  /// No description provided for @profileErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load profile'**
+  String get profileErrorTitle;
+
+  /// No description provided for @profileErrorSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection and try again.'**
+  String get profileErrorSubtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

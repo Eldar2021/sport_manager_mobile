@@ -6,6 +6,7 @@ export 'exception/auth_exception.dart';
 export 'models/auth_result_model.dart';
 export 'models/auth_tokens_model.dart';
 export 'models/invite_code_model.dart';
+export 'models/profile_model.dart';
 export 'models/register_param.dart';
 export 'models/user_model.dart';
 export 'models/user_role.dart';

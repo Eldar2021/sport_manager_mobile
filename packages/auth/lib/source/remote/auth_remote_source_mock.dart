@@ -115,4 +115,15 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
       expiresAt: DateTime.now().add(const Duration(days: 7)),
     );
   }
+
+  @override
+  Future<ProfileModel> getProfile() async {
+    await Future<void>.delayed(const Duration(milliseconds: 500));
+    return ProfileModel(
+      user: _testOwner,
+      venuesCount: 3,
+      managersCount: 5,
+      subscriptionEndDate: DateTime.now().add(const Duration(days: 30)),
+    );
+  }
 }

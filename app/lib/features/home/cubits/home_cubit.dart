@@ -20,7 +20,6 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> _fetch(Future<SelectedVenueModel> Function() action) async {
-    if (state is HomeLoading) return;
     try {
       emit(const HomeLoading());
       final response = await action();

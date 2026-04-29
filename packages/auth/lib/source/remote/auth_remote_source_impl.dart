@@ -58,4 +58,12 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
       fromJson: InviteCodeModel.fromJson,
     );
   }
+
+  @override
+  Future<ProfileModel> getProfile() {
+    return _client.postType<ProfileModel>(
+      '/auth/profile',
+      fromJson: ProfileModel.fromJson,
+    );
+  }
 }

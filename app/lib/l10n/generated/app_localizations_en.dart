@@ -345,4 +345,63 @@ class AppLocalizationsEn extends AppLocalizations {
   String homeTablesSection(int count) {
     return 'TABLES · $count';
   }
+
+  @override
+  String get profileSectionManagement => 'Management';
+
+  @override
+  String get profileManageVenuesTitle => 'Manage venues';
+
+  @override
+  String profileManageVenuesSubtitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count venues',
+      one: '1 venue',
+      zero: 'No venues',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileManagersTitle => 'Managers';
+
+  @override
+  String profileManagersSubtitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count managers',
+      one: '1 manager',
+      zero: 'No managers',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileSectionAccount => 'Account';
+
+  @override
+  String get profileSubscriptionTitle => 'Subscription';
+
+  @override
+  String profileSubscriptionActiveUntil(String date) {
+    return 'Active · until $date';
+  }
+
+  @override
+  String get profileChangePasswordTitle => 'Change password';
+
+  @override
+  String get profileLogout => 'Log out';
+
+  @override
+  String get profileDeleteAccount => 'Delete account';
+
+  @override
+  String get profileErrorTitle => 'Couldn\'t load profile';
+
+  @override
+  String get profileErrorSubtitle => 'Check your connection and try again.';
 }
