@@ -10,9 +10,9 @@ part 'profile_model.g.dart';
 final class ProfileModel extends Equatable {
   const ProfileModel({
     required this.user,
-    required this.venuesCount,
-    required this.managersCount,
-    required this.subscriptionEndDate,
+    this.venuesCount,
+    this.managersCount,
+    this.subscriptionEndDate,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
@@ -20,9 +20,9 @@ final class ProfileModel extends Equatable {
   }
 
   final UserModel user;
-  final int venuesCount;
-  final int managersCount;
-  final DateTime subscriptionEndDate;
+  final int? venuesCount;
+  final int? managersCount;
+  final DateTime? subscriptionEndDate;
 
   Map<String, dynamic> toJson() => _$ProfileModelToJson(this);
 
