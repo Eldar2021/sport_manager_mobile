@@ -332,4 +332,14 @@ class AppLocalizationsRu extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String homeTableTitle(int number) {
+    return 'Стол $number';
+  }
+
+  @override
+  String homeTablesSection(int count) {
+    return 'СТОЛЫ · $count';
+  }
 }

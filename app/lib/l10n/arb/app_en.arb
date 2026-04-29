@@ -108,5 +108,17 @@
     "placeholders": {
       "count": {"type": "int"}
     }
+  },
+  "homeTableTitle": "Table {number}",
+  "@homeTableTitle": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "homeTablesSection": "TABLES · {count}",
+  "@homeTablesSection": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
   }
 }

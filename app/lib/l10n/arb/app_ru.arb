@@ -103,5 +103,17 @@
   "currencyRub": "Рубль",
   "currencyKzt": "Тенге",
   "currencyTry": "Лира",
-  "venueTablesCount": "{count, plural, =0{нет столов} one{{count} стол} few{{count} стола} many{{count} столов} other{{count} столов}}"
+  "venueTablesCount": "{count, plural, =0{нет столов} one{{count} стол} few{{count} стола} many{{count} столов} other{{count} столов}}",
+  "homeTableTitle": "Стол {number}",
+  "@homeTableTitle": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "homeTablesSection": "СТОЛЫ · {count}",
+  "@homeTablesSection": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  }
 }
