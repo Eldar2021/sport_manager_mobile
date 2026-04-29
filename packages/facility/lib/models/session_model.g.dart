@@ -11,10 +11,16 @@ SessionModel _$SessionModelFromJson(Map<String, dynamic> json) => SessionModel(
   tableId: json['tableId'] as String,
   status: $enumDecode(_$SessionStatusEnumMap, json['status']),
   startedAt: DateTime.parse(json['startedAt'] as String),
-  totalPausedSeconds: (json['totalPausedSeconds'] as num).toInt(),
-  tarifAmountSnapshot: (json['tarifAmountSnapshot'] as num).toInt(),
-  tarifTypeSnapshot: $enumDecode(_$TarifTypeEnumMap, json['tarifTypeSnapshot']),
+  totalPausedSeconds: (json['totalPausedSeconds'] as num?)?.toInt() ?? 0,
   pausedAt: json['pausedAt'] == null ? null : DateTime.parse(json['pausedAt'] as String),
+  tarifAmountSnapshot: (json['tarifAmountSnapshot'] as num?)?.toInt(),
+  tarifTypeSnapshot: $enumDecodeNullable(_$TarifTypeEnumMap, json['tarifTypeSnapshot']),
+  endedAt: json['endedAt'] == null ? null : DateTime.parse(json['endedAt'] as String),
+  durationSeconds: (json['durationSeconds'] as num?)?.toInt(),
+  subtotal: (json['subtotal'] as num?)?.toInt(),
+  discountPercent: (json['discountPercent'] as num?)?.toInt(),
+  totalAmount: (json['totalAmount'] as num?)?.toInt(),
+  cancelReason: json['cancelReason'] as String?,
 );
 
 Map<String, dynamic> _$SessionModelToJson(SessionModel instance) => <String, dynamic>{
@@ -22,10 +28,16 @@ Map<String, dynamic> _$SessionModelToJson(SessionModel instance) => <String, dyn
   'tableId': instance.tableId,
   'status': _$SessionStatusEnumMap[instance.status]!,
   'startedAt': instance.startedAt.toIso8601String(),
-  'pausedAt': instance.pausedAt?.toIso8601String(),
   'totalPausedSeconds': instance.totalPausedSeconds,
+  'pausedAt': instance.pausedAt?.toIso8601String(),
   'tarifAmountSnapshot': instance.tarifAmountSnapshot,
-  'tarifTypeSnapshot': _$TarifTypeEnumMap[instance.tarifTypeSnapshot]!,
+  'tarifTypeSnapshot': _$TarifTypeEnumMap[instance.tarifTypeSnapshot],
+  'endedAt': instance.endedAt?.toIso8601String(),
+  'durationSeconds': instance.durationSeconds,
+  'subtotal': instance.subtotal,
+  'discountPercent': instance.discountPercent,
+  'totalAmount': instance.totalAmount,
+  'cancelReason': instance.cancelReason,
 };
 
 const _$SessionStatusEnumMap = {

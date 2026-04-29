@@ -54,9 +54,6 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
         tableId: 'table-002',
         status: SessionStatus.active,
         startedAt: _now.subtract(const Duration(minutes: 45)),
-        totalPausedSeconds: 0,
-        tarifAmountSnapshot: 800,
-        tarifTypeSnapshot: TarifType.hour,
       ),
     ),
     TableModel(
@@ -93,9 +90,6 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
         tableId: 'table-005',
         status: SessionStatus.active,
         startedAt: _now.subtract(const Duration(minutes: 20)),
-        totalPausedSeconds: 0,
-        tarifAmountSnapshot: 600,
-        tarifTypeSnapshot: TarifType.hour,
       ),
     ),
   ];
