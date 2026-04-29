@@ -12,6 +12,7 @@ class UserProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: context.colors.surface,
+      margin: EdgeInsets.zero,
       child: ListTile(
         leading: CircleAvatar(
           radius: AppSpacing.x7,

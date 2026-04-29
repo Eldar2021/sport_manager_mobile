@@ -56,4 +56,6 @@ final class AuthRepository {
   }
 
   Future<InviteCodeModel> getInviteCode() => _remote.getInviteCode();
+
+  Future<ProfileModel> getProfile() => _remote.getProfile();
 }
