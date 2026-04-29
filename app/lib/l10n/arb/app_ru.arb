@@ -120,5 +120,18 @@
         "type": "int"
       }
     }
-  }
+  },
+  "profileSectionManagement": "Управление",
+  "profileManageVenuesTitle": "Управление залами",
+  "profileManageVenuesSubtitle": "{count, plural, =0{нет залов} one{{count} зал} few{{count} зала} many{{count} залов} other{{count} залов}}",
+  "profileManagersTitle": "Менеджеры",
+  "profileManagersSubtitle": "{count, plural, =0{нет менеджеров} one{{count} менеджер} few{{count} менеджера} many{{count} менеджеров} other{{count} менеджеров}}",
+  "profileSectionAccount": "Аккаунт",
+  "profileSubscriptionTitle": "Подписка",
+  "profileSubscriptionActiveUntil": "Активна · до {date}",
+  "profileChangePasswordTitle": "Сменить пароль",
+  "profileLogout": "Выйти",
+  "profileDeleteAccount": "Удалить аккаунт",
+  "profileErrorTitle": "Не удалось загрузить профиль",
+  "profileErrorSubtitle": "Проверьте подключение и попробуйте снова."
 }

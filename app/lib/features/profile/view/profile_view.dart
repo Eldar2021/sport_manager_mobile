@@ -1,54 +1,128 @@
+import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
+  State<ProfileView> createState() => _ProfileViewState();
+}
 
+class _ProfileViewState extends State<ProfileView> {
+  late final ProfileCubit _profileCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _profileCubit = ProfileCubit(GetIt.I<AuthRepository>());
+    _profileCubit.fetchProfile();
+  }
+
+  @override
+  void dispose() {
+    _profileCubit.close();
+    super.dispose();
+  }
+
+  Future<void> _refreshProfile() => _profileCubit.fetchProfile();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          l10n.homeWelcomeBack,
-          style: context.textTheme.titleMedium,
-        ),
+        title: Text(context.l10n.navProfile),
       ),
-      body: BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (context, state) {
-          return ListView(
-            children: [
-              _LanguageSelector(current: state.locale),
-            ],
-          );
-        },
+      body: RefreshIndicator.adaptive(
+        onRefresh: _refreshProfile,
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(AppSpacing.x4),
+          children: [
+            BlocBuilder<ProfileCubit, DataState<ProfileModel>>(
+              bloc: _profileCubit,
+              builder: (context, state) {
+                return switch (state) {
+                  DataLoading<ProfileModel>() || DataInitial<ProfileModel>() => const _ProfileLoading(),
+                  DataFailure<ProfileModel>() => ProfileErrorView(
+                    error: state.exception,
+                    onRetry: _refreshProfile,
+                  ),
+                  DataSuccess<ProfileModel>(:final data) => _ProfileLoaded(data),
+                };
+              },
+            ),
+            const SizedBox(height: AppSpacing.x6),
+            FilledButton.icon(
+              style: FilledButton.styleFrom(
+                backgroundColor: context.colors.surfaceContainer,
+                foregroundColor: context.colors.error,
+              ),
+              onPressed: () {},
+              icon: const Icon(Icons.logout),
+              label: Text(context.l10n.profileLogout),
+            ),
+            const SizedBox(height: AppSpacing.x3),
+            OutlinedButton.icon(
+              style: OutlinedButton.styleFrom(
+                backgroundColor: AppColors.transparent,
+                side: BorderSide(
+                  color: context.appColors.onWarning.withValues(alpha: 0.5),
+                ),
+                foregroundColor: context.appColors.onWarning.withValues(alpha: 0.5),
+              ),
+              onPressed: () {},
+              icon: const Icon(Icons.delete),
+              label: Text(context.l10n.profileDeleteAccount),
+            ),
+            const SizedBox(height: AppSpacing.x6),
+            Align(
+              child: Text(
+                'Sport X MVP',
+                style: context.appTextStyles.disabled.bodySmall,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _LanguageSelector extends StatelessWidget {
-  const _LanguageSelector({required this.current});
-
-  final Locale current;
+class _ProfileLoading extends StatelessWidget {
+  const _ProfileLoading();
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<SettingsCubit>();
-
-    return Column(
+    return const Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        for (final locale in AppLocalizationHelper.locales) ...[
-          LanguageTile(
-            name: AppLocalizationHelper.getName(locale.languageCode),
-            isSelected: current.languageCode == locale.languageCode,
-            onTap: () => cubit.setLocale(locale),
-          ),
-        ],
+        UserProfileCardSkeleton(),
+        OwnerProfileExtraDataSkeleton(),
+        UserProfileExtraDataSkeleton(),
+      ],
+    );
+  }
+}
+
+class _ProfileLoaded extends StatelessWidget {
+  const _ProfileLoaded(this.data);
+
+  final ProfileModel data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        UserProfileCard(data.user),
+        if (data.user.role == UserRole.owner) OwnerProfileExtraData(data),
+        UserProfileExtraData(data),
       ],
     );
   }

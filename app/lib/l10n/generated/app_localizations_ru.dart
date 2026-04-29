@@ -345,4 +345,67 @@ class AppLocalizationsRu extends AppLocalizations {
   String homeTablesSection(int count) {
     return 'СТОЛЫ · $count';
   }
+
+  @override
+  String get profileSectionManagement => 'Управление';
+
+  @override
+  String get profileManageVenuesTitle => 'Управление залами';
+
+  @override
+  String profileManageVenuesSubtitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count залов',
+      many: '$count залов',
+      few: '$count зала',
+      one: '$count зал',
+      zero: 'нет залов',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileManagersTitle => 'Менеджеры';
+
+  @override
+  String profileManagersSubtitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count менеджеров',
+      many: '$count менеджеров',
+      few: '$count менеджера',
+      one: '$count менеджер',
+      zero: 'нет менеджеров',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileSectionAccount => 'Аккаунт';
+
+  @override
+  String get profileSubscriptionTitle => 'Подписка';
+
+  @override
+  String profileSubscriptionActiveUntil(String date) {
+    return 'Активна · до $date';
+  }
+
+  @override
+  String get profileChangePasswordTitle => 'Сменить пароль';
+
+  @override
+  String get profileLogout => 'Выйти';
+
+  @override
+  String get profileDeleteAccount => 'Удалить аккаунт';
+
+  @override
+  String get profileErrorTitle => 'Не удалось загрузить профиль';
+
+  @override
+  String get profileErrorSubtitle => 'Проверьте подключение и попробуйте снова.';
 }

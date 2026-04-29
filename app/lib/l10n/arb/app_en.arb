@@ -127,5 +127,39 @@
         "type": "int"
       }
     }
-  }
+  },
+  "profileSectionManagement": "Management",
+  "profileManageVenuesTitle": "Manage venues",
+  "profileManageVenuesSubtitle": "{count, plural, =0{No venues} =1{1 venue} other{{count} venues}}",
+  "@profileManageVenuesSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profileManagersTitle": "Managers",
+  "profileManagersSubtitle": "{count, plural, =0{No managers} =1{1 manager} other{{count} managers}}",
+  "@profileManagersSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profileSectionAccount": "Account",
+  "profileSubscriptionTitle": "Subscription",
+  "profileSubscriptionActiveUntil": "Active · until {date}",
+  "@profileSubscriptionActiveUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "profileChangePasswordTitle": "Change password",
+  "profileLogout": "Log out",
+  "profileDeleteAccount": "Delete account",
+  "profileErrorTitle": "Couldn't load profile",
+  "profileErrorSubtitle": "Check your connection and try again."
 }
