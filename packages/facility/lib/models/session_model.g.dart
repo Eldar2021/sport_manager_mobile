@@ -31,6 +31,8 @@ Map<String, dynamic> _$SessionModelToJson(SessionModel instance) => <String, dyn
 const _$SessionStatusEnumMap = {
   SessionStatus.active: 'ACTIVE',
   SessionStatus.paused: 'PAUSED',
+  SessionStatus.cancelled: 'CANCELLED',
+  SessionStatus.completed: 'COMPLETED',
 };
 
 const _$TarifTypeEnumMap = {
