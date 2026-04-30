@@ -66,7 +66,7 @@ class _AppDestructiveSheetState extends State<AppDestructiveSheet> {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(
           AppSpacing.x6,
-          AppSpacing.x6,
+          AppSpacing.x1,
           AppSpacing.x6,
           AppSpacing.x8,
         ),
