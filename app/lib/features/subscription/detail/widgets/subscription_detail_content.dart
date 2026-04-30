@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/features/subscription/detail/widgets/subscription_detail_rows.dart';
-import 'package:sport_manager_mobile/features/subscription/detail/widgets/subscription_payment_history.dart';
-import 'package:sport_manager_mobile/features/subscription/detail/widgets/subscription_plan_card.dart';
-import 'package:sport_manager_mobile/features/subscription/detail/widgets/subscription_status_banner.dart';
+import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
@@ -12,7 +9,9 @@ class SubscriptionDetailContent extends StatelessWidget {
 
   final SubscriptionDetailModel detail;
 
-  PaymentModel? get _lastPaid => detail.payments.where((p) => p.status == PaymentStatus.paid).firstOrNull;
+  PaymentModel? get _lastPaid => detail.payments.where((p) {
+    return p.status == PaymentStatus.paid;
+  }).firstOrNull;
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +37,19 @@ class SubscriptionDetailContent extends StatelessWidget {
           currency: last?.currency ?? 'KGS',
         ),
         const SizedBox(height: AppSpacing.x4),
-        SubscriptionDetailRows(subscription: s, lastPayment: last),
+        SubscriptionDetailRows(
+          subscription: s,
+          lastPayment: last,
+        ),
         const SizedBox(height: AppSpacing.x6),
         Text(
           context.l10n.subscriptionPaymentHistoryTitle,
-          style: context.appTextStyles.muted.labelSmall.copyWith(letterSpacing: 0.6),
+          style: context.appTextStyles.muted.labelSmall.copyWith(
+            letterSpacing: 0.6,
+          ),
         ),
         const SizedBox(height: AppSpacing.x2),
-        SubscriptionPaymentHistory(payments: detail.payments),
+        SubscriptionPaymentHistory(detail.payments),
       ],
     );
   }

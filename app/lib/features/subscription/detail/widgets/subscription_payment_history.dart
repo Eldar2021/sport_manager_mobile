@@ -5,7 +5,7 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
 
 class SubscriptionPaymentHistory extends StatelessWidget {
-  const SubscriptionPaymentHistory({required this.payments, super.key});
+  const SubscriptionPaymentHistory(this.payments, {super.key});
 
   final List<PaymentModel> payments;
 
