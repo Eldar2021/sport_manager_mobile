@@ -825,6 +825,12 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get authUpdatePasswordSubmit;
 
+  /// No description provided for @authUpdatePasswordSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Password updated'**
+  String get authUpdatePasswordSuccess;
+
   /// No description provided for @profileLogout.
   ///
   /// In en, this message translates to:

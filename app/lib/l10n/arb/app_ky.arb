@@ -136,6 +136,7 @@
   "authUpdatePasswordNewLabel": "Жаңы сырсөз",
   "authUpdatePasswordRepeatLabel": "Жаңы сырсөздү кайталаңыз",
   "authUpdatePasswordSubmit": "Сактоо",
+  "authUpdatePasswordSuccess": "Сырсөз жаңыртылды",
   "profileLogout": "Чыгуу",
   "profileLogoutTitle": "Аккаунттан чыгасызбы?",
   "profileLogoutSubtitle": "Сиз кирүү экранына багытталасыз. Маалыматтар сакталат.",

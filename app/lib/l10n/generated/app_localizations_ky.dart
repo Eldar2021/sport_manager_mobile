@@ -407,6 +407,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get authUpdatePasswordSubmit => 'Сактоо';
 
   @override
+  String get authUpdatePasswordSuccess => 'Сырсөз жаңыртылды';
+
+  @override
   String get profileLogout => 'Чыгуу';
 
   @override

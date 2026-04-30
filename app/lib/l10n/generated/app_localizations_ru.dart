@@ -416,6 +416,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authUpdatePasswordSubmit => 'Сохранить';
 
   @override
+  String get authUpdatePasswordSuccess => 'Пароль обновлён';
+
+  @override
   String get profileLogout => 'Выйти';
 
   @override

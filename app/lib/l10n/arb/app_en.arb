@@ -164,6 +164,7 @@
   "authUpdatePasswordNewLabel": "New password",
   "authUpdatePasswordRepeatLabel": "Repeat new password",
   "authUpdatePasswordSubmit": "Save",
+  "authUpdatePasswordSuccess": "Password updated",
   "profileLogout": "Log out",
   "profileLogoutTitle": "Log out of account?",
   "profileLogoutSubtitle": "You'll be redirected to the sign-in screen. Your data will be kept.",

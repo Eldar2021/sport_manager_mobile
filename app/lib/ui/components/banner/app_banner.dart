@@ -18,14 +18,12 @@ class AppBanner extends StatelessWidget {
     this.text, {
     this.variant = AppBannerVariant.hint,
     this.icon = Icons.info_outline_rounded,
-    this.padding = const EdgeInsets.all(AppSpacing.x4),
     super.key,
   });
 
   final String text;
   final AppBannerVariant variant;
   final IconData icon;
-  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +45,7 @@ class AppBanner extends StatelessWidget {
         borderRadius: AppRadius.cardBorderRadius,
       ),
       child: Padding(
-        padding: padding,
+        padding: const EdgeInsets.all(AppSpacing.x4),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

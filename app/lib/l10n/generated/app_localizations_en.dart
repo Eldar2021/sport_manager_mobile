@@ -412,6 +412,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authUpdatePasswordSubmit => 'Save';
 
   @override
+  String get authUpdatePasswordSuccess => 'Password updated';
+
+  @override
   String get profileLogout => 'Log out';
 
   @override

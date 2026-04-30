@@ -136,6 +136,7 @@
   "authUpdatePasswordNewLabel": "Новый пароль",
   "authUpdatePasswordRepeatLabel": "Повторите новый пароль",
   "authUpdatePasswordSubmit": "Сохранить",
+  "authUpdatePasswordSuccess": "Пароль обновлён",
   "profileLogout": "Выйти",
   "profileLogoutTitle": "Выйти из аккаунта?",
   "profileLogoutSubtitle": "Вы будете перенаправлены на экран входа. Данные сохранятся.",

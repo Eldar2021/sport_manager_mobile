@@ -28,7 +28,9 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
     _formKey = GlobalKey<FormState>();
     final repository = GetIt.I<AuthRepository>();
     final cachedUser = repository.getCachedUser();
-    _loginCtr = TextEditingController(text: cachedUser?.email ?? '');
+    _loginCtr = TextEditingController(
+      text: cachedUser?.email ?? cachedUser?.phone ?? '',
+    );
     _newPasswordCtr = TextEditingController();
     _confirmPasswordCtr = TextEditingController();
     _updatePasswordCubit = UpdatePasswordCubit(repository);
@@ -62,12 +64,14 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                 label: context.l10n.authUpdatePasswordLoginLabel,
                 controller: _loginCtr,
                 enabled: false,
+                validator: (v) => InputValidators.emptyValidator(v, context),
               ),
               const SizedBox(height: AppSpacing.x4),
               AppPasswordField(
                 label: context.l10n.authUpdatePasswordNewLabel,
                 controller: _newPasswordCtr,
                 textInputAction: TextInputAction.next,
+                onChanged: (_) => _formKey.currentState?.validate(),
                 validator: (v) => InputValidators.passwordValidator(v, context),
               ),
               const SizedBox(height: AppSpacing.x4),
@@ -115,7 +119,9 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
 
   void _listener(BuildContext context, DataState<void> state) {
     if (state is DataSuccess<void>) {
-      context.pop();
+      context
+        ..showSuccessSnackBar(context.l10n.authUpdatePasswordSuccess)
+        ..pop();
     } else if (state is DataFailure<void>) {
       context.handleError(state.exception);
     }
