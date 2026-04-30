@@ -24,7 +24,9 @@ class TableInfoRow extends StatelessWidget {
         ),
         Text(
           value,
-          style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+          style: context.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ],
     );

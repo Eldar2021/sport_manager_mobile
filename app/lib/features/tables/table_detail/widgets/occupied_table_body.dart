@@ -17,7 +17,10 @@ class OccupiedTableBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final session = context.select<SessionActiveCubit, SessionModel>((cubit) => cubit.state.session);
+    final session = context.select<SessionActiveCubit, SessionModel>(
+      (cubit) => cubit.state.session,
+    );
+
     final isPaused = session.isPaused;
 
     return ListView(

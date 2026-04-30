@@ -25,9 +25,9 @@ class PaymentSummarySheet extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        AppSpacing.x6,
         AppSpacing.x4,
-        AppSpacing.x6,
+        AppSpacing.x4,
+        AppSpacing.x4,
         AppSpacing.bottom(context) + AppSpacing.x4,
       ),
       child: Column(
