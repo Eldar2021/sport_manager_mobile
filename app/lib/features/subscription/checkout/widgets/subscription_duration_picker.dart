@@ -27,7 +27,9 @@ class SubscriptionDurationPicker extends StatelessWidget {
       children: [
         for (final months in presets)
           ChoiceChip(
-            label: Text(context.l10n.subscriptionCheckoutMonthsLabel(months)),
+            label: Text(
+              context.l10n.subscriptionCheckoutMonthsLabel(months),
+            ),
             selected: months == value,
             onSelected: (_) => onChanged(months),
           ),
