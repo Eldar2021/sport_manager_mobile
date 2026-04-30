@@ -34,14 +34,14 @@ class UserProfileExtraData extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (isOwner) ...[
-                _SubscriptionTile(
-                  fallbackEndDate: data.subscriptionEndDate,
-                ),
+                _SubscriptionTile(data.subscriptionEndDate),
                 const Divider(),
               ],
               ProfileItemTile(
                 title: context.l10n.profileChangePasswordTitle,
-                iconBgColor: context.colors.inverseSurface.withValues(alpha: AppOpacity.tint),
+                iconBgColor: context.colors.inverseSurface.withValues(
+                  alpha: AppOpacity.tint,
+                ),
                 icon: Icon(
                   Icons.lock_outline,
                   color: context.colors.shadow,
@@ -57,7 +57,7 @@ class UserProfileExtraData extends StatelessWidget {
 }
 
 class _SubscriptionTile extends StatelessWidget {
-  const _SubscriptionTile({this.fallbackEndDate});
+  const _SubscriptionTile(this.fallbackEndDate);
 
   final DateTime? fallbackEndDate;
 
@@ -88,7 +88,9 @@ class _SubscriptionTile extends StatelessWidget {
     if (s == null) {
       return fallbackEndDate == null
           ? context.l10n.subscriptionStatusActive
-          : context.l10n.profileSubscriptionActiveUntil(_formatDate(context, fallbackEndDate!));
+          : context.l10n.profileSubscriptionActiveUntil(
+              _formatDate(context, fallbackEndDate!),
+            );
     }
     return switch (s.alert) {
       SubscriptionAlert.expired => context.l10n.profileSubscriptionExpired,
