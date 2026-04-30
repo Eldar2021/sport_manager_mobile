@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport_manager_mobile/features/subscription/checkout/cubit/subscription_checkout_cubit.dart';
-import 'package:sport_manager_mobile/features/subscription/checkout/widgets/subscription_duration_picker.dart';
-import 'package:sport_manager_mobile/features/subscription/checkout/widgets/subscription_total_card.dart';
+import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
@@ -28,11 +26,13 @@ class SubscriptionCheckoutContent extends StatelessWidget {
         kAppButtonFabClearance,
       ),
       children: [
-        _SummaryCard(pricing: pricing),
+        _SummaryCard(pricing),
         const SizedBox(height: AppSpacing.x6),
         Text(
           context.l10n.subscriptionCheckoutDuration,
-          style: context.appTextStyles.muted.labelSmall.copyWith(letterSpacing: 0.6),
+          style: context.appTextStyles.muted.labelSmall.copyWith(
+            letterSpacing: 0.6,
+          ),
         ),
         const SizedBox(height: AppSpacing.x2),
         _DurationField(cubit: cubit, pricing: pricing),
@@ -44,7 +44,7 @@ class SubscriptionCheckoutContent extends StatelessWidget {
 }
 
 class _SummaryCard extends StatelessWidget {
-  const _SummaryCard({required this.pricing});
+  const _SummaryCard(this.pricing);
 
   final SubscriptionPricingModel pricing;
 
@@ -73,7 +73,10 @@ class _SummaryCard extends StatelessWidget {
 }
 
 class _DurationField extends StatelessWidget {
-  const _DurationField({required this.cubit, required this.pricing});
+  const _DurationField({
+    required this.cubit,
+    required this.pricing,
+  });
 
   final SubscriptionCheckoutCubit cubit;
   final SubscriptionPricingModel pricing;
@@ -94,7 +97,10 @@ class _DurationField extends StatelessWidget {
 }
 
 class _TotalField extends StatelessWidget {
-  const _TotalField({required this.cubit, required this.pricing});
+  const _TotalField({
+    required this.cubit,
+    required this.pricing,
+  });
 
   final SubscriptionCheckoutCubit cubit;
   final SubscriptionPricingModel pricing;
