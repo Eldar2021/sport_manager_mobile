@@ -46,50 +46,55 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final isOwner = context.read<AuthCubit>().state.isOwner;
-    return BlocBuilder<HomeCubit, HomeState>(
-      bloc: _cubit,
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: switch (state) {
-              HomeLoaded(:final venue) => VenueListTile(
-                venue: venue,
-                onTap: () => _openVenueSelector(venue),
-              ),
-              _ => const SizedBox.shrink(),
-            },
-          ),
-          body: RefreshIndicator.adaptive(
-            onRefresh: () => _cubit.load(),
-            child: switch (state) {
-              HomeNoVenue() => const VenuesEmpty(),
-              HomeNoTables() => const TablesEmpty(),
-              HomeLoaded(:final venue, :final tables) => HomeSuccess(
-                venue: venue,
-                tables: tables,
-              ),
-              HomeLoading() => const HomeSkeleton(),
-              HomeFailure(:final exception) => ErrorBodyWidget(
-                exception,
-                onRetryPressed: _cubit.load,
-              ),
-            },
-          ),
-          floatingActionButton: switch (state) {
-            HomeLoaded(:final venue) =>
-              isOwner
-                  ? FloatingActionButton(
-                      onPressed: () => context.push(
-                        AppRoutes.tableForm,
-                        extra: TableFormExtra(venueId: venue.id),
-                      ),
-                      child: const Icon(Icons.add_rounded),
-                    )
-                  : null,
-            _ => null,
+    return Scaffold(
+      appBar: AppBar(
+        title: BlocBuilder<HomeCubit, HomeState>(
+          bloc: _cubit,
+          builder: (context, state) => switch (state) {
+            HomeLoaded(:final venue) => VenueListTile(
+              venue: venue,
+              onTap: () => _openVenueSelector(venue),
+            ),
+            _ => const SizedBox.shrink(),
           },
-        );
-      },
+        ),
+      ),
+      body: RefreshIndicator.adaptive(
+        onRefresh: () => _cubit.load(),
+        child: BlocBuilder<HomeCubit, HomeState>(
+          bloc: _cubit,
+          builder: (context, state) => switch (state) {
+            HomeNoVenue() => const VenuesEmpty(),
+            HomeNoTables() => const TablesEmpty(),
+            HomeLoaded(:final venue, :final tables) => HomeSuccess(
+              venue: venue,
+              tables: tables,
+            ),
+            HomeLoading() => const HomeSkeleton(),
+            HomeFailure(:final exception) => ErrorBodyWidget(
+              exception,
+              onRetryPressed: _cubit.load,
+            ),
+          },
+        ),
+      ),
+      floatingActionButton: isOwner
+          ? BlocBuilder<HomeCubit, HomeState>(
+              bloc: _cubit,
+              builder: (context, state) => switch (state) {
+                HomeLoaded(:final venue) => FloatingActionButton(
+                  onPressed: () {
+                    context.push(
+                      AppRoutes.tableForm,
+                      extra: TableFormExtra(venueId: venue.id),
+                    );
+                  },
+                  child: const Icon(Icons.add_rounded),
+                ),
+                _ => const SizedBox.shrink(),
+              },
+            )
+          : null,
     );
   }
 }
