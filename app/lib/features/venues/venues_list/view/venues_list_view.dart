@@ -76,7 +76,10 @@ class _VenuesListViewState extends State<VenuesListView> {
                     return VenueCard(
                       key: ValueKey(venue.id),
                       venue: venue,
-                      onTap: () => context.push(AppRoutes.venueDetail, extra: venue),
+                      onTap: () => context.push(
+                        AppRoutes.venueDetail,
+                        extra: venue,
+                      ),
                     );
                   },
                 ),

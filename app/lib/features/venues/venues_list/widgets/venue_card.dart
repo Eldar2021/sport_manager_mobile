@@ -17,40 +17,9 @@ class VenueCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.zero,
-      child: InkWell(
+      child: ListTile(
         onTap: onTap,
-        borderRadius: AppRadius.cardBorderRadius,
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.x4),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _Header(venue: venue),
-              const SizedBox(height: AppSpacing.x4),
-              _MetricTile(
-                label: context.l10n.venueMetricTablesLabel,
-                value: '${venue.tableCount}',
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  const _Header({required this.venue});
-
-  final VenueModel venue;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DecoratedBox(
+        leading: DecoratedBox(
           decoration: BoxDecoration(
             color: context.colors.primaryContainer,
             borderRadius: AppRadius.buttonBorderRadius,
@@ -65,33 +34,41 @@ class _Header extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: AppSpacing.x3),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                venue.name,
-                style: context.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
+        title: Text(venue.name),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: AppSpacing.x1),
+            Text(_subtitle(venue)),
+            const SizedBox(height: AppSpacing.x2),
+            Row(
+              children: [
+                Text(
+                  context.l10n.venueMetricTablesLabel,
+                  style: context.textTheme.bodySmall?.copyWith(
+                    color: context.colors.onSurfaceVariant,
+                    fontWeight: FontWeight.w700,
+                    // letterSpacing: 1.2,
+                  ),
                 ),
-              ),
-              const SizedBox(height: AppSpacing.x1),
-              Text(
-                _subtitle(venue),
-                style: context.appTextStyles.muted.bodySmall,
-              ),
-            ],
-          ),
+                const SizedBox(width: AppSpacing.x2),
+                Text(
+                  '${venue.tableCount}',
+                  style: context.textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
-        const SizedBox(width: AppSpacing.x2),
-        Icon(
+        trailing: Icon(
           Icons.arrow_forward_ios,
           size: AppSpacing.x4,
           color: context.colors.onSurfaceVariant,
         ),
-      ],
+      ),
     );
   }
 
@@ -100,45 +77,5 @@ class _Header extends StatelessWidget {
     final address = venue.address;
     if (address == null || address.isEmpty) return number;
     return '$number · $address';
-  }
-}
-
-class _MetricTile extends StatelessWidget {
-  const _MetricTile({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: context.colors.surfaceContainer,
-        borderRadius: AppRadius.buttonBorderRadius,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.x4,
-          vertical: AppSpacing.x3,
-        ),
-        child: Row(
-          children: [
-            Text(
-              label,
-              style: context.textTheme.bodySmall?.copyWith(
-                color: context.colors.onSurfaceVariant,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 1.2,
-              ),
-            ),
-            const Spacer(),
-            Text(
-              value,
-              style: context.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
