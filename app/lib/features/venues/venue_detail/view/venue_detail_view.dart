@@ -11,8 +11,6 @@ import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-enum _VenueAction { edit, delete }
-
 class VenueDetailView extends StatefulWidget {
   const VenueDetailView({required this.venue, super.key});
 
@@ -52,27 +50,9 @@ class _VenueDetailViewState extends State<VenueDetailView> {
           appBar: AppBar(
             title: Text(widget.venue.name),
             actions: [
-              PopupMenuButton<_VenueAction>(
-                icon: const Icon(Icons.more_vert_rounded),
-                onSelected: _onActionSelected,
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: _VenueAction.edit,
-                    child: _MenuRow(
-                      icon: Icons.edit_outlined,
-                      color: context.colors.primary,
-                      label: context.l10n.menuEdit,
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: _VenueAction.delete,
-                    child: _MenuRow(
-                      icon: Icons.delete_outline_rounded,
-                      color: context.colors.error,
-                      label: context.l10n.menuDelete,
-                    ),
-                  ),
-                ],
+              AppEditDeleteMenu(
+                onEdit: _onEdit,
+                onDelete: _onDelete,
               ),
               const SizedBox(width: AppSpacing.x2),
             ],
@@ -144,20 +124,22 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     );
   }
 
-  void _onActionSelected(_VenueAction action) {
-    switch (action) {
-      case _VenueAction.edit:
-        context.push(AppRoutes.venueForm, extra: widget.venue);
-      case _VenueAction.delete:
-        AppDestructiveSheet.show(
-          context,
-          icon: Icons.delete_outline_rounded,
-          title: context.l10n.deleteVenueButton,
-          subtitle: context.l10n.deleteVenueSubtitle,
-          confirmLabel: context.l10n.deleteVenueButton,
-          onConfirm: _cubit.deleteVenue,
-        );
-    }
+  void _onEdit() {
+    context.push(
+      AppRoutes.venueForm,
+      extra: widget.venue,
+    );
+  }
+
+  void _onDelete() {
+    AppDestructiveSheet.show(
+      context,
+      icon: Icons.delete_outline_rounded,
+      title: context.l10n.deleteVenueButton,
+      subtitle: context.l10n.deleteVenueSubtitle,
+      confirmLabel: context.l10n.deleteVenueButton,
+      onConfirm: _cubit.deleteVenue,
+    );
   }
 
   Future<void> _onAddTable() async {
@@ -174,31 +156,5 @@ class _VenueDetailViewState extends State<VenueDetailView> {
   void dispose() {
     _cubit.close();
     super.dispose();
-  }
-}
-
-class _MenuRow extends StatelessWidget {
-  const _MenuRow({
-    required this.icon,
-    required this.color,
-    required this.label,
-  });
-
-  final IconData icon;
-  final Color color;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(icon, color: color, size: AppSpacing.x5),
-        const SizedBox(width: AppSpacing.x3),
-        Text(
-          label,
-          style: context.textTheme.bodyLarge?.copyWith(color: color),
-        ),
-      ],
-    );
   }
 }
