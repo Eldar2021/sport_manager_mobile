@@ -22,13 +22,15 @@ class VenueDetailView extends StatefulWidget {
 
 class _VenueDetailViewState extends State<VenueDetailView> {
   late final VenueDetailCubit _cubit;
+  late VenueModel _venue;
 
   @override
   void initState() {
     super.initState();
+    _venue = widget.venue;
     _cubit = VenueDetailCubit(
       repository: GetIt.I<FacilityRepository>(),
-      venueId: widget.venue.id,
+      venueId: _venue.id,
     );
     _cubit.load();
   }
@@ -38,7 +40,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     return AppButtonScope(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.venue.name),
+          title: Text(_venue.name),
           actions: [
             AppEditDeleteMenu(
               onEdit: _onEdit,
@@ -59,8 +61,8 @@ class _VenueDetailViewState extends State<VenueDetailView> {
             ),
             children: [
               VenueDetailHeaderCard(
-                venue: widget.venue,
-                tableCount: widget.venue.tableCount,
+                venue: _venue,
+                tableCount: _venue.tableCount,
               ),
               const SizedBox(height: AppSpacing.x4),
               BlocBuilder<VenueDetailCubit, VenueDetailState>(
@@ -91,7 +93,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
                             )
                           : TablesList(
                               tables: data,
-                              venueId: widget.venue.id,
+                              venueId: _venue.id,
                             ),
                     ),
                   };
@@ -113,11 +115,14 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     );
   }
 
-  void _onEdit() {
-    context.push(
+  Future<void> _onEdit() async {
+    final updated = await context.push<VenueModel>(
       AppRoutes.venueForm,
-      extra: widget.venue,
+      extra: _venue,
     );
+    if (mounted && updated != null) {
+      setState(() => _venue = updated);
+    }
   }
 
   Future<void> _onDelete() async {
@@ -141,7 +146,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
   Future<void> _onAddTable() async {
     final value = await context.push<bool>(
       AppRoutes.tableForm,
-      extra: TableFormExtra(venueId: widget.venue.id),
+      extra: TableFormExtra(venueId: _venue.id),
     );
     if (value == true) {
       await _cubit.load();

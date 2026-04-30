@@ -119,8 +119,8 @@ class _VenuesListViewState extends State<VenuesListView> {
   }
 
   Future<void> _onAddVenue() async {
-    final value = await context.push<bool>(AppRoutes.venueForm);
-    if (value == true) {
+    final created = await context.push<VenueModel>(AppRoutes.venueForm);
+    if (created != null) {
       await _cubit.load();
     }
   }
