@@ -99,6 +99,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         path: AppRoutes.tableForm,
         builder: (_, state) => TableFormView(state.extra! as TableFormExtra),
       ),
+
       StatefulShellRoute.indexedStack(
         builder: (_, _, shell) => MainView(shell),
         branches: [
