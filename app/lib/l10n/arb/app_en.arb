@@ -161,5 +161,31 @@
   "profileLogout": "Log out",
   "profileDeleteAccount": "Delete account",
   "profileErrorTitle": "Couldn't load profile",
-  "profileErrorSubtitle": "Check your connection and try again."
+  "profileErrorSubtitle": "Check your connection and try again.",
+  "tableDetailStart": "START",
+  "tableDetailStop": "STOP & CLOSE",
+  "tableDetailElapsed": "ELAPSED",
+  "tableDetailCurrentAmount": "CURRENT AMOUNT",
+  "tableDetailStartTime": "Start",
+  "tableDetailDuration": "Duration",
+  "tableDetailTariff": "Rate",
+  "tableDetailMistakeLaunch": "Mistake launch",
+  "tableDetailMistakeLaunchTitle": "Cancel session?",
+  "tableDetailMistakeLaunchSubtitle": "The session will be cancelled. No charge will be applied.",
+  "tableDetailMistakeLaunchConfirm": "Yes, cancel",
+  "tableDetailLastSession": "Last session",
+  "tableDetailTodaySessions": "Today's sessions",
+  "tableDetailPaymentTitle": "Payment summary",
+  "tableDetailSubtotal": "Subtotal",
+  "tableDetailDiscount": "Discount",
+  "tableDetailToPay": "TO PAY",
+  "tableDetailConfirmAndClose": "CONFIRM & CLOSE",
+  "tableDetailDurationMin": "{count} min",
+  "@tableDetailDurationMin": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

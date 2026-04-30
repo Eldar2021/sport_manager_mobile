@@ -404,4 +404,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileErrorSubtitle => 'Check your connection and try again.';
+
+  @override
+  String get tableDetailStart => 'START';
+
+  @override
+  String get tableDetailStop => 'STOP & CLOSE';
+
+  @override
+  String get tableDetailElapsed => 'ELAPSED';
+
+  @override
+  String get tableDetailCurrentAmount => 'CURRENT AMOUNT';
+
+  @override
+  String get tableDetailStartTime => 'Start';
+
+  @override
+  String get tableDetailDuration => 'Duration';
+
+  @override
+  String get tableDetailTariff => 'Rate';
+
+  @override
+  String get tableDetailMistakeLaunch => 'Mistake launch';
+
+  @override
+  String get tableDetailMistakeLaunchTitle => 'Cancel session?';
+
+  @override
+  String get tableDetailMistakeLaunchSubtitle => 'The session will be cancelled. No charge will be applied.';
+
+  @override
+  String get tableDetailMistakeLaunchConfirm => 'Yes, cancel';
+
+  @override
+  String get tableDetailLastSession => 'Last session';
+
+  @override
+  String get tableDetailTodaySessions => 'Today\'s sessions';
+
+  @override
+  String get tableDetailPaymentTitle => 'Payment summary';
+
+  @override
+  String get tableDetailSubtotal => 'Subtotal';
+
+  @override
+  String get tableDetailDiscount => 'Discount';
+
+  @override
+  String get tableDetailToPay => 'TO PAY';
+
+  @override
+  String get tableDetailConfirmAndClose => 'CONFIRM & CLOSE';
+
+  @override
+  String tableDetailDurationMin(int count) {
+    return '$count min';
+  }
 }

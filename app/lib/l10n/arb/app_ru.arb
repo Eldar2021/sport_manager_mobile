@@ -133,5 +133,31 @@
   "profileLogout": "Выйти",
   "profileDeleteAccount": "Удалить аккаунт",
   "profileErrorTitle": "Не удалось загрузить профиль",
-  "profileErrorSubtitle": "Проверьте подключение и попробуйте снова."
+  "profileErrorSubtitle": "Проверьте подключение и попробуйте снова.",
+  "tableDetailStart": "НАЧАТЬ",
+  "tableDetailStop": "ОСТАНОВИТЬ И ЗАКРЫТЬ",
+  "tableDetailElapsed": "ПРОШЛО",
+  "tableDetailCurrentAmount": "ТЕКУЩАЯ СУММА",
+  "tableDetailStartTime": "Начало",
+  "tableDetailDuration": "Длительность",
+  "tableDetailTariff": "Тариф",
+  "tableDetailMistakeLaunch": "Ошибочный запуск",
+  "tableDetailMistakeLaunchTitle": "Отменить сессию?",
+  "tableDetailMistakeLaunchSubtitle": "Сессия будет отменена без начисления оплаты.",
+  "tableDetailMistakeLaunchConfirm": "Да, отменить",
+  "tableDetailLastSession": "Прошлая сессия",
+  "tableDetailTodaySessions": "Сегодня сессий",
+  "tableDetailPaymentTitle": "Итоги оплаты",
+  "tableDetailSubtotal": "Подытог",
+  "tableDetailDiscount": "Скидка",
+  "tableDetailToPay": "К ОПЛАТЕ",
+  "tableDetailConfirmAndClose": "ПОДТВЕРДИТЬ И ЗАКРЫТЬ",
+  "tableDetailDurationMin": "{count} мин",
+  "@tableDetailDurationMin": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

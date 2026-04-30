@@ -399,4 +399,63 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get profileErrorSubtitle => 'Туташууну текшерип, кайра аракет кылыңыз.';
+
+  @override
+  String get tableDetailStart => 'БАШТОО';
+
+  @override
+  String get tableDetailStop => 'ТОКТОТУУ ЖАНА ЖАБУУ';
+
+  @override
+  String get tableDetailElapsed => 'ӨТКӨН';
+
+  @override
+  String get tableDetailCurrentAmount => 'УЧУРДАГЫ СУММА';
+
+  @override
+  String get tableDetailStartTime => 'Башталышы';
+
+  @override
+  String get tableDetailDuration => 'Узактыгы';
+
+  @override
+  String get tableDetailTariff => 'Тариф';
+
+  @override
+  String get tableDetailMistakeLaunch => 'Ката иш-аракет';
+
+  @override
+  String get tableDetailMistakeLaunchTitle => 'Сессияны жокко чыгаруу?';
+
+  @override
+  String get tableDetailMistakeLaunchSubtitle => 'Сессия төлөмсүз жокко чыгарылат.';
+
+  @override
+  String get tableDetailMistakeLaunchConfirm => 'Ооба, жокко чыгаруу';
+
+  @override
+  String get tableDetailLastSession => 'Акыркы сессия';
+
+  @override
+  String get tableDetailTodaySessions => 'Бүгүнкү сессиялар';
+
+  @override
+  String get tableDetailPaymentTitle => 'Төлөм корутундусу';
+
+  @override
+  String get tableDetailSubtotal => 'Аралык жыйынтык';
+
+  @override
+  String get tableDetailDiscount => 'Арзандатуу';
+
+  @override
+  String get tableDetailToPay => 'ТӨЛӨНҮҮГӨ';
+
+  @override
+  String get tableDetailConfirmAndClose => 'ЫРАСТОО ЖАНА ЖАБУУ';
+
+  @override
+  String tableDetailDurationMin(int count) {
+    return '$count мин';
+  }
 }
