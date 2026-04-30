@@ -178,6 +178,8 @@
   "tableDetailStop": "STOP & CLOSE",
   "tableDetailElapsed": "ELAPSED",
   "tableDetailCurrentAmount": "CURRENT AMOUNT",
+  "tableDetailPause": "PAUSE",
+  "tableDetailResume": "CONTINUE",
   "tableDetailStartTime": "Start",
   "tableDetailDuration": "Duration",
   "tableDetailTariff": "Rate",

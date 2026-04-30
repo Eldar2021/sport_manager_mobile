@@ -44,10 +44,24 @@ class FreeTableView extends StatelessWidget {
       floatingActionButton: BlocBuilder<TableDetailCubit, TableDetailState>(
         bloc: tableCubit,
         buildWhen: (p, c) => p is TableDetailFree && c is TableDetailFree && p.startStatus != c.startStatus,
-        builder: (context, state) => TableDetailStartFab(
-          isLoading: state is TableDetailFree && state.startStatus.isLoading,
-          onPressed: tableCubit.startSession,
-        ),
+        builder: (context, state) {
+          final isLoading = state is TableDetailFree && state.startStatus.isLoading;
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+            child: FilledButton(
+              onPressed: isLoading ? null : tableCubit.startSession,
+              style: FilledButton.styleFrom(
+                backgroundColor: context.appColors.success,
+                foregroundColor: context.appColors.onSuccess,
+                minimumSize: const Size(double.infinity, AppSpacing.x16),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: AppRadius.buttonBorderRadius,
+                ),
+              ),
+              child: isLoading ? const AppActivityIndicator() : Text(context.l10n.tableDetailStart),
+            ),
+          );
+        },
       ),
     );
   }

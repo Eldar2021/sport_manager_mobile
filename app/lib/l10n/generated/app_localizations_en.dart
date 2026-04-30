@@ -455,6 +455,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tableDetailCurrentAmount => 'CURRENT AMOUNT';
 
   @override
+  String get tableDetailPause => 'PAUSE';
+
+  @override
+  String get tableDetailResume => 'CONTINUE';
+
+  @override
   String get tableDetailStartTime => 'Start';
 
   @override

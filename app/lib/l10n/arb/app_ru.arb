@@ -150,6 +150,8 @@
   "tableDetailStop": "ОСТАНОВИТЬ И ЗАКРЫТЬ",
   "tableDetailElapsed": "ПРОШЛО",
   "tableDetailCurrentAmount": "ТЕКУЩАЯ СУММА",
+  "tableDetailPause": "ПАУЗА",
+  "tableDetailResume": "ПРОДОЛЖИТЬ",
   "tableDetailStartTime": "Начало",
   "tableDetailDuration": "Длительность",
   "tableDetailTariff": "Тариф",

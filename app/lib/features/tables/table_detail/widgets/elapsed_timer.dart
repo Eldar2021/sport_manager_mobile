@@ -8,9 +8,11 @@ class ElapsedTimer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<SessionActiveCubit, SessionActiveState, Duration>(
-      selector: (state) => state.elapsed,
-      builder: (context, elapsed) {
+    return BlocBuilder<SessionActiveCubit, SessionActiveState>(
+      buildWhen: (p, c) => p.elapsed != c.elapsed || p.session.status != c.session.status,
+      builder: (context, state) {
+        final elapsed = state.elapsed;
+        final isPaused = state.session.isPaused;
         final h = elapsed.inHours.toString().padLeft(2, '0');
         final m = (elapsed.inMinutes % 60).toString().padLeft(2, '0');
         final s = (elapsed.inSeconds % 60).toString().padLeft(2, '0');
@@ -19,7 +21,7 @@ class ElapsedTimer extends StatelessWidget {
           style: context.textTheme.displayLarge?.copyWith(
             fontWeight: FontWeight.w900,
             letterSpacing: -2,
-            color: context.colors.onSurface,
+            color: isPaused ? context.colors.primary : context.colors.onSurface,
           ),
           textAlign: TextAlign.center,
         );

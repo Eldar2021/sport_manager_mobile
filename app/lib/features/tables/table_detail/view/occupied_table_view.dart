@@ -82,13 +82,25 @@ class _OccupiedTableViewState extends State<OccupiedTableView> {
       body: BlocProvider.value(
         value: _sessionCubit,
         child: BlocListener<SessionActiveCubit, SessionActiveState>(
-          listenWhen: (p, c) => p.stopStatus != c.stopStatus || p.cancelStatus != c.cancelStatus,
+          listenWhen: (p, c) =>
+              p.stopStatus != c.stopStatus ||
+              p.cancelStatus != c.cancelStatus ||
+              p.pauseStatus != c.pauseStatus ||
+              p.resumeStatus != c.resumeStatus,
           listener: (context, state) {
             if (state.stopStatus.isSuccess || state.cancelStatus.isSuccess) {
               widget.tableCubit.onSessionEnded();
             }
             if (state.cancelStatus.isFailure) {
               final exception = (state.cancelStatus as RequestFailure<SessionModel>).exception;
+              context.handleError(exception);
+            }
+            if (state.pauseStatus.isFailure) {
+              final exception = (state.pauseStatus as RequestFailure<SessionModel>).exception;
+              context.handleError(exception);
+            }
+            if (state.resumeStatus.isFailure) {
+              final exception = (state.resumeStatus as RequestFailure<SessionModel>).exception;
               context.handleError(exception);
             }
           },
@@ -99,9 +111,9 @@ class _OccupiedTableViewState extends State<OccupiedTableView> {
         ),
       ),
       floatingActionButtonLocation: kAppButtonFabLocation,
-      floatingActionButton: TableDetailStopFab(
+      floatingActionButton: OccupiedTableFooter(
         sessionCubit: _sessionCubit,
-        onPressed: _showPaymentSheet,
+        onStopPressed: _showPaymentSheet,
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:facility/models/session_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
@@ -16,13 +17,15 @@ class OccupiedTableBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final session = context.read<SessionActiveCubit>().state.session;
+    final session = context.select<SessionActiveCubit, SessionModel>((cubit) => cubit.state.session);
+    final isPaused = session.isPaused;
+
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.x5),
       children: [
         RoleBadge(
-          label: context.l10n.homeTableOccupied,
-          color: context.colors.error,
+          label: isPaused ? context.l10n.homeTablePaused : context.l10n.homeTableOccupied,
+          color: isPaused ? context.colors.primary : context.colors.error,
           icon: Icons.circle,
         ),
         const SizedBox(height: AppSpacing.x5),
@@ -83,6 +86,7 @@ class OccupiedTableBody extends StatelessWidget {
           },
         ),
         const SizedBox(height: AppSpacing.x4),
+
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x16),
           child: AppOutlinedButton(

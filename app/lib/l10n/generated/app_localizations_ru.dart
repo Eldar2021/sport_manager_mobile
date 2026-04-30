@@ -459,6 +459,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tableDetailCurrentAmount => 'ТЕКУЩАЯ СУММА';
 
   @override
+  String get tableDetailPause => 'ПАУЗА';
+
+  @override
+  String get tableDetailResume => 'ПРОДОЛЖИТЬ';
+
+  @override
   String get tableDetailStartTime => 'Начало';
 
   @override

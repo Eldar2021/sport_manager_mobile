@@ -909,6 +909,18 @@ abstract class AppLocalizations {
   /// **'CURRENT AMOUNT'**
   String get tableDetailCurrentAmount;
 
+  /// No description provided for @tableDetailPause.
+  ///
+  /// In en, this message translates to:
+  /// **'PAUSE'**
+  String get tableDetailPause;
+
+  /// No description provided for @tableDetailResume.
+  ///
+  /// In en, this message translates to:
+  /// **'CONTINUE'**
+  String get tableDetailResume;
+
   /// No description provided for @tableDetailStartTime.
   ///
   /// In en, this message translates to:

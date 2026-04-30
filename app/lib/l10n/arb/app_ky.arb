@@ -150,6 +150,8 @@
   "tableDetailStop": "ТОКТОТУУ ЖАНА ЖАБУУ",
   "tableDetailElapsed": "ӨТКӨН",
   "tableDetailCurrentAmount": "УЧУРДАГЫ СУММА",
+  "tableDetailPause": "ТЫНЫГУУ",
+  "tableDetailResume": "УЛАНТУУ",
   "tableDetailStartTime": "Башталышы",
   "tableDetailDuration": "Узактыгы",
   "tableDetailTariff": "Тариф",

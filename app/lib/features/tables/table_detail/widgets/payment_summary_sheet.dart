@@ -74,7 +74,9 @@ class PaymentSummarySheet extends StatelessWidget {
           BlocConsumer<SessionActiveCubit, SessionActiveState>(
             listenWhen: (prev, curr) => prev.stopStatus != curr.stopStatus,
             listener: (context, state) {
-              if (state.stopStatus.isFailure) {
+              if (state.stopStatus.isSuccess) {
+                Navigator.of(context).pop();
+              } else if (state.stopStatus.isFailure) {
                 final exception = (state.stopStatus as RequestFailure<SessionModel>).exception;
                 context.handleError(exception);
               }

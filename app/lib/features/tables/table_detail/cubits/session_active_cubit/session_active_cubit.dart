@@ -34,8 +34,38 @@ class SessionActiveCubit extends Cubit<SessionActiveState> {
 
   void _tick() {
     final session = state.session;
-    final raw = DateTime.now().difference(session.startedAt) - Duration(seconds: session.totalPausedSeconds);
+    final now = session.isPaused ? (session.pausedAt ?? DateTime.now()) : DateTime.now();
+    final raw = now.difference(session.startedAt) - Duration(seconds: session.totalPausedSeconds);
     emit(state.copyWith(elapsed: raw.isNegative ? Duration.zero : raw));
+  }
+
+  Future<void> pauseSession() => _request(
+        () => _repo.pauseSession(state.session.id),
+        (res) => state.copyWith(session: res, pauseStatus: RequestSuccess(res)),
+        (e) => state.copyWith(pauseStatus: RequestFailure(e)),
+        state.copyWith(pauseStatus: const RequestLoading()),
+      );
+
+  Future<void> resumeSession() => _request(
+        () => _repo.resumeSession(state.session.id),
+        (res) => state.copyWith(session: res, resumeStatus: RequestSuccess(res)),
+        (e) => state.copyWith(resumeStatus: RequestFailure(e)),
+        state.copyWith(resumeStatus: const RequestLoading()),
+      );
+
+  Future<void> _request<T>(
+    Future<T> Function() action,
+    SessionActiveState Function(T res) onSuccess,
+    SessionActiveState Function(Object e) onFailure,
+    SessionActiveState loading,
+  ) async {
+    emit(loading);
+    try {
+      final res = await action();
+      emit(onSuccess(res));
+    } on Object catch (e) {
+      emit(onFailure(e));
+    }
   }
 
   Future<void> confirmStop() async {
@@ -82,6 +112,10 @@ class SessionActiveCubit extends Cubit<SessionActiveState> {
 
   void setCustomDiscount(int value) {
     emit(state.copyWith(customDiscount: value));
+  }
+
+  void updateSession(SessionModel session) {
+    emit(state.copyWith(session: session));
   }
 
   @override

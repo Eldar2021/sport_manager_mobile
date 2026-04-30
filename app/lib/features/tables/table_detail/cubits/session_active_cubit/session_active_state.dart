@@ -15,11 +15,15 @@ final class SessionActiveState extends Equatable {
     this.elapsed = Duration.zero,
     this.selectedDiscount = 0,
     this.customDiscount,
+    this.pauseStatus = const RequestInitial(),
+    this.resumeStatus = const RequestInitial(),
   });
 
   final SessionModel session;
   final RequestStatus<SessionModel> stopStatus;
   final RequestStatus<SessionModel> cancelStatus;
+  final RequestStatus<SessionModel> pauseStatus;
+  final RequestStatus<SessionModel> resumeStatus;
   final Duration elapsed;
   final int selectedDiscount;
   final int? customDiscount;
@@ -38,16 +42,21 @@ final class SessionActiveState extends Equatable {
   }
 
   SessionActiveState copyWith({
+    SessionModel? session,
     RequestStatus<SessionModel>? stopStatus,
     RequestStatus<SessionModel>? cancelStatus,
+    RequestStatus<SessionModel>? pauseStatus,
+    RequestStatus<SessionModel>? resumeStatus,
     Duration? elapsed,
     int? selectedDiscount,
     Object? customDiscount = _absent,
   }) {
     return SessionActiveState(
-      session: session,
+      session: session ?? this.session,
       stopStatus: stopStatus ?? this.stopStatus,
       cancelStatus: cancelStatus ?? this.cancelStatus,
+      pauseStatus: pauseStatus ?? this.pauseStatus,
+      resumeStatus: resumeStatus ?? this.resumeStatus,
       elapsed: elapsed ?? this.elapsed,
       selectedDiscount: selectedDiscount ?? this.selectedDiscount,
       customDiscount: customDiscount is _Absent ? this.customDiscount : customDiscount as int?,
@@ -59,6 +68,8 @@ final class SessionActiveState extends Equatable {
     session,
     stopStatus,
     cancelStatus,
+    pauseStatus,
+    resumeStatus,
     elapsed,
     selectedDiscount,
     customDiscount,

@@ -1,7 +1,7 @@
 import 'package:facility/facility.dart';
 
 final class SessionRemoteSourceMock implements SessionRemoteSource {
-  final _sessions = <String, SessionModel>{};
+  Map<String, SessionModel> get _sessions => MockData.sessions;
 
   @override
   Future<SessionModel> startSession(String tableId) async {
@@ -21,6 +21,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
       tarifTypeSnapshot: TarifType.hour,
     );
     _sessions[session.id] = session;
+    MockData.updateTableSession(tableId, session);
     return session;
   }
 
@@ -43,6 +44,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
       tarifTypeSnapshot: session.tarifTypeSnapshot,
     );
     _sessions[sessionId] = paused;
+    MockData.updateTableSession(session.tableId, paused);
     return paused;
   }
 
@@ -65,6 +67,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
       tarifTypeSnapshot: session.tarifTypeSnapshot,
     );
     _sessions[sessionId] = resumed;
+    MockData.updateTableSession(session.tableId, resumed);
     return resumed;
   }
 

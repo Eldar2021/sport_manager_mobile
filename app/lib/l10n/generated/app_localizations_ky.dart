@@ -450,6 +450,12 @@ class AppLocalizationsKy extends AppLocalizations {
   String get tableDetailCurrentAmount => 'УЧУРДАГЫ СУММА';
 
   @override
+  String get tableDetailPause => 'ТЫНЫГУУ';
+
+  @override
+  String get tableDetailResume => 'УЛАНТУУ';
+
+  @override
   String get tableDetailStartTime => 'Башталышы';
 
   @override
