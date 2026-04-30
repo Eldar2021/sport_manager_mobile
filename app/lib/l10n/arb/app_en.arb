@@ -177,6 +177,7 @@
   "menuEdit": "Edit",
   "menuDelete": "Delete",
   "managersInviteCodeLabel": "ACTIVE INVITE CODE",
+  "managersInviteCodeErrorLabel": "INVITE CODE UNAVAILABLE",
   "managersInviteCodeCopy": "Copy",
   "managersInviteCodeCopied": "Code copied to clipboard",
   "managersSectionLabel": "MANAGERS",

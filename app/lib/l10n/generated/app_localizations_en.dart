@@ -452,6 +452,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get managersInviteCodeLabel => 'ACTIVE INVITE CODE';
 
   @override
+  String get managersInviteCodeErrorLabel => 'INVITE CODE UNAVAILABLE';
+
+  @override
   String get managersInviteCodeCopy => 'Copy';
 
   @override

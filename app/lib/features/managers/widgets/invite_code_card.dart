@@ -6,18 +6,30 @@ import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class InviteCodeCard extends StatelessWidget {
-  const InviteCodeCard(this.code, {super.key});
+  const InviteCodeCard.success(
+    InviteCodeModel this.code, {
+    super.key,
+  }) : onRetry = null;
 
-  final InviteCodeModel code;
+  const InviteCodeCard.error({
+    required VoidCallback this.onRetry,
+    super.key,
+  }) : code = null;
+
+  final InviteCodeModel? code;
+  final VoidCallback? onRetry;
+
+  bool get _isError => code == null;
 
   Future<void> _copy(BuildContext context) async {
-    await Clipboard.setData(ClipboardData(text: code.code));
+    await Clipboard.setData(ClipboardData(text: code!.code));
     if (!context.mounted) return;
     context.showSuccessSnackBar(context.l10n.managersInviteCodeCopied);
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final onPrimary = context.colors.onPrimary;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -31,29 +43,30 @@ class InviteCodeCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              context.l10n.managersInviteCodeLabel,
-              style: context.textTheme.labelSmall?.copyWith(
-                color: onPrimary,
-              ),
+              _isError ? l10n.managersInviteCodeErrorLabel : l10n.managersInviteCodeLabel,
+              style: context.textTheme.labelSmall?.copyWith(color: onPrimary),
             ),
             const SizedBox(height: AppSpacing.x2),
             Text(
-              code.code,
-              style: context.textTheme.displaySmall?.copyWith(
-                color: onPrimary,
-              ),
+              _isError ? '—' : code!.code,
+              style: context.textTheme.displaySmall?.copyWith(color: onPrimary),
             ),
             const SizedBox(height: AppSpacing.x4),
             SizedBox(
               width: double.infinity,
               child: FilledButton.icon(
-                onPressed: () => _copy(context),
+                onPressed: _isError ? onRetry : () => _copy(context),
                 style: FilledButton.styleFrom(
                   backgroundColor: onPrimary.withValues(alpha: AppOpacity.tint),
                   foregroundColor: onPrimary,
                 ),
-                icon: const Icon(Icons.copy_rounded, size: AppSpacing.x4),
-                label: Text(context.l10n.managersInviteCodeCopy),
+                icon: Icon(
+                  _isError ? Icons.refresh_rounded : Icons.copy_rounded,
+                  size: AppSpacing.x4,
+                ),
+                label: Text(
+                  _isError ? l10n.generalRetry : l10n.managersInviteCodeCopy,
+                ),
               ),
             ),
           ],

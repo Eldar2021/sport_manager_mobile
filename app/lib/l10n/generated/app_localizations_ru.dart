@@ -456,6 +456,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get managersInviteCodeLabel => 'АКТИВНЫЙ КОД ПРИГЛАШЕНИЯ';
 
   @override
+  String get managersInviteCodeErrorLabel => 'КОД ПРИГЛАШЕНИЯ НЕДОСТУПЕН';
+
+  @override
   String get managersInviteCodeCopy => 'Копировать';
 
   @override

@@ -149,6 +149,7 @@
   "menuEdit": "Редактировать",
   "menuDelete": "Удалить",
   "managersInviteCodeLabel": "АКТИВНЫЙ КОД ПРИГЛАШЕНИЯ",
+  "managersInviteCodeErrorLabel": "КОД ПРИГЛАШЕНИЯ НЕДОСТУПЕН",
   "managersInviteCodeCopy": "Копировать",
   "managersInviteCodeCopied": "Код скопирован",
   "managersSectionLabel": "МЕНЕДЖЕРЫ",

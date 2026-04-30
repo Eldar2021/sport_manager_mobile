@@ -149,6 +149,7 @@
   "menuEdit": "Өзгөртүү",
   "menuDelete": "Жок кылуу",
   "managersInviteCodeLabel": "АКТИВДҮҮ ЧАКЫРУУ КОДУ",
+  "managersInviteCodeErrorLabel": "ЧАКЫРУУ КОДУ ЖЕТКИЛИКСИЗ",
   "managersInviteCodeCopy": "Көчүрүү",
   "managersInviteCodeCopied": "Код көчүрүлдү",
   "managersSectionLabel": "МЕНЕДЖЕРЛЕР",

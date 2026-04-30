@@ -903,6 +903,12 @@ abstract class AppLocalizations {
   /// **'ACTIVE INVITE CODE'**
   String get managersInviteCodeLabel;
 
+  /// No description provided for @managersInviteCodeErrorLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'INVITE CODE UNAVAILABLE'**
+  String get managersInviteCodeErrorLabel;
+
   /// No description provided for @managersInviteCodeCopy.
   ///
   /// In en, this message translates to:

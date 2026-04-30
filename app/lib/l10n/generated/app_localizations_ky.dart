@@ -447,6 +447,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get managersInviteCodeLabel => 'АКТИВДҮҮ ЧАКЫРУУ КОДУ';
 
   @override
+  String get managersInviteCodeErrorLabel => 'ЧАКЫРУУ КОДУ ЖЕТКИЛИКСИЗ';
+
+  @override
   String get managersInviteCodeCopy => 'Көчүрүү';
 
   @override
