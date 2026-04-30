@@ -4,10 +4,7 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
 
 class SubscriptionStatusBadge extends StatelessWidget {
-  const SubscriptionStatusBadge({
-    required this.status,
-    super.key,
-  });
+  const SubscriptionStatusBadge(this.status, {super.key});
 
   final SubscriptionStatus status;
 
@@ -40,7 +37,11 @@ class SubscriptionStatusBadge extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.circle, size: 8, color: fg),
+            Icon(
+              Icons.circle,
+              size: 8,
+              color: fg,
+            ),
             const SizedBox(width: AppSpacing.x2),
             Text(
               label.toUpperCase(),

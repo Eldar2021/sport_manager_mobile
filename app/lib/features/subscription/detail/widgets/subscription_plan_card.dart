@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/features/subscription/detail/widgets/subscription_status_badge.dart';
+import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
@@ -39,10 +39,13 @@ class SubscriptionPlanCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SubscriptionStatusBadge(status: subscription.status),
+            SubscriptionStatusBadge(subscription.status),
             const SizedBox(height: AppSpacing.x4),
             Text(
-              context.l10n.subscriptionPlanCardPerTable(pricePerTable, currency),
+              context.l10n.subscriptionPlanCardPerTable(
+                pricePerTable,
+                currency,
+              ),
               style: context.textTheme.headlineMedium?.copyWith(
                 color: context.appColors.onSuccess,
                 fontWeight: FontWeight.w800,
@@ -50,7 +53,11 @@ class SubscriptionPlanCard extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.x2),
             Text(
-              context.l10n.subscriptionPlanCardMonthly(tableCount, monthly, currency),
+              context.l10n.subscriptionPlanCardMonthly(
+                tableCount,
+                monthly,
+                currency,
+              ),
               style: context.textTheme.bodyMedium?.copyWith(
                 color: context.appColors.onSuccess.withValues(alpha: 0.85),
               ),
