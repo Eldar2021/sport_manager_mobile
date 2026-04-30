@@ -55,7 +55,10 @@ class SubscriptionDetailRows extends StatelessWidget {
 }
 
 class _Row extends StatelessWidget {
-  const _Row({required this.label, required this.value});
+  const _Row({
+    required this.label,
+    required this.value,
+  });
 
   final String label;
   final String value;
