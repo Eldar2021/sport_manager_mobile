@@ -397,7 +397,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileLogout => 'Log out';
 
   @override
+  String get profileLogoutTitle => 'Log out of account?';
+
+  @override
+  String get profileLogoutSubtitle => 'You\'ll be redirected to the sign-in screen. Your data will be kept.';
+
+  @override
   String get profileDeleteAccount => 'Delete account';
+
+  @override
+  String get profileDeleteAccountTitle => 'Delete account?';
+
+  @override
+  String get profileDeleteAccountSubtitle =>
+      'All data, sessions and settings will be permanently deleted. This action cannot be undone.';
+
+  @override
+  String get profileDeleteAccountConfirm => 'Delete forever';
 
   @override
   String get profileErrorTitle => 'Couldn\'t load profile';

@@ -44,6 +44,11 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   }
 
   @override
+  Future<void> deleteAccount() {
+    return _client.delete('/auth/account');
+  }
+
+  @override
   Future<void> forgotPassword(String email) {
     return _client.post(
       '/auth/forgot-password',

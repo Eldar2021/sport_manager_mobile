@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -31,6 +32,39 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   Future<void> _refreshProfile() => _profileCubit.fetchProfile();
+
+  Future<void> _onLogout() {
+    return AppDestructiveSheet.show(
+      context,
+      icon: Icons.logout_rounded,
+      title: context.l10n.profileLogoutTitle,
+      subtitle: context.l10n.profileLogoutSubtitle,
+      confirmLabel: context.l10n.profileLogout,
+      onConfirm: () => context.read<AuthCubit>().logout(),
+    );
+  }
+
+  Future<void> _onDeleteAccount() async {
+    final authCubit = context.read<AuthCubit>();
+    Object? failure;
+    await AppDestructiveSheet.show(
+      context,
+      icon: Icons.delete_outline_rounded,
+      title: context.l10n.profileDeleteAccountTitle,
+      subtitle: context.l10n.profileDeleteAccountSubtitle,
+      confirmLabel: context.l10n.profileDeleteAccountConfirm,
+      onConfirm: () async {
+        try {
+          await authCubit.deleteAccount();
+        } on Object catch (e) {
+          failure = e;
+        }
+      },
+    );
+    final error = failure;
+    if (!mounted || error == null) return;
+    context.handleError(error);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +97,7 @@ class _ProfileViewState extends State<ProfileView> {
                 backgroundColor: context.colors.surfaceContainer,
                 foregroundColor: context.colors.error,
               ),
-              onPressed: () {},
+              onPressed: _onLogout,
               icon: const Icon(Icons.logout),
               label: Text(context.l10n.profileLogout),
             ),
@@ -76,7 +110,7 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
                 foregroundColor: context.appColors.onWarning.withValues(alpha: 0.5),
               ),
-              onPressed: () {},
+              onPressed: _onDeleteAccount,
               icon: const Icon(Icons.delete),
               label: Text(context.l10n.profileDeleteAccount),
             ),

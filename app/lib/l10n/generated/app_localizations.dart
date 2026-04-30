@@ -795,11 +795,41 @@ abstract class AppLocalizations {
   /// **'Log out'**
   String get profileLogout;
 
+  /// No description provided for @profileLogoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out of account?'**
+  String get profileLogoutTitle;
+
+  /// No description provided for @profileLogoutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll be redirected to the sign-in screen. Your data will be kept.'**
+  String get profileLogoutSubtitle;
+
   /// No description provided for @profileDeleteAccount.
   ///
   /// In en, this message translates to:
   /// **'Delete account'**
   String get profileDeleteAccount;
+
+  /// No description provided for @profileDeleteAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account?'**
+  String get profileDeleteAccountTitle;
+
+  /// No description provided for @profileDeleteAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All data, sessions and settings will be permanently deleted. This action cannot be undone.'**
+  String get profileDeleteAccountSubtitle;
+
+  /// No description provided for @profileDeleteAccountConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete forever'**
+  String get profileDeleteAccountConfirm;
 
   /// No description provided for @profileErrorTitle.
   ///

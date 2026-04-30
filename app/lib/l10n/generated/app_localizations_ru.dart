@@ -401,7 +401,23 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileLogout => 'Выйти';
 
   @override
+  String get profileLogoutTitle => 'Выйти из аккаунта?';
+
+  @override
+  String get profileLogoutSubtitle => 'Вы будете перенаправлены на экран входа. Данные сохранятся.';
+
+  @override
   String get profileDeleteAccount => 'Удалить аккаунт';
+
+  @override
+  String get profileDeleteAccountTitle => 'Удалить аккаунт?';
+
+  @override
+  String get profileDeleteAccountSubtitle =>
+      'Все данные, сессии и настройки будут безвозвратно удалены. Это действие нельзя отменить.';
+
+  @override
+  String get profileDeleteAccountConfirm => 'Удалить навсегда';
 
   @override
   String get profileErrorTitle => 'Не удалось загрузить профиль';

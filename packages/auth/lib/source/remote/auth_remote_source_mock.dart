@@ -108,6 +108,11 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
   }
 
   @override
+  Future<void> deleteAccount() async {
+    await Future<void>.delayed(const Duration(milliseconds: 600));
+  }
+
+  @override
   Future<InviteCodeModel> getInviteCode() async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     return InviteCodeModel(

@@ -392,7 +392,23 @@ class AppLocalizationsKy extends AppLocalizations {
   String get profileLogout => 'Чыгуу';
 
   @override
+  String get profileLogoutTitle => 'Аккаунттан чыгасызбы?';
+
+  @override
+  String get profileLogoutSubtitle => 'Сиз кирүү экранына багытталасыз. Маалыматтар сакталат.';
+
+  @override
   String get profileDeleteAccount => 'Аккаунтту өчүрүү';
+
+  @override
+  String get profileDeleteAccountTitle => 'Аккаунтту өчүрөсүзбү?';
+
+  @override
+  String get profileDeleteAccountSubtitle =>
+      'Бардык маалыматтар, сессиялар жана жөндөөлөр биротоло өчүрүлөт. Бул аракетти артка кайтаруу мүмкүн эмес.';
+
+  @override
+  String get profileDeleteAccountConfirm => 'Биротоло өчүрүү';
 
   @override
   String get profileErrorTitle => 'Профилди жүктөө мүмкүн болбоду';
