@@ -4,8 +4,8 @@ import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class ActiveSessionBody extends StatelessWidget {
-  const ActiveSessionBody({
+class OccupiedTableBody extends StatelessWidget {
+  const OccupiedTableBody({
     required this.onMistakeLaunch,
     required this.currency,
     super.key,

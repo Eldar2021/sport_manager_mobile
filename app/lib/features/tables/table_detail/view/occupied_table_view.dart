@@ -92,7 +92,7 @@ class _OccupiedTableViewState extends State<OccupiedTableView> {
               context.handleError(exception);
             }
           },
-          child: ActiveSessionBody(
+          child: OccupiedTableBody(
             currency: widget.table.currency.localizedName(context.l10n),
             onMistakeLaunch: _showCancelConfirm,
           ),
