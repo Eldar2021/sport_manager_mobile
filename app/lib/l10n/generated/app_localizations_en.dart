@@ -404,4 +404,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileErrorSubtitle => 'Check your connection and try again.';
+
+  @override
+  String get venueMetricTablesLabel => 'TABLES';
+
+  @override
+  String get venueDetailTablesHeader => 'HALL TABLES';
+
+  @override
+  String venueTablesCountSuffix(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pcs',
+      one: '1 pc',
+      zero: '0 pcs',
+    );
+    return '$_temp0';
+  }
 }

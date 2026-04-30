@@ -10,5 +10,6 @@ export 'form/app_checkbox_field.dart';
 export 'form/app_password_field.dart';
 export 'form/app_text_field.dart';
 export 'indicators/app_activity_indicator.dart';
+export 'indicators/shimmer_box.dart';
 export 'logo/app_logo.dart';
 export 'painter/dashed_rounded_border_painter.dart';

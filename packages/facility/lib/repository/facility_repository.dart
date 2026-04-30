@@ -34,6 +34,10 @@ final class FacilityRepository {
     return _remote.deleteVenue(id);
   }
 
+  Future<List<TableModel>> getVenueTables(String venueId) {
+    return _remote.getVenueTables(venueId);
+  }
+
   Future<TableModel> createTable(
     String venueId,
     TableFormParam param,
