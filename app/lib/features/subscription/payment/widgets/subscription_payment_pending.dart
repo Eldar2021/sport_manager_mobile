@@ -20,7 +20,7 @@ class SubscriptionPaymentPending extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _Summary(payment: payment),
+          _Summary(payment),
           const Spacer(),
           AppButton(
             onPressed: () => onConfirm(PaymentOutcome.paid),
@@ -39,7 +39,7 @@ class SubscriptionPaymentPending extends StatelessWidget {
 }
 
 class _Summary extends StatelessWidget {
-  const _Summary({required this.payment});
+  const _Summary(this.payment);
 
   final PaymentModel payment;
 
@@ -59,7 +59,10 @@ class _Summary extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.x4),
             Text(
-              context.l10n.subscriptionAmountWithCurrency(payment.amount, payment.currency),
+              context.l10n.subscriptionAmountWithCurrency(
+                payment.amount,
+                payment.currency,
+              ),
               style: context.textTheme.displaySmall?.copyWith(
                 fontWeight: FontWeight.w800,
                 color: context.colors.primary,
@@ -67,7 +70,10 @@ class _Summary extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.x2),
             Text(
-              context.l10n.subscriptionPaymentItemSummary(payment.months, payment.tableCountSnapshot),
+              context.l10n.subscriptionPaymentItemSummary(
+                payment.months,
+                payment.tableCountSnapshot,
+              ),
               style: context.appTextStyles.muted.bodySmall,
             ),
           ],
