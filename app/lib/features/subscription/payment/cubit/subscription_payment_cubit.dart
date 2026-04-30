@@ -3,7 +3,10 @@ import 'package:sport_manager_mobile/core/core.dart';
 import 'package:subscription/subscription.dart';
 
 class SubscriptionPaymentCubit extends Cubit<DataState<PaymentModel>> {
-  SubscriptionPaymentCubit(this._repository, PaymentModel initial) : super(DataSuccess<PaymentModel>(initial));
+  SubscriptionPaymentCubit(
+    this._repository,
+    PaymentModel initial,
+  ) : super(DataSuccess<PaymentModel>(initial));
 
   final SubscriptionRepository _repository;
 
