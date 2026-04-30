@@ -812,6 +812,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check your connection and try again.'**
   String get profileErrorSubtitle;
+
+  /// No description provided for @menuEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get menuEdit;
+
+  /// No description provided for @menuDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get menuDelete;
+
+  /// No description provided for @venueMetricTablesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TABLES'**
+  String get venueMetricTablesLabel;
+
+  /// No description provided for @venueDetailTablesHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'HALL TABLES'**
+  String get venueDetailTablesHeader;
+
+  /// No description provided for @venueTablesCountSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}'**
+  String venueTablesCountSuffix(int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -85,9 +85,21 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       ),
 
       GoRoute(
+        path: AppRoutes.venuesList,
+        builder: (_, _) => const VenuesListView(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.venueDetail,
+        redirect: (_, state) => state.extra is VenueModel ? null : AppRoutes.venuesList,
+        builder: (_, state) => VenueDetailView(venue: state.extra! as VenueModel),
+      ),
+
+      GoRoute(
         path: AppRoutes.tableForm,
         builder: (_, state) => TableFormView(state.extra! as TableFormExtra),
       ),
+
       StatefulShellRoute.indexedStack(
         builder: (_, _, shell) => MainView(shell),
         branches: [

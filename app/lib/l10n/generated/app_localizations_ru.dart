@@ -408,4 +408,30 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profileErrorSubtitle => 'Проверьте подключение и попробуйте снова.';
+
+  @override
+  String get menuEdit => 'Редактировать';
+
+  @override
+  String get menuDelete => 'Удалить';
+
+  @override
+  String get venueMetricTablesLabel => 'СТОЛОВ';
+
+  @override
+  String get venueDetailTablesHeader => 'СТОЛЫ ЗАЛА';
+
+  @override
+  String venueTablesCountSuffix(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count шт.',
+      many: '$count шт.',
+      few: '$count шт.',
+      one: '$count шт.',
+      zero: '0 шт.',
+    );
+    return '$_temp0';
+  }
 }

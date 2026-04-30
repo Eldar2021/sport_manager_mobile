@@ -399,4 +399,27 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get profileErrorSubtitle => 'Туташууну текшерип, кайра аракет кылыңыз.';
+
+  @override
+  String get menuEdit => 'Өзгөртүү';
+
+  @override
+  String get menuDelete => 'Жок кылуу';
+
+  @override
+  String get venueMetricTablesLabel => 'СТОЛДОР';
+
+  @override
+  String get venueDetailTablesHeader => 'ЗАЛДЫН СТОЛДОРУ';
+
+  @override
+  String venueTablesCountSuffix(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count даана',
+      zero: '0 даана',
+    );
+    return '$_temp0';
+  }
 }

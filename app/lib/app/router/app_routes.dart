@@ -10,4 +10,6 @@ abstract final class AppRoutes {
   static const profile = '/profile';
   static const tableForm = '/tables/form';
   static const venueForm = '/venues/form';
+  static const venuesList = '/venues';
+  static const venueDetail = '/venues/detail';
 }

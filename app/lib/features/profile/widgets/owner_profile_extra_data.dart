@@ -1,5 +1,7 @@
 import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -36,7 +38,7 @@ class OwnerProfileExtraData extends StatelessWidget {
                   Icons.location_on,
                   color: context.colors.primary,
                 ),
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.venuesList),
               ),
               const Divider(),
               ProfileItemTile(

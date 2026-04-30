@@ -42,23 +42,14 @@ class _TableFormViewState extends State<TableFormView> with TableFormViewMixin {
           ),
           actions: [
             if (isEdit) ...[
-              BlocConsumer<TableFormCubit, TableFormState>(
+              BlocBuilder<TableFormCubit, TableFormState>(
                 bloc: cubit,
-                listenWhen: (p, n) => p.deleteStatus != n.deleteStatus,
-                listener: listenerDelete,
                 buildWhen: (p, n) => p.deleteStatus.isLoading != n.deleteStatus.isLoading,
                 builder: (_, state) {
                   return AppDeleteButton(
                     label: context.l10n.deleteTableButton,
                     isLoading: state.deleteStatus.isLoading,
-                    onTap: () => AppDestructiveSheet.show(
-                      context,
-                      icon: Icons.delete_outline_rounded,
-                      title: context.l10n.deleteTableButton,
-                      subtitle: context.l10n.deleteTableSubtitle,
-                      confirmLabel: context.l10n.deleteTableButton,
-                      onConfirm: cubit.deleteTable,
-                    ),
+                    onTap: onDelete,
                   );
                 },
               ),
