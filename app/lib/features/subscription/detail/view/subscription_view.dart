@@ -49,7 +49,7 @@ class _SubscriptionViewState extends State<SubscriptionView> {
             bloc: _cubit,
             builder: (_, state) => switch (state) {
               DataSuccess<SubscriptionDetailModel>(:final data) => SubscriptionDetailContent(data),
-              DataFailure<SubscriptionDetailModel>() => SubscriptionErrorView(onRetry: _cubit.load),
+              DataFailure<SubscriptionDetailModel>() => SubscriptionErrorView(_cubit.load),
               _ => const SubscriptionSkeleton(),
             },
           ),

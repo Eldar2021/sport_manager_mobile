@@ -3,7 +3,7 @@ import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class SubscriptionErrorView extends StatelessWidget {
-  const SubscriptionErrorView({required this.onRetry, super.key});
+  const SubscriptionErrorView(this.onRetry, {super.key});
 
   final VoidCallback onRetry;
 

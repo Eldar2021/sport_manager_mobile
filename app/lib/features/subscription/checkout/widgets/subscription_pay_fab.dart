@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport_manager_mobile/features/subscription/checkout/cubit/subscription_checkout_cubit.dart';
+import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 

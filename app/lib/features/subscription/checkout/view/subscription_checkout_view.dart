@@ -23,7 +23,9 @@ class _SubscriptionCheckoutViewState extends State<SubscriptionCheckoutView> {
   @override
   void initState() {
     super.initState();
-    _cubit = SubscriptionCheckoutCubit(GetIt.I<SubscriptionRepository>())..loadPricing();
+    _cubit = SubscriptionCheckoutCubit(
+      GetIt.I<SubscriptionRepository>(),
+    )..loadPricing();
   }
 
   @override
@@ -36,7 +38,10 @@ class _SubscriptionCheckoutViewState extends State<SubscriptionCheckoutView> {
     try {
       final payment = await _cubit.checkout();
       if (!mounted || payment == null) return;
-      await context.push<bool>(AppRoutes.subscriptionPayment, extra: payment);
+      await context.push<bool>(
+        AppRoutes.subscriptionPayment,
+        extra: payment,
+      );
     } on Object catch (e) {
       if (mounted) context.handleError(e);
     }
@@ -66,12 +71,15 @@ class _SubscriptionCheckoutViewState extends State<SubscriptionCheckoutView> {
               cubit: _cubit,
               pricing: data,
             ),
-            RequestFailure<SubscriptionPricingModel>() => SubscriptionErrorView(onRetry: _cubit.loadPricing),
+            RequestFailure<SubscriptionPricingModel>() => SubscriptionErrorView(_cubit.loadPricing),
             _ => const SubscriptionSkeleton(),
           },
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
-        floatingActionButton: SubscriptionPayFab(cubit: _cubit, onPressed: _onPay),
+        floatingActionButton: SubscriptionPayFab(
+          cubit: _cubit,
+          onPressed: _onPay,
+        ),
       ),
     );
   }
