@@ -406,6 +406,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileErrorSubtitle => 'Check your connection and try again.';
 
   @override
+  String get menuEdit => 'Edit';
+
+  @override
+  String get menuDelete => 'Delete';
+
+  @override
   String get venueMetricTablesLabel => 'TABLES';
 
   @override

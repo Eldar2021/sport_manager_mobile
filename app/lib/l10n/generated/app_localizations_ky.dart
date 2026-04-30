@@ -401,6 +401,12 @@ class AppLocalizationsKy extends AppLocalizations {
   String get profileErrorSubtitle => 'Туташууну текшерип, кайра аракет кылыңыз.';
 
   @override
+  String get menuEdit => 'Өзгөртүү';
+
+  @override
+  String get menuDelete => 'Жок кылуу';
+
+  @override
   String get venueMetricTablesLabel => 'СТОЛДОР';
 
   @override

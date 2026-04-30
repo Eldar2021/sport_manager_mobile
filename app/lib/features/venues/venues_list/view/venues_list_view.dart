@@ -41,19 +41,23 @@ class _VenuesListViewState extends State<VenuesListView> {
         ),
         body: RefreshIndicator.adaptive(
           onRefresh: _cubit.load,
-          child: BlocConsumer<VenuesListCubit, DataState<List<VenueModel>>>(
+          child: BlocBuilder<VenuesListCubit, DataState<List<VenueModel>>>(
             bloc: _cubit,
-            listenWhen: (prev, next) => next is DataFailure<List<VenueModel>>,
-            listener: (context, state) {
-              if (state is DataFailure<List<VenueModel>>) {
-                context.handleError(state.exception);
-              }
-            },
             builder: (context, state) {
               return switch (state) {
-                DataInitial<List<VenueModel>>() ||
-                DataLoading<List<VenueModel>>() ||
-                DataFailure<List<VenueModel>>() => const VenuesListSkeleton(),
+                DataInitial<List<VenueModel>>() || DataLoading<List<VenueModel>>() => const VenuesListSkeleton(),
+                DataFailure<List<VenueModel>>(:final exception) => ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                    vertical: MediaQuery.sizeOf(context).height * 0.1,
+                  ),
+                  children: [
+                    ErrorBodyWidget(
+                      exception,
+                      onRetryPressed: _cubit.load,
+                    ),
+                  ],
+                ),
                 DataSuccess<List<VenueModel>>(:final data) when data.isEmpty => ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(

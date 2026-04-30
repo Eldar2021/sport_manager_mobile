@@ -162,6 +162,8 @@
   "profileDeleteAccount": "Delete account",
   "profileErrorTitle": "Couldn't load profile",
   "profileErrorSubtitle": "Check your connection and try again.",
+  "menuEdit": "Edit",
+  "menuDelete": "Delete",
   "venueMetricTablesLabel": "TABLES",
   "venueDetailTablesHeader": "HALL TABLES",
   "venueTablesCountSuffix": "{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}",

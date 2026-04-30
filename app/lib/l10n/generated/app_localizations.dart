@@ -813,6 +813,18 @@ abstract class AppLocalizations {
   /// **'Check your connection and try again.'**
   String get profileErrorSubtitle;
 
+  /// No description provided for @menuEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get menuEdit;
+
+  /// No description provided for @menuDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get menuDelete;
+
   /// No description provided for @venueMetricTablesLabel.
   ///
   /// In en, this message translates to:

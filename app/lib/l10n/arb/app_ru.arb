@@ -134,6 +134,8 @@
   "profileDeleteAccount": "Удалить аккаунт",
   "profileErrorTitle": "Не удалось загрузить профиль",
   "profileErrorSubtitle": "Проверьте подключение и попробуйте снова.",
+  "menuEdit": "Редактировать",
+  "menuDelete": "Удалить",
   "venueMetricTablesLabel": "СТОЛОВ",
   "venueDetailTablesHeader": "СТОЛЫ ЗАЛА",
   "venueTablesCountSuffix": "{count, plural, =0{0 шт.} one{{count} шт.} few{{count} шт.} many{{count} шт.} other{{count} шт.}}"

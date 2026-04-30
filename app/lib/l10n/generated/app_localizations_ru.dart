@@ -410,6 +410,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileErrorSubtitle => 'Проверьте подключение и попробуйте снова.';
 
   @override
+  String get menuEdit => 'Редактировать';
+
+  @override
+  String get menuDelete => 'Удалить';
+
+  @override
   String get venueMetricTablesLabel => 'СТОЛОВ';
 
   @override
