@@ -15,12 +15,16 @@ class SubscriptionStatusBanner extends StatelessWidget {
       SubscriptionAlert.warning => _Banner(
         icon: Icons.warning_amber_rounded,
         color: context.appColors.warning,
-        message: context.l10n.subscriptionWarningBanner(subscription.daysUntilExpiry),
+        message: context.l10n.subscriptionWarningBanner(
+          subscription.daysUntilExpiry,
+        ),
       ),
       SubscriptionAlert.grace => _Banner(
         icon: Icons.access_time,
         color: context.appColors.warning,
-        message: context.l10n.subscriptionGraceBanner(subscription.graceDaysRemaining),
+        message: context.l10n.subscriptionGraceBanner(
+          subscription.graceDaysRemaining,
+        ),
       ),
       SubscriptionAlert.expired => _Banner(
         icon: Icons.lock_outline,
