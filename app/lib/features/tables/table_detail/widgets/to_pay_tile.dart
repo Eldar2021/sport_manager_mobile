@@ -16,29 +16,31 @@ class ToPayTile extends StatelessWidget {
         final subtotal = s.currentAmount;
         return subtotal - (subtotal * s.effectiveDiscount / 100).round();
       },
-      builder: (context, toPay) => ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.x3,
-          vertical: AppSpacing.x2,
-        ),
-        shape: const RoundedRectangleBorder(
-          borderRadius: AppRadius.buttonBorderRadius,
-        ),
-        tileColor: context.colors.primary,
-        title: Text(
-          context.l10n.tableDetailToPay,
-          style: context.textTheme.titleMedium?.copyWith(
-            color: context.colors.onPrimary,
+      builder: (context, toPay) {
+        return ListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.x3,
+            vertical: AppSpacing.x2,
           ),
-        ),
-        trailing: Text(
-          '$toPay ${currency.toLowerCase()}',
-          style: context.textTheme.titleLarge?.copyWith(
-            color: context.colors.onPrimary,
-            fontWeight: FontWeight.w800,
+          shape: const RoundedRectangleBorder(
+            borderRadius: AppRadius.buttonBorderRadius,
           ),
-        ),
-      ),
+          tileColor: context.colors.primary,
+          title: Text(
+            context.l10n.tableDetailToPay,
+            style: context.textTheme.titleMedium?.copyWith(
+              color: context.colors.onPrimary,
+            ),
+          ),
+          trailing: Text(
+            '$toPay ${currency.toLowerCase()}',
+            style: context.textTheme.titleLarge?.copyWith(
+              color: context.colors.onPrimary,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        );
+      },
     );
   }
 }
