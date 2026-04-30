@@ -14,11 +14,17 @@ class SubscriptionErrorView extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.x4),
       children: [
         const SizedBox(height: AppSpacing.x6),
-        Icon(Icons.error_outline, size: 56, color: context.colors.error),
+        Icon(
+          Icons.error_outline,
+          size: 56,
+          color: context.colors.error,
+        ),
         const SizedBox(height: AppSpacing.x3),
         Text(
           context.l10n.subscriptionErrorTitle,
-          style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+          style: context.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: AppSpacing.x2),
