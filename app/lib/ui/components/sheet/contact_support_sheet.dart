@@ -4,9 +4,6 @@ import 'package:sport_manager_mobile/generated/assets.gen.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-/// Channel-specific brand colors. They do not adapt to light/dark — channel
-/// identity stays the same in both modes; only the surrounding tinted bg is
-/// theme-aware (built via `iconColor.withValues(alpha: AppOpacity.tint)`).
 const Color _whatsappBrand = Color(0xFF41D365);
 const Color _telegramBrand = Color(0xFF369ED9);
 
@@ -36,14 +33,14 @@ class ContactSupportSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.authContactSupportTitle,
+            l10n.contactSupportTitle,
             style: context.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.w800,
             ),
           ),
           const SizedBox(height: AppSpacing.x2),
           Text(
-            l10n.authContactSupportSubtitle,
+            l10n.contactSupportSubtitle,
             style: context.appTextStyles.muted.bodySmall,
           ),
           const SizedBox(height: AppSpacing.x4),
@@ -75,7 +72,7 @@ class ContactSupportSheet extends StatelessWidget {
           _ContactItem(
             iconAsset: Assets.icons.call,
             iconColor: context.appColors.success,
-            title: l10n.authContactCallLabel,
+            title: l10n.contactCallLabel,
             subtitle: SupportContacts.callPhone,
             onTap: () {},
           ),

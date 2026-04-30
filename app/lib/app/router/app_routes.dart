@@ -14,4 +14,7 @@ abstract final class AppRoutes {
   static const venuesList = '/venues';
   static const venueDetail = '/venues/detail';
   static const managers = '/managers';
+  static const subscription = '/subscription';
+  static const subscriptionCheckout = '/subscription/checkout';
+  static const subscriptionPayment = '/subscription/payment';
 }
