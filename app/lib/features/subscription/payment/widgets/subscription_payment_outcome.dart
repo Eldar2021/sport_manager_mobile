@@ -71,7 +71,9 @@ class SubscriptionPaymentOutcome extends StatelessWidget {
           const SizedBox(height: AppSpacing.x4),
           Text(
             title,
-            style: context.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800),
+            style: context.textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: AppSpacing.x2),
