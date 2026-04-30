@@ -31,13 +31,13 @@ const double kAppButtonFabClearance = AppSpacing.x6 + AppSpacing.x16;
 ///     body: Form(
 ///       child: ListView(
 ///         padding: const EdgeInsets.fromLTRB(
-///           AppSpacing.x6, AppSpacing.x6, AppSpacing.x6, kAppButtonFabClearance,
+///           AppSpacing.x4, AppSpacing.x4, AppSpacing.x4, kAppButtonFabClearance,
 ///         ),
 ///         children: [/* form fields */],
 ///       ),
 ///     ),
 ///     floatingActionButton: Padding(
-///       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+///       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
 ///       child: AppButton(
 ///         collapseOnScroll: true,
 ///         onPressed: _submit,

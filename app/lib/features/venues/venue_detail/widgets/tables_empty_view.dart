@@ -8,7 +8,7 @@ class TablesEmptyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

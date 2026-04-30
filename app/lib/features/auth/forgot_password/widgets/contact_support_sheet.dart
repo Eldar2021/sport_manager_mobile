@@ -26,9 +26,9 @@ class ContactSupportSheet extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        AppSpacing.x6,
+        AppSpacing.x4,
         0,
-        AppSpacing.x6,
+        AppSpacing.x4,
         AppSpacing.x6 + MediaQuery.paddingOf(context).bottom,
       ),
       child: Column(

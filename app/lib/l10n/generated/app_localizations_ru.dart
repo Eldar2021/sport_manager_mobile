@@ -398,6 +398,27 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileChangePasswordTitle => 'Сменить пароль';
 
   @override
+  String get authUpdatePasswordTitle => 'Сменить пароль';
+
+  @override
+  String get authUpdatePasswordHint => 'Минимум 8 символов. Используйте буквы, цифры и спецсимволы.';
+
+  @override
+  String get authUpdatePasswordLoginLabel => 'Логин / Email';
+
+  @override
+  String get authUpdatePasswordNewLabel => 'Новый пароль';
+
+  @override
+  String get authUpdatePasswordRepeatLabel => 'Повторите новый пароль';
+
+  @override
+  String get authUpdatePasswordSubmit => 'Сохранить';
+
+  @override
+  String get authUpdatePasswordSuccess => 'Пароль обновлён';
+
+  @override
   String get profileLogout => 'Выйти';
 
   @override

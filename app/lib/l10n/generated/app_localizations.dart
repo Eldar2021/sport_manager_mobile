@@ -789,6 +789,48 @@ abstract class AppLocalizations {
   /// **'Change password'**
   String get profileChangePasswordTitle;
 
+  /// No description provided for @authUpdatePasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get authUpdatePasswordTitle;
+
+  /// No description provided for @authUpdatePasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum 8 characters. Use letters, numbers and special characters.'**
+  String get authUpdatePasswordHint;
+
+  /// No description provided for @authUpdatePasswordLoginLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Login / Email'**
+  String get authUpdatePasswordLoginLabel;
+
+  /// No description provided for @authUpdatePasswordNewLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get authUpdatePasswordNewLabel;
+
+  /// No description provided for @authUpdatePasswordRepeatLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat new password'**
+  String get authUpdatePasswordRepeatLabel;
+
+  /// No description provided for @authUpdatePasswordSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get authUpdatePasswordSubmit;
+
+  /// No description provided for @authUpdatePasswordSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Password updated'**
+  String get authUpdatePasswordSuccess;
+
   /// No description provided for @profileLogout.
   ///
   /// In en, this message translates to:

@@ -133,7 +133,7 @@ class _TableFormViewState extends State<TableFormView> with TableFormViewMixin {
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
           child: BlocConsumer<TableFormCubit, TableFormState>(
             bloc: cubit,
             listenWhen: (p, n) => p.submitStatus != n.submitStatus,

@@ -40,9 +40,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
           key: _formKey,
           child: ListView(
             padding: const EdgeInsets.fromLTRB(
-              AppSpacing.x6,
-              AppSpacing.x6,
-              AppSpacing.x6,
+              AppSpacing.x4,
+              AppSpacing.x4,
+              AppSpacing.x4,
               kAppButtonFabClearance,
             ),
             children: [
@@ -71,7 +71,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
           ),
         ),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
           child: BlocConsumer<ForgotPasswordCubit, DataState<void>>(
             bloc: _forgotPasswordCubit,
             listener: _forgotPasswordListener,

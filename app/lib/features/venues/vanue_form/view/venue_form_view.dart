@@ -80,7 +80,7 @@ class _VenueFormViewState extends State<VenueFormView> {
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
           child: BlocConsumer<VenueFormCubit, VenueFormState>(
             bloc: _cubit,
             listenWhen: (prev, next) => prev.reqStatus != next.reqStatus,

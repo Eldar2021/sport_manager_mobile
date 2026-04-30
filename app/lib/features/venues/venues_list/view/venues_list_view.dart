@@ -95,7 +95,7 @@ class _VenuesListViewState extends State<VenuesListView> {
             final hasVenues = state is DataSuccess<List<VenueModel>> && state.data.isNotEmpty;
             if (!hasVenues) return const SizedBox.shrink();
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
               child: AppButton(
                 leading: const Icon(Icons.add_rounded),
                 onPressed: _onAddVenue,

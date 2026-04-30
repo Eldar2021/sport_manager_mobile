@@ -158,6 +158,13 @@
     }
   },
   "profileChangePasswordTitle": "Change password",
+  "authUpdatePasswordTitle": "Change password",
+  "authUpdatePasswordHint": "Minimum 8 characters. Use letters, numbers and special characters.",
+  "authUpdatePasswordLoginLabel": "Login / Email",
+  "authUpdatePasswordNewLabel": "New password",
+  "authUpdatePasswordRepeatLabel": "Repeat new password",
+  "authUpdatePasswordSubmit": "Save",
+  "authUpdatePasswordSuccess": "Password updated",
   "profileLogout": "Log out",
   "profileLogoutTitle": "Log out of account?",
   "profileLogoutSubtitle": "You'll be redirected to the sign-in screen. Your data will be kept.",
