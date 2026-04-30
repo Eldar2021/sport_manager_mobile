@@ -20,7 +20,9 @@ class _SubscriptionViewState extends State<SubscriptionView> {
   @override
   void initState() {
     super.initState();
-    _cubit = SubscriptionDetailCubit(GetIt.I<SubscriptionRepository>())..load();
+    _cubit = SubscriptionDetailCubit(
+      GetIt.I<SubscriptionRepository>(),
+    )..load();
   }
 
   @override
@@ -55,7 +57,7 @@ class _SubscriptionViewState extends State<SubscriptionView> {
           ),
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
-        floatingActionButton: SubscriptionContinueFab(cubit: _cubit),
+        floatingActionButton: SubscriptionContinueFab(_cubit),
       ),
     );
   }

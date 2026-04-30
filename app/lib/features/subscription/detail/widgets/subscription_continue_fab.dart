@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
-import 'package:sport_manager_mobile/features/subscription/detail/cubit/subscription_detail_cubit.dart';
+import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
 
 class SubscriptionContinueFab extends StatelessWidget {
-  const SubscriptionContinueFab({required this.cubit, super.key});
+  const SubscriptionContinueFab(this.cubit, {super.key});
 
   final SubscriptionDetailCubit cubit;
 
