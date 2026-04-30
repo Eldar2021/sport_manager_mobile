@@ -36,88 +36,77 @@ class _VenueDetailViewState extends State<VenueDetailView> {
   @override
   Widget build(BuildContext context) {
     return AppButtonScope(
-      child: BlocListener<VenueDetailCubit, VenueDetailState>(
-        bloc: _cubit,
-        listenWhen: (prev, next) => prev.deleteStatus != next.deleteStatus,
-        listener: (context, state) {
-          if (state.deleteStatus is RequestSuccess<bool>) {
-            context.pop(true);
-          } else if (state.deleteStatus is RequestFailure<bool>) {
-            context.handleError((state.deleteStatus as RequestFailure<bool>).exception);
-          }
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(widget.venue.name),
-            actions: [
-              AppEditDeleteMenu(
-                onEdit: _onEdit,
-                onDelete: _onDelete,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.venue.name),
+          actions: [
+            AppEditDeleteMenu(
+              onEdit: _onEdit,
+              onDelete: _onDelete,
+            ),
+            const SizedBox(width: AppSpacing.x2),
+          ],
+        ),
+        body: RefreshIndicator.adaptive(
+          onRefresh: _cubit.load,
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.x4,
+              AppSpacing.x4,
+              AppSpacing.x4,
+              kAppButtonFabClearance,
+            ),
+            children: [
+              VenueDetailHeaderCard(
+                venue: widget.venue,
+                tableCount: widget.venue.tableCount,
               ),
-              const SizedBox(width: AppSpacing.x2),
-            ],
-          ),
-          body: RefreshIndicator.adaptive(
-            onRefresh: _cubit.load,
-            child: ListView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.fromLTRB(
-                AppSpacing.x4,
-                AppSpacing.x4,
-                AppSpacing.x4,
-                kAppButtonFabClearance,
-              ),
-              children: [
-                VenueDetailHeaderCard(
-                  venue: widget.venue,
-                  tableCount: widget.venue.tableCount,
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                BlocBuilder<VenueDetailCubit, VenueDetailState>(
-                  bloc: _cubit,
-                  buildWhen: (prev, next) => prev.tables != next.tables,
-                  builder: (context, state) {
-                    return switch (state.tables) {
-                      RequestInitial<List<TableModel>>() || RequestLoading<List<TableModel>>() => const TablesSection(
-                        count: null,
-                        child: VenueDetailSkeleton(),
-                      ),
-                      RequestFailure<List<TableModel>>(:final exception) => TablesSection(
-                        count: null,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: AppSpacing.x6),
-                          child: ErrorBodyWidget(
-                            exception,
-                            onRetryPressed: _cubit.load,
-                          ),
+              const SizedBox(height: AppSpacing.x4),
+              BlocBuilder<VenueDetailCubit, VenueDetailState>(
+                bloc: _cubit,
+                buildWhen: (prev, next) => prev.tables != next.tables,
+                builder: (context, state) {
+                  return switch (state.tables) {
+                    RequestInitial<List<TableModel>>() || RequestLoading<List<TableModel>>() => const TablesSection(
+                      count: null,
+                      child: VenueDetailSkeleton(),
+                    ),
+                    RequestFailure<List<TableModel>>(:final exception) => TablesSection(
+                      count: null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: AppSpacing.x6),
+                        child: ErrorBodyWidget(
+                          exception,
+                          onRetryPressed: _cubit.load,
                         ),
                       ),
-                      RequestSuccess<List<TableModel>>(:final data) => TablesSection(
-                        count: data.length,
-                        child: data.isEmpty
-                            ? const Padding(
-                                padding: EdgeInsets.symmetric(vertical: AppSpacing.x10),
-                                child: TablesEmptyView(),
-                              )
-                            : TablesList(
-                                tables: data,
-                                venueId: widget.venue.id,
-                              ),
-                      ),
-                    };
-                  },
-                ),
-              ],
-            ),
+                    ),
+                    RequestSuccess<List<TableModel>>(:final data) => TablesSection(
+                      count: data.length,
+                      child: data.isEmpty
+                          ? const Padding(
+                              padding: EdgeInsets.symmetric(vertical: AppSpacing.x10),
+                              child: TablesEmptyView(),
+                            )
+                          : TablesList(
+                              tables: data,
+                              venueId: widget.venue.id,
+                            ),
+                    ),
+                  };
+                },
+              ),
+            ],
           ),
-          floatingActionButtonLocation: kAppButtonFabLocation,
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
-            child: AppButton(
-              leading: const Icon(Icons.add_rounded),
-              onPressed: _onAddTable,
-              child: Text(context.l10n.homeAddTable),
-            ),
+        ),
+        floatingActionButtonLocation: kAppButtonFabLocation,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          child: AppButton(
+            leading: const Icon(Icons.add_rounded),
+            onPressed: _onAddTable,
+            child: Text(context.l10n.homeAddTable),
           ),
         ),
       ),
@@ -131,8 +120,8 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     );
   }
 
-  void _onDelete() {
-    AppDestructiveSheet.show(
+  Future<void> _onDelete() async {
+    await AppDestructiveSheet.show(
       context,
       icon: Icons.delete_outline_rounded,
       title: context.l10n.deleteVenueButton,
@@ -140,6 +129,13 @@ class _VenueDetailViewState extends State<VenueDetailView> {
       confirmLabel: context.l10n.deleteVenueButton,
       onConfirm: _cubit.deleteVenue,
     );
+    if (!mounted) return;
+    final status = _cubit.state.deleteStatus;
+    if (status is RequestSuccess<bool>) {
+      context.pop(true);
+    } else if (status is RequestFailure<bool>) {
+      context.handleError(status.exception);
+    }
   }
 
   Future<void> _onAddTable() async {
