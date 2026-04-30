@@ -40,9 +40,9 @@ class _LoginViewState extends State<LoginView> {
           key: _formKey,
           child: ListView(
             padding: const EdgeInsets.fromLTRB(
-              AppSpacing.x6,
-              AppSpacing.x6,
-              AppSpacing.x6,
+              AppSpacing.x4,
+              AppSpacing.x4,
+              AppSpacing.x4,
               kAppButtonFabClearance,
             ),
             children: [
@@ -110,7 +110,7 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
           child: BlocConsumer<LoginCubit, DataState<AuthResultModel>>(
             bloc: _loginCubit,
             listener: (context, state) {

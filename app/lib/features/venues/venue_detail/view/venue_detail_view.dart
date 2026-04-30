@@ -104,7 +104,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
           child: AppButton(
             leading: const Icon(Icons.add_rounded),
             onPressed: _onAddTable,

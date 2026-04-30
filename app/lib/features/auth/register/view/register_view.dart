@@ -66,9 +66,9 @@ class _RegisterViewState extends State<RegisterView> {
           key: _formKey,
           child: ListView(
             padding: const EdgeInsets.fromLTRB(
-              AppSpacing.x6,
-              AppSpacing.x6,
-              AppSpacing.x6,
+              AppSpacing.x4,
+              AppSpacing.x4,
+              AppSpacing.x4,
               kAppButtonFabClearance,
             ),
             children: [
@@ -149,7 +149,7 @@ class _RegisterViewState extends State<RegisterView> {
           ),
         ),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
           child: BlocConsumer<RegisterCubit, DataState<AuthResultModel>>(
             bloc: _registerCubit,
             listener: (context, state) {

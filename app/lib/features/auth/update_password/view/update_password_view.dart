@@ -86,7 +86,7 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
           ),
         ),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
           child: BlocConsumer<UpdatePasswordCubit, DataState<void>>(
             bloc: _updatePasswordCubit,
             listener: _listener,
