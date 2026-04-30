@@ -1,8 +1,6 @@
 import 'package:auth/auth.dart';
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:managers/managers.dart';
 import 'package:sport_manager_mobile/core/core.dart';
@@ -71,127 +69,35 @@ class _ManagersViewState extends State<ManagersView> {
         appBar: AppBar(title: Text(context.l10n.profileManagersTitle)),
         body: RefreshIndicator.adaptive(
           onRefresh: _cubit.load,
-          child: BlocBuilder<ManagersCubit, ManagersState>(
-            bloc: _cubit,
-            builder: (context, state) {
-              return ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.x4,
-                  AppSpacing.x4,
-                  AppSpacing.x4,
-                  kAppButtonFabClearance,
-                ),
-                children: [
-                  _InviteCodeSection(
-                    status: state.inviteCode,
-                    onRetry: _cubit.loadInviteCode,
-                  ),
-                  const SizedBox(height: AppSpacing.x6),
-                  Text(
-                    context.l10n.managersSectionLabel,
-                    style: context.appTextStyles.muted.bodySmall.copyWith(
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0.8,
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.x2),
-                  _ManagersSection(
-                    status: state.managers,
-                    deletingId: state.deletingId,
-                    onDelete: _onDeleteManager,
-                    onRetry: _cubit.loadManagers,
-                  ),
-                ],
-              );
-            },
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.x4,
+              AppSpacing.x4,
+              AppSpacing.x4,
+              kAppButtonFabClearance,
+            ),
+            children: [
+              InviteCodeSection(_cubit),
+              const SizedBox(height: AppSpacing.x6),
+              Text(
+                context.l10n.managersSectionLabel,
+                style: context.appTextStyles.muted.labelSmall,
+              ),
+              const SizedBox(height: AppSpacing.x2),
+              ManagersSection(
+                cubit: _cubit,
+                onDelete: _onDeleteManager,
+              ),
+            ],
           ),
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
-        floatingActionButton: BlocBuilder<ManagersCubit, ManagersState>(
-          bloc: _cubit,
-          buildWhen: (a, b) => a.inviteCode != b.inviteCode,
-          builder: (context, state) {
-            final hasCode = state.inviteCode.isSuccess;
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-              child: AppButton(
-                leading: const Icon(Icons.add_rounded),
-                onPressed: hasCode ? _onShareInvite : null,
-                child: Text(context.l10n.managersInviteAction),
-              ),
-            );
-          },
+        floatingActionButton: InviteActionButton(
+          cubit: _cubit,
+          onPressed: _onShareInvite,
         ),
       ),
     );
-  }
-}
-
-class _InviteCodeSection extends StatelessWidget {
-  const _InviteCodeSection({required this.status, required this.onRetry});
-
-  final RequestStatus<InviteCodeModel> status;
-  final Future<void> Function() onRetry;
-
-  @override
-  Widget build(BuildContext context) {
-    return switch (status) {
-      RequestInitial<InviteCodeModel>() || RequestLoading<InviteCodeModel>() => const InviteCodeCardSkeleton(),
-      RequestFailure<InviteCodeModel>(:final exception) => ErrorBodyWidget(
-        exception,
-        onRetryPressed: onRetry,
-      ),
-      RequestSuccess<InviteCodeModel>(:final data) => InviteCodeCard(data),
-    };
-  }
-}
-
-class _ManagersSection extends StatelessWidget {
-  const _ManagersSection({
-    required this.status,
-    required this.deletingId,
-    required this.onDelete,
-    required this.onRetry,
-  });
-
-  final RequestStatus<List<ManagerModel>> status;
-  final String? deletingId;
-  final ValueChanged<ManagerModel> onDelete;
-  final Future<void> Function() onRetry;
-
-  @override
-  Widget build(BuildContext context) {
-    return switch (status) {
-      RequestInitial<List<ManagerModel>>() || RequestLoading<List<ManagerModel>>() => const Card(
-        margin: EdgeInsets.zero,
-        child: ManagersListSkeleton(),
-      ),
-      RequestFailure<List<ManagerModel>>(:final exception) => ErrorBodyWidget(
-        exception,
-        onRetryPressed: onRetry,
-      ),
-      RequestSuccess<List<ManagerModel>>(:final data) when data.isEmpty => const Card(
-        margin: EdgeInsets.zero,
-        child: ManagersEmpty(),
-      ),
-      RequestSuccess<List<ManagerModel>>(:final data) => Card(
-        margin: EdgeInsets.zero,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (var i = 0; i < data.length; i++) ...[
-              if (i != 0) const Divider(height: 1),
-              ManagerCard(
-                key: ValueKey(data[i].id),
-                manager: data[i],
-                isDeleting: deletingId == data[i].id,
-                onDelete: () => onDelete(data[i]),
-              ),
-            ],
-          ],
-        ),
-      ),
-    };
   }
 }

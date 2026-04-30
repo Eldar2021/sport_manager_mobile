@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
+const double _shimmerNameWidth = 0.55;
+const double _shimmerHandleWidth = 0.35;
+
 class ManagersListSkeleton extends StatelessWidget {
   const ManagersListSkeleton({
     this.itemCount = 3,
@@ -42,16 +45,18 @@ class _ManagerSkeletonTile extends StatelessWidget {
         width: AppSpacing.x12,
         shape: BoxShape.circle,
       ),
-      title: Padding(
-        padding: EdgeInsets.only(right: AppSpacing.x16),
-        child: ShimmerBox(height: AppSpacing.x4, width: 140),
+      title: FractionallySizedBox(
+        alignment: Alignment.centerLeft,
+        widthFactor: _shimmerNameWidth,
+        child: ShimmerBox(height: AppSpacing.x4),
       ),
       subtitle: Padding(
-        padding: EdgeInsets.only(
-          top: AppSpacing.x2,
-          right: AppSpacing.x16,
+        padding: EdgeInsets.only(top: AppSpacing.x2),
+        child: FractionallySizedBox(
+          alignment: Alignment.centerLeft,
+          widthFactor: _shimmerHandleWidth,
+          child: ShimmerBox(height: AppSpacing.x3),
         ),
-        child: ShimmerBox(height: AppSpacing.x3, width: 100),
       ),
     );
   }

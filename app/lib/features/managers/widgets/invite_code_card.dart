@@ -18,6 +18,7 @@ class InviteCodeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final onPrimary = context.colors.onPrimary;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: context.colors.primary,
@@ -31,19 +32,15 @@ class InviteCodeCard extends StatelessWidget {
           children: [
             Text(
               context.l10n.managersInviteCodeLabel,
-              style: context.textTheme.bodySmall?.copyWith(
-                color: context.colors.onPrimary.withValues(alpha: 0.85),
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.8,
+              style: context.textTheme.labelSmall?.copyWith(
+                color: onPrimary,
               ),
             ),
             const SizedBox(height: AppSpacing.x2),
             Text(
               code.code,
-              style: context.textTheme.headlineLarge?.copyWith(
-                color: context.colors.onPrimary,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 1,
+              style: context.textTheme.displaySmall?.copyWith(
+                color: onPrimary,
               ),
             ),
             const SizedBox(height: AppSpacing.x4),
@@ -52,8 +49,8 @@ class InviteCodeCard extends StatelessWidget {
               child: FilledButton.icon(
                 onPressed: () => _copy(context),
                 style: FilledButton.styleFrom(
-                  backgroundColor: context.colors.onPrimary.withValues(alpha: 0.18),
-                  foregroundColor: context.colors.onPrimary,
+                  backgroundColor: onPrimary.withValues(alpha: AppOpacity.tint),
+                  foregroundColor: onPrimary,
                 ),
                 icon: const Icon(Icons.copy_rounded, size: AppSpacing.x4),
                 label: Text(context.l10n.managersInviteCodeCopy),
