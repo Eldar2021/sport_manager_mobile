@@ -46,9 +46,9 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
           key: _formKey,
           child: ListView(
             padding: const EdgeInsets.fromLTRB(
-              AppSpacing.x6,
-              AppSpacing.x6,
-              AppSpacing.x6,
+              AppSpacing.x4,
+              AppSpacing.x4,
+              AppSpacing.x4,
               kAppButtonFabClearance,
             ),
             children: [
