@@ -65,9 +65,9 @@ class _AppDestructiveSheetState extends State<AppDestructiveSheet> {
       canPop: !_isPerforming,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(
-          AppSpacing.x6,
+          AppSpacing.x4,
           AppSpacing.x1,
-          AppSpacing.x6,
+          AppSpacing.x4,
           AppSpacing.x8,
         ),
         child: Column(
