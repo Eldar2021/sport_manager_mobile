@@ -52,7 +52,7 @@ mixin TableFormViewMixin on State<TableFormView> {
 
   void tableCubitListener(BuildContext context, TableFormState state) {
     if (state.submitStatus.isSuccess) {
-      context.pop();
+      context.pop(true);
     } else if (state.submitStatus.isFailure) {
       context.handleError((state.submitStatus as RequestFailure).exception);
     }

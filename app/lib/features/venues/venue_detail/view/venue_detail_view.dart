@@ -104,15 +104,22 @@ class _VenueDetailViewState extends State<VenueDetailView> {
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
           child: AppButton(
             leading: const Icon(Icons.add_rounded),
-            onPressed: () => context.push(
-              AppRoutes.tableForm,
-              extra: TableFormExtra(venueId: widget.venue.id),
-            ),
+            onPressed: _onAddTable,
             child: Text(context.l10n.homeAddTable),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _onAddTable() async {
+    final value = await context.push<bool>(
+      AppRoutes.tableForm,
+      extra: TableFormExtra(venueId: widget.venue.id),
+    );
+    if (value == true) {
+      await _cubit.load();
+    }
   }
 
   @override
