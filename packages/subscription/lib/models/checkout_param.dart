@@ -7,7 +7,7 @@ part 'checkout_param.g.dart';
 @immutable
 @JsonSerializable()
 final class CheckoutParam extends Equatable {
-  const CheckoutParam({required this.months});
+  const CheckoutParam(this.months);
 
   factory CheckoutParam.fromJson(Map<String, dynamic> json) {
     return _$CheckoutParamFromJson(json);

@@ -83,7 +83,11 @@ class SubscriptionPaymentOutcome extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const Spacer(),
-          AppButton(onPressed: onAction, child: Text(actionLabel)),
+          AppButton(
+            onPressed: onAction,
+            child: Text(actionLabel),
+          ),
+          SizedBox(height: AppSpacing.bottom(context)),
         ],
       ),
     );

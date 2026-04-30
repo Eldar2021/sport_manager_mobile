@@ -21,7 +21,7 @@ final class SubscriptionRepository {
   }
 
   Future<PaymentModel> createCheckout(int months) {
-    return _remote.createCheckout(CheckoutParam(months: months));
+    return _remote.createCheckout(CheckoutParam(months));
   }
 
   Future<PaymentModel> getPayment(String id) {

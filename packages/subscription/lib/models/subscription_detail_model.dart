@@ -24,5 +24,8 @@ final class SubscriptionDetailModel extends Equatable {
   Map<String, dynamic> toJson() => _$SubscriptionDetailModelToJson(this);
 
   @override
-  List<Object?> get props => [subscription, payments];
+  List<Object?> get props => [
+    subscription,
+    payments,
+  ];
 }

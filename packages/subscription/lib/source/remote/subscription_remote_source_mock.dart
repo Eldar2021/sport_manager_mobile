@@ -23,7 +23,9 @@ enum MockSubscriptionScenario {
 }
 
 final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
-  SubscriptionRemoteSourceMock({MockSubscriptionScenario scenario = MockSubscriptionScenario.activeFar}) {
+  SubscriptionRemoteSourceMock({
+    MockSubscriptionScenario scenario = MockSubscriptionScenario.activeWarning,
+  }) {
     setScenario(scenario);
   }
 

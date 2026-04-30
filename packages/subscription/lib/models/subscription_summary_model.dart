@@ -41,5 +41,10 @@ final class SubscriptionSummaryModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [status, endDate, daysUntilExpiry, graceDaysRemaining];
+  List<Object?> get props => [
+    status,
+    endDate,
+    daysUntilExpiry,
+    graceDaysRemaining,
+  ];
 }
