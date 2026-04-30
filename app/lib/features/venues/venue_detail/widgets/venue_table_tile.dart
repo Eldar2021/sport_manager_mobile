@@ -23,17 +23,19 @@ class VenueTableTile extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
       leading: DecoratedBox(
         decoration: BoxDecoration(
-          color: context.colors.surfaceContainer,
-          shape: BoxShape.circle,
+          color: context.colors.primaryContainer,
+          borderRadius: BorderRadius.circular(AppSpacing.x2),
         ),
         child: SizedBox(
           width: AppSpacing.x10,
           height: AppSpacing.x10,
           child: Center(
-            child: Icon(
-              Icons.play_arrow_rounded,
-              color: context.colors.onSurfaceVariant,
-              size: AppSpacing.x5,
+            child: Text(
+              table.number.toString(),
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: context.colors.primary,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),

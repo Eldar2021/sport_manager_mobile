@@ -49,7 +49,9 @@ class VenueDetailHeaderCard extends StatelessWidget {
                     children: [
                       Text(
                         venue.name,
-                        style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                        style: context.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       const SizedBox(height: AppSpacing.x1),
                       Text(
@@ -70,7 +72,6 @@ class VenueDetailHeaderCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppSpacing.x4,
-                  vertical: AppSpacing.x3,
                 ),
                 child: Row(
                   children: [
