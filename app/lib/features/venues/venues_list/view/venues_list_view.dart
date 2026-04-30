@@ -80,10 +80,7 @@ class _VenuesListViewState extends State<VenuesListView> {
                     return VenueCard(
                       key: ValueKey(venue.id),
                       venue: venue,
-                      onTap: () => context.push(
-                        AppRoutes.venueDetail,
-                        extra: venue,
-                      ),
+                      onTap: () => _onNavigateDetail(venue),
                     );
                   },
                 ),
@@ -109,6 +106,16 @@ class _VenuesListViewState extends State<VenuesListView> {
         ),
       ),
     );
+  }
+
+  Future<void> _onNavigateDetail(VenueModel venue) async {
+    final value = await context.push(
+      AppRoutes.venueDetail,
+      extra: venue,
+    );
+    if (value == true) {
+      await _cubit.load();
+    }
   }
 
   Future<void> _onAddVenue() async {
