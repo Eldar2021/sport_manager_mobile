@@ -49,7 +49,6 @@ class VenueCard extends StatelessWidget {
                   style: context.textTheme.bodySmall?.copyWith(
                     color: context.colors.onSurfaceVariant,
                     fontWeight: FontWeight.w700,
-                    // letterSpacing: 1.2,
                   ),
                 ),
                 const SizedBox(width: AppSpacing.x2),
