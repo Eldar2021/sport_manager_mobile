@@ -4,10 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:sport_manager_mobile/core/core.dart';
-import 'package:sport_manager_mobile/features/subscription/cubit/subscription_cubit.dart';
-import 'package:sport_manager_mobile/features/subscription/payment/cubit/subscription_payment_cubit.dart';
-import 'package:sport_manager_mobile/features/subscription/payment/widgets/subscription_payment_outcome.dart';
-import 'package:sport_manager_mobile/features/subscription/payment/widgets/subscription_payment_pending.dart';
+import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
@@ -27,7 +24,10 @@ class _SubscriptionPaymentViewState extends State<SubscriptionPaymentView> {
   @override
   void initState() {
     super.initState();
-    _cubit = SubscriptionPaymentCubit(GetIt.I<SubscriptionRepository>(), widget.payment);
+    _cubit = SubscriptionPaymentCubit(
+      GetIt.I<SubscriptionRepository>(),
+      widget.payment,
+    );
   }
 
   @override
@@ -71,11 +71,16 @@ class _SubscriptionPaymentViewState extends State<SubscriptionPaymentView> {
           }
           final payment = state.dataValue ?? widget.payment;
           return switch (payment.status) {
-            PaymentStatus.pending => SubscriptionPaymentPending(payment: payment, onConfirm: _onConfirm),
+            PaymentStatus.pending => SubscriptionPaymentPending(
+              payment: payment,
+              onConfirm: _onConfirm,
+            ),
             PaymentStatus.paid => SubscriptionPaymentOutcome.success(
               context,
-              body: context.l10n.subscriptionPaymentSuccessBody(_extendedDate(context, payment)),
               onClose: _onClose,
+              body: context.l10n.subscriptionPaymentSuccessBody(
+                _extendedDate(context, payment),
+              ),
             ),
             PaymentStatus.failed => SubscriptionPaymentOutcome.failed(
               context,
@@ -90,6 +95,7 @@ class _SubscriptionPaymentViewState extends State<SubscriptionPaymentView> {
   String _extendedDate(BuildContext context, PaymentModel payment) {
     final paidAt = payment.paidAt ?? DateTime.now();
     final newEnd = paidAt.add(Duration(days: payment.months * 30)).toLocal();
-    return DateFormat('d MMMM yyyy', Localizations.localeOf(context).languageCode).format(newEnd);
+    final locale = Localizations.localeOf(context).languageCode;
+    return DateFormat('d MMMM yyyy', locale).format(newEnd);
   }
 }
