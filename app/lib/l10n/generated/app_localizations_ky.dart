@@ -389,6 +389,24 @@ class AppLocalizationsKy extends AppLocalizations {
   String get profileChangePasswordTitle => 'Сырсөздү өзгөртүү';
 
   @override
+  String get authUpdatePasswordTitle => 'Сырсөздү өзгөртүү';
+
+  @override
+  String get authUpdatePasswordHint => 'Минимум 8 символ. Тамгаларды, сандарды жана атайын символдорду колдонуңуз.';
+
+  @override
+  String get authUpdatePasswordLoginLabel => 'Логин / Email';
+
+  @override
+  String get authUpdatePasswordNewLabel => 'Жаңы сырсөз';
+
+  @override
+  String get authUpdatePasswordRepeatLabel => 'Жаңы сырсөздү кайталаңыз';
+
+  @override
+  String get authUpdatePasswordSubmit => 'Сактоо';
+
+  @override
   String get profileLogout => 'Чыгуу';
 
   @override

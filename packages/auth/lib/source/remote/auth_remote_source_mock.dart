@@ -103,6 +103,14 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
   }
 
   @override
+  Future<void> updatePassword({
+    required String login,
+    required String newPassword,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 600));
+  }
+
+  @override
   Future<void> logout() async {
     await Future<void>.delayed(const Duration(milliseconds: 300));
   }

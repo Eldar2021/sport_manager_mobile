@@ -70,6 +70,10 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         builder: (context, state) => const ForgotPasswordView(),
       ),
       GoRoute(
+        path: AppRoutes.updatePassword,
+        builder: (context, state) => const UpdatePasswordView(),
+      ),
+      GoRoute(
         path: AppRoutes.role,
         builder: (context, state) => const RoleSelectView(),
       ),

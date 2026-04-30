@@ -394,6 +394,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileChangePasswordTitle => 'Change password';
 
   @override
+  String get authUpdatePasswordTitle => 'Change password';
+
+  @override
+  String get authUpdatePasswordHint => 'Minimum 8 characters. Use letters, numbers and special characters.';
+
+  @override
+  String get authUpdatePasswordLoginLabel => 'Login / Email';
+
+  @override
+  String get authUpdatePasswordNewLabel => 'New password';
+
+  @override
+  String get authUpdatePasswordRepeatLabel => 'Repeat new password';
+
+  @override
+  String get authUpdatePasswordSubmit => 'Save';
+
+  @override
   String get profileLogout => 'Log out';
 
   @override

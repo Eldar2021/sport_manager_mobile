@@ -57,6 +57,20 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   }
 
   @override
+  Future<void> updatePassword({
+    required String login,
+    required String newPassword,
+  }) {
+    return _client.put<void>(
+      '/auth/update-password',
+      data: {
+        'login': login,
+        'newPassword': newPassword,
+      },
+    );
+  }
+
+  @override
   Future<InviteCodeModel> getInviteCode() {
     return _client.postType<InviteCodeModel>(
       '/auth/invite-code',
