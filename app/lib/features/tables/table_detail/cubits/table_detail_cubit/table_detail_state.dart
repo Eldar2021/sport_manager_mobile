@@ -31,18 +31,19 @@ final class TableDetailFree extends TableDetailState {
   ];
 }
 
+@immutable
 final class TableDetailOccupied extends TableDetailState {
   const TableDetailOccupied({
     required this.table,
-    required this.sessionCubit,
+    required this.session,
   });
 
   final TableModel table;
-  final SessionActiveCubit sessionCubit;
+  final SessionModel session;
 
   @override
   List<Object?> get props => [
     table,
-    sessionCubit,
+    session,
   ];
 }
