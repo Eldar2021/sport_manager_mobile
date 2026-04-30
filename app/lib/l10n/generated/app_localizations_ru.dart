@@ -150,13 +150,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authForgotPasswordSendLink => 'Отправить ссылку';
 
   @override
-  String get authContactSupportTitle => 'Связаться с поддержкой';
+  String get contactSupportTitle => 'Связаться с поддержкой';
 
   @override
-  String get authContactSupportSubtitle => 'Напишите или позвоните — поможем восстановить доступ.';
+  String get contactSupportSubtitle => 'Напишите или позвоните — мы поможем.';
 
   @override
-  String get authContactCallLabel => 'Позвонить';
+  String get contactCallLabel => 'Позвонить';
 
   @override
   String get navHome => 'Главная';
@@ -546,4 +546,212 @@ class AppLocalizationsRu extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get subscriptionTitle => 'Подписка';
+
+  @override
+  String get subscriptionStatusActive => 'Активна';
+
+  @override
+  String get subscriptionStatusGrace => 'Льготный период';
+
+  @override
+  String get subscriptionStatusExpired => 'Истекла';
+
+  @override
+  String get subscriptionSourceTrial => 'Пробный период';
+
+  @override
+  String get subscriptionSourcePaid => 'Оплачена';
+
+  @override
+  String subscriptionWarningBanner(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Подписка истекает через $n дн. Продлите, чтобы избежать перерыва.',
+      one: 'Подписка истекает через 1 день. Продлите, чтобы избежать перерыва.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String subscriptionGraceBanner(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Подписка истекла. Осталось $n дн. льготного периода.',
+      one: 'Подписка истекла. Остался 1 день льготного периода.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get subscriptionExpiredBanner => 'Подписка истекла. Продлите, чтобы пользоваться основными функциями.';
+
+  @override
+  String subscriptionPlanCardPerTable(int price, String currency) {
+    return '$price $currency / стол / месяц';
+  }
+
+  @override
+  String subscriptionPlanCardMonthly(int tableCount, int monthly, String currency) {
+    return '× $tableCount столов = $monthly $currency / месяц';
+  }
+
+  @override
+  String get subscriptionDetailNextPayment => 'Следующий платёж';
+
+  @override
+  String get subscriptionDetailLastPayment => 'Последний платёж';
+
+  @override
+  String get subscriptionDetailStatus => 'Статус';
+
+  @override
+  String get subscriptionPaymentHistoryTitle => 'История платежей';
+
+  @override
+  String get subscriptionPaymentHistoryEmpty => 'Платежей пока нет';
+
+  @override
+  String subscriptionPaymentItemSummary(int months, int tableCount) {
+    return '$months мес × $tableCount столов';
+  }
+
+  @override
+  String subscriptionAmountWithCurrency(int amount, String currency) {
+    return '$amount $currency';
+  }
+
+  @override
+  String get subscriptionContinueCta => 'Продлить подписку';
+
+  @override
+  String get subscriptionCheckoutTitle => 'Оплата';
+
+  @override
+  String subscriptionCheckoutSummary(int tableCount, int price, int monthly, String currency) {
+    return '$tableCount столов × $price $currency = $monthly $currency / мес';
+  }
+
+  @override
+  String get subscriptionCheckoutDuration => 'Длительность';
+
+  @override
+  String subscriptionCheckoutMonthsLabel(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n мес',
+      many: '$n мес',
+      few: '$n мес',
+      one: '$n мес',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get subscriptionCheckoutTotal => 'Итого';
+
+  @override
+  String subscriptionCheckoutTotalLine(int months, int monthly, int total, String currency) {
+    return '$months мес × $monthly $currency = $total $currency';
+  }
+
+  @override
+  String subscriptionCheckoutNewEndDate(String date) {
+    return 'Новая дата окончания: $date';
+  }
+
+  @override
+  String get subscriptionCheckoutPay => 'Оплатить';
+
+  @override
+  String get subscriptionCheckoutNoTablesTitle => 'Столов пока нет';
+
+  @override
+  String get subscriptionCheckoutNoTablesSubtitle => 'Добавьте хотя бы один стол, чтобы оформить подписку.';
+
+  @override
+  String get subscriptionCheckoutGoToVenues => 'К залам';
+
+  @override
+  String get subscriptionPaymentMockTitle => 'Тестовая оплата';
+
+  @override
+  String get subscriptionPaymentMockSubtitle => 'Интеграция с настоящей оплатой скоро. Симулируйте результат ниже.';
+
+  @override
+  String get subscriptionPaymentSimulateSuccess => 'Имитировать успех';
+
+  @override
+  String get subscriptionPaymentSimulateFailure => 'Имитировать ошибку';
+
+  @override
+  String get subscriptionPaymentSuccessTitle => 'Оплата прошла';
+
+  @override
+  String subscriptionPaymentSuccessBody(String date) {
+    return 'Подписка продлена до $date.';
+  }
+
+  @override
+  String get subscriptionPaymentFailedTitle => 'Оплата не прошла';
+
+  @override
+  String get subscriptionPaymentFailedBody => 'Что-то пошло не так. Попробуйте ещё раз.';
+
+  @override
+  String get subscriptionPaymentRetry => 'Попробовать снова';
+
+  @override
+  String get subscriptionPaymentClose => 'Закрыть';
+
+  @override
+  String get subscriptionBlockedTitle => 'Нужна подписка';
+
+  @override
+  String get subscriptionBlockedSubtitle => 'Продлите подписку, чтобы пользоваться основными функциями.';
+
+  @override
+  String get subscriptionBlockedRenew => 'Продлить';
+
+  @override
+  String get subscriptionBlockedCancel => 'Не сейчас';
+
+  @override
+  String get subscriptionErrorTitle => 'Не удалось загрузить подписку';
+
+  @override
+  String get subscriptionErrorSubtitle => 'Проверьте подключение и попробуйте снова.';
+
+  @override
+  String get subscriptionContactSupportAction => 'Нужна помощь? Свяжитесь с поддержкой';
+
+  @override
+  String profileSubscriptionExpiresIn(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Истекает через $n дн.',
+      one: 'Истекает через 1 день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String profileSubscriptionGrace(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Льготный · осталось $n дн.',
+      one: 'Льготный · остался 1 день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileSubscriptionExpired => 'Истекла';
 }

@@ -49,7 +49,7 @@ Run app: `cd app && flutter run --dart-define=BASE_URL=https://...` (required �
 
 ## Conventions
 
-**Features** — `features/<name>/cubits/`, `view/`, `widgets/`, `<name>.dart` (barrel export).
+**Features** — `features/<name>/cubit/`, `view/`, `widgets/`, `<name>.dart` (barrel export). When a feature has multiple sub-screens, **each gets its own nested folder** with `cubit/view/widgets/<sub>.dart` (see `features/auth/` for the canonical layout). Don't dump every cubit in one `cubit/` folder. Cross-sub-screen widgets live at `features/<name>/widgets/`; truly cross-feature widgets in `ui/components/`. Full convention: [docs/code-rules.md § Feature folder structure](docs/code-rules.md#feature-folder-structure).
 
 **State** — Cubit + sealed `DataState<T>` (`DataInitial / DataLoading / DataSuccess / DataFailure`) for single-field async, or `RequestStatus<T>` from `packages/core` inside a `copyWith`-style state class for multiple independent fields. States extend `Equatable`, are `@immutable`.
 
@@ -65,7 +65,11 @@ Run app: `cd app && flutter run --dart-define=BASE_URL=https://...` (required �
 
 **Theme** — Warm dark: primary `#D97706` amber, success `#65A30D` olive, danger `#DC2626`. Use `AppColors.*`, `AppSpacing.*`, `AppTypography.*` — never hardcode colors or sizes.
 
-**Widgets** — Prefer `ColoredBox` / `SizedBox` / `DecoratedBox` / `Padding` / `Align` over `Container`. No `_buildX()` private widget methods — extract to a `StatelessWidget` class in its own file. Keep view files ≤ ~180 lines; if larger, extract widgets or move logic to a mixin.
+**Widgets** — Prefer `ColoredBox` / `SizedBox` / `DecoratedBox` / `Padding` / `Align` over `Container`. No `_buildX()` private widget methods — extract to a `StatelessWidget` class in its own file. Keep view files ≤ ~180 lines; if larger, extract widgets or move logic to a mixin. Prefer Material widgets (`ListTile`, `Chip`, `Card`, …) over hand-rolled equivalents.
+
+**BlocBuilder rebuild scope** — wrap the **smallest** widget that depends on the state, not the whole `Scaffold` / `ListView`. Don't duplicate scaffolding across switch branches (one `ListView` per state branch is a smell — share the structure, push scrollables into the leaf widget). Use multiple narrow `BlocBuilder`s with `buildWhen` for independent fields. Full guide: [docs/code-rules.md § BlocBuilder rebuild scope](docs/code-rules.md#blocbuilder-rebuild-scope).
+
+**Logic in widgets** — `build()` should read declaratively. Don't compute flags, switch on enums, or compose multi-line strings inside `builder:` callbacks. Lift to: a getter on the model (`subscription.needsRenewal`), a computed property on the state, or a small dedicated widget. Rule of thumb: if a `builder:` has more than one local variable or one `if`, refactor. Full guide: [docs/code-rules.md § Don't put complex logic inline in widget trees](docs/code-rules.md#dont-put-complex-logic-inline-in-widget-trees).
 
 **Error handling** — throw `AppException<T>` (with `handleType: dialog | snackbar`). Localized messages via `BaseMessage(en, ru, ky)`. From widgets: `context.handleError(error)`. 401/423 are routed through `UnauthenticatedExceptionHandle` (registered with `instanceName: 'unauthenticated'`).
 

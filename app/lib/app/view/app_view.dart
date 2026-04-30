@@ -6,9 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
+import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:storage_client/storage_client.dart';
+import 'package:subscription/subscription.dart';
 
 class MyAppWrapper extends StatelessWidget {
   const MyAppWrapper({super.key});
@@ -27,9 +29,27 @@ class MyAppWrapper extends StatelessWidget {
             GetIt.I<PreferencesStorage>(),
           )..init(),
         ),
+        BlocProvider(
+          create: (_) => SubscriptionCubit(
+            GetIt.I<SubscriptionRepository>(),
+          ),
+        ),
       ],
-      child: const MyApp(),
+      child: BlocListener<AuthCubit, AuthState>(
+        listenWhen: (prev, next) => prev.runtimeType != next.runtimeType,
+        listener: _onAuthChange,
+        child: const MyApp(),
+      ),
     );
+  }
+
+  static void _onAuthChange(BuildContext context, AuthState authState) {
+    final cubit = context.read<SubscriptionCubit>();
+    if (authState is AuthAuthenticated && authState.role == UserRole.owner) {
+      cubit.loadSummary();
+    } else if (authState is AuthUnauthenticated) {
+      cubit.clear();
+    }
   }
 }
 
