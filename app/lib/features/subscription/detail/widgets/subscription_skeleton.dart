@@ -10,11 +10,20 @@ class SubscriptionSkeleton extends StatelessWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.all(AppSpacing.x4),
       children: const [
-        ShimmerBox(height: 160, borderRadius: AppRadius.cardBorderRadius),
+        ShimmerBox(
+          height: 160,
+          borderRadius: AppRadius.cardBorderRadius,
+        ),
         SizedBox(height: AppSpacing.x4),
-        ShimmerBox(height: 140, borderRadius: AppRadius.cardBorderRadius),
+        ShimmerBox(
+          height: 140,
+          borderRadius: AppRadius.cardBorderRadius,
+        ),
         SizedBox(height: AppSpacing.x4),
-        ShimmerBox(height: 100, borderRadius: AppRadius.cardBorderRadius),
+        ShimmerBox(
+          height: 100,
+          borderRadius: AppRadius.cardBorderRadius,
+        ),
       ],
     );
   }
