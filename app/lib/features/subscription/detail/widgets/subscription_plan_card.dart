@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/features/subscription/subscription.dart';
+import 'package:sport_manager_mobile/features/subscription/detail/widgets/subscription_status_badge.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';

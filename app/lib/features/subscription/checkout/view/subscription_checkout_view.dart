@@ -5,7 +5,12 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
-import 'package:sport_manager_mobile/features/subscription/subscription.dart';
+import 'package:sport_manager_mobile/features/subscription/checkout/cubit/subscription_checkout_cubit.dart';
+import 'package:sport_manager_mobile/features/subscription/checkout/widgets/subscription_checkout_content.dart';
+import 'package:sport_manager_mobile/features/subscription/checkout/widgets/subscription_no_tables.dart';
+import 'package:sport_manager_mobile/features/subscription/checkout/widgets/subscription_pay_fab.dart';
+import 'package:sport_manager_mobile/features/subscription/detail/widgets/subscription_error_view.dart';
+import 'package:sport_manager_mobile/features/subscription/detail/widgets/subscription_skeleton.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
@@ -23,8 +28,7 @@ class _SubscriptionCheckoutViewState extends State<SubscriptionCheckoutView> {
   @override
   void initState() {
     super.initState();
-    _cubit = SubscriptionCheckoutCubit(GetIt.I<SubscriptionRepository>());
-    _cubit.loadPricing();
+    _cubit = SubscriptionCheckoutCubit(GetIt.I<SubscriptionRepository>())..loadPricing();
   }
 
   @override
@@ -59,108 +63,21 @@ class _SubscriptionCheckoutViewState extends State<SubscriptionCheckoutView> {
         ),
         body: BlocBuilder<SubscriptionCheckoutCubit, SubscriptionCheckoutState>(
           bloc: _cubit,
-          builder: (_, state) {
-            return switch (state.pricing) {
-              RequestInitial<SubscriptionPricingModel>() || RequestLoading<SubscriptionPricingModel>() => const Padding(
-                padding: EdgeInsets.all(AppSpacing.x4),
-                child: SubscriptionSkeleton(),
-              ),
-              RequestFailure<SubscriptionPricingModel>() => Padding(
-                padding: const EdgeInsets.all(AppSpacing.x4),
-                child: SubscriptionErrorView(onRetry: _cubit.loadPricing),
-              ),
-              RequestSuccess<SubscriptionPricingModel>(:final data) =>
-                data.tableCount == 0
-                    ? const SubscriptionNoTables()
-                    : _Body(
-                        state: state,
-                        pricing: data,
-                      ),
-            };
+          buildWhen: (a, b) => a.pricing != b.pricing,
+          builder: (_, state) => switch (state.pricing) {
+            RequestSuccess<SubscriptionPricingModel>(:final data) when data.tableCount == 0 =>
+              const SubscriptionNoTables(),
+            RequestSuccess<SubscriptionPricingModel>(:final data) => SubscriptionCheckoutContent(
+              cubit: _cubit,
+              pricing: data,
+            ),
+            RequestFailure<SubscriptionPricingModel>() => SubscriptionErrorView(onRetry: _cubit.loadPricing),
+            _ => const SubscriptionSkeleton(),
           },
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
-        floatingActionButton: BlocBuilder<SubscriptionCheckoutCubit, SubscriptionCheckoutState>(
-          bloc: _cubit,
-          builder: (_, state) {
-            final pricing = state.pricing.dataOrNull;
-            if (pricing == null || pricing.tableCount == 0) return const SizedBox.shrink();
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-              child: AppButton(
-                collapseOnScroll: true,
-                isLoading: state.checkout.isLoading,
-                onPressed: _onPay,
-                child: Text(context.l10n.subscriptionCheckoutPay),
-              ),
-            );
-          },
-        ),
+        floatingActionButton: SubscriptionPayFab(cubit: _cubit, onPressed: _onPay),
       ),
-    );
-  }
-}
-
-class _Body extends StatelessWidget {
-  const _Body({
-    required this.state,
-    required this.pricing,
-  });
-
-  final SubscriptionCheckoutState state;
-  final SubscriptionPricingModel pricing;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.x4,
-        AppSpacing.x4,
-        AppSpacing.x4,
-        kAppButtonFabClearance,
-      ),
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: context.appColors.brandAmberSoft,
-            borderRadius: AppRadius.cardBorderRadius,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.x4),
-            child: Text(
-              context.l10n.subscriptionCheckoutSummary(
-                pricing.tableCount,
-                pricing.pricePerTable,
-                pricing.monthlyAmount,
-                pricing.currency,
-              ),
-              style: context.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w700,
-                color: context.colors.primary,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: AppSpacing.x6),
-        Text(
-          context.l10n.subscriptionCheckoutDuration,
-          style: context.appTextStyles.muted.labelSmall.copyWith(letterSpacing: 0.6),
-        ),
-        const SizedBox(height: AppSpacing.x2),
-        SubscriptionDurationPicker(
-          value: state.months,
-          minMonths: pricing.minDurationMonths,
-          maxMonths: pricing.maxDurationMonths,
-          onChanged: context.read<SubscriptionCheckoutCubit>().setMonths,
-        ),
-        const SizedBox(height: AppSpacing.x6),
-        SubscriptionTotalCard(
-          months: state.months,
-          monthlyAmount: pricing.monthlyAmount,
-          currency: pricing.currency,
-          newEndDate: state.newEndDate,
-        ),
-      ],
     );
   }
 }

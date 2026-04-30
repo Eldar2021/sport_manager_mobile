@@ -10,9 +10,11 @@ final class SubscriptionState extends Equatable {
 
   SubscriptionSummaryModel? get data => summary.dataOrNull;
 
-  bool get isBlocked => data?.isBlocked ?? false;
+  SubscriptionAlert get alert => data?.alert ?? SubscriptionAlert.none;
 
-  bool get hasWarning => data?.hasWarning ?? false;
+  bool get isBlocked => alert == SubscriptionAlert.expired;
+
+  bool get needsRenewal => alert != SubscriptionAlert.none;
 
   SubscriptionState copyWith({
     RequestStatus<SubscriptionSummaryModel>? summary,

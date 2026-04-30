@@ -6,23 +6,15 @@ class SubscriptionSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ShimmerBox(
-          height: 160,
-          borderRadius: AppRadius.cardBorderRadius,
-        ),
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.all(AppSpacing.x4),
+      children: const [
+        ShimmerBox(height: 160, borderRadius: AppRadius.cardBorderRadius),
         SizedBox(height: AppSpacing.x4),
-        ShimmerBox(
-          height: 140,
-          borderRadius: AppRadius.cardBorderRadius,
-        ),
+        ShimmerBox(height: 140, borderRadius: AppRadius.cardBorderRadius),
         SizedBox(height: AppSpacing.x4),
-        ShimmerBox(
-          height: 100,
-          borderRadius: AppRadius.cardBorderRadius,
-        ),
+        ShimmerBox(height: 100, borderRadius: AppRadius.cardBorderRadius),
       ],
     );
   }

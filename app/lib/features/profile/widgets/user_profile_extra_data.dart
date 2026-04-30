@@ -34,13 +34,8 @@ class UserProfileExtraData extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (isOwner) ...[
-                BlocBuilder<SubscriptionCubit, SubscriptionState>(
-                  builder: (context, state) {
-                    return _SubscriptionTile(
-                      summary: state.data,
-                      fallbackEndDate: data.subscriptionEndDate,
-                    );
-                  },
+                _SubscriptionTile(
+                  fallbackEndDate: data.subscriptionEndDate,
                 ),
                 const Divider(),
               ],
@@ -62,52 +57,44 @@ class UserProfileExtraData extends StatelessWidget {
 }
 
 class _SubscriptionTile extends StatelessWidget {
-  const _SubscriptionTile({
-    required this.summary,
-    required this.fallbackEndDate,
-  });
+  const _SubscriptionTile({this.fallbackEndDate});
 
-  final SubscriptionSummaryModel? summary;
   final DateTime? fallbackEndDate;
 
   @override
   Widget build(BuildContext context) {
-    final (subtitle, color) = _resolveSubtitle(context);
-    return ProfileItemTile(
-      title: context.l10n.profileSubscriptionTitle,
-      subtitle: subtitle,
-      iconBgColor: color.withValues(alpha: AppOpacity.tint),
-      icon: Icon(Icons.credit_card, color: color),
-      onTap: () => context.push(AppRoutes.subscription),
+    return BlocBuilder<SubscriptionCubit, SubscriptionState>(
+      buildWhen: (a, b) => a.summary != b.summary,
+      builder: (context, state) {
+        final color = _color(context, state.alert);
+        return ProfileItemTile(
+          title: context.l10n.profileSubscriptionTitle,
+          subtitle: _subtitle(context, state.data),
+          iconBgColor: color.withValues(alpha: AppOpacity.tint),
+          icon: Icon(Icons.credit_card, color: color),
+          onTap: () => context.push(AppRoutes.subscription),
+        );
+      },
     );
   }
 
-  (String, Color) _resolveSubtitle(BuildContext context) {
-    final s = summary;
+  Color _color(BuildContext context, SubscriptionAlert alert) => switch (alert) {
+    SubscriptionAlert.expired => context.colors.error,
+    SubscriptionAlert.grace || SubscriptionAlert.warning => context.appColors.warning,
+    SubscriptionAlert.none => context.colors.primary,
+  };
+
+  String _subtitle(BuildContext context, SubscriptionSummaryModel? s) {
     if (s == null) {
-      final fallback = fallbackEndDate;
-      final text = fallback == null
+      return fallbackEndDate == null
           ? context.l10n.subscriptionStatusActive
-          : context.l10n.profileSubscriptionActiveUntil(_formatDate(context, fallback));
-      return (text, context.colors.primary);
+          : context.l10n.profileSubscriptionActiveUntil(_formatDate(context, fallbackEndDate!));
     }
-    return switch (s.status) {
-      SubscriptionStatus.expired => (
-        context.l10n.profileSubscriptionExpired,
-        context.colors.error,
-      ),
-      SubscriptionStatus.grace => (
-        context.l10n.profileSubscriptionGrace(s.graceDaysRemaining),
-        context.appColors.warning,
-      ),
-      SubscriptionStatus.active when s.daysUntilExpiry <= 3 => (
-        context.l10n.profileSubscriptionExpiresIn(s.daysUntilExpiry),
-        context.appColors.warning,
-      ),
-      SubscriptionStatus.active => (
-        context.l10n.profileSubscriptionActiveUntil(_formatDate(context, s.endDate)),
-        context.colors.primary,
-      ),
+    return switch (s.alert) {
+      SubscriptionAlert.expired => context.l10n.profileSubscriptionExpired,
+      SubscriptionAlert.grace => context.l10n.profileSubscriptionGrace(s.graceDaysRemaining),
+      SubscriptionAlert.warning => context.l10n.profileSubscriptionExpiresIn(s.daysUntilExpiry),
+      SubscriptionAlert.none => context.l10n.profileSubscriptionActiveUntil(_formatDate(context, s.endDate)),
     };
   }
 

@@ -346,6 +346,171 @@ class _LoginViewState extends State<LoginView> {
 
 ---
 
+## Feature folder structure
+
+Top-level features live under `app/lib/features/<feature>/`. When a feature has
+**multiple sub-screens** that share a domain (e.g. auth has login, register,
+forgot_password, update_password, welcome), each sub-screen gets its **own
+nested folder** with `cubit/`, `view/`, `widgets/`, and a barrel `<sub>.dart`.
+Don't dump all cubits in one `cubit/` and all views in one `view/` — that
+gets unreadable as the feature grows.
+
+**Reference shape — `features/auth/`:**
+
+```
+features/auth/
+├── auth.dart                  ← top-level barrel
+├── cubit/                     ← feature-wide AuthCubit (shared across sub-screens)
+│   ├── auth_cubit.dart
+│   └── auth_state.dart
+├── login/
+│   ├── cubit/
+│   ├── view/
+│   ├── widgets/               ← optional, only if widgets are login-specific
+│   └── login.dart             ← sub-feature barrel
+├── register/
+│   ├── cubit/
+│   ├── view/
+│   ├── widgets/
+│   └── register.dart
+├── forgot_password/
+│   ├── cubit/
+│   ├── view/
+│   ├── widgets/
+│   └── forgot_password.dart
+└── welcome/
+    ├── view/
+    └── welcome.dart
+```
+
+Apply the same shape to any new feature with multiple screens (e.g.
+`features/subscription/` has detail + checkout + payment sub-folders, each
+with its own `cubit/view/widgets/<sub>.dart`).
+
+A widget that **multiple sub-screens share** lives at the feature root in
+`features/<feature>/widgets/`, not inside any one sub-screen's folder.
+
+A widget that's **truly cross-feature** (e.g. `ContactSupportSheet`,
+`ProfileItemTile`) belongs in `app/lib/ui/components/`, not under any
+feature.
+
+---
+
+## BlocBuilder rebuild scope
+
+Wrap the **smallest** widget that depends on the state, not the whole
+screen. `BlocBuilder` rebuilds its `builder` on every state change — if the
+builder returns a full `Scaffold` or `ListView`, the entire tree gets rebuilt
+even though only a label or a button needed to refresh.
+
+**Bad — whole screen rebuilds on every state change:**
+
+```dart
+body: BlocBuilder<MyCubit, MyState>(
+  builder: (_, state) => switch (state) {
+    Loading => ListView(physics: ..., padding: ..., children: [Skeleton()]),
+    Failure => ListView(physics: ..., padding: ..., children: [ErrorView(...)]),
+    Success(:final data) => ListView(physics: ..., padding: ..., children: [_Content(data)]),
+  },
+),
+```
+
+Three almost-identical `ListView`s, three padding constants, three physics —
+all duplicated. The whole list rebuilds when only the inner widget changes.
+
+**Good — share the structure, scope the rebuild:**
+
+```dart
+body: BlocBuilder<MyCubit, MyState>(
+  bloc: _cubit,
+  builder: (_, state) => switch (state) {
+    Loading() || Initial() => const MyLoadingView(),   // owns its own scrollable
+    Failure() => MyErrorView(onRetry: _cubit.load),    // owns its own scrollable
+    Success(:final data) => MyContent(data),           // owns its own scrollable
+  },
+),
+```
+
+Each leaf widget is responsible for its own `ListView` / `physics` /
+`padding`. The view file stays declarative.
+
+**For independent fields in a multi-field state**, use multiple narrow
+`BlocBuilder`s with `buildWhen`:
+
+```dart
+// Independent rebuilds — only the part that changed re-renders.
+BlocBuilder<CheckoutCubit, CheckoutState>(
+  buildWhen: (a, b) => a.months != b.months,
+  builder: (_, state) => Text('${state.months} months'),
+)
+```
+
+Or `context.select<Cubit, T>(picker)` for one-off reads inside a deep tree.
+
+---
+
+## Don't put complex logic inline in widget trees
+
+A widget's `build()` method should be **declarative** — read like a tree, not
+like an algorithm. If you find yourself computing flags, switching on enums,
+or composing strings inside `builder:` callbacks, lift that work into:
+
+- **A getter on the model** (`subscription.needsRenewal`,
+  `subscription.alert`),
+- **A computed property on the state class** (`state.totalAmount`,
+  `state.isFormValid`),
+- **A separate widget** that owns the conditional rendering.
+
+**Bad — multi-step logic inline in a `builder:`:**
+
+```dart
+floatingActionButton: BlocBuilder<DetailCubit, DataState<Detail>>(
+  builder: (_, state) {
+    final detail = state.dataValue;
+    if (detail == null) return const SizedBox.shrink();
+    final s = detail.subscription;
+    final showFab =
+        s.status == SubscriptionStatus.expired ||
+        s.status == SubscriptionStatus.grace ||
+        (s.status == SubscriptionStatus.active && s.daysUntilExpiry <= 3);
+    if (!showFab) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+      child: AppButton(
+        collapseOnScroll: true,
+        onPressed: () => context.push(AppRoutes.subscriptionCheckout),
+        child: Text(context.l10n.subscriptionContinueCta),
+      ),
+    );
+  },
+),
+```
+
+**Good — extract a widget, push the predicate onto the model:**
+
+```dart
+// On SubscriptionModel:
+bool get needsRenewal =>
+    status == SubscriptionStatus.expired ||
+    status == SubscriptionStatus.grace ||
+    (status == SubscriptionStatus.active && daysUntilExpiry <= 3);
+
+// In view:
+floatingActionButton: SubscriptionContinueFab(cubit: _cubit),
+
+// SubscriptionContinueFab handles its own visibility + tap.
+```
+
+Apply the same rule to multi-branch `if/else` ladders that pick an icon, a
+color, and a label: they belong in a small widget per variant or behind a
+domain enum (`enum SubscriptionAlert { none, warning, grace, expired }`),
+not inline in the parent's `build()`.
+
+**Rule of thumb:** if a `builder:` has more than one local variable or one
+`if`, refactor.
+
+---
+
 ## Widgets and UI
 
 ### Reuse pre-built components

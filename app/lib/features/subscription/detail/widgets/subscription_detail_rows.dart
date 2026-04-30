@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
-import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
 
 class SubscriptionDetailRows extends StatelessWidget {
@@ -16,78 +15,48 @@ class SubscriptionDetailRows extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = Localizations.localeOf(context).languageCode;
-    final dateFmt = DateFormat('d MMMM yyyy', locale);
-    final last = lastPayment;
-    final lastValue = last == null
-        ? '—'
-        : '${dateFmt.format(last.paidAt?.toLocal() ?? last.createdAt.toLocal())} · '
-              '${context.l10n.subscriptionAmountWithCurrency(last.amount, last.currency)}';
-    final statusLabel = switch (subscription.status) {
-      SubscriptionStatus.active => context.l10n.subscriptionStatusActive,
-      SubscriptionStatus.grace => context.l10n.subscriptionStatusGrace,
-      SubscriptionStatus.expired => context.l10n.subscriptionStatusExpired,
-    };
+    final l10n = context.l10n;
+    final dateFmt = DateFormat('d MMMM yyyy', Localizations.localeOf(context).languageCode);
+
     return Card(
       margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.x4,
-          vertical: AppSpacing.x2,
-        ),
-        child: Column(
-          children: [
-            _Row(
-              label: context.l10n.subscriptionDetailNextPayment,
-              value: subscription.status == SubscriptionStatus.expired
-                  ? '—'
-                  : dateFmt.format(subscription.endDate.toLocal()),
-            ),
-            const Divider(height: AppSpacing.x4),
-            _Row(label: context.l10n.subscriptionDetailLastPayment, value: lastValue),
-            const Divider(height: AppSpacing.x4),
-            _Row(label: context.l10n.subscriptionDetailStatus, value: statusLabel),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _Row extends StatelessWidget {
-  const _Row({
-    required this.label,
-    required this.value,
-  });
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSpacing.x2),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
         children: [
-          Expanded(
-            child: Text(
-              label,
-              style: context.appTextStyles.muted.bodyMedium,
-            ),
+          ListTile(
+            title: Text(l10n.subscriptionDetailNextPayment),
+            trailing: Text(_nextPaymentLabel(context, dateFmt)),
           ),
-          const SizedBox(width: AppSpacing.x4),
-          Flexible(
-            child: Text(
-              value,
-              textAlign: TextAlign.end,
-              style: context.textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+          const Divider(height: 0),
+          ListTile(
+            title: Text(l10n.subscriptionDetailLastPayment),
+            trailing: Text(_lastPaymentLabel(context, dateFmt)),
+          ),
+          const Divider(height: 0),
+          ListTile(
+            title: Text(l10n.subscriptionDetailStatus),
+            trailing: Text(_statusLabel(context)),
           ),
         ],
       ),
     );
   }
+
+  String _nextPaymentLabel(BuildContext context, DateFormat dateFmt) {
+    if (subscription.status == SubscriptionStatus.expired) return '—';
+    return dateFmt.format(subscription.endDate.toLocal());
+  }
+
+  String _lastPaymentLabel(BuildContext context, DateFormat dateFmt) {
+    final last = lastPayment;
+    if (last == null) return '—';
+    final date = dateFmt.format((last.paidAt ?? last.createdAt).toLocal());
+    final amount = context.l10n.subscriptionAmountWithCurrency(last.amount, last.currency);
+    return '$date · $amount';
+  }
+
+  String _statusLabel(BuildContext context) => switch (subscription.status) {
+    SubscriptionStatus.active => context.l10n.subscriptionStatusActive,
+    SubscriptionStatus.grace => context.l10n.subscriptionStatusGrace,
+    SubscriptionStatus.expired => context.l10n.subscriptionStatusExpired,
+  };
 }

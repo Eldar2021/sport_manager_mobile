@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+import 'package:subscription/models/subscription_alert.dart';
 import 'package:subscription/models/subscription_source.dart';
 import 'package:subscription/models/subscription_status.dart';
 
@@ -40,6 +41,22 @@ final class SubscriptionModel extends Equatable {
   final DateTime updatedAt;
 
   Map<String, dynamic> toJson() => _$SubscriptionModelToJson(this);
+
+  /// True when the UI should surface a renewal CTA (warning, grace, or expired).
+  bool get needsRenewal => alert != SubscriptionAlert.none;
+
+  /// Hard-blocked: status is `EXPIRED` or grace ran out.
+  bool get isBlocked => alert == SubscriptionAlert.expired;
+
+  /// Single derived alert kind for UI banners / badges / FABs.
+  SubscriptionAlert get alert {
+    if (status == SubscriptionStatus.expired) return SubscriptionAlert.expired;
+    if (status == SubscriptionStatus.grace) {
+      return graceDaysRemaining <= 0 ? SubscriptionAlert.expired : SubscriptionAlert.grace;
+    }
+    if (daysUntilExpiry <= 3) return SubscriptionAlert.warning;
+    return SubscriptionAlert.none;
+  }
 
   @override
   List<Object?> get props => [

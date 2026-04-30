@@ -5,10 +5,7 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:subscription/subscription.dart';
 
 class SubscriptionPaymentHistory extends StatelessWidget {
-  const SubscriptionPaymentHistory({
-    required this.payments,
-    super.key,
-  });
+  const SubscriptionPaymentHistory({required this.payments, super.key});
 
   final List<PaymentModel> payments;
 
@@ -30,7 +27,7 @@ class SubscriptionPaymentHistory extends StatelessWidget {
       child: Column(
         children: [
           for (var i = 0; i < payments.length; i++) ...[
-            _Item(payment: payments[i]),
+            _PaymentTile(payments[i]),
             if (i < payments.length - 1) const Divider(height: 0),
           ],
         ],
@@ -39,65 +36,37 @@ class SubscriptionPaymentHistory extends StatelessWidget {
   }
 }
 
-class _Item extends StatelessWidget {
-  const _Item({required this.payment});
+class _PaymentTile extends StatelessWidget {
+  const _PaymentTile(this.payment);
 
   final PaymentModel payment;
 
   @override
   Widget build(BuildContext context) {
-    final locale = Localizations.localeOf(context).languageCode;
-    final dateFmt = DateFormat('d MMM yyyy', locale);
-    final isPaid = payment.status == PaymentStatus.paid;
-    final dateValue = isPaid && payment.paidAt != null ? payment.paidAt!.toLocal() : payment.createdAt.toLocal();
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.x4,
-        vertical: AppSpacing.x3,
+    final dateFmt = DateFormat('d MMM yyyy', Localizations.localeOf(context).languageCode);
+    final date = (payment.paidAt ?? payment.createdAt).toLocal();
+    return ListTile(
+      title: Text(dateFmt.format(date)),
+      subtitle: Text(
+        context.l10n.subscriptionPaymentItemSummary(payment.months, payment.tableCountSnapshot),
       ),
-      child: Row(
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  dateFmt.format(dateValue),
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.x1),
-                Text(
-                  context.l10n.subscriptionPaymentItemSummary(
-                    payment.months,
-                    payment.tableCountSnapshot,
-                  ),
-                  style: context.appTextStyles.muted.bodySmall,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: AppSpacing.x3),
           Text(
-            context.l10n.subscriptionAmountWithCurrency(
-              payment.amount,
-              payment.currency,
-            ),
-            style: context.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
+            context.l10n.subscriptionAmountWithCurrency(payment.amount, payment.currency),
+            style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(width: AppSpacing.x3),
-          _StatusIcon(payment.status),
+          _StatusDot(payment.status),
         ],
       ),
     );
   }
 }
 
-class _StatusIcon extends StatelessWidget {
-  const _StatusIcon(this.status);
+class _StatusDot extends StatelessWidget {
+  const _StatusDot(this.status);
 
   final PaymentStatus status;
 
@@ -108,15 +77,6 @@ class _StatusIcon extends StatelessWidget {
       PaymentStatus.pending => (Icons.access_time, context.appColors.warning),
       PaymentStatus.failed => (Icons.cancel, context.colors.error),
     };
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: AppOpacity.tint),
-        shape: BoxShape.circle,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.x1),
-        child: Icon(icon, size: 16, color: color),
-      ),
-    );
+    return Icon(icon, size: 20, color: color);
   }
 }

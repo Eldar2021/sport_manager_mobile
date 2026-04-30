@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+import 'package:subscription/models/subscription_alert.dart';
 import 'package:subscription/models/subscription_status.dart';
 
 part 'subscription_summary_model.g.dart';
@@ -26,11 +27,18 @@ final class SubscriptionSummaryModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$SubscriptionSummaryModelToJson(this);
 
-  bool get isBlocked =>
-      status == SubscriptionStatus.expired || (status == SubscriptionStatus.grace && graceDaysRemaining == 0);
+  bool get needsRenewal => alert != SubscriptionAlert.none;
 
-  bool get hasWarning =>
-      status == SubscriptionStatus.grace || (status == SubscriptionStatus.active && daysUntilExpiry <= 3);
+  bool get isBlocked => alert == SubscriptionAlert.expired;
+
+  SubscriptionAlert get alert {
+    if (status == SubscriptionStatus.expired) return SubscriptionAlert.expired;
+    if (status == SubscriptionStatus.grace) {
+      return graceDaysRemaining <= 0 ? SubscriptionAlert.expired : SubscriptionAlert.grace;
+    }
+    if (daysUntilExpiry <= 3) return SubscriptionAlert.warning;
+    return SubscriptionAlert.none;
+  }
 
   @override
   List<Object?> get props => [status, endDate, daysUntilExpiry, graceDaysRemaining];
