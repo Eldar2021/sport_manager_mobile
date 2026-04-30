@@ -86,7 +86,7 @@ class _VenueFormViewState extends State<VenueFormView> {
             listenWhen: (prev, next) => prev.reqStatus != next.reqStatus,
             listener: (context, state) {
               if (state.reqStatus.isSuccess) {
-                context.pop();
+                context.pop(true);
               } else if (state.reqStatus.isFailure) {
                 context.handleError((state.reqStatus as RequestFailure).exception);
               }

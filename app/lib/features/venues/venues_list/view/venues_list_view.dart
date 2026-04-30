@@ -97,7 +97,7 @@ class _VenuesListViewState extends State<VenuesListView> {
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
               child: AppButton(
                 leading: const Icon(Icons.add_rounded),
-                onPressed: () => context.push(AppRoutes.venueForm),
+                onPressed: _onAddVenue,
                 child: Text(context.l10n.homeNewVenue),
               ),
             );
@@ -105,5 +105,12 @@ class _VenuesListViewState extends State<VenuesListView> {
         ),
       ),
     );
+  }
+
+  Future<void> _onAddVenue() async {
+    final value = await context.push<bool>(AppRoutes.venueForm);
+    if (value == true) {
+      await _cubit.load();
+    }
   }
 }
