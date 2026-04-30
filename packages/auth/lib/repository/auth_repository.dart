@@ -55,6 +55,11 @@ final class AuthRepository {
     }
   }
 
+  Future<void> deleteAccount() async {
+    await _remote.deleteAccount();
+    await _local.clearAll();
+  }
+
   Future<InviteCodeModel> getInviteCode() => _remote.getInviteCode();
 
   Future<ProfileModel> getProfile() => _remote.getProfile();
