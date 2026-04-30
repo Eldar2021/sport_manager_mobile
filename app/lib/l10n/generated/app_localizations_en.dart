@@ -508,6 +508,74 @@ class AppLocalizationsEn extends AppLocalizations {
   String get menuDelete => 'Delete';
 
   @override
+  String get managersInviteCodeLabel => 'ACTIVE INVITE CODE';
+
+  @override
+  String get managersInviteCodeErrorLabel => 'INVITE CODE UNAVAILABLE';
+
+  @override
+  String get managersInviteCodeCopy => 'Copy';
+
+  @override
+  String get managersInviteCodeCopied => 'Code copied to clipboard';
+
+  @override
+  String get managersSectionLabel => 'MANAGERS';
+
+  @override
+  String get managersInviteAction => 'Invite manager';
+
+  @override
+  String managersDeleteTitle(String name) {
+    return 'Remove $name?';
+  }
+
+  @override
+  String get managersDeleteSubtitle => 'The manager will lose access to your venues. Their session history is kept.';
+
+  @override
+  String get managersEmptyTitle => 'No managers yet';
+
+  @override
+  String get managersEmptySubtitle => 'Share the invite code so a manager can sign up and start working shifts.';
+
+  @override
+  String get managersLastSeenJustNow => 'online now';
+
+  @override
+  String managersLastSeenMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count min ago',
+      one: '1 min ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String managersLastSeenHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hours ago',
+      one: '1 hour ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String managersLastSeenDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days ago',
+      one: '1 day ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get venueMetricTablesLabel => 'TABLES';
 
   @override

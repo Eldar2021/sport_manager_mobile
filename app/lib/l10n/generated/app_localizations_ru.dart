@@ -512,6 +512,81 @@ class AppLocalizationsRu extends AppLocalizations {
   String get menuDelete => 'Удалить';
 
   @override
+  String get managersInviteCodeLabel => 'АКТИВНЫЙ КОД ПРИГЛАШЕНИЯ';
+
+  @override
+  String get managersInviteCodeErrorLabel => 'КОД ПРИГЛАШЕНИЯ НЕДОСТУПЕН';
+
+  @override
+  String get managersInviteCodeCopy => 'Копировать';
+
+  @override
+  String get managersInviteCodeCopied => 'Код скопирован';
+
+  @override
+  String get managersSectionLabel => 'МЕНЕДЖЕРЫ';
+
+  @override
+  String get managersInviteAction => 'Пригласить менеджера';
+
+  @override
+  String managersDeleteTitle(String name) {
+    return 'Удалить $name?';
+  }
+
+  @override
+  String get managersDeleteSubtitle => 'Менеджер потеряет доступ к вашим залам. История его сессий сохранится.';
+
+  @override
+  String get managersEmptyTitle => 'Менеджеров пока нет';
+
+  @override
+  String get managersEmptySubtitle =>
+      'Поделитесь кодом приглашения — менеджер сможет зарегистрироваться и выйти на смену.';
+
+  @override
+  String get managersLastSeenJustNow => 'онлайн';
+
+  @override
+  String managersLastSeenMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count мин назад',
+      many: '$count мин назад',
+      few: '$count мин назад',
+      one: '$count мин назад',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String managersLastSeenHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count часов назад',
+      many: '$count часов назад',
+      few: '$count часа назад',
+      one: '$count час назад',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String managersLastSeenDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count дней назад',
+      many: '$count дней назад',
+      few: '$count дня назад',
+      one: '$count день назад',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get venueMetricTablesLabel => 'СТОЛОВ';
 
   @override

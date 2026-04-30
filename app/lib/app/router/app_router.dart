@@ -7,6 +7,7 @@ import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/main/main.dart';
+import 'package:sport_manager_mobile/features/managers/managers.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
@@ -107,6 +108,11 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         path: AppRoutes.tableDetail,
         redirect: (_, state) => state.extra is TableModel ? null : AppRoutes.home,
         builder: (_, state) => TableDetailView(state.extra! as TableModel),
+      ),
+
+      GoRoute(
+        path: AppRoutes.managers,
+        builder: (_, _) => const ManagersView(),
       ),
 
       StatefulShellRoute.indexedStack(
