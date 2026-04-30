@@ -25,6 +25,7 @@ dependencies:
   storage_client:
   auth:
   facility:
+  managers:
   cupertino_icons:
   get_it:
   toastification:

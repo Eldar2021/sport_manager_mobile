@@ -444,6 +444,72 @@ class AppLocalizationsKy extends AppLocalizations {
   String get menuDelete => 'Жок кылуу';
 
   @override
+  String get managersInviteCodeLabel => 'АКТИВДҮҮ ЧАКЫРУУ КОДУ';
+
+  @override
+  String get managersInviteCodeCopy => 'Көчүрүү';
+
+  @override
+  String get managersInviteCodeCopied => 'Код көчүрүлдү';
+
+  @override
+  String get managersSectionLabel => 'МЕНЕДЖЕРЛЕР';
+
+  @override
+  String get managersInviteAction => 'Менеджер чакыруу';
+
+  @override
+  String managersDeleteTitle(String name) {
+    return '$name чыгарылсынбы?';
+  }
+
+  @override
+  String get managersDeleteSubtitle =>
+      'Менеджер сиздин залдарга кирүү мүмкүндүгүн жоготот. Анын сессияларынын тарыхы сакталат.';
+
+  @override
+  String get managersEmptyTitle => 'Азырынча менеджер жок';
+
+  @override
+  String get managersEmptySubtitle => 'Чакыруу кодун бөлүшүңүз — менеджер катталып, кезмеге чыга алат.';
+
+  @override
+  String get managersLastSeenJustNow => 'онлайн';
+
+  @override
+  String managersLastSeenMinutes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count мүн мурун',
+      one: '1 мүн мурун',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String managersLastSeenHours(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count саат мурун',
+      one: '1 саат мурун',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String managersLastSeenDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count күн мурун',
+      one: '1 күн мурун',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get venueMetricTablesLabel => 'СТОЛДОР';
 
   @override

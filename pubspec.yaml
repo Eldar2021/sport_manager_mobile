@@ -12,6 +12,7 @@ workspace:
   - packages/storage_client
   - packages/auth
   - packages/facility
+  - packages/managers
 
 dependencies:
   meta: ^1.17.0

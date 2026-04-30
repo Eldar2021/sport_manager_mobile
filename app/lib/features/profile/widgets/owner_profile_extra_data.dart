@@ -49,7 +49,7 @@ class OwnerProfileExtraData extends StatelessWidget {
                   Icons.group,
                   color: context.appColors.success,
                 ),
-                onTap: () {},
+                onTap: () => context.push(AppRoutes.managers),
               ),
             ],
           ),

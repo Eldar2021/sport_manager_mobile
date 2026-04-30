@@ -13,4 +13,5 @@ abstract final class AppRoutes {
   static const venueForm = '/venues/form';
   static const venuesList = '/venues';
   static const venueDetail = '/venues/detail';
+  static const managers = '/managers';
 }

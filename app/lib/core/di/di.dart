@@ -6,6 +6,7 @@ export 'modules/auth_module.dart';
 export 'modules/core_module.dart';
 export 'modules/data_module.dart';
 export 'modules/error_module.dart';
+export 'modules/managers_module.dart';
 export 'modules/network_module.dart';
 
 Future<void> diInit(
