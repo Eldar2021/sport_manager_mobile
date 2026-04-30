@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 class ErrorBodyWidget extends StatefulWidget {
   const ErrorBodyWidget(
@@ -38,11 +39,16 @@ class _ErrorBodyWidgetState extends State<ErrorBodyWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (model.icon != null)
-              Padding(
-                padding: const EdgeInsetsGeometry.all(8),
-                child: model.icon,
-              ),
+            Padding(
+              padding: const EdgeInsetsGeometry.all(8),
+              child:
+                  model.icon ??
+                  Icon(
+                    Icons.error_outline_rounded,
+                    size: 64,
+                    color: context.colors.error,
+                  ),
+            ),
             Text(
               model.title.getMessage(locale),
               textAlign: TextAlign.center,

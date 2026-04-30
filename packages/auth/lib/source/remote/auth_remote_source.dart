@@ -12,7 +12,14 @@ abstract interface class AuthRemoteSource {
 
   Future<void> logout();
 
+  Future<void> deleteAccount();
+
   Future<void> forgotPassword(String email);
+
+  Future<void> updatePassword({
+    required String login,
+    required String newPassword,
+  });
 
   Future<InviteCodeModel> getInviteCode();
 

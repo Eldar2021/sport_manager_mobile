@@ -789,17 +789,89 @@ abstract class AppLocalizations {
   /// **'Change password'**
   String get profileChangePasswordTitle;
 
+  /// No description provided for @authUpdatePasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get authUpdatePasswordTitle;
+
+  /// No description provided for @authUpdatePasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum 8 characters. Use letters, numbers and special characters.'**
+  String get authUpdatePasswordHint;
+
+  /// No description provided for @authUpdatePasswordLoginLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Login / Email'**
+  String get authUpdatePasswordLoginLabel;
+
+  /// No description provided for @authUpdatePasswordNewLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get authUpdatePasswordNewLabel;
+
+  /// No description provided for @authUpdatePasswordRepeatLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat new password'**
+  String get authUpdatePasswordRepeatLabel;
+
+  /// No description provided for @authUpdatePasswordSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get authUpdatePasswordSubmit;
+
+  /// No description provided for @authUpdatePasswordSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Password updated'**
+  String get authUpdatePasswordSuccess;
+
   /// No description provided for @profileLogout.
   ///
   /// In en, this message translates to:
   /// **'Log out'**
   String get profileLogout;
 
+  /// No description provided for @profileLogoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out of account?'**
+  String get profileLogoutTitle;
+
+  /// No description provided for @profileLogoutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll be redirected to the sign-in screen. Your data will be kept.'**
+  String get profileLogoutSubtitle;
+
   /// No description provided for @profileDeleteAccount.
   ///
   /// In en, this message translates to:
   /// **'Delete account'**
   String get profileDeleteAccount;
+
+  /// No description provided for @profileDeleteAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account?'**
+  String get profileDeleteAccountTitle;
+
+  /// No description provided for @profileDeleteAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All data, sessions and settings will be permanently deleted. This action cannot be undone.'**
+  String get profileDeleteAccountSubtitle;
+
+  /// No description provided for @profileDeleteAccountConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete forever'**
+  String get profileDeleteAccountConfirm;
 
   /// No description provided for @profileErrorTitle.
   ///
@@ -926,6 +998,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} min'**
   String tableDetailDurationMin(int count);
+
+  /// No description provided for @menuEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get menuEdit;
+
+  /// No description provided for @menuDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get menuDelete;
+
+  /// No description provided for @venueMetricTablesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TABLES'**
+  String get venueMetricTablesLabel;
+
+  /// No description provided for @venueDetailTablesHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'HALL TABLES'**
+  String get venueDetailTablesHeader;
+
+  /// No description provided for @venueTablesCountSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}'**
+  String venueTablesCountSuffix(int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

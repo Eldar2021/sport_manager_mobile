@@ -80,15 +80,16 @@ class _VenueFormViewState extends State<VenueFormView> {
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x6),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
           child: BlocConsumer<VenueFormCubit, VenueFormState>(
             bloc: _cubit,
             listenWhen: (prev, next) => prev.reqStatus != next.reqStatus,
             listener: (context, state) {
-              if (state.reqStatus.isSuccess) {
-                context.pop();
-              } else if (state.reqStatus.isFailure) {
-                context.handleError((state.reqStatus as RequestFailure).exception);
+              final status = state.reqStatus;
+              if (status is RequestSuccess<VenueModel>) {
+                context.pop(status.data);
+              } else if (status is RequestFailure<VenueModel>) {
+                context.handleError(status.exception);
               }
             },
             builder: (context, state) {

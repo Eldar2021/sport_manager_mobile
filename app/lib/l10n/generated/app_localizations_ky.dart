@@ -389,10 +389,47 @@ class AppLocalizationsKy extends AppLocalizations {
   String get profileChangePasswordTitle => 'Сырсөздү өзгөртүү';
 
   @override
+  String get authUpdatePasswordTitle => 'Сырсөздү өзгөртүү';
+
+  @override
+  String get authUpdatePasswordHint => 'Минимум 8 символ. Тамгаларды, сандарды жана атайын символдорду колдонуңуз.';
+
+  @override
+  String get authUpdatePasswordLoginLabel => 'Логин / Email';
+
+  @override
+  String get authUpdatePasswordNewLabel => 'Жаңы сырсөз';
+
+  @override
+  String get authUpdatePasswordRepeatLabel => 'Жаңы сырсөздү кайталаңыз';
+
+  @override
+  String get authUpdatePasswordSubmit => 'Сактоо';
+
+  @override
+  String get authUpdatePasswordSuccess => 'Сырсөз жаңыртылды';
+
+  @override
   String get profileLogout => 'Чыгуу';
 
   @override
+  String get profileLogoutTitle => 'Аккаунттан чыгасызбы?';
+
+  @override
+  String get profileLogoutSubtitle => 'Сиз кирүү экранына багытталасыз. Маалыматтар сакталат.';
+
+  @override
   String get profileDeleteAccount => 'Аккаунтту өчүрүү';
+
+  @override
+  String get profileDeleteAccountTitle => 'Аккаунтту өчүрөсүзбү?';
+
+  @override
+  String get profileDeleteAccountSubtitle =>
+      'Бардык маалыматтар, сессиялар жана жөндөөлөр биротоло өчүрүлөт. Бул аракетти артка кайтаруу мүмкүн эмес.';
+
+  @override
+  String get profileDeleteAccountConfirm => 'Биротоло өчүрүү';
 
   @override
   String get profileErrorTitle => 'Профилди жүктөө мүмкүн болбоду';
@@ -457,5 +494,28 @@ class AppLocalizationsKy extends AppLocalizations {
   @override
   String tableDetailDurationMin(int count) {
     return '$count мин';
+  }
+
+  @override
+  String get menuEdit => 'Өзгөртүү';
+
+  @override
+  String get menuDelete => 'Жок кылуу';
+
+  @override
+  String get venueMetricTablesLabel => 'СТОЛДОР';
+
+  @override
+  String get venueDetailTablesHeader => 'ЗАЛДЫН СТОЛДОРУ';
+
+  @override
+  String venueTablesCountSuffix(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count даана',
+      zero: '0 даана',
+    );
+    return '$_temp0';
   }
 }

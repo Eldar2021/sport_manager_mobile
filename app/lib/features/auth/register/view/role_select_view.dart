@@ -15,7 +15,7 @@ class RoleSelectView extends StatelessWidget {
       appBar: AppBar(),
       body: ListView(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.x6,
+          horizontal: AppSpacing.x4,
           vertical: AppSpacing.x4,
         ),
         children: [

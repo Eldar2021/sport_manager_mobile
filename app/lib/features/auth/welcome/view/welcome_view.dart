@@ -17,7 +17,7 @@ class WelcomeView extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.x6,
+            horizontal: AppSpacing.x4,
             vertical: AppSpacing.x4,
           ),
           child: Column(

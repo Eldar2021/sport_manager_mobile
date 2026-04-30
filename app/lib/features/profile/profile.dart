@@ -5,7 +5,6 @@ export 'widgets/owner_profile_extra_data_skeleton.dart';
 export 'widgets/profile_error_view.dart';
 export 'widgets/profile_item_tile.dart';
 export 'widgets/profile_section_skeleton_tile.dart';
-export 'widgets/shimmer_box.dart';
 export 'widgets/user_profile_card.dart';
 export 'widgets/user_profile_card_skeleton.dart';
 export 'widgets/user_profile_extra_data.dart';

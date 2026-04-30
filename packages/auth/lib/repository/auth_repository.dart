@@ -42,6 +42,16 @@ final class AuthRepository {
     return _remote.forgotPassword(email);
   }
 
+  Future<void> updatePassword({
+    required String login,
+    required String newPassword,
+  }) {
+    return _remote.updatePassword(
+      login: login,
+      newPassword: newPassword,
+    );
+  }
+
   Future<AuthTokensModel?> getTokens() => _local.getTokens();
 
   UserModel? getCachedUser() => _local.getCachedUser();
@@ -53,6 +63,11 @@ final class AuthRepository {
     } on Object catch (e) {
       log('remote logout failed (ignored): $e');
     }
+  }
+
+  Future<void> deleteAccount() async {
+    await _remote.deleteAccount();
+    await _local.clearAll();
   }
 
   Future<InviteCodeModel> getInviteCode() => _remote.getInviteCode();

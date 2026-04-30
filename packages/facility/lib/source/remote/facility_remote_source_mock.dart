@@ -197,6 +197,15 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   }
 
   @override
+  Future<List<TableModel>> getVenueTables(String venueId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 700));
+    if (!_venues.any((v) => v.id == venueId)) {
+      throw const VenueException(VenueErrorCode.notFound);
+    }
+    return List.unmodifiable(_tables.where((t) => t.venueId == venueId));
+  }
+
+  @override
   Future<TableModel> createTable(String venueId, TableFormParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
     if (_tables.any((t) => t.venueId == venueId && t.number == param.number)) {

@@ -46,6 +46,12 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     ky: 'Чакыруу коду туура эмес',
   );
 
+  static const _weakPassword = BaseMessage(
+    en: 'Password must be at least 8 characters',
+    ru: 'Пароль должен быть не короче 8 символов',
+    ky: 'Сырсөз эң аз дегенде 8 символдон турушу керек',
+  );
+
   @override
   Future<AuthResultModel> login({
     required String username,
@@ -103,8 +109,24 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
   }
 
   @override
+  Future<void> updatePassword({
+    required String login,
+    required String newPassword,
+  }) async {
+    await Future<void>.delayed(const Duration(milliseconds: 600));
+    if (newPassword.length < 8) {
+      throw const AuthException(AuthErrorCode.unknown, message: _weakPassword);
+    }
+  }
+
+  @override
   Future<void> logout() async {
     await Future<void>.delayed(const Duration(milliseconds: 300));
+  }
+
+  @override
+  Future<void> deleteAccount() async {
+    await Future<void>.delayed(const Duration(milliseconds: 600));
   }
 
   @override

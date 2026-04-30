@@ -23,7 +23,7 @@ class ProfileErrorView extends StatelessWidget {
       margin: EdgeInsets.zero,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.x6,
+          horizontal: AppSpacing.x4,
           vertical: AppSpacing.x8,
         ),
         child: Column(

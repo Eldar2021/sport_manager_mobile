@@ -14,7 +14,10 @@ SessionModel _$SessionModelFromJson(Map<String, dynamic> json) => SessionModel(
   totalPausedSeconds: (json['totalPausedSeconds'] as num?)?.toInt() ?? 0,
   pausedAt: json['pausedAt'] == null ? null : DateTime.parse(json['pausedAt'] as String),
   tarifAmountSnapshot: (json['tarifAmountSnapshot'] as num?)?.toInt(),
-  tarifTypeSnapshot: $enumDecodeNullable(_$TarifTypeEnumMap, json['tarifTypeSnapshot']),
+  tarifTypeSnapshot: $enumDecodeNullable(
+    _$TarifTypeEnumMap,
+    json['tarifTypeSnapshot'],
+  ),
   endedAt: json['endedAt'] == null ? null : DateTime.parse(json['endedAt'] as String),
   durationSeconds: (json['durationSeconds'] as num?)?.toInt(),
   subtotal: (json['subtotal'] as num?)?.toInt(),

@@ -398,10 +398,47 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileChangePasswordTitle => 'Сменить пароль';
 
   @override
+  String get authUpdatePasswordTitle => 'Сменить пароль';
+
+  @override
+  String get authUpdatePasswordHint => 'Минимум 8 символов. Используйте буквы, цифры и спецсимволы.';
+
+  @override
+  String get authUpdatePasswordLoginLabel => 'Логин / Email';
+
+  @override
+  String get authUpdatePasswordNewLabel => 'Новый пароль';
+
+  @override
+  String get authUpdatePasswordRepeatLabel => 'Повторите новый пароль';
+
+  @override
+  String get authUpdatePasswordSubmit => 'Сохранить';
+
+  @override
+  String get authUpdatePasswordSuccess => 'Пароль обновлён';
+
+  @override
   String get profileLogout => 'Выйти';
 
   @override
+  String get profileLogoutTitle => 'Выйти из аккаунта?';
+
+  @override
+  String get profileLogoutSubtitle => 'Вы будете перенаправлены на экран входа. Данные сохранятся.';
+
+  @override
   String get profileDeleteAccount => 'Удалить аккаунт';
+
+  @override
+  String get profileDeleteAccountTitle => 'Удалить аккаунт?';
+
+  @override
+  String get profileDeleteAccountSubtitle =>
+      'Все данные, сессии и настройки будут безвозвратно удалены. Это действие нельзя отменить.';
+
+  @override
+  String get profileDeleteAccountConfirm => 'Удалить навсегда';
 
   @override
   String get profileErrorTitle => 'Не удалось загрузить профиль';
@@ -466,5 +503,31 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String tableDetailDurationMin(int count) {
     return '$count мин';
+  }
+
+  @override
+  String get menuEdit => 'Редактировать';
+
+  @override
+  String get menuDelete => 'Удалить';
+
+  @override
+  String get venueMetricTablesLabel => 'СТОЛОВ';
+
+  @override
+  String get venueDetailTablesHeader => 'СТОЛЫ ЗАЛА';
+
+  @override
+  String venueTablesCountSuffix(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count шт.',
+      many: '$count шт.',
+      few: '$count шт.',
+      one: '$count шт.',
+      zero: '0 шт.',
+    );
+    return '$_temp0';
   }
 }

@@ -394,10 +394,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileChangePasswordTitle => 'Change password';
 
   @override
+  String get authUpdatePasswordTitle => 'Change password';
+
+  @override
+  String get authUpdatePasswordHint => 'Minimum 8 characters. Use letters, numbers and special characters.';
+
+  @override
+  String get authUpdatePasswordLoginLabel => 'Login / Email';
+
+  @override
+  String get authUpdatePasswordNewLabel => 'New password';
+
+  @override
+  String get authUpdatePasswordRepeatLabel => 'Repeat new password';
+
+  @override
+  String get authUpdatePasswordSubmit => 'Save';
+
+  @override
+  String get authUpdatePasswordSuccess => 'Password updated';
+
+  @override
   String get profileLogout => 'Log out';
 
   @override
+  String get profileLogoutTitle => 'Log out of account?';
+
+  @override
+  String get profileLogoutSubtitle => 'You\'ll be redirected to the sign-in screen. Your data will be kept.';
+
+  @override
   String get profileDeleteAccount => 'Delete account';
+
+  @override
+  String get profileDeleteAccountTitle => 'Delete account?';
+
+  @override
+  String get profileDeleteAccountSubtitle =>
+      'All data, sessions and settings will be permanently deleted. This action cannot be undone.';
+
+  @override
+  String get profileDeleteAccountConfirm => 'Delete forever';
 
   @override
   String get profileErrorTitle => 'Couldn\'t load profile';
@@ -462,5 +499,29 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String tableDetailDurationMin(int count) {
     return '$count min';
+  }
+
+  @override
+  String get menuEdit => 'Edit';
+
+  @override
+  String get menuDelete => 'Delete';
+
+  @override
+  String get venueMetricTablesLabel => 'TABLES';
+
+  @override
+  String get venueDetailTablesHeader => 'HALL TABLES';
+
+  @override
+  String venueTablesCountSuffix(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pcs',
+      one: '1 pc',
+      zero: '0 pcs',
+    );
+    return '$_temp0';
   }
 }

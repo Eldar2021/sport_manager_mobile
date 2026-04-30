@@ -57,6 +57,14 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   }
 
   @override
+  Future<List<TableModel>> getVenueTables(String venueId) {
+    return _client.getListOfType<TableModel>(
+      '/api/v1/venue/$venueId/tables',
+      fromJson: TableModel.fromJson,
+    );
+  }
+
+  @override
   Future<TableModel> createTable(String venueId, TableFormParam param) {
     return _client.postType<TableModel>(
       '/api/v1/table/create',

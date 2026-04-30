@@ -158,8 +158,20 @@
     }
   },
   "profileChangePasswordTitle": "Change password",
+  "authUpdatePasswordTitle": "Change password",
+  "authUpdatePasswordHint": "Minimum 8 characters. Use letters, numbers and special characters.",
+  "authUpdatePasswordLoginLabel": "Login / Email",
+  "authUpdatePasswordNewLabel": "New password",
+  "authUpdatePasswordRepeatLabel": "Repeat new password",
+  "authUpdatePasswordSubmit": "Save",
+  "authUpdatePasswordSuccess": "Password updated",
   "profileLogout": "Log out",
+  "profileLogoutTitle": "Log out of account?",
+  "profileLogoutSubtitle": "You'll be redirected to the sign-in screen. Your data will be kept.",
   "profileDeleteAccount": "Delete account",
+  "profileDeleteAccountTitle": "Delete account?",
+  "profileDeleteAccountSubtitle": "All data, sessions and settings will be permanently deleted. This action cannot be undone.",
+  "profileDeleteAccountConfirm": "Delete forever",
   "profileErrorTitle": "Couldn't load profile",
   "profileErrorSubtitle": "Check your connection and try again.",
   "tableDetailStart": "START",
@@ -182,6 +194,18 @@
   "tableDetailConfirmAndClose": "CONFIRM & CLOSE",
   "tableDetailDurationMin": "{count} min",
   "@tableDetailDurationMin": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "menuEdit": "Edit",
+  "menuDelete": "Delete",
+  "venueMetricTablesLabel": "TABLES",
+  "venueDetailTablesHeader": "HALL TABLES",
+  "venueTablesCountSuffix": "{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}",
+  "@venueTablesCountSuffix": {
     "placeholders": {
       "count": {
         "type": "int"

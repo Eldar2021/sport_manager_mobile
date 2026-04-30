@@ -70,6 +70,10 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         builder: (context, state) => const ForgotPasswordView(),
       ),
       GoRoute(
+        path: AppRoutes.updatePassword,
+        builder: (context, state) => const UpdatePasswordView(),
+      ),
+      GoRoute(
         path: AppRoutes.role,
         builder: (context, state) => const RoleSelectView(),
       ),
@@ -85,6 +89,17 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       ),
 
       GoRoute(
+        path: AppRoutes.venuesList,
+        builder: (_, _) => const VenuesListView(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.venueDetail,
+        redirect: (_, state) => state.extra is VenueModel ? null : AppRoutes.venuesList,
+        builder: (_, state) => VenueDetailView(venue: state.extra! as VenueModel),
+      ),
+
+      GoRoute(
         path: AppRoutes.tableForm,
         builder: (_, state) => TableFormView(state.extra! as TableFormExtra),
       ),
@@ -93,6 +108,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         redirect: (_, state) => state.extra is TableModel ? null : AppRoutes.home,
         builder: (_, state) => TableDetailView(state.extra! as TableModel),
       ),
+
       StatefulShellRoute.indexedStack(
         builder: (_, _, shell) => MainView(shell),
         branches: [
