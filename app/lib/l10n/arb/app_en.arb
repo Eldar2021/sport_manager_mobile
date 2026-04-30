@@ -176,6 +176,48 @@
   "profileErrorSubtitle": "Check your connection and try again.",
   "menuEdit": "Edit",
   "menuDelete": "Delete",
+  "managersInviteCodeLabel": "ACTIVE INVITE CODE",
+  "managersInviteCodeErrorLabel": "INVITE CODE UNAVAILABLE",
+  "managersInviteCodeCopy": "Copy",
+  "managersInviteCodeCopied": "Code copied to clipboard",
+  "managersSectionLabel": "MANAGERS",
+  "managersInviteAction": "Invite manager",
+  "managersDeleteTitle": "Remove {name}?",
+  "@managersDeleteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "managersDeleteSubtitle": "The manager will lose access to your venues. Their session history is kept.",
+  "managersEmptyTitle": "No managers yet",
+  "managersEmptySubtitle": "Share the invite code so a manager can sign up and start working shifts.",
+  "managersLastSeenJustNow": "online now",
+  "managersLastSeenMinutes": "{count, plural, =1{1 min ago} other{{count} min ago}}",
+  "@managersLastSeenMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "managersLastSeenHours": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@managersLastSeenHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "managersLastSeenDays": "{count, plural, =1{1 day ago} other{{count} days ago}}",
+  "@managersLastSeenDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "venueMetricTablesLabel": "TABLES",
   "venueDetailTablesHeader": "HALL TABLES",
   "venueTablesCountSuffix": "{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}",

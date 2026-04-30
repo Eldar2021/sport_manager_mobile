@@ -12,6 +12,7 @@ void main() async {
     const NetworkModule(),
     const AuthModule(),
     const FacilityModule(),
+    const ManagersModule(),
   ]);
 
   runApp(const MyAppWrapper());

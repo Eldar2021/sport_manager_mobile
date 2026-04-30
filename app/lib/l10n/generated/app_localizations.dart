@@ -897,6 +897,90 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get menuDelete;
 
+  /// No description provided for @managersInviteCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ACTIVE INVITE CODE'**
+  String get managersInviteCodeLabel;
+
+  /// No description provided for @managersInviteCodeErrorLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'INVITE CODE UNAVAILABLE'**
+  String get managersInviteCodeErrorLabel;
+
+  /// No description provided for @managersInviteCodeCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get managersInviteCodeCopy;
+
+  /// No description provided for @managersInviteCodeCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Code copied to clipboard'**
+  String get managersInviteCodeCopied;
+
+  /// No description provided for @managersSectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'MANAGERS'**
+  String get managersSectionLabel;
+
+  /// No description provided for @managersInviteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite manager'**
+  String get managersInviteAction;
+
+  /// No description provided for @managersDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {name}?'**
+  String managersDeleteTitle(String name);
+
+  /// No description provided for @managersDeleteSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The manager will lose access to your venues. Their session history is kept.'**
+  String get managersDeleteSubtitle;
+
+  /// No description provided for @managersEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No managers yet'**
+  String get managersEmptyTitle;
+
+  /// No description provided for @managersEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share the invite code so a manager can sign up and start working shifts.'**
+  String get managersEmptySubtitle;
+
+  /// No description provided for @managersLastSeenJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'online now'**
+  String get managersLastSeenJustNow;
+
+  /// No description provided for @managersLastSeenMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 min ago} other{{count} min ago}}'**
+  String managersLastSeenMinutes(int count);
+
+  /// No description provided for @managersLastSeenHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 hour ago} other{{count} hours ago}}'**
+  String managersLastSeenHours(int count);
+
+  /// No description provided for @managersLastSeenDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day ago} other{{count} days ago}}'**
+  String managersLastSeenDays(int count);
+
   /// No description provided for @venueMetricTablesLabel.
   ///
   /// In en, this message translates to:
