@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:facility/facility.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_manager_mobile/core/core.dart';
@@ -20,6 +22,7 @@ class VenueDetailCubit extends Cubit<DataState<List<TableModel>>> {
       final tables = await _repository.getVenueTables(_venueId);
       emit(DataSuccess(tables));
     } on Object catch (e) {
+      log('Failed to load venue tables', error: e);
       emit(DataFailure(e));
     }
   }
