@@ -43,19 +43,28 @@ class _PaymentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFmt = DateFormat('d MMM yyyy', Localizations.localeOf(context).languageCode);
+    final locale = Localizations.localeOf(context).languageCode;
+    final dateFmt = DateFormat('d MMM yyyy', locale);
     final date = (payment.paidAt ?? payment.createdAt).toLocal();
     return ListTile(
       title: Text(dateFmt.format(date)),
       subtitle: Text(
-        context.l10n.subscriptionPaymentItemSummary(payment.months, payment.tableCountSnapshot),
+        context.l10n.subscriptionPaymentItemSummary(
+          payment.months,
+          payment.tableCountSnapshot,
+        ),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            context.l10n.subscriptionAmountWithCurrency(payment.amount, payment.currency),
-            style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
+            context.l10n.subscriptionAmountWithCurrency(
+              payment.amount,
+              payment.currency,
+            ),
+            style: context.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(width: AppSpacing.x3),
           _StatusDot(payment.status),
@@ -73,10 +82,23 @@ class _StatusDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (icon, color) = switch (status) {
-      PaymentStatus.paid => (Icons.check_circle, context.appColors.success),
-      PaymentStatus.pending => (Icons.access_time, context.appColors.warning),
-      PaymentStatus.failed => (Icons.cancel, context.colors.error),
+      PaymentStatus.paid => (
+        Icons.check_circle,
+        context.appColors.success,
+      ),
+      PaymentStatus.pending => (
+        Icons.access_time,
+        context.appColors.warning,
+      ),
+      PaymentStatus.failed => (
+        Icons.cancel,
+        context.colors.error,
+      ),
     };
-    return Icon(icon, size: 20, color: color);
+    return Icon(
+      icon,
+      size: 20,
+      color: color,
+    );
   }
 }
