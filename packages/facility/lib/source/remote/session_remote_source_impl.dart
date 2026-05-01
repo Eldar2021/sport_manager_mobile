@@ -22,7 +22,6 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
     return _client.postType<SessionModel>(
       '/api/v1/session/$sessionId/pause',
       fromJson: SessionModel.fromJson,
-      data: {},
     );
   }
 
@@ -31,7 +30,6 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
     return _client.postType<SessionModel>(
       '/api/v1/session/$sessionId/resume',
       fromJson: SessionModel.fromJson,
-      data: {},
     );
   }
 
