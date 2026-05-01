@@ -40,18 +40,18 @@ class SessionActiveCubit extends Cubit<SessionActiveState> {
   }
 
   Future<void> pauseSession() => _request(
-        () => _repo.pauseSession(state.session.id),
-        (res) => state.copyWith(session: res, pauseStatus: RequestSuccess(res)),
-        (e) => state.copyWith(pauseStatus: RequestFailure(e)),
-        state.copyWith(pauseStatus: const RequestLoading()),
-      );
+    () => _repo.pauseSession(state.session.id),
+    (res) => state.copyWith(session: res, pauseStatus: RequestSuccess(res)),
+    (e) => state.copyWith(pauseStatus: RequestFailure(e)),
+    state.copyWith(pauseStatus: const RequestLoading()),
+  );
 
   Future<void> resumeSession() => _request(
-        () => _repo.resumeSession(state.session.id),
-        (res) => state.copyWith(session: res, resumeStatus: RequestSuccess(res)),
-        (e) => state.copyWith(resumeStatus: RequestFailure(e)),
-        state.copyWith(resumeStatus: const RequestLoading()),
-      );
+    () => _repo.resumeSession(state.session.id),
+    (res) => state.copyWith(session: res, resumeStatus: RequestSuccess(res)),
+    (e) => state.copyWith(resumeStatus: RequestFailure(e)),
+    state.copyWith(resumeStatus: const RequestLoading()),
+  );
 
   Future<void> _request<T>(
     Future<T> Function() action,

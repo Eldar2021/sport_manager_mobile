@@ -7,7 +7,13 @@ abstract interface class SessionRemoteSource {
 
   Future<SessionModel> resumeSession(String sessionId);
 
-  Future<SessionModel> finishSession(String sessionId, int? discountPercent);
+  Future<SessionModel> finishSession(
+    String sessionId,
+    int? discountPercent,
+  );
 
-  Future<SessionModel> cancelSession(String sessionId, String? cancelReason);
+  Future<SessionModel> cancelSession(
+    String sessionId,
+    String? cancelReason,
+  );
 }
