@@ -10,8 +10,11 @@ import 'package:sport_manager_mobile/features/main/main.dart';
 import 'package:sport_manager_mobile/features/managers/managers.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
+import 'package:sport_manager_mobile/features/settings/settings.dart';
+import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
+import 'package:subscription/subscription.dart' show PaymentModel;
 
 const Set<String> _authRoutes = {
   AppRoutes.welcome,
@@ -113,6 +116,27 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       GoRoute(
         path: AppRoutes.managers,
         builder: (_, _) => const ManagersView(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.settings,
+        builder: (_, _) => const SettingsView(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.subscription,
+        builder: (_, _) => const SubscriptionView(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.subscriptionCheckout,
+        builder: (_, _) => const SubscriptionCheckoutView(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.subscriptionPayment,
+        redirect: (_, state) => state.extra is PaymentModel ? null : AppRoutes.subscription,
+        builder: (_, state) => SubscriptionPaymentView(payment: state.extra! as PaymentModel),
       ),
 
       StatefulShellRoute.indexedStack(

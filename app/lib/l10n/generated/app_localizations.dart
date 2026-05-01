@@ -99,17 +99,41 @@ abstract class AppLocalizations {
   /// **'Welcome back'**
   String get homeWelcomeBack;
 
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
   /// No description provided for @settingsAppearance.
   ///
   /// In en, this message translates to:
   /// **'Appearance'**
   String get settingsAppearance;
 
+  /// No description provided for @settingsThemeMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsThemeMode;
+
+  /// No description provided for @settingsThemePickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose theme'**
+  String get settingsThemePickerTitle;
+
   /// No description provided for @settingsLanguage.
   ///
   /// In en, this message translates to:
   /// **'Language'**
   String get settingsLanguage;
+
+  /// No description provided for @settingsLanguagePickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose language'**
+  String get settingsLanguagePickerTitle;
 
   /// No description provided for @settingsThemeLight.
   ///
@@ -375,23 +399,23 @@ abstract class AppLocalizations {
   /// **'Send link'**
   String get authForgotPasswordSendLink;
 
-  /// No description provided for @authContactSupportTitle.
+  /// No description provided for @contactSupportTitle.
   ///
   /// In en, this message translates to:
   /// **'Contact Support'**
-  String get authContactSupportTitle;
+  String get contactSupportTitle;
 
-  /// No description provided for @authContactSupportSubtitle.
+  /// No description provided for @contactSupportSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Write or call — we\'ll help restore access.'**
-  String get authContactSupportSubtitle;
+  /// **'Write or call — we\'re here to help.'**
+  String get contactSupportSubtitle;
 
-  /// No description provided for @authContactCallLabel.
+  /// No description provided for @contactCallLabel.
   ///
   /// In en, this message translates to:
   /// **'Call'**
-  String get authContactCallLabel;
+  String get contactCallLabel;
 
   /// No description provided for @navHome.
   ///
@@ -789,6 +813,18 @@ abstract class AppLocalizations {
   /// **'Change password'**
   String get profileChangePasswordTitle;
 
+  /// No description provided for @profileSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get profileSettingsTitle;
+
+  /// No description provided for @profileSettingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme, language'**
+  String get profileSettingsSubtitle;
+
   /// No description provided for @authUpdatePasswordTitle.
   ///
   /// In en, this message translates to:
@@ -1124,6 +1160,306 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}'**
   String venueTablesCountSuffix(int count);
+
+  /// No description provided for @subscriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get subscriptionTitle;
+
+  /// No description provided for @subscriptionStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get subscriptionStatusActive;
+
+  /// No description provided for @subscriptionStatusGrace.
+  ///
+  /// In en, this message translates to:
+  /// **'Grace period'**
+  String get subscriptionStatusGrace;
+
+  /// No description provided for @subscriptionStatusExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get subscriptionStatusExpired;
+
+  /// No description provided for @subscriptionSourceTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'Free trial'**
+  String get subscriptionSourceTrial;
+
+  /// No description provided for @subscriptionSourcePaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get subscriptionSourcePaid;
+
+  /// No description provided for @subscriptionWarningBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{Your subscription expires in 1 day. Renew to avoid interruption.} other{Your subscription expires in {n} days. Renew to avoid interruption.}}'**
+  String subscriptionWarningBanner(int n);
+
+  /// No description provided for @subscriptionGraceBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{Subscription expired. 1 day of grace period left.} other{Subscription expired. {n} days of grace period left.}}'**
+  String subscriptionGraceBanner(int n);
+
+  /// No description provided for @subscriptionExpiredBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription expired. Renew to use core features.'**
+  String get subscriptionExpiredBanner;
+
+  /// No description provided for @subscriptionPlanCardPerTable.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} {currency} / table / month'**
+  String subscriptionPlanCardPerTable(int price, String currency);
+
+  /// No description provided for @subscriptionPlanCardMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'× {tableCount} tables = {monthly} {currency} / month'**
+  String subscriptionPlanCardMonthly(int tableCount, int monthly, String currency);
+
+  /// No description provided for @subscriptionDetailNextPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Next payment'**
+  String get subscriptionDetailNextPayment;
+
+  /// No description provided for @subscriptionDetailLastPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Last payment'**
+  String get subscriptionDetailLastPayment;
+
+  /// No description provided for @subscriptionDetailStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get subscriptionDetailStatus;
+
+  /// No description provided for @subscriptionPaymentHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment history'**
+  String get subscriptionPaymentHistoryTitle;
+
+  /// No description provided for @subscriptionPaymentHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No payments yet'**
+  String get subscriptionPaymentHistoryEmpty;
+
+  /// No description provided for @subscriptionPaymentItemSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{months} months × {tableCount} tables'**
+  String subscriptionPaymentItemSummary(int months, int tableCount);
+
+  /// No description provided for @subscriptionAmountWithCurrency.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} {currency}'**
+  String subscriptionAmountWithCurrency(int amount, String currency);
+
+  /// No description provided for @subscriptionContinueCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue subscription'**
+  String get subscriptionContinueCta;
+
+  /// No description provided for @subscriptionCheckoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get subscriptionCheckoutTitle;
+
+  /// No description provided for @subscriptionCheckoutSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{tableCount} tables × {price} {currency} = {monthly} {currency} / month'**
+  String subscriptionCheckoutSummary(int tableCount, int price, int monthly, String currency);
+
+  /// No description provided for @subscriptionCheckoutDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get subscriptionCheckoutDuration;
+
+  /// No description provided for @subscriptionCheckoutMonthsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{1 month} other{{n} months}}'**
+  String subscriptionCheckoutMonthsLabel(int n);
+
+  /// No description provided for @subscriptionCheckoutTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get subscriptionCheckoutTotal;
+
+  /// No description provided for @subscriptionCheckoutTotalLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{months} months × {monthly} {currency} = {total} {currency}'**
+  String subscriptionCheckoutTotalLine(int months, int monthly, int total, String currency);
+
+  /// No description provided for @subscriptionCheckoutNewEndDate.
+  ///
+  /// In en, this message translates to:
+  /// **'New end date: {date}'**
+  String subscriptionCheckoutNewEndDate(String date);
+
+  /// No description provided for @subscriptionCheckoutPay.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay'**
+  String get subscriptionCheckoutPay;
+
+  /// No description provided for @subscriptionCheckoutNoTablesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No tables yet'**
+  String get subscriptionCheckoutNoTablesTitle;
+
+  /// No description provided for @subscriptionCheckoutNoTablesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least one table to subscribe.'**
+  String get subscriptionCheckoutNoTablesSubtitle;
+
+  /// No description provided for @subscriptionCheckoutGoToVenues.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to venues'**
+  String get subscriptionCheckoutGoToVenues;
+
+  /// No description provided for @subscriptionPaymentMockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock payment'**
+  String get subscriptionPaymentMockTitle;
+
+  /// No description provided for @subscriptionPaymentMockSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Real payment integration is coming soon. Simulate the outcome below.'**
+  String get subscriptionPaymentMockSubtitle;
+
+  /// No description provided for @subscriptionPaymentSimulateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Simulate success'**
+  String get subscriptionPaymentSimulateSuccess;
+
+  /// No description provided for @subscriptionPaymentSimulateFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Simulate failure'**
+  String get subscriptionPaymentSimulateFailure;
+
+  /// No description provided for @subscriptionPaymentSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment successful'**
+  String get subscriptionPaymentSuccessTitle;
+
+  /// No description provided for @subscriptionPaymentSuccessBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription extended until {date}.'**
+  String subscriptionPaymentSuccessBody(String date);
+
+  /// No description provided for @subscriptionPaymentFailedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment failed'**
+  String get subscriptionPaymentFailedTitle;
+
+  /// No description provided for @subscriptionPaymentFailedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong with the payment. Please try again.'**
+  String get subscriptionPaymentFailedBody;
+
+  /// No description provided for @subscriptionPaymentRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get subscriptionPaymentRetry;
+
+  /// No description provided for @subscriptionPaymentClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get subscriptionPaymentClose;
+
+  /// No description provided for @subscriptionBlockedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription required'**
+  String get subscriptionBlockedTitle;
+
+  /// No description provided for @subscriptionBlockedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew your subscription to use core features.'**
+  String get subscriptionBlockedSubtitle;
+
+  /// No description provided for @subscriptionBlockedRenew.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew now'**
+  String get subscriptionBlockedRenew;
+
+  /// No description provided for @subscriptionBlockedCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get subscriptionBlockedCancel;
+
+  /// No description provided for @subscriptionErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load subscription'**
+  String get subscriptionErrorTitle;
+
+  /// No description provided for @subscriptionErrorSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection and try again.'**
+  String get subscriptionErrorSubtitle;
+
+  /// No description provided for @subscriptionContactSupportAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help? Contact support'**
+  String get subscriptionContactSupportAction;
+
+  /// No description provided for @profileSubscriptionExpiresIn.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{Expires in 1 day} other{Expires in {n} days}}'**
+  String profileSubscriptionExpiresIn(int n);
+
+  /// No description provided for @profileSubscriptionGrace.
+  ///
+  /// In en, this message translates to:
+  /// **'{n, plural, =1{Grace · 1 day left} other{Grace · {n} days left}}'**
+  String profileSubscriptionGrace(int n);
+
+  /// No description provided for @profileSubscriptionExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get profileSubscriptionExpired;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

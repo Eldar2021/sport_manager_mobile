@@ -9,10 +9,14 @@ abstract final class AppRoutes {
   static const home = '/home';
   static const report = '/report';
   static const profile = '/profile';
+  static const settings = '/settings';
   static const tableForm = '/tables/form';
   static const tableDetail = '/tables/detail';
   static const venueForm = '/venues/form';
   static const venuesList = '/venues';
   static const venueDetail = '/venues/detail';
   static const managers = '/managers';
+  static const subscription = '/subscription';
+  static const subscriptionCheckout = '/subscription/checkout';
+  static const subscriptionPayment = '/subscription/payment';
 }

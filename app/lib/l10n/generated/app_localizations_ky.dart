@@ -12,10 +12,22 @@ class AppLocalizationsKy extends AppLocalizations {
   String get homeWelcomeBack => 'Кайра кош келиңиз';
 
   @override
+  String get settingsTitle => 'Жөндөөлөр';
+
+  @override
   String get settingsAppearance => 'Көрүнүш';
 
   @override
+  String get settingsThemeMode => 'Тема';
+
+  @override
+  String get settingsThemePickerTitle => 'Теманы тандаңыз';
+
+  @override
   String get settingsLanguage => 'Тил';
+
+  @override
+  String get settingsLanguagePickerTitle => 'Тилди тандаңыз';
 
   @override
   String get settingsThemeLight => 'Жарык';
@@ -150,13 +162,13 @@ class AppLocalizationsKy extends AppLocalizations {
   String get authForgotPasswordSendLink => 'Шилтеме жөнөтүү';
 
   @override
-  String get authContactSupportTitle => 'Колдоо кызматы менен байланышуу';
+  String get contactSupportTitle => 'Колдоо кызматы менен байланышуу';
 
   @override
-  String get authContactSupportSubtitle => 'Жазыңыз же чалыңыз — кирүүнү калыбына келтирүүгө жардамдашабыз.';
+  String get contactSupportSubtitle => 'Жазыңыз же чалыңыз — биз жардамдашабыз.';
 
   @override
-  String get authContactCallLabel => 'Чалуу';
+  String get contactCallLabel => 'Чалуу';
 
   @override
   String get navHome => 'Башкы';
@@ -389,6 +401,12 @@ class AppLocalizationsKy extends AppLocalizations {
   String get profileChangePasswordTitle => 'Сырсөздү өзгөртүү';
 
   @override
+  String get profileSettingsTitle => 'Жөндөөлөр';
+
+  @override
+  String get profileSettingsSubtitle => 'Тема, тил';
+
+  @override
   String get authUpdatePasswordTitle => 'Сырсөздү өзгөртүү';
 
   @override
@@ -593,4 +611,211 @@ class AppLocalizationsKy extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get subscriptionTitle => 'Жазылуу';
+
+  @override
+  String get subscriptionStatusActive => 'Активдүү';
+
+  @override
+  String get subscriptionStatusGrace => 'Жеңилдик мөөнөтү';
+
+  @override
+  String get subscriptionStatusExpired => 'Бүткөн';
+
+  @override
+  String get subscriptionSourceTrial => 'Сыноо мөөнөтү';
+
+  @override
+  String get subscriptionSourcePaid => 'Төлөнгөн';
+
+  @override
+  String subscriptionWarningBanner(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Жазылууңуздун $n күнү калды. Үзгүлтүксүздүк үчүн узартыңыз.',
+      one: 'Жазылууңуздун 1 күнү калды. Үзгүлтүксүздүк үчүн узартыңыз.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String subscriptionGraceBanner(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Жазылуу бүттү. Жеңилдик мөөнөтүнүн $n күнү калды.',
+      one: 'Жазылуу бүттү. Жеңилдик мөөнөтүнүн 1 күнү калды.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get subscriptionExpiredBanner => 'Жазылуу бүттү. Негизги функцияларды колдонуу үчүн узартыңыз.';
+
+  @override
+  String subscriptionPlanCardPerTable(int price, String currency) {
+    return '$price $currency / стол / ай';
+  }
+
+  @override
+  String subscriptionPlanCardMonthly(int tableCount, int monthly, String currency) {
+    return '× $tableCount стол = $monthly $currency / ай';
+  }
+
+  @override
+  String get subscriptionDetailNextPayment => 'Кийинки төлөм';
+
+  @override
+  String get subscriptionDetailLastPayment => 'Акыркы төлөм';
+
+  @override
+  String get subscriptionDetailStatus => 'Статус';
+
+  @override
+  String get subscriptionPaymentHistoryTitle => 'Төлөм тарыхы';
+
+  @override
+  String get subscriptionPaymentHistoryEmpty => 'Төлөм али жок';
+
+  @override
+  String subscriptionPaymentItemSummary(int months, int tableCount) {
+    return '$months ай × $tableCount стол';
+  }
+
+  @override
+  String subscriptionAmountWithCurrency(int amount, String currency) {
+    return '$amount $currency';
+  }
+
+  @override
+  String get subscriptionContinueCta => 'Жазылууну улантуу';
+
+  @override
+  String get subscriptionCheckoutTitle => 'Төлөө';
+
+  @override
+  String subscriptionCheckoutSummary(int tableCount, int price, int monthly, String currency) {
+    return '$tableCount стол × $price $currency = $monthly $currency / ай';
+  }
+
+  @override
+  String get subscriptionCheckoutDuration => 'Узактык';
+
+  @override
+  String subscriptionCheckoutMonthsLabel(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n ай',
+      one: '1 ай',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get subscriptionCheckoutTotal => 'Жалпы';
+
+  @override
+  String subscriptionCheckoutTotalLine(int months, int monthly, int total, String currency) {
+    return '$months ай × $monthly $currency = $total $currency';
+  }
+
+  @override
+  String subscriptionCheckoutNewEndDate(String date) {
+    return 'Жаңы бүтүү күнү: $date';
+  }
+
+  @override
+  String get subscriptionCheckoutPay => 'Төлөө';
+
+  @override
+  String get subscriptionCheckoutNoTablesTitle => 'Стол али жок';
+
+  @override
+  String get subscriptionCheckoutNoTablesSubtitle => 'Жазылуу үчүн жок дегенде бир стол кошуңуз.';
+
+  @override
+  String get subscriptionCheckoutGoToVenues => 'Залдарга өтүү';
+
+  @override
+  String get subscriptionPaymentMockTitle => 'Тесттик төлөм';
+
+  @override
+  String get subscriptionPaymentMockSubtitle =>
+      'Чыныгы төлөм интеграциясы жакында. Натыйжаны төмөндө симуляция кылыңыз.';
+
+  @override
+  String get subscriptionPaymentSimulateSuccess => 'Ийгиликти симуляция кылуу';
+
+  @override
+  String get subscriptionPaymentSimulateFailure => 'Катаны симуляция кылуу';
+
+  @override
+  String get subscriptionPaymentSuccessTitle => 'Төлөм ийгиликтүү';
+
+  @override
+  String subscriptionPaymentSuccessBody(String date) {
+    return 'Жазылуу $date чейин узартылды.';
+  }
+
+  @override
+  String get subscriptionPaymentFailedTitle => 'Төлөм ишке ашпады';
+
+  @override
+  String get subscriptionPaymentFailedBody => 'Бир нерсе туура эмес болду. Кайра аракет кылыңыз.';
+
+  @override
+  String get subscriptionPaymentRetry => 'Кайра аракет кылуу';
+
+  @override
+  String get subscriptionPaymentClose => 'Жабуу';
+
+  @override
+  String get subscriptionBlockedTitle => 'Жазылуу керек';
+
+  @override
+  String get subscriptionBlockedSubtitle => 'Негизги функцияларды колдонуу үчүн жазылууну узартыңыз.';
+
+  @override
+  String get subscriptionBlockedRenew => 'Узартуу';
+
+  @override
+  String get subscriptionBlockedCancel => 'Азыр эмес';
+
+  @override
+  String get subscriptionErrorTitle => 'Жазылууну жүктөө мүмкүн болбоду';
+
+  @override
+  String get subscriptionErrorSubtitle => 'Туташууну текшерип, кайра аракет кылыңыз.';
+
+  @override
+  String get subscriptionContactSupportAction => 'Жардам керекпи? Колдоо менен байланышыңыз';
+
+  @override
+  String profileSubscriptionExpiresIn(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n күндө бүтөт',
+      one: '1 күндө бүтөт',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String profileSubscriptionGrace(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Жеңилдик · $n күн калды',
+      one: 'Жеңилдик · 1 күн калды',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileSubscriptionExpired => 'Бүттү';
 }

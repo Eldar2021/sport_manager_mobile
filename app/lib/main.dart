@@ -13,6 +13,7 @@ void main() async {
     const AuthModule(),
     const FacilityModule(),
     const ManagersModule(),
+    const SubscriptionModule(),
   ]);
 
   runApp(const MyAppWrapper());

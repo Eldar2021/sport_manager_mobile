@@ -12,10 +12,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeWelcomeBack => 'Welcome back';
 
   @override
+  String get settingsTitle => 'Settings';
+
+  @override
   String get settingsAppearance => 'Appearance';
 
   @override
+  String get settingsThemeMode => 'Theme';
+
+  @override
+  String get settingsThemePickerTitle => 'Choose theme';
+
+  @override
   String get settingsLanguage => 'Language';
+
+  @override
+  String get settingsLanguagePickerTitle => 'Choose language';
 
   @override
   String get settingsThemeLight => 'Light';
@@ -150,13 +162,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authForgotPasswordSendLink => 'Send link';
 
   @override
-  String get authContactSupportTitle => 'Contact Support';
+  String get contactSupportTitle => 'Contact Support';
 
   @override
-  String get authContactSupportSubtitle => 'Write or call — we\'ll help restore access.';
+  String get contactSupportSubtitle => 'Write or call — we\'re here to help.';
 
   @override
-  String get authContactCallLabel => 'Call';
+  String get contactCallLabel => 'Call';
 
   @override
   String get navHome => 'Home';
@@ -394,6 +406,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileChangePasswordTitle => 'Change password';
 
   @override
+  String get profileSettingsTitle => 'Settings';
+
+  @override
+  String get profileSettingsSubtitle => 'Theme, language';
+
+  @override
   String get authUpdatePasswordTitle => 'Change password';
 
   @override
@@ -598,4 +616,210 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get subscriptionTitle => 'Subscription';
+
+  @override
+  String get subscriptionStatusActive => 'Active';
+
+  @override
+  String get subscriptionStatusGrace => 'Grace period';
+
+  @override
+  String get subscriptionStatusExpired => 'Expired';
+
+  @override
+  String get subscriptionSourceTrial => 'Free trial';
+
+  @override
+  String get subscriptionSourcePaid => 'Paid';
+
+  @override
+  String subscriptionWarningBanner(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Your subscription expires in $n days. Renew to avoid interruption.',
+      one: 'Your subscription expires in 1 day. Renew to avoid interruption.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String subscriptionGraceBanner(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Subscription expired. $n days of grace period left.',
+      one: 'Subscription expired. 1 day of grace period left.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get subscriptionExpiredBanner => 'Subscription expired. Renew to use core features.';
+
+  @override
+  String subscriptionPlanCardPerTable(int price, String currency) {
+    return '$price $currency / table / month';
+  }
+
+  @override
+  String subscriptionPlanCardMonthly(int tableCount, int monthly, String currency) {
+    return '× $tableCount tables = $monthly $currency / month';
+  }
+
+  @override
+  String get subscriptionDetailNextPayment => 'Next payment';
+
+  @override
+  String get subscriptionDetailLastPayment => 'Last payment';
+
+  @override
+  String get subscriptionDetailStatus => 'Status';
+
+  @override
+  String get subscriptionPaymentHistoryTitle => 'Payment history';
+
+  @override
+  String get subscriptionPaymentHistoryEmpty => 'No payments yet';
+
+  @override
+  String subscriptionPaymentItemSummary(int months, int tableCount) {
+    return '$months months × $tableCount tables';
+  }
+
+  @override
+  String subscriptionAmountWithCurrency(int amount, String currency) {
+    return '$amount $currency';
+  }
+
+  @override
+  String get subscriptionContinueCta => 'Continue subscription';
+
+  @override
+  String get subscriptionCheckoutTitle => 'Checkout';
+
+  @override
+  String subscriptionCheckoutSummary(int tableCount, int price, int monthly, String currency) {
+    return '$tableCount tables × $price $currency = $monthly $currency / month';
+  }
+
+  @override
+  String get subscriptionCheckoutDuration => 'Duration';
+
+  @override
+  String subscriptionCheckoutMonthsLabel(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n months',
+      one: '1 month',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get subscriptionCheckoutTotal => 'Total';
+
+  @override
+  String subscriptionCheckoutTotalLine(int months, int monthly, int total, String currency) {
+    return '$months months × $monthly $currency = $total $currency';
+  }
+
+  @override
+  String subscriptionCheckoutNewEndDate(String date) {
+    return 'New end date: $date';
+  }
+
+  @override
+  String get subscriptionCheckoutPay => 'Pay';
+
+  @override
+  String get subscriptionCheckoutNoTablesTitle => 'No tables yet';
+
+  @override
+  String get subscriptionCheckoutNoTablesSubtitle => 'Add at least one table to subscribe.';
+
+  @override
+  String get subscriptionCheckoutGoToVenues => 'Go to venues';
+
+  @override
+  String get subscriptionPaymentMockTitle => 'Mock payment';
+
+  @override
+  String get subscriptionPaymentMockSubtitle => 'Real payment integration is coming soon. Simulate the outcome below.';
+
+  @override
+  String get subscriptionPaymentSimulateSuccess => 'Simulate success';
+
+  @override
+  String get subscriptionPaymentSimulateFailure => 'Simulate failure';
+
+  @override
+  String get subscriptionPaymentSuccessTitle => 'Payment successful';
+
+  @override
+  String subscriptionPaymentSuccessBody(String date) {
+    return 'Subscription extended until $date.';
+  }
+
+  @override
+  String get subscriptionPaymentFailedTitle => 'Payment failed';
+
+  @override
+  String get subscriptionPaymentFailedBody => 'Something went wrong with the payment. Please try again.';
+
+  @override
+  String get subscriptionPaymentRetry => 'Try again';
+
+  @override
+  String get subscriptionPaymentClose => 'Close';
+
+  @override
+  String get subscriptionBlockedTitle => 'Subscription required';
+
+  @override
+  String get subscriptionBlockedSubtitle => 'Renew your subscription to use core features.';
+
+  @override
+  String get subscriptionBlockedRenew => 'Renew now';
+
+  @override
+  String get subscriptionBlockedCancel => 'Not now';
+
+  @override
+  String get subscriptionErrorTitle => 'Couldn\'t load subscription';
+
+  @override
+  String get subscriptionErrorSubtitle => 'Check your connection and try again.';
+
+  @override
+  String get subscriptionContactSupportAction => 'Need help? Contact support';
+
+  @override
+  String profileSubscriptionExpiresIn(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Expires in $n days',
+      one: 'Expires in 1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String profileSubscriptionGrace(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Grace · $n days left',
+      one: 'Grace · 1 day left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileSubscriptionExpired => 'Expired';
 }

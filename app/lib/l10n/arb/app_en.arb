@@ -1,8 +1,12 @@
 {
   "@@locale": "en",
   "homeWelcomeBack": "Welcome back",
+  "settingsTitle": "Settings",
   "settingsAppearance": "Appearance",
+  "settingsThemeMode": "Theme",
+  "settingsThemePickerTitle": "Choose theme",
   "settingsLanguage": "Language",
+  "settingsLanguagePickerTitle": "Choose language",
   "settingsThemeLight": "Light",
   "settingsThemeDark": "Dark",
   "settingsThemeSystem": "System",
@@ -47,9 +51,9 @@
   "authForgotPasswordNoLink": "Link not arriving?",
   "authForgotPasswordContactUs": "Contact us — WhatsApp, Telegram, email, call",
   "authForgotPasswordSendLink": "Send link",
-  "authContactSupportTitle": "Contact Support",
-  "authContactSupportSubtitle": "Write or call — we'll help restore access.",
-  "authContactCallLabel": "Call",
+  "contactSupportTitle": "Contact Support",
+  "contactSupportSubtitle": "Write or call — we're here to help.",
+  "contactCallLabel": "Call",
   "navHome": "Home",
   "navReport": "Reports",
   "navProfile": "Profile",
@@ -158,6 +162,8 @@
     }
   },
   "profileChangePasswordTitle": "Change password",
+  "profileSettingsTitle": "Settings",
+  "profileSettingsSubtitle": "Theme, language",
   "authUpdatePasswordTitle": "Change password",
   "authUpdatePasswordHint": "Minimum 8 characters. Use letters, numbers and special characters.",
   "authUpdatePasswordLoginLabel": "Login / Email",
@@ -255,5 +261,179 @@
         "type": "int"
       }
     }
-  }
+  },
+  "subscriptionTitle": "Subscription",
+  "subscriptionStatusActive": "Active",
+  "subscriptionStatusGrace": "Grace period",
+  "subscriptionStatusExpired": "Expired",
+  "subscriptionSourceTrial": "Free trial",
+  "subscriptionSourcePaid": "Paid",
+  "subscriptionWarningBanner": "{n, plural, =1{Your subscription expires in 1 day. Renew to avoid interruption.} other{Your subscription expires in {n} days. Renew to avoid interruption.}}",
+  "@subscriptionWarningBanner": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "subscriptionGraceBanner": "{n, plural, =1{Subscription expired. 1 day of grace period left.} other{Subscription expired. {n} days of grace period left.}}",
+  "@subscriptionGraceBanner": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "subscriptionExpiredBanner": "Subscription expired. Renew to use core features.",
+  "subscriptionPlanCardPerTable": "{price} {currency} / table / month",
+  "@subscriptionPlanCardPerTable": {
+    "placeholders": {
+      "price": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionPlanCardMonthly": "× {tableCount} tables = {monthly} {currency} / month",
+  "@subscriptionPlanCardMonthly": {
+    "placeholders": {
+      "tableCount": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionDetailNextPayment": "Next payment",
+  "subscriptionDetailLastPayment": "Last payment",
+  "subscriptionDetailStatus": "Status",
+  "subscriptionPaymentHistoryTitle": "Payment history",
+  "subscriptionPaymentHistoryEmpty": "No payments yet",
+  "subscriptionPaymentItemSummary": "{months} months × {tableCount} tables",
+  "@subscriptionPaymentItemSummary": {
+    "placeholders": {
+      "months": {
+        "type": "int"
+      },
+      "tableCount": {
+        "type": "int"
+      }
+    }
+  },
+  "subscriptionAmountWithCurrency": "{amount} {currency}",
+  "@subscriptionAmountWithCurrency": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionContinueCta": "Continue subscription",
+  "subscriptionCheckoutTitle": "Checkout",
+  "subscriptionCheckoutSummary": "{tableCount} tables × {price} {currency} = {monthly} {currency} / month",
+  "@subscriptionCheckoutSummary": {
+    "placeholders": {
+      "tableCount": {
+        "type": "int"
+      },
+      "price": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionCheckoutDuration": "Duration",
+  "subscriptionCheckoutMonthsLabel": "{n, plural, =1{1 month} other{{n} months}}",
+  "@subscriptionCheckoutMonthsLabel": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "subscriptionCheckoutTotal": "Total",
+  "subscriptionCheckoutTotalLine": "{months} months × {monthly} {currency} = {total} {currency}",
+  "@subscriptionCheckoutTotalLine": {
+    "placeholders": {
+      "months": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionCheckoutNewEndDate": "New end date: {date}",
+  "@subscriptionCheckoutNewEndDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionCheckoutPay": "Pay",
+  "subscriptionCheckoutNoTablesTitle": "No tables yet",
+  "subscriptionCheckoutNoTablesSubtitle": "Add at least one table to subscribe.",
+  "subscriptionCheckoutGoToVenues": "Go to venues",
+  "subscriptionPaymentMockTitle": "Mock payment",
+  "subscriptionPaymentMockSubtitle": "Real payment integration is coming soon. Simulate the outcome below.",
+  "subscriptionPaymentSimulateSuccess": "Simulate success",
+  "subscriptionPaymentSimulateFailure": "Simulate failure",
+  "subscriptionPaymentSuccessTitle": "Payment successful",
+  "subscriptionPaymentSuccessBody": "Subscription extended until {date}.",
+  "@subscriptionPaymentSuccessBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionPaymentFailedTitle": "Payment failed",
+  "subscriptionPaymentFailedBody": "Something went wrong with the payment. Please try again.",
+  "subscriptionPaymentRetry": "Try again",
+  "subscriptionPaymentClose": "Close",
+  "subscriptionBlockedTitle": "Subscription required",
+  "subscriptionBlockedSubtitle": "Renew your subscription to use core features.",
+  "subscriptionBlockedRenew": "Renew now",
+  "subscriptionBlockedCancel": "Not now",
+  "subscriptionErrorTitle": "Couldn't load subscription",
+  "subscriptionErrorSubtitle": "Check your connection and try again.",
+  "subscriptionContactSupportAction": "Need help? Contact support",
+  "profileSubscriptionExpiresIn": "{n, plural, =1{Expires in 1 day} other{Expires in {n} days}}",
+  "@profileSubscriptionExpiresIn": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "profileSubscriptionGrace": "{n, plural, =1{Grace · 1 day left} other{Grace · {n} days left}}",
+  "@profileSubscriptionGrace": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "profileSubscriptionExpired": "Expired"
 }
