@@ -9,6 +9,7 @@ abstract final class AppRoutes {
   static const home = '/home';
   static const report = '/report';
   static const profile = '/profile';
+  static const settings = '/settings';
   static const tableForm = '/tables/form';
   static const venueForm = '/venues/form';
   static const venuesList = '/venues';

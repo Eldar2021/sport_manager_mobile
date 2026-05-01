@@ -48,6 +48,19 @@ class UserProfileExtraData extends StatelessWidget {
                 ),
                 onTap: () => context.push(AppRoutes.updatePassword),
               ),
+              const Divider(),
+              ProfileItemTile(
+                title: context.l10n.profileSettingsTitle,
+                subtitle: context.l10n.profileSettingsSubtitle,
+                iconBgColor: context.colors.primary.withValues(
+                  alpha: AppOpacity.tint,
+                ),
+                icon: Icon(
+                  Icons.settings_outlined,
+                  color: context.colors.primary,
+                ),
+                onTap: () => context.push(AppRoutes.settings),
+              ),
             ],
           ),
         ),

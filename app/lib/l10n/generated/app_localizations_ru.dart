@@ -12,10 +12,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeWelcomeBack => 'С возвращением';
 
   @override
+  String get settingsTitle => 'Настройки';
+
+  @override
   String get settingsAppearance => 'Внешний вид';
 
   @override
+  String get settingsThemeMode => 'Тема';
+
+  @override
+  String get settingsThemePickerTitle => 'Выберите тему';
+
+  @override
   String get settingsLanguage => 'Язык';
+
+  @override
+  String get settingsLanguagePickerTitle => 'Выберите язык';
 
   @override
   String get settingsThemeLight => 'Светлая';
@@ -396,6 +408,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profileChangePasswordTitle => 'Сменить пароль';
+
+  @override
+  String get profileSettingsTitle => 'Настройки';
+
+  @override
+  String get profileSettingsSubtitle => 'Тема, язык';
 
   @override
   String get authUpdatePasswordTitle => 'Сменить пароль';

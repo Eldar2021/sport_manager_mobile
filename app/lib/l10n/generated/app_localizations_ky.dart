@@ -12,10 +12,22 @@ class AppLocalizationsKy extends AppLocalizations {
   String get homeWelcomeBack => 'Кайра кош келиңиз';
 
   @override
+  String get settingsTitle => 'Жөндөөлөр';
+
+  @override
   String get settingsAppearance => 'Көрүнүш';
 
   @override
+  String get settingsThemeMode => 'Тема';
+
+  @override
+  String get settingsThemePickerTitle => 'Теманы тандаңыз';
+
+  @override
   String get settingsLanguage => 'Тил';
+
+  @override
+  String get settingsLanguagePickerTitle => 'Тилди тандаңыз';
 
   @override
   String get settingsThemeLight => 'Жарык';
@@ -387,6 +399,12 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get profileChangePasswordTitle => 'Сырсөздү өзгөртүү';
+
+  @override
+  String get profileSettingsTitle => 'Жөндөөлөр';
+
+  @override
+  String get profileSettingsSubtitle => 'Тема, тил';
 
   @override
   String get authUpdatePasswordTitle => 'Сырсөздү өзгөртүү';

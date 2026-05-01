@@ -99,17 +99,41 @@ abstract class AppLocalizations {
   /// **'Welcome back'**
   String get homeWelcomeBack;
 
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
   /// No description provided for @settingsAppearance.
   ///
   /// In en, this message translates to:
   /// **'Appearance'**
   String get settingsAppearance;
 
+  /// No description provided for @settingsThemeMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsThemeMode;
+
+  /// No description provided for @settingsThemePickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose theme'**
+  String get settingsThemePickerTitle;
+
   /// No description provided for @settingsLanguage.
   ///
   /// In en, this message translates to:
   /// **'Language'**
   String get settingsLanguage;
+
+  /// No description provided for @settingsLanguagePickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose language'**
+  String get settingsLanguagePickerTitle;
 
   /// No description provided for @settingsThemeLight.
   ///
@@ -788,6 +812,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change password'**
   String get profileChangePasswordTitle;
+
+  /// No description provided for @profileSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get profileSettingsTitle;
+
+  /// No description provided for @profileSettingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme, language'**
+  String get profileSettingsSubtitle;
 
   /// No description provided for @authUpdatePasswordTitle.
   ///

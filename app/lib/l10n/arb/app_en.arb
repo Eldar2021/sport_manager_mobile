@@ -1,8 +1,12 @@
 {
   "@@locale": "en",
   "homeWelcomeBack": "Welcome back",
+  "settingsTitle": "Settings",
   "settingsAppearance": "Appearance",
+  "settingsThemeMode": "Theme",
+  "settingsThemePickerTitle": "Choose theme",
   "settingsLanguage": "Language",
+  "settingsLanguagePickerTitle": "Choose language",
   "settingsThemeLight": "Light",
   "settingsThemeDark": "Dark",
   "settingsThemeSystem": "System",
@@ -158,6 +162,8 @@
     }
   },
   "profileChangePasswordTitle": "Change password",
+  "profileSettingsTitle": "Settings",
+  "profileSettingsSubtitle": "Theme, language",
   "authUpdatePasswordTitle": "Change password",
   "authUpdatePasswordHint": "Minimum 8 characters. Use letters, numbers and special characters.",
   "authUpdatePasswordLoginLabel": "Login / Email",
