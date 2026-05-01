@@ -12,10 +12,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeWelcomeBack => 'Welcome back';
 
   @override
+  String get settingsTitle => 'Settings';
+
+  @override
   String get settingsAppearance => 'Appearance';
 
   @override
+  String get settingsThemeMode => 'Theme';
+
+  @override
+  String get settingsThemePickerTitle => 'Choose theme';
+
+  @override
   String get settingsLanguage => 'Language';
+
+  @override
+  String get settingsLanguagePickerTitle => 'Choose language';
 
   @override
   String get settingsThemeLight => 'Light';
@@ -392,6 +404,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileChangePasswordTitle => 'Change password';
+
+  @override
+  String get profileSettingsTitle => 'Settings';
+
+  @override
+  String get profileSettingsSubtitle => 'Theme, language';
 
   @override
   String get authUpdatePasswordTitle => 'Change password';

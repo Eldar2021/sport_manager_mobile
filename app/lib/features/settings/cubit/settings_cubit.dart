@@ -19,7 +19,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
     emit(
       SettingsState(
-        themeMode: themeIndex != null ? ThemeMode.values[themeIndex] : ThemeMode.light,
+        themeMode: _getThemeMode(themeIndex),
         locale: Locale(localeCode ?? 'en'),
       ),
     );
@@ -39,5 +39,14 @@ class SettingsCubit extends Cubit<SettingsState> {
       key: _localeKey,
       value: locale.languageCode,
     );
+  }
+
+  ThemeMode _getThemeMode(int? themeIndex) {
+    try {
+      if (themeIndex != null) return ThemeMode.values[themeIndex];
+      return ThemeMode.light;
+    } on Object catch (_) {
+      return ThemeMode.light;
+    }
   }
 }
