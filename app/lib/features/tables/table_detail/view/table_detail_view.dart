@@ -21,7 +21,8 @@ class _TableDetailViewState extends State<TableDetailView> {
     super.initState();
     _tableCubit = TableDetailCubit(
       table: widget.table,
-      repository: GetIt.I<SessionRepository>(),
+      sessionRepository: GetIt.I<SessionRepository>(),
+      facilityRepository: GetIt.I<FacilityRepository>(),
     );
   }
 

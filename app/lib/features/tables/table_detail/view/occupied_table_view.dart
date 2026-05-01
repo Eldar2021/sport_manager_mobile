@@ -72,12 +72,6 @@ class _OccupiedTableViewState extends State<OccupiedTableView> {
         title: Text(
           widget.table.name ?? context.l10n.homeTableTitle(widget.table.number),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert_rounded),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: BlocProvider.value(
         value: _sessionCubit,
