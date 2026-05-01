@@ -56,7 +56,10 @@ class LanguagePickerSheet extends StatelessWidget {
 }
 
 class _LanguageOption extends StatelessWidget {
-  const _LanguageOption({required this.locale, required this.isSelected});
+  const _LanguageOption({
+    required this.locale,
+    required this.isSelected,
+  });
 
   final Locale locale;
   final bool isSelected;
@@ -69,7 +72,9 @@ class _LanguageOption extends StatelessWidget {
       selected: isSelected,
       leading: DecoratedBox(
         decoration: BoxDecoration(
-          color: (isSelected ? accent : context.colors.onSurfaceVariant).withValues(alpha: AppOpacity.tint),
+          color: (isSelected ? accent : context.colors.onSurfaceVariant).withValues(
+            alpha: AppOpacity.tint,
+          ),
           borderRadius: BorderRadius.circular(AppSpacing.x2),
         ),
         child: SizedBox(
@@ -92,7 +97,12 @@ class _LanguageOption extends StatelessWidget {
           fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
         ),
       ),
-      trailing: isSelected ? Icon(Icons.check_circle_rounded, color: accent) : null,
+      trailing: isSelected
+          ? Icon(
+              Icons.check_circle_rounded,
+              color: accent,
+            )
+          : null,
       onTap: () {
         context.read<SettingsCubit>().setLocale(locale);
         Navigator.of(context).pop();

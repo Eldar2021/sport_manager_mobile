@@ -56,7 +56,10 @@ class ThemeModePickerSheet extends StatelessWidget {
 }
 
 class _ThemeModeOption extends StatelessWidget {
-  const _ThemeModeOption({required this.mode, required this.isSelected});
+  const _ThemeModeOption({
+    required this.mode,
+    required this.isSelected,
+  });
 
   final ThemeMode mode;
   final bool isSelected;
@@ -77,7 +80,12 @@ class _ThemeModeOption extends StatelessWidget {
           fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
         ),
       ),
-      trailing: isSelected ? Icon(Icons.check_circle_rounded, color: accent) : null,
+      trailing: isSelected
+          ? Icon(
+              Icons.check_circle_rounded,
+              color: accent,
+            )
+          : null,
       onTap: () {
         context.read<SettingsCubit>().setThemeMode(mode);
         Navigator.of(context).pop();
@@ -85,15 +93,19 @@ class _ThemeModeOption extends StatelessWidget {
     );
   }
 
-  IconData _iconFor(ThemeMode mode) => switch (mode) {
-    ThemeMode.light => Icons.light_mode_outlined,
-    ThemeMode.dark => Icons.dark_mode_outlined,
-    ThemeMode.system => Icons.brightness_auto_outlined,
-  };
+  IconData _iconFor(ThemeMode mode) {
+    return switch (mode) {
+      ThemeMode.light => Icons.light_mode_outlined,
+      ThemeMode.dark => Icons.dark_mode_outlined,
+      ThemeMode.system => Icons.brightness_auto_outlined,
+    };
+  }
 
-  String _labelFor(BuildContext context, ThemeMode mode) => switch (mode) {
-    ThemeMode.light => context.l10n.settingsThemeLight,
-    ThemeMode.dark => context.l10n.settingsThemeDark,
-    ThemeMode.system => context.l10n.settingsThemeSystem,
-  };
+  String _labelFor(BuildContext context, ThemeMode mode) {
+    return switch (mode) {
+      ThemeMode.light => context.l10n.settingsThemeLight,
+      ThemeMode.dark => context.l10n.settingsThemeDark,
+      ThemeMode.system => context.l10n.settingsThemeSystem,
+    };
+  }
 }
