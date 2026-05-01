@@ -29,6 +29,16 @@ final class FacilityModule extends BaseDiModule {
       )
       ..registerLazySingleton<FacilityRepository>(
         () => FacilityRepository(sl<FacilityRemoteSource>()),
+      )
+      ..registerLazySingleton<SessionRemoteSource>(
+        () => Env.isMock
+            ? SessionRemoteSourceMock()
+            : SessionRemoteSourceImpl(
+                sl<ApiClient>(instanceName: ApiClient.bearerInstance),
+              ),
+      )
+      ..registerLazySingleton<SessionRepository>(
+        () => SessionRepository(sl<SessionRemoteSource>()),
       );
   }
 }

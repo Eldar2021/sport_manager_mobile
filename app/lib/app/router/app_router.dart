@@ -107,6 +107,11 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
         path: AppRoutes.tableForm,
         builder: (_, state) => TableFormView(state.extra! as TableFormExtra),
       ),
+      GoRoute(
+        path: AppRoutes.tableDetail,
+        redirect: (_, state) => state.extra is TableModel ? null : AppRoutes.home,
+        builder: (_, state) => TableDetailView(state.extra! as TableModel),
+      ),
 
       GoRoute(
         path: AppRoutes.managers,

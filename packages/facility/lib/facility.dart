@@ -1,6 +1,7 @@
-/// Facility data layer — venues, tables models, sources, repository
+/// Facility data layer — venues, tables, sessions models, sources, repositories
 library;
 
+export 'exceptions/session_exception.dart';
 export 'exceptions/table_exception.dart';
 export 'exceptions/venue_exception.dart';
 export 'models/currency.dart';
@@ -13,4 +14,5 @@ export 'models/tarif_type.dart';
 export 'models/venue_form_param.dart';
 export 'models/venue_model.dart';
 export 'repository/facility_repository.dart';
+export 'repository/session_repository.dart';
 export 'source/source.dart';
