@@ -164,7 +164,7 @@ class _Body extends StatelessWidget {
           style: context.textTheme.titleSmall,
         ),
         const SizedBox(height: AppSpacing.x2),
-        FraudFlagList(flags: summary.flags),
+        FraudFlagList(summary.flags),
         const SizedBox(height: AppSpacing.x6),
         ManagerSessionLog(
           cubit: cubit,

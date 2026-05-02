@@ -4,7 +4,7 @@ import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class FraudFlagList extends StatelessWidget {
-  const FraudFlagList({required this.flags, super.key});
+  const FraudFlagList(this.flags, {super.key});
 
   final List<FraudFlagModel> flags;
 
@@ -18,10 +18,16 @@ class FraudFlagList extends StatelessWidget {
           padding: const EdgeInsets.all(AppSpacing.x4),
           child: Row(
             children: [
-              Icon(Icons.verified_outlined, color: context.appColors.success),
+              Icon(
+                Icons.verified_outlined,
+                color: context.appColors.success,
+              ),
               const SizedBox(width: AppSpacing.x3),
               Expanded(
-                child: Text(l10n.reportsFraudNoFlags, style: context.textTheme.bodyMedium),
+                child: Text(
+                  l10n.reportsFraudNoFlags,
+                  style: context.textTheme.bodyMedium,
+                ),
               ),
             ],
           ),
@@ -34,7 +40,7 @@ class FraudFlagList extends StatelessWidget {
         children: [
           for (var i = 0; i < flags.length; i++) ...[
             if (i != 0) const Divider(height: 1),
-            _FlagRow(flag: flags[i]),
+            _FlagRow(flags[i]),
           ],
         ],
       ),
@@ -43,7 +49,7 @@ class FraudFlagList extends StatelessWidget {
 }
 
 class _FlagRow extends StatelessWidget {
-  const _FlagRow({required this.flag});
+  const _FlagRow(this.flag);
 
   final FraudFlagModel flag;
 
@@ -98,7 +104,10 @@ class _FlagRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(_label(l10n), style: context.textTheme.bodyMedium),
+                Text(
+                  _label(l10n),
+                  style: context.textTheme.bodyMedium,
+                ),
                 if (flag.benchmark > 0)
                   Padding(
                     padding: const EdgeInsets.only(top: 2),
