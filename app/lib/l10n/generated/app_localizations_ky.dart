@@ -844,9 +844,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsPeriodCustom => 'Мөөнөт';
 
   @override
-  String get reportsAllVenues => 'Бардык залдар';
-
-  @override
   String get reportsVenuePickerTitle => 'Залды тандаңыз';
 
   @override
@@ -871,16 +868,10 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsRevenueChartCompareToggle => 'Мурунку мөөнөт менен салыштыруу';
 
   @override
-  String get reportsTopTablesTitle => 'Топ столдор';
-
-  @override
-  String get reportsTopTablesSeeAll => 'Бардык столдор';
+  String get reportsTablesTitle => 'Столдор';
 
   @override
   String get reportsTopManagersTitle => 'Менеджерлер';
-
-  @override
-  String get reportsTopManagersSeeAll => 'Бардык менеджерлер';
 
   @override
   String get reportsTableLabel => 'Стол';
@@ -892,72 +883,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsCancelledShort => 'жокко чыгаруу';
 
   @override
-  String get reportsForecastSummaryTitle => 'Болжом';
-
-  @override
-  String get reportsForecastVsPrevious => 'мурунку мөөнөт менен';
-
-  @override
-  String get reportsForecastNoComparison => 'Тарых али жетишсиз';
-
-  @override
-  String get reportsManagerRiskLow => 'Төмөн тобокел';
-
-  @override
-  String get reportsManagerRiskMedium => 'Текшерүү керек';
-
-  @override
-  String get reportsManagerRiskHigh => 'Жогорку — азыр текшериңиз';
-
-  @override
-  String get reportsRiskScoreTitle => 'Тобокел упайы';
-
-  @override
-  String get reportsRiskScoreExplain =>
-      'Жокко чыгаруу, арзандатуу, түнкү активдүүлүк жана сессия үлгүлөрүнөн эсептелет. Жогорку упай — лог карап чыгуу белгиси.';
-
-  @override
-  String get reportsFraudSignalsTitle => 'Тобокел сигналдары';
-
-  @override
-  String get reportsFraudNoFlags => 'Сигнал жок — командасынын ченеминде иштеп жатат.';
-
-  @override
-  String get reportsFraudHighCancelRate => 'Жокко чыгаруу мааниси жогору';
-
-  @override
-  String get reportsFraudHighCancel60s => '60 сек ичинде көп жокко чыгаруу';
-
-  @override
-  String get reportsFraudHighDiscountRate => 'Көп арзандатуу';
-
-  @override
-  String get reportsFraudHighAvgDiscount => 'Орт. арзандатуу жогору';
-
-  @override
-  String get reportsFraudLongPauseAvg => 'Узун паузалар';
-
-  @override
-  String get reportsFraudManyPausePerSession => 'Сессияда көп пауза';
-
-  @override
-  String get reportsFraudOffHoursActivity => 'Жумуш сааты сыртында активдүүлүк';
-
-  @override
-  String get reportsFraudShortSessionCluster => 'Кыска сессиялар сериясы';
-
-  @override
-  String get reportsFraudTariffOverride => 'Тариф өзгөрүшү';
-
-  @override
-  String get reportsFraudLowShiftRevenue => 'Сменда киреше төмөн';
-
-  @override
-  String reportsFraudMultiplier(String x) {
-    return '×$x орточодон';
-  }
-
-  @override
   String get reportsSessionLogTitle => 'Сессия логу';
 
   @override
@@ -967,13 +892,16 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsLogFilterCancelled => 'Жокко чыгарылган';
 
   @override
-  String get reportsLogFilterDiscounted => 'Арзандатылган';
-
-  @override
-  String get reportsLogFilterShort => 'Кыска';
-
-  @override
   String get reportsLogEmpty => 'Бул фильтрде сессия жок.';
+
+  @override
+  String get reportsForecastSummaryTitle => 'Болжом';
+
+  @override
+  String get reportsForecastVsPrevious => 'мурунку мөөнөт менен';
+
+  @override
+  String get reportsForecastNoComparison => 'Тарых али жетишсиз';
 
   @override
   String get reportsTableTrendTitle => 'Киреше трендине';

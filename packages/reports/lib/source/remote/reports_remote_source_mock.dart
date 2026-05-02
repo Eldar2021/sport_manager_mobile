@@ -5,14 +5,14 @@ import 'package:reports/reports.dart';
 
 /// Synthetic data store used while the backend is not yet wired. Generates
 /// ~90 days of session-level data so every report endpoint has something
-/// realistic (and a manager seeded with fraud-signal patterns) to render.
+/// realistic to render. Deliberately MVP-scoped — no fraud-signal logic,
+/// no per-manager risk scoring, just plain revenue and session counts.
 final class ReportsRemoteSourceMock implements ReportsRemoteSource {
   ReportsRemoteSourceMock() : _store = _MockStore.seed();
 
   static const _delay = Duration(milliseconds: 400);
 
   final _MockStore _store;
-  final Set<String> _dismissed = <String>{};
 
   @override
   Future<List<ReportVenueModel>> getVenues() async {
@@ -56,25 +56,15 @@ final class ReportsRemoteSourceMock implements ReportsRemoteSource {
   }
 
   @override
-  Future<List<TableReportRowModel>> getTopTables(
-    ReportFilter filter, {
-    int limit = 5,
-  }) async {
+  Future<List<TableReportRowModel>> getTables(ReportFilter filter) async {
     await Future<void>.delayed(_delay);
-    final rows = _store.tableRows(filter)..sort((a, b) => b.revenue.compareTo(a.revenue));
-    return rows.take(limit).toList(growable: false);
+    return _store.tableRows(filter);
   }
 
   @override
   Future<List<ManagerReportRowModel>> getManagers(ReportFilter filter) async {
     await Future<void>.delayed(_delay);
     return _store.managerRows(filter);
-  }
-
-  @override
-  Future<List<InsightModel>> getInsights(ReportFilter filter) async {
-    await Future<void>.delayed(_delay);
-    return _store.insights(filter).where((i) => !_dismissed.contains(i.id)).toList(growable: false);
   }
 
   @override
@@ -100,15 +90,11 @@ final class ReportsRemoteSourceMock implements ReportsRemoteSource {
     await Future<void>.delayed(_delay);
     return _store.tableDetail(tableId, filter);
   }
-
-  @override
-  Future<void> dismissInsight(String id) async {
-    await Future<void>.delayed(const Duration(milliseconds: 200));
-    _dismissed.add(id);
-  }
 }
 
 // ───────────────────────── synthetic data engine ─────────────────────────
+
+enum _MockSessionStatus { completed, cancelled }
 
 class _MockTable {
   _MockTable({
@@ -118,6 +104,7 @@ class _MockTable {
     required this.tarifAmount,
     this.name,
   });
+
   final String id;
   final String venueId;
   final int number;
@@ -130,18 +117,11 @@ class _MockManager {
     required this.id,
     required this.name,
     required this.username,
-    required this.honesty,
-    required this.discountBias,
   });
+
   final String id;
   final String name;
   final String username;
-
-  /// 0.0 = saint, 1.0 = bandit. Used to bias cancel/short/off-hours rates.
-  final double honesty;
-
-  /// 0.0 = no discount, 1.0 = always discounts heavily. Independent signal.
-  final double discountBias;
 }
 
 class _MockSession {
@@ -154,19 +134,18 @@ class _MockSession {
     required this.durationSeconds,
     required this.status,
     required this.totalAmount,
-    required this.discountPercent,
-    this.cancelReason,
   });
+
   final String id;
   final String tableId;
   final String managerId;
   final DateTime startedAt;
   final DateTime endedAt;
   final int durationSeconds;
-  final ManagerSessionLogStatus status;
+  final _MockSessionStatus status;
   final int totalAmount;
-  final int discountPercent;
-  final String? cancelReason;
+
+  bool get isCompleted => status == _MockSessionStatus.completed;
 }
 
 class _MockStore {
@@ -204,22 +183,16 @@ class _MockStore {
         id: 'user-101',
         name: 'Айбек Асанов',
         username: 'aibek',
-        honesty: 0.9, // bandit pattern
-        discountBias: 0.7,
       ),
       _MockManager(
         id: 'user-102',
         name: 'Нурлан Беков',
         username: 'nurlan',
-        honesty: 0.05,
-        discountBias: 0.05,
       ),
       _MockManager(
         id: 'user-103',
         name: 'Данияр Токтогул',
         username: 'daniyar',
-        honesty: 0.2,
-        discountBias: 0.15,
       ),
     ];
 
@@ -234,23 +207,15 @@ class _MockStore {
       final trendBoost = 0.8 + (d / 90) * 0.4;
 
       for (final table in tables) {
-        // Around 4 sessions per table per day on average, scaled.
         final sessionCount = (rng.nextDouble() * 6 * weekendBoost * trendBoost).round();
         for (var s = 0; s < sessionCount; s++) {
           final manager = managers[rng.nextInt(managers.length)];
-          // Mostly daytime, but bandits drift into off-hours.
-          final hour = manager.honesty > 0.5 && rng.nextDouble() < 0.15
-              ? 1 +
-                    rng.nextInt(6) // 01:00-07:00 → off-hours signal
-              : 11 + rng.nextInt(12); // 11:00-23:00
+          final hour = 11 + rng.nextInt(12); // 11:00-23:00
           final startedAt = DateTime(day.year, day.month, day.day, hour, rng.nextInt(60));
 
-          // CANCELLED bias: bandits cancel a lot, especially under 60s.
-          final cancelChance = 0.02 + manager.honesty * 0.10;
-          if (rng.nextDouble() < cancelChance) {
-            final cancelDelaySec = manager.honesty > 0.5 && rng.nextDouble() < 0.7
-                ? rng.nextInt(55) // within 60s window
-                : 60 + rng.nextInt(600);
+          // ~3% cancellation rate, broadly applied — no per-manager bias.
+          if (rng.nextDouble() < 0.03) {
+            final cancelDelaySec = 10 + rng.nextInt(120);
             sessions.add(
               _MockSession(
                 id: 'sess-${sessions.length}',
@@ -259,29 +224,17 @@ class _MockStore {
                 startedAt: startedAt,
                 endedAt: startedAt.add(Duration(seconds: cancelDelaySec)),
                 durationSeconds: 0,
-                status: ManagerSessionLogStatus.cancelled,
+                status: _MockSessionStatus.cancelled,
                 totalAmount: 0,
-                discountPercent: 0,
-                cancelReason: cancelDelaySec < 60 ? 'Yanlış başladım' : 'Müşteri vazgeçti',
               ),
             );
             continue;
           }
 
-          // Short-session cluster bias for bandits.
-          final isShortFraud = manager.honesty > 0.5 && rng.nextDouble() < 0.12;
-          final durationMinutes = isShortFraud
-              ? 1 +
-                    rng.nextInt(4) // <5 min
-              : 30 + rng.nextInt(150); // 30-180 min
+          final durationMinutes = 30 + rng.nextInt(150); // 30-180 min
           final durationSec = durationMinutes * 60;
           final endedAt = startedAt.add(Duration(seconds: durationSec));
-
-          // Discount bias.
-          final hasDiscount = rng.nextDouble() < (0.05 + manager.discountBias * 0.4);
-          final discountPercent = hasDiscount ? (5 + rng.nextInt(25)) : 0;
-          final subtotal = (durationMinutes / 60.0 * table.tarifAmount).round();
-          final total = (subtotal * (100 - discountPercent) / 100).round();
+          final total = (durationMinutes / 60.0 * table.tarifAmount).round();
 
           sessions.add(
             _MockSession(
@@ -291,9 +244,8 @@ class _MockStore {
               startedAt: startedAt,
               endedAt: endedAt,
               durationSeconds: durationSec,
-              status: ManagerSessionLogStatus.completed,
+              status: _MockSessionStatus.completed,
               totalAmount: total,
-              discountPercent: discountPercent,
             ),
           );
         }
@@ -327,8 +279,8 @@ class _MockStore {
 
   ReportsSummaryModel summary(ReportRange range, {String? venueId}) {
     final scoped = _filtered(range, venueId: venueId).toList();
-    final completed = scoped.where((s) => s.status == ManagerSessionLogStatus.completed).toList();
-    final cancelled = scoped.where((s) => s.status == ManagerSessionLogStatus.cancelled).length;
+    final completed = scoped.where((s) => s.isCompleted).toList();
+    final cancelled = scoped.where((s) => !s.isCompleted).length;
 
     final revenue = completed.fold<int>(0, (a, s) => a + s.totalAmount);
     final avgDuration = completed.isEmpty
@@ -360,7 +312,7 @@ class _MockStore {
     final scoped = _filtered(
       filter.range,
       venueId: filter.venueId,
-    ).where((s) => s.status == ManagerSessionLogStatus.completed).toList();
+    ).where((s) => s.isCompleted).toList();
     final byDay = <DateTime, _DayBucket>{};
     for (final s in scoped) {
       final key = DateTime(s.startedAt.year, s.startedAt.month, s.startedAt.day);
@@ -387,13 +339,12 @@ class _MockStore {
     final out = <TableReportRowModel>[];
     for (final t in tables) {
       if (filter.venueId != null && t.venueId != filter.venueId) continue;
-      final rows = scoped.where((s) => s.tableId == t.id && s.status == ManagerSessionLogStatus.completed).toList();
-      if (rows.isEmpty) continue;
+      final rows = scoped.where((s) => s.tableId == t.id && s.isCompleted).toList();
       final revenue = rows.fold<int>(0, (a, s) => a + s.totalAmount);
       final prevRevenue = prevScoped
-          .where((s) => s.tableId == t.id && s.status == ManagerSessionLogStatus.completed)
+          .where((s) => s.tableId == t.id && s.isCompleted)
           .fold<int>(0, (a, s) => a + s.totalAmount);
-      final avgDuration = rows.fold<int>(0, (a, s) => a + s.durationSeconds) ~/ rows.length;
+      final avgDuration = rows.isEmpty ? 0 : rows.fold<int>(0, (a, s) => a + s.durationSeconds) ~/ rows.length;
       final periodSeconds = filter.range.length.inSeconds.clamp(1, 1 << 31);
       final occupancy = rows.fold<int>(0, (a, s) => a + s.durationSeconds) / (periodSeconds * 0.5);
       final venue = venues.firstWhere((v) => v.id == t.venueId);
@@ -421,131 +372,19 @@ class _MockStore {
     final scoped = _filtered(filter.range, venueId: filter.venueId).toList();
     final out = <ManagerReportRowModel>[];
 
-    // Compute team-level benchmarks first.
-    var totalCompleted = 0;
-    var totalCancel = 0;
-    var totalDiscounted = 0;
-    var totalDiscountPct = 0;
-    for (final s in scoped) {
-      if (s.status == ManagerSessionLogStatus.cancelled) {
-        totalCancel++;
-      } else {
-        totalCompleted++;
-        if (s.discountPercent > 0) {
-          totalDiscounted++;
-          totalDiscountPct += s.discountPercent;
-        }
-      }
-    }
-    final teamCancelRate = totalCompleted + totalCancel == 0 ? 0.0 : totalCancel / (totalCompleted + totalCancel);
-    final teamDiscountRate = totalCompleted == 0 ? 0.0 : totalDiscounted / totalCompleted;
-    final teamAvgDiscount = totalDiscounted == 0 ? 0.0 : totalDiscountPct / totalDiscounted;
-
     for (final m in managers) {
       final mine = scoped.where((s) => s.managerId == m.id).toList();
-      if (mine.isEmpty) continue;
-      final completed = mine.where((s) => s.status == ManagerSessionLogStatus.completed).toList();
-      final cancelled = mine.where((s) => s.status == ManagerSessionLogStatus.cancelled).toList();
-      final cancel60s = cancelled.where((s) => s.endedAt.difference(s.startedAt).inSeconds < 60).length;
-      final shortSessions = completed.where((s) => s.durationSeconds < 5 * 60).length;
-      final offHours = mine.where((s) => s.startedAt.hour < 8).length;
-      final discounted = completed.where((s) => s.discountPercent > 0).toList();
-      final myCancelRate = mine.isEmpty ? 0.0 : cancelled.length / mine.length;
-      final myDiscountRate = completed.isEmpty ? 0.0 : discounted.length / completed.length;
-      final myAvgDiscount = discounted.isEmpty
-          ? 0.0
-          : discounted.fold<int>(0, (a, s) => a + s.discountPercent) / discounted.length;
-
-      final flags = <FraudFlagModel>[];
-      if (myCancelRate > 2 * teamCancelRate && myCancelRate > 0.05) {
-        flags.add(
-          FraudFlagModel(
-            code: FraudFlagCode.highCancelRate,
-            severity: InsightSeverity.critical,
-            value: myCancelRate,
-            benchmark: teamCancelRate,
-          ),
-        );
-      }
-      if (cancel60s > 5) {
-        flags.add(
-          FraudFlagModel(
-            code: FraudFlagCode.highCancel60s,
-            severity: InsightSeverity.critical,
-            value: cancel60s.toDouble(),
-            benchmark: 2,
-          ),
-        );
-      }
-      if (myDiscountRate > 2 * teamDiscountRate && myDiscountRate > 0.10) {
-        flags.add(
-          FraudFlagModel(
-            code: FraudFlagCode.highDiscountRate,
-            severity: InsightSeverity.warning,
-            value: myDiscountRate,
-            benchmark: teamDiscountRate,
-          ),
-        );
-      }
-      if (myAvgDiscount > 15) {
-        flags.add(
-          FraudFlagModel(
-            code: FraudFlagCode.highAvgDiscount,
-            severity: InsightSeverity.warning,
-            value: myAvgDiscount,
-            benchmark: max(teamAvgDiscount, 1),
-          ),
-        );
-      }
-      if (offHours > 0) {
-        flags.add(
-          FraudFlagModel(
-            code: FraudFlagCode.offHoursActivity,
-            severity: InsightSeverity.warning,
-            value: offHours.toDouble(),
-            benchmark: 0,
-          ),
-        );
-      }
-      if (shortSessions > 5 && completed.isNotEmpty && shortSessions / completed.length > 0.10) {
-        flags.add(
-          FraudFlagModel(
-            code: FraudFlagCode.shortSessionCluster,
-            severity: InsightSeverity.warning,
-            value: shortSessions.toDouble(),
-            benchmark: max(completed.length * 0.05, 1),
-          ),
-        );
-      }
-
-      final score = flags.fold<int>(0, (acc, f) {
-        return acc +
-            switch (f.severity) {
-              InsightSeverity.critical => 35,
-              InsightSeverity.warning => 18,
-              InsightSeverity.info => 6,
-            };
-      });
-      final clamped = score.clamp(0, 100);
-      final band = clamped >= 60
-          ? ManagerRiskBand.red
-          : clamped >= 30
-          ? ManagerRiskBand.yellow
-          : ManagerRiskBand.green;
-
+      final completed = mine.where((s) => s.isCompleted).toList();
+      if (completed.isEmpty) continue;
+      final cancelled = mine.length - completed.length;
       out.add(
         ManagerReportRowModel(
           managerId: m.id,
           name: m.name,
           username: m.username,
-          revenue: completed.fold(0, (a, s) => a + s.totalAmount),
+          revenue: completed.fold<int>(0, (a, s) => a + s.totalAmount),
           sessions: completed.length,
-          cancelCount: cancelled.length,
-          discountedCount: discounted.length,
-          avgDiscountPercent: myAvgDiscount.round(),
-          riskScore: clamped,
-          riskBand: band,
-          flags: flags,
+          cancelCount: cancelled,
           currency: Currency.kgs,
         ),
       );
@@ -554,126 +393,8 @@ class _MockStore {
     return out;
   }
 
-  List<InsightModel> insights(ReportFilter filter) {
-    final out = <InsightModel>[];
-    final managers = managerRows(filter);
-    for (final m in managers) {
-      if (m.riskBand == ManagerRiskBand.red) {
-        out.add(
-          InsightModel(
-            id: 'insight-mgr-${m.managerId}-${filter.range.from.toIso8601String()}',
-            severity: InsightSeverity.critical,
-            title: const {
-              'en': 'Manager needs review',
-              'ru': 'Менеджер требует внимания',
-              'ky': 'Менеджерди карап чыгуу керек',
-            },
-            body: {
-              'en': '${m.name}: ${m.cancelCount} cancels, ${m.flags.length} risk signals',
-              'ru': '${m.name}: ${m.cancelCount} отмен, ${m.flags.length} сигналов риска',
-              'ky': '${m.name}: ${m.cancelCount} жокко чыгаруу, ${m.flags.length} тобокел сигналы',
-            },
-            createdAt: now,
-            acknowledged: false,
-            action: InsightAction(type: InsightActionType.managerDetail, targetId: m.managerId),
-          ),
-        );
-      }
-    }
-
-    // Tables in long decline.
-    final tableRowsList = tableRows(filter);
-    for (final t in tableRowsList.take(2)) {
-      if ((t.deltaPercent ?? 0) <= -20) {
-        out.add(
-          InsightModel(
-            id: 'insight-tbl-${t.tableId}-${filter.range.from.toIso8601String()}',
-            severity: InsightSeverity.warning,
-            title: const {
-              'en': 'Table revenue dropping',
-              'ru': 'Доход стола падает',
-              'ky': 'Стол кирешеси түшүп жатат',
-            },
-            body: {
-              'en': '${t.venueName} · #${t.tableNumber}: ${t.deltaPercent}% vs previous',
-              'ru': '${t.venueName} · №${t.tableNumber}: ${t.deltaPercent}% к прошлому',
-              'ky': '${t.venueName} · №${t.tableNumber}: ${t.deltaPercent}% мурунку менен',
-            },
-            createdAt: now,
-            acknowledged: false,
-            action: InsightAction(type: InsightActionType.tableDetail, targetId: t.tableId),
-          ),
-        );
-      }
-    }
-    return out;
-  }
-
-  ForecastModel forecast(ReportFilter filter) {
-    final series = revenueSeries(filter);
-    final actualPoints = series
-        .map(
-          (p) => ForecastPointModel(
-            bucket: p.bucket,
-            expected: p.revenue,
-            lower: p.revenue,
-            upper: p.revenue,
-            isProjection: false,
-          ),
-        )
-        .toList();
-    if (series.isEmpty) {
-      return const ForecastModel(
-        points: [],
-        projectedTotal: 0,
-        previousPeriodTotal: 0,
-        currency: Currency.kgs,
-      );
-    }
-    // Linear regression over the visible window.
-    final n = series.length;
-    var sumX = 0.0;
-    var sumY = 0.0;
-    var sumXY = 0.0;
-    var sumX2 = 0.0;
-    for (var i = 0; i < n; i++) {
-      sumX += i;
-      sumY += series[i].revenue;
-      sumXY += i * series[i].revenue;
-      sumX2 += i * i;
-    }
-    final slope = (n * sumXY - sumX * sumY) / max(n * sumX2 - sumX * sumX, 1);
-    final intercept = (sumY - slope * sumX) / n;
-    const projDays = 14;
-    final projection = <ForecastPointModel>[];
-    var projTotal = 0;
-    for (var i = 0; i < projDays; i++) {
-      final x = n + i;
-      final base = (intercept + slope * x).clamp(0, double.infinity).round();
-      // Simple weekend boost.
-      final day = series.last.bucket.add(Duration(days: i + 1));
-      final boost = day.weekday >= 6 ? 1.3 : 1.0;
-      final expected = (base * boost).round();
-      projection.add(
-        ForecastPointModel(
-          bucket: day,
-          expected: expected,
-          lower: (expected * 0.85).round(),
-          upper: (expected * 1.15).round(),
-          isProjection: true,
-        ),
-      );
-      projTotal += expected;
-    }
-    final prevSummary = summary(filter.range.previous, venueId: filter.venueId);
-    return ForecastModel(
-      points: [...actualPoints, ...projection],
-      projectedTotal: projTotal,
-      previousPeriodTotal: prevSummary.totalRevenue,
-      currency: Currency.kgs,
-    );
-  }
-
+  /// Manager-detail page payload — KPI summary plus the most recent
+  /// session log entries for the manager, scoped to the filter venue.
   ManagerReportDetailModel managerDetail(String managerId, ReportFilter filter) {
     final rows = managerRows(filter);
     final summary = rows.firstWhere(
@@ -695,16 +416,142 @@ class _MockStore {
           venueName: venue.name,
           startedAt: s.startedAt,
           endedAt: s.endedAt,
-          status: s.status,
+          status: s.isCompleted ? ManagerSessionLogStatus.completed : ManagerSessionLogStatus.cancelled,
           currency: Currency.kgs,
-          durationSeconds: s.status == ManagerSessionLogStatus.completed ? s.durationSeconds : null,
-          totalAmount: s.status == ManagerSessionLogStatus.completed ? s.totalAmount : null,
-          discountPercent: s.status == ManagerSessionLogStatus.completed ? s.discountPercent : null,
-          cancelReason: s.cancelReason,
+          durationSeconds: s.isCompleted ? s.durationSeconds : null,
+          totalAmount: s.isCompleted ? s.totalAmount : null,
+          cancelReason: s.isCompleted ? null : 'Yanlış başladım',
         ),
       );
     }
     return ManagerReportDetailModel(summary: summary, sessionLog: log);
+  }
+
+  /// Forecast for the **calendar period that the filter sits in**:
+  /// linear regression on observed history extended to the end of the
+  /// current calendar month/week/year. The returned `projectedTotal`
+  /// includes both real-so-far revenue and projected remaining-days
+  /// revenue, so the verdict reads as "this is what we'll end up with".
+  /// `previousPeriodTotal` is the equivalent calendar period before
+  /// (last month, last week, last year), giving a meaningful delta.
+  ForecastModel forecast(ReportFilter filter) {
+    final series = revenueSeries(filter);
+    final actualPoints = series
+        .map(
+          (p) => ForecastPointModel(
+            bucket: p.bucket,
+            expected: p.revenue,
+            lower: p.revenue,
+            upper: p.revenue,
+            isProjection: false,
+          ),
+        )
+        .toList();
+    if (series.isEmpty) {
+      return const ForecastModel(
+        points: [],
+        projectedTotal: 0,
+        previousPeriodTotal: 0,
+        currency: Currency.kgs,
+      );
+    }
+
+    // Linear regression on the historical series (slope per day).
+    final n = series.length;
+    var sumX = 0.0;
+    var sumY = 0.0;
+    var sumXY = 0.0;
+    var sumX2 = 0.0;
+    for (var i = 0; i < n; i++) {
+      sumX += i;
+      sumY += series[i].revenue;
+      sumXY += i * series[i].revenue;
+      sumX2 += i * i;
+    }
+    final slope = (n * sumXY - sumX * sumY) / max(n * sumX2 - sumX * sumX, 1);
+    final intercept = (sumY - slope * sumX) / n;
+
+    // Project from `series.last.bucket + 1 day` until the end of the
+    // calendar period that matches `filter.period`. Capped at 60 to
+    // keep the chart readable.
+    final periodEnd = _calendarPeriodEnd(filter.period, now);
+    final lastSeen = series.last.bucket;
+    var projDays = periodEnd.difference(lastSeen).inDays - 1;
+    if (projDays < 0) projDays = 0;
+    if (projDays > 60) projDays = 60;
+
+    final projection = <ForecastPointModel>[];
+    var projTotal = 0;
+    for (var i = 0; i < projDays; i++) {
+      final x = n + i;
+      final base = (intercept + slope * x).clamp(0, double.infinity).round();
+      final day = lastSeen.add(Duration(days: i + 1));
+      final boost = day.weekday >= 6 ? 1.3 : 1.0;
+      final expected = (base * boost).round();
+      projection.add(
+        ForecastPointModel(
+          bucket: day,
+          expected: expected,
+          lower: (expected * 0.85).round(),
+          upper: (expected * 1.15).round(),
+          isProjection: true,
+        ),
+      );
+      projTotal += expected;
+    }
+
+    final realSoFar = series.fold<int>(0, (a, p) => a + p.revenue);
+    final projectedTotal = realSoFar + projTotal;
+
+    final prevRange = _previousCalendarRange(filter.period, now) ?? filter.range.previous;
+    final previousTotal = summary(prevRange, venueId: filter.venueId).totalRevenue;
+
+    return ForecastModel(
+      points: [...actualPoints, ...projection],
+      projectedTotal: projectedTotal,
+      previousPeriodTotal: previousTotal,
+      currency: Currency.kgs,
+    );
+  }
+
+  /// First instant **after** the current calendar period — i.e. the
+  /// boundary that the projection should end at.
+  DateTime _calendarPeriodEnd(ReportPeriod period, DateTime now) {
+    final today = DateTime(now.year, now.month, now.day);
+    return switch (period) {
+      ReportPeriod.today => today.add(const Duration(days: 1)),
+      // ISO week: Monday=1, Sunday=7. End of week = next Monday 00:00.
+      ReportPeriod.week => today.add(Duration(days: 8 - now.weekday)),
+      ReportPeriod.month => DateTime(now.year, now.month + 1),
+      ReportPeriod.year => DateTime(now.year + 1),
+      ReportPeriod.custom => today.add(const Duration(days: 30)),
+    };
+  }
+
+  /// Range covering the **previous** calendar period of the same kind.
+  /// `null` for `custom` — caller falls back to `filter.range.previous`.
+  ReportRange? _previousCalendarRange(ReportPeriod period, DateTime now) {
+    final today = DateTime(now.year, now.month, now.day);
+    return switch (period) {
+      ReportPeriod.today => ReportRange(
+        from: today.subtract(const Duration(days: 1)),
+        to: today,
+      ),
+      ReportPeriod.week => () {
+        final thisWeekStart = today.subtract(Duration(days: now.weekday - 1));
+        final prevWeekStart = thisWeekStart.subtract(const Duration(days: 7));
+        return ReportRange(from: prevWeekStart, to: thisWeekStart);
+      }(),
+      ReportPeriod.month => ReportRange(
+        from: DateTime(now.year, now.month - 1),
+        to: DateTime(now.year, now.month),
+      ),
+      ReportPeriod.year => ReportRange(
+        from: DateTime(now.year - 1),
+        to: DateTime(now.year),
+      ),
+      ReportPeriod.custom => null,
+    };
   }
 
   TableReportDetailModel tableDetail(String tableId, ReportFilter filter) {
@@ -713,9 +560,7 @@ class _MockStore {
       (t) => t.tableId == tableId,
       orElse: () => throw const ReportsException(ReportsErrorCode.notFound),
     );
-    final scoped = _filtered(
-      filter.range,
-    ).where((s) => s.tableId == tableId && s.status == ManagerSessionLogStatus.completed).toList();
+    final scoped = _filtered(filter.range).where((s) => s.tableId == tableId && s.isCompleted).toList();
     final byDay = <DateTime, _DayBucket>{};
     for (final s in scoped) {
       final key = DateTime(s.startedAt.year, s.startedAt.month, s.startedAt.day);
@@ -739,7 +584,11 @@ class _MockStore {
       heatmap[s.startedAt.weekday - 1][s.startedAt.hour] += s.totalAmount;
     }
 
-    return TableReportDetailModel(summary: summary, revenueByDay: revenueByDay, hourHeatmap: heatmap);
+    return TableReportDetailModel(
+      summary: summary,
+      revenueByDay: revenueByDay,
+      hourHeatmap: heatmap,
+    );
   }
 }
 

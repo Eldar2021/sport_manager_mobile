@@ -13,18 +13,24 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
 
   final ReportsRepository _repository;
 
+  /// First load: fetch venues, auto-select the first venue, then refresh
+  /// every section against that venue.
   Future<void> load() async {
-    await Future.wait([
-      loadVenues(),
-      _refreshAll(),
-    ]);
+    await loadVenues();
+    if (state.filter.venueId != null) await _refreshAll();
   }
 
   Future<void> loadVenues() async {
     emit(state.copyWith(venues: const RequestLoading()));
     try {
       final venues = await _repository.getVenues();
-      emit(state.copyWith(venues: RequestSuccess(venues)));
+      final selected = state.filter.venueId ?? (venues.isNotEmpty ? venues.first.id : null);
+      emit(
+        state.copyWith(
+          venues: RequestSuccess(venues),
+          filter: state.filter.copyWith(venueId: selected),
+        ),
+      );
     } on Object catch (e) {
       emit(state.copyWith(venues: RequestFailure(e)));
     }
@@ -39,35 +45,18 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
     await _refreshAll();
   }
 
-  Future<void> changeVenue(String? venueId) async {
-    final next = state.filter.copyWith(
-      venueId: venueId,
-      clearVenue: venueId == null,
-    );
-    emit(state.copyWith(filter: next));
+  Future<void> changeVenue(String venueId) async {
+    if (state.filter.venueId == venueId) return;
+    emit(state.copyWith(filter: state.filter.copyWith(venueId: venueId)));
     await _refreshAll();
-  }
-
-  Future<void> dismissInsight(String id) async {
-    final current = state.insights.dataOrNull;
-    if (current == null) return;
-    final next = current.where((i) => i.id != id).toList(growable: false);
-    emit(state.copyWith(insights: RequestSuccess(next)));
-    try {
-      await _repository.dismissInsight(id);
-    } on Object catch (_) {
-      emit(state.copyWith(insights: RequestSuccess(current)));
-      rethrow;
-    }
   }
 
   Future<void> _refreshAll() async {
     await Future.wait([
       loadSummary(),
       loadRevenueSeries(),
-      loadTopTables(),
+      loadTables(),
       loadManagers(),
-      loadInsights(),
       loadForecast(),
     ]);
   }
@@ -92,10 +81,10 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
     }
   }
 
-  Future<void> loadTopTables() async {
+  Future<void> loadTables() async {
     emit(state.copyWith(tables: const RequestLoading()));
     try {
-      final tables = await _repository.getTopTables(state.filter);
+      final tables = await _repository.getTables(state.filter);
       emit(state.copyWith(tables: RequestSuccess(tables)));
     } on Object catch (e) {
       emit(state.copyWith(tables: RequestFailure(e)));
@@ -109,16 +98,6 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
       emit(state.copyWith(managers: RequestSuccess(managers)));
     } on Object catch (e) {
       emit(state.copyWith(managers: RequestFailure(e)));
-    }
-  }
-
-  Future<void> loadInsights() async {
-    emit(state.copyWith(insights: const RequestLoading()));
-    try {
-      final insights = await _repository.getInsights(state.filter);
-      emit(state.copyWith(insights: RequestSuccess(insights)));
-    } on Object catch (e) {
-      emit(state.copyWith(insights: RequestFailure(e)));
     }
   }
 

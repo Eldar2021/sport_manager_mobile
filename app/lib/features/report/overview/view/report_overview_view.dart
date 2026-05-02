@@ -62,8 +62,6 @@ class _ReportOverviewViewState extends State<ReportOverviewView> {
               ),
             ),
             const SizedBox(height: AppSpacing.x4),
-            InsightsStrip(_cubit),
-            const SizedBox(height: AppSpacing.x3),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
               child: Column(
@@ -75,7 +73,7 @@ class _ReportOverviewViewState extends State<ReportOverviewView> {
                   const SizedBox(height: AppSpacing.x4),
                   ForecastSummaryCard(_cubit),
                   const SizedBox(height: AppSpacing.x6),
-                  TopTablesSection(_cubit),
+                  TablesSection(_cubit),
                   const SizedBox(height: AppSpacing.x6),
                   TopManagersSection(_cubit),
                 ],

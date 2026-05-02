@@ -13,6 +13,9 @@ enum ManagerSessionLogStatus {
   cancelled,
 }
 
+/// One row of a manager's session log on the manager-detail page.
+/// Slim by design — no per-session fraud signals (discount %, etc.); just
+/// the facts an owner needs to scan their team's day.
 @immutable
 @JsonSerializable()
 final class ManagerSessionLogEntry extends Equatable {
@@ -28,7 +31,6 @@ final class ManagerSessionLogEntry extends Equatable {
     this.tableName,
     this.durationSeconds,
     this.totalAmount,
-    this.discountPercent,
     this.cancelReason,
   });
 
@@ -49,14 +51,11 @@ final class ManagerSessionLogEntry extends Equatable {
   // Filled for COMPLETED:
   final int? durationSeconds;
   final int? totalAmount;
-  final int? discountPercent;
 
   // Filled for CANCELLED:
   final String? cancelReason;
 
   bool get isCancelled => status == ManagerSessionLogStatus.cancelled;
-  bool get hadDiscount => (discountPercent ?? 0) > 0;
-  bool get isShort => (durationSeconds ?? 0) < 5 * 60;
 
   Map<String, dynamic> toJson() => _$ManagerSessionLogEntryToJson(this);
 
@@ -73,7 +72,6 @@ final class ManagerSessionLogEntry extends Equatable {
     currency,
     durationSeconds,
     totalAmount,
-    discountPercent,
     cancelReason,
   ];
 }

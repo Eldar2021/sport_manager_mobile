@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-/// Loading placeholder for the top-tables section — three shimmer rows.
-class TopTablesSkeleton extends StatelessWidget {
-  const TopTablesSkeleton({super.key});
+/// Loading placeholder for the tables section — three shimmer rows.
+class TablesSkeleton extends StatelessWidget {
+  const TablesSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,6 +8,9 @@ import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
+/// Managers working at the currently-selected venue, sorted by revenue
+/// they've generated. MVP scope: no risk signals — tapping a row opens
+/// the manager-detail page with KPI band + session log.
 class TopManagersSection extends StatelessWidget {
   const TopManagersSection(this.cubit, {super.key});
 
@@ -69,22 +72,15 @@ class _ManagerRow extends StatelessWidget {
           style: TextStyle(color: context.colors.onPrimaryContainer),
         ),
       ),
-      title: Row(
-        children: [
-          Expanded(
-            child: Text(
-              row.name,
-              style: context.textTheme.bodyMedium,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          ManagerRiskBadge(row.riskBand),
-        ],
+      title: Text(
+        row.name,
+        style: context.textTheme.bodyMedium,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
-        '${ReportFormat.money(row.revenue, row.currency)} · ${row.sessions} ${l10n.reportsSessionsShort}'
-        '${row.cancelCount > 0 ? ' · ${row.cancelCount} ${l10n.reportsCancelledShort}' : ''}',
+        '${ReportFormat.money(row.revenue, row.currency)} · '
+        '${row.sessions} ${l10n.reportsSessionsShort}',
         style: context.appTextStyles.muted.labelSmall,
       ),
       trailing: const Icon(Icons.chevron_right_rounded),

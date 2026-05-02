@@ -2,8 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:facility/facility.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
-import 'package:reports/models/fraud_flag_model.dart';
-import 'package:reports/models/manager_risk_band.dart';
 
 part 'manager_report_row_model.g.dart';
 
@@ -17,11 +15,6 @@ final class ManagerReportRowModel extends Equatable {
     required this.revenue,
     required this.sessions,
     required this.cancelCount,
-    required this.discountedCount,
-    required this.avgDiscountPercent,
-    required this.riskScore,
-    required this.riskBand,
-    required this.flags,
     required this.currency,
   });
 
@@ -34,21 +27,12 @@ final class ManagerReportRowModel extends Equatable {
   final String username;
   final int revenue;
   final int sessions;
+
+  /// Number of CANCELLED sessions in the period — neutral data,
+  /// shown only on the manager-detail KPI band.
   final int cancelCount;
-  final int discountedCount;
-  final int avgDiscountPercent;
 
-  /// 0-100 — see [riskBand] for the bucketing.
-  final int riskScore;
-  final ManagerRiskBand riskBand;
-  final List<FraudFlagModel> flags;
   final Currency currency;
-
-  /// Cancel rate as a decimal (0.0-1.0). `0` when there are no sessions.
-  double get cancelRate {
-    final total = sessions + cancelCount;
-    return total == 0 ? 0 : cancelCount / total;
-  }
 
   Map<String, dynamic> toJson() => _$ManagerReportRowModelToJson(this);
 
@@ -60,11 +44,6 @@ final class ManagerReportRowModel extends Equatable {
     revenue,
     sessions,
     cancelCount,
-    discountedCount,
-    avgDiscountPercent,
-    riskScore,
-    riskBand,
-    flags,
     currency,
   ];
 }

@@ -10,17 +10,13 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
 
   static const _base = '/reports';
 
-  GetApiParams _params(
-    ReportFilter f, {
-    Map<String, dynamic>? extra,
-  }) {
+  GetApiParams _params(ReportFilter f) {
     return GetApiParams(
       queryParameters: <String, dynamic>{
         'from': f.range.from.toUtc().toIso8601String(),
         'to': f.range.to.toUtc().toIso8601String(),
         if (f.venueId != null) 'venueId': f.venueId,
         'compare': f.compareToPrevious,
-        ...?extra,
       },
     );
   }
@@ -52,13 +48,10 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
   }
 
   @override
-  Future<List<TableReportRowModel>> getTopTables(
-    ReportFilter filter, {
-    int limit = 5,
-  }) {
+  Future<List<TableReportRowModel>> getTables(ReportFilter filter) {
     return _client.getListOfType<TableReportRowModel>(
       '$_base/tables',
-      params: _params(filter, extra: {'limit': limit}),
+      params: _params(filter),
       fromJson: TableReportRowModel.fromJson,
     );
   }
@@ -69,15 +62,6 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
       '$_base/managers',
       params: _params(filter),
       fromJson: ManagerReportRowModel.fromJson,
-    );
-  }
-
-  @override
-  Future<List<InsightModel>> getInsights(ReportFilter filter) {
-    return _client.getListOfType<InsightModel>(
-      '$_base/insights',
-      params: _params(filter),
-      fromJson: InsightModel.fromJson,
     );
   }
 
@@ -112,10 +96,5 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
       params: _params(filter),
       fromJson: TableReportDetailModel.fromJson,
     );
-  }
-
-  @override
-  Future<void> dismissInsight(String id) {
-    return _client.post<void>('$_base/insights/$id/dismiss');
   }
 }

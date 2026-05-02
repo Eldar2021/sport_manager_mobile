@@ -4,9 +4,10 @@ import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-/// Body of [ManagerReportDetailView] — header card, KPI band, risk score,
-/// fraud signals and the filterable session log. Lives in its own file so
-/// the view stays declarative and short.
+/// Body of [ManagerReportDetailView] — header card, KPI band and the
+/// filterable session log. MVP: no risk score panel, no fraud-flag list
+/// — those were intentionally cut to avoid surfacing fraud-style
+/// signals on synthetic data.
 class ManagerReportBody extends StatelessWidget {
   const ManagerReportBody({
     required this.cubit,
@@ -39,20 +40,11 @@ class ManagerReportBody extends StatelessWidget {
               child: ReportKpiCard(
                 title: l10n.reportsKpiSessions,
                 value: summary.sessions.toString(),
-                subtitle: '${summary.cancelCount} ${l10n.reportsCancelledShort}',
+                subtitle: summary.cancelCount > 0 ? '${summary.cancelCount} ${l10n.reportsCancelledShort}' : null,
               ),
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.x4),
-        RiskScorePanel(summary),
-        const SizedBox(height: AppSpacing.x4),
-        Text(
-          l10n.reportsFraudSignalsTitle,
-          style: context.textTheme.titleSmall,
-        ),
-        const SizedBox(height: AppSpacing.x2),
-        FraudFlagList(summary.flags),
         const SizedBox(height: AppSpacing.x6),
         ManagerSessionLog(
           cubit: cubit,
