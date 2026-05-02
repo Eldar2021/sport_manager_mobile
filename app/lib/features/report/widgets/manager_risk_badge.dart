@@ -37,8 +37,14 @@ class ManagerRiskBadge extends StatelessWidget {
         borderRadius: AppRadius.chipBorderRadius,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x2, vertical: 2),
-        child: Text(label, style: context.textTheme.labelSmall?.copyWith(color: fg)),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.x2,
+          vertical: AppSpacing.x1,
+        ),
+        child: Text(
+          label,
+          style: context.textTheme.labelSmall?.copyWith(color: fg),
+        ),
       ),
     );
   }

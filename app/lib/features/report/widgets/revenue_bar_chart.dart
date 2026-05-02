@@ -97,7 +97,9 @@ class _Bar extends StatelessWidget {
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: color,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(2)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(2),
+              ),
             ),
           ),
         ),

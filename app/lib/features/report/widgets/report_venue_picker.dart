@@ -40,7 +40,12 @@ class ReportVenuePicker extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.apps_rounded),
                 title: Text(l10n.reportsAllVenues),
-                trailing: selectedVenueId == null ? Icon(Icons.check, color: context.colors.primary) : null,
+                trailing: selectedVenueId == null
+                    ? Icon(
+                        Icons.check,
+                        color: context.colors.primary,
+                      )
+                    : null,
                 onTap: () => Navigator.of(context).pop(const _VenueChoice(null)),
               ),
               for (final v in venues)
@@ -48,7 +53,12 @@ class ReportVenuePicker extends StatelessWidget {
                   leading: const Icon(Icons.storefront_outlined),
                   title: Text(v.name),
                   subtitle: Text('#${v.number}'),
-                  trailing: selectedVenueId == v.id ? Icon(Icons.check, color: context.colors.primary) : null,
+                  trailing: selectedVenueId == v.id
+                      ? Icon(
+                          Icons.check,
+                          color: context.colors.primary,
+                        )
+                      : null,
                   onTap: () => Navigator.of(context).pop(_VenueChoice(v.id)),
                 ),
             ],
@@ -67,7 +77,11 @@ class ReportVenuePicker extends StatelessWidget {
         : venues
               .firstWhere(
                 (v) => v.id == selectedVenueId,
-                orElse: () => ReportVenueModel(id: '', name: l10n.reportsAllVenues, number: 0),
+                orElse: () => ReportVenueModel(
+                  id: '',
+                  name: l10n.reportsAllVenues,
+                  number: 0,
+                ),
               )
               .name;
     return Padding(

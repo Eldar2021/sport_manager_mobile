@@ -436,7 +436,6 @@
     }
   },
   "profileSubscriptionExpired": "Expired",
-
   "reportsOverviewTitle": "Reports",
   "reportsManagerDetailTitle": "Manager",
   "reportsTableDetailTitle": "Table",
@@ -484,7 +483,9 @@
   "reportsFraudMultiplier": "{x}× team average",
   "@reportsFraudMultiplier": {
     "placeholders": {
-      "x": { "type": "String" }
+      "x": {
+        "type": "String"
+      }
     }
   },
   "reportsSessionLogTitle": "Session log",

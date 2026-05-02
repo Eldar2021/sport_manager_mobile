@@ -249,7 +249,6 @@
   "profileSubscriptionExpiresIn": "{n, plural, =1{Истекает через 1 день} other{Истекает через {n} дн.}}",
   "profileSubscriptionGrace": "{n, plural, =1{Льготный · остался 1 день} other{Льготный · осталось {n} дн.}}",
   "profileSubscriptionExpired": "Истекла",
-
   "reportsOverviewTitle": "Отчёты",
   "reportsManagerDetailTitle": "Менеджер",
   "reportsTableDetailTitle": "Стол",
@@ -295,11 +294,6 @@
   "reportsFraudTariffOverride": "Изменения тарифа",
   "reportsFraudLowShiftRevenue": "Низкая выручка в смену",
   "reportsFraudMultiplier": "×{x} от среднего",
-  "@reportsFraudMultiplier": {
-    "placeholders": {
-      "x": { "type": "String" }
-    }
-  },
   "reportsSessionLogTitle": "Лог сессий",
   "reportsLogFilterAll": "Все",
   "reportsLogFilterCancelled": "Отменённые",

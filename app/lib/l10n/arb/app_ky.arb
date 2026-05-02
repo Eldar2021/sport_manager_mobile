@@ -249,7 +249,6 @@
   "profileSubscriptionExpiresIn": "{n, plural, =1{1 күндө бүтөт} other{{n} күндө бүтөт}}",
   "profileSubscriptionGrace": "{n, plural, =1{Жеңилдик · 1 күн калды} other{Жеңилдик · {n} күн калды}}",
   "profileSubscriptionExpired": "Бүттү",
-
   "reportsOverviewTitle": "Отчёттор",
   "reportsManagerDetailTitle": "Менеджер",
   "reportsTableDetailTitle": "Стол",
@@ -295,11 +294,6 @@
   "reportsFraudTariffOverride": "Тариф өзгөрүшү",
   "reportsFraudLowShiftRevenue": "Сменда киреше төмөн",
   "reportsFraudMultiplier": "×{x} орточодон",
-  "@reportsFraudMultiplier": {
-    "placeholders": {
-      "x": { "type": "String" }
-    }
-  },
   "reportsSessionLogTitle": "Сессия логу",
   "reportsLogFilterAll": "Баары",
   "reportsLogFilterCancelled": "Жокко чыгарылган",

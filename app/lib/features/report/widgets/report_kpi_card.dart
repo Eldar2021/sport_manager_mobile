@@ -67,7 +67,9 @@ class ReportKpiCard extends StatelessWidget {
                     const SizedBox(width: AppSpacing.x1),
                     Text(
                       ReportFormat.delta(deltaPercent),
-                      style: context.textTheme.labelMedium?.copyWith(color: _deltaColor(context)),
+                      style: context.textTheme.labelMedium?.copyWith(
+                        color: _deltaColor(context),
+                      ),
                     ),
                   ],
                   if (subtitle != null) ...[
