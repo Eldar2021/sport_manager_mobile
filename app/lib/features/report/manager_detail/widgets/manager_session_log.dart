@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:reports/reports.dart';
-import 'package:sport_manager_mobile/features/report/manager_detail/cubit/manager_report_detail_cubit.dart';
-import 'package:sport_manager_mobile/features/report/utils/report_format.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -41,7 +40,10 @@ class ManagerSessionLog extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.reportsSessionLogTitle, style: context.textTheme.titleSmall),
+        Text(
+          l10n.reportsSessionLogTitle,
+          style: context.textTheme.titleSmall,
+        ),
         const SizedBox(height: AppSpacing.x2),
         BlocBuilder<ManagerReportDetailCubit, ManagerReportDetailState>(
           bloc: cubit,
