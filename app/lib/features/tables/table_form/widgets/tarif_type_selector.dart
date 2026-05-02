@@ -22,7 +22,9 @@ class TarifTypeSelector extends StatelessWidget {
           selectedBackgroundColor: context.colors.primary,
           selectedForegroundColor: context.colors.onPrimary,
           foregroundColor: context.colors.onSurface,
-          textStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+          textStyle: context.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
         ),
         segments: [
           ButtonSegment(

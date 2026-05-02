@@ -152,6 +152,34 @@
   "profileDeleteAccountConfirm": "Биротоло өчүрүү",
   "profileErrorTitle": "Профилди жүктөө мүмкүн болбоду",
   "profileErrorSubtitle": "Туташууну текшерип, кайра аракет кылыңыз.",
+  "tableDetailStart": "БАШТОО",
+  "tableDetailStop": "ТОКТОТУУ ЖАНА ЖАБУУ",
+  "tableDetailElapsed": "ӨТКӨН",
+  "tableDetailCurrentAmount": "УЧУРДАГЫ СУММА",
+  "tableDetailPause": "ТЫНЫГУУ",
+  "tableDetailResume": "УЛАНТУУ",
+  "tableDetailStartTime": "Башталышы",
+  "tableDetailDuration": "Узактыгы",
+  "tableDetailTariff": "Тариф",
+  "tableDetailMistakeLaunch": "Ката иш-аракет",
+  "tableDetailMistakeLaunchTitle": "Сессияны жокко чыгаруу?",
+  "tableDetailMistakeLaunchSubtitle": "Сессия төлөмсүз жокко чыгарылат.",
+  "tableDetailMistakeLaunchConfirm": "Ооба, жокко чыгаруу",
+  "tableDetailLastSession": "Акыркы сессия",
+  "tableDetailTodaySessions": "Бүгүнкү сессиялар",
+  "tableDetailPaymentTitle": "Төлөм корутундусу",
+  "tableDetailSubtotal": "Аралык жыйынтык",
+  "tableDetailDiscount": "Арзандатуу",
+  "tableDetailToPay": "ТӨЛӨНҮҮГӨ",
+  "tableDetailConfirmAndClose": "ЫРАСТОО ЖАНА ЖАБУУ",
+  "tableDetailDurationMin": "{count} мин",
+  "@tableDetailDurationMin": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "menuEdit": "Өзгөртүү",
   "menuDelete": "Жок кылуу",
   "managersInviteCodeLabel": "АКТИВДҮҮ ЧАКЫРУУ КОДУ",

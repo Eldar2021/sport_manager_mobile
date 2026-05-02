@@ -465,6 +465,71 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileErrorSubtitle => 'Проверьте подключение и попробуйте снова.';
 
   @override
+  String get tableDetailStart => 'НАЧАТЬ';
+
+  @override
+  String get tableDetailStop => 'ОСТАНОВИТЬ И ЗАКРЫТЬ';
+
+  @override
+  String get tableDetailElapsed => 'ПРОШЛО';
+
+  @override
+  String get tableDetailCurrentAmount => 'ТЕКУЩАЯ СУММА';
+
+  @override
+  String get tableDetailPause => 'ПАУЗА';
+
+  @override
+  String get tableDetailResume => 'ПРОДОЛЖИТЬ';
+
+  @override
+  String get tableDetailStartTime => 'Начало';
+
+  @override
+  String get tableDetailDuration => 'Длительность';
+
+  @override
+  String get tableDetailTariff => 'Тариф';
+
+  @override
+  String get tableDetailMistakeLaunch => 'Ошибочный запуск';
+
+  @override
+  String get tableDetailMistakeLaunchTitle => 'Отменить сессию?';
+
+  @override
+  String get tableDetailMistakeLaunchSubtitle => 'Сессия будет отменена без начисления оплаты.';
+
+  @override
+  String get tableDetailMistakeLaunchConfirm => 'Да, отменить';
+
+  @override
+  String get tableDetailLastSession => 'Прошлая сессия';
+
+  @override
+  String get tableDetailTodaySessions => 'Сегодня сессий';
+
+  @override
+  String get tableDetailPaymentTitle => 'Итоги оплаты';
+
+  @override
+  String get tableDetailSubtotal => 'Подытог';
+
+  @override
+  String get tableDetailDiscount => 'Скидка';
+
+  @override
+  String get tableDetailToPay => 'К ОПЛАТЕ';
+
+  @override
+  String get tableDetailConfirmAndClose => 'ПОДТВЕРДИТЬ И ЗАКРЫТЬ';
+
+  @override
+  String tableDetailDurationMin(int count) {
+    return '$count мин';
+  }
+
+  @override
   String get menuEdit => 'Редактировать';
 
   @override

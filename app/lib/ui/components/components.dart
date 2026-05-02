@@ -5,7 +5,6 @@ export 'button/app_button_scope.dart';
 export 'button/app_delete_button.dart';
 export 'button/app_edit_delete_menu.dart';
 export 'button/app_outline_button.dart';
-export 'chips/app_badge.dart';
 export 'chips/role_badge.dart';
 export 'form/app_checkbox_field.dart';
 export 'form/app_password_field.dart';

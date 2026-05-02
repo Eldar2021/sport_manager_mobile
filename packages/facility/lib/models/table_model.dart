@@ -46,6 +46,34 @@ final class TableModel extends Equatable {
     return _$TableModelToJson(this);
   }
 
+  TableModel copyWith({
+    String? id,
+    String? venueId,
+    int? number,
+    String? name,
+    String? description,
+    int? tarifAmount,
+    Currency? currency,
+    TarifType? tarifType,
+    SessionModel? session,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return TableModel(
+      id: id ?? this.id,
+      venueId: venueId ?? this.venueId,
+      number: number ?? this.number,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      tarifAmount: tarifAmount ?? this.tarifAmount,
+      currency: currency ?? this.currency,
+      tarifType: tarifType ?? this.tarifType,
+      session: session ?? this.session,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
   @override
   List<Object?> get props => [
     id,

@@ -921,6 +921,132 @@ abstract class AppLocalizations {
   /// **'Check your connection and try again.'**
   String get profileErrorSubtitle;
 
+  /// No description provided for @tableDetailStart.
+  ///
+  /// In en, this message translates to:
+  /// **'START'**
+  String get tableDetailStart;
+
+  /// No description provided for @tableDetailStop.
+  ///
+  /// In en, this message translates to:
+  /// **'STOP & CLOSE'**
+  String get tableDetailStop;
+
+  /// No description provided for @tableDetailElapsed.
+  ///
+  /// In en, this message translates to:
+  /// **'ELAPSED'**
+  String get tableDetailElapsed;
+
+  /// No description provided for @tableDetailCurrentAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'CURRENT AMOUNT'**
+  String get tableDetailCurrentAmount;
+
+  /// No description provided for @tableDetailPause.
+  ///
+  /// In en, this message translates to:
+  /// **'PAUSE'**
+  String get tableDetailPause;
+
+  /// No description provided for @tableDetailResume.
+  ///
+  /// In en, this message translates to:
+  /// **'CONTINUE'**
+  String get tableDetailResume;
+
+  /// No description provided for @tableDetailStartTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get tableDetailStartTime;
+
+  /// No description provided for @tableDetailDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get tableDetailDuration;
+
+  /// No description provided for @tableDetailTariff.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate'**
+  String get tableDetailTariff;
+
+  /// No description provided for @tableDetailMistakeLaunch.
+  ///
+  /// In en, this message translates to:
+  /// **'Mistake launch'**
+  String get tableDetailMistakeLaunch;
+
+  /// No description provided for @tableDetailMistakeLaunchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel session?'**
+  String get tableDetailMistakeLaunchTitle;
+
+  /// No description provided for @tableDetailMistakeLaunchSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The session will be cancelled. No charge will be applied.'**
+  String get tableDetailMistakeLaunchSubtitle;
+
+  /// No description provided for @tableDetailMistakeLaunchConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, cancel'**
+  String get tableDetailMistakeLaunchConfirm;
+
+  /// No description provided for @tableDetailLastSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Last session'**
+  String get tableDetailLastSession;
+
+  /// No description provided for @tableDetailTodaySessions.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s sessions'**
+  String get tableDetailTodaySessions;
+
+  /// No description provided for @tableDetailPaymentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment summary'**
+  String get tableDetailPaymentTitle;
+
+  /// No description provided for @tableDetailSubtotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get tableDetailSubtotal;
+
+  /// No description provided for @tableDetailDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get tableDetailDiscount;
+
+  /// No description provided for @tableDetailToPay.
+  ///
+  /// In en, this message translates to:
+  /// **'TO PAY'**
+  String get tableDetailToPay;
+
+  /// No description provided for @tableDetailConfirmAndClose.
+  ///
+  /// In en, this message translates to:
+  /// **'CONFIRM & CLOSE'**
+  String get tableDetailConfirmAndClose;
+
+  /// No description provided for @tableDetailDurationMin.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min'**
+  String tableDetailDurationMin(int count);
+
   /// No description provided for @menuEdit.
   ///
   /// In en, this message translates to:

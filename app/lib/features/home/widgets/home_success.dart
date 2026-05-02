@@ -1,5 +1,7 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -51,6 +53,10 @@ class HomeSuccess extends StatelessWidget {
               return TableCard(
                 key: ValueKey(table.id),
                 table,
+                onTap: () => context.push(
+                  AppRoutes.tableDetail,
+                  extra: table,
+                ),
               );
             },
           ),
