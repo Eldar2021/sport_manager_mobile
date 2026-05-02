@@ -47,7 +47,10 @@ class _KpiGridContent extends StatelessWidget {
             Expanded(
               child: ReportKpiCard(
                 title: l10n.reportsKpiRevenue,
-                value: ReportFormat.money(summary.totalRevenue, summary.currency),
+                value: ReportFormat.money(
+                  summary.totalRevenue,
+                  summary.currency,
+                ),
                 deltaPercent: summary.revenueDeltaPercent,
               ),
             ),
