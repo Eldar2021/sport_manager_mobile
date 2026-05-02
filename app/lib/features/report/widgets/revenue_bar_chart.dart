@@ -2,18 +2,24 @@ import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:reports/reports.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 /// Day-by-day revenue column chart, rendered with `SfCartesianChart`. The
 /// peak day uses [ColorScheme.primary]; the rest use a softer brand-amber
-/// tint so the highest-grossing day pops at a glance.
+/// tint so the highest-grossing day pops at a glance. The tooltip is
+/// currency-aware via [ReportFormat.money].
 class RevenueBarChart extends StatelessWidget {
   const RevenueBarChart({
     required this.points,
     required this.currency,
     super.key,
   });
+
+  /// Single height shared by both the empty-state and the rendered chart
+  /// so the layout stays stable while data loads.
+  static const double _height = 160;
 
   final List<RevenuePointModel> points;
   final Currency currency;
@@ -22,7 +28,7 @@ class RevenueBarChart extends StatelessWidget {
   Widget build(BuildContext context) {
     if (points.isEmpty) {
       return SizedBox(
-        height: 160,
+        height: _height,
         child: Center(
           child: Text(
             '—',
@@ -40,7 +46,7 @@ class RevenueBarChart extends StatelessWidget {
     final dayLabel = DateFormat.MMMd(locale);
 
     return SizedBox(
-      height: 160,
+      height: _height,
       child: SfCartesianChart(
         margin: EdgeInsets.zero,
         plotAreaBorderWidth: 0,
@@ -59,8 +65,20 @@ class RevenueBarChart extends StatelessWidget {
         ),
         tooltipBehavior: TooltipBehavior(
           enable: true,
-          format: 'point.x · point.y',
           header: '',
+          builder: (data, point, series, pointIndex, seriesIndex) {
+            final p = data as RevenuePointModel;
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.x3,
+                vertical: AppSpacing.x2,
+              ),
+              child: Text(
+                '${dayLabel.format(p.bucket)} · ${ReportFormat.money(p.revenue, currency)}',
+                style: context.textTheme.labelSmall,
+              ),
+            );
+          },
         ),
         series: <CartesianSeries<RevenuePointModel, DateTime>>[
           ColumnSeries<RevenuePointModel, DateTime>(
