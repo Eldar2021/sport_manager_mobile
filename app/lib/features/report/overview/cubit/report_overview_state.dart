@@ -45,5 +45,14 @@ final class ReportOverviewState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [filter, venues, summary, revenue, tables, managers, insights, forecast];
+  List<Object?> get props => [
+    filter,
+    venues,
+    summary,
+    revenue,
+    tables,
+    managers,
+    insights,
+    forecast,
+  ];
 }

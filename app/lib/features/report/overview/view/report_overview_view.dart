@@ -19,7 +19,7 @@ class _ReportOverviewViewState extends State<ReportOverviewView> {
   @override
   void initState() {
     super.initState();
-    _cubit = ReportOverviewCubit(repository: GetIt.I<ReportsRepository>());
+    _cubit = ReportOverviewCubit(GetIt.I<ReportsRepository>());
     _cubit.load();
   }
 

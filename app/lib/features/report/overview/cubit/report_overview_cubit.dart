@@ -7,7 +7,7 @@ import 'package:reports/reports.dart';
 part 'report_overview_state.dart';
 
 class ReportOverviewCubit extends Cubit<ReportOverviewState> {
-  ReportOverviewCubit({required ReportsRepository repository})
+  ReportOverviewCubit(ReportsRepository repository)
     : _repository = repository,
       super(ReportOverviewState(filter: ReportFilter.initial(DateTime.now())));
 
@@ -40,7 +40,10 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
   }
 
   Future<void> changeVenue(String? venueId) async {
-    final next = state.filter.copyWith(venueId: venueId, clearVenue: venueId == null);
+    final next = state.filter.copyWith(
+      venueId: venueId,
+      clearVenue: venueId == null,
+    );
     emit(state.copyWith(filter: next));
     await _refreshAll();
   }
