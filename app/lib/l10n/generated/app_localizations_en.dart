@@ -822,4 +822,175 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileSubscriptionExpired => 'Expired';
+
+  @override
+  String get reportsOverviewTitle => 'Reports';
+
+  @override
+  String get reportsManagerDetailTitle => 'Manager';
+
+  @override
+  String get reportsTableDetailTitle => 'Table';
+
+  @override
+  String get reportsPeriodToday => 'Today';
+
+  @override
+  String get reportsPeriodWeek => 'Week';
+
+  @override
+  String get reportsPeriodMonth => 'Month';
+
+  @override
+  String get reportsPeriodYear => 'Year';
+
+  @override
+  String get reportsPeriodCustom => 'Custom';
+
+  @override
+  String get reportsAllVenues => 'All venues';
+
+  @override
+  String get reportsVenuePickerTitle => 'Pick a venue';
+
+  @override
+  String get reportsKpiRevenue => 'Total revenue';
+
+  @override
+  String get reportsKpiSessions => 'Sessions';
+
+  @override
+  String get reportsKpiAvgDuration => 'Avg duration';
+
+  @override
+  String get reportsKpiOccupancy => 'Occupancy';
+
+  @override
+  String get reportsKpiActive => 'Active';
+
+  @override
+  String get reportsRevenueChartTitle => 'Revenue by day';
+
+  @override
+  String get reportsRevenueChartCompareToggle => 'Compare to previous period';
+
+  @override
+  String get reportsTopTablesTitle => 'Top tables';
+
+  @override
+  String get reportsTopTablesSeeAll => 'See all tables';
+
+  @override
+  String get reportsTopManagersTitle => 'Managers';
+
+  @override
+  String get reportsTopManagersSeeAll => 'See all managers';
+
+  @override
+  String get reportsTableLabel => 'Table';
+
+  @override
+  String get reportsSessionsShort => 'sessions';
+
+  @override
+  String get reportsCancelledShort => 'cancels';
+
+  @override
+  String get reportsForecastSummaryTitle => 'Forecast';
+
+  @override
+  String get reportsForecastVsPrevious => 'vs previous period';
+
+  @override
+  String get reportsForecastNoComparison => 'Not enough history yet';
+
+  @override
+  String get reportsManagerRiskLow => 'Low risk';
+
+  @override
+  String get reportsManagerRiskMedium => 'Review';
+
+  @override
+  String get reportsManagerRiskHigh => 'High — review now';
+
+  @override
+  String get reportsRiskScoreTitle => 'Risk score';
+
+  @override
+  String get reportsRiskScoreExplain =>
+      'Computed from cancel rate, discount rate, off-hours activity and session patterns. A high score means review the session log — not necessarily fraud.';
+
+  @override
+  String get reportsFraudSignalsTitle => 'Risk signals';
+
+  @override
+  String get reportsFraudNoFlags => 'No signals — this manager is operating within team norms.';
+
+  @override
+  String get reportsFraudHighCancelRate => 'High cancel rate';
+
+  @override
+  String get reportsFraudHighCancel60s => 'Many cancels under 60s';
+
+  @override
+  String get reportsFraudHighDiscountRate => 'Frequent discounts';
+
+  @override
+  String get reportsFraudHighAvgDiscount => 'High average discount';
+
+  @override
+  String get reportsFraudLongPauseAvg => 'Long average pause';
+
+  @override
+  String get reportsFraudManyPausePerSession => 'Many pauses per session';
+
+  @override
+  String get reportsFraudOffHoursActivity => 'Off-hours activity';
+
+  @override
+  String get reportsFraudShortSessionCluster => 'Cluster of short sessions';
+
+  @override
+  String get reportsFraudTariffOverride => 'Tariff overrides';
+
+  @override
+  String get reportsFraudLowShiftRevenue => 'Low shift revenue';
+
+  @override
+  String reportsFraudMultiplier(String x) {
+    return '$x× team average';
+  }
+
+  @override
+  String get reportsSessionLogTitle => 'Session log';
+
+  @override
+  String get reportsLogFilterAll => 'All';
+
+  @override
+  String get reportsLogFilterCancelled => 'Cancelled';
+
+  @override
+  String get reportsLogFilterDiscounted => 'Discounted';
+
+  @override
+  String get reportsLogFilterShort => 'Short';
+
+  @override
+  String get reportsLogEmpty => 'No sessions match this filter.';
+
+  @override
+  String get reportsTableTrendTitle => 'Revenue trend';
+
+  @override
+  String get reportsTableHeatmapTitle => 'Hour-of-day heatmap';
+
+  @override
+  String get reportsErrorTitle => 'Couldn\'t load report';
+
+  @override
+  String get reportsEmptyTitle => 'No data yet';
+
+  @override
+  String get reportsEmptySubtitle => 'Start sessions to populate this report.';
 }

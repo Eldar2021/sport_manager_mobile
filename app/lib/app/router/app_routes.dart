@@ -8,6 +8,8 @@ abstract final class AppRoutes {
   static const updatePassword = '/update-password';
   static const home = '/home';
   static const report = '/report';
+  static const reportManager = '/report/managers/:id';
+  static const reportTable = '/report/tables/:id';
   static const profile = '/profile';
   static const settings = '/settings';
   static const tableForm = '/tables/form';

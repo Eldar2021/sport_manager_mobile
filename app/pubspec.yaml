@@ -27,6 +27,7 @@ dependencies:
   facility:
   managers:
   subscription:
+  reports:
   cupertino_icons:
   get_it:
   toastification:

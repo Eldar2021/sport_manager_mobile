@@ -1,0 +1,136 @@
+import 'package:core/core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reports/reports.dart';
+import 'package:sport_manager_mobile/features/report/overview/cubit/report_overview_cubit.dart';
+import 'package:sport_manager_mobile/features/report/utils/report_format.dart';
+import 'package:sport_manager_mobile/features/report/widgets/report_kpi_card.dart';
+import 'package:sport_manager_mobile/l10n/l10n.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
+
+class KpiGrid extends StatelessWidget {
+  const KpiGrid({required this.cubit, super.key});
+
+  final ReportOverviewCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
+      bloc: cubit,
+      buildWhen: (a, b) => a.summary != b.summary,
+      builder: (_, state) {
+        return switch (state.summary) {
+          RequestInitial<ReportsSummaryModel>() || RequestLoading<ReportsSummaryModel>() => const _KpiSkeleton(),
+          RequestFailure<ReportsSummaryModel>() => Card(
+            margin: EdgeInsets.zero,
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.x4),
+              child: Center(child: Text(l10n.reportsErrorTitle)),
+            ),
+          ),
+          RequestSuccess<ReportsSummaryModel>(:final data) => _KpiGridContent(summary: data),
+        };
+      },
+    );
+  }
+}
+
+class _KpiGridContent extends StatelessWidget {
+  const _KpiGridContent({required this.summary});
+
+  final ReportsSummaryModel summary;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: ReportKpiCard(
+                title: l10n.reportsKpiRevenue,
+                value: ReportFormat.money(summary.totalRevenue, summary.currency),
+                deltaPercent: summary.revenueDeltaPercent,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.x3),
+            Expanded(
+              child: ReportKpiCard(
+                title: l10n.reportsKpiSessions,
+                value: summary.totalSessions.toString(),
+                deltaPercent: summary.sessionsDeltaPercent,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.x3),
+        Row(
+          children: [
+            Expanded(
+              child: ReportKpiCard(
+                title: l10n.reportsKpiAvgDuration,
+                value: ReportFormat.duration(summary.avgDurationSeconds),
+                deltaPercent: summary.avgDurationDeltaPercent,
+              ),
+            ),
+            const SizedBox(width: AppSpacing.x3),
+            Expanded(
+              child: ReportKpiCard(
+                title: l10n.reportsKpiOccupancy,
+                value: '${summary.occupancyPercent}%',
+                subtitle: '${summary.activeNow}/${summary.activeMax}',
+                deltaPercent: summary.occupancyDeltaPercent,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _KpiSkeleton extends StatelessWidget {
+  const _KpiSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    Widget card() => const Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: EdgeInsets.all(AppSpacing.x4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ShimmerBox(height: 12, width: 80),
+            SizedBox(height: AppSpacing.x2),
+            ShimmerBox(height: 22, width: 120),
+            SizedBox(height: AppSpacing.x1),
+            ShimmerBox(height: 12, width: 60),
+          ],
+        ),
+      ),
+    );
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(child: card()),
+            const SizedBox(width: AppSpacing.x3),
+            Expanded(child: card()),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.x3),
+        Row(
+          children: [
+            Expanded(child: card()),
+            const SizedBox(width: AppSpacing.x3),
+            Expanded(child: card()),
+          ],
+        ),
+      ],
+    );
+  }
+}
