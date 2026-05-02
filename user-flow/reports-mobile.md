@@ -15,7 +15,41 @@
 
 ---
 
-## 0. v1 → v2 değişikliklerinin özeti
+## 0. v2.1 — Periyot semantiği & yıl chart bucket'ı
+
+v2 canlıdan sonra üç UX/logic problemi tespit edildi:
+
+1. **"Today" KPI delta'sı** her zaman çok büyük negatif görünüyordu — bugünün
+   yarım-günü dünün tam-günü ile karşılaştırılıyordu.
+2. **Hafta/Ay/Yıl mid-period delta'sı** aynı problemi farklı ölçekte yaşıyordu —
+   periyodun ortasında "geçen periyodun tamamı"yla karşılaştırma yanlış sinyal
+   üretiyordu.
+3. **Yıl seçildiğinde RevenueBarChart** 365 günlük bar mobile'da okunmuyordu.
+
+Çözümler (v2.1, **canlı**):
+
+- **Today kalır ama comparison kapalı.** Period chip'lerinde Today yine var,
+  ama seçildiğinde KPI delta arrow'ları çizilmiyor, ForecastSummaryCard
+  gizleniyor. Sadece mutlak rakamlar: "Bugün şu ana kadar: 12 500 сом · 8
+  oturum". `ReportFilter.supportsComparison` getter'ı bu davranışı taşıyor
+  (`period != ReportPeriod.today`).
+- **KPI delta'sı için "clipped-previous" karşılaştırması.** Bugün periyodun
+  N'inci günü ise, geçen periyodun **ilk N gününü** kıyaslarız. "Hafta seçili,
+  Çarşamba" → bu hafta Pzt-Çar vs geçen hafta Pzt-Çar (geçen haftanın tamamı
+  değil). Periyot kapalıysa (Pazar gece) clipping otomatik no-op.
+- **ForecastSummaryCard mevcut "full previous" karşılaştırmasında kalıyor.**
+  Forecast tam-period vs tam-period kıyaslıyor — bu doğru. Yalnızca KPI delta
+  mantığı clipped'e geçti. Hesap formülleri §6'da güncellenmiş.
+- **Yıl için RevenueBarChart aylık bucket'a düştü.** 12 bar, x-ekseni
+  `DateFormat.MMM` ("Oca, Şub …"). Hafta/Ay günlük kalmaya devam ediyor.
+  `RevenuePointModel.bucket` semantiği period-bağımlı: yılda ay başlangıçları,
+  diğerlerinde gün başlangıçları. Backend `?period=year` gördüğünde aylık
+  aggregate döner. TableDetail'in `revenueByDay` alanı bu yüzden
+  **`revenueSeries`** olarak yeniden adlandırıldı (period-agnostik isim).
+
+---
+
+### v1 → v2 değişikliklerinin özeti (geçmiş)
 
 İlk taslak (v1, 2026-05-01) Owner'a fraud-tespit motoru ve insight kartları
 sunmayı planlıyordu. Saha datası olmadan synthetic ile canlıya çıkmak yanlış
@@ -73,14 +107,14 @@ Bu üç sorudan biri bile cevapsız kalırsa Owner abonelik yenilemeyecek.
 
 ## 2. Kullanıcı (Owner) profili & "jobs to be done"
 
-| Anlık ihtiyaç                                | Yaptığı şey                                                       |
-| -------------------------------------------- | ----------------------------------------------------------------- |
-| Sabah hızlıca dünkü hasılat                  | Reports → Bugün — toplam, ortalama, masa/manager listesi.         |
-| Ay başı muhasebe / vergi                     | Reports → Ay (üretilen rakamlar; CSV export v2).                  |
-| Yeni mekan ekleyip eklemeyeceği kararı       | Reports → Yıl — gelir trendi.                                     |
-| Bir masayı kapatma kararı                    | Reports → Masa → 30/90 günlük gelir + occupancy + saat-gün heatmap. |
-| Bir manager'ın özel performansı              | Reports → Manager kartı → KPI + son 40 oturum.                    |
-| Ay sonu tahmini ("kira yetişir mi?")         | Reports overview → Forecast özet kartı.                           |
+| Anlık ihtiyaç                          | Yaptığı şey                                                         |
+| -------------------------------------- | ------------------------------------------------------------------- |
+| Sabah hızlıca dünkü hasılat            | Reports → Bugün — toplam, ortalama, masa/manager listesi.           |
+| Ay başı muhasebe / vergi               | Reports → Ay (üretilen rakamlar; CSV export v2).                    |
+| Yeni mekan ekleyip eklemeyeceği kararı | Reports → Yıl — gelir trendi.                                       |
+| Bir masayı kapatma kararı              | Reports → Masa → 30/90 günlük gelir + occupancy + saat-gün heatmap. |
+| Bir manager'ın özel performansı        | Reports → Manager kartı → KPI + son 40 oturum.                      |
+| Ay sonu tahmini ("kira yetişir mi?")   | Reports overview → Forecast özet kartı.                             |
 
 > Reports feature'ı manager'a kapalı (`role=OWNER`). Mobile'da bottom-nav'da
 > "Otçet" sekmesi tüm rollere görünür ama içerik OWNER bekler — manager
@@ -249,8 +283,8 @@ Hep aynı period (`from`, `to`) için. **Tüm hesap backend'de.**
 | KPI                  | Tanım                                                                   |
 | -------------------- | ----------------------------------------------------------------------- |
 | `totalRevenue`       | sum(`totalAmount`) where status=COMPLETED, endedAt ∈ [from,to]          |
-| `totalSessions`      | count(*) where status=COMPLETED, endedAt ∈ [from,to]                    |
-| `cancelledSessions`  | count(*) where status=CANCELLED, endedAt ∈ [from,to]                    |
+| `totalSessions`      | count(\*) where status=COMPLETED, endedAt ∈ [from,to]                   |
+| `cancelledSessions`  | count(\*) where status=CANCELLED, endedAt ∈ [from,to]                   |
 | `avgDurationSeconds` | avg(`durationSeconds`) — sadece COMPLETED                               |
 | `occupancyPercent`   | sum(durationSeconds) / (tableCount × periodSeconds × workingFraction)   |
 | `activeNow`          | count(table) where session != null AND session.status ∈ {ACTIVE,PAUSED} |
@@ -259,29 +293,59 @@ Hep aynı period (`from`, `to`) için. **Tüm hesap backend'de.**
 `workingFraction`: MVP `0.5` (12 saat/gün varsayım). v2'de owner mekan
 ayarlarına working hours ekler, gerçek değer kullanılır.
 
-**Comparison delta:**
+**KPI delta (clipped-previous, v2.1):**
 
 ```
-delta = (current - previous) / previous × 100
-previous = aynı uzunlukta önceki periyot (filter.range.previous)
+1. previousFull   = aynı isimli takvim periyodunun bir önceki örneği
+                    (Mayıs için tam Nisan, bu hafta için tam geçen hafta)
+2. previousClip   = previousFull[0 → filter.range.length]
+                    (yani "geçen periyodun, bu periyodun elapsed süresi
+                    kadar olan ilk dilimi")
+3. delta = (current - previousClip) / previousClip × 100
 ```
 
-`previous = 0` ise delta gösterilmez (∞ değil "—").
+Çarşamba günü "Hafta" seçildiğinde: `current = bu hafta Pzt-Çar`,
+`previousClip = geçen hafta Pzt-Çar` (Pzt-Paz değil). Periyot tamamen kapanmışsa
+(Pazar gece) `previousClip == previousFull` — clipping otomatik no-op.
 
-**Forecast (overview kartı için):**
+`previousClip = 0` ise delta gösterilmez ("—").
+
+`filter.supportsComparison` false ise (Today periyodu) delta hiç hesaplanmaz —
+KPI kartlarında arrow yok, sadece mutlak rakam.
+
+**Forecast (overview kartı için, full-previous):**
 
 ```
 1. revenueSeries(filter)  → günlük gelir geçmişi
 2. linear regression slope + intercept (p günlük slope)
 3. projectionEnd = takvim periyodunun bitimi (ay sonu / hafta sonu / yıl sonu)
 4. projectedTotal = realSoFar + Σ projection(today+1 → projectionEnd)
-5. previousPeriodTotal = aynı isimli takvim periyodunun bir önceki örneği
-   (Mayıs için tam Nisan, bu hafta için tam geçen hafta, 2026 için tam 2025)
+5. previousPeriodTotal = previousFull.totalRevenue (tam ay/hafta/yıl)
 6. delta = (projectedTotal - previousPeriodTotal) / previousPeriodTotal × 100
 ```
 
-> v1'de `projectedTotal` sadece 14 günlük future'ı topluyordu, gerçeği
-> dahil etmiyordu — verdict yanlış geliyordu. v2'de düzeltildi.
+Forecast **clipped değil full** kullanır — çünkü tahminin doğası "tam-period
+projeksiyonu vs tam-period geçmişi". Kart Today periyodunda gizlenir
+(`!supportsComparison`).
+
+> v1'de `projectedTotal` sadece 14 günlük future'ı topluyordu, gerçeği dahil
+> etmiyordu — verdict yanlış geliyordu. v2'de düzeltildi.
+
+**Bucket size — period-aware (v2.1):**
+
+`revenueSeries` ve `TableReportDetailModel.revenueSeries` artık period'a göre
+farklı bucket boyutu döner:
+
+| Period | Bucket | # nokta | x-axis format     |
+| ------ | ------ | ------- | ----------------- |
+| Today  | günlük | 1       | (delta yok zaten) |
+| Week   | günlük | 7       | `DateFormat.MMMd` |
+| Month  | günlük | ~30     | `DateFormat.MMMd` |
+| Year   | aylık  | 12      | `DateFormat.MMM`  |
+
+Backend `?period=year` parametresini görüp aylık aggregate döner. Mobile
+chart `RevenueBarChart` aldığı `ReportPeriod period`'a göre x-ekseni format
+ve interval type seçer.
 
 ---
 
@@ -321,6 +385,10 @@ final class ReportFilter extends Equatable {
   final ReportRange range;
   final String? venueId;
   final bool compareToPrevious;
+
+  /// `false` for `today` — KPI delta'sı / Forecast card / chart compare
+  /// hepsi bu getter'a bakar. (v2.1)
+  bool get supportsComparison => period != ReportPeriod.today;
 }
 ```
 
@@ -328,6 +396,13 @@ final class ReportFilter extends Equatable {
 otomatik set eder, sonra hiçbir akış null'a geri çekmez. v2'de veri tipinde
 güçlendirilebilir (custom date range desteği eklendiğinde tekrar
 değerlendirilir).
+
+**Cubit period gate'leri (v2.1):**
+
+- `changePeriod(today)` → `compareToPrevious = false`, KPI delta'ları çizilmez,
+  ForecastCard kendisini gizler.
+- `changePeriod(week | month | year)` → `compareToPrevious = true`, normal akış.
+- `loadForecast()` Today için early-return — gereksiz API çağrısı yok.
 
 ---
 
@@ -380,17 +455,17 @@ ReportVenueModel          id, name, number     // hafif venue picker payload'ı
 
 ## 9. Bilinçli olarak ertelenen — geri gelmesi için ne lazım
 
-| Özellik                                           | Geri gelmek için ön-koşul                                                                          |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Manager risk skoru + `ManagerRiskBadge`           | Saha datası (3-6 ay) + 2-3 gerçek owner ile kalibrasyon + legal review (yanlış pozitif maliyeti)   |
-| Fraud sinyali listesi (`FraudFlagModel` ailesi)   | Risk skoru ile birlikte; sinyal başına owner-spesifik threshold ayarı                              |
-| `RiskScorePanel` + `FraudFlagList`                | Yukarıdakiler. UI hazır şablonu git history'de mevcut                                              |
-| `InsightsStrip` (otomatik insight kartları)       | Risk skoru + actionable threshold'lar; UI'da owner "yoksay" + "haklıydı" feedback loop'u           |
-| Çok-mekan ("All venues") agregasyonu              | Multi-currency düzgün handling; currency mix fallback davranışı                                     |
-| Manager log filtreleri `discounted` / `short`     | Risk skoruyla birlikte (tek başına bilgi-değil-suçlama dengesi belirsiz)                            |
-| Insights Inbox (geçmiş insight history)           | Risk skoruyla birlikte                                                                              |
-| Forecast full sayfası (senaryolar dahil)          | Currency normalization, en az 60 gün veri threshold'u                                              |
-| PDF / CSV export                                  | Backend tarafı; saha owner'ından gerçek talep                                                       |
+| Özellik                                         | Geri gelmek için ön-koşul                                                                        |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Manager risk skoru + `ManagerRiskBadge`         | Saha datası (3-6 ay) + 2-3 gerçek owner ile kalibrasyon + legal review (yanlış pozitif maliyeti) |
+| Fraud sinyali listesi (`FraudFlagModel` ailesi) | Risk skoru ile birlikte; sinyal başına owner-spesifik threshold ayarı                            |
+| `RiskScorePanel` + `FraudFlagList`              | Yukarıdakiler. UI hazır şablonu git history'de mevcut                                            |
+| `InsightsStrip` (otomatik insight kartları)     | Risk skoru + actionable threshold'lar; UI'da owner "yoksay" + "haklıydı" feedback loop'u         |
+| Çok-mekan ("All venues") agregasyonu            | Multi-currency düzgün handling; currency mix fallback davranışı                                  |
+| Manager log filtreleri `discounted` / `short`   | Risk skoruyla birlikte (tek başına bilgi-değil-suçlama dengesi belirsiz)                         |
+| Insights Inbox (geçmiş insight history)         | Risk skoruyla birlikte                                                                           |
+| Forecast full sayfası (senaryolar dahil)        | Currency normalization, en az 60 gün veri threshold'u                                            |
+| PDF / CSV export                                | Backend tarafı; saha owner'ından gerçek talep                                                    |
 
 > Bu özelliklerin önceki implementation şablonları **git history**'de. Geri
 > gelirken sıfırdan yazmaya gerek yok — `el/reports` branch'inde PR #25
@@ -403,25 +478,25 @@ ReportVenueModel          id, name, number     // hafif venue picker payload'ı
 Tüm endpoint'ler `Authorization: Bearer <accessToken>` + `role=OWNER`.
 Manager `403 FORBIDDEN`. Hesaplar backend'de — mobile aggregation yok.
 
-| Method | Path                                       | Amaç                                                   |
-| ------ | ------------------------------------------ | ------------------------------------------------------ |
-| GET    | `/api/v1/reports/venues`                   | Owner'ın mekan listesi (picker)                        |
-| GET    | `/api/v1/reports/overview`                 | KPI özeti + comparison previous                        |
-| GET    | `/api/v1/reports/revenue-series`           | Bar chart için aggregated time series                  |
-| GET    | `/api/v1/reports/tables`                   | Seçili mekanın tüm masaları (top-N parametresi yok)    |
-| GET    | `/api/v1/reports/tables/{id}`              | Table detail (heatmap dahil)                           |
-| GET    | `/api/v1/reports/managers`                 | Seçili mekanda gelir üreten manager listesi            |
-| GET    | `/api/v1/reports/managers/{id}`            | Manager detail — summary + sessionLog                  |
-| GET    | `/api/v1/reports/forecast`                 | Tahmin (overview kartı için)                           |
+| Method | Path                             | Amaç                                                |
+| ------ | -------------------------------- | --------------------------------------------------- |
+| GET    | `/api/v1/reports/venues`         | Owner'ın mekan listesi (picker)                     |
+| GET    | `/api/v1/reports/overview`       | KPI özeti + comparison previous                     |
+| GET    | `/api/v1/reports/revenue-series` | Bar chart için aggregated time series               |
+| GET    | `/api/v1/reports/tables`         | Seçili mekanın tüm masaları (top-N parametresi yok) |
+| GET    | `/api/v1/reports/tables/{id}`    | Table detail (heatmap dahil)                        |
+| GET    | `/api/v1/reports/managers`       | Seçili mekanda gelir üreten manager listesi         |
+| GET    | `/api/v1/reports/managers/{id}`  | Manager detail — summary + sessionLog               |
+| GET    | `/api/v1/reports/forecast`       | Tahmin (overview kartı için)                        |
 
 Ortak query parametreleri:
 
-| Param      | Type    | Notes                                                                  |
-| ---------- | ------- | ---------------------------------------------------------------------- |
-| `from`     | ISO8601 | inclusive UTC                                                          |
-| `to`       | ISO8601 | exclusive UTC                                                          |
-| `venueId`  | uuid    | MVP'de **her zaman set** (mobile null göndermez)                       |
-| `compare`  | bool    | `true` ise overview response'una `previous` bloğu eklenir              |
+| Param     | Type    | Notes                                                     |
+| --------- | ------- | --------------------------------------------------------- |
+| `from`    | ISO8601 | inclusive UTC                                             |
+| `to`      | ISO8601 | exclusive UTC                                             |
+| `venueId` | uuid    | MVP'de **her zaman set** (mobile null göndermez)          |
+| `compare` | bool    | `true` ise overview response'una `previous` bloğu eklenir |
 
 > **Önceki kontrattan çıkarılanlar:** `/reports/insights`,
 > `/reports/insights/{id}/dismiss`, fraud flag alanları
@@ -629,6 +704,7 @@ Mevcut: **`RevenueBarChart` widget testi** —
 4 case: empty data, normal data, all-zero peak-tied, single point.
 
 Eklenecek (M2+):
+
 - `ReportFormat` unit test'leri (money/duration/delta edge case'leri)
 - `_MockStore.forecast` test'leri (period boundary, real-so-far)
 - Cubit testleri (overview load + venue change flow)

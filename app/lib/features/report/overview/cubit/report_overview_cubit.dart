@@ -40,6 +40,7 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
     final next = state.filter.copyWith(
       period: period,
       range: ReportRange.fromPeriod(period, DateTime.now()),
+      compareToPrevious: period != ReportPeriod.today,
     );
     emit(state.copyWith(filter: next));
     await _refreshAll();
@@ -102,6 +103,10 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
   }
 
   Future<void> loadForecast() async {
+    if (!state.filter.supportsComparison) {
+      emit(state.copyWith(forecast: const RequestInitial()));
+      return;
+    }
     emit(state.copyWith(forecast: const RequestLoading()));
     try {
       final forecast = await _repository.getForecast(state.filter);

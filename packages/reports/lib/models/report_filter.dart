@@ -29,6 +29,12 @@ final class ReportFilter extends Equatable {
   /// current one so KPI cards can render delta arrows.
   final bool compareToPrevious;
 
+  /// Whether this period supports comparison/forecast UX. `false` for
+  /// `today` — half-day data vs full previous day always paints a false
+  /// "down 50%" picture, so KPI delta arrows and the Forecast card are
+  /// hidden in Today view. Caller still gets absolute numbers.
+  bool get supportsComparison => period != ReportPeriod.today;
+
   ReportFilter copyWith({
     ReportPeriod? period,
     ReportRange? range,

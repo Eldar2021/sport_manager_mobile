@@ -31,8 +31,10 @@ final class ReportsRemoteSourceMock implements ReportsRemoteSource {
 
     if (!filter.compareToPrevious) return current;
 
+    final previousRange = _store.clippedPreviousRange(filter);
+
     final previous = _store.summary(
-      filter.range.previous,
+      previousRange,
       venueId: filter.venueId,
     );
 
@@ -308,11 +310,21 @@ class _MockStore {
     );
   }
 
+  /// Period'a göre bucket boyutu:
+  /// - `year` → aylık 12 nokta (mobile chart'ın okunabilir kalması için)
+  /// - diğerleri → günlük (`week=7`, `month=~30`, `today=1`)
+  /// (v2.1)
   List<RevenuePointModel> revenueSeries(ReportFilter filter) {
     final scoped = _filtered(
       filter.range,
       venueId: filter.venueId,
     ).where((s) => s.isCompleted).toList();
+
+    if (filter.period == ReportPeriod.year) return _monthlyBuckets(filter, scoped);
+    return _dailyBuckets(filter, scoped);
+  }
+
+  List<RevenuePointModel> _dailyBuckets(ReportFilter filter, List<_MockSession> scoped) {
     final byDay = <DateTime, _DayBucket>{};
     for (final s in scoped) {
       final key = DateTime(s.startedAt.year, s.startedAt.month, s.startedAt.day);
@@ -332,9 +344,35 @@ class _MockStore {
     ];
   }
 
+  List<RevenuePointModel> _monthlyBuckets(ReportFilter filter, List<_MockSession> scoped) {
+    final byMonth = <DateTime, _DayBucket>{};
+    for (final s in scoped) {
+      final key = DateTime(s.startedAt.year, s.startedAt.month);
+      byMonth.putIfAbsent(key, _DayBucket.new)
+        ..revenue += s.totalAmount
+        ..sessions += 1;
+    }
+    // Range'in başından bitiş ayının ilk gününe kadar her ayı doldur.
+    final start = DateTime(filter.range.from.year, filter.range.from.month);
+    final months = <DateTime>[];
+    var cursor = start;
+    while (cursor.isBefore(filter.range.to)) {
+      months.add(cursor);
+      cursor = DateTime(cursor.year, cursor.month + 1);
+    }
+    return [
+      for (final m in months)
+        () {
+          final b = byMonth[m] ?? _DayBucket();
+          return RevenuePointModel(bucket: m, revenue: b.revenue, sessions: b.sessions);
+        }(),
+    ];
+  }
+
   List<TableReportRowModel> tableRows(ReportFilter filter) {
     final scoped = _filtered(filter.range, venueId: filter.venueId).toList();
-    final prevScoped = _filtered(filter.range.previous, venueId: filter.venueId).toList();
+    // Per-table delta'da KPI delta'sıyla aynı clipped-previous mantığı.
+    final prevScoped = _filtered(clippedPreviousRange(filter), venueId: filter.venueId).toList();
 
     final out = <TableReportRowModel>[];
     for (final t in tables) {
@@ -528,6 +566,23 @@ class _MockStore {
     };
   }
 
+  /// "Clipped previous" — geçen takvim periyodunun **ilk N gününü** döner;
+  /// burada N = current filter.range.length. KPI delta'sı bu dilimi
+  /// kullanır ki periyot kapanmadan "geçen periyodun tamamı"yla
+  /// karşılaştırılıp yanıltıcı düşüş sinyali vermesin. (v2.1)
+  ///
+  /// Periyot tamamen kapalıysa (range.to ≤ now) clipped == previousFull
+  /// olur — clipping no-op.
+  ReportRange clippedPreviousRange(ReportFilter filter) {
+    final prevFull = _previousCalendarRange(filter.period, now) ?? filter.range.previous;
+    final elapsed = filter.range.length;
+    final clippedTo = prevFull.from.add(elapsed);
+    return ReportRange(
+      from: prevFull.from,
+      to: clippedTo.isBefore(prevFull.to) ? clippedTo : prevFull.to,
+    );
+  }
+
   /// Range covering the **previous** calendar period of the same kind.
   /// `null` for `custom` — caller falls back to `filter.range.previous`.
   ReportRange? _previousCalendarRange(ReportPeriod period, DateTime now) {
@@ -561,23 +616,11 @@ class _MockStore {
       orElse: () => throw const ReportsException(ReportsErrorCode.notFound),
     );
     final scoped = _filtered(filter.range).where((s) => s.tableId == tableId && s.isCompleted).toList();
-    final byDay = <DateTime, _DayBucket>{};
-    for (final s in scoped) {
-      final key = DateTime(s.startedAt.year, s.startedAt.month, s.startedAt.day);
-      byDay.putIfAbsent(key, _DayBucket.new)
-        ..revenue += s.totalAmount
-        ..sessions += 1;
-    }
-    final days = filter.range.length.inDays.clamp(1, 366);
-    final start = DateTime(filter.range.from.year, filter.range.from.month, filter.range.from.day);
-    final revenueByDay = [
-      for (var i = 0; i < days; i++)
-        () {
-          final day = start.add(Duration(days: i));
-          final b = byDay[day] ?? _DayBucket();
-          return RevenuePointModel(bucket: day, revenue: b.revenue, sessions: b.sessions);
-        }(),
-    ];
+    // revenueSeries() ile aynı bucket mantığı — yıl için aylık, diğerleri
+    // için günlük. Tek farkı: scope tableId üzerine pre-filter edilmiş.
+    final revenueSeries = filter.period == ReportPeriod.year
+        ? _monthlyBuckets(filter, scoped)
+        : _dailyBuckets(filter, scoped);
 
     final heatmap = List.generate(7, (_) => List<int>.filled(24, 0));
     for (final s in scoped) {
@@ -586,7 +629,7 @@ class _MockStore {
 
     return TableReportDetailModel(
       summary: summary,
-      revenueByDay: revenueByDay,
+      revenueSeries: revenueSeries,
       hourHeatmap: heatmap,
     );
   }

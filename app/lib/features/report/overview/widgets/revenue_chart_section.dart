@@ -28,7 +28,8 @@ class RevenueChartSection extends StatelessWidget {
             const SizedBox(height: AppSpacing.x3),
             BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
               bloc: cubit,
-              buildWhen: (a, b) => a.revenue != b.revenue || a.summary != b.summary,
+              buildWhen: (a, b) =>
+                  a.revenue != b.revenue || a.summary != b.summary || a.filter.period != b.filter.period,
               builder: (_, state) {
                 final currency = state.summary.dataOrNull?.currency ?? Currency.kgs;
                 return switch (state.revenue) {
@@ -41,6 +42,7 @@ class RevenueChartSection extends StatelessWidget {
                   RequestSuccess<List<RevenuePointModel>>(:final data) => RevenueBarChart(
                     points: data,
                     currency: currency,
+                    period: state.filter.period,
                   ),
                 };
               },
