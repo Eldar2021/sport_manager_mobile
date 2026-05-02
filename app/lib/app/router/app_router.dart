@@ -9,9 +9,7 @@ import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/main/main.dart';
 import 'package:sport_manager_mobile/features/managers/managers.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
-import 'package:sport_manager_mobile/features/report/manager_detail/manager_detail.dart';
-import 'package:sport_manager_mobile/features/report/overview/overview.dart';
-import 'package:sport_manager_mobile/features/report/table_detail/table_detail.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
 import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
@@ -161,12 +159,16 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
                   GoRoute(
                     path: 'managers/:id',
                     parentNavigatorKey: rootNavigatorKey,
-                    builder: (_, state) => ManagerReportDetailView(managerId: state.pathParameters['id']!),
+                    builder: (_, state) => ManagerReportDetailView(
+                      managerId: state.pathParameters['id']!,
+                    ),
                   ),
                   GoRoute(
                     path: 'tables/:id',
                     parentNavigatorKey: rootNavigatorKey,
-                    builder: (_, state) => TableReportDetailView(tableId: state.pathParameters['id']!),
+                    builder: (_, state) => TableReportDetailView(
+                      tableId: state.pathParameters['id']!,
+                    ),
                   ),
                 ],
               ),
