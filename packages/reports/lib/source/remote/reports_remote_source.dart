@@ -7,14 +7,9 @@ abstract interface class ReportsRemoteSource {
 
   Future<List<RevenuePointModel>> getRevenueSeries(ReportFilter filter);
 
-  Future<List<TableReportRowModel>> getTopTables(
-    ReportFilter filter, {
-    int limit = 5,
-  });
+  Future<List<TableReportRowModel>> getTables(ReportFilter filter);
 
   Future<List<ManagerReportRowModel>> getManagers(ReportFilter filter);
-
-  Future<List<InsightModel>> getInsights(ReportFilter filter);
 
   Future<ForecastModel> getForecast(ReportFilter filter);
 
@@ -27,6 +22,4 @@ abstract interface class ReportsRemoteSource {
     String tableId,
     ReportFilter filter,
   );
-
-  Future<void> dismissInsight(String id);
 }

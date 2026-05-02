@@ -20,7 +20,6 @@ ManagerSessionLogEntry _$ManagerSessionLogEntryFromJson(
   tableName: json['tableName'] as String?,
   durationSeconds: (json['durationSeconds'] as num?)?.toInt(),
   totalAmount: (json['totalAmount'] as num?)?.toInt(),
-  discountPercent: (json['discountPercent'] as num?)?.toInt(),
   cancelReason: json['cancelReason'] as String?,
 );
 
@@ -38,7 +37,6 @@ Map<String, dynamic> _$ManagerSessionLogEntryToJson(
   'currency': _$CurrencyEnumMap[instance.currency]!,
   'durationSeconds': instance.durationSeconds,
   'totalAmount': instance.totalAmount,
-  'discountPercent': instance.discountPercent,
   'cancelReason': instance.cancelReason,
 };
 

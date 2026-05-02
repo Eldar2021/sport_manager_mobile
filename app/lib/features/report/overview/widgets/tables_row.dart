@@ -6,26 +6,19 @@ import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-/// Single row of the top-tables section — renders the table label,
-/// optional trend delta, total revenue and a relative-progress bar.
-/// Built on top of [ListTile] so tap ripple, padding and theming come
-/// from the existing list-tile theme.
-class TopTablesRow extends StatelessWidget {
-  const TopTablesRow({
+/// Single row of the tables section — table label, optional trend delta,
+/// total revenue and a relative-progress bar. Built on [ListTile] so tap
+/// ripple, padding and theming come from the existing list-tile theme.
+class TablesRow extends StatelessWidget {
+  const TablesRow({
     required this.row,
-    required this.showVenue,
     required this.maxRevenue,
     super.key,
   });
 
   final TableReportRowModel row;
 
-  /// When `true`, show the venue name under the row — used in
-  /// "All venues" mode where the same table number can repeat across
-  /// venues. In single-venue mode this is implicit.
-  final bool showVenue;
-
-  /// The largest revenue in the visible group; used to scale the
+  /// The largest revenue among the visible rows; used to scale the
   /// relative-progress bar.
   final int maxRevenue;
 
@@ -65,26 +58,14 @@ class TopTablesRow extends StatelessWidget {
           ),
         ],
       ),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(99),
-            child: LinearProgressIndicator(
-              value: ratio,
-              minHeight: 4,
-              backgroundColor: context.colors.surfaceContainerHighest,
-              valueColor: AlwaysStoppedAnimation<Color>(context.colors.primary),
-            ),
-          ),
-          if (showVenue) ...[
-            const SizedBox(height: AppSpacing.x1),
-            Text(
-              row.venueName,
-              style: context.appTextStyles.muted.labelSmall,
-            ),
-          ],
-        ],
+      subtitle: ClipRRect(
+        borderRadius: BorderRadius.circular(99),
+        child: LinearProgressIndicator(
+          value: ratio,
+          minHeight: 4,
+          backgroundColor: context.colors.surfaceContainerHighest,
+          valueColor: AlwaysStoppedAnimation<Color>(context.colors.primary),
+        ),
       ),
     );
   }

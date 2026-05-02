@@ -6,6 +6,9 @@ import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
+/// Filterable list of a manager's recent sessions. MVP: only "All" and
+/// "Cancelled" filters; no discount/short-cluster filters since those
+/// were the entry point to the fraud-signal flow that's been removed.
 class ManagerSessionLog extends StatelessWidget {
   const ManagerSessionLog({
     required this.cubit,
@@ -20,8 +23,6 @@ class ManagerSessionLog extends StatelessWidget {
     return switch (f) {
       ManagerLogFilter.all => entries,
       ManagerLogFilter.cancelled => entries.where((e) => e.isCancelled),
-      ManagerLogFilter.discounted => entries.where((e) => e.hadDiscount),
-      ManagerLogFilter.short => entries.where((e) => e.isShort),
     };
   }
 
@@ -29,8 +30,6 @@ class ManagerSessionLog extends StatelessWidget {
     return switch (f) {
       ManagerLogFilter.all => l10n.reportsLogFilterAll,
       ManagerLogFilter.cancelled => l10n.reportsLogFilterCancelled,
-      ManagerLogFilter.discounted => l10n.reportsLogFilterDiscounted,
-      ManagerLogFilter.short => l10n.reportsLogFilterShort,
     };
   }
 
@@ -124,9 +123,8 @@ class _LogRow extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
-        '${entry.venueName} · ${df.format(entry.startedAt)}'
-        '${entry.durationSeconds != null ? ' · ${ReportFormat.duration(entry.durationSeconds!)}' : ''}'
-        '${entry.hadDiscount ? ' · -${entry.discountPercent}%' : ''}',
+        '${df.format(entry.startedAt)}'
+        '${entry.durationSeconds != null ? ' · ${ReportFormat.duration(entry.durationSeconds!)}' : ''}',
         style: context.appTextStyles.muted.labelSmall,
       ),
       trailing: entry.isCancelled

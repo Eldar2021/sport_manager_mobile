@@ -1,10 +1,11 @@
 part of 'manager_report_detail_cubit.dart';
 
+/// Filters for the manager session log. MVP: just "all" and "cancelled"
+/// — discount/short-cluster filters were intentionally cut along with
+/// the fraud-signal removal.
 enum ManagerLogFilter {
   all,
   cancelled,
-  discounted,
-  short,
 }
 
 @immutable

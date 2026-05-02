@@ -1509,12 +1509,6 @@ abstract class AppLocalizations {
   /// **'Custom'**
   String get reportsPeriodCustom;
 
-  /// No description provided for @reportsAllVenues.
-  ///
-  /// In en, this message translates to:
-  /// **'All venues'**
-  String get reportsAllVenues;
-
   /// No description provided for @reportsVenuePickerTitle.
   ///
   /// In en, this message translates to:
@@ -1563,29 +1557,17 @@ abstract class AppLocalizations {
   /// **'Compare to previous period'**
   String get reportsRevenueChartCompareToggle;
 
-  /// No description provided for @reportsTopTablesTitle.
+  /// No description provided for @reportsTablesTitle.
   ///
   /// In en, this message translates to:
-  /// **'Top tables'**
-  String get reportsTopTablesTitle;
-
-  /// No description provided for @reportsTopTablesSeeAll.
-  ///
-  /// In en, this message translates to:
-  /// **'See all tables'**
-  String get reportsTopTablesSeeAll;
+  /// **'Tables'**
+  String get reportsTablesTitle;
 
   /// No description provided for @reportsTopManagersTitle.
   ///
   /// In en, this message translates to:
   /// **'Managers'**
   String get reportsTopManagersTitle;
-
-  /// No description provided for @reportsTopManagersSeeAll.
-  ///
-  /// In en, this message translates to:
-  /// **'See all managers'**
-  String get reportsTopManagersSeeAll;
 
   /// No description provided for @reportsTableLabel.
   ///
@@ -1605,132 +1587,6 @@ abstract class AppLocalizations {
   /// **'cancels'**
   String get reportsCancelledShort;
 
-  /// No description provided for @reportsForecastSummaryTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Forecast'**
-  String get reportsForecastSummaryTitle;
-
-  /// No description provided for @reportsForecastVsPrevious.
-  ///
-  /// In en, this message translates to:
-  /// **'vs previous period'**
-  String get reportsForecastVsPrevious;
-
-  /// No description provided for @reportsForecastNoComparison.
-  ///
-  /// In en, this message translates to:
-  /// **'Not enough history yet'**
-  String get reportsForecastNoComparison;
-
-  /// No description provided for @reportsManagerRiskLow.
-  ///
-  /// In en, this message translates to:
-  /// **'Low risk'**
-  String get reportsManagerRiskLow;
-
-  /// No description provided for @reportsManagerRiskMedium.
-  ///
-  /// In en, this message translates to:
-  /// **'Review'**
-  String get reportsManagerRiskMedium;
-
-  /// No description provided for @reportsManagerRiskHigh.
-  ///
-  /// In en, this message translates to:
-  /// **'High — review now'**
-  String get reportsManagerRiskHigh;
-
-  /// No description provided for @reportsRiskScoreTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Risk score'**
-  String get reportsRiskScoreTitle;
-
-  /// No description provided for @reportsRiskScoreExplain.
-  ///
-  /// In en, this message translates to:
-  /// **'Computed from cancel rate, discount rate, off-hours activity and session patterns. A high score means review the session log — not necessarily fraud.'**
-  String get reportsRiskScoreExplain;
-
-  /// No description provided for @reportsFraudSignalsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Risk signals'**
-  String get reportsFraudSignalsTitle;
-
-  /// No description provided for @reportsFraudNoFlags.
-  ///
-  /// In en, this message translates to:
-  /// **'No signals — this manager is operating within team norms.'**
-  String get reportsFraudNoFlags;
-
-  /// No description provided for @reportsFraudHighCancelRate.
-  ///
-  /// In en, this message translates to:
-  /// **'High cancel rate'**
-  String get reportsFraudHighCancelRate;
-
-  /// No description provided for @reportsFraudHighCancel60s.
-  ///
-  /// In en, this message translates to:
-  /// **'Many cancels under 60s'**
-  String get reportsFraudHighCancel60s;
-
-  /// No description provided for @reportsFraudHighDiscountRate.
-  ///
-  /// In en, this message translates to:
-  /// **'Frequent discounts'**
-  String get reportsFraudHighDiscountRate;
-
-  /// No description provided for @reportsFraudHighAvgDiscount.
-  ///
-  /// In en, this message translates to:
-  /// **'High average discount'**
-  String get reportsFraudHighAvgDiscount;
-
-  /// No description provided for @reportsFraudLongPauseAvg.
-  ///
-  /// In en, this message translates to:
-  /// **'Long average pause'**
-  String get reportsFraudLongPauseAvg;
-
-  /// No description provided for @reportsFraudManyPausePerSession.
-  ///
-  /// In en, this message translates to:
-  /// **'Many pauses per session'**
-  String get reportsFraudManyPausePerSession;
-
-  /// No description provided for @reportsFraudOffHoursActivity.
-  ///
-  /// In en, this message translates to:
-  /// **'Off-hours activity'**
-  String get reportsFraudOffHoursActivity;
-
-  /// No description provided for @reportsFraudShortSessionCluster.
-  ///
-  /// In en, this message translates to:
-  /// **'Cluster of short sessions'**
-  String get reportsFraudShortSessionCluster;
-
-  /// No description provided for @reportsFraudTariffOverride.
-  ///
-  /// In en, this message translates to:
-  /// **'Tariff overrides'**
-  String get reportsFraudTariffOverride;
-
-  /// No description provided for @reportsFraudLowShiftRevenue.
-  ///
-  /// In en, this message translates to:
-  /// **'Low shift revenue'**
-  String get reportsFraudLowShiftRevenue;
-
-  /// No description provided for @reportsFraudMultiplier.
-  ///
-  /// In en, this message translates to:
-  /// **'{x}× team average'**
-  String reportsFraudMultiplier(String x);
-
   /// No description provided for @reportsSessionLogTitle.
   ///
   /// In en, this message translates to:
@@ -1749,23 +1605,29 @@ abstract class AppLocalizations {
   /// **'Cancelled'**
   String get reportsLogFilterCancelled;
 
-  /// No description provided for @reportsLogFilterDiscounted.
-  ///
-  /// In en, this message translates to:
-  /// **'Discounted'**
-  String get reportsLogFilterDiscounted;
-
-  /// No description provided for @reportsLogFilterShort.
-  ///
-  /// In en, this message translates to:
-  /// **'Short'**
-  String get reportsLogFilterShort;
-
   /// No description provided for @reportsLogEmpty.
   ///
   /// In en, this message translates to:
   /// **'No sessions match this filter.'**
   String get reportsLogEmpty;
+
+  /// No description provided for @reportsForecastSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Forecast'**
+  String get reportsForecastSummaryTitle;
+
+  /// No description provided for @reportsForecastVsPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'vs previous period'**
+  String get reportsForecastVsPrevious;
+
+  /// No description provided for @reportsForecastNoComparison.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough history yet'**
+  String get reportsForecastNoComparison;
 
   /// No description provided for @reportsTableTrendTitle.
   ///

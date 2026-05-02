@@ -15,11 +15,6 @@ ManagerReportRowModel _$ManagerReportRowModelFromJson(
   revenue: (json['revenue'] as num).toInt(),
   sessions: (json['sessions'] as num).toInt(),
   cancelCount: (json['cancelCount'] as num).toInt(),
-  discountedCount: (json['discountedCount'] as num).toInt(),
-  avgDiscountPercent: (json['avgDiscountPercent'] as num).toInt(),
-  riskScore: (json['riskScore'] as num).toInt(),
-  riskBand: $enumDecode(_$ManagerRiskBandEnumMap, json['riskBand']),
-  flags: (json['flags'] as List<dynamic>).map((e) => FraudFlagModel.fromJson(e as Map<String, dynamic>)).toList(),
   currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
 );
 
@@ -32,18 +27,7 @@ Map<String, dynamic> _$ManagerReportRowModelToJson(
   'revenue': instance.revenue,
   'sessions': instance.sessions,
   'cancelCount': instance.cancelCount,
-  'discountedCount': instance.discountedCount,
-  'avgDiscountPercent': instance.avgDiscountPercent,
-  'riskScore': instance.riskScore,
-  'riskBand': _$ManagerRiskBandEnumMap[instance.riskBand]!,
-  'flags': instance.flags,
   'currency': _$CurrencyEnumMap[instance.currency]!,
-};
-
-const _$ManagerRiskBandEnumMap = {
-  ManagerRiskBand.green: 'GREEN',
-  ManagerRiskBand.yellow: 'YELLOW',
-  ManagerRiskBand.red: 'RED',
 };
 
 const _$CurrencyEnumMap = {

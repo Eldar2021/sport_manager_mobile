@@ -9,7 +9,6 @@ final class ReportOverviewState extends Equatable {
     this.revenue = const RequestInitial(),
     this.tables = const RequestInitial(),
     this.managers = const RequestInitial(),
-    this.insights = const RequestInitial(),
     this.forecast = const RequestInitial(),
   });
 
@@ -19,7 +18,6 @@ final class ReportOverviewState extends Equatable {
   final RequestStatus<List<RevenuePointModel>> revenue;
   final RequestStatus<List<TableReportRowModel>> tables;
   final RequestStatus<List<ManagerReportRowModel>> managers;
-  final RequestStatus<List<InsightModel>> insights;
   final RequestStatus<ForecastModel> forecast;
 
   ReportOverviewState copyWith({
@@ -29,7 +27,6 @@ final class ReportOverviewState extends Equatable {
     RequestStatus<List<RevenuePointModel>>? revenue,
     RequestStatus<List<TableReportRowModel>>? tables,
     RequestStatus<List<ManagerReportRowModel>>? managers,
-    RequestStatus<List<InsightModel>>? insights,
     RequestStatus<ForecastModel>? forecast,
   }) {
     return ReportOverviewState(
@@ -39,7 +36,6 @@ final class ReportOverviewState extends Equatable {
       revenue: revenue ?? this.revenue,
       tables: tables ?? this.tables,
       managers: managers ?? this.managers,
-      insights: insights ?? this.insights,
       forecast: forecast ?? this.forecast,
     );
   }
@@ -52,7 +48,6 @@ final class ReportOverviewState extends Equatable {
     revenue,
     tables,
     managers,
-    insights,
     forecast,
   ];
 }

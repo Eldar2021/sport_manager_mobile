@@ -863,9 +863,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsPeriodCustom => 'Период';
 
   @override
-  String get reportsAllVenues => 'Все залы';
-
-  @override
   String get reportsVenuePickerTitle => 'Выберите зал';
 
   @override
@@ -890,16 +887,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsRevenueChartCompareToggle => 'Сравнить с прошлым периодом';
 
   @override
-  String get reportsTopTablesTitle => 'Топ столов';
-
-  @override
-  String get reportsTopTablesSeeAll => 'Все столы';
+  String get reportsTablesTitle => 'Столы';
 
   @override
   String get reportsTopManagersTitle => 'Менеджеры';
-
-  @override
-  String get reportsTopManagersSeeAll => 'Все менеджеры';
 
   @override
   String get reportsTableLabel => 'Стол';
@@ -911,72 +902,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsCancelledShort => 'отмен';
 
   @override
-  String get reportsForecastSummaryTitle => 'Прогноз';
-
-  @override
-  String get reportsForecastVsPrevious => 'к прошлому периоду';
-
-  @override
-  String get reportsForecastNoComparison => 'Истории пока недостаточно';
-
-  @override
-  String get reportsManagerRiskLow => 'Низкий риск';
-
-  @override
-  String get reportsManagerRiskMedium => 'Проверить';
-
-  @override
-  String get reportsManagerRiskHigh => 'Высокий — срочно';
-
-  @override
-  String get reportsRiskScoreTitle => 'Оценка риска';
-
-  @override
-  String get reportsRiskScoreExplain =>
-      'Считается по частоте отмен, скидок, ночной активности и шаблонам сессий. Высокая оценка — повод просмотреть лог, а не приговор.';
-
-  @override
-  String get reportsFraudSignalsTitle => 'Сигналы риска';
-
-  @override
-  String get reportsFraudNoFlags => 'Сигналов нет — менеджер работает в пределах нормы команды.';
-
-  @override
-  String get reportsFraudHighCancelRate => 'Высокая частота отмен';
-
-  @override
-  String get reportsFraudHighCancel60s => 'Много отмен в первые 60 сек';
-
-  @override
-  String get reportsFraudHighDiscountRate => 'Частые скидки';
-
-  @override
-  String get reportsFraudHighAvgDiscount => 'Высокая средняя скидка';
-
-  @override
-  String get reportsFraudLongPauseAvg => 'Длинные паузы';
-
-  @override
-  String get reportsFraudManyPausePerSession => 'Много пауз за сессию';
-
-  @override
-  String get reportsFraudOffHoursActivity => 'Активность вне часов';
-
-  @override
-  String get reportsFraudShortSessionCluster => 'Серия коротких сессий';
-
-  @override
-  String get reportsFraudTariffOverride => 'Изменения тарифа';
-
-  @override
-  String get reportsFraudLowShiftRevenue => 'Низкая выручка в смену';
-
-  @override
-  String reportsFraudMultiplier(String x) {
-    return '×$x от среднего';
-  }
-
-  @override
   String get reportsSessionLogTitle => 'Лог сессий';
 
   @override
@@ -986,13 +911,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsLogFilterCancelled => 'Отменённые';
 
   @override
-  String get reportsLogFilterDiscounted => 'Со скидкой';
-
-  @override
-  String get reportsLogFilterShort => 'Короткие';
-
-  @override
   String get reportsLogEmpty => 'Нет сессий по этому фильтру.';
+
+  @override
+  String get reportsForecastSummaryTitle => 'Прогноз';
+
+  @override
+  String get reportsForecastVsPrevious => 'к прошлому периоду';
+
+  @override
+  String get reportsForecastNoComparison => 'Истории пока недостаточно';
 
   @override
   String get reportsTableTrendTitle => 'Тренд выручки';
