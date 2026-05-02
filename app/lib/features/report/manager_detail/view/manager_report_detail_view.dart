@@ -4,14 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:reports/reports.dart';
 import 'package:sport_manager_mobile/core/core.dart';
-import 'package:sport_manager_mobile/core/exeptions/widget/error_body_widget.dart';
-import 'package:sport_manager_mobile/features/report/manager_detail/cubit/manager_report_detail_cubit.dart';
-import 'package:sport_manager_mobile/features/report/manager_detail/widgets/fraud_flag_list.dart';
-import 'package:sport_manager_mobile/features/report/manager_detail/widgets/manager_session_log.dart';
-import 'package:sport_manager_mobile/features/report/manager_detail/widgets/risk_score_panel.dart';
-import 'package:sport_manager_mobile/features/report/utils/report_format.dart';
-import 'package:sport_manager_mobile/features/report/widgets/report_kpi_card.dart';
-import 'package:sport_manager_mobile/features/report/widgets/report_period_chips.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
