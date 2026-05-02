@@ -7,7 +7,6 @@ abstract interface class ReportsRemoteSource {
 
   Future<List<RevenuePointModel>> getRevenueSeries(ReportFilter filter);
 
-  /// All tables of the selected venue, sorted by revenue desc.
   Future<List<TableReportRowModel>> getTables(ReportFilter filter);
 
   Future<List<ManagerReportRowModel>> getManagers(ReportFilter filter);

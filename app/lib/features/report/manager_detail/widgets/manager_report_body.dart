@@ -40,7 +40,6 @@ class ManagerReportBody extends StatelessWidget {
               child: ReportKpiCard(
                 title: l10n.reportsKpiSessions,
                 value: summary.sessions.toString(),
-                subtitle: summary.cancelCount > 0 ? '${summary.cancelCount} ${l10n.reportsCancelledShort}' : null,
               ),
             ),
           ],
