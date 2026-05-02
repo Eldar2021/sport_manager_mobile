@@ -72,35 +72,22 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.x4),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 22,
-              backgroundColor: context.colors.primaryContainer,
-              child: Text(
-                _initials(summary.name),
-                style: TextStyle(color: context.colors.onPrimaryContainer),
-              ),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    summary.name,
-                    style: context.textTheme.titleMedium,
-                  ),
-                  Text(
-                    '@${summary.username}',
-                    style: context.appTextStyles.muted.labelSmall,
-                  ),
-                ],
-              ),
-            ),
-          ],
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 22,
+          backgroundColor: context.colors.primaryContainer,
+          child: Text(
+            _initials(summary.name),
+            style: TextStyle(color: context.colors.onPrimaryContainer),
+          ),
+        ),
+        title: Text(
+          summary.name,
+          style: context.textTheme.titleMedium,
+        ),
+        subtitle: Text(
+          '@${summary.username}',
+          style: context.appTextStyles.muted.labelSmall,
         ),
       ),
     );
