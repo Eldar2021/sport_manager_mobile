@@ -84,13 +84,13 @@ Her owner'ın tek bir **active subscription** kaydı vardır (`status: ACTIVE | 
 
 **Status değerleri (kontrat):**
 
-| Status    | Backend ne döner       | UI nasıl çizer                            | Ana özellikler |
-| --------- | ---------------------- | ----------------------------------------- | -------------- |
-| `ACTIVE`  | `daysUntilExpiry > 3`  | Yeşil rozet, buton **YOK**                | Açık           |
-| `ACTIVE`  | `daysUntilExpiry ≤ 3`  | Sarı/turuncu rozet, **Continue** butonu   | Açık           |
-| `GRACE`   | `graceDaysRemaining ≥ 1` | Üstte sarı NOTE banner, **Continue** butonu | Açık |
-| `GRACE`   | `graceDaysRemaining = 0` | Üstte kırmızı NOTE banner, **Continue** butonu | **Bloke** |
-| `EXPIRED` | always                 | Kırmızı banner, **Continue** butonu       | **Bloke**       |
+| Status    | Backend ne döner         | UI nasıl çizer                                 | Ana özellikler |
+| --------- | ------------------------ | ---------------------------------------------- | -------------- |
+| `ACTIVE`  | `daysUntilExpiry > 3`    | Yeşil rozet, buton **YOK**                     | Açık           |
+| `ACTIVE`  | `daysUntilExpiry ≤ 3`    | Sarı/turuncu rozet, **Continue** butonu        | Açık           |
+| `GRACE`   | `graceDaysRemaining ≥ 1` | Üstte sarı NOTE banner, **Continue** butonu    | Açık           |
+| `GRACE`   | `graceDaysRemaining = 0` | Üstte kırmızı NOTE banner, **Continue** butonu | **Bloke**      |
+| `EXPIRED` | always                   | Kırmızı banner, **Continue** butonu            | **Bloke**      |
 
 > Backend "warning" diye ayrı bir status üretmez — `ACTIVE` döner ve mobile `daysUntilExpiry ≤ 3` ise warning UI'ı gösterir. Tek source of truth: `endDate` ve `graceDaysRemaining`.
 
@@ -120,19 +120,19 @@ Manager subscription'ı **owner'ından devralır** — bağımsız bir abonesi y
 
 EXPIRED veya GRACE@0 durumunda — uygulama tamamen kapanmaz, ancak **para üreten / state değiştiren** aksiyonlar engellenir. Read-only erişim açık kalır ki owner verilerine bakabilsin.
 
-| Özellik                              | Active | Grace (≥1) | Grace@0 / Expired |
-| ------------------------------------ | :----: | :--------: | :---------------: |
-| Login / logout                       |   ✅   |     ✅     |        ✅         |
-| Profile / subscription görme         |   ✅   |     ✅     |        ✅         |
-| Subscription ödeme yapma             |   ✅   |     ✅     |        ✅         |
-| Mekan listesi görme                  |   ✅   |     ✅     |        ✅         |
-| Masa listesi görme                   |   ✅   |     ✅     |        ✅         |
-| **Session start / pause / resume / finish** |   ✅   |     ✅     |        ❌         |
-| **Mekan / masa create / update / delete** |   ✅   |     ✅     |        ❌         |
+| Özellik                                       | Active | Grace (≥1) | Grace@0 / Expired |
+| --------------------------------------------- | :----: | :--------: | :---------------: |
+| Login / logout                                |   ✅   |     ✅     |        ✅         |
+| Profile / subscription görme                  |   ✅   |     ✅     |        ✅         |
+| Subscription ödeme yapma                      |   ✅   |     ✅     |        ✅         |
+| Mekan listesi görme                           |   ✅   |     ✅     |        ✅         |
+| Masa listesi görme                            |   ✅   |     ✅     |        ✅         |
+| **Session start / pause / resume / finish**   |   ✅   |     ✅     |        ❌         |
+| **Mekan / masa create / update / delete**     |   ✅   |     ✅     |        ❌         |
 | **Manager invite (POST `/auth/invite-code`)** |   ✅   |     ✅     |        ❌         |
-| Manager listesini görme              |   ✅   |     ✅     |        ✅         |
-| Şifre değiştirme                     |   ✅   |     ✅     |        ✅         |
-| Hesap silme                          |   ✅   |     ✅     |        ✅         |
+| Manager listesini görme                       |   ✅   |     ✅     |        ✅         |
+| Şifre değiştirme                              |   ✅   |     ✅     |        ✅         |
+| Hesap silme                                   |   ✅   |     ✅     |        ✅         |
 
 > Reports / analytics ekranı: read-only, açık.
 

@@ -80,6 +80,48 @@ final class AuthSuccess extends AuthState { ... }
 - Constants use `camelCase`, not `SCREAMING_SNAKE`: `static const bearerInstance`
 - Methods use `camelCase`: `loadVenues()`, `startSession()`
 
+### Constructor parameter style
+
+If a class has **exactly one** domain parameter, use a **positional**
+parameter — not a single-element named bag.
+
+```dart
+// Bad — noisy named API for one field
+const FraudFlagList({required this.flags, super.key});
+
+// Good — positional reads naturally at the call site
+const FraudFlagList(this.flags, {super.key});
+
+// Call sites:
+FraudFlagList(state.flags)            // not FraudFlagList(flags: state.flags)
+```
+
+`super.key` doesn't count toward the "one parameter" tally — it's a
+framework concern, not domain. Multi-domain-param widgets stay named
+(`{required this.row, required this.maxRevenue}`) so call sites self-document.
+
+### Trailing commas & multi-line formatting
+
+[`analysis_options.yaml`](../analysis_options.yaml) has `trailing_commas: preserve` — the formatter
+respects whatever shape you write. Use that lever:
+
+- **Single arg** → keep it on one line.
+- **2+ args** → put each on its own line **with a trailing comma**, even
+  if it would fit on one line. The diff stays narrow when arguments are
+  added or reordered, and the call reads top-to-bottom instead of
+  scanning a long horizontal line.
+
+```dart
+// Bad — fits, but next add/edit thrashes the whole line
+Icon(Icons.verified_outlined, color: context.appColors.success),
+
+// Good — each arg owns a line, trailing comma keeps shape stable
+Icon(
+  Icons.verified_outlined,
+  color: context.appColors.success,
+),
+```
+
 ---
 
 ## Import order
@@ -394,6 +436,42 @@ A widget that's **truly cross-feature** (e.g. `ContactSupportSheet`,
 `ProfileItemTile`) belongs in `app/lib/ui/components/`, not under any
 feature.
 
+### Barrels are exhaustive
+
+A feature barrel (`features/<feature>/<feature>.dart`) and each
+sub-feature barrel (`<sub>/<sub>.dart`) re-export **every** public file
+in their tree — cubits, views, widgets, utils, sub-feature barrels.
+Consumers should never need a deep import path to reach an internal
+file.
+
+```dart
+// features/report/report.dart
+export 'manager_detail/manager_detail.dart';
+export 'overview/overview.dart';
+export 'table_detail/table_detail.dart';
+export 'utils/report_format.dart';
+export 'widgets/manager_risk_badge.dart';
+export 'widgets/report_kpi_card.dart';
+// ...etc — every public file
+```
+
+**Bad — many lines of deep imports at the top of one widget:**
+
+```dart
+import 'package:sport_manager_mobile/features/report/manager_detail/cubit/manager_report_detail_cubit.dart';
+import 'package:sport_manager_mobile/features/report/utils/report_format.dart';
+import 'package:sport_manager_mobile/features/report/widgets/report_kpi_card.dart';
+```
+
+**Good — single import via the feature barrel:**
+
+```dart
+import 'package:sport_manager_mobile/features/report/report.dart';
+```
+
+Within the same sub-feature folder direct imports are fine; reach for
+the feature barrel when crossing sub-folders inside a feature.
+
 ---
 
 ## BlocBuilder rebuild scope
@@ -446,6 +524,75 @@ BlocBuilder<CheckoutCubit, CheckoutState>(
 ```
 
 Or `context.select<Cubit, T>(picker)` for one-off reads inside a deep tree.
+
+### `Scaffold` / `ListView` / `RefreshIndicator` belong **outside** the builder
+
+A view's structural scaffolding doesn't depend on cubit state — only its
+leaves do. Keep the structure stable and wrap each dynamic leaf in its
+own narrow `BlocBuilder`.
+
+**Bad — `RefreshIndicator` and `ListView` rebuild on every emit:**
+
+```dart
+body: RefreshIndicator.adaptive(
+  onRefresh: _cubit.load,
+  child: BlocBuilder<MyCubit, MyState>(
+    bloc: _cubit,
+    builder: (_, state) {
+      return ListView(
+        children: [
+          PeriodChips(value: state.filter.period, onChanged: ...),
+          Padding(
+            padding: ...,
+            child: switch (state.detail) {
+              Loading() => const _Skeleton(),
+              Failure(:final e) => ErrorBodyWidget(e, onRetryPressed: _cubit.load),
+              Success(:final data) => _Body(detail: data),
+            },
+          ),
+        ],
+      );
+    },
+  ),
+),
+```
+
+Every emit reconstructs the whole `ListView` and its sliver geometry.
+The chips' state didn't change but they still rebuild.
+
+**Good — structure stays put, two narrow builders:**
+
+```dart
+body: RefreshIndicator.adaptive(
+  onRefresh: _cubit.load,
+  child: ListView(
+    children: [
+      BlocBuilder<MyCubit, MyState>(
+        bloc: _cubit,
+        buildWhen: (a, b) => a.filter.period != b.filter.period,
+        builder: (_, state) => PeriodChips(
+          value: state.filter.period,
+          onChanged: _cubit.changePeriod,
+        ),
+      ),
+      Padding(
+        padding: ...,
+        child: BlocBuilder<MyCubit, MyState>(
+          bloc: _cubit,
+          buildWhen: (a, b) => a.detail != b.detail,
+          builder: (_, state) => switch (state.detail) {
+            Loading() => const _Skeleton(),
+            Failure(:final e) => ErrorBodyWidget(e, onRetryPressed: _cubit.load),
+            Success(:final data) => _Body(detail: data),
+          },
+        ),
+      ),
+    ],
+  ),
+),
+```
+
+`buildWhen` makes each section opt-in to the state slice it depends on.
 
 ---
 
@@ -581,11 +728,17 @@ class TableCard extends StatelessWidget { ... }
 
 ### View file size
 
-Keep screen files under ~180 lines. When they grow:
+Aim for **≤ 160 lines** in a screen file (`<name>_view.dart`). When they
+grow past that, refactor before adding more:
 
-1. Extract selection / handling logic into a mixin
-2. Extract form fields into reusable widgets
-3. The view should hold only the widget tree and minimal glue
+1. Extract `_Body` / `_Skeleton` / `_ErrorView` private classes into
+   their own files under `widgets/` (and re-export from the
+   sub-feature barrel).
+2. Move selection / event-handling logic into a mixin.
+3. Promote inline computations to getters on the model or state.
+4. The view should hold only the `Scaffold` + `AppBar` + the
+   top-level body composition. No multi-branch `switch`es, no
+   private classes longer than 30 lines.
 
 ### Shared typedefs
 

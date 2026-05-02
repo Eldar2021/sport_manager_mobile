@@ -14,6 +14,7 @@ void main() async {
     const FacilityModule(),
     const ManagersModule(),
     const SubscriptionModule(),
+    const ReportsModule(),
   ]);
 
   runApp(const MyAppWrapper());

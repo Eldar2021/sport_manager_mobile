@@ -1460,6 +1460,342 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Expired'**
   String get profileSubscriptionExpired;
+
+  /// No description provided for @reportsOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get reportsOverviewTitle;
+
+  /// No description provided for @reportsManagerDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manager'**
+  String get reportsManagerDetailTitle;
+
+  /// No description provided for @reportsTableDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Table'**
+  String get reportsTableDetailTitle;
+
+  /// No description provided for @reportsPeriodToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get reportsPeriodToday;
+
+  /// No description provided for @reportsPeriodWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get reportsPeriodWeek;
+
+  /// No description provided for @reportsPeriodMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get reportsPeriodMonth;
+
+  /// No description provided for @reportsPeriodYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get reportsPeriodYear;
+
+  /// No description provided for @reportsPeriodCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get reportsPeriodCustom;
+
+  /// No description provided for @reportsAllVenues.
+  ///
+  /// In en, this message translates to:
+  /// **'All venues'**
+  String get reportsAllVenues;
+
+  /// No description provided for @reportsVenuePickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a venue'**
+  String get reportsVenuePickerTitle;
+
+  /// No description provided for @reportsKpiRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total revenue'**
+  String get reportsKpiRevenue;
+
+  /// No description provided for @reportsKpiSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'Sessions'**
+  String get reportsKpiSessions;
+
+  /// No description provided for @reportsKpiAvgDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg duration'**
+  String get reportsKpiAvgDuration;
+
+  /// No description provided for @reportsKpiOccupancy.
+  ///
+  /// In en, this message translates to:
+  /// **'Occupancy'**
+  String get reportsKpiOccupancy;
+
+  /// No description provided for @reportsKpiActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get reportsKpiActive;
+
+  /// No description provided for @reportsRevenueChartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue by day'**
+  String get reportsRevenueChartTitle;
+
+  /// No description provided for @reportsRevenueChartCompareToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare to previous period'**
+  String get reportsRevenueChartCompareToggle;
+
+  /// No description provided for @reportsTopTablesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Top tables'**
+  String get reportsTopTablesTitle;
+
+  /// No description provided for @reportsTopTablesSeeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all tables'**
+  String get reportsTopTablesSeeAll;
+
+  /// No description provided for @reportsTopManagersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Managers'**
+  String get reportsTopManagersTitle;
+
+  /// No description provided for @reportsTopManagersSeeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all managers'**
+  String get reportsTopManagersSeeAll;
+
+  /// No description provided for @reportsTableLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Table'**
+  String get reportsTableLabel;
+
+  /// No description provided for @reportsSessionsShort.
+  ///
+  /// In en, this message translates to:
+  /// **'sessions'**
+  String get reportsSessionsShort;
+
+  /// No description provided for @reportsCancelledShort.
+  ///
+  /// In en, this message translates to:
+  /// **'cancels'**
+  String get reportsCancelledShort;
+
+  /// No description provided for @reportsForecastSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Forecast'**
+  String get reportsForecastSummaryTitle;
+
+  /// No description provided for @reportsForecastVsPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'vs previous period'**
+  String get reportsForecastVsPrevious;
+
+  /// No description provided for @reportsForecastNoComparison.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough history yet'**
+  String get reportsForecastNoComparison;
+
+  /// No description provided for @reportsManagerRiskLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low risk'**
+  String get reportsManagerRiskLow;
+
+  /// No description provided for @reportsManagerRiskMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get reportsManagerRiskMedium;
+
+  /// No description provided for @reportsManagerRiskHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High — review now'**
+  String get reportsManagerRiskHigh;
+
+  /// No description provided for @reportsRiskScoreTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk score'**
+  String get reportsRiskScoreTitle;
+
+  /// No description provided for @reportsRiskScoreExplain.
+  ///
+  /// In en, this message translates to:
+  /// **'Computed from cancel rate, discount rate, off-hours activity and session patterns. A high score means review the session log — not necessarily fraud.'**
+  String get reportsRiskScoreExplain;
+
+  /// No description provided for @reportsFraudSignalsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk signals'**
+  String get reportsFraudSignalsTitle;
+
+  /// No description provided for @reportsFraudNoFlags.
+  ///
+  /// In en, this message translates to:
+  /// **'No signals — this manager is operating within team norms.'**
+  String get reportsFraudNoFlags;
+
+  /// No description provided for @reportsFraudHighCancelRate.
+  ///
+  /// In en, this message translates to:
+  /// **'High cancel rate'**
+  String get reportsFraudHighCancelRate;
+
+  /// No description provided for @reportsFraudHighCancel60s.
+  ///
+  /// In en, this message translates to:
+  /// **'Many cancels under 60s'**
+  String get reportsFraudHighCancel60s;
+
+  /// No description provided for @reportsFraudHighDiscountRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequent discounts'**
+  String get reportsFraudHighDiscountRate;
+
+  /// No description provided for @reportsFraudHighAvgDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'High average discount'**
+  String get reportsFraudHighAvgDiscount;
+
+  /// No description provided for @reportsFraudLongPauseAvg.
+  ///
+  /// In en, this message translates to:
+  /// **'Long average pause'**
+  String get reportsFraudLongPauseAvg;
+
+  /// No description provided for @reportsFraudManyPausePerSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Many pauses per session'**
+  String get reportsFraudManyPausePerSession;
+
+  /// No description provided for @reportsFraudOffHoursActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Off-hours activity'**
+  String get reportsFraudOffHoursActivity;
+
+  /// No description provided for @reportsFraudShortSessionCluster.
+  ///
+  /// In en, this message translates to:
+  /// **'Cluster of short sessions'**
+  String get reportsFraudShortSessionCluster;
+
+  /// No description provided for @reportsFraudTariffOverride.
+  ///
+  /// In en, this message translates to:
+  /// **'Tariff overrides'**
+  String get reportsFraudTariffOverride;
+
+  /// No description provided for @reportsFraudLowShiftRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Low shift revenue'**
+  String get reportsFraudLowShiftRevenue;
+
+  /// No description provided for @reportsFraudMultiplier.
+  ///
+  /// In en, this message translates to:
+  /// **'{x}× team average'**
+  String reportsFraudMultiplier(String x);
+
+  /// No description provided for @reportsSessionLogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Session log'**
+  String get reportsSessionLogTitle;
+
+  /// No description provided for @reportsLogFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get reportsLogFilterAll;
+
+  /// No description provided for @reportsLogFilterCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get reportsLogFilterCancelled;
+
+  /// No description provided for @reportsLogFilterDiscounted.
+  ///
+  /// In en, this message translates to:
+  /// **'Discounted'**
+  String get reportsLogFilterDiscounted;
+
+  /// No description provided for @reportsLogFilterShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Short'**
+  String get reportsLogFilterShort;
+
+  /// No description provided for @reportsLogEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No sessions match this filter.'**
+  String get reportsLogEmpty;
+
+  /// No description provided for @reportsTableTrendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue trend'**
+  String get reportsTableTrendTitle;
+
+  /// No description provided for @reportsTableHeatmapTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour-of-day heatmap'**
+  String get reportsTableHeatmapTitle;
+
+  /// No description provided for @reportsErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load report'**
+  String get reportsErrorTitle;
+
+  /// No description provided for @reportsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No data yet'**
+  String get reportsEmptyTitle;
+
+  /// No description provided for @reportsEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start sessions to populate this report.'**
+  String get reportsEmptySubtitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -154,7 +154,23 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
             routes: [
               GoRoute(
                 path: AppRoutes.report,
-                builder: (_, _) => const ReportView(),
+                builder: (_, _) => const ReportOverviewView(),
+                routes: [
+                  GoRoute(
+                    path: 'managers/:id',
+                    parentNavigatorKey: rootNavigatorKey,
+                    builder: (_, state) => ManagerReportDetailView(
+                      state.pathParameters['id']!,
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'tables/:id',
+                    parentNavigatorKey: rootNavigatorKey,
+                    builder: (_, state) => TableReportDetailView(
+                      state.pathParameters['id']!,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
