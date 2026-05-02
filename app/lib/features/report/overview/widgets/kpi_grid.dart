@@ -2,14 +2,12 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reports/reports.dart';
-import 'package:sport_manager_mobile/features/report/overview/cubit/report_overview_cubit.dart';
-import 'package:sport_manager_mobile/features/report/utils/report_format.dart';
-import 'package:sport_manager_mobile/features/report/widgets/report_kpi_card.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class KpiGrid extends StatelessWidget {
-  const KpiGrid({required this.cubit, super.key});
+  const KpiGrid(this.cubit, {super.key});
 
   final ReportOverviewCubit cubit;
 
@@ -19,25 +17,23 @@ class KpiGrid extends StatelessWidget {
     return BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
       bloc: cubit,
       buildWhen: (a, b) => a.summary != b.summary,
-      builder: (_, state) {
-        return switch (state.summary) {
-          RequestInitial<ReportsSummaryModel>() || RequestLoading<ReportsSummaryModel>() => const _KpiSkeleton(),
-          RequestFailure<ReportsSummaryModel>() => Card(
-            margin: EdgeInsets.zero,
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.x4),
-              child: Center(child: Text(l10n.reportsErrorTitle)),
-            ),
+      builder: (_, state) => switch (state.summary) {
+        RequestInitial<ReportsSummaryModel>() || RequestLoading<ReportsSummaryModel>() => const _KpiSkeleton(),
+        RequestFailure<ReportsSummaryModel>() => Card(
+          margin: EdgeInsets.zero,
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.x4),
+            child: Center(child: Text(l10n.reportsErrorTitle)),
           ),
-          RequestSuccess<ReportsSummaryModel>(:final data) => _KpiGridContent(summary: data),
-        };
+        ),
+        RequestSuccess<ReportsSummaryModel>(:final data) => _KpiGridContent(data),
       },
     );
   }
 }
 
 class _KpiGridContent extends StatelessWidget {
-  const _KpiGridContent({required this.summary});
+  const _KpiGridContent(this.summary);
 
   final ReportsSummaryModel summary;
 
@@ -96,7 +92,34 @@ class _KpiSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget card() => const Card(
+    return const Column(
+      children: [
+        Row(
+          children: [
+            Expanded(child: _SkeletonCard()),
+            SizedBox(width: AppSpacing.x3),
+            Expanded(child: _SkeletonCard()),
+          ],
+        ),
+        SizedBox(height: AppSpacing.x3),
+        Row(
+          children: [
+            Expanded(child: _SkeletonCard()),
+            SizedBox(width: AppSpacing.x3),
+            Expanded(child: _SkeletonCard()),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _SkeletonCard extends StatelessWidget {
+  const _SkeletonCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Card(
       margin: EdgeInsets.zero,
       child: Padding(
         padding: EdgeInsets.all(AppSpacing.x4),
@@ -112,25 +135,6 @@ class _KpiSkeleton extends StatelessWidget {
           ],
         ),
       ),
-    );
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(child: card()),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(child: card()),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.x3),
-        Row(
-          children: [
-            Expanded(child: card()),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(child: card()),
-          ],
-        ),
-      ],
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 /// a localized label. Uses the existing `AppColorsExt` tokens so it
 /// adapts to light/dark.
 class ManagerRiskBadge extends StatelessWidget {
-  const ManagerRiskBadge({required this.band, super.key});
+  const ManagerRiskBadge(this.band, {super.key});
 
   final ManagerRiskBand band;
 

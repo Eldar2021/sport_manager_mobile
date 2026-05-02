@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reports/reports.dart';
 import 'package:sport_manager_mobile/app/app.dart';
-import 'package:sport_manager_mobile/features/report/overview/cubit/report_overview_cubit.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class InsightsStrip extends StatelessWidget {
-  const InsightsStrip({required this.cubit, super.key});
+  const InsightsStrip(this.cubit, {super.key});
 
   final ReportOverviewCubit cubit;
 

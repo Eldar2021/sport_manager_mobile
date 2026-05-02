@@ -1,7 +1,7 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:reports/reports.dart';
-import 'package:sport_manager_mobile/features/report/utils/report_format.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 /// Lightweight day-by-day revenue bar chart. Bars rendered as `Container`s

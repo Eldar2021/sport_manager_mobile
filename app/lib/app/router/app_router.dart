@@ -167,7 +167,7 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
                     path: 'tables/:id',
                     parentNavigatorKey: rootNavigatorKey,
                     builder: (_, state) => TableReportDetailView(
-                      tableId: state.pathParameters['id']!,
+                      state.pathParameters['id']!,
                     ),
                   ),
                 ],

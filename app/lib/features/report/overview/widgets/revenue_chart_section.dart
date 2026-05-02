@@ -3,13 +3,12 @@ import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reports/reports.dart';
-import 'package:sport_manager_mobile/features/report/overview/cubit/report_overview_cubit.dart';
-import 'package:sport_manager_mobile/features/report/widgets/revenue_bar_chart.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class RevenueChartSection extends StatelessWidget {
-  const RevenueChartSection({required this.cubit, super.key});
+  const RevenueChartSection(this.cubit, {super.key});
 
   final ReportOverviewCubit cubit;
 
@@ -22,7 +21,10 @@ class RevenueChartSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(context.l10n.reportsRevenueChartTitle, style: context.textTheme.titleSmall),
+            Text(
+              context.l10n.reportsRevenueChartTitle,
+              style: context.textTheme.titleSmall,
+            ),
             const SizedBox(height: AppSpacing.x3),
             BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
               bloc: cubit,

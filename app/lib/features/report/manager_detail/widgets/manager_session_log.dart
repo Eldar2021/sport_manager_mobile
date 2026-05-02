@@ -88,7 +88,7 @@ class ManagerSessionLog extends StatelessWidget {
                 children: [
                   for (var i = 0; i < list.length; i++) ...[
                     if (i != 0) const Divider(height: 1),
-                    _LogRow(entry: list[i]),
+                    _LogRow(list[i]),
                   ],
                 ],
               ),
@@ -101,7 +101,7 @@ class ManagerSessionLog extends StatelessWidget {
 }
 
 class _LogRow extends StatelessWidget {
-  const _LogRow({required this.entry});
+  const _LogRow(this.entry);
 
   final ManagerSessionLogEntry entry;
 

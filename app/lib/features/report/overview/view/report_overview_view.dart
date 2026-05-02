@@ -2,15 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:reports/reports.dart';
-import 'package:sport_manager_mobile/features/report/overview/cubit/report_overview_cubit.dart';
-import 'package:sport_manager_mobile/features/report/overview/widgets/forecast_summary_card.dart';
-import 'package:sport_manager_mobile/features/report/overview/widgets/insights_strip.dart';
-import 'package:sport_manager_mobile/features/report/overview/widgets/kpi_grid.dart';
-import 'package:sport_manager_mobile/features/report/overview/widgets/revenue_chart_section.dart';
-import 'package:sport_manager_mobile/features/report/overview/widgets/top_managers_section.dart';
-import 'package:sport_manager_mobile/features/report/overview/widgets/top_tables_section.dart';
-import 'package:sport_manager_mobile/features/report/widgets/report_period_chips.dart';
-import 'package:sport_manager_mobile/features/report/widgets/report_venue_picker.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -39,22 +31,18 @@ class _ReportOverviewViewState extends State<ReportOverviewView> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.reportsOverviewTitle),
+        title: Text(context.l10n.reportsOverviewTitle),
         actions: [
           BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
             bloc: _cubit,
             buildWhen: (a, b) => a.venues != b.venues || a.filter.venueId != b.filter.venueId,
-            builder: (_, state) {
-              final venues = state.venues.dataOrNull ?? const <ReportVenueModel>[];
-              return ReportVenuePicker(
-                venues: venues,
-                selectedVenueId: state.filter.venueId,
-                onSelected: _cubit.changeVenue,
-              );
-            },
+            builder: (_, state) => ReportVenuePicker(
+              venues: state.venues.dataOrNull ?? const <ReportVenueModel>[],
+              selectedVenueId: state.filter.venueId,
+              onSelected: _cubit.changeVenue,
+            ),
           ),
         ],
       ),
@@ -74,22 +62,22 @@ class _ReportOverviewViewState extends State<ReportOverviewView> {
               ),
             ),
             const SizedBox(height: AppSpacing.x4),
-            InsightsStrip(cubit: _cubit),
+            InsightsStrip(_cubit),
             const SizedBox(height: AppSpacing.x3),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  KpiGrid(cubit: _cubit),
+                  KpiGrid(_cubit),
                   const SizedBox(height: AppSpacing.x4),
-                  RevenueChartSection(cubit: _cubit),
+                  RevenueChartSection(_cubit),
                   const SizedBox(height: AppSpacing.x4),
-                  ForecastSummaryCard(cubit: _cubit),
+                  ForecastSummaryCard(_cubit),
                   const SizedBox(height: AppSpacing.x6),
-                  TopTablesSection(cubit: _cubit),
+                  TopTablesSection(_cubit),
                   const SizedBox(height: AppSpacing.x6),
-                  TopManagersSection(cubit: _cubit),
+                  TopManagersSection(_cubit),
                 ],
               ),
             ),

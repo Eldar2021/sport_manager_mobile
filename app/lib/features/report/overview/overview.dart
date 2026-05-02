@@ -5,4 +5,6 @@ export 'widgets/insights_strip.dart';
 export 'widgets/kpi_grid.dart';
 export 'widgets/revenue_chart_section.dart';
 export 'widgets/top_managers_section.dart';
+export 'widgets/top_tables_row.dart';
 export 'widgets/top_tables_section.dart';
+export 'widgets/top_tables_skeleton.dart';

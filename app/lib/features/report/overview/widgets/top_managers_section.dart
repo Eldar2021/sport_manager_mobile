@@ -4,14 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reports/reports.dart';
 import 'package:sport_manager_mobile/app/app.dart';
-import 'package:sport_manager_mobile/features/report/overview/cubit/report_overview_cubit.dart';
-import 'package:sport_manager_mobile/features/report/utils/report_format.dart';
-import 'package:sport_manager_mobile/features/report/widgets/manager_risk_badge.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class TopManagersSection extends StatelessWidget {
-  const TopManagersSection({required this.cubit, super.key});
+  const TopManagersSection(this.cubit, {super.key});
 
   final ReportOverviewCubit cubit;
 
@@ -21,41 +19,32 @@ class TopManagersSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.reportsTopManagersTitle, style: context.textTheme.titleMedium),
+        Text(
+          l10n.reportsTopManagersTitle,
+          style: context.textTheme.titleMedium,
+        ),
         const SizedBox(height: AppSpacing.x2),
         BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
           bloc: cubit,
           buildWhen: (a, b) => a.managers != b.managers,
-          builder: (_, state) {
-            return switch (state.managers) {
-              RequestInitial<List<ManagerReportRowModel>>() ||
-              RequestLoading<List<ManagerReportRowModel>>() => const _ManagersSkeleton(),
-              RequestFailure<List<ManagerReportRowModel>>() => Card(
-                margin: EdgeInsets.zero,
-                child: Padding(
-                  padding: const EdgeInsets.all(AppSpacing.x4),
-                  child: Center(child: Text(l10n.reportsErrorTitle)),
-                ),
-              ),
-              RequestSuccess<List<ManagerReportRowModel>>(:final data) when data.isEmpty => Card(
-                margin: EdgeInsets.zero,
-                child: Padding(
-                  padding: const EdgeInsets.all(AppSpacing.x4),
-                  child: Center(child: Text(l10n.reportsEmptySubtitle)),
-                ),
-              ),
-              RequestSuccess<List<ManagerReportRowModel>>(:final data) => Card(
-                margin: EdgeInsets.zero,
-                child: Column(
-                  children: [
-                    for (var i = 0; i < data.length; i++) ...[
-                      if (i != 0) const Divider(height: 1),
-                      _ManagerRow(row: data[i]),
-                    ],
+          builder: (_, state) => switch (state.managers) {
+            RequestInitial<List<ManagerReportRowModel>>() ||
+            RequestLoading<List<ManagerReportRowModel>>() => const _ManagersSkeleton(),
+            RequestFailure<List<ManagerReportRowModel>>() => _MessageCard(l10n.reportsErrorTitle),
+            RequestSuccess<List<ManagerReportRowModel>>(:final data) when data.isEmpty => _MessageCard(
+              l10n.reportsEmptySubtitle,
+            ),
+            RequestSuccess<List<ManagerReportRowModel>>(:final data) => Card(
+              margin: EdgeInsets.zero,
+              child: Column(
+                children: [
+                  for (var i = 0; i < data.length; i++) ...[
+                    if (i != 0) const Divider(height: 1),
+                    _ManagerRow(data[i]),
                   ],
-                ),
+                ],
               ),
-            };
+            ),
           },
         ),
       ],
@@ -64,7 +53,7 @@ class TopManagersSection extends StatelessWidget {
 }
 
 class _ManagerRow extends StatelessWidget {
-  const _ManagerRow({required this.row});
+  const _ManagerRow(this.row);
 
   final ManagerReportRowModel row;
 
@@ -90,7 +79,7 @@ class _ManagerRow extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          ManagerRiskBadge(band: row.riskBand),
+          ManagerRiskBadge(row.riskBand),
         ],
       ),
       subtitle: Text(
@@ -129,6 +118,23 @@ class _ManagersSkeleton extends StatelessWidget {
             ShimmerBox(height: 18),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _MessageCard extends StatelessWidget {
+  const _MessageCard(this.message);
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.x4),
+        child: Center(child: Text(message)),
       ),
     );
   }

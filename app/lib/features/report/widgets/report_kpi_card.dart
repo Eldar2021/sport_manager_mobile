@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/features/report/utils/report_format.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 /// Single KPI tile with title, big value, and optional delta vs previous

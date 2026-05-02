@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:reports/reports.dart';
-import 'package:sport_manager_mobile/features/report/widgets/manager_risk_badge.dart';
+import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class RiskScorePanel extends StatelessWidget {
-  const RiskScorePanel({required this.row, super.key});
+  const RiskScorePanel(this.row, {super.key});
 
   final ManagerReportRowModel row;
 
@@ -33,7 +33,7 @@ class RiskScorePanel extends StatelessWidget {
                 Expanded(
                   child: Text(l10n.reportsRiskScoreTitle, style: context.textTheme.titleSmall),
                 ),
-                ManagerRiskBadge(band: row.riskBand),
+                ManagerRiskBadge(row.riskBand),
               ],
             ),
             const SizedBox(height: AppSpacing.x3),

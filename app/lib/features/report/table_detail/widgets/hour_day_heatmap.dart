@@ -5,7 +5,7 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 /// Visualises a `7×24` revenue intensity matrix as a colour-coded grid.
 /// Rows = ISO weekdays (1=Mon … 7=Sun), columns = hours of the day.
 class HourDayHeatmap extends StatelessWidget {
-  const HourDayHeatmap({required this.heatmap, super.key});
+  const HourDayHeatmap(this.heatmap, {super.key});
 
   final List<List<int>> heatmap;
 
