@@ -31,7 +31,10 @@ class RiskScorePanel extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text(l10n.reportsRiskScoreTitle, style: context.textTheme.titleSmall),
+                  child: Text(
+                    l10n.reportsRiskScoreTitle,
+                    style: context.textTheme.titleSmall,
+                  ),
                 ),
                 ManagerRiskBadge(row.riskBand),
               ],
