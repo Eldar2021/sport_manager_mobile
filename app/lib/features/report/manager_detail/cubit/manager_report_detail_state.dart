@@ -1,6 +1,11 @@
 part of 'manager_report_detail_cubit.dart';
 
-enum ManagerLogFilter { all, cancelled, discounted, short }
+enum ManagerLogFilter {
+  all,
+  cancelled,
+  discounted,
+  short,
+}
 
 @immutable
 final class ManagerReportDetailState extends Equatable {
@@ -27,5 +32,9 @@ final class ManagerReportDetailState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [filter, detail, logFilter];
+  List<Object?> get props => [
+    filter,
+    detail,
+    logFilter,
+  ];
 }

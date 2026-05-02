@@ -19,7 +19,10 @@ class ManagerReportDetailCubit extends Cubit<ManagerReportDetailState> {
   Future<void> load() async {
     emit(state.copyWith(detail: const RequestLoading()));
     try {
-      final detail = await _repository.getManagerDetail(managerId, state.filter);
+      final detail = await _repository.getManagerDetail(
+        managerId,
+        state.filter,
+      );
       emit(state.copyWith(detail: RequestSuccess(detail)));
     } on Object catch (e) {
       emit(state.copyWith(detail: RequestFailure(e)));
@@ -35,5 +38,7 @@ class ManagerReportDetailCubit extends Cubit<ManagerReportDetailState> {
     await load();
   }
 
-  void changeLogFilter(ManagerLogFilter f) => emit(state.copyWith(logFilter: f));
+  void changeLogFilter(ManagerLogFilter f) {
+    emit(state.copyWith(logFilter: f));
+  }
 }
