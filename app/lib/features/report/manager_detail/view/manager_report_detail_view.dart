@@ -9,7 +9,7 @@ import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class ManagerReportDetailView extends StatefulWidget {
-  const ManagerReportDetailView({required this.managerId, super.key});
+  const ManagerReportDetailView(this.managerId, {super.key});
 
   final String managerId;
 
@@ -38,43 +38,49 @@ class _ManagerReportDetailViewState extends State<ManagerReportDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.reportsManagerDetailTitle)),
+      appBar: AppBar(
+        title: Text(context.l10n.reportsManagerDetailTitle),
+      ),
       body: RefreshIndicator.adaptive(
         onRefresh: _cubit.load,
-        child: BlocBuilder<ManagerReportDetailCubit, ManagerReportDetailState>(
-          bloc: _cubit,
-          buildWhen: (a, b) => a.detail != b.detail || a.filter.period != b.filter.period,
-          builder: (_, state) {
-            return ListView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: AppSpacing.x6),
-              children: [
-                const SizedBox(height: AppSpacing.x3),
-                ReportPeriodChips(
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.only(bottom: AppSpacing.x6),
+          children: [
+            const SizedBox(height: AppSpacing.x3),
+            BlocBuilder<ManagerReportDetailCubit, ManagerReportDetailState>(
+              builder: (context, state) {
+                return ReportPeriodChips(
                   value: state.filter.period,
                   onChanged: _cubit.changePeriod,
-                ),
-                const SizedBox(height: AppSpacing.x4),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-                  child: switch (state.detail) {
+                );
+              },
+            ),
+            const SizedBox(height: AppSpacing.x4),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+              child: BlocBuilder<ManagerReportDetailCubit, ManagerReportDetailState>(
+                bloc: _cubit,
+                buildWhen: (a, b) => a.detail != b.detail || a.filter.period != b.filter.period,
+                builder: (context, state) {
+                  final detailState = state.detail;
+                  return switch (detailState) {
                     RequestInitial<ManagerReportDetailModel>() ||
                     RequestLoading<ManagerReportDetailModel>() => const _Skeleton(),
-                    RequestFailure<ManagerReportDetailModel>(:final exception) => ErrorBodyWidget(
-                      exception,
+                    RequestFailure<ManagerReportDetailModel>() => ErrorBodyWidget(
+                      detailState.exception,
                       onRetryPressed: _cubit.load,
                     ),
-                    RequestSuccess<ManagerReportDetailModel>(:final data) => _Body(
+                    RequestSuccess<ManagerReportDetailModel>() => _Body(
                       cubit: _cubit,
-                      detail: data,
+                      detail: detailState.data,
                     ),
-                  },
-                ),
-              ],
-            );
-          },
+                  };
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -82,7 +88,10 @@ class _ManagerReportDetailViewState extends State<ManagerReportDetailView> {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({required this.cubit, required this.detail});
+  const _Body({
+    required this.cubit,
+    required this.detail,
+  });
 
   final ManagerReportDetailCubit cubit;
   final ManagerReportDetailModel detail;
@@ -113,8 +122,14 @@ class _Body extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(summary.name, style: context.textTheme.titleMedium),
-                      Text('@${summary.username}', style: context.appTextStyles.muted.labelSmall),
+                      Text(
+                        summary.name,
+                        style: context.textTheme.titleMedium,
+                      ),
+                      Text(
+                        '@${summary.username}',
+                        style: context.appTextStyles.muted.labelSmall,
+                      ),
                     ],
                   ),
                 ),
@@ -144,11 +159,17 @@ class _Body extends StatelessWidget {
         const SizedBox(height: AppSpacing.x4),
         RiskScorePanel(row: summary),
         const SizedBox(height: AppSpacing.x4),
-        Text(l10n.reportsFraudSignalsTitle, style: context.textTheme.titleSmall),
+        Text(
+          l10n.reportsFraudSignalsTitle,
+          style: context.textTheme.titleSmall,
+        ),
         const SizedBox(height: AppSpacing.x2),
         FraudFlagList(flags: summary.flags),
         const SizedBox(height: AppSpacing.x6),
-        ManagerSessionLog(cubit: cubit, entries: detail.sessionLog),
+        ManagerSessionLog(
+          cubit: cubit,
+          entries: detail.sessionLog,
+        ),
       ],
     );
   }
