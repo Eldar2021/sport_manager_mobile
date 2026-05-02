@@ -11,7 +11,7 @@ part 'table_report_detail_model.g.dart';
 final class TableReportDetailModel extends Equatable {
   const TableReportDetailModel({
     required this.summary,
-    required this.revenueByDay,
+    required this.revenueSeries,
     required this.hourHeatmap,
   });
 
@@ -20,7 +20,7 @@ final class TableReportDetailModel extends Equatable {
   }
 
   final TableReportRowModel summary;
-  final List<RevenuePointModel> revenueByDay;
+  final List<RevenuePointModel> revenueSeries;
 
   /// 7×24 matrix (`hourHeatmap[weekday-1][hour]`) — revenue intensity per
   /// hour across the week. `weekday` follows ISO 8601 (1=Monday).
@@ -31,7 +31,7 @@ final class TableReportDetailModel extends Equatable {
   @override
   List<Object?> get props => [
     summary,
-    revenueByDay,
+    revenueSeries,
     hourHeatmap,
   ];
 }

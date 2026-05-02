@@ -12,7 +12,7 @@ TableReportDetailModel _$TableReportDetailModelFromJson(
   summary: TableReportRowModel.fromJson(
     json['summary'] as Map<String, dynamic>,
   ),
-  revenueByDay: (json['revenueByDay'] as List<dynamic>)
+  revenueSeries: (json['revenueSeries'] as List<dynamic>)
       .map((e) => RevenuePointModel.fromJson(e as Map<String, dynamic>))
       .toList(),
   hourHeatmap: (json['hourHeatmap'] as List<dynamic>)
@@ -24,6 +24,6 @@ Map<String, dynamic> _$TableReportDetailModelToJson(
   TableReportDetailModel instance,
 ) => <String, dynamic>{
   'summary': instance.summary,
-  'revenueByDay': instance.revenueByDay,
+  'revenueSeries': instance.revenueSeries,
   'hourHeatmap': instance.hourHeatmap,
 };

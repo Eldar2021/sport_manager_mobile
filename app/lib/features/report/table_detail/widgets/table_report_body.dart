@@ -5,13 +5,18 @@ import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-/// Body of [TableReportDetailView]: table label, KPI band, day-by-day
+/// Body of [TableReportDetailView]: table label, KPI band, period-aware
 /// trend chart and the hour-of-day heatmap. Kept in its own file so the
 /// view stays declarative and short.
 class TableReportBody extends StatelessWidget {
-  const TableReportBody(this.detail, {super.key});
+  const TableReportBody({
+    required this.detail,
+    required this.period,
+    super.key,
+  });
 
   final TableReportDetailModel detail;
+  final ReportPeriod period;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +42,7 @@ class TableReportBody extends StatelessWidget {
               child: ReportKpiCard(
                 title: l10n.reportsKpiRevenue,
                 value: ReportFormat.money(summary.revenue, summary.currency),
-                deltaPercent: summary.deltaPercent,
+                deltaPercent: period == ReportPeriod.today ? null : summary.deltaPercent,
               ),
             ),
             const SizedBox(width: AppSpacing.x3),
@@ -69,8 +74,9 @@ class TableReportBody extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.x4),
         _TrendCard(
-          points: detail.revenueByDay,
+          points: detail.revenueSeries,
           currency: summary.currency,
+          period: period,
         ),
         const SizedBox(height: AppSpacing.x4),
         Text(
@@ -95,10 +101,12 @@ class _TrendCard extends StatelessWidget {
   const _TrendCard({
     required this.points,
     required this.currency,
+    required this.period,
   });
 
   final List<RevenuePointModel> points;
   final Currency currency;
+  final ReportPeriod period;
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +125,7 @@ class _TrendCard extends StatelessWidget {
             RevenueBarChart(
               points: points,
               currency: currency,
+              period: period,
             ),
           ],
         ),

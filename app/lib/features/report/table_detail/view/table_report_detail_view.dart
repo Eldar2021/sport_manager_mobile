@@ -62,7 +62,7 @@ class _TableReportDetailViewState extends State<TableReportDetailView> {
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
               child: BlocBuilder<TableReportDetailCubit, TableReportDetailState>(
                 bloc: _cubit,
-                buildWhen: (a, b) => a.detail != b.detail,
+                buildWhen: (a, b) => a.detail != b.detail || a.filter.period != b.filter.period,
                 builder: (_, state) => switch (state.detail) {
                   RequestInitial<TableReportDetailModel>() ||
                   RequestLoading<TableReportDetailModel>() => const TableReportDetailSkeleton(),
@@ -70,7 +70,10 @@ class _TableReportDetailViewState extends State<TableReportDetailView> {
                     exception,
                     onRetryPressed: _cubit.load,
                   ),
-                  RequestSuccess<TableReportDetailModel>(:final data) => TableReportBody(data),
+                  RequestSuccess<TableReportDetailModel>(:final data) => TableReportBody(
+                    detail: data,
+                    period: state.filter.period,
+                  ),
                 },
               ),
             ),

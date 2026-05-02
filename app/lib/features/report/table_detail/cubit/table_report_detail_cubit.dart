@@ -33,6 +33,7 @@ class TableReportDetailCubit extends Cubit<TableReportDetailState> {
     final next = state.filter.copyWith(
       period: period,
       range: ReportRange.fromPeriod(period, DateTime.now()),
+      compareToPrevious: period != ReportPeriod.today,
     );
     emit(state.copyWith(filter: next));
     await load();

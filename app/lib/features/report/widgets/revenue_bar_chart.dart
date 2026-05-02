@@ -6,14 +6,19 @@ import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-/// Day-by-day revenue column chart, rendered with `SfCartesianChart`. The
-/// peak day uses [ColorScheme.primary]; the rest use a softer brand-amber
-/// tint so the highest-grossing day pops at a glance. The tooltip is
-/// currency-aware via [ReportFormat.money].
+/// Period-aware revenue column chart, rendered with `SfCartesianChart`.
+///
+/// X-axis bucket size depends on [period]:
+/// - `year` → aylık (12 sütun, `DateFormat.MMM`)
+/// - `today`/`week`/`month` → günlük (`DateFormat.MMMd`)
+///
+/// Peak bucket uses [ColorScheme.primary]; the rest use a softer
+/// brand-amber tint. Tooltip is currency-aware via [ReportFormat.money].
 class RevenueBarChart extends StatelessWidget {
   const RevenueBarChart({
     required this.points,
     required this.currency,
+    required this.period,
     super.key,
   });
 
@@ -23,6 +28,9 @@ class RevenueBarChart extends StatelessWidget {
 
   final List<RevenuePointModel> points;
   final Currency currency;
+  final ReportPeriod period;
+
+  bool get _isMonthly => period == ReportPeriod.year;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +51,8 @@ class RevenueBarChart extends StatelessWidget {
     );
     final peakBucket = points.firstWhere((p) => p.revenue == maxValue).bucket;
     final locale = Localizations.localeOf(context).languageCode;
-    final dayLabel = DateFormat.MMMd(locale);
+    final axisFormat = _isMonthly ? DateFormat.MMM(locale) : DateFormat.MMMd(locale);
+    final tooltipFormat = _isMonthly ? DateFormat.yMMM(locale) : DateFormat.MMMd(locale);
 
     return SizedBox(
       height: _height,
@@ -53,8 +62,8 @@ class RevenueBarChart extends StatelessWidget {
         primaryXAxis: DateTimeAxis(
           majorGridLines: const MajorGridLines(width: 0),
           axisLine: const AxisLine(width: 0),
-          intervalType: DateTimeIntervalType.days,
-          dateFormat: dayLabel,
+          intervalType: _isMonthly ? DateTimeIntervalType.months : DateTimeIntervalType.days,
+          dateFormat: axisFormat,
           labelStyle: context.appTextStyles.muted.labelSmall,
         ),
         primaryYAxis: NumericAxis(
@@ -74,7 +83,7 @@ class RevenueBarChart extends StatelessWidget {
                 vertical: AppSpacing.x2,
               ),
               child: Text(
-                '${dayLabel.format(p.bucket)} · ${ReportFormat.money(p.revenue, currency)}',
+                '${tooltipFormat.format(p.bucket)} · ${ReportFormat.money(p.revenue, currency)}',
                 style: context.textTheme.labelSmall,
               ),
             );
