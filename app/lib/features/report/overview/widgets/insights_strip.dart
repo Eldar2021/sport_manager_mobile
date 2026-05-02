@@ -77,9 +77,18 @@ class _InsightCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
     final (bg, fg) = switch (insight.severity) {
-      InsightSeverity.critical => (context.colors.errorContainer, context.colors.onErrorContainer),
-      InsightSeverity.warning => (context.appColors.warningContainer, context.appColors.onWarning),
-      InsightSeverity.info => (context.appColors.infoContainer, context.appColors.info),
+      InsightSeverity.critical => (
+        context.colors.errorContainer,
+        context.colors.onErrorContainer,
+      ),
+      InsightSeverity.warning => (
+        context.appColors.warningContainer,
+        context.appColors.onWarning,
+      ),
+      InsightSeverity.info => (
+        context.appColors.infoContainer,
+        context.appColors.info,
+      ),
     };
     return SizedBox(
       width: 280,
