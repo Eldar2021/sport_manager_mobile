@@ -936,4 +936,23 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get reportsEmptySubtitle => 'Начните сессии, чтобы здесь появились цифры.';
+
+  @override
+  String get upgraderRequiredTitle => 'Необходимо обновление';
+
+  @override
+  String get upgraderRecommendedTitle => 'Доступно обновление';
+
+  @override
+  String get upgraderRequiredDescription =>
+      'Эта версия больше не поддерживается. Обновите приложение, чтобы продолжить.';
+
+  @override
+  String get upgraderRecommendedDescription => 'Доступна новая версия. Обновите для лучшего опыта.';
+
+  @override
+  String get upgraderUpdateButton => 'Обновить';
+
+  @override
+  String get upgraderLaterButton => 'Позже';
 }

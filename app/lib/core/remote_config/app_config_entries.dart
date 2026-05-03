@@ -22,10 +22,19 @@ abstract final class AppConfigEntries {
     defaultValue: SupportContacts.callPhone,
   );
 
+  static final ConfigEntry<AppVersionConfigModel> appVersion = jsonObjectEntry(
+    key: 'app_version',
+    defaultJson:
+        '{"android":{"requiredBuildNumber":0,"recommendedBuildNumber":0},'
+        '"ios":{"requiredBuildNumber":0,"recommendedBuildNumber":0}}',
+    fromJson: AppVersionConfigModel.fromJson,
+  );
+
   static List<ConfigEntry<dynamic>> get all => [
     whatsappPhone,
     telegramHandle,
     supportEmail,
     callPhone,
+    appVersion,
   ];
 }

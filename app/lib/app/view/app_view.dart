@@ -1,9 +1,11 @@
 import 'package:auth/auth.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
+import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
 import 'package:sport_manager_mobile/features/subscription/subscription.dart';
@@ -19,6 +21,11 @@ class MyAppWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (_) => UpgraderCubit(
+            GetIt.I<RemoteConfigRepository>(),
+          ),
+        ),
         BlocProvider(
           create: (_) => AuthCubit(
             GetIt.I<AuthRepository>(),
@@ -62,36 +69,55 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late final GoRouter _router;
+  late final GlobalKey<NavigatorState> _navigatorKey;
 
   @override
   void initState() {
     super.initState();
-    _router = appRouter(context.read<AuthCubit>());
+    _navigatorKey = GlobalKey<NavigatorState>();
+    _router = appRouter(context.read<AuthCubit>(), navigatorKey: _navigatorKey);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) context.read<UpgraderCubit>().init();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsCubit, SettingsState>(
-      builder: (context, settings) {
-        return MaterialApp.router(
-          title: 'Sport Manager',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.light,
-          darkTheme: AppTheme.dark,
-          themeMode: settings.themeMode,
-          locale: settings.locale,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizationHelper.locales,
-          routerConfig: _router,
-          builder: (context, child) {
-            return GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: child,
-            );
-          },
+    return BlocListener<UpgraderCubit, UpgraderState>(
+      listenWhen: (prev, next) => next.status != UpgradeStatusEnum.none && prev.status != next.status,
+      listener: (_, upgraderState) {
+        final navCtx = _navigatorKey.currentContext;
+        if (navCtx == null) return;
+        final cubit = context.read<UpgraderCubit>();
+        UpgraderSheet.show(
+          navCtx,
+          upgraderState.status,
+          storeUrl: cubit.storeUrl,
+          onDismiss: cubit.dismiss,
         );
       },
+      child: BlocBuilder<SettingsCubit, SettingsState>(
+        builder: (context, settings) {
+          return MaterialApp.router(
+            title: 'Sport Manager',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
+            themeMode: settings.themeMode,
+            locale: settings.locale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizationHelper.locales,
+            routerConfig: _router,
+            builder: (context, child) {
+              return GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

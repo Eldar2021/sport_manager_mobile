@@ -921,4 +921,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reportsEmptySubtitle => 'Start sessions to populate this report.';
+
+  @override
+  String get upgraderRequiredTitle => 'Update Required';
+
+  @override
+  String get upgraderRecommendedTitle => 'Update Available';
+
+  @override
+  String get upgraderRequiredDescription => 'This version is no longer supported. Please update the app to continue.';
+
+  @override
+  String get upgraderRecommendedDescription => 'A new version is available. Update for the best experience.';
+
+  @override
+  String get upgraderUpdateButton => 'Update';
+
+  @override
+  String get upgraderLaterButton => 'Later';
 }
