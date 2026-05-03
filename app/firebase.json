@@ -1,0 +1,30 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "sport-manager-4bba2",
+                    "appId": "1:144048218328:android:5ae1a217287202d16577ad",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "sport-manager-4bba2",
+                    "appId": "1:144048218328:ios:091b3b855d32bd2a6577ad",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "sport-manager-4bba2",
+                    "configurations": {
+                        "android": "1:144048218328:android:5ae1a217287202d16577ad",
+                        "ios": "1:144048218328:ios:091b3b855d32bd2a6577ad"
+                    }
+                }
+            }
+        }
+    }
+}

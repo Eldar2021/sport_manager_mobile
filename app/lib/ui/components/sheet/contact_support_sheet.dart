@@ -1,5 +1,7 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/core/constants/support_contacts.dart';
+import 'package:get_it/get_it.dart';
+import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/generated/assets.gen.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -20,6 +22,7 @@ class ContactSupportSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final config = GetIt.I<RemoteConfigRepository>();
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -49,7 +52,7 @@ class ContactSupportSheet extends StatelessWidget {
             iconAsset: Assets.icons.whatsapp,
             iconColor: _whatsappBrand,
             title: 'WhatsApp',
-            subtitle: SupportContacts.whatsappPhone,
+            subtitle: config.get(AppConfigEntries.whatsappPhone),
             onTap: () {},
           ),
           const Divider(),
@@ -57,7 +60,7 @@ class ContactSupportSheet extends StatelessWidget {
             iconAsset: Assets.icons.telegram,
             iconColor: _telegramBrand,
             title: 'Telegram',
-            subtitle: SupportContacts.telegramHandle,
+            subtitle: config.get(AppConfigEntries.telegramHandle),
             onTap: () {},
           ),
           const Divider(),
@@ -65,7 +68,7 @@ class ContactSupportSheet extends StatelessWidget {
             iconAsset: Assets.icons.email,
             iconColor: context.colors.primary,
             title: 'Email',
-            subtitle: SupportContacts.supportEmail,
+            subtitle: config.get(AppConfigEntries.supportEmail),
             onTap: () {},
           ),
           const Divider(),
@@ -73,7 +76,7 @@ class ContactSupportSheet extends StatelessWidget {
             iconAsset: Assets.icons.call,
             iconColor: context.appColors.success,
             title: l10n.contactCallLabel,
-            subtitle: SupportContacts.callPhone,
+            subtitle: config.get(AppConfigEntries.callPhone),
             onTap: () {},
           ),
         ],

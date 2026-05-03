@@ -15,6 +15,17 @@ final class ConfigEntry<T> {
   T get defaultValue => parser(defaultRaw);
 }
 
+ConfigEntry<String> stringEntry({
+  required String key,
+  required String defaultValue,
+}) {
+  return ConfigEntry(
+    key: key,
+    defaultRaw: defaultValue,
+    parser: (raw) => raw,
+  );
+}
+
 ConfigEntry<bool> boolEntry({
   required String key,
   required bool defaultValue,

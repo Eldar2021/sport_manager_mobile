@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "144048218328",
+    "project_id": "sport-manager-4bba2",
+    "storage_bucket": "sport-manager-4bba2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144048218328:android:5ae1a217287202d16577ad",
+        "android_client_info": {
+          "package_name": "com.sport.manager.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoYU7JLDmeSqDeqDhEwniNwBHxlCGJK_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
