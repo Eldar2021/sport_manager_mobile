@@ -13,6 +13,7 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
   GetApiParams _params(ReportFilter f) {
     return GetApiParams(
       queryParameters: <String, dynamic>{
+        'period': f.period.wireValue,
         'from': f.range.from.toUtc().toIso8601String(),
         'to': f.range.to.toUtc().toIso8601String(),
         if (f.venueId != null) 'venueId': f.venueId,
