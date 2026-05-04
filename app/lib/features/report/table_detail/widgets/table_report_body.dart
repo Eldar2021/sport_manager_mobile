@@ -57,27 +57,6 @@ class TableReportBody extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: AppSpacing.x3),
-        IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: ReportKpiCard(
-                  title: l10n.reportsKpiAvgDuration,
-                  value: ReportFormat.duration(summary.avgDurationSeconds),
-                ),
-              ),
-              const SizedBox(width: AppSpacing.x3),
-              Expanded(
-                child: ReportKpiCard(
-                  title: l10n.reportsKpiOccupancy,
-                  value: '${summary.occupancyPercent}%',
-                ),
-              ),
-            ],
-          ),
-        ),
         const SizedBox(height: AppSpacing.x4),
         _TrendCard(
           points: detail.revenueSeries,
