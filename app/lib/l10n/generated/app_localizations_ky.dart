@@ -853,15 +853,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsKpiSessions => 'Сессиялар';
 
   @override
-  String get reportsKpiAvgDuration => 'Орт. узактык';
-
-  @override
-  String get reportsKpiOccupancy => 'Толтуруу';
-
-  @override
-  String get reportsKpiActive => 'Активдүү';
-
-  @override
   String get reportsRevenueChartTitle => 'Күн боюнча киреше';
 
   @override
@@ -901,7 +892,17 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsForecastVsPrevious => 'мурунку мөөнөт менен';
 
   @override
+  String reportsForecastVsRange(String previous) {
+    return '$previous менен';
+  }
+
+  @override
   String get reportsForecastNoComparison => 'Тарых али жетишсиз';
+
+  @override
+  String reportsComparisonCaption(String current, String previous) {
+    return '$current  ·  vs $previous';
+  }
 
   @override
   String get reportsTableTrendTitle => 'Киреше трендине';

@@ -872,15 +872,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsKpiSessions => 'Сессии';
 
   @override
-  String get reportsKpiAvgDuration => 'Средняя длит.';
-
-  @override
-  String get reportsKpiOccupancy => 'Загрузка';
-
-  @override
-  String get reportsKpiActive => 'Активных';
-
-  @override
   String get reportsRevenueChartTitle => 'Выручка по дням';
 
   @override
@@ -920,7 +911,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsForecastVsPrevious => 'к прошлому периоду';
 
   @override
+  String reportsForecastVsRange(String previous) {
+    return 'к $previous';
+  }
+
+  @override
   String get reportsForecastNoComparison => 'Истории пока недостаточно';
+
+  @override
+  String reportsComparisonCaption(String current, String previous) {
+    return '$current  ·  vs $previous';
+  }
 
   @override
   String get reportsTableTrendTitle => 'Тренд выручки';

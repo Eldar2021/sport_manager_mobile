@@ -57,7 +57,16 @@ class _TableReportDetailViewState extends State<TableReportDetailView> {
                 onChanged: _cubit.changePeriod,
               ),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: AppSpacing.x3),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+              child: BlocBuilder<TableReportDetailCubit, TableReportDetailState>(
+                bloc: _cubit,
+                buildWhen: (a, b) => a.filter != b.filter,
+                builder: (_, state) => ReportComparisonLabel(state.filter),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.x3),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
               child: BlocBuilder<TableReportDetailCubit, TableReportDetailState>(

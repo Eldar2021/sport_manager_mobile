@@ -46,6 +46,20 @@ v2 canlıdan sonra üç UX/logic problemi tespit edildi:
   diğerlerinde gün başlangıçları. Backend `?period=year` gördüğünde aylık
   aggregate döner. TableDetail'in `revenueByDay` alanı bu yüzden
   **`revenueSeries`** olarak yeniden adlandırıldı (period-agnostik isim).
+- **KPI grid daraltıldı (revenue + sessions).** Avg-duration / occupancy /
+  active-now/max field'ları MVP'den çıkarıldı — synthetic data üzerinde
+  delta'ları gürültülü, owner zaten Table Detail'de tablo bazlı sayıları
+  görüyor. Etkilenen alanlar: `ReportsSummaryModel.avgDurationSeconds`,
+  `occupancyPercent`, `activeNow`, `activeMax` ve delta getter'ları;
+  `TableReportRowModel.avgDurationSeconds`, `occupancyPercent`. L10n
+  key'leri (`reportsKpiAvgDuration`, `reportsKpiOccupancy`,
+  `reportsKpiActive`) silindi. `ReportFormat.duration` korundu — manager
+  session log'da hâlâ tek session süresini gösteriyor.
+- **"Bu vs şu tarih aralığı" caption'ı.** KPI grid'in üstüne küçük caption:
+  `"4–7 May  ·  vs 27–30 Apr"`. Today'de sadece `"5 May"`. ForecastCard'ın
+  `vs previous period` metni → `vs Nisan` / `vs 2025` olarak gerçek isme
+  bağlandı (`reportsForecastVsRange(previous)` parametreli key). Owner artık
+  hangi tarih aralığının karşılaştırıldığını net görüyor.
 
 ---
 
@@ -54,7 +68,7 @@ v2 canlıdan sonra üç UX/logic problemi tespit edildi:
 İlk taslak (v1, 2026-05-01) Owner'a fraud-tespit motoru ve insight kartları
 sunmayı planlıyordu. Saha datası olmadan synthetic ile canlıya çıkmak yanlış
 yönlendirici sonuçlar üretebileceği için **MVP'ye fraud-style hiçbir sinyal
-girmiyor** — sadece nötr veri (gelir, oturum sayısı, süre, occupancy).
+girmiyor** — sadece nötr veri (gelir, oturum sayısı).
 
 **v2'de çıkan / değişen:**
 
@@ -107,14 +121,14 @@ Bu üç sorudan biri bile cevapsız kalırsa Owner abonelik yenilemeyecek.
 
 ## 2. Kullanıcı (Owner) profili & "jobs to be done"
 
-| Anlık ihtiyaç                          | Yaptığı şey                                                         |
-| -------------------------------------- | ------------------------------------------------------------------- |
-| Sabah hızlıca dünkü hasılat            | Reports → Bugün — toplam, ortalama, masa/manager listesi.           |
-| Ay başı muhasebe / vergi               | Reports → Ay (üretilen rakamlar; CSV export v2).                    |
-| Yeni mekan ekleyip eklemeyeceği kararı | Reports → Yıl — gelir trendi.                                       |
-| Bir masayı kapatma kararı              | Reports → Masa → 30/90 günlük gelir + occupancy + saat-gün heatmap. |
-| Bir manager'ın özel performansı        | Reports → Manager kartı → KPI + son 40 oturum.                      |
-| Ay sonu tahmini ("kira yetişir mi?")   | Reports overview → Forecast özet kartı.                             |
+| Anlık ihtiyaç                          | Yaptığı şey                                                    |
+| -------------------------------------- | -------------------------------------------------------------- |
+| Sabah hızlıca dünkü hasılat            | Reports → Bugün — toplam, ortalama, masa/manager listesi.      |
+| Ay başı muhasebe / vergi               | Reports → Ay (üretilen rakamlar; CSV export v2).               |
+| Yeni mekan ekleyip eklemeyeceği kararı | Reports → Yıl — gelir trendi.                                  |
+| Bir masayı kapatma kararı              | Reports → Masa → 30/90 günlük gelir trendi + saat-gün heatmap. |
+| Bir manager'ın özel performansı        | Reports → Manager kartı → KPI + son 40 oturum.                 |
+| Ay sonu tahmini ("kira yetişir mi?")   | Reports overview → Forecast özet kartı.                        |
 
 > Reports feature'ı manager'a kapalı (`role=OWNER`). Mobile'da bottom-nav'da
 > "Otçet" sekmesi tüm rollere görünür ama içerik OWNER bekler — manager
@@ -131,7 +145,7 @@ Reports (bottom nav: 2. tab)
 ├── Overview (varsayılan)
 │   ├── Period chips           ← Bugün · Hafta · Ay · Yıl
 │   ├── Venue picker chip      ← Tek mekan zorunlu (MVP)
-│   ├── KPI grid (2×2)         ← gelir / session / ortalama süre / occupancy
+│   ├── KPI grid (1×2)         ← toplam gelir / oturum sayısı
 │   ├── Revenue bar chart      ← Syncfusion SfCartesianChart, peak day vurgu
 │   ├── Forecast özet kartı    ← "Bu tempoda Mayıs ~165 000 сом (+12%)"
 │   ├── Tables                 ← seçili mekanın tüm masaları, gelir desc
@@ -175,14 +189,14 @@ Owner manager kartına dokunur → Manager Detail açılır (KPI + session log)
 Reports Overview → "Tables" listesi
   ↓ alttaki masa
 Table Detail
-  ├── KPI: gelir + delta, sessions, ortalama süre, occupancy
+  ├── KPI: gelir + delta, sessions
   ├── 30 günlük gelir trendi (revenue bar chart)
   └── Saat × gün heatmap (7×24)
 ```
 
-Owner bu ekranda "occupancy %8, ortalama süre düşük, saat heatmap'i karanlık"
-deyip tarife düşürme veya kapatma kararını ham veriyle veriyor — uygulama
-yorumlamıyor.
+Owner bu ekranda "gelir geçen aydan %X düştü, hafta sonları boş, saat
+heatmap'i karanlık" deyip tarife düşürme veya kapatma kararını ham veriyle
+veriyor — uygulama yorumlamıyor.
 
 ### 4.3 Tahmin akışı — "ay sonunda ne olacak?"
 
@@ -212,13 +226,13 @@ Sırayla, listView içinde:
 2. **Venue picker** (AppBar action) — `ActionChip` + bottom sheet
    `ListTile` listesi. Her zaman bir mekan seçili (silver bullet "Tüm
    mekanlar" yok).
-3. **KPI grid 2×2** — her hücre `ReportKpiCard` (title + büyük değer +
-   delta vs previous period):
+3. **KPI grid 1×2** — iki `ReportKpiCard` (title + büyük değer + delta vs
+   clipped previous):
    - Toplam gelir
    - Sessions
-   - Ortalama süre (`ReportFormat.duration`)
-   - Occupancy `%` + alt satırda `activeNow/activeMax`
-   - Delta yoksa (önceki dönem 0) "—"; pozitif yeşil, negatif kırmızı.
+   - Today periyodunda delta gösterilmez (sadece mutlak); diğerlerinde
+     pozitif yeşil, negatif kırmızı arrow + yüzde. Delta yoksa (önceki
+     dönem 0) hiç render olmaz.
 4. **Revenue bar chart** — `RevenueBarChart` (Syncfusion). Locale-aware
    tarih ekseni (`DateFormat.MMMd`), compact y-axis (`NumberFormat.compact`).
    Peak gün primary renkte, diğerleri `appColors.brandAmberSoft`.
@@ -244,8 +258,8 @@ verir (bkz. [code-rules.md § BlocBuilder rebuild scope](../docs/code-rules.md#b
 > [`features/report/table_detail/view/table_report_detail_view.dart`](../app/lib/features/report/table_detail/view/table_report_detail_view.dart)
 
 - Period chips (manager-detail'inkiyle aynı kontrat)
-- KPI: revenue (delta), sessions, ortalama süre, occupancy %
-- Revenue trend (Syncfusion bar chart, period boyunca günlük)
+- KPI: revenue (delta), sessions
+- Revenue trend (Syncfusion bar chart, period boyunca günlük; yıl için aylık)
 - Saat × gün heatmap — 7×24 grid, custom widget (`HourDayHeatmap`).
   Syncfusion charts paketinde heatmap widget'ı yok; basit `Container`
   grid'i ile renderlanıyor. Renk yoğunluğu `colorScheme.primary` üzerinde
@@ -280,18 +294,16 @@ verir (bkz. [code-rules.md § BlocBuilder rebuild scope](../docs/code-rules.md#b
 
 Hep aynı period (`from`, `to`) için. **Tüm hesap backend'de.**
 
-| KPI                  | Tanım                                                                   |
-| -------------------- | ----------------------------------------------------------------------- |
-| `totalRevenue`       | sum(`totalAmount`) where status=COMPLETED, endedAt ∈ [from,to]          |
-| `totalSessions`      | count(\*) where status=COMPLETED, endedAt ∈ [from,to]                   |
-| `cancelledSessions`  | count(\*) where status=CANCELLED, endedAt ∈ [from,to]                   |
-| `avgDurationSeconds` | avg(`durationSeconds`) — sadece COMPLETED                               |
-| `occupancyPercent`   | sum(durationSeconds) / (tableCount × periodSeconds × workingFraction)   |
-| `activeNow`          | count(table) where session != null AND session.status ∈ {ACTIVE,PAUSED} |
-| `cancelCount`        | (manager) cancelled session count for that manager                      |
+| KPI                 | Tanım                                                          |
+| ------------------- | -------------------------------------------------------------- |
+| `totalRevenue`      | sum(`totalAmount`) where status=COMPLETED, endedAt ∈ [from,to] |
+| `totalSessions`     | count(\*) where status=COMPLETED, endedAt ∈ [from,to]          |
+| `cancelledSessions` | count(\*) where status=CANCELLED, endedAt ∈ [from,to]          |
+| `cancelCount`       | (manager) cancelled session count for that manager             |
 
-`workingFraction`: MVP `0.5` (12 saat/gün varsayım). v2'de owner mekan
-ayarlarına working hours ekler, gerçek değer kullanılır.
+> v2.1 sonra: `avgDurationSeconds` / `occupancyPercent` / `activeNow` /
+> `activeMax` MVP'den çıkarıldı. Synthetic data delta'larını gürültülü
+> bulduk; saha datasına geçince geri eklemek kolay (5 dk değişiklik).
 
 **KPI delta (clipped-previous, v2.1):**
 
@@ -415,17 +427,18 @@ değerlendirilir).
 
 ```dart
 ReportsSummaryModel       totalRevenue, totalSessions, cancelledSessions,
-                          avgDurationSeconds, occupancyPercent, activeNow,
-                          activeMax, currency, previous
+                          currency, previous
+                          // avgDuration*/occupancy*/activeNow/activeMax YOK
 
 RevenuePointModel         bucket (DateTime), revenue, sessions
 
 TableReportRowModel       tableId, tableName, tableNumber, venueId,
-                          venueName, revenue, sessions, avgDurationSeconds,
-                          occupancyPercent, currency, deltaPercent
+                          venueName, revenue, sessions, currency,
+                          deltaPercent
+                          // avgDurationSeconds / occupancyPercent YOK
 
 TableReportDetailModel    summary (TableReportRowModel),
-                          revenueByDay (List<RevenuePointModel>),
+                          revenueSeries (List<RevenuePointModel>),
                           hourHeatmap (List<List<int>>, 7×24)
 
 ManagerReportRowModel     managerId, name, username, revenue, sessions,
@@ -678,7 +691,7 @@ MVP'de canlı key'ler:
 reportsOverviewTitle, reportsManagerDetailTitle, reportsTableDetailTitle,
 reportsPeriodToday/Week/Month/Year/Custom,
 reportsVenuePickerTitle,
-reportsKpiRevenue/Sessions/AvgDuration/Occupancy/Active,
+reportsKpiRevenue, reportsKpiSessions,
 reportsRevenueChartTitle, reportsRevenueChartCompareToggle,
 reportsTablesTitle, reportsTopManagersTitle, reportsTableLabel,
 reportsSessionsShort, reportsCancelledShort,
