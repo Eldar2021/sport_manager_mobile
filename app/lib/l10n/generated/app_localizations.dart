@@ -1527,24 +1527,6 @@ abstract class AppLocalizations {
   /// **'Sessions'**
   String get reportsKpiSessions;
 
-  /// No description provided for @reportsKpiAvgDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'Avg duration'**
-  String get reportsKpiAvgDuration;
-
-  /// No description provided for @reportsKpiOccupancy.
-  ///
-  /// In en, this message translates to:
-  /// **'Occupancy'**
-  String get reportsKpiOccupancy;
-
-  /// No description provided for @reportsKpiActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get reportsKpiActive;
-
   /// No description provided for @reportsRevenueChartTitle.
   ///
   /// In en, this message translates to:

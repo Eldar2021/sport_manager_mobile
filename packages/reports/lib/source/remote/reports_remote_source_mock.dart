@@ -42,10 +42,6 @@ final class ReportsRemoteSourceMock implements ReportsRemoteSource {
       totalRevenue: current.totalRevenue,
       totalSessions: current.totalSessions,
       cancelledSessions: current.cancelledSessions,
-      avgDurationSeconds: current.avgDurationSeconds,
-      occupancyPercent: current.occupancyPercent,
-      activeNow: current.activeNow,
-      activeMax: current.activeMax,
       currency: current.currency,
       previous: previous,
     );
@@ -283,29 +279,12 @@ class _MockStore {
     final scoped = _filtered(range, venueId: venueId).toList();
     final completed = scoped.where((s) => s.isCompleted).toList();
     final cancelled = scoped.where((s) => !s.isCompleted).length;
-
     final revenue = completed.fold<int>(0, (a, s) => a + s.totalAmount);
-    final avgDuration = completed.isEmpty
-        ? 0
-        : completed.fold<int>(0, (a, s) => a + s.durationSeconds) ~/ completed.length;
-
-    final tableScopeIds = venueId == null
-        ? tables.map((t) => t.id).toSet()
-        : tables.where((t) => t.venueId == venueId).map((t) => t.id).toSet();
-    final periodSeconds = range.length.inSeconds.clamp(1, 1 << 31);
-    final occupancy =
-        (completed.fold<int>(0, (a, s) => a + s.durationSeconds) /
-                (tableScopeIds.length * periodSeconds * 0.5)) // 12h/day working window
-            .clamp(0.0, 1.0);
 
     return ReportsSummaryModel(
       totalRevenue: revenue,
       totalSessions: completed.length,
       cancelledSessions: cancelled,
-      avgDurationSeconds: avgDuration,
-      occupancyPercent: (occupancy * 100).round(),
-      activeNow: 0,
-      activeMax: tableScopeIds.length,
       currency: Currency.kgs,
     );
   }
@@ -385,9 +364,6 @@ class _MockStore {
       final prevRevenue = prevScoped
           .where((s) => s.tableId == t.id && s.isCompleted)
           .fold<int>(0, (a, s) => a + s.totalAmount);
-      final avgDuration = rows.isEmpty ? 0 : rows.fold<int>(0, (a, s) => a + s.durationSeconds) ~/ rows.length;
-      final periodSeconds = filter.range.length.inSeconds.clamp(1, 1 << 31);
-      final occupancy = rows.fold<int>(0, (a, s) => a + s.durationSeconds) / (periodSeconds * 0.5);
       final venue = venues.firstWhere((v) => v.id == t.venueId);
       final deltaPercent = !filter.compareToPrevious || prevRevenue == 0
           ? null
@@ -401,8 +377,6 @@ class _MockStore {
           venueName: venue.name,
           revenue: revenue,
           sessions: rows.length,
-          avgDurationSeconds: avgDuration,
-          occupancyPercent: (occupancy.clamp(0.0, 1.0) * 100).round(),
           currency: Currency.kgs,
           deltaPercent: deltaPercent,
         ),

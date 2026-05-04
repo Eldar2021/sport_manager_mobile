@@ -853,15 +853,6 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsKpiSessions => 'Сессиялар';
 
   @override
-  String get reportsKpiAvgDuration => 'Орт. узактык';
-
-  @override
-  String get reportsKpiOccupancy => 'Толтуруу';
-
-  @override
-  String get reportsKpiActive => 'Активдүү';
-
-  @override
   String get reportsRevenueChartTitle => 'Күн боюнча киреше';
 
   @override

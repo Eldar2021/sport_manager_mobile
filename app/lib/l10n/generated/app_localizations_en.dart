@@ -857,15 +857,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportsKpiSessions => 'Sessions';
 
   @override
-  String get reportsKpiAvgDuration => 'Avg duration';
-
-  @override
-  String get reportsKpiOccupancy => 'Occupancy';
-
-  @override
-  String get reportsKpiActive => 'Active';
-
-  @override
   String get reportsRevenueChartTitle => 'Revenue by day';
 
   @override
