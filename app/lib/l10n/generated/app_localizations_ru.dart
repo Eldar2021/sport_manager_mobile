@@ -920,7 +920,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsForecastVsPrevious => 'к прошлому периоду';
 
   @override
+  String reportsForecastVsRange(String previous) {
+    return 'к $previous';
+  }
+
+  @override
   String get reportsForecastNoComparison => 'Истории пока недостаточно';
+
+  @override
+  String reportsComparisonCaption(String current, String previous) {
+    return '$current  ·  vs $previous';
+  }
 
   @override
   String get reportsTableTrendTitle => 'Тренд выручки';

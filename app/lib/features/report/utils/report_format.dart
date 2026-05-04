@@ -1,5 +1,6 @@
 import 'package:facility/facility.dart';
 import 'package:intl/intl.dart';
+import 'package:reports/reports.dart';
 
 /// Money / duration / delta helpers used across the report feature. Kept
 /// as plain top-level functions so callers don't need to instantiate.
@@ -54,6 +55,35 @@ abstract final class ReportFormat {
     final base = DateTime(2024); // 2024-01-01 is a Monday
     final date = base.add(Duration(days: isoWeekday - 1));
     return DateFormat('E', locale).format(date);
+  }
+
+  /// Compact human-readable label for a [ReportRange]. Used in the
+  /// "current vs previous" comparison caption above KPI grids and in the
+  /// Forecast card. Examples (English locale):
+  ///
+  /// - `today` (single day)        → "May 5"
+  /// - `week` / `month` (range)    → "May 4 – May 7"
+  /// - `year` (months in a year)   → "Jan – May 2026"
+  ///
+  /// Locale-sensitive: order/separators come from the active `DateFormat`.
+  static String rangeLabel(ReportRange range, ReportPeriod period, String locale) {
+    final from = range.from;
+    // range.to is exclusive — the last visible day is the one before.
+    final lastDay = range.to.subtract(const Duration(days: 1));
+
+    if (period == ReportPeriod.year) {
+      final monthOnly = DateFormat.MMM(locale);
+      final fromLabel = monthOnly.format(from);
+      final toLabel = monthOnly.format(lastDay);
+      if (fromLabel == toLabel) return '$fromLabel ${from.year}';
+      return '$fromLabel – $toLabel ${from.year}';
+    }
+
+    final dayMonth = DateFormat.MMMd(locale);
+    final isSingleDay = from.year == lastDay.year && from.month == lastDay.month && from.day == lastDay.day;
+    if (isSingleDay) return dayMonth.format(from);
+
+    return '${dayMonth.format(from)} – ${dayMonth.format(lastDay)}';
   }
 
   static String _currencyShort(Currency c) {

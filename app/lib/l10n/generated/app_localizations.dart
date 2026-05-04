@@ -1623,11 +1623,23 @@ abstract class AppLocalizations {
   /// **'vs previous period'**
   String get reportsForecastVsPrevious;
 
+  /// No description provided for @reportsForecastVsRange.
+  ///
+  /// In en, this message translates to:
+  /// **'vs {previous}'**
+  String reportsForecastVsRange(String previous);
+
   /// No description provided for @reportsForecastNoComparison.
   ///
   /// In en, this message translates to:
   /// **'Not enough history yet'**
   String get reportsForecastNoComparison;
+
+  /// No description provided for @reportsComparisonCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'{current}  ·  vs {previous}'**
+  String reportsComparisonCaption(String current, String previous);
 
   /// No description provided for @reportsTableTrendTitle.
   ///

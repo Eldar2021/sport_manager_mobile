@@ -463,7 +463,26 @@
   "reportsLogEmpty": "No sessions match this filter.",
   "reportsForecastSummaryTitle": "Forecast",
   "reportsForecastVsPrevious": "vs previous period",
+  "reportsForecastVsRange": "vs {previous}",
+  "@reportsForecastVsRange": {
+    "placeholders": {
+      "previous": {
+        "type": "String"
+      }
+    }
+  },
   "reportsForecastNoComparison": "Not enough history yet",
+  "reportsComparisonCaption": "{current}  ·  vs {previous}",
+  "@reportsComparisonCaption": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "previous": {
+        "type": "String"
+      }
+    }
+  },
   "reportsTableTrendTitle": "Revenue trend",
   "reportsTableHeatmapTitle": "Hour-of-day heatmap",
   "reportsErrorTitle": "Couldn't load report",

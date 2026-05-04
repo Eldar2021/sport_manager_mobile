@@ -901,7 +901,17 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsForecastVsPrevious => 'мурунку мөөнөт менен';
 
   @override
+  String reportsForecastVsRange(String previous) {
+    return '$previous менен';
+  }
+
+  @override
   String get reportsForecastNoComparison => 'Тарых али жетишсиз';
+
+  @override
+  String reportsComparisonCaption(String current, String previous) {
+    return '$current  ·  vs $previous';
+  }
 
   @override
   String get reportsTableTrendTitle => 'Киреше трендине';

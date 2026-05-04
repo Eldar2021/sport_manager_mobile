@@ -905,7 +905,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportsForecastVsPrevious => 'vs previous period';
 
   @override
+  String reportsForecastVsRange(String previous) {
+    return 'vs $previous';
+  }
+
+  @override
   String get reportsForecastNoComparison => 'Not enough history yet';
+
+  @override
+  String reportsComparisonCaption(String current, String previous) {
+    return '$current  ·  vs $previous';
+  }
 
   @override
   String get reportsTableTrendTitle => 'Revenue trend';
