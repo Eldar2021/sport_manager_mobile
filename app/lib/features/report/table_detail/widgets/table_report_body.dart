@@ -36,41 +36,47 @@ class TableReportBody extends StatelessWidget {
           style: context.appTextStyles.muted.labelSmall,
         ),
         const SizedBox(height: AppSpacing.x4),
-        Row(
-          children: [
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiRevenue,
-                value: ReportFormat.money(summary.revenue, summary.currency),
-                deltaPercent: period == ReportPeriod.today ? null : summary.deltaPercent,
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiRevenue,
+                  value: ReportFormat.money(summary.revenue, summary.currency),
+                  deltaPercent: period == ReportPeriod.today ? null : summary.deltaPercent,
+                ),
               ),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiSessions,
-                value: summary.sessions.toString(),
+              const SizedBox(width: AppSpacing.x3),
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiSessions,
+                  value: summary.sessions.toString(),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: AppSpacing.x3),
-        Row(
-          children: [
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiAvgDuration,
-                value: ReportFormat.duration(summary.avgDurationSeconds),
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiAvgDuration,
+                  value: ReportFormat.duration(summary.avgDurationSeconds),
+                ),
               ),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiOccupancy,
-                value: '${summary.occupancyPercent}%',
+              const SizedBox(width: AppSpacing.x3),
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiOccupancy,
+                  value: '${summary.occupancyPercent}%',
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: AppSpacing.x4),
         _TrendCard(

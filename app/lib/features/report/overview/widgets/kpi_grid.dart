@@ -42,48 +42,53 @@ class _KpiGridContent extends StatelessWidget {
     final l10n = context.l10n;
     return Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiRevenue,
-                value: ReportFormat.money(
-                  summary.totalRevenue,
-                  summary.currency,
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiRevenue,
+                  value: ReportFormat.money(
+                    summary.totalRevenue,
+                    summary.currency,
+                  ),
+                  deltaPercent: summary.revenueDeltaPercent,
                 ),
-                deltaPercent: summary.revenueDeltaPercent,
               ),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiSessions,
-                value: summary.totalSessions.toString(),
-                deltaPercent: summary.sessionsDeltaPercent,
+              const SizedBox(width: AppSpacing.x3),
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiSessions,
+                  value: summary.totalSessions.toString(),
+                  deltaPercent: summary.sessionsDeltaPercent,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: AppSpacing.x3),
-        Row(
-          children: [
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiAvgDuration,
-                value: ReportFormat.duration(summary.avgDurationSeconds),
-                deltaPercent: summary.avgDurationDeltaPercent,
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiAvgDuration,
+                  value: ReportFormat.duration(summary.avgDurationSeconds),
+                  deltaPercent: summary.avgDurationDeltaPercent,
+                ),
               ),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiOccupancy,
-                value: '${summary.occupancyPercent}%',
-                subtitle: '${summary.activeNow}/${summary.activeMax}',
-                deltaPercent: summary.occupancyDeltaPercent,
+              const SizedBox(width: AppSpacing.x3),
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiOccupancy,
+                  value: '${summary.occupancyPercent}%',
+                  deltaPercent: summary.occupancyDeltaPercent,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
