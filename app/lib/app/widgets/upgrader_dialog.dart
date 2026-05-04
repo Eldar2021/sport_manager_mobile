@@ -54,6 +54,7 @@ class UpgraderDialog extends StatelessWidget {
         isRequired ? context.l10n.upgraderRequiredDescription : context.l10n.upgraderRecommendedDescription,
         textAlign: TextAlign.center,
       ),
+      actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
         if (!isRequired)
           _DialogAction(
@@ -93,8 +94,6 @@ class _DialogAction extends StatelessWidget {
         child: Text(label),
       );
     }
-    return isDefault
-        ? FilledButton(onPressed: onPressed, child: Text(label))
-        : TextButton(onPressed: onPressed, child: Text(label));
+    return TextButton(onPressed: onPressed, child: Text(label));
   }
 }
