@@ -27,22 +27,25 @@ class ManagerReportBody extends StatelessWidget {
       children: [
         _Header(summary),
         const SizedBox(height: AppSpacing.x4),
-        Row(
-          children: [
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiRevenue,
-                value: ReportFormat.money(summary.revenue, summary.currency),
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiRevenue,
+                  value: ReportFormat.money(summary.revenue, summary.currency),
+                ),
               ),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiSessions,
-                value: summary.sessions.toString(),
+              const SizedBox(width: AppSpacing.x3),
+              Expanded(
+                child: ReportKpiCard(
+                  title: l10n.reportsKpiSessions,
+                  value: summary.sessions.toString(),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: AppSpacing.x6),
         ManagerSessionLog(

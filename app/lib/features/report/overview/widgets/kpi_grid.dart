@@ -13,7 +13,6 @@ class KpiGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
       bloc: cubit,
       buildWhen: (a, b) => a.summary != b.summary,
@@ -23,7 +22,7 @@ class KpiGrid extends StatelessWidget {
           margin: EdgeInsets.zero,
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.x4),
-            child: Center(child: Text(l10n.reportsErrorTitle)),
+            child: Center(child: Text(context.l10n.reportsErrorTitle)),
           ),
         ),
         RequestSuccess<ReportsSummaryModel>(:final data) => _KpiGridContent(data),
@@ -39,53 +38,30 @@ class _KpiGridContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiRevenue,
-                value: ReportFormat.money(
-                  summary.totalRevenue,
-                  summary.currency,
-                ),
-                deltaPercent: summary.revenueDeltaPercent,
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: ReportKpiCard(
+              title: context.l10n.reportsKpiRevenue,
+              value: ReportFormat.money(
+                summary.totalRevenue,
+                summary.currency,
               ),
+              deltaPercent: summary.revenueDeltaPercent,
             ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiSessions,
-                value: summary.totalSessions.toString(),
-                deltaPercent: summary.sessionsDeltaPercent,
-              ),
+          ),
+          const SizedBox(width: AppSpacing.x3),
+          Expanded(
+            child: ReportKpiCard(
+              title: context.l10n.reportsKpiSessions,
+              value: summary.totalSessions.toString(),
+              deltaPercent: summary.sessionsDeltaPercent,
             ),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.x3),
-        Row(
-          children: [
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiAvgDuration,
-                value: ReportFormat.duration(summary.avgDurationSeconds),
-                deltaPercent: summary.avgDurationDeltaPercent,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.x3),
-            Expanded(
-              child: ReportKpiCard(
-                title: l10n.reportsKpiOccupancy,
-                value: '${summary.occupancyPercent}%',
-                subtitle: '${summary.activeNow}/${summary.activeMax}',
-                deltaPercent: summary.occupancyDeltaPercent,
-              ),
-            ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

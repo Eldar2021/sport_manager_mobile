@@ -31,10 +31,10 @@ final class ReportsRemoteSourceMock implements ReportsRemoteSource {
 
     if (!filter.compareToPrevious) return current;
 
-    final previousRange = _store.clippedPreviousRange(filter);
-
+    // KPI delta'da clipped previous — periyot mid-stride'da yanıltıcı
+    // değil. Helper artık ReportFilter üzerinde.
     final previous = _store.summary(
-      previousRange,
+      filter.clippedPreviousRange,
       venueId: filter.venueId,
     );
 
@@ -42,10 +42,6 @@ final class ReportsRemoteSourceMock implements ReportsRemoteSource {
       totalRevenue: current.totalRevenue,
       totalSessions: current.totalSessions,
       cancelledSessions: current.cancelledSessions,
-      avgDurationSeconds: current.avgDurationSeconds,
-      occupancyPercent: current.occupancyPercent,
-      activeNow: current.activeNow,
-      activeMax: current.activeMax,
       currency: current.currency,
       previous: previous,
     );
@@ -283,29 +279,12 @@ class _MockStore {
     final scoped = _filtered(range, venueId: venueId).toList();
     final completed = scoped.where((s) => s.isCompleted).toList();
     final cancelled = scoped.where((s) => !s.isCompleted).length;
-
     final revenue = completed.fold<int>(0, (a, s) => a + s.totalAmount);
-    final avgDuration = completed.isEmpty
-        ? 0
-        : completed.fold<int>(0, (a, s) => a + s.durationSeconds) ~/ completed.length;
-
-    final tableScopeIds = venueId == null
-        ? tables.map((t) => t.id).toSet()
-        : tables.where((t) => t.venueId == venueId).map((t) => t.id).toSet();
-    final periodSeconds = range.length.inSeconds.clamp(1, 1 << 31);
-    final occupancy =
-        (completed.fold<int>(0, (a, s) => a + s.durationSeconds) /
-                (tableScopeIds.length * periodSeconds * 0.5)) // 12h/day working window
-            .clamp(0.0, 1.0);
 
     return ReportsSummaryModel(
       totalRevenue: revenue,
       totalSessions: completed.length,
       cancelledSessions: cancelled,
-      avgDurationSeconds: avgDuration,
-      occupancyPercent: (occupancy * 100).round(),
-      activeNow: 0,
-      activeMax: tableScopeIds.length,
       currency: Currency.kgs,
     );
   }
@@ -371,8 +350,11 @@ class _MockStore {
 
   List<TableReportRowModel> tableRows(ReportFilter filter) {
     final scoped = _filtered(filter.range, venueId: filter.venueId).toList();
-    // Per-table delta'da KPI delta'sıyla aynı clipped-previous mantığı.
-    final prevScoped = _filtered(clippedPreviousRange(filter), venueId: filter.venueId).toList();
+    // Today periyodunda comparison'ı kapatıyoruz — yarım-gün vs tam-gün
+    // karşılaştırması her zaman -100% sinyali verir, yanıltıcı.
+    final prevScoped = filter.compareToPrevious
+        ? _filtered(filter.clippedPreviousRange, venueId: filter.venueId).toList()
+        : const <_MockSession>[];
 
     final out = <TableReportRowModel>[];
     for (final t in tables) {
@@ -382,10 +364,10 @@ class _MockStore {
       final prevRevenue = prevScoped
           .where((s) => s.tableId == t.id && s.isCompleted)
           .fold<int>(0, (a, s) => a + s.totalAmount);
-      final avgDuration = rows.isEmpty ? 0 : rows.fold<int>(0, (a, s) => a + s.durationSeconds) ~/ rows.length;
-      final periodSeconds = filter.range.length.inSeconds.clamp(1, 1 << 31);
-      final occupancy = rows.fold<int>(0, (a, s) => a + s.durationSeconds) / (periodSeconds * 0.5);
       final venue = venues.firstWhere((v) => v.id == t.venueId);
+      final deltaPercent = !filter.compareToPrevious || prevRevenue == 0
+          ? null
+          : ((revenue - prevRevenue) / prevRevenue * 100).round();
       out.add(
         TableReportRowModel(
           tableId: t.id,
@@ -395,10 +377,8 @@ class _MockStore {
           venueName: venue.name,
           revenue: revenue,
           sessions: rows.length,
-          avgDurationSeconds: avgDuration,
-          occupancyPercent: (occupancy.clamp(0.0, 1.0) * 100).round(),
           currency: Currency.kgs,
-          deltaPercent: prevRevenue == 0 ? null : ((revenue - prevRevenue) / prevRevenue * 100).round(),
+          deltaPercent: deltaPercent,
         ),
       );
     }
@@ -541,7 +521,9 @@ class _MockStore {
     final realSoFar = series.fold<int>(0, (a, p) => a + p.revenue);
     final projectedTotal = realSoFar + projTotal;
 
-    final prevRange = _previousCalendarRange(filter.period, now) ?? filter.range.previous;
+    // Forecast: tam-period vs tam-period karşılaştırması (clipped değil)
+    // — projection'ın "ay sonuna kadar tahmin" semantiği bunu gerektirir.
+    final prevRange = filter.previousCalendarRange ?? filter.range.previous;
     final previousTotal = summary(prevRange, venueId: filter.venueId).totalRevenue;
 
     return ForecastModel(
@@ -563,49 +545,6 @@ class _MockStore {
       ReportPeriod.month => DateTime(now.year, now.month + 1),
       ReportPeriod.year => DateTime(now.year + 1),
       ReportPeriod.custom => today.add(const Duration(days: 30)),
-    };
-  }
-
-  /// "Clipped previous" — geçen takvim periyodunun **ilk N gününü** döner;
-  /// burada N = current filter.range.length. KPI delta'sı bu dilimi
-  /// kullanır ki periyot kapanmadan "geçen periyodun tamamı"yla
-  /// karşılaştırılıp yanıltıcı düşüş sinyali vermesin. (v2.1)
-  ///
-  /// Periyot tamamen kapalıysa (range.to ≤ now) clipped == previousFull
-  /// olur — clipping no-op.
-  ReportRange clippedPreviousRange(ReportFilter filter) {
-    final prevFull = _previousCalendarRange(filter.period, now) ?? filter.range.previous;
-    final elapsed = filter.range.length;
-    final clippedTo = prevFull.from.add(elapsed);
-    return ReportRange(
-      from: prevFull.from,
-      to: clippedTo.isBefore(prevFull.to) ? clippedTo : prevFull.to,
-    );
-  }
-
-  /// Range covering the **previous** calendar period of the same kind.
-  /// `null` for `custom` — caller falls back to `filter.range.previous`.
-  ReportRange? _previousCalendarRange(ReportPeriod period, DateTime now) {
-    final today = DateTime(now.year, now.month, now.day);
-    return switch (period) {
-      ReportPeriod.today => ReportRange(
-        from: today.subtract(const Duration(days: 1)),
-        to: today,
-      ),
-      ReportPeriod.week => () {
-        final thisWeekStart = today.subtract(Duration(days: now.weekday - 1));
-        final prevWeekStart = thisWeekStart.subtract(const Duration(days: 7));
-        return ReportRange(from: prevWeekStart, to: thisWeekStart);
-      }(),
-      ReportPeriod.month => ReportRange(
-        from: DateTime(now.year, now.month - 1),
-        to: DateTime(now.year, now.month),
-      ),
-      ReportPeriod.year => ReportRange(
-        from: DateTime(now.year - 1),
-        to: DateTime(now.year),
-      ),
-      ReportPeriod.custom => null,
     };
   }
 

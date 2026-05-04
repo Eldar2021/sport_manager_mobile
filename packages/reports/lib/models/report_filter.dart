@@ -35,6 +35,51 @@ final class ReportFilter extends Equatable {
   /// hidden in Today view. Caller still gets absolute numbers.
   bool get supportsComparison => period != ReportPeriod.today;
 
+  /// **Full** previous calendar period of the same kind — used by
+  /// Forecast card ("Mayıs projeksiyonu vs tam Nisan"). Anchored on
+  /// `range.from` so it's deterministic regardless of when the getter
+  /// is called. `null` for `custom` — caller falls back to
+  /// `range.previous` (same-length window before).
+  ReportRange? get previousCalendarRange {
+    final from = range.from;
+    return switch (period) {
+      ReportPeriod.today => ReportRange(
+        from: from.subtract(const Duration(days: 1)),
+        to: from,
+      ),
+      ReportPeriod.week => ReportRange(
+        from: from.subtract(const Duration(days: 7)),
+        to: from,
+      ),
+      ReportPeriod.month => ReportRange(
+        from: DateTime(from.year, from.month - 1),
+        to: DateTime(from.year, from.month),
+      ),
+      ReportPeriod.year => ReportRange(
+        from: DateTime(from.year - 1),
+        to: DateTime(from.year),
+      ),
+      ReportPeriod.custom => null,
+    };
+  }
+
+  /// **Clipped** previous — geçen takvim periyodunun ilk N gününü
+  /// döner (N = `range.length`). KPI delta'sı bu dilimi kullanır ki
+  /// periyot kapanmadan "geçen periyodun tamamı"yla karşılaştırılıp
+  /// yanıltıcı düşüş sinyali vermesin.
+  ///
+  /// Periyot tamamen kapalıysa (range.length == prev calendar length)
+  /// clipped == previousCalendar olur — clipping no-op.
+  ReportRange get clippedPreviousRange {
+    final prevFull = previousCalendarRange ?? range.previous;
+    final elapsed = range.length;
+    final clippedTo = prevFull.from.add(elapsed);
+    return ReportRange(
+      from: prevFull.from,
+      to: clippedTo.isBefore(prevFull.to) ? clippedTo : prevFull.to,
+    );
+  }
+
   ReportFilter copyWith({
     ReportPeriod? period,
     ReportRange? range,

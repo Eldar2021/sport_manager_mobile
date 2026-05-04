@@ -5,6 +5,11 @@ import 'package:meta/meta.dart';
 
 part 'reports_summary_model.g.dart';
 
+/// Top-level KPI summary for the Reports overview. MVP scope is **revenue
+/// + sessions** only — average-duration / occupancy / active-now were
+/// dropped because synthetic data made the deltas meaningless and the
+/// owner can read those signals from Table Detail (which keeps the per-
+/// table revenue/session view).
 @immutable
 @JsonSerializable()
 final class ReportsSummaryModel extends Equatable {
@@ -12,10 +17,6 @@ final class ReportsSummaryModel extends Equatable {
     required this.totalRevenue,
     required this.totalSessions,
     required this.cancelledSessions,
-    required this.avgDurationSeconds,
-    required this.occupancyPercent,
-    required this.activeNow,
-    required this.activeMax,
     required this.currency,
     this.previous,
   });
@@ -27,10 +28,6 @@ final class ReportsSummaryModel extends Equatable {
   final int totalRevenue;
   final int totalSessions;
   final int cancelledSessions;
-  final int avgDurationSeconds;
-  final int occupancyPercent;
-  final int activeNow;
-  final int activeMax;
   final Currency currency;
 
   /// Same shape, computed for the previous period of equal length. `null`
@@ -52,18 +49,12 @@ final class ReportsSummaryModel extends Equatable {
 
   int? get revenueDeltaPercent => _delta((s) => s.totalRevenue);
   int? get sessionsDeltaPercent => _delta((s) => s.totalSessions);
-  int? get avgDurationDeltaPercent => _delta((s) => s.avgDurationSeconds);
-  int? get occupancyDeltaPercent => _delta((s) => s.occupancyPercent);
 
   @override
   List<Object?> get props => [
     totalRevenue,
     totalSessions,
     cancelledSessions,
-    avgDurationSeconds,
-    occupancyPercent,
-    activeNow,
-    activeMax,
     currency,
     previous,
   ];

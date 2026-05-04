@@ -10,10 +10,6 @@ ReportsSummaryModel _$ReportsSummaryModelFromJson(Map<String, dynamic> json) => 
   totalRevenue: (json['totalRevenue'] as num).toInt(),
   totalSessions: (json['totalSessions'] as num).toInt(),
   cancelledSessions: (json['cancelledSessions'] as num).toInt(),
-  avgDurationSeconds: (json['avgDurationSeconds'] as num).toInt(),
-  occupancyPercent: (json['occupancyPercent'] as num).toInt(),
-  activeNow: (json['activeNow'] as num).toInt(),
-  activeMax: (json['activeMax'] as num).toInt(),
   currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
   previous: json['previous'] == null
       ? null
@@ -28,10 +24,6 @@ Map<String, dynamic> _$ReportsSummaryModelToJson(
   'totalRevenue': instance.totalRevenue,
   'totalSessions': instance.totalSessions,
   'cancelledSessions': instance.cancelledSessions,
-  'avgDurationSeconds': instance.avgDurationSeconds,
-  'occupancyPercent': instance.occupancyPercent,
-  'activeNow': instance.activeNow,
-  'activeMax': instance.activeMax,
   'currency': _$CurrencyEnumMap[instance.currency]!,
   'previous': instance.previous,
 };

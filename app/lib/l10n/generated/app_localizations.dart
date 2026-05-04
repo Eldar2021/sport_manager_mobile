@@ -1527,24 +1527,6 @@ abstract class AppLocalizations {
   /// **'Sessions'**
   String get reportsKpiSessions;
 
-  /// No description provided for @reportsKpiAvgDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'Avg duration'**
-  String get reportsKpiAvgDuration;
-
-  /// No description provided for @reportsKpiOccupancy.
-  ///
-  /// In en, this message translates to:
-  /// **'Occupancy'**
-  String get reportsKpiOccupancy;
-
-  /// No description provided for @reportsKpiActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get reportsKpiActive;
-
   /// No description provided for @reportsRevenueChartTitle.
   ///
   /// In en, this message translates to:
@@ -1623,11 +1605,23 @@ abstract class AppLocalizations {
   /// **'vs previous period'**
   String get reportsForecastVsPrevious;
 
+  /// No description provided for @reportsForecastVsRange.
+  ///
+  /// In en, this message translates to:
+  /// **'vs {previous}'**
+  String reportsForecastVsRange(String previous);
+
   /// No description provided for @reportsForecastNoComparison.
   ///
   /// In en, this message translates to:
   /// **'Not enough history yet'**
   String get reportsForecastNoComparison;
+
+  /// No description provided for @reportsComparisonCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'{current}  ·  vs {previous}'**
+  String reportsComparisonCaption(String current, String previous);
 
   /// No description provided for @reportsTableTrendTitle.
   ///

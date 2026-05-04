@@ -857,15 +857,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportsKpiSessions => 'Sessions';
 
   @override
-  String get reportsKpiAvgDuration => 'Avg duration';
-
-  @override
-  String get reportsKpiOccupancy => 'Occupancy';
-
-  @override
-  String get reportsKpiActive => 'Active';
-
-  @override
   String get reportsRevenueChartTitle => 'Revenue by day';
 
   @override
@@ -905,7 +896,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportsForecastVsPrevious => 'vs previous period';
 
   @override
+  String reportsForecastVsRange(String previous) {
+    return 'vs $previous';
+  }
+
+  @override
   String get reportsForecastNoComparison => 'Not enough history yet';
+
+  @override
+  String reportsComparisonCaption(String current, String previous) {
+    return '$current  ·  vs $previous';
+  }
 
   @override
   String get reportsTableTrendTitle => 'Revenue trend';

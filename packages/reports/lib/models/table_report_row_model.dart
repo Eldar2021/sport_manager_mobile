@@ -5,6 +5,10 @@ import 'package:meta/meta.dart';
 
 part 'table_report_row_model.g.dart';
 
+/// Per-table row used by the Tables section and the Table Detail summary.
+/// MVP: revenue + sessions only — avg-duration / occupancy were dropped
+/// because the UI no longer surfaces them and synthetic-data deltas were
+/// noisy.
 @immutable
 @JsonSerializable()
 final class TableReportRowModel extends Equatable {
@@ -15,8 +19,6 @@ final class TableReportRowModel extends Equatable {
     required this.venueName,
     required this.revenue,
     required this.sessions,
-    required this.avgDurationSeconds,
-    required this.occupancyPercent,
     required this.currency,
     this.tableName,
     this.deltaPercent,
@@ -33,8 +35,6 @@ final class TableReportRowModel extends Equatable {
   final String venueName;
   final int revenue;
   final int sessions;
-  final int avgDurationSeconds;
-  final int occupancyPercent;
   final Currency currency;
 
   /// Percent change vs previous period (`null` = not enough data).
@@ -51,8 +51,6 @@ final class TableReportRowModel extends Equatable {
     venueName,
     revenue,
     sessions,
-    avgDurationSeconds,
-    occupancyPercent,
     currency,
     deltaPercent,
   ];

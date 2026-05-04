@@ -61,7 +61,16 @@ class _ReportOverviewViewState extends State<ReportOverviewView> {
                 onChanged: _cubit.changePeriod,
               ),
             ),
-            const SizedBox(height: AppSpacing.x4),
+            const SizedBox(height: AppSpacing.x3),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+              child: BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
+                bloc: _cubit,
+                buildWhen: (a, b) => a.filter != b.filter,
+                builder: (_, state) => ReportComparisonLabel(state.filter),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.x3),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
               child: Column(

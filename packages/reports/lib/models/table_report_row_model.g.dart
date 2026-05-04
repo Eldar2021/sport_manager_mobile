@@ -13,8 +13,6 @@ TableReportRowModel _$TableReportRowModelFromJson(Map<String, dynamic> json) => 
   venueName: json['venueName'] as String,
   revenue: (json['revenue'] as num).toInt(),
   sessions: (json['sessions'] as num).toInt(),
-  avgDurationSeconds: (json['avgDurationSeconds'] as num).toInt(),
-  occupancyPercent: (json['occupancyPercent'] as num).toInt(),
   currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
   tableName: json['tableName'] as String?,
   deltaPercent: (json['deltaPercent'] as num?)?.toInt(),
@@ -30,8 +28,6 @@ Map<String, dynamic> _$TableReportRowModelToJson(
   'venueName': instance.venueName,
   'revenue': instance.revenue,
   'sessions': instance.sessions,
-  'avgDurationSeconds': instance.avgDurationSeconds,
-  'occupancyPercent': instance.occupancyPercent,
   'currency': _$CurrencyEnumMap[instance.currency]!,
   'deltaPercent': instance.deltaPercent,
 };

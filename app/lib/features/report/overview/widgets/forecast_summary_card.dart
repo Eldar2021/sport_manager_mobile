@@ -15,9 +15,12 @@ class ForecastSummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
       bloc: cubit,
-      buildWhen: (a, b) => a.forecast != b.forecast,
+      buildWhen: (a, b) => a.forecast != b.forecast || a.filter != b.filter,
       builder: (_, state) => switch (state.forecast) {
-        RequestSuccess<ForecastModel>(:final data) when data.points.isNotEmpty => _Body(data),
+        RequestSuccess<ForecastModel>(:final data) when data.points.isNotEmpty => _Body(
+          forecast: data,
+          filter: state.filter,
+        ),
         _ => const SizedBox.shrink(),
       },
     );
@@ -25,9 +28,13 @@ class ForecastSummaryCard extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body(this.forecast);
+  const _Body({
+    required this.forecast,
+    required this.filter,
+  });
 
   final ForecastModel forecast;
+  final ReportFilter filter;
 
   Color _deltaColor(BuildContext context, int? delta) {
     if (delta == null) return context.colors.onSurfaceVariant;
@@ -37,8 +44,11 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final locale = Localizations.localeOf(context).languageCode;
     final delta = forecast.deltaPercent;
     final deltaColor = _deltaColor(context, delta);
+    final prevRange = filter.previousCalendarRange ?? filter.range.previous;
+    final prevLabel = ReportFormat.rangeLabel(prevRange, filter.period, locale);
     return Card(
       margin: EdgeInsets.zero,
       color: context.colors.primaryContainer,
@@ -79,9 +89,13 @@ class _Body extends StatelessWidget {
                     size: 16,
                   ),
                   const SizedBox(width: AppSpacing.x1),
-                  Text(
-                    '${ReportFormat.delta(delta)} ${l10n.reportsForecastVsPrevious}',
-                    style: context.textTheme.bodyMedium?.copyWith(color: deltaColor),
+                  Expanded(
+                    child: Text(
+                      '${ReportFormat.delta(delta)} ${l10n.reportsForecastVsRange(prevLabel)}',
+                      style: context.textTheme.bodyMedium?.copyWith(color: deltaColor),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               )
