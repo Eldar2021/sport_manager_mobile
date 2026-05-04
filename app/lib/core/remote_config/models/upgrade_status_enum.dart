@@ -1,1 +1,5 @@
-enum UpgradeStatusEnum { none, recommended, required }
+enum UpgradeStatusEnum {
+  none,
+  recommended,
+  required,
+}

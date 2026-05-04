@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:sport_manager_mobile/core/remote_config/models/platform_version_model.dart';
+import 'package:sport_manager_mobile/core/core.dart';
 
 @immutable
 final class AppVersionConfigModel extends Equatable {
@@ -9,14 +9,19 @@ final class AppVersionConfigModel extends Equatable {
     required this.ios,
   });
 
-  factory AppVersionConfigModel.fromJson(Map<String, dynamic> json) => AppVersionConfigModel(
-    android: PlatformVersionModel.fromJson(json['android'] as Map<String, dynamic>),
-    ios: PlatformVersionModel.fromJson(json['ios'] as Map<String, dynamic>),
-  );
+  factory AppVersionConfigModel.fromJson(Map<String, dynamic> json) {
+    return AppVersionConfigModel(
+      android: PlatformVersionModel.fromJson(json['android'] as Map<String, dynamic>),
+      ios: PlatformVersionModel.fromJson(json['ios'] as Map<String, dynamic>),
+    );
+  }
 
   final PlatformVersionModel android;
   final PlatformVersionModel ios;
 
   @override
-  List<Object?> get props => [android, ios];
+  List<Object?> get props => [
+    android,
+    ios,
+  ];
 }

@@ -8,14 +8,19 @@ final class PlatformVersionModel extends Equatable {
     required this.recommendedBuildNumber,
   });
 
-  factory PlatformVersionModel.fromJson(Map<String, dynamic> json) => PlatformVersionModel(
-    requiredBuildNumber: json['requiredBuildNumber'] as int,
-    recommendedBuildNumber: json['recommendedBuildNumber'] as int,
-  );
+  factory PlatformVersionModel.fromJson(Map<String, dynamic> json) {
+    return PlatformVersionModel(
+      requiredBuildNumber: json['requiredBuildNumber'] as int,
+      recommendedBuildNumber: json['recommendedBuildNumber'] as int,
+    );
+  }
 
   final int requiredBuildNumber;
   final int recommendedBuildNumber;
 
   @override
-  List<Object?> get props => [requiredBuildNumber, recommendedBuildNumber];
+  List<Object?> get props => [
+    requiredBuildNumber,
+    recommendedBuildNumber,
+  ];
 }

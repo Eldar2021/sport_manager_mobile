@@ -24,9 +24,7 @@ abstract final class AppConfigEntries {
 
   static final ConfigEntry<AppVersionConfigModel> appVersion = jsonObjectEntry(
     key: 'app_version',
-    defaultJson:
-        '{"android":{"requiredBuildNumber":0,"recommendedBuildNumber":0},'
-        '"ios":{"requiredBuildNumber":0,"recommendedBuildNumber":0}}',
+    defaultJson: AppVersion.appVersionDefauldValue,
     fromJson: AppVersionConfigModel.fromJson,
   );
 

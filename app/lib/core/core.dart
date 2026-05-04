@@ -1,4 +1,5 @@
 export 'bloc/bloc_cancel_token.dart';
+export 'constants/app_version.dart';
 export 'constants/store_urls.dart';
 export 'constants/support_contacts.dart';
 export 'di/di.dart';

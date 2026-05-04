@@ -57,6 +57,10 @@ class MyAppWrapper extends StatelessWidget {
     } else if (authState is AuthUnauthenticated) {
       cubit.clear();
     }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<UpgraderCubit>().init();
+    });
   }
 }
 
@@ -76,24 +80,19 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _navigatorKey = GlobalKey<NavigatorState>();
     _router = appRouter(context.read<AuthCubit>(), navigatorKey: _navigatorKey);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) context.read<UpgraderCubit>().init();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<UpgraderCubit, UpgraderState>(
       listenWhen: (prev, next) => next.status != UpgradeStatusEnum.none && prev.status != next.status,
-      listener: (_, upgraderState) {
+      listener: (_, state) {
         final navCtx = _navigatorKey.currentContext;
         if (navCtx == null) return;
-        final cubit = context.read<UpgraderCubit>();
-        UpgraderSheet.show(
+        UpgraderDialog.show(
           navCtx,
-          upgraderState.status,
-          storeUrl: cubit.storeUrl,
-          onDismiss: cubit.dismiss,
+          state.status,
+          onDismiss: context.read<UpgraderCubit>().dismiss,
         );
       },
       child: BlocBuilder<SettingsCubit, SettingsState>(
