@@ -33,7 +33,7 @@ class _ManagerReportDetailViewState extends State<ManagerReportDetailView> with 
     _tabController = TabController(
       length: _periods.length,
       vsync: this,
-      initialIndex: _periods.indexOf(ReportPeriod.month),
+      initialIndex: _periods.indexOf(_cubit.state.filter.period),
     );
     _tabController.addListener(_onTabChanged);
     _cubit.load();
