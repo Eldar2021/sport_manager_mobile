@@ -17,8 +17,11 @@ class TableReportDetailView extends StatefulWidget {
   State<TableReportDetailView> createState() => _TableReportDetailViewState();
 }
 
-class _TableReportDetailViewState extends State<TableReportDetailView> {
+class _TableReportDetailViewState extends State<TableReportDetailView> with SingleTickerProviderStateMixin {
   late final TableReportDetailCubit _cubit;
+  late final TabController _tabController;
+
+  static const List<ReportPeriod> _periods = ReportPeriodTabs.periods;
 
   @override
   void initState() {
@@ -27,13 +30,27 @@ class _TableReportDetailViewState extends State<TableReportDetailView> {
       repository: GetIt.I<ReportsRepository>(),
       tableId: widget.tableId,
     );
+    _tabController = TabController(
+      length: _periods.length,
+      vsync: this,
+      initialIndex: _periods.indexOf(_cubit.state.filter.period),
+    );
+    _tabController.addListener(_onTabChanged);
     _cubit.load();
   }
 
   @override
   void dispose() {
+    _tabController
+      ..removeListener(_onTabChanged)
+      ..dispose();
     _cubit.close();
     super.dispose();
+  }
+
+  void _onTabChanged() {
+    if (_tabController.indexIsChanging) return;
+    _cubit.changePeriod(_periods[_tabController.index]);
   }
 
   @override
@@ -44,49 +61,60 @@ class _TableReportDetailViewState extends State<TableReportDetailView> {
       ),
       body: RefreshIndicator.adaptive(
         onRefresh: _cubit.load,
-        child: ListView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.only(bottom: AppSpacing.x6),
-          children: [
-            const SizedBox(height: AppSpacing.x3),
-            BlocBuilder<TableReportDetailCubit, TableReportDetailState>(
-              bloc: _cubit,
-              buildWhen: (a, b) => a.filter.period != b.filter.period,
-              builder: (_, state) => ReportPeriodChips(
-                value: state.filter.period,
-                onChanged: _cubit.changePeriod,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.x3),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-              child: BlocBuilder<TableReportDetailCubit, TableReportDetailState>(
-                bloc: _cubit,
-                buildWhen: (a, b) => a.filter != b.filter,
-                builder: (_, state) => ReportComparisonLabel(state.filter),
-              ),
-            ),
-            const SizedBox(height: AppSpacing.x3),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-              child: BlocBuilder<TableReportDetailCubit, TableReportDetailState>(
-                bloc: _cubit,
-                buildWhen: (a, b) => a.detail != b.detail || a.filter.period != b.filter.period,
-                builder: (_, state) => switch (state.detail) {
-                  RequestInitial<TableReportDetailModel>() ||
-                  RequestLoading<TableReportDetailModel>() => const TableReportDetailSkeleton(),
-                  RequestFailure<TableReportDetailModel>(:final exception) => ErrorBodyWidget(
-                    exception,
-                    onRetryPressed: _cubit.load,
+        child: NestedScrollView(
+          headerSliverBuilder: (_, _) => [
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  const SizedBox(height: AppSpacing.x3),
+                  ReportPeriodTabs(_tabController),
+                  const SizedBox(height: AppSpacing.x3),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+                    child: BlocBuilder<TableReportDetailCubit, TableReportDetailState>(
+                      bloc: _cubit,
+                      buildWhen: (a, b) => a.filter != b.filter,
+                      builder: (_, state) => ReportComparisonLabel(state.filter),
+                    ),
                   ),
-                  RequestSuccess<TableReportDetailModel>(:final data) => TableReportBody(
-                    detail: data,
-                    period: state.filter.period,
-                  ),
-                },
+                  const SizedBox(height: AppSpacing.x3),
+                ],
               ),
             ),
           ],
+          body: TabBarView(
+            controller: _tabController,
+            children: List.generate(
+              _periods.length,
+              (_) => ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.x4,
+                  0,
+                  AppSpacing.x4,
+                  AppSpacing.x6,
+                ),
+                children: [
+                  BlocBuilder<TableReportDetailCubit, TableReportDetailState>(
+                    bloc: _cubit,
+                    buildWhen: (a, b) => a.detail != b.detail || a.filter.period != b.filter.period,
+                    builder: (_, state) => switch (state.detail) {
+                      RequestInitial<TableReportDetailModel>() ||
+                      RequestLoading<TableReportDetailModel>() => const TableReportDetailSkeleton(),
+                      RequestFailure<TableReportDetailModel>(:final exception) => ErrorBodyWidget(
+                        exception,
+                        onRetryPressed: _cubit.load,
+                      ),
+                      RequestSuccess<TableReportDetailModel>(:final data) => TableReportBody(
+                        detail: data,
+                        period: state.filter.period,
+                      ),
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

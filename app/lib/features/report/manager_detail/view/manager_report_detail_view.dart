@@ -17,8 +17,11 @@ class ManagerReportDetailView extends StatefulWidget {
   State<ManagerReportDetailView> createState() => _ManagerReportDetailViewState();
 }
 
-class _ManagerReportDetailViewState extends State<ManagerReportDetailView> {
+class _ManagerReportDetailViewState extends State<ManagerReportDetailView> with SingleTickerProviderStateMixin {
   late final ManagerReportDetailCubit _cubit;
+  late final TabController _tabController;
+
+  static const List<ReportPeriod> _periods = ReportPeriodTabs.periods;
 
   @override
   void initState() {
@@ -27,13 +30,27 @@ class _ManagerReportDetailViewState extends State<ManagerReportDetailView> {
       repository: GetIt.I<ReportsRepository>(),
       managerId: widget.managerId,
     );
+    _tabController = TabController(
+      length: _periods.length,
+      vsync: this,
+      initialIndex: _periods.indexOf(_cubit.state.filter.period),
+    );
+    _tabController.addListener(_onTabChanged);
     _cubit.load();
   }
 
   @override
   void dispose() {
+    _tabController
+      ..removeListener(_onTabChanged)
+      ..dispose();
     _cubit.close();
     super.dispose();
+  }
+
+  void _onTabChanged() {
+    if (_tabController.indexIsChanging) return;
+    _cubit.changePeriod(_periods[_tabController.index]);
   }
 
   @override
@@ -44,40 +61,46 @@ class _ManagerReportDetailViewState extends State<ManagerReportDetailView> {
       ),
       body: RefreshIndicator.adaptive(
         onRefresh: _cubit.load,
-        child: ListView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.only(bottom: AppSpacing.x6),
-          children: [
-            const SizedBox(height: AppSpacing.x3),
-            BlocBuilder<ManagerReportDetailCubit, ManagerReportDetailState>(
-              bloc: _cubit,
-              buildWhen: (a, b) => a.filter.period != b.filter.period,
-              builder: (_, state) => ReportPeriodChips(
-                value: state.filter.period,
-                onChanged: _cubit.changePeriod,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.x4),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-              child: BlocBuilder<ManagerReportDetailCubit, ManagerReportDetailState>(
-                bloc: _cubit,
-                buildWhen: (a, b) => a.detail != b.detail,
-                builder: (_, state) => switch (state.detail) {
-                  RequestInitial<ManagerReportDetailModel>() ||
-                  RequestLoading<ManagerReportDetailModel>() => const ManagerReportDetailSkeleton(),
-                  RequestFailure<ManagerReportDetailModel>(:final exception) => ErrorBodyWidget(
-                    exception,
-                    onRetryPressed: _cubit.load,
-                  ),
-                  RequestSuccess<ManagerReportDetailModel>(:final data) => ManagerReportBody(
-                    cubit: _cubit,
-                    detail: data,
-                  ),
-                },
+        child: NestedScrollView(
+          headerSliverBuilder: (_, _) => [
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  const SizedBox(height: AppSpacing.x3),
+                  ReportPeriodTabs(_tabController),
+                  const SizedBox(height: AppSpacing.x4),
+                ],
               ),
             ),
           ],
+          body: TabBarView(
+            controller: _tabController,
+            children: List.generate(
+              _periods.length,
+              (_) => ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+                children: [
+                  BlocBuilder<ManagerReportDetailCubit, ManagerReportDetailState>(
+                    bloc: _cubit,
+                    buildWhen: (a, b) => a.detail != b.detail,
+                    builder: (_, state) => switch (state.detail) {
+                      RequestInitial<ManagerReportDetailModel>() ||
+                      RequestLoading<ManagerReportDetailModel>() => const ManagerReportDetailSkeleton(),
+                      RequestFailure<ManagerReportDetailModel>(:final exception) => ErrorBodyWidget(
+                        exception,
+                        onRetryPressed: _cubit.load,
+                      ),
+                      RequestSuccess<ManagerReportDetailModel>(:final data) => ManagerReportBody(
+                        cubit: _cubit,
+                        detail: data,
+                      ),
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -13,20 +13,37 @@ class ReportOverviewView extends StatefulWidget {
   State<ReportOverviewView> createState() => _ReportOverviewViewState();
 }
 
-class _ReportOverviewViewState extends State<ReportOverviewView> {
+class _ReportOverviewViewState extends State<ReportOverviewView> with SingleTickerProviderStateMixin {
   late final ReportOverviewCubit _cubit;
+  late final TabController _tabController;
+
+  static const List<ReportPeriod> _periods = ReportPeriodTabs.periods;
 
   @override
   void initState() {
     super.initState();
     _cubit = ReportOverviewCubit(GetIt.I<ReportsRepository>());
+    _tabController = TabController(
+      length: _periods.length,
+      vsync: this,
+      initialIndex: _periods.indexOf(_cubit.state.filter.period),
+    );
+    _tabController.addListener(_onTabChanged);
     _cubit.load();
   }
 
   @override
   void dispose() {
+    _tabController
+      ..removeListener(_onTabChanged)
+      ..dispose();
     _cubit.close();
     super.dispose();
+  }
+
+  void _onTabChanged() {
+    if (_tabController.indexIsChanging) return;
+    _cubit.changePeriod(_periods[_tabController.index]);
   }
 
   @override
@@ -48,47 +65,56 @@ class _ReportOverviewViewState extends State<ReportOverviewView> {
       ),
       body: RefreshIndicator.adaptive(
         onRefresh: _cubit.load,
-        child: ListView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.only(bottom: AppSpacing.x6),
-          children: [
-            const SizedBox(height: AppSpacing.x3),
-            BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
-              bloc: _cubit,
-              buildWhen: (a, b) => a.filter.period != b.filter.period,
-              builder: (_, state) => ReportPeriodChips(
-                value: state.filter.period,
-                onChanged: _cubit.changePeriod,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.x3),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-              child: BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
-                bloc: _cubit,
-                buildWhen: (a, b) => a.filter != b.filter,
-                builder: (_, state) => ReportComparisonLabel(state.filter),
-              ),
-            ),
-            const SizedBox(height: AppSpacing.x3),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+        child: NestedScrollView(
+          headerSliverBuilder: (_, _) => [
+            SliverToBoxAdapter(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  KpiGrid(_cubit),
-                  const SizedBox(height: AppSpacing.x4),
-                  RevenueChartSection(_cubit),
-                  const SizedBox(height: AppSpacing.x4),
-                  ForecastSummaryCard(_cubit),
-                  const SizedBox(height: AppSpacing.x6),
-                  TablesSection(_cubit),
-                  const SizedBox(height: AppSpacing.x6),
-                  TopManagersSection(_cubit),
+                  const SizedBox(height: AppSpacing.x3),
+                  ReportPeriodTabs(_tabController),
+                  const SizedBox(height: AppSpacing.x3),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+                    child: BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
+                      bloc: _cubit,
+                      buildWhen: (a, b) => a.filter != b.filter,
+                      builder: (_, state) => ReportComparisonLabel(state.filter),
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.x3),
                 ],
               ),
             ),
           ],
+          body: TabBarView(
+            controller: _tabController,
+            children: List.generate(
+              _periods.length,
+              (_) => ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.only(bottom: AppSpacing.x6),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        KpiGrid(_cubit),
+                        const SizedBox(height: AppSpacing.x4),
+                        RevenueChartSection(_cubit),
+                        const SizedBox(height: AppSpacing.x4),
+                        ForecastSummaryCard(_cubit),
+                        const SizedBox(height: AppSpacing.x6),
+                        TablesSection(_cubit),
+                        const SizedBox(height: AppSpacing.x6),
+                        TopManagersSection(_cubit),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

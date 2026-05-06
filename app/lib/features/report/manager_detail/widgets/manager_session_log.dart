@@ -9,7 +9,7 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 /// Filterable list of a manager's recent sessions. MVP: only "All" and
 /// "Cancelled" filters; no discount/short-cluster filters since those
 /// were the entry point to the fraud-signal flow that's been removed.
-class ManagerSessionLog extends StatelessWidget {
+class ManagerSessionLog extends StatefulWidget {
   const ManagerSessionLog({
     required this.cubit,
     required this.entries,
@@ -19,10 +19,43 @@ class ManagerSessionLog extends StatelessWidget {
   final ManagerReportDetailCubit cubit;
   final List<ManagerSessionLogEntry> entries;
 
+  @override
+  State<ManagerSessionLog> createState() => _ManagerSessionLogState();
+}
+
+class _ManagerSessionLogState extends State<ManagerSessionLog> with SingleTickerProviderStateMixin {
+  static const List<ManagerLogFilter> _filters = ManagerLogFilter.values;
+
+  late final TabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TabController(
+      length: _filters.length,
+      vsync: this,
+      initialIndex: _filters.indexOf(widget.cubit.state.logFilter),
+    );
+    _controller.addListener(_onTabChanged);
+  }
+
+  @override
+  void dispose() {
+    _controller
+      ..removeListener(_onTabChanged)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _onTabChanged() {
+    if (_controller.indexIsChanging) return;
+    widget.cubit.changeLogFilter(_filters[_controller.index]);
+  }
+
   Iterable<ManagerSessionLogEntry> _filtered(ManagerLogFilter f) {
     return switch (f) {
-      ManagerLogFilter.all => entries,
-      ManagerLogFilter.cancelled => entries.where((e) => e.isCancelled),
+      ManagerLogFilter.all => widget.entries,
+      ManagerLogFilter.cancelled => widget.entries.where((e) => e.isCancelled),
     };
   }
 
@@ -44,31 +77,15 @@ class ManagerSessionLog extends StatelessWidget {
           style: context.textTheme.titleSmall,
         ),
         const SizedBox(height: AppSpacing.x2),
-        BlocBuilder<ManagerReportDetailCubit, ManagerReportDetailState>(
-          bloc: cubit,
-          buildWhen: (a, b) => a.logFilter != b.logFilter,
-          builder: (_, state) {
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  for (final f in ManagerLogFilter.values)
-                    Padding(
-                      padding: const EdgeInsets.only(right: AppSpacing.x2),
-                      child: ChoiceChip(
-                        label: Text(_filterLabel(f, l10n)),
-                        selected: state.logFilter == f,
-                        onSelected: (_) => cubit.changeLogFilter(f),
-                      ),
-                    ),
-                ],
-              ),
-            );
-          },
+        AppPillTabBar(
+          controller: _controller,
+          tabs: [
+            for (final f in _filters) Tab(text: _filterLabel(f, l10n)),
+          ],
         ),
         const SizedBox(height: AppSpacing.x2),
         BlocBuilder<ManagerReportDetailCubit, ManagerReportDetailState>(
-          bloc: cubit,
+          bloc: widget.cubit,
           buildWhen: (a, b) => a.logFilter != b.logFilter,
           builder: (_, state) {
             final list = _filtered(state.logFilter).toList(growable: false);
