@@ -100,6 +100,9 @@ class _DialogAction extends StatelessWidget {
         child: Text(label),
       );
     }
-    return TextButton(onPressed: onPressed, child: Text(label));
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(label),
+    );
   }
 }

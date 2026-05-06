@@ -75,7 +75,10 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _navigatorKey = GlobalKey<NavigatorState>();
-    _router = appRouter(context.read<AuthCubit>(), navigatorKey: _navigatorKey);
+    _router = appRouter(
+      context.read<AuthCubit>(),
+      navigatorKey: _navigatorKey,
+    );
   }
 
   @override

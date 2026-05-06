@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:core/core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/foundation.dart';
 
 final class FirebaseRemoteConfigClientImpl implements RemoteConfigClient {
   FirebaseRemoteConfigClientImpl(this._remoteConfig);
@@ -15,21 +14,31 @@ final class FirebaseRemoteConfigClientImpl implements RemoteConfigClient {
     await _remoteConfig.setConfigSettings(
       RemoteConfigSettings(
         fetchTimeout: const Duration(seconds: 10),
-        minimumFetchInterval: kDebugMode ? const Duration(seconds: 10) : const Duration(hours: 12),
+        minimumFetchInterval: const Duration(hours: 1),
       ),
     );
     try {
       await _remoteConfig.fetchAndActivate();
     } on Object catch (e, s) {
-      log('RemoteConfig: fetchAndActivate failed, using defaults', error: e, stackTrace: s);
+      log(
+        'RemoteConfig: fetchAndActivate failed, using defaults',
+        error: e,
+        stackTrace: s,
+      );
     }
   }
 
   @override
-  Future<void> refresh() => _remoteConfig.fetchAndActivate();
+  Future<void> refresh() {
+    return _remoteConfig.fetchAndActivate();
+  }
 
   @override
-  Stream<void> get updatesStream => _remoteConfig.onConfigUpdated.asyncMap((_) => _remoteConfig.activate());
+  Stream<void> get updatesStream {
+    return _remoteConfig.onConfigUpdated.asyncMap(
+      (_) => _remoteConfig.activate(),
+    );
+  }
 
   @override
   String getString(String key) => _remoteConfig.getString(key);
