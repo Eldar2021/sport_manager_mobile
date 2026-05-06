@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -37,8 +38,13 @@ class UpgraderDialog extends StatelessWidget {
 
   Future<void> _launchStore() async {
     final uri = Uri.parse(StoreUrls.current);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    try {
+      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      if (!launched) {
+        log('UpgraderDialog: launchUrl returned false for $uri');
+      }
+    } on Object catch (e, s) {
+      log('UpgraderDialog: failed to open store', error: e, stackTrace: s);
     }
   }
 

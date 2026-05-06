@@ -24,7 +24,7 @@ abstract final class AppConfigEntries {
 
   static final ConfigEntry<AppVersionConfigModel> appVersion = jsonObjectEntry(
     key: 'app_version',
-    defaultJson: AppVersion.appVersionDefauldValue,
+    defaultJson: AppVersion.appVersionDefaultValue,
     fromJson: AppVersionConfigModel.fromJson,
   );
 

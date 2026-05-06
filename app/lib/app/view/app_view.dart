@@ -24,7 +24,7 @@ class MyAppWrapper extends StatelessWidget {
         BlocProvider(
           create: (_) => UpgraderCubit(
             GetIt.I<RemoteConfigRepository>(),
-          ),
+          )..init(),
         ),
         BlocProvider(
           create: (_) => AuthCubit(
@@ -57,10 +57,6 @@ class MyAppWrapper extends StatelessWidget {
     } else if (authState is AuthUnauthenticated) {
       cubit.clear();
     }
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<UpgraderCubit>().init();
-    });
   }
 }
 
