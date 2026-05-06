@@ -77,23 +77,8 @@ class _ManagerSessionLogState extends State<ManagerSessionLog> with SingleTicker
           style: context.textTheme.titleSmall,
         ),
         const SizedBox(height: AppSpacing.x2),
-        TabBar(
+        AppPillTabBar(
           controller: _controller,
-          indicator: BoxDecoration(
-            color: context.colors.primary,
-            borderRadius: AppRadius.chipBorderRadius,
-          ),
-          indicatorSize: TabBarIndicatorSize.tab,
-          indicatorPadding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.x2,
-            vertical: AppSpacing.x2,
-          ),
-          dividerColor: Colors.transparent,
-          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-          labelColor: context.colors.onPrimary,
-          unselectedLabelColor: context.colors.onSurface,
-          labelStyle: context.textTheme.labelLarge,
-          unselectedLabelStyle: context.textTheme.labelLarge,
           tabs: [
             for (final f in _filters) Tab(text: _filterLabel(f, l10n)),
           ],

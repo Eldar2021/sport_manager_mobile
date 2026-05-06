@@ -18,23 +18,8 @@ class ReportPeriodTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return TabBar(
+    return AppPillTabBar(
       controller: controller,
-      indicator: BoxDecoration(
-        color: context.colors.primary,
-        borderRadius: AppRadius.chipBorderRadius,
-      ),
-      indicatorSize: TabBarIndicatorSize.tab,
-      indicatorPadding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.x2,
-        vertical: AppSpacing.x2,
-      ),
-      dividerColor: Colors.transparent,
-      overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-      labelColor: context.colors.onPrimary,
-      unselectedLabelColor: context.colors.onSurface,
-      labelStyle: context.textTheme.labelLarge,
-      unselectedLabelStyle: context.textTheme.labelLarge,
       tabs: [
         for (final p in periods) Tab(text: _label(p, l10n)),
       ],
