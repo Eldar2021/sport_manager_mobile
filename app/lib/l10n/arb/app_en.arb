@@ -484,5 +484,11 @@
   "reportsTableHeatmapTitle": "Hour-of-day heatmap",
   "reportsErrorTitle": "Couldn't load report",
   "reportsEmptyTitle": "No data yet",
-  "reportsEmptySubtitle": "Start sessions to populate this report."
+  "reportsEmptySubtitle": "Start sessions to populate this report.",
+  "upgraderRequiredTitle": "Update Required",
+  "upgraderRecommendedTitle": "Update Available",
+  "upgraderRequiredDescription": "This version is no longer supported. Please update the app to continue.",
+  "upgraderRecommendedDescription": "A new version is available. Update for the best experience.",
+  "upgraderUpdateButton": "Update",
+  "upgraderLaterButton": "Later"
 }

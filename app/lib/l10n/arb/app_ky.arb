@@ -280,5 +280,11 @@
   "reportsTableHeatmapTitle": "Саат боюнча карта",
   "reportsErrorTitle": "Отчётту жүктөө мүмкүн эмес",
   "reportsEmptyTitle": "Маалымат али жок",
-  "reportsEmptySubtitle": "Сессияларды баштап, бул жерди толтуруңуз."
+  "reportsEmptySubtitle": "Сессияларды баштап, бул жерди толтуруңуз.",
+  "upgraderRequiredTitle": "Жаңыртуу талап кылынат",
+  "upgraderRecommendedTitle": "Жаңыртуу жеткиликтүү",
+  "upgraderRequiredDescription": "Бул версия колдоого алынбайт. Улантуу үчүн колдонмону жаңыртыңыз.",
+  "upgraderRecommendedDescription": "Жаңы версия жеткиликтүү. Мыкты тажрыйба үчүн жаңыртыңыз.",
+  "upgraderUpdateButton": "Жаңыртуу",
+  "upgraderLaterButton": "Кийинчерээк"
 }

@@ -918,4 +918,22 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get reportsEmptySubtitle => 'Сессияларды баштап, бул жерди толтуруңуз.';
+
+  @override
+  String get upgraderRequiredTitle => 'Жаңыртуу талап кылынат';
+
+  @override
+  String get upgraderRecommendedTitle => 'Жаңыртуу жеткиликтүү';
+
+  @override
+  String get upgraderRequiredDescription => 'Бул версия колдоого алынбайт. Улантуу үчүн колдонмону жаңыртыңыз.';
+
+  @override
+  String get upgraderRecommendedDescription => 'Жаңы версия жеткиликтүү. Мыкты тажрыйба үчүн жаңыртыңыз.';
+
+  @override
+  String get upgraderUpdateButton => 'Жаңыртуу';
+
+  @override
+  String get upgraderLaterButton => 'Кийинчерээк';
 }

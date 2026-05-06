@@ -1652,6 +1652,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start sessions to populate this report.'**
   String get reportsEmptySubtitle;
+
+  /// No description provided for @upgraderRequiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Required'**
+  String get upgraderRequiredTitle;
+
+  /// No description provided for @upgraderRecommendedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Available'**
+  String get upgraderRecommendedTitle;
+
+  /// No description provided for @upgraderRequiredDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This version is no longer supported. Please update the app to continue.'**
+  String get upgraderRequiredDescription;
+
+  /// No description provided for @upgraderRecommendedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'A new version is available. Update for the best experience.'**
+  String get upgraderRecommendedDescription;
+
+  /// No description provided for @upgraderUpdateButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get upgraderUpdateButton;
+
+  /// No description provided for @upgraderLaterButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get upgraderLaterButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

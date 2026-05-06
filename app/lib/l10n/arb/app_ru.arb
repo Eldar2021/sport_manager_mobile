@@ -280,5 +280,11 @@
   "reportsTableHeatmapTitle": "Карта по часам",
   "reportsErrorTitle": "Не удалось загрузить отчёт",
   "reportsEmptyTitle": "Данных пока нет",
-  "reportsEmptySubtitle": "Начните сессии, чтобы здесь появились цифры."
+  "reportsEmptySubtitle": "Начните сессии, чтобы здесь появились цифры.",
+  "upgraderRequiredTitle": "Необходимо обновление",
+  "upgraderRecommendedTitle": "Доступно обновление",
+  "upgraderRequiredDescription": "Эта версия больше не поддерживается. Обновите приложение, чтобы продолжить.",
+  "upgraderRecommendedDescription": "Доступна новая версия. Обновите для лучшего опыта.",
+  "upgraderUpdateButton": "Обновить",
+  "upgraderLaterButton": "Позже"
 }
