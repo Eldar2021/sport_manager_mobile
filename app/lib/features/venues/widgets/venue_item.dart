@@ -47,7 +47,12 @@ class VenueItem extends StatelessWidget {
         '№ ${venue.number} · ${context.l10n.venueTablesCount(venue.tableCount)}',
         style: context.appTextStyles.muted.bodySmall,
       ),
-      trailing: isSelected ? Icon(Icons.check_rounded, color: context.colors.primary) : null,
+      trailing: isSelected
+          ? Icon(
+              Icons.check_rounded,
+              color: context.colors.primary,
+            )
+          : null,
     );
   }
 }
