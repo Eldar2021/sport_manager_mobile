@@ -18,61 +18,33 @@ class ReportVenuePicker extends StatelessWidget {
   final String? selectedVenueId;
   final ValueChanged<String> onSelected;
 
+  ReportVenueModel get _selected => venues.firstWhere(
+    (v) => v.id == selectedVenueId,
+    orElse: () => venues.first,
+  );
+
   Future<void> _open(BuildContext context) async {
-    final result = await showModalBottomSheet<String>(
+    final selected = await CustomSheet.open<ReportVenueModel>(
       context: context,
-      builder: (sheetContext) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: Text(
-                  context.l10n.reportsVenuePickerTitle,
-                  style: context.textTheme.titleMedium,
-                ),
-                trailing: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.of(sheetContext).pop(),
-                ),
-              ),
-              const Divider(height: 1),
-              for (final v in venues)
-                ListTile(
-                  leading: const Icon(Icons.storefront_outlined),
-                  title: Text(v.name),
-                  subtitle: Text('#${v.number}'),
-                  trailing: selectedVenueId == v.id
-                      ? Icon(
-                          Icons.check,
-                          color: context.colors.primary,
-                        )
-                      : null,
-                  onTap: () => Navigator.of(sheetContext).pop(v.id),
-                ),
-            ],
-          ),
-        );
-      },
+      title: context.l10n.reportsVenuePickerTitle,
+      emptyMessage: context.l10n.homeNoVenuesTitle,
+      loader: () async => venues,
+      titleBuilder: (_, v) => v.name,
+      subtitleBuilder: (_, v) => '#${v.number}',
+      selectedItem: _selected,
     );
-    if (result != null) onSelected(result);
+    if (selected != null) onSelected(selected.id);
   }
 
   @override
   Widget build(BuildContext context) {
     if (venues.isEmpty) return const SizedBox.shrink();
-    final selectedName = venues
-        .firstWhere(
-          (v) => v.id == selectedVenueId,
-          orElse: () => venues.first,
-        )
-        .name;
     return Padding(
       padding: const EdgeInsets.only(right: AppSpacing.x2),
       child: ActionChip(
         avatar: const Icon(Icons.storefront_outlined, size: 18),
         label: Text(
-          selectedName,
+          _selected.name,
           style: context.textTheme.labelMedium,
           overflow: TextOverflow.ellipsis,
         ),

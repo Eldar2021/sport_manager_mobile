@@ -9,6 +9,8 @@ import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
+import 'package:sport_manager_mobile/l10n/l10n.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -33,14 +35,25 @@ class _HomeViewState extends State<HomeView> {
     super.dispose();
   }
 
-  void _openVenueSelector(VenueModel venue) {
+  Future<void> _openVenueSelector(VenueModel current) async {
     final isOwner = context.read<AuthCubit>().state.isOwner;
-    VenueSelectorSheet.show(
-      context,
-      selectedVenue: venue,
-      onSelect: (selected) => _cubit.selectVenue(selected.id),
-      isOwner: isOwner,
+    final selected = await CustomSheet.open<VenueModel>(
+      context: context,
+      title: context.l10n.homeSelectVenue,
+      emptyMessage: context.l10n.homeNoVenuesTitle,
+      loader: () => GetIt.I<FacilityRepository>().getVenues(),
+      titleBuilder: (_, v) => v.name,
+      selectedItem: current,
+      itemBuilder: (_, venue, isSelected, onTap) => VenueItem(
+        venue: venue,
+        isSelected: isSelected,
+        onTap: onTap,
+      ),
+      footer: isOwner ? const _NewVenueFooter() : null,
+      footerHeight: isOwner ? 96 : 0,
     );
+    if (!mounted || selected == null) return;
+    await _cubit.selectVenue(selected.id);
   }
 
   @override
@@ -95,6 +108,29 @@ class _HomeViewState extends State<HomeView> {
               },
             )
           : null,
+    );
+  }
+}
+
+class _NewVenueFooter extends StatelessWidget {
+  const _NewVenueFooter();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        AppSpacing.x4,
+        AppSpacing.x2,
+        AppSpacing.x4,
+        AppSpacing.bottom(context),
+      ),
+      child: AppOutlinedButton(
+        title: context.l10n.homeNewVenue,
+        onTap: () {
+          Navigator.pop(context);
+          context.push(AppRoutes.venueForm);
+        },
+      ),
     );
   }
 }
