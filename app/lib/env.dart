@@ -8,4 +8,9 @@ abstract final class Env {
     'IS_MOCK',
     defaultValue: true,
   );
+
+  static bool isDev = const bool.fromEnvironment(
+    'IS_DEV',
+    defaultValue: true,
+  );
 }
