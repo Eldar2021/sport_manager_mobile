@@ -5,7 +5,23 @@ enum VenueErrorCode {
   numberTaken,
   hasTables,
   forbidden,
-  unknown,
+  unknown
+  ;
+
+  factory VenueErrorCode.fromString(String? code) {
+    switch (code) {
+      case 'VENUE_NOT_FOUND':
+        return VenueErrorCode.notFound;
+      case 'VENUE_NUMBER_TAKEN':
+        return VenueErrorCode.numberTaken;
+      case 'VENUE_HAS_TABLES':
+        return VenueErrorCode.hasTables;
+      case 'VENUE_FORBIDDEN':
+        return VenueErrorCode.forbidden;
+      default:
+        return VenueErrorCode.unknown;
+    }
+  }
 }
 
 final class VenueException extends AppException<VenueErrorCode> {

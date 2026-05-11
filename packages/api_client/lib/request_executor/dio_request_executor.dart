@@ -36,12 +36,29 @@ class DioRequestExecutor implements RequestExecutor {
       }
     } on DioException catch (e, s) {
       log('ApiClient request $method $path', error: e, stackTrace: s);
-      throw ApiClientException(e, stackTrace: s);
+      final code = _parseErrorCode(e);
+      throw ApiClientException(
+        e,
+        stackTrace: s,
+        code: code,
+      );
     } on ConnectionException {
       rethrow;
     } catch (e, s) {
       log('ApiClient request $method $path', error: e, stackTrace: s);
       throw ApiClientUnknownException(e, stackTrace: s);
+    }
+  }
+
+  String? _parseErrorCode(DioException e) {
+    try {
+      final data = e.response?.data;
+      if (data is Map<String, dynamic>) {
+        return data['code'] as String?;
+      }
+      return null;
+    } on Object catch (_) {
+      return null;
     }
   }
 }

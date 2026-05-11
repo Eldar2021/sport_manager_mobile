@@ -10,7 +10,10 @@ final class ApiClientException extends AppException<DioException> {
     super.stackTrace,
     super.type,
     super.handleType,
+    this.code,
   });
+
+  final String? code;
 
   @override
   ErrorModel getModel() {

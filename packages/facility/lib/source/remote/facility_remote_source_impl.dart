@@ -17,11 +17,23 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   }
 
   @override
-  Future<SelectedVenueModel> getSelected() {
-    return _client.getType<SelectedVenueModel>(
-      '/api/v1/venue/selected',
-      fromJson: SelectedVenueModel.fromJson,
-    );
+  Future<SelectedVenueModel> getSelected() async {
+    try {
+      final selectedVenue = await _client.getType<SelectedVenueModel>(
+        '/api/v1/venue/selected',
+        fromJson: SelectedVenueModel.fromJson,
+      );
+      return selectedVenue;
+    } catch (e) {
+      if (e is ApiClientException) {
+        throw VenueException(
+          VenueErrorCode.fromString(e.code),
+          message: e.message,
+        );
+      } else {
+        rethrow;
+      }
+    }
   }
 
   @override
