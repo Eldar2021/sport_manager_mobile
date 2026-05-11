@@ -10,7 +10,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
     final hasActive = _sessions.values.any(
       (s) => s.tableId == tableId && (s.isActive || s.isPaused),
     );
-    if (hasActive) throw const FacilityException(FacilityErrorCode.tableHasActiveSession);
+    if (hasActive) throw const FacilityExc(FacilityErrorCode.tableHasActiveSession);
 
     final session = SessionModel(
       id: 'session-${DateTime.now().millisecondsSinceEpoch}',
@@ -30,8 +30,8 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 400));
 
     final session = _sessions[sessionId];
-    if (session == null) throw const FacilityException(FacilityErrorCode.sessionNotFound);
-    if (!session.isActive) throw const FacilityException(FacilityErrorCode.sessionNotActive);
+    if (session == null) throw const FacilityExc(FacilityErrorCode.sessionNotFound);
+    if (!session.isActive) throw const FacilityExc(FacilityErrorCode.sessionNotActive);
 
     final paused = SessionModel(
       id: session.id,
@@ -53,8 +53,8 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 400));
 
     final session = _sessions[sessionId];
-    if (session == null) throw const FacilityException(FacilityErrorCode.sessionNotFound);
-    if (!session.isPaused) throw const FacilityException(FacilityErrorCode.sessionNotPaused);
+    if (session == null) throw const FacilityExc(FacilityErrorCode.sessionNotFound);
+    if (!session.isPaused) throw const FacilityExc(FacilityErrorCode.sessionNotPaused);
 
     final extra = session.pausedAt != null ? DateTime.now().difference(session.pausedAt!).inSeconds : 0;
     final resumed = SessionModel(
@@ -79,12 +79,12 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 600));
 
     final discount = discountPercent ?? 0;
-    if (discount < 0 || discount > 100) throw const FacilityException(FacilityErrorCode.invalidDiscount);
+    if (discount < 0 || discount > 100) throw const FacilityExc(FacilityErrorCode.invalidDiscount);
 
     var session = _sessions[sessionId];
-    if (session == null) throw const FacilityException(FacilityErrorCode.sessionNotFound);
+    if (session == null) throw const FacilityExc(FacilityErrorCode.sessionNotFound);
     if (session.isCompleted || session.isCancelled) {
-      throw const FacilityException(FacilityErrorCode.sessionAlreadyCompleted);
+      throw const FacilityExc(FacilityErrorCode.sessionAlreadyCompleted);
     }
 
     if (session.isPaused && session.pausedAt != null) {
@@ -134,9 +134,9 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 400));
 
     final session = _sessions[sessionId];
-    if (session == null) throw const FacilityException(FacilityErrorCode.sessionNotFound);
+    if (session == null) throw const FacilityExc(FacilityErrorCode.sessionNotFound);
     if (session.isCompleted || session.isCancelled) {
-      throw const FacilityException(FacilityErrorCode.sessionAlreadyCompleted);
+      throw const FacilityExc(FacilityErrorCode.sessionAlreadyCompleted);
     }
 
     _sessions.remove(sessionId);

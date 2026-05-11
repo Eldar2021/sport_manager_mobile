@@ -18,7 +18,7 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 700));
     final venue = _venues.firstWhere(
       (v) => v.id == _selectedVenueId,
-      orElse: () => throw const FacilityException(
+      orElse: () => throw const FacilityExc(
         FacilityErrorCode.venueNotFound,
         message: BaseMessage(
           en: 'No venues found. Please create a venue first.',
@@ -35,7 +35,7 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   Future<SelectedVenueModel> updateSelected(String venueId) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     final index = _venues.indexWhere((v) => v.id == venueId);
-    if (index == -1) throw const FacilityException(FacilityErrorCode.venueNotFound);
+    if (index == -1) throw const FacilityExc(FacilityErrorCode.venueNotFound);
     _selectedVenueId = venueId;
     final updated = _venues.map((v) => _withSelected(v, v.id == venueId)).toList();
     _venues
@@ -48,7 +48,7 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   Future<VenueModel> createVenue(VenueFormParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
     if (_venues.any((v) => v.number == param.number)) {
-      throw const FacilityException(FacilityErrorCode.venueNumberTaken);
+      throw const FacilityExc(FacilityErrorCode.venueNumberTaken);
     }
     final isFirst = _venues.isEmpty;
     final venue = VenueModel(
@@ -70,9 +70,9 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   Future<VenueModel> updateVenue(String id, VenueFormParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 600));
     final index = _venues.indexWhere((v) => v.id == id);
-    if (index == -1) throw const FacilityException(FacilityErrorCode.venueNotFound);
+    if (index == -1) throw const FacilityExc(FacilityErrorCode.venueNotFound);
     if (_venues.any((v) => v.number == param.number && v.id != id)) {
-      throw const FacilityException(FacilityErrorCode.venueNumberTaken);
+      throw const FacilityExc(FacilityErrorCode.venueNumberTaken);
     }
     final updated = VenueModel(
       id: id,
@@ -93,12 +93,12 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     final venue = _venues.firstWhere(
       (v) => v.id == id,
-      orElse: () => throw const FacilityException(FacilityErrorCode.venueNotFound),
+      orElse: () => throw const FacilityExc(FacilityErrorCode.venueNotFound),
     );
     final hasActiveSession = _tables.any(
       (t) => t.venueId == id && t.session != null,
     );
-    if (hasActiveSession) throw const FacilityException(FacilityErrorCode.tableHasActiveSession);
+    if (hasActiveSession) throw const FacilityExc(FacilityErrorCode.tableHasActiveSession);
     _tables.removeWhere((t) => t.venueId == id);
     _venues.removeWhere((v) => v.id == id);
     if (venue.selected && _venues.isNotEmpty) {
@@ -111,7 +111,7 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   Future<List<TableModel>> getVenueTables(String venueId) async {
     await Future<void>.delayed(const Duration(milliseconds: 700));
     if (!_venues.any((v) => v.id == venueId)) {
-      throw const FacilityException(FacilityErrorCode.venueNotFound);
+      throw const FacilityExc(FacilityErrorCode.venueNotFound);
     }
     return List.unmodifiable(_tables.where((t) => t.venueId == venueId));
   }
@@ -120,7 +120,7 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   Future<TableModel> createTable(String venueId, TableFormParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
     if (_tables.any((t) => t.venueId == venueId && t.number == param.number)) {
-      throw const FacilityException(FacilityErrorCode.tableNumberTaken);
+      throw const FacilityExc(FacilityErrorCode.tableNumberTaken);
     }
     final table = TableModel(
       id: 'table-${DateTime.now().millisecondsSinceEpoch}',
@@ -156,10 +156,10 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   Future<TableModel> updateTable(String id, TableFormParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 600));
     final index = _tables.indexWhere((t) => t.id == id);
-    if (index == -1) throw const FacilityException(FacilityErrorCode.tableNotFound);
+    if (index == -1) throw const FacilityExc(FacilityErrorCode.tableNotFound);
     final old = _tables[index];
     if (_tables.any((t) => t.venueId == old.venueId && t.number == param.number && t.id != id)) {
-      throw const FacilityException(FacilityErrorCode.tableNumberTaken);
+      throw const FacilityExc(FacilityErrorCode.tableNumberTaken);
     }
     final updated = TableModel(
       id: id,
@@ -183,9 +183,9 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     final table = _tables.firstWhere(
       (t) => t.id == id,
-      orElse: () => throw const FacilityException(FacilityErrorCode.tableNotFound),
+      orElse: () => throw const FacilityExc(FacilityErrorCode.tableNotFound),
     );
-    if (table.session != null) throw const FacilityException(FacilityErrorCode.tableHasActiveSession);
+    if (table.session != null) throw const FacilityExc(FacilityErrorCode.tableHasActiveSession);
     _tables.removeWhere((t) => t.id == id);
     final venueIdx = _venues.indexWhere((v) => v.id == table.venueId);
     if (venueIdx != -1) {

@@ -16,7 +16,7 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
           fromJson: SessionModel.fromJson,
           data: {'tableId': tableId},
         )
-        .mapTo(FacilityException.fromApiClientExc);
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
@@ -26,7 +26,7 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
           '/api/v1/session/$sessionId/pause',
           fromJson: SessionModel.fromJson,
         )
-        .mapTo(FacilityException.fromApiClientExc);
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
@@ -36,7 +36,7 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
           '/api/v1/session/$sessionId/resume',
           fromJson: SessionModel.fromJson,
         )
-        .mapTo(FacilityException.fromApiClientExc);
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
@@ -50,7 +50,7 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
           fromJson: SessionModel.fromJson,
           data: {'discountPercent': discountPercent},
         )
-        .mapTo(FacilityException.fromApiClientExc);
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
@@ -64,6 +64,6 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
           fromJson: SessionModel.fromJson,
           data: {'reason': cancelReason},
         )
-        .mapTo(FacilityException.fromApiClientExc);
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 }
