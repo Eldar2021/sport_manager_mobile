@@ -40,6 +40,8 @@ dependencies:
   syncfusion_flutter_charts: ^33.2.4
   package_info_plus: ^8.3.0
   url_launcher: ^6.3.1
+  talker_flutter: 5.1.16
+  talker_dio_logger: 5.1.16
   # infinite_scroll_pagination: ^5.1.1
 
 dev_dependencies:

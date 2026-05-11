@@ -39,6 +39,8 @@ dependencies:
   syncfusion_flutter_charts:
   package_info_plus:
   url_launcher:
+  talker_flutter:
+  talker_dio_logger:
 
 dev_dependencies:
   flutter_test:
