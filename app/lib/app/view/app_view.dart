@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/env.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
 import 'package:sport_manager_mobile/features/subscription/subscription.dart';
@@ -107,10 +108,17 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: AppLocalizationHelper.locales,
             routerConfig: _router,
             builder: (context, child) {
-              return GestureDetector(
+              final wrapped = GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
                 child: child,
+              );
+              if (!Env.isDev) return wrapped;
+              return Stack(
+                children: [
+                  Positioned.fill(child: wrapped),
+                  TalkerDevOverlay(_navigatorKey),
+                ],
               );
             },
           );
