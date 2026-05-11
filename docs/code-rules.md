@@ -39,17 +39,18 @@ analyzer:
 
 ### Classes
 
-| Type           | Format                     | Example                         |
-| -------------- | -------------------------- | ------------------------------- |
-| Interface      | `abstract interface class` | `VenueRemoteSource`             |
-| Implementation | `Impl` suffix              | `VenueRemoteSourceImpl`         |
-| Mock           | `Mock` suffix              | `AuthRemoteSourceMock`          |
-| Model          | `Model` suffix             | `SessionModel`, `VenueModel`    |
-| Param / DTO    | `Param` or `Body` suffix   | `StartSessionParam`             |
-| Cubit          | `Cubit` suffix             | `VenuesCubit`, `SettingsCubit`  |
-| State          | `State` suffix             | `VenuesState`, `SettingsState`  |
-| Repository     | `Repository` suffix        | `AuthRepository`                |
-| DI module      | `Module` suffix            | `VenuesModule`, `NetworkModule` |
+| Type             | Format                     | Example                         |
+| ---------------- | -------------------------- | ------------------------------- |
+| Interface        | `abstract interface class` | `VenueRemoteSource`             |
+| Implementation   | `Impl` suffix              | `VenueRemoteSourceImpl`         |
+| Mock             | `Mock` suffix              | `AuthRemoteSourceMock`          |
+| Model            | `Model` suffix             | `SessionModel`, `VenueModel`    |
+| Param / DTO      | `Param` or `Body` suffix   | `StartSessionParam`             |
+| Cubit            | `Cubit` suffix             | `VenuesCubit`, `SettingsCubit`  |
+| State            | `State` suffix             | `VenuesState`, `SettingsState`  |
+| Repository       | `Repository` suffix        | `AuthRepository`                |
+| DI module        | `Module` suffix            | `VenuesModule`, `NetworkModule` |
+| Domain exception | `Exc` suffix               | `FacilityExc`, `AuthExc`        |
 
 > **Don't add `I` prefix to interfaces.** The `Impl` suffix on the
 > implementation already conveys the interface/impl relationship; `I`

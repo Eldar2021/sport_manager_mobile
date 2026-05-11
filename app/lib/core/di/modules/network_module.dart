@@ -24,6 +24,8 @@ final class NetworkModule extends BaseDiModule {
       platform: () => Platform.isAndroid ? 'android' : 'ios',
     );
 
+    final talkerLogger = Env.isDev ? TalkerDioLogger(talker: talker) : null;
+
     final bearerDio = Dio(baseOptions);
 
     bearerDio.interceptors.addAll([
@@ -42,11 +44,11 @@ final class NetworkModule extends BaseDiModule {
           );
         },
       ),
-      if (Env.isDev) TalkerDioLogger(talker: talker),
+      ?talkerLogger,
     ]);
 
     final noneDio = Dio(baseOptions)..interceptors.add(baseInterceptor);
-    if (Env.isDev) noneDio.interceptors.add(TalkerDioLogger(talker: talker));
+    if (talkerLogger != null) noneDio.interceptors.add(talkerLogger);
 
     sl
       ..registerSingleton<Dio>(

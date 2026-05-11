@@ -47,6 +47,8 @@ final class FacilityExc extends AppException<FacilityErrorCode> { ... }
 
 **Rule:** if two exceptions can be thrown from the same endpoint, they must be the same class. In practice that means **one exception per package**. Apply this when you add `auth`, `subscription`, `reports`, etc.
 
+> **Migration status.** `facility` is the canonical reference. `auth`, `managers`, `subscription`, `reports` still use the older `…Exception` suffix and per-method try/catch — they are scheduled to migrate to `…Exc` + `.mapTo` when next touched. New packages always start with the `Exc` convention below; do not introduce another `…Exception` class.
+
 ---
 
 ## File shape
@@ -115,14 +117,14 @@ final class FacilityExc extends AppException<FacilityErrorCode> {
 
 ### Conventions baked into the template
 
-| Element                | Rule                                                                                                                                                                         |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Exception class suffix | **`Exc`** (not `Exception`) — `FacilityExc`, `AuthExc`. Short, reads at the call site.                                                                                       |
-| Enum name              | `<Feature>ErrorCode`                                                                                                                                                         |
-| Backend → enum parser  | Top-level `factory <Enum>.fromString(String?)` on the enum                                                                                                                   |
-| API → domain mapper    | Named `factory <Exc>.fromApiClientExc(ApiClientException e)` on the exception (matches `.mapTo(...)` signature)                                                              |
-| switch style           | **Switch expression** + **dot-shorthand** (`.venueNotFound`) — Dart 3.11 supports it and it keeps the enum prefix from drowning the code                                     |
-| Unknown fallback       | Always include an `unknown` enum case; `getUiMessage()` for it returns `message ?? BaseMessage.defaultUiMessage` so the raw `ApiClientException.message` survives if present |
+| Element                | Rule                                                                                                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Exception class suffix | **`Exc`** (not `Exception`) — `FacilityExc`, `AuthExc`. Short, reads at the call site.                                                                                                                  |
+| Enum name              | `<Feature>ErrorCode`                                                                                                                                                                                    |
+| Backend → enum parser  | Top-level `factory <Enum>.fromString(String?)` on the enum                                                                                                                                              |
+| API → domain mapper    | Named `factory <Exc>.fromApiClientExc(ApiClientException e)` on the exception (matches `.mapTo(...)` signature)                                                                                         |
+| switch style           | **Switch expression** + **dot-shorthand** (`.venueNotFound`) — Dart 3.11 supports it and it keeps the enum prefix from drowning the code                                                                |
+| Unknown fallback       | Always include an `unknown` enum case; `getUiMessage()` for it returns `message ?? BaseMessage.defaultUiMessage` so the raw `ApiClientException.message` survives if present                            |
 | `_title` getter        | Private. Groups codes into existing `BaseMessage.X` titles (venueError / tableError / sessionError / base for unknown). Use OR-patterns (`a &#124;&#124; b`), don't repeat the same `BaseMessage` body. |
 
 ---

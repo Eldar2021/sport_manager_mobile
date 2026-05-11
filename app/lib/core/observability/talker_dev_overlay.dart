@@ -20,11 +20,12 @@ class TalkerDevOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context);
-    if (mq.viewInsets.bottom > 0) return const SizedBox.shrink();
+    final keyboardInset = MediaQuery.viewInsetsOf(context).bottom;
+    if (keyboardInset > 0) return const SizedBox.shrink();
+    final safeBottom = MediaQuery.viewPaddingOf(context).bottom;
     return Positioned(
       right: AppSpacing.x3,
-      bottom: AppSpacing.x16 + AppSpacing.x4 + mq.viewPadding.bottom,
+      bottom: AppSpacing.x16 + AppSpacing.x4 + safeBottom,
       child: Material(
         color: context.colors.primary.withValues(alpha: 0.85),
         shape: const CircleBorder(),

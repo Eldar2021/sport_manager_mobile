@@ -9,7 +9,7 @@ abstract final class Env {
     defaultValue: true,
   );
 
-  static bool isDev = const bool.fromEnvironment(
+  static const bool isDev = bool.fromEnvironment(
     'IS_DEV',
     defaultValue: true,
   );
