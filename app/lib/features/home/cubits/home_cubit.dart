@@ -33,8 +33,8 @@ class HomeCubit extends Cubit<HomeState> {
       } else {
         emit(HomeNoTables(response.venue));
       }
-    } on VenueException catch (e) {
-      if (e.error == VenueErrorCode.notFound) {
+    } on FacilityException catch (e) {
+      if (e.error == FacilityErrorCode.venueNotFound) {
         emit(const HomeNoVenue());
       } else {
         emit(HomeFailure(e));

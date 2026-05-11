@@ -15,7 +15,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
           '/api/v1/venue/list',
           fromJson: VenueModel.fromJson,
         )
-        .mapTo(VenueException.fromApiClientExc);
+        .mapTo(FacilityException.fromApiClientExc);
   }
 
   @override
@@ -25,7 +25,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
           '/api/v1/venue/selected',
           fromJson: SelectedVenueModel.fromJson,
         )
-        .mapTo(VenueException.fromApiClientExc);
+        .mapTo(FacilityException.fromApiClientExc);
   }
 
   @override
@@ -36,7 +36,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
           fromJson: SelectedVenueModel.fromJson,
           data: {'venueId': venueId},
         )
-        .mapTo(VenueException.fromApiClientExc);
+        .mapTo(FacilityException.fromApiClientExc);
   }
 
   @override
@@ -47,7 +47,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
           fromJson: VenueModel.fromJson,
           data: param.toJson(),
         )
-        .mapTo(VenueException.fromApiClientExc);
+        .mapTo(FacilityException.fromApiClientExc);
   }
 
   @override
@@ -58,12 +58,12 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
           fromJson: VenueModel.fromJson,
           data: param.toJson(),
         )
-        .mapTo(VenueException.fromApiClientExc);
+        .mapTo(FacilityException.fromApiClientExc);
   }
 
   @override
   Future<void> deleteVenue(String id) {
-    return _client.delete<void>('/api/v1/venue/$id').mapTo(VenueException.fromApiClientExc);
+    return _client.delete<void>('/api/v1/venue/$id').mapTo(FacilityException.fromApiClientExc);
   }
 
   @override
@@ -73,7 +73,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
           '/api/v1/venue/$venueId/tables',
           fromJson: TableModel.fromJson,
         )
-        .mapTo(VenueException.fromApiClientExc);
+        .mapTo(FacilityException.fromApiClientExc);
   }
 
   @override
@@ -87,7 +87,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
             ...param.toJson(),
           },
         )
-        .mapTo(VenueException.fromApiClientExc);
+        .mapTo(FacilityException.fromApiClientExc);
   }
 
   @override
@@ -98,11 +98,11 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
           fromJson: TableModel.fromJson,
           data: param.toJson(),
         )
-        .mapTo(VenueException.fromApiClientExc);
+        .mapTo(FacilityException.fromApiClientExc);
   }
 
   @override
   Future<void> deleteTable(String tableId) {
-    return _client.delete<void>('/api/v1/table/$tableId').mapTo(VenueException.fromApiClientExc);
+    return _client.delete<void>('/api/v1/table/$tableId').mapTo(FacilityException.fromApiClientExc);
   }
 }
