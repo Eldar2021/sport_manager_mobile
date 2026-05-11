@@ -5,6 +5,7 @@ import 'package:auth/auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/env.dart';
+import 'package:talker_dio_logger/talker_dio_logger.dart';
 
 final class NetworkModule extends BaseDiModule {
   const NetworkModule({super.scope});
@@ -22,6 +23,8 @@ final class NetworkModule extends BaseDiModule {
     final baseInterceptor = BaseInterceptor(
       platform: () => Platform.isAndroid ? 'android' : 'ios',
     );
+
+    final talkerLogger = Env.isDev ? TalkerDioLogger(talker: talker) : null;
 
     final bearerDio = Dio(baseOptions);
 
@@ -41,9 +44,11 @@ final class NetworkModule extends BaseDiModule {
           );
         },
       ),
+      ?talkerLogger,
     ]);
 
     final noneDio = Dio(baseOptions)..interceptors.add(baseInterceptor);
+    if (talkerLogger != null) noneDio.interceptors.add(talkerLogger);
 
     sl
       ..registerSingleton<Dio>(

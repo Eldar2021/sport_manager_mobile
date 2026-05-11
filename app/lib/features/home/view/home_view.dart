@@ -78,7 +78,7 @@ class _HomeViewState extends State<HomeView> {
           bloc: _cubit,
           builder: (context, state) => switch (state) {
             HomeNoVenue() => const VenuesEmpty(),
-            HomeNoTables() => const TablesEmpty(),
+            HomeNoTables(:final venue) => TablesEmpty(venue),
             HomeLoaded(:final venue, :final tables) => HomeSuccess(
               venue: venue,
               tables: tables,

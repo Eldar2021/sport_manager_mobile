@@ -10,27 +10,33 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
 
   @override
   Future<SessionModel> startSession(String tableId) {
-    return _client.postType<SessionModel>(
-      '/api/v1/session/start',
-      fromJson: SessionModel.fromJson,
-      data: {'tableId': tableId},
-    );
+    return _client
+        .postType<SessionModel>(
+          '/api/v1/session/start',
+          fromJson: SessionModel.fromJson,
+          data: {'tableId': tableId},
+        )
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
   Future<SessionModel> pauseSession(String sessionId) {
-    return _client.postType<SessionModel>(
-      '/api/v1/session/$sessionId/pause',
-      fromJson: SessionModel.fromJson,
-    );
+    return _client
+        .postType<SessionModel>(
+          '/api/v1/session/$sessionId/pause',
+          fromJson: SessionModel.fromJson,
+        )
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
   Future<SessionModel> resumeSession(String sessionId) {
-    return _client.postType<SessionModel>(
-      '/api/v1/session/$sessionId/resume',
-      fromJson: SessionModel.fromJson,
-    );
+    return _client
+        .postType<SessionModel>(
+          '/api/v1/session/$sessionId/resume',
+          fromJson: SessionModel.fromJson,
+        )
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
@@ -38,11 +44,13 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
     String sessionId,
     int? discountPercent,
   ) {
-    return _client.postType<SessionModel>(
-      '/api/v1/session/$sessionId/finish',
-      fromJson: SessionModel.fromJson,
-      data: {'discountPercent': discountPercent},
-    );
+    return _client
+        .postType<SessionModel>(
+          '/api/v1/session/$sessionId/finish',
+          fromJson: SessionModel.fromJson,
+          data: {'discountPercent': discountPercent},
+        )
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
@@ -50,10 +58,12 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
     String sessionId,
     String? cancelReason,
   ) {
-    return _client.postType<SessionModel>(
-      '/api/v1/session/$sessionId/cancel',
-      fromJson: SessionModel.fromJson,
-      data: {'reason': cancelReason},
-    );
+    return _client
+        .postType<SessionModel>(
+          '/api/v1/session/$sessionId/cancel',
+          fromJson: SessionModel.fromJson,
+          data: {'reason': cancelReason},
+        )
+        .mapTo(FacilityExc.fromApiClientExc);
   }
 }

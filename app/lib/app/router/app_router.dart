@@ -1,9 +1,10 @@
 import 'package:auth/auth.dart';
 import 'package:facility/facility.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
+import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/env.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/main/main.dart';
@@ -15,6 +16,7 @@ import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:subscription/subscription.dart' show PaymentModel;
+import 'package:talker_flutter/talker_flutter.dart';
 
 const Set<String> _authRoutes = {
   AppRoutes.welcome,
@@ -30,7 +32,9 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
   return GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.init,
-    debugLogDiagnostics: kDebugMode,
+    observers: [
+      if (Env.isDev) TalkerRouteObserver(talker),
+    ],
     refreshListenable: GoRouterAuthListenable(authCubit.stream),
     redirect: (context, state) {
       final authState = authCubit.state;

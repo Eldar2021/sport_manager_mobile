@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Flutter monorepo. Dart ^3.11.5 · Flutter 3.41.7 (FVM) · Material 3 · Melos workspace.
 
-Deep references: [docs/architecture.md](docs/architecture.md), [docs/code-rules.md](docs/code-rules.md), [docs/theme-system.md](docs/theme-system.md), [docs/ui-components.md](docs/ui-components.md), [docs/contributing.md](docs/contributing.md). Read `theme-system.md` before writing any UI — it explains how to pick the right color / text / spacing token so the result adapts to light/dark. Read `ui-components.md` before adding a new widget — most "obvious" widgets (text field, password field, banner, submit button, spinner, checkbox, logo) already exist; reuse before re-implementing.
+Deep references: [docs/architecture.md](docs/architecture.md), [docs/code-rules.md](docs/code-rules.md), [docs/error-handling.md](docs/error-handling.md), [docs/theme-system.md](docs/theme-system.md), [docs/ui-components.md](docs/ui-components.md), [docs/contributing.md](docs/contributing.md). Read `theme-system.md` before writing any UI — it explains how to pick the right color / text / spacing token so the result adapts to light/dark. Read `ui-components.md` before adding a new widget — most "obvious" widgets (text field, password field, banner, submit button, spinner, checkbox, logo) already exist; reuse before re-implementing. Read `error-handling.md` before touching exceptions, error codes, or a remote source — it's the canonical reference for the `ApiClientException → XxxExc` pipeline, the `.mapTo` extension, and the one-exception-per-package rule.
 
 ## Structure
 
@@ -75,7 +75,7 @@ Run app: `cd app && flutter run --dart-define=BASE_URL=https://...` (required �
 
 **Logic in widgets** — `build()` should read declaratively. Don't compute flags, switch on enums, or compose multi-line strings inside `builder:` callbacks. Lift to: a getter on the model (`subscription.needsRenewal`), a computed property on the state, or a small dedicated widget. Rule of thumb: if a `builder:` has more than one local variable or one `if`, refactor. Full guide: [docs/code-rules.md § Don't put complex logic inline in widget trees](docs/code-rules.md#dont-put-complex-logic-inline-in-widget-trees).
 
-**Error handling** — throw `AppException<T>` (with `handleType: dialog | snackbar`). Localized messages via `BaseMessage(en, ru, ky)`. From widgets: `context.handleError(error)`. 401/423 are routed through `UnauthenticatedExceptionHandle` (registered with `instanceName: 'unauthenticated'`).
+**Error handling** — every package defines **one** `XxxExc extends AppException<XxxErrorCode>` (suffix `Exc`, not `Exception`) covering every backend code its endpoints can return. Remote-source methods end each call with `.mapTo(XxxExc.fromApiClientExc)` — no try/catch in source bodies. Cubits switch on `e.error` (the enum), never on subtype. `handleType: dialog | snackbar` on the exception, localized messages via `BaseMessage(en, ru, ky)`, `context.handleError(error)` from widgets, 401/423 via `UnauthenticatedExceptionHandle` (`instanceName: 'unauthenticated'`). Full pipeline + template in [docs/error-handling.md](docs/error-handling.md).
 
 **Storage** — `StorageInterfaceSyncRead` (sync read, async write). All operations wrap failures in `StorageException`.
 

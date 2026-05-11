@@ -1,4 +1,3 @@
-import 'package:api_client/api_client.dart';
 import 'package:facility/facility.dart';
 import 'package:meta/meta.dart';
 
@@ -9,17 +8,7 @@ final class FacilityRepository {
   final FacilityRemoteSource _remote;
 
   Future<List<VenueModel>> getVenues() {
-    try {
-      return _remote.getVenues();
-    } on ApiClientException catch (e) {
-      throw switch (e.error.response?.data) {
-        'VENUE_NOT_FOUND' => const VenueException(VenueErrorCode.notFound),
-        'VENUE_NUMBER_TAKEN' => const VenueException(VenueErrorCode.numberTaken),
-        'VENUE_HAS_TABLES' => const VenueException(VenueErrorCode.hasTables),
-        'VENUE_FORBIDDEN' => const VenueException(VenueErrorCode.forbidden),
-        _ => const VenueException(VenueErrorCode.unknown),
-      };
-    }
+    return _remote.getVenues();
   }
 
   Future<SelectedVenueModel> getSelected() {
