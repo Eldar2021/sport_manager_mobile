@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:api_client/api_client.dart';
 
 class DioRequestExecutor implements RequestExecutor {
@@ -31,21 +30,17 @@ class DioRequestExecutor implements RequestExecutor {
         );
         return res;
       } else {
-        log('ApiClient connection error $method $path');
         throw const ConnectionException('No internet connection');
       }
     } on DioException catch (e, s) {
-      log('ApiClient request $method $path', error: e, stackTrace: s);
-      final code = _parseErrorCode(e);
       throw ApiClientException(
         e,
         stackTrace: s,
-        code: code,
+        code: _parseErrorCode(e),
       );
     } on ConnectionException {
       rethrow;
     } catch (e, s) {
-      log('ApiClient request $method $path', error: e, stackTrace: s);
       throw ApiClientUnknownException(e, stackTrace: s);
     }
   }

@@ -1,6 +1,5 @@
 import 'package:auth/auth.dart';
 import 'package:facility/facility.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
@@ -33,7 +32,6 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
   return GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.init,
-    debugLogDiagnostics: kDebugMode,
     observers: [
       if (Env.isDev) TalkerRouteObserver(talker),
     ],
