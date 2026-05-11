@@ -1,3 +1,4 @@
+import 'package:api_client/api_client.dart';
 import 'package:core/core.dart';
 
 enum VenueErrorCode {
@@ -30,6 +31,13 @@ final class VenueException extends AppException<VenueErrorCode> {
     super.message,
     super.handleType,
   });
+
+  factory VenueException.fromApiClientExc(ApiClientException e) {
+    return VenueException(
+      VenueErrorCode.fromString(e.code),
+      message: e.message,
+    );
+  }
 
   @override
   ErrorModel getModel() => ErrorModel(

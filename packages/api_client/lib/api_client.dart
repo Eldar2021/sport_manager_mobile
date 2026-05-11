@@ -12,6 +12,7 @@ export 'exceptions/api_client_exception.dart';
 export 'exceptions/connection_exception.dart';
 export 'exceptions/convert_exception.dart';
 export 'extensions/dio_exception_extension.dart';
+export 'extensions/map_api_errors_extension.dart';
 export 'interceptors/auth_interceptor.dart';
 export 'interceptors/base_interceptor.dart';
 export 'interceptors/bearer_interceptor.dart';
