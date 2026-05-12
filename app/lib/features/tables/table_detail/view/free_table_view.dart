@@ -26,12 +26,20 @@ class FreeTableView extends StatefulWidget {
 }
 
 class _FreeTableViewState extends State<FreeTableView> {
+  late TableModel _table;
+
+  @override
+  void initState() {
+    super.initState();
+    _table = widget.table;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(widget.table.name ?? context.l10n.homeTableTitle(widget.table.number)),
+        title: Text(_table.name ?? context.l10n.homeTableTitle(_table.number)),
         actions: [
           AppEditDeleteMenu(
             onEdit: _onEdit,
@@ -50,7 +58,7 @@ class _FreeTableViewState extends State<FreeTableView> {
             unawaited(context.read<HomeCubit>().load());
           }
         },
-        child: FreeTableBody(widget.table),
+        child: FreeTableBody(_table),
       ),
       floatingActionButtonLocation: kAppButtonFabLocation,
       floatingActionButton: BlocBuilder<TableDetailCubit, TableDetailState>(
@@ -78,14 +86,17 @@ class _FreeTableViewState extends State<FreeTableView> {
     );
   }
 
-  void _onEdit() {
-    context.push(
+  Future<void> _onEdit() async {
+    final updated = await context.push<TableModel>(
       AppRoutes.tableForm,
       extra: TableFormExtra(
-        venueId: widget.table.venueId,
-        table: widget.table,
+        venueId: _table.venueId,
+        table: _table,
       ),
     );
+    if (!mounted || updated == null) return;
+    setState(() => _table = updated);
+    widget.tableCubit.updateTable(updated);
   }
 
   Future<void> _onDelete() async {

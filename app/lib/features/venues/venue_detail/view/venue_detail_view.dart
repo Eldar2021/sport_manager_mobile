@@ -118,11 +118,11 @@ class _VenueDetailViewState extends State<VenueDetailView> {
   }
 
   Future<void> _onAddTable() async {
-    final added = await context.push<bool>(
+    final added = await context.push<TableModel>(
       AppRoutes.tableForm,
       extra: TableFormExtra(venueId: _venue.id),
     );
-    if (added == true) unawaited(_cubit.load());
+    if (added != null) unawaited(_cubit.load());
   }
 
   Future<void> _onEdit() async {
