@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:core/core.dart';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
@@ -77,10 +76,53 @@ class _OccupiedTableViewState extends State<OccupiedTableView> {
       ),
       body: BlocProvider.value(
         value: _sessionCubit,
-        child: BlocListener<SessionActiveCubit, SessionActiveState>(
-          bloc: _sessionCubit,
-          listenWhen: _listenWhen,
-          listener: _listener,
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<SessionActiveCubit, SessionActiveState>(
+              bloc: _sessionCubit,
+              listenWhen: (p, c) => p.stopStatus != c.stopStatus,
+              listener: (context, state) {
+                if (state.stopStatus.isSuccess) {
+                  widget.tableCubit.onSessionEnded();
+                  context.read<HomeCubit>().load();
+                }
+              },
+            ),
+            BlocListener<SessionActiveCubit, SessionActiveState>(
+              bloc: _sessionCubit,
+              listenWhen: (p, c) => p.cancelStatus != c.cancelStatus,
+              listener: (context, state) {
+                if (state.cancelStatus.isSuccess) {
+                  widget.tableCubit.onSessionEnded();
+                  context.read<HomeCubit>().load();
+                } else if (state.cancelStatus.isFailure) {
+                  context.handleError((state.cancelStatus as RequestFailure<SessionModel>).exception);
+                }
+              },
+            ),
+            BlocListener<SessionActiveCubit, SessionActiveState>(
+              bloc: _sessionCubit,
+              listenWhen: (p, c) => p.pauseStatus != c.pauseStatus,
+              listener: (context, state) {
+                if (state.pauseStatus.isSuccess) {
+                  context.read<HomeCubit>().load();
+                } else if (state.pauseStatus.isFailure) {
+                  context.handleError((state.pauseStatus as RequestFailure<SessionModel>).exception);
+                }
+              },
+            ),
+            BlocListener<SessionActiveCubit, SessionActiveState>(
+              bloc: _sessionCubit,
+              listenWhen: (p, c) => p.resumeStatus != c.resumeStatus,
+              listener: (context, state) {
+                if (state.resumeStatus.isSuccess) {
+                  context.read<HomeCubit>().load();
+                } else if (state.resumeStatus.isFailure) {
+                  context.handleError((state.resumeStatus as RequestFailure<SessionModel>).exception);
+                }
+              },
+            ),
+          ],
           child: OccupiedTableBody(
             currency: widget.table.currency.localizedName(context.l10n),
             onMistakeLaunch: _showCancelConfirm,
@@ -93,33 +135,5 @@ class _OccupiedTableViewState extends State<OccupiedTableView> {
         onStopPressed: _showPaymentSheet,
       ),
     );
-  }
-
-  bool _listenWhen(SessionActiveState p, SessionActiveState c) =>
-      p.stopStatus != c.stopStatus ||
-      p.cancelStatus != c.cancelStatus ||
-      p.pauseStatus != c.pauseStatus ||
-      p.resumeStatus != c.resumeStatus;
-
-  void _listener(BuildContext context, SessionActiveState state) {
-    if (state.stopStatus.isSuccess || state.cancelStatus.isSuccess) {
-      widget.tableCubit.onSessionEnded();
-      unawaited(context.read<HomeCubit>().load());
-    }
-    if (state.pauseStatus.isSuccess || state.resumeStatus.isSuccess) {
-      unawaited(context.read<HomeCubit>().load());
-    }
-    if (state.cancelStatus.isFailure) {
-      final exception = (state.cancelStatus as RequestFailure<SessionModel>).exception;
-      context.handleError(exception);
-    }
-    if (state.pauseStatus.isFailure) {
-      final exception = (state.pauseStatus as RequestFailure<SessionModel>).exception;
-      context.handleError(exception);
-    }
-    if (state.resumeStatus.isFailure) {
-      final exception = (state.resumeStatus as RequestFailure<SessionModel>).exception;
-      context.handleError(exception);
-    }
   }
 }
