@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:core/core.dart';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
@@ -115,6 +117,14 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     );
   }
 
+  Future<void> _onAddTable() async {
+    final added = await context.push<bool>(
+      AppRoutes.tableForm,
+      extra: TableFormExtra(venueId: _venue.id),
+    );
+    if (added == true) unawaited(_cubit.load());
+  }
+
   Future<void> _onEdit() async {
     final updated = await context.push<VenueModel>(
       AppRoutes.venueForm,
@@ -122,6 +132,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     );
     if (mounted && updated != null) {
       setState(() => _venue = updated);
+      unawaited(context.read<HomeCubit>().load());
     }
   }
 
@@ -137,19 +148,10 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     if (!mounted) return;
     final status = _cubit.state.deleteStatus;
     if (status is RequestSuccess<bool>) {
+      unawaited(context.read<HomeCubit>().load());
       context.pop(true);
     } else if (status is RequestFailure<bool>) {
       context.handleError(status.exception);
-    }
-  }
-
-  Future<void> _onAddTable() async {
-    final value = await context.push<bool>(
-      AppRoutes.tableForm,
-      extra: TableFormExtra(venueId: _venue.id),
-    );
-    if (value == true) {
-      await _cubit.load();
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:auth/auth.dart';
 import 'package:core/core.dart';
+import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -8,6 +9,7 @@ import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/env.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
 import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
@@ -41,6 +43,11 @@ class MyAppWrapper extends StatelessWidget {
           create: (_) => SubscriptionCubit(
             GetIt.I<SubscriptionRepository>(),
           ),
+        ),
+        BlocProvider(
+          create: (_) => HomeCubit(
+            GetIt.I<FacilityRepository>(),
+          )..load(),
         ),
       ],
       child: BlocListener<AuthCubit, AuthState>(

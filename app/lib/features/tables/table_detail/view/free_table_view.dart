@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:core/core.dart';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -43,6 +45,9 @@ class _FreeTableViewState extends State<FreeTableView> {
           if (state is TableDetailFree && state.startStatus.isFailure) {
             final exception = (state.startStatus as RequestFailure<SessionModel>).exception;
             context.handleError(exception);
+          }
+          if (state is TableDetailOccupied) {
+            unawaited(context.read<HomeCubit>().load());
           }
         },
         child: FreeTableBody(widget.table),
@@ -98,6 +103,7 @@ class _FreeTableViewState extends State<FreeTableView> {
       TableDetailOccupied(:final deleteStatus) => deleteStatus,
     };
     if (deleteStatus.isSuccess) {
+      unawaited(context.read<HomeCubit>().load());
       context.pop();
     } else if (deleteStatus is RequestFailure<bool>) {
       context.handleError(deleteStatus.exception);

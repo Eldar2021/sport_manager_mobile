@@ -2,29 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "spm_flutter dev_mock (debug)",
-      "request": "launch",
-      "type": "dart",
-      "program": "app/lib/main.dart",
-      "toolArgs": ["--dart-define-from-file", "dev_mock.env"]
-    },
-    {
-      "name": "spm_flutter dev_mock (profile)",
-      "request": "launch",
-      "type": "dart",
-      "program": "app/lib/main.dart",
-      "toolArgs": ["--dart-define-from-file", "dev_mock.env"],
-      "flutterMode": "profile"
-    },
-    {
-      "name": "spm_flutter dev_mock (release)",
-      "request": "launch",
-      "type": "dart",
-      "program": "app/lib/main.dart",
-      "toolArgs": ["--dart-define-from-file", "dev_mock.env"],
-      "flutterMode": "release"
-    },
-    {
       "name": "spm_flutter dev (debug)",
       "request": "launch",
       "type": "dart",
@@ -69,6 +46,29 @@
       "program": "app/lib/main.dart",
       "toolArgs": ["--dart-define-from-file", "prod.env"],
       "flutterMode": "release"
-    }
+    },
+      {
+      "name": "spm_flutter dev_mock (debug)",
+      "request": "launch",
+      "type": "dart",
+      "program": "app/lib/main.dart",
+      "toolArgs": ["--dart-define-from-file", "dev_mock.env"]
+    },
+    {
+      "name": "spm_flutter dev_mock (profile)",
+      "request": "launch",
+      "type": "dart",
+      "program": "app/lib/main.dart",
+      "toolArgs": ["--dart-define-from-file", "dev_mock.env"],
+      "flutterMode": "profile"
+    },
+    {
+      "name": "spm_flutter dev_mock (release)",
+      "request": "launch",
+      "type": "dart",
+      "program": "app/lib/main.dart",
+      "toolArgs": ["--dart-define-from-file", "dev_mock.env"],
+      "flutterMode": "release"
+    },
   ]
 }

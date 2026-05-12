@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'package:core/core.dart';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -102,6 +104,10 @@ class _OccupiedTableViewState extends State<OccupiedTableView> {
   void _listener(BuildContext context, SessionActiveState state) {
     if (state.stopStatus.isSuccess || state.cancelStatus.isSuccess) {
       widget.tableCubit.onSessionEnded();
+      unawaited(context.read<HomeCubit>().load());
+    }
+    if (state.pauseStatus.isSuccess || state.resumeStatus.isSuccess) {
+      unawaited(context.read<HomeCubit>().load());
     }
     if (state.cancelStatus.isFailure) {
       final exception = (state.cancelStatus as RequestFailure<SessionModel>).exception;

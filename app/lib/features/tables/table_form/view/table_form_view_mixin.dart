@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'package:core/core.dart';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -54,6 +57,7 @@ mixin TableFormViewMixin on State<TableFormView> {
 
   void tableCubitListener(BuildContext context, TableFormState state) {
     if (state.submitStatus.isSuccess) {
+      context.read<HomeCubit>().load();
       context.pop(true);
     } else if (state.submitStatus.isFailure) {
       context.handleError((state.submitStatus as RequestFailure).exception);
@@ -72,6 +76,7 @@ mixin TableFormViewMixin on State<TableFormView> {
     if (!mounted) return;
     final status = cubit.state.deleteStatus;
     if (status.isSuccess) {
+      unawaited(context.read<HomeCubit>().load());
       context.pop();
     } else if (status is RequestFailure<bool>) {
       context.handleError(status.exception);

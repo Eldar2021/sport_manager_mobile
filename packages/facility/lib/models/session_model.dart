@@ -27,6 +27,14 @@ final class SessionModel extends Equatable {
   });
 
   factory SessionModel.fromJson(Map<String, dynamic> json) {
+    // The embedded session shape (from venue/selected) omits `status` and uses
+    // `active` + `paused` booleans instead. Normalise before generated decode.
+    if (json['status'] == null) {
+      final active = json['active'] as bool? ?? false;
+      final paused = json['paused'] as bool? ?? false;
+      final statusStr = active ? (paused ? 'PAUSED' : 'ACTIVE') : 'COMPLETED';
+      return _$SessionModelFromJson({...json, 'status': statusStr});
+    }
     return _$SessionModelFromJson(json);
   }
 

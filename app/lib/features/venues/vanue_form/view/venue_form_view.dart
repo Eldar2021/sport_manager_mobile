@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -87,6 +88,7 @@ class _VenueFormViewState extends State<VenueFormView> {
             listener: (context, state) {
               final status = state.reqStatus;
               if (status is RequestSuccess<VenueModel>) {
+                context.read<HomeCubit>().load();
                 context.pop(status.data);
               } else if (status is RequestFailure<VenueModel>) {
                 context.handleError(status.exception);
