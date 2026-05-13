@@ -19,7 +19,7 @@ Mobil istemcinin (`packages/auth`) backend'den beklediği auth uçları, request
 
 ---
 
-## 1. POST `/auth/login`
+## 1. POST `/api/v1/auth/login`
 
 **Auth:** none
 
@@ -64,7 +64,7 @@ Mobil istemcinin (`packages/auth`) backend'den beklediği auth uçları, request
 
 ---
 
-## 2. POST `/auth/register`
+## 2. POST `/api/v1/auth/register`
 
 **Auth:** none
 
@@ -133,9 +133,11 @@ Login ile aynı: `{ user, accessToken, refreshToken }`.
 
 ---
 
-## 3. POST `/auth/refresh`
+## 3. POST `/api/v1/auth/refresh`
 
-**Auth:** none (bearer instance üzerinden çağrılır ama `Authorization` header'ı access token bekler — refresh sırasında access expire olduğunda bile gönderilir, backend ignore etmeli ya da kabul etmeli)
+**Auth:** none (refresh işlemi için access token zorunlu değil — backend yalnızca body'deki `refreshToken`'a güvenir).
+
+> İstemci bu endpoint'i bearer Dio instance'ı üzerinden çağırdığı için `Authorization: Bearer <accessToken>` header'ı **gönderilebilir** (özellikle access token henüz expire olmamışsa). Backend bu header'ı **yok sayar** — refresh kararını sadece body'deki `refreshToken` üzerinden verir. Access token süresi dolduğunda da aynı endpoint çağrılır; header'ın expired bir token taşıması engelleyici olmamalıdır.
 
 ### Request body
 
@@ -168,7 +170,7 @@ Login ile aynı: `{ user, accessToken, refreshToken }`.
 
 ---
 
-## 4. POST `/auth/logout`
+## 4. POST `/api/v1/auth/logout`
 
 **Auth:** required (`Authorization: Bearer <accessToken>`)
 
@@ -188,7 +190,7 @@ Body beklenmiyor.
 
 ---
 
-## 5. POST `/auth/forgot-password`
+## 5. POST `/api/v1/auth/forgot-password`
 
 **Auth:** none
 
@@ -214,7 +216,7 @@ Body önemsiz. Gizlilik için backend **email kayıtlı mı kayıtsız mı** ayr
 
 ---
 
-## 6. POST `/auth/invite-code`
+## 6. POST `/api/v1/auth/invite-code`
 
 **Auth:** required, role = `OWNER`. Owner olmayan kullanıcı 403 almalı.
 
@@ -238,10 +240,13 @@ Boş.
 
 ### Errors
 
-| HTTP | Trigger           |
-| ---- | ----------------- |
-| 401  | Token yok/expired |
-| 403  | Owner değil       |
+| HTTP | `code`                  | Trigger                                                |
+| ---- | ----------------------- | ------------------------------------------------------ |
+| 401  | —                       | Token yok/expired                                      |
+| 403  | `FORBIDDEN`             | Owner değil                                            |
+| 403  | `SUBSCRIPTION_REQUIRED` | Owner aboneliği `EXPIRED` veya `GRACE@0` (yazma gate) |
+
+> `SUBSCRIPTION_REQUIRED` global gate kuralı için bkz. [subscription-api.md § Subscription gate](subscription-api.md#subscription-gate--diğer-endpointlere-etkisi).
 
 ---
 
@@ -298,14 +303,16 @@ Backend tüm hata yanıtlarını tutarlı bir zarfla göndermeli — istemci tar
     "en": "Invalid username or password",
     "ru": "Неверный логин или пароль",
     "ky": "Логин же сырсөз туура эмес"
-  }
+  },
+  "details": null
 }
 ```
 
-| Field     | Type                            | Notes                                                   |
-| --------- | ------------------------------- | ------------------------------------------------------- |
-| `code`    | string (UPPER_SNAKE)            | İstemcide `AuthErrorCode` enum'una map edilir           |
-| `message` | object `{en, ru, ky}` \| string | Tercihen üç dil; tek dilse `Accept-Language`'i kullanır |
+| Field     | Type                            | Notes                                                                                                  |
+| --------- | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `code`    | string (UPPER_SNAKE)            | İstemcide `AuthErrorCode` enum'una map edilir                                                          |
+| `message` | object `{en, ru, ky}` \| string | Tercihen üç dil; tek dilse `Accept-Language`'i kullanır                                                |
+| `details` | array \| null                   | Validation hatalarında `[{field, rule, message}]` dolar; diğer durumlarda `null` (bkz. home_page_api.md) |
 
 İstemcideki `AuthErrorCode` enum'una göre backend code map'i:
 

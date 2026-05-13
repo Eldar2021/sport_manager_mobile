@@ -1,6 +1,6 @@
 # Subscription REST API — Backend Contract
 
-Mobil istemcinin (`packages/subscription`) backend'den beklediği abonelik (uyelik) uçları, request/response gövdeleri ve hata akışı. Ürün akışı için bkz. [work/subscription-flow.md](../work/subscription-flow.md).
+Mobil istemcinin (`packages/subscription`) backend'den beklediği abonelik (uyelik) uçları, request/response gövdeleri ve hata akışı. Ürün akışı için bkz. [user-flow/subscription-flow.md](../user-flow/subscription-flow.md).
 
 **Base URL:** `<BASE_URL>` (mobil tarafta `--dart-define=BASE_URL=...`)
 **Content-Type:** `application/json; charset=utf-8`
@@ -23,13 +23,13 @@ Mobil istemcinin (`packages/subscription`) backend'den beklediği abonelik (uyel
 
 ## Authorization Roller
 
-| Endpoint                                         | OWNER | MANAGER |
-| ------------------------------------------------ | :---: | :-----: |
-| GET `/subscription`                              |  ✅   |   ❌    |
-| GET `/subscription/pricing`                      |  ✅   |   ❌    |
-| POST `/subscription/checkout`                    |  ✅   |   ❌    |
-| GET `/subscription/payment/{id}`                 |  ✅   |   ❌    |
-| POST `/subscription/payment/{id}/confirm` (mock) |  ✅   |   ❌    |
+| Endpoint                                                | OWNER | MANAGER |
+| ------------------------------------------------------- | :---: | :-----: |
+| GET `/api/v1/subscription`                              |  ✅   |   ❌    |
+| GET `/api/v1/subscription/pricing`                      |  ✅   |   ❌    |
+| POST `/api/v1/subscription/checkout`                    |  ✅   |   ❌    |
+| GET `/api/v1/subscription/payment/{id}`                 |  ✅   |   ❌    |
+| POST `/api/v1/subscription/payment/{id}/confirm` (mock) |  ✅   |   ❌    |
 
 > Manager bu uçlara `403 FORBIDDEN` alır. Manager'ın görmesi gereken bilgi (örn: owner'ı EXPIRED ise blocked-screen) **dolaylı** olarak diğer endpoint'lerin `403 SUBSCRIPTION_REQUIRED` cevabı üzerinden anlaşılır (bkz. § Subscription gate aşağıda).
 
