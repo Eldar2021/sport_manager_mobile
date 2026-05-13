@@ -22,17 +22,17 @@ Kullanıcı login ya da register olduğunda direkt olarak Home Page'e yönlendir
 
 ## Authorization Roller
 
-| Endpoint                | OWNER | MANAGER |
-| ----------------------- | :---: | :-----: |
-| GET `/venue/list`       |  ✅   |   ✅    |
-| GET `/venue/selected`   |  ✅   |   ✅    |
-| PATCH `/venue/selected` |  ✅   |   ✅    |
-| POST `/venue/create`    |  ✅   |   ❌    |
-| PUT `/venue/{id}`       |  ✅   |   ❌    |
-| DELETE `/venue/{id}`    |  ✅   |   ❌    |
-| POST `/table/create`    |  ✅   |   ❌    |
-| PUT `/table/{id}`       |  ✅   |   ❌    |
-| DELETE `/table/{id}`    |  ✅   |   ❌    |
+| Endpoint                       | OWNER | MANAGER |
+| ------------------------------ | :---: | :-----: |
+| GET `/api/v1/venue/list`       |  ✅   |   ✅    |
+| GET `/api/v1/venue/selected`   |  ✅   |   ✅    |
+| PATCH `/api/v1/venue/selected` |  ✅   |   ✅    |
+| POST `/api/v1/venue/create`    |  ✅   |   ❌    |
+| PUT `/api/v1/venue/{id}`       |  ✅   |   ❌    |
+| DELETE `/api/v1/venue/{id}`    |  ✅   |   ❌    |
+| POST `/api/v1/table/create`    |  ✅   |   ❌    |
+| PUT `/api/v1/table/{id}`       |  ✅   |   ❌    |
+| DELETE `/api/v1/table/{id}`    |  ✅   |   ❌    |
 
 Yetkisiz erişim → **403 FORBIDDEN**.
 
@@ -93,6 +93,7 @@ Validation hatası ise `details` field'ı doldurulur:
 | `TABLE_NUMBER_TAKEN`       | 409  | Bu masa numarası mekanda zaten var          |
 | `VENUE_HAS_TABLES`         | 409  | Mekanın içinde masalar var, önce onları sil |
 | `TABLE_HAS_ACTIVE_SESSION` | 409  | Masada aktif session var, silinemez         |
+| `SUBSCRIPTION_REQUIRED`    | 403  | Owner aboneliği `EXPIRED` veya `GRACE@0` (yazma gate; bkz. [subscription-api.md](subscription-api.md#subscription-gate--diğer-endpointlere-etkisi)) |
 | `INTERNAL_SERVER_ERROR`    | 500  | Beklenmeyen sunucu hatası                   |
 | `SERVICE_UNAVAILABLE`      | 503  | Servis geçici olarak kullanılamıyor         |
 
@@ -139,6 +140,7 @@ Validation hatası ise `details` field'ı doldurulur:
 {
   id: string (uuid),
   tableId: string (uuid),
+  managerId: string (uuid),       // session'ı başlatan kullanıcı (owner veya manager)
   isActive: boolean,
   isPaused: boolean,
   startedAt: string (ISO 8601),
@@ -151,6 +153,8 @@ Validation hatası ise `details` field'ı doldurulur:
 ```
 
 > **Snapshot kuralı:** Session başladığında masa fiyatı kopyalanır. Owner session ortasında fiyatı değiştirirse mevcut session etkilenmez.
+>
+> **`managerId`:** Session'ı başlatan kullanıcının ID'si. Owner kendisi başlattıysa owner'ın ID'si, manager başlattıysa manager'ın ID'si. Reports tarafı (manager performans/fraud sinyali) bu alanı kullanır. Bkz. [reports-api.md](reports-api.md).
 
 ### SelectedVenueResponse
 
@@ -278,6 +282,7 @@ GET /api/v1/venue/selected
       "session": {
         "id": "770e8400-e29b-41d4-a716-446655440002",
         "tableId": "660e8400-e29b-41d4-a716-446655440001",
+        "managerId": "user-101",
         "isActive": true,
         "isPaused": false,
         "startedAt": "2026-04-27T18:42:00.000Z",
@@ -415,6 +420,7 @@ POST /api/v1/venue/create
 - `422 VALIDATION_ERROR`
 - `409 VENUE_NUMBER_TAKEN` — bu numara zaten kullanılıyor
 - `403 FORBIDDEN` — manager bu endpoint'i çağıramaz
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 
@@ -465,6 +471,7 @@ PUT /api/v1/venue/{id}
 - `409 VENUE_NUMBER_TAKEN` — yeni number başka bir mekanda kullanılıyor
 - `422 VALIDATION_ERROR`
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 
@@ -499,6 +506,7 @@ DELETE /api/v1/venue/{id}
 - `404 VENUE_NOT_FOUND`
 - `409 TABLE_HAS_ACTIVE_SESSION` — içerideki bir masada aktif session var
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 
@@ -561,6 +569,7 @@ POST /api/v1/table/create
 - `409 TABLE_NUMBER_TAKEN` — bu venue içinde aynı numarada masa var
 - `422 VALIDATION_ERROR`
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 
@@ -619,6 +628,7 @@ PUT /api/v1/table/{id}
 - `409 TABLE_NUMBER_TAKEN`
 - `422 VALIDATION_ERROR`
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 
@@ -651,6 +661,7 @@ DELETE /api/v1/table/{id}
 - `404 TABLE_NOT_FOUND`
 - `409 TABLE_HAS_ACTIVE_SESSION`
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 

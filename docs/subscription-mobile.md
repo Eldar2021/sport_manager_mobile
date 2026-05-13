@@ -4,7 +4,7 @@
 >
 > **Kaynak dokümanlar:**
 >
-> - Akış: [backend_doc/subscription-flow.md](../backend_doc/subscription-flow.md)
+> - Akış: [user-flow/subscription-flow.md](../user-flow/subscription-flow.md)
 > - Backend kontratı: [backend_doc/subscription-api.md](../backend_doc/subscription-api.md)
 >
 > **Audience:** Mobile dev (Claude / insan). Onaylanırsa implementasyon bu plana göre yapılacak.
