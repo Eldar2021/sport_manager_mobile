@@ -11,7 +11,7 @@ ForecastPointModel _$ForecastPointModelFromJson(Map<String, dynamic> json) => Fo
   expected: (json['expected'] as num).toInt(),
   lower: (json['lower'] as num).toInt(),
   upper: (json['upper'] as num).toInt(),
-  isProjection: json['isProjection'] as bool,
+  projection: json['projection'] as bool,
 );
 
 Map<String, dynamic> _$ForecastPointModelToJson(ForecastPointModel instance) => <String, dynamic>{
@@ -19,7 +19,7 @@ Map<String, dynamic> _$ForecastPointModelToJson(ForecastPointModel instance) => 
   'expected': instance.expected,
   'lower': instance.lower,
   'upper': instance.upper,
-  'isProjection': instance.isProjection,
+  'projection': instance.projection,
 };
 
 ForecastModel _$ForecastModelFromJson(Map<String, dynamic> json) => ForecastModel(

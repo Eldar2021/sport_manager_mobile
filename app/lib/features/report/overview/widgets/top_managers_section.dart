@@ -29,7 +29,7 @@ class TopManagersSection extends StatelessWidget {
         const SizedBox(height: AppSpacing.x2),
         BlocBuilder<ReportOverviewCubit, ReportOverviewState>(
           bloc: cubit,
-          buildWhen: (a, b) => a.managers != b.managers,
+          buildWhen: (a, b) => a.managers != b.managers || a.filter.venueId != b.filter.venueId,
           builder: (_, state) => switch (state.managers) {
             RequestInitial<List<ManagerReportRowModel>>() ||
             RequestLoading<List<ManagerReportRowModel>>() => const _ManagersSkeleton(),
@@ -43,7 +43,7 @@ class TopManagersSection extends StatelessWidget {
                 children: [
                   for (var i = 0; i < data.length; i++) ...[
                     if (i != 0) const Divider(height: 1),
-                    _ManagerRow(data[i]),
+                    _ManagerRow(data[i], state.filter.venueId),
                   ],
                 ],
               ),
@@ -56,15 +56,19 @@ class TopManagersSection extends StatelessWidget {
 }
 
 class _ManagerRow extends StatelessWidget {
-  const _ManagerRow(this.row);
+  const _ManagerRow(this.row, this.venueId);
 
   final ManagerReportRowModel row;
+  final String? venueId;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return ListTile(
-      onTap: () => context.push('${AppRoutes.report}/managers/${row.managerId}'),
+      onTap: () => context.push(
+        '${AppRoutes.report}/managers/${row.managerId}',
+        extra: venueId,
+      ),
       leading: CircleAvatar(
         backgroundColor: context.colors.primaryContainer,
         child: Text(

@@ -461,7 +461,7 @@ class _MockStore {
             expected: p.revenue,
             lower: p.revenue,
             upper: p.revenue,
-            isProjection: false,
+            projection: false,
           ),
         )
         .toList();
@@ -512,7 +512,7 @@ class _MockStore {
           expected: expected,
           lower: (expected * 0.85).round(),
           upper: (expected * 1.15).round(),
-          isProjection: true,
+          projection: true,
         ),
       );
       projTotal += expected;

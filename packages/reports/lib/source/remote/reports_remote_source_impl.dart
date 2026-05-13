@@ -8,15 +8,15 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
 
   final ApiClient _client;
 
-  static const _base = '/reports';
+  static const _base = '/api/v1/reports';
 
   GetApiParams _params(ReportFilter f) {
     return GetApiParams(
       queryParameters: <String, dynamic>{
+        if (f.venueId != null) 'venueId': f.venueId,
         'period': f.period.wireValue,
         'from': f.range.from.toUtc().toIso8601String(),
         'to': f.range.to.toUtc().toIso8601String(),
-        if (f.venueId != null) 'venueId': f.venueId,
         'compare': f.compareToPrevious,
       },
     );
