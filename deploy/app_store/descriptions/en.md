@@ -1,26 +1,31 @@
 # English
 
 ## App Name (max 30)
+
 ```
 Dula
 ```
 
 ## Subtitle (max 30)
+
 ```
 Sports facility management
 ```
 
 ## Promotional Text (max 170)
+
 ```
 Run your halls, tables and sessions from one place. Track revenue, manage your team, and stay in control wherever you are.
 ```
 
 ## Keywords (max 100, comma-separated, no spaces)
+
 ```
 venue,facility,billiard,pool,session,table,booking,sports,club,manager,owner,revenue,report
 ```
 
 ## Description (max 4000)
+
 ```
 Dula is the all-in-one management app for sports venues — billiard halls, pool clubs, and game rooms.
 
@@ -61,6 +66,7 @@ Dula — your sports facility, in your pocket.
 ```
 
 ## What's New (max 4000) — v1.0.0
+
 ```
 Welcome to Dula.
 

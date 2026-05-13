@@ -3,13 +3,16 @@
 App Store Connect → Version → "App Review Information" altına yapıştırılacak metin.
 
 ## Sign-In Information
+
 - **Required:** Yes
 
 ### Owner test hesabı
+
 - Username: `<PROD owner username>`
 - Password: `<PROD password>`
 
 ### Manager test hesabı
+
 - Username: `<PROD manager username>`
 - Password: `<PROD password>`
 
@@ -50,10 +53,12 @@ Contact: <support email>
 ```
 
 ## Contact Information
+
 - First name: `<contact-first>`
 - Last name: `<contact-last>`
 - Phone: `<+xx ...>`
 - Email: `<support@dula.app>`
 
 ## Attachments
+
 - (Opsiyonel) 30 saniyelik demo video — özellikle login + venue + session akışı
