@@ -34,6 +34,15 @@ class TableDetailCubit extends Cubit<TableDetailState> {
     }
   }
 
+  void updateTable(TableModel updated) {
+    emit(
+      switch (state) {
+        final TableDetailFree s => s.copyWith(table: updated),
+        final TableDetailOccupied s => s.copyWith(table: updated),
+      },
+    );
+  }
+
   void onSessionEnded() {
     if (state is! TableDetailOccupied) return;
     final table = (state as TableDetailOccupied).table;

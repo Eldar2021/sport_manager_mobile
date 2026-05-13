@@ -20,19 +20,10 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  late final HomeCubit _cubit;
-
   @override
   void initState() {
     super.initState();
-    _cubit = HomeCubit(GetIt.I<FacilityRepository>());
-    _cubit.load();
-  }
-
-  @override
-  void dispose() {
-    _cubit.close();
-    super.dispose();
+    context.read<HomeCubit>().load();
   }
 
   Future<void> _openVenueSelector(VenueModel current) async {
@@ -44,16 +35,18 @@ class _HomeViewState extends State<HomeView> {
       loader: () => GetIt.I<FacilityRepository>().getVenues(),
       titleBuilder: (_, v) => v.name,
       selectedItem: current,
-      itemBuilder: (_, venue, isSelected, onTap) => VenueItem(
-        venue: venue,
-        isSelected: isSelected,
-        onTap: onTap,
-      ),
+      itemBuilder: (_, venue, _, onTap) {
+        return VenueItem(
+          venue: venue,
+          isSelected: venue.id == current.id,
+          onTap: onTap,
+        );
+      },
       footer: isOwner ? const _NewVenueFooter() : null,
       footerHeight: isOwner ? 96 : 0,
     );
     if (!mounted || selected == null) return;
-    await _cubit.selectVenue(selected.id);
+    await context.read<HomeCubit>().selectVenue(selected.id);
   }
 
   @override
@@ -62,9 +55,8 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: AppBar(
         title: BlocBuilder<HomeCubit, HomeState>(
-          bloc: _cubit,
           builder: (context, state) => switch (state) {
-            HomeLoaded(:final venue) => VenueListTile(
+            HomeLoaded(:final venue) || HomeNoTables(:final venue) => VenueListTile(
               venue: venue,
               onTap: () => _openVenueSelector(venue),
             ),
@@ -73,35 +65,35 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       body: RefreshIndicator.adaptive(
-        onRefresh: () => _cubit.load(),
+        onRefresh: () => context.read<HomeCubit>().load(),
         child: BlocBuilder<HomeCubit, HomeState>(
-          bloc: _cubit,
           builder: (context, state) => switch (state) {
             HomeNoVenue() => const VenuesEmpty(),
             HomeNoTables(:final venue) => TablesEmpty(venue),
             HomeLoaded(:final venue, :final tables) => HomeSuccess(
               venue: venue,
               tables: tables,
+              onTableTap: (table) => context.push(
+                AppRoutes.tableDetail,
+                extra: table,
+              ),
             ),
             HomeLoading() => const HomeSkeleton(),
             HomeFailure(:final exception) => ErrorBodyWidget(
               exception,
-              onRetryPressed: _cubit.load,
+              onRetryPressed: context.read<HomeCubit>().load,
             ),
           },
         ),
       ),
       floatingActionButton: isOwner
           ? BlocBuilder<HomeCubit, HomeState>(
-              bloc: _cubit,
               builder: (context, state) => switch (state) {
                 HomeLoaded(:final venue) => FloatingActionButton(
-                  onPressed: () {
-                    context.push(
-                      AppRoutes.tableForm,
-                      extra: TableFormExtra(venueId: venue.id),
-                    );
-                  },
+                  onPressed: () => context.push(
+                    AppRoutes.tableForm,
+                    extra: TableFormExtra(venueId: venue.id),
+                  ),
                   child: const Icon(Icons.add_rounded),
                 ),
                 _ => const SizedBox.shrink(),

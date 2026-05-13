@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,19 +111,15 @@ class _VenuesListViewState extends State<VenuesListView> {
   }
 
   Future<void> _onNavigateDetail(VenueModel venue) async {
-    final value = await context.push(
+    final deleted = await context.push<bool>(
       AppRoutes.venueDetail,
       extra: venue,
     );
-    if (value == true) {
-      await _cubit.load();
-    }
+    if (deleted == true) unawaited(_cubit.load());
   }
 
   Future<void> _onAddVenue() async {
     final created = await context.push<VenueModel>(AppRoutes.venueForm);
-    if (created != null) {
-      await _cubit.load();
-    }
+    if (created != null) unawaited(_cubit.load());
   }
 }

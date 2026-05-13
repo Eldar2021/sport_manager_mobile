@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:core/core.dart';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -24,12 +26,20 @@ class FreeTableView extends StatefulWidget {
 }
 
 class _FreeTableViewState extends State<FreeTableView> {
+  late TableModel _table;
+
+  @override
+  void initState() {
+    super.initState();
+    _table = widget.table;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(widget.table.name ?? context.l10n.homeTableTitle(widget.table.number)),
+        title: Text(_table.name ?? context.l10n.homeTableTitle(_table.number)),
         actions: [
           AppEditDeleteMenu(
             onEdit: _onEdit,
@@ -44,8 +54,11 @@ class _FreeTableViewState extends State<FreeTableView> {
             final exception = (state.startStatus as RequestFailure<SessionModel>).exception;
             context.handleError(exception);
           }
+          if (state is TableDetailOccupied) {
+            unawaited(context.read<HomeCubit>().load());
+          }
         },
-        child: FreeTableBody(widget.table),
+        child: FreeTableBody(_table),
       ),
       floatingActionButtonLocation: kAppButtonFabLocation,
       floatingActionButton: BlocBuilder<TableDetailCubit, TableDetailState>(
@@ -73,14 +86,17 @@ class _FreeTableViewState extends State<FreeTableView> {
     );
   }
 
-  void _onEdit() {
-    context.push(
+  Future<void> _onEdit() async {
+    final updated = await context.push<TableModel>(
       AppRoutes.tableForm,
       extra: TableFormExtra(
-        venueId: widget.table.venueId,
-        table: widget.table,
+        venueId: _table.venueId,
+        table: _table,
       ),
     );
+    if (!mounted || updated == null) return;
+    setState(() => _table = updated);
+    widget.tableCubit.updateTable(updated);
   }
 
   Future<void> _onDelete() async {
@@ -98,6 +114,7 @@ class _FreeTableViewState extends State<FreeTableView> {
       TableDetailOccupied(:final deleteStatus) => deleteStatus,
     };
     if (deleteStatus.isSuccess) {
+      unawaited(context.read<HomeCubit>().load());
       context.pop();
     } else if (deleteStatus is RequestFailure<bool>) {
       context.handleError(deleteStatus.exception);
