@@ -26,10 +26,7 @@ class _HomeViewState extends State<HomeView> {
     context.read<HomeCubit>().load();
   }
 
-  Future<void> _openVenueSelector(
-    BuildContext context,
-    VenueModel current,
-  ) async {
+  Future<void> _openVenueSelector(VenueModel current) async {
     final isOwner = context.read<AuthCubit>().state.isOwner;
     final selected = await CustomSheet.open<VenueModel>(
       context: context,
@@ -48,7 +45,7 @@ class _HomeViewState extends State<HomeView> {
       footer: isOwner ? const _NewVenueFooter() : null,
       footerHeight: isOwner ? 96 : 0,
     );
-    if (!context.mounted || selected == null) return;
+    if (!mounted || selected == null) return;
     await context.read<HomeCubit>().selectVenue(selected.id);
   }
 
@@ -61,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
           builder: (context, state) => switch (state) {
             HomeLoaded(:final venue) || HomeNoTables(:final venue) => VenueListTile(
               venue: venue,
-              onTap: () => _openVenueSelector(context, venue),
+              onTap: () => _openVenueSelector(venue),
             ),
             _ => const SizedBox.shrink(),
           },
