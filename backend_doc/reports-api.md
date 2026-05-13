@@ -96,14 +96,14 @@ yeterli; multi-currency düzgün handling v2'de.
 
 | Endpoint                      | OWNER | MANAGER |
 | ----------------------------- | :---: | :-----: |
-| GET `/reports/venues`         |  ✅   |   ❌    |
-| GET `/reports/overview`       |  ✅   |   ❌    |
-| GET `/reports/revenue-series` |  ✅   |   ❌    |
-| GET `/reports/tables`         |  ✅   |   ❌    |
-| GET `/reports/tables/{id}`    |  ✅   |   ❌    |
-| GET `/reports/managers`       |  ✅   |   ❌    |
-| GET `/reports/managers/{id}`  |  ✅   |   ❌    |
-| GET `/reports/forecast`       |  ✅   |   ❌    |
+| GET `/api/v1/reports/venues`         |  ✅   |   ❌    |
+| GET `/api/v1/reports/overview`       |  ✅   |   ❌    |
+| GET `/api/v1/reports/revenue-series` |  ✅   |   ❌    |
+| GET `/api/v1/reports/tables`         |  ✅   |   ❌    |
+| GET `/api/v1/reports/tables/{id}`    |  ✅   |   ❌    |
+| GET `/api/v1/reports/managers`       |  ✅   |   ❌    |
+| GET `/api/v1/reports/managers/{id}`  |  ✅   |   ❌    |
+| GET `/api/v1/reports/forecast`       |  ✅   |   ❌    |
 
 Manager rolüyle bu uçların hiçbiri çağrılmaz; backend her zaman `403
 FORBIDDEN` dönebilir.
@@ -142,7 +142,8 @@ Diğer doclarla aynı zarfı kullanır (bkz. [auth-api.md](auth-api.md#error-res
     "en": "Report data not found",
     "ru": "Данные отчёта не найдены",
     "ky": "Отчёт маалыматтары табылган жок"
-  }
+  },
+  "details": null
 }
 ```
 
@@ -162,7 +163,7 @@ Diğer doclarla aynı zarfı kullanır (bkz. [auth-api.md](auth-api.md#error-res
 
 ## Endpoint'ler
 
-### 1. GET `/reports/venues`
+### 1. GET `/api/v1/reports/venues`
 
 Owner'a ait mekanların hafif listesi — Reports ekranındaki venue picker
 bottom sheet'i bunu kullanır. Masa veya session bilgisi içermez.
@@ -199,7 +200,7 @@ ve raporun diğer bölümleri "data yok" gösterir.
 
 ---
 
-### 2. GET `/reports/overview`
+### 2. GET `/api/v1/reports/overview`
 
 Üst seviye KPI özeti (gelir, oturum, iptal). MVP'de **sadece bu üç
 alan**; ortalama süre / occupancy / aktif masa sayısı kasıtlı olarak
@@ -253,7 +254,7 @@ Mobile delta hesabını client-side yapar (`(current - previous) / previous × 1
 
 ---
 
-### 3. GET `/reports/revenue-series`
+### 3. GET `/api/v1/reports/revenue-series`
 
 Günlük (ya da yıl periyodunda aylık) gelir noktaları — overview'daki bar
 chart'ı besler.
@@ -299,7 +300,7 @@ Query: ortak parametreler.
 
 ---
 
-### 4. GET `/reports/tables`
+### 4. GET `/api/v1/reports/tables`
 
 Seçili mekandaki **tüm** masaların gelir desc sıralı listesi. Top-N limiti
 yok — owner'ın hangi masanın az kazandığını görmesi için tam liste lazım.
@@ -353,7 +354,7 @@ Sıralama: `revenue DESC`. Bağ kopması için `tableNumber ASC`.
 
 ---
 
-### 5. GET `/reports/tables/{id}`
+### 5. GET `/api/v1/reports/tables/{id}`
 
 Tek masanın detay sayfası — overview KPI'larına ek olarak günlük/aylık
 gelir trendi ve saat-gün heatmap'i içerir.
@@ -401,8 +402,8 @@ Query: ortak parametreler.
 
 | Field           | Type           | Notes                                                                                                                                                                                                                                     |
 | --------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `summary`       | TableReportRow | `/reports/tables` listesindeki aynı satır şeması                                                                                                                                                                                          |
-| `revenueSeries` | RevenuePoint[] | `/reports/revenue-series` ile aynı bucket kuralı (period'a göre günlük/aylık), bu masaya scope'lu                                                                                                                                         |
+| `summary`       | TableReportRow | `/api/v1/reports/tables` listesindeki aynı satır şeması                                                                                                                                                                                          |
+| `revenueSeries` | RevenuePoint[] | `/api/v1/reports/revenue-series` ile aynı bucket kuralı (period'a göre günlük/aylık), bu masaya scope'lu                                                                                                                                         |
 | `hourHeatmap`   | int[7][24]     | 7 satır (ISO 8601 Pzt=index 0 … Paz=index 6) × 24 sütun (saat 0…23). Hücre değeri = o gün × o saat dilimine düşen COMPLETED session toplam revenue. `from`/`to` aralığındaki TÜM tarihlerde toplanır (period kullanıcının seçtiği aralık) |
 
 Heatmap format kritik:
@@ -421,7 +422,7 @@ Heatmap format kritik:
 
 ---
 
-### 6. GET `/reports/managers`
+### 6. GET `/api/v1/reports/managers`
 
 Seçili mekanda gelir üretmiş manager'ların listesi (gelir desc).
 
@@ -467,13 +468,13 @@ Query: ortak parametreler.
 Sıralama: `revenue DESC`. **Risk skoru / fraud sinyalleri yok** — UI
 sadece "kim ne kadar gelir üretti, kaç session iptal etti" gösterir.
 
-> **Backend prerequisite:** `Session` kaydında `managerId` alanı olmalı
-> (kim başlattı / bitirdi). `home_page_api.md` ve `session_api.md`'de bu
-> alan henüz yok — eklenmesi şart.
+> **Backend prerequisite:** `Session` kaydında `managerId` alanı bulunur
+> (kim başlattı / bitirdi). Bkz. [session_api.md § Response Modelleri](session_api.md#response-modelleri)
+> ve [home_page_api.md § Session](home_page_api.md#session).
 
 ---
 
-### 7. GET `/reports/managers/{id}`
+### 7. GET `/api/v1/reports/managers/{id}`
 
 Manager detay sayfası — KPI özeti + son ~40 session'ın log'u.
 
@@ -533,7 +534,7 @@ Query: ortak parametreler.
 
 | Field        | Type              | Notes                                              |
 | ------------ | ----------------- | -------------------------------------------------- |
-| `summary`    | ManagerReportRow  | `/reports/managers` listesindeki aynı satır şeması |
+| `summary`    | ManagerReportRow  | `/api/v1/reports/managers` listesindeki aynı satır şeması |
 | `sessionLog` | SessionLogEntry[] | En fazla **40** satır, `startedAt DESC`            |
 
 **SessionLogEntry alanları:**
@@ -566,7 +567,7 @@ Query: ortak parametreler.
 
 ---
 
-### 8. GET `/reports/forecast`
+### 8. GET `/api/v1/reports/forecast`
 
 Mevcut tempoda **bu takvim periyodunun sonu** için projeksiyon. Sadece
 overview kartının üstünde gösterilir.
@@ -667,14 +668,14 @@ sözleşme garanti edilmeli:
 
 | Method | Path                      | Cache | Rate Limit |
 | ------ | ------------------------- | ----- | ---------- |
-| GET    | `/reports/venues`         | 60s   | 60/dk      |
-| GET    | `/reports/overview`       | 5 dk  | 60/dk      |
-| GET    | `/reports/revenue-series` | 5 dk  | 60/dk      |
-| GET    | `/reports/tables`         | 5 dk  | 60/dk      |
-| GET    | `/reports/tables/{id}`    | 5 dk  | 60/dk      |
-| GET    | `/reports/managers`       | 5 dk  | 60/dk      |
-| GET    | `/reports/managers/{id}`  | 5 dk  | 60/dk      |
-| GET    | `/reports/forecast`       | 15 dk | 30/dk      |
+| GET    | `/api/v1/reports/venues`         | 60s   | 60/dk      |
+| GET    | `/api/v1/reports/overview`       | 5 dk  | 60/dk      |
+| GET    | `/api/v1/reports/revenue-series` | 5 dk  | 60/dk      |
+| GET    | `/api/v1/reports/tables`         | 5 dk  | 60/dk      |
+| GET    | `/api/v1/reports/tables/{id}`    | 5 dk  | 60/dk      |
+| GET    | `/api/v1/reports/managers`       | 5 dk  | 60/dk      |
+| GET    | `/api/v1/reports/managers/{id}`  | 5 dk  | 60/dk      |
+| GET    | `/api/v1/reports/forecast`       | 15 dk | 30/dk      |
 
 > Owner reports ekranını saniyede bir refresh etmeyecek — 5 dakikalık
 > server-side cache pratikte yeterli ve veritabanı yükünü ciddi
@@ -684,8 +685,9 @@ sözleşme garanti edilmeli:
 
 ## Backend Prerequisites
 
-1. **`Session.managerId`** — kim başlattı/bitirdi alanı şu an
-   `session_api.md`'de yok. Manager raporları bunsuz çalışmaz.
+1. **`Session.managerId`** — kim başlattı/bitirdi alanı. `session_api.md`
+   ve `home_page_api.md` Session şemalarında tanımlı. Manager raporları
+   bunu kullanır.
 2. **Session timestamp'leri server-side garanti** — `startedAt`/`endedAt`
    client'tan gelmiyor (zaten `session_api.md` bunu sağlıyor). Forecast
    ve clipping doğru çalışsın diye kritik.

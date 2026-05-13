@@ -6,13 +6,13 @@ Owner-tarafından yönetilen manager listesi. Mobil istemci (`packages/managers`
 **Content-Type:** `application/json; charset=utf-8`
 **Auth:** Tüm uçlar `Authorization: Bearer <accessToken>` ister, **role = `OWNER`**. Owner olmayan kullanıcı `403` almalı.
 
-> Invite kod (gösterilmek için) ayrı bir uca ait: `POST /auth/invite-code` (bkz. [auth-api.md](auth-api.md#6-post-authinvite-code)). Managers ekranı bu mevcut ucu yeniden kullanır.
+> Invite kod (gösterilmek için) ayrı bir uca ait: `POST /api/v1/auth/invite-code` (bkz. [auth-api.md](auth-api.md#6-post-apiv1authinvite-code)). Managers ekranı bu mevcut ucu yeniden kullanır.
 >
-> Invite kodun **rotation / yenileme** uç noktası şu an için yok — istemcide "yenile" butonu da yoktur. Eklenirse `POST /auth/invite-code/refresh` öneriyoruz.
+> Invite kodun **rotation / yenileme** uç noktası şu an için yok — istemcide "yenile" butonu da yoktur. Eklenirse `POST /api/v1/auth/invite-code/refresh` öneriyoruz.
 
 ---
 
-## 1. GET `/managers`
+## 1. GET `/api/v1/managers`
 
 Owner'a bağlı manager listesi.
 
@@ -54,7 +54,7 @@ Query parametresi yok. Body yok.
 
 ---
 
-## 2. DELETE `/managers/{id}`
+## 2. DELETE `/api/v1/managers/{id}`
 
 Belirtilen manager hesabını owner'ın takımından çıkarır. Backend tarafında manager'ın aktif sessionları varsa nasıl davranacağı backend kararı (kapatılabilir veya `409` dönebilir).
 
@@ -110,7 +110,8 @@ Body beklenmiyor.
     "en": "Manager not found",
     "ru": "Менеджер не найден",
     "ky": "Менеджер табылган жок"
-  }
+  },
+  "details": null
 }
 ```
 

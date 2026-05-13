@@ -64,13 +64,13 @@ Masa kullanım sürelerini yöneten endpoint'ler. Bir masada müşteri oturduğu
 
 ## Authorization Rolleri
 
-| Endpoint                    | OWNER | MANAGER |
-| --------------------------- | :---: | :-----: |
-| POST `/session/start`       |  ✅   |   ✅    |
-| POST `/session/{id}/pause`  |  ✅   |   ✅    |
-| POST `/session/{id}/resume` |  ✅   |   ✅    |
-| POST `/session/{id}/finish` |  ✅   |   ✅    |
-| POST `/session/{id}/cancel` |  ✅   |  ✅\*   |
+| Endpoint                           | OWNER | MANAGER |
+| ---------------------------------- | :---: | :-----: |
+| POST `/api/v1/session/start`       |  ✅   |   ✅    |
+| POST `/api/v1/session/{id}/pause`  |  ✅   |   ✅    |
+| POST `/api/v1/session/{id}/resume` |  ✅   |   ✅    |
+| POST `/api/v1/session/{id}/finish` |  ✅   |   ✅    |
+| POST `/api/v1/session/{id}/cancel` |  ✅   |  ✅\*   |
 
 > \*Manager `cancel` çağırabilir ama sadece **session başladıktan sonraki ilk 60 saniye içinde**. Bu süre dolduktan sonra sadece owner cancel edebilir.
 
@@ -88,6 +88,7 @@ Aktif (ACTIVE veya PAUSED) session için. `start`, `pause`, `resume` response'la
 {
   id: string (uuid),
   tableId: string (uuid),
+  managerId: string (uuid),            // session'ı başlatan kullanıcı (owner veya manager)
   status: "ACTIVE" | "PAUSED",
   startedAt: string (ISO 8601),
   totalPausedSeconds: integer,         // mobile sayaç hesabı için
@@ -105,6 +106,7 @@ Bitmiş session için. `finish` ve `cancel` response'larında dönen yapı.
 {
   id: string (uuid),
   tableId: string (uuid),
+  managerId: string (uuid),            // session'ı başlatan kullanıcı (kimlik audit)
   status: "COMPLETED" | "CANCELLED",
   startedAt: string (ISO 8601),
   endedAt: string (ISO 8601),
@@ -119,6 +121,8 @@ Bitmiş session için. `finish` ve `cancel` response'larında dönen yapı.
   cancelReason: string | null
 }
 ```
+
+> **`managerId`:** Session'ı başlatan kullanıcının ID'si (owner kendisi başlattıysa owner'ın ID'si, manager başlattıysa manager'ın ID'si). Reports tarafı (manager performans / fraud sinyalleri) bu alanı kullanır. Bkz. [reports-api.md](reports-api.md).
 
 ### Hesaplama Formülleri
 
@@ -165,6 +169,7 @@ totalAmount    = subtotal - discountAmount
 | `SESSION_ALREADY_COMPLETED` | 409  | Session zaten tamamlanmış, işlem yapılamaz              |
 | `CANCEL_WINDOW_EXPIRED`     | 422  | 60 saniyelik iptal süresi doldu                         |
 | `INVALID_DISCOUNT`          | 422  | İndirim yüzdesi 0-100 aralığında değil                  |
+| `SUBSCRIPTION_REQUIRED`     | 403  | Owner aboneliği `EXPIRED` veya `GRACE@0` (yazma gate; bkz. [subscription-api.md](subscription-api.md#subscription-gate--diğer-endpointlere-etkisi)) |
 
 ---
 
@@ -201,6 +206,7 @@ POST /api/v1/session/start
 {
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "tableId": "660e8400-e29b-41d4-a716-446655440001",
+  "managerId": "user-101",
   "status": "ACTIVE",
   "startedAt": "2026-04-27T18:42:00.000Z",
   "totalPausedSeconds": 0,
@@ -215,6 +221,7 @@ POST /api/v1/session/start
 - `404 TABLE_NOT_FOUND`
 - `409 TABLE_HAS_ACTIVE_SESSION`
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 **Race condition:** Backend transaction içinde masayı lock'lar. İki paralel start denemesi gelirse biri başarılı olur, diğeri 409 alır.
 
@@ -244,6 +251,7 @@ POST /api/v1/session/{id}/pause
 {
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "tableId": "660e8400-e29b-41d4-a716-446655440001",
+  "managerId": "user-101",
   "status": "PAUSED",
   "startedAt": "2026-04-27T18:42:00.000Z",
   "totalPausedSeconds": 0,
@@ -263,6 +271,7 @@ POST /api/v1/session/{id}/pause
 - `404 SESSION_NOT_FOUND`
 - `409 SESSION_NOT_ACTIVE`
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 
@@ -288,6 +297,7 @@ POST /api/v1/session/{id}/resume
 {
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "tableId": "660e8400-e29b-41d4-a716-446655440001",
+  "managerId": "user-101",
   "status": "ACTIVE",
   "startedAt": "2026-04-27T18:42:00.000Z",
   "totalPausedSeconds": 600,
@@ -308,6 +318,7 @@ POST /api/v1/session/{id}/resume
 - `404 SESSION_NOT_FOUND`
 - `409 SESSION_NOT_PAUSED`
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 
@@ -355,6 +366,7 @@ POST /api/v1/session/{id}/finish
 {
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "tableId": "660e8400-e29b-41d4-a716-446655440001",
+  "managerId": "user-101",
   "status": "COMPLETED",
   "startedAt": "2026-04-27T18:42:00.000Z",
   "endedAt": "2026-04-27T20:12:00.000Z",
@@ -385,6 +397,7 @@ POST /api/v1/session/{id}/finish
 - `409 SESSION_ALREADY_COMPLETED`
 - `422 INVALID_DISCOUNT`
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 
@@ -423,6 +436,7 @@ POST /api/v1/session/{id}/cancel
 {
   "id": "770e8400-e29b-41d4-a716-446655440002",
   "tableId": "660e8400-e29b-41d4-a716-446655440001",
+  "managerId": "user-101",
   "status": "CANCELLED",
   "startedAt": "2026-04-27T18:42:00.000Z",
   "endedAt": "2026-04-27T18:42:30.000Z",
@@ -446,6 +460,7 @@ POST /api/v1/session/{id}/cancel
 - `409 SESSION_ALREADY_COMPLETED`
 - `422 CANCEL_WINDOW_EXPIRED`
 - `403 FORBIDDEN`
+- `403 SUBSCRIPTION_REQUIRED` — owner aboneliği `EXPIRED` / `GRACE@0`
 
 ---
 
