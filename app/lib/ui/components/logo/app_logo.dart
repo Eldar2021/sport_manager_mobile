@@ -12,22 +12,24 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: size,
-      height: size,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: context.colors.primary.withValues(
-                alpha: AppOpacity.brandGlow,
+    return Center(
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: context.colors.primary.withValues(
+                  alpha: AppOpacity.brandGlow,
+                ),
+                blurRadius: AppSpacing.x6,
+                offset: const Offset(0, AppSpacing.x3),
               ),
-              blurRadius: AppSpacing.x6,
-              offset: const Offset(0, AppSpacing.x3),
-            ),
-          ],
+            ],
+          ),
+          child: Assets.icons.appIcon.svg(),
         ),
-        child: Assets.icons.appIcon.svg(),
       ),
     );
   }
