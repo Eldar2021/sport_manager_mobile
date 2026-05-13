@@ -127,7 +127,7 @@ class _ProfileViewState extends State<ProfileView> {
               child: GestureDetector(
                 onLongPress: Env.isDev ? () => _openTalker(context) : null,
                 child: Text(
-                  'Sport X MVP',
+                  'Dula MVP',
                   style: context.appTextStyles.disabled.bodySmall,
                 ),
               ),

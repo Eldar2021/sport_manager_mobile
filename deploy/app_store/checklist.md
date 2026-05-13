@@ -1,10 +1,10 @@
-# App Store Submission Checklist — Sport X
+# App Store Submission Checklist — Dula
 
 Submit'e basmadan önce her satırı doğrula.
 
 ## Proje
 - [ ] `app/pubspec.yaml` → `version` doğru artırıldı (build number unique)
-- [ ] `app/ios/Runner/Info.plist` → `CFBundleDisplayName` = "Sport X" (App Store Name ile aynı)
+- [ ] `app/ios/Runner/Info.plist` → `CFBundleDisplayName` = "Dula" (App Store Name ile aynı)
 - [ ] `ITSAppUsesNonExemptEncryption` Info.plist'e eklendi (false)
 - [ ] `prod.env` doğru `BASE_URL` içeriyor ve `.gitignore`'da
 - [ ] `Env.isMock` prod build'inde false (manuel doğrulama)
@@ -14,7 +14,7 @@ Submit'e basmadan önce her satırı doğrula.
 - [ ] Talker / Dio logger release modunda kapalı
 
 ## App Store Connect record
-- [ ] App record oluşturuldu (`Sport X`, bundle `com.sport.manager.mobile`)
+- [ ] App record oluşturuldu (`Dula`, bundle `com.sport.manager.mobile`)
 - [ ] Primary Language: English (U.S.)
 - [ ] Category: Business / Productivity
 - [ ] Age Rating: 4+

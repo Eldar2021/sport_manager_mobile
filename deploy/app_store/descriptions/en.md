@@ -2,7 +2,7 @@
 
 ## App Name (max 30)
 ```
-Sport X
+Dula
 ```
 
 ## Subtitle (max 30)
@@ -22,9 +22,9 @@ venue,facility,billiard,pool,session,table,booking,sports,club,manager,owner,rev
 
 ## Description (max 4000)
 ```
-Sport X is the all-in-one management app for sports venues — billiard halls, pool clubs, and game rooms.
+Dula is the all-in-one management app for sports venues — billiard halls, pool clubs, and game rooms.
 
-Designed for owners and floor managers, Sport X turns daily operations into a clear, real-time workflow on your phone or tablet.
+Designed for owners and floor managers, Dula turns daily operations into a clear, real-time workflow on your phone or tablet.
 
 WHAT YOU CAN DO
 
@@ -49,7 +49,7 @@ FOR MANAGERS
 • Clean, fast UI tuned for use behind the counter
 
 BUILT FOR THE FLOOR
-Sport X is designed to be used on a busy night — large tap targets, fast lists, offline-tolerant flows and a warm dark theme that doesn't burn your eyes during late shifts.
+Dula is designed to be used on a busy night — large tap targets, fast lists, offline-tolerant flows and a warm dark theme that doesn't burn your eyes during late shifts.
 
 PRIVACY FIRST
 We collect only what we need to run your account. No third-party advertising. No tracking across other apps. See our privacy policy for full details.
@@ -57,12 +57,12 @@ We collect only what we need to run your account. No third-party advertising. No
 SUPPORT
 Questions or feedback? Reach us anytime through the Support section in the app or visit our website. We listen and ship fast.
 
-Sport X — your sports facility, in your pocket.
+Dula — your sports facility, in your pocket.
 ```
 
 ## What's New (max 4000) — v1.0.0
 ```
-Welcome to Sport X.
+Welcome to Dula.
 
 This is our first public release. With this version you can:
 

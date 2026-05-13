@@ -2,9 +2,9 @@
 
 | Alan | Değer |
 |------|-------|
-| App Name | `Sport X` |
+| App Name | `Dula` |
 | Bundle ID | `com.sport.manager.mobile` |
-| SKU | `sport-x-ios-001` |
+| SKU | `dula-ios-001` |
 | Apple Team ID | `K9JN47N96M` |
 | Primary Language | English (U.S.) |
 | Supported Languages | English, Russian, Kyrgyz |

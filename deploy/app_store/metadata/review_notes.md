@@ -20,7 +20,7 @@ App Store Connect → Version → "App Review Information" altına yapıştırı
 ## Notes (örnek metin — İngilizce)
 
 ```
-Sport X is a venue/facility management app for sports halls (billiard, etc.).
+Dula is a venue/facility management app for sports halls (billiard, etc.).
 
 How to test:
 
@@ -53,7 +53,7 @@ Contact: <support email>
 - First name: `<contact-first>`
 - Last name: `<contact-last>`
 - Phone: `<+xx ...>`
-- Email: `<support@sportx.app>`
+- Email: `<support@dula.app>`
 
 ## Attachments
 - (Opsiyonel) 30 saniyelik demo video — özellikle login + venue + session akışı

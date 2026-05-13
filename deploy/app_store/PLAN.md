@@ -1,6 +1,6 @@
-# App Store Yayın Planı — Sport X
+# App Store Yayın Planı — Dula
 
-**Uygulama:** Sport X (Sport Manager Mobile)
+**Uygulama:** Dula (Sport Manager Mobile)
 **Bundle ID:** `com.sport.manager.mobile`
 **Apple Team ID:** `K9JN47N96M`
 **Sürüm:** `1.0.0` (build `1`)
@@ -49,7 +49,7 @@ Sonraki sürümlerde:
 `CFBundleVersion` (build number) her yüklemede artmalı, App Store Connect aynı build numarasını ikinci kez kabul etmez.
 
 ### 2.2 Bundle Display Name
-[app/ios/Runner/Info.plist](../../app/ios/Runner/Info.plist) → `CFBundleDisplayName = "Sport X"`. **App Store Connect'teki "App Name" alanı ile bire bir aynı olmalı** (max 30 karakter).
+[app/ios/Runner/Info.plist](../../app/ios/Runner/Info.plist) → `CFBundleDisplayName = "Dula"`. **App Store Connect'teki "App Name" alanı ile bire bir aynı olmalı** (max 30 karakter).
 
 ### 2.3 Ortam değişkenleri
 - `dev.env` / `dev_mock.env` / `prod.env` mevcut. Prod release komutu:
@@ -92,10 +92,10 @@ make build-runner          # .g.dart güncel
 ### 3.1 App record oluşturma
 App Store Connect → My Apps → "+" → New App
 - **Platform:** iOS
-- **Name:** `Sport X`
+- **Name:** `Dula`
 - **Primary Language:** English (U.S.)
 - **Bundle ID:** `com.sport.manager.mobile` (Developer Portal'da önceden register edilmiş olmalı)
-- **SKU:** `sport-x-ios-001` (iç ID, değiştirilemez)
+- **SKU:** `dula-ios-001` (iç ID, değiştirilemez)
 - **User Access:** Full Access
 
 ### 3.2 Bundle ID & yetenekler
@@ -113,7 +113,7 @@ Developer Portal → Identifiers → `com.sport.manager.mobile`:
 - Manuel olarak Match/Fastlane kullanılmıyorsa Xcode > Settings > Accounts altında Apple ID girili olmalı
 
 ### 3.4 App Privacy
-App Store Connect → App Privacy bölümünde her veri tipi için "topluyor mu, kim toplar, nasıl kullanır" cevaplanır. Sport X için **muhtemel** veri tipleri:
+App Store Connect → App Privacy bölümünde her veri tipi için "topluyor mu, kim toplar, nasıl kullanır" cevaplanır. Dula için **muhtemel** veri tipleri:
 - **Contact Info → Name, Email/Phone** (auth için, hesaba bağlı)
 - **Identifiers → User ID** (auth tokenı, hesaba bağlı)
 - **Usage Data → Product Interaction** (Firebase Analytics aktifse, hesaba bağlı değil → Analytics)
@@ -158,7 +158,7 @@ Her dil (en, ru, ky) için ayrı set. Önerilen senaryo (5 görüntü):
 
 ### 4.4 Açıklamalar — [descriptions/](descriptions/)
 Her dil için ayrı:
-- **App Name** (max 30): `Sport X`
+- **App Name** (max 30): `Dula`
 - **Subtitle** (max 30): `Spor tesisi yönetimi` (loc karşılığı)
 - **Promotional Text** (max 170, yayın sonrası değişebilir — re-review gerekmez)
 - **Description** (max 4000): uzun açıklama
@@ -166,9 +166,9 @@ Her dil için ayrı:
 - **What's New** (max 4000, her sürümde değişir)
 
 ### 4.5 URL'ler
-- **Support URL** (zorunlu): örn. `https://sportx.app/support`
+- **Support URL** (zorunlu): örn. `https://dula.app/support`
 - **Marketing URL** (opsiyonel)
-- **Privacy Policy URL** (zorunlu): örn. `https://sportx.app/privacy`
+- **Privacy Policy URL** (zorunlu): örn. `https://dula.app/privacy`
 
 ### 4.6 Yaş derecelendirmesi
 4+ — şiddet, müstehcen içerik, kumar (saymıyoruz), korkutucu tema, sınırsız web erişimi yok.
@@ -217,7 +217,7 @@ xcrun altool --upload-app -f build/ios/ipa/*.ipa \
 - En az 1 turda dış kullanıcı testi önerilir
 
 ### 5.6 Export Compliance
-Build yüklenince App Store Connect "Does your app use encryption?" sorar. Sport X HTTPS dışında kripto kullanmıyor → **"Standart kripto, exemption"** seçilir. Tek seferlik plist anahtarı:
+Build yüklenince App Store Connect "Does your app use encryption?" sorar. Dula HTTPS dışında kripto kullanmıyor → **"Standart kripto, exemption"** seçilir. Tek seferlik plist anahtarı:
 ```xml
 <key>ITSAppUsesNonExemptEncryption</key>
 <false/>
@@ -299,7 +299,7 @@ App Store onayı alındıktan sonra `deploy/play_store/` klasörünü açıp şu
 
 ## 9. Kalan açık sorular (yayın öncesi karara bağlanmalı)
 
-- [ ] **App Name kesin mi?** `Sport X` → marka çakışması var mı (Apple isim kontrolü yapar)?
+- [ ] **App Name kesin mi?** `Dula` → marka çakışması var mı (Apple isim kontrolü yapar)?
 - [ ] **Abonelik IAP mu, harici mi?** Eğer IAP zorunluysa `packages/subscription` mevcut REST akışı `StoreKit` ile değiştirilmeli veya hibrit yaklaşım belirlenmeli.
 - [ ] **Hesap silme akışı uygulamada var mı?** Yoksa zorunlu — `features/profile/` veya `features/settings/` altına eklenmeli (Apple 5.1.1(v) — 30 Haziran 2022).
 - [ ] **Production backend URL'i ve demo hesap** Apple inceleyicisinin erişebileceği şekilde hazır mı?

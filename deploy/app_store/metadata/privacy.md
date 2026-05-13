@@ -3,7 +3,7 @@
 App Store Connect → App Privacy bölümünün taslak cevapları. **Submit öncesi backend ile final ekibi onayı gerekir.**
 
 ## Privacy Policy
-URL: `https://sportx.app/privacy` *(yayınlanmış olmalı — placeholder)*
+URL: `https://dula.app/privacy` *(yayınlanmış olmalı — placeholder)*
 
 ## Veri tipleri
 
