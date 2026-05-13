@@ -26,7 +26,7 @@ class FreeTableBody extends StatelessWidget {
           icon: Icons.circle,
         ),
         const SizedBox(height: AppSpacing.x5),
-        const AppLogo(), 
+        const AppLogo(),
         const SizedBox(height: AppSpacing.x5),
         Text(
           name,
