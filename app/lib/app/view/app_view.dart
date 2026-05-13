@@ -47,7 +47,7 @@ class MyAppWrapper extends StatelessWidget {
         BlocProvider(
           create: (_) => HomeCubit(
             GetIt.I<FacilityRepository>(),
-          )..load(),
+          ),
         ),
       ],
       child: BlocListener<AuthCubit, AuthState>(
