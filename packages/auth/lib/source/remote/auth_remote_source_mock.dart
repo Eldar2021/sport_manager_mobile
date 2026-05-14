@@ -109,7 +109,7 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
   }
 
   @override
-  Future<void> updatePassword({
+  Future<AuthTokensModel> updatePassword({
     required String login,
     required String newPassword,
   }) async {
@@ -117,6 +117,7 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     if (newPassword.length < 8) {
       throw const AuthException(AuthErrorCode.unknown, message: _weakPassword);
     }
+    return _tokens;
   }
 
   @override

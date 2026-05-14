@@ -83,13 +83,14 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   }
 
   @override
-  Future<void> updatePassword({
+  Future<AuthTokensModel> updatePassword({
     required String login,
     required String newPassword,
   }) {
     return _bearerClient
-        .post<void>(
+        .postType<AuthTokensModel>(
           '$_authBaseUrl/update-password',
+          fromJson: AuthTokensModel.fromJson,
           data: {
             'login': login,
             'newPassword': newPassword,
