@@ -4,15 +4,15 @@ Submit'e basmadan önce her satırı doğrula.
 
 ## Proje
 
-- [ ] `app/pubspec.yaml` → `version` doğru artırıldı (build number unique)
-- [ ] `app/ios/Runner/Info.plist` → `CFBundleDisplayName` = "Dula" (App Store Name ile aynı)
-- [ ] `ITSAppUsesNonExemptEncryption` Info.plist'e eklendi (false)
-- [ ] `prod.env` doğru `BASE_URL` içeriyor ve `.gitignore`'da
-- [ ] `Env.isMock` prod build'inde false (manuel doğrulama)
-- [ ] `melos run analyze-check` temiz
-- [ ] `melos run unit-test` yeşil
-- [ ] `make build-runner` çalıştırıldı, `.g.dart` güncel ve commit'li
-- [ ] Talker / Dio logger release modunda kapalı
+- [x] `app/pubspec.yaml` → `version` doğru artırıldı (build number unique)
+- [x] `app/ios/Runner/Info.plist` → `CFBundleDisplayName` = "Dula" (App Store Name ile aynı)
+- [x] `ITSAppUsesNonExemptEncryption` Info.plist'e eklendi (false)
+- [x] `prod.env` doğru `BASE_URL` içeriyor ve `.gitignore`'da
+- [x] `Env.isMock` prod build'inde false (manuel doğrulama)
+- [x] `melos run analyze-check` temiz
+- [x] `melos run unit-test` yeşil
+- [x] `make build-runner` çalıştırıldı, `.g.dart` güncel ve commit'li
+- [x] Talker / Dio logger release modunda kapalı
 
 ## App Store Connect record
 
@@ -31,7 +31,7 @@ Submit'e basmadan önce her satırı doğrula.
 
 ## Görsel materyal
 
-- [ ] 1024×1024 App Store icon (PNG, alpha yok, sRGB) — `icons/app_store_icon_1024.png`
+- [x] 1024×1024 App Store icon (PNG, alpha yok, sRGB) — `icons/app_store_icon_1024.png`
 - [ ] 6.9" iPhone screenshots × en az 3 (en, ru, ky)
 - [ ] 6.7" iPhone screenshots × en az 3 (en, ru, ky)
 - [ ] 5.5" iPhone screenshots × en az 3 (en, ru, ky)
@@ -40,12 +40,12 @@ Submit'e basmadan önce her satırı doğrula.
 
 ## Metin materyali (her dil için)
 
-- [ ] App Name (max 30)
-- [ ] Subtitle (max 30)
-- [ ] Promotional Text (max 170)
-- [ ] Description (max 4000)
-- [ ] Keywords (max 100)
-- [ ] What's New (max 4000) — ilk sürüm: "Initial release"
+- [x] App Name (max 30)
+- [x] Subtitle (max 30)
+- [x] Promotional Text (max 170)
+- [x] Description (max 4000)
+- [x] Keywords (max 100)
+- [x] What's New (max 4000) — ilk sürüm: "Initial release"
 
 ## URL'ler
 
@@ -68,10 +68,10 @@ Submit'e basmadan önce her satırı doğrula.
 
 ## Zorunlu özellikler
 
-- [ ] **Hesap silme akışı uygulama içinde mevcut** (Apple Guideline 5.1.1(v))
-- [ ] Şifre sıfırlama akışı çalışıyor
-- [ ] Logout akışı çalışıyor
-- [ ] Bütün hata mesajları lokalize (3 dil)
+- [x] **Hesap silme akışı uygulama içinde mevcut** (Apple Guideline 5.1.1(v))
+- [x] Şifre sıfırlama akışı çalışıyor
+- [x] Logout akışı çalışıyor
+- [x] Bütün hata mesajları lokalize (3 dil)
 
 ## Build
 
