@@ -9,6 +9,7 @@ import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
@@ -140,6 +141,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     if (mounted && updated != null) {
       setState(() => _venue = updated);
       unawaited(context.read<HomeCubit>().load());
+      unawaited(context.read<ProfileCubit>().fetchProfile());
     }
   }
 
@@ -156,6 +158,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     final status = _cubit.state.deleteStatus;
     if (status is RequestSuccess<bool>) {
       unawaited(context.read<HomeCubit>().load());
+      unawaited(context.read<ProfileCubit>().fetchProfile());
       context.pop(true);
     } else if (status is RequestFailure<bool>) {
       context.handleError(status.exception);

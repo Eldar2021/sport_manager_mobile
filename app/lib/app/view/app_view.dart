@@ -10,6 +10,7 @@ import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/env.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
 import 'package:sport_manager_mobile/features/subscription/subscription.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
@@ -49,6 +50,11 @@ class MyAppWrapper extends StatelessWidget {
             GetIt.I<FacilityRepository>(),
           ),
         ),
+        BlocProvider(
+          create: (_) => ProfileCubit(
+            GetIt.I<AuthRepository>(),
+          ),
+        ),
       ],
       child: BlocListener<AuthCubit, AuthState>(
         listenWhen: (prev, next) => prev.runtimeType != next.runtimeType,
@@ -64,6 +70,7 @@ class MyAppWrapper extends StatelessWidget {
       cubit.loadSummary();
     } else if (authState is AuthUnauthenticated) {
       cubit.clear();
+      context.read<ProfileCubit>().clearState();
     }
   }
 }

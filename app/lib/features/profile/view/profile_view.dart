@@ -1,7 +1,6 @@
 import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/env.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
@@ -18,22 +17,15 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  late final ProfileCubit _profileCubit;
-
   @override
   void initState() {
     super.initState();
-    _profileCubit = ProfileCubit(GetIt.I<AuthRepository>());
-    _profileCubit.fetchProfile();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _fetchProfile());
   }
 
-  @override
-  void dispose() {
-    _profileCubit.close();
-    super.dispose();
+  Future<void> _fetchProfile() {
+    return context.read<ProfileCubit>().fetchProfile();
   }
-
-  Future<void> _refreshProfile() => _profileCubit.fetchProfile();
 
   void _openTalker(BuildContext context) {
     Navigator.of(context).push(
@@ -81,19 +73,18 @@ class _ProfileViewState extends State<ProfileView> {
         title: Text(context.l10n.navProfile),
       ),
       body: RefreshIndicator.adaptive(
-        onRefresh: _refreshProfile,
+        onRefresh: _fetchProfile,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(AppSpacing.x4),
           children: [
             BlocBuilder<ProfileCubit, DataState<ProfileModel>>(
-              bloc: _profileCubit,
               builder: (context, state) {
                 return switch (state) {
                   DataLoading<ProfileModel>() || DataInitial<ProfileModel>() => const _ProfileLoading(),
                   DataFailure<ProfileModel>() => ProfileErrorView(
                     error: state.exception,
-                    onRetry: _refreshProfile,
+                    onRetry: _fetchProfile,
                   ),
                   DataSuccess<ProfileModel>(:final data) => _ProfileLoaded(data),
                 };
