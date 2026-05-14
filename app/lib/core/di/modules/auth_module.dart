@@ -26,14 +26,8 @@ final class AuthModule extends BaseDiModule {
         () => Env.isMock
             ? AuthRemoteSourceMock()
             : AuthRemoteSourceImpl(
-                noAuthClient: ApiClient.fromDio(
-                  dio: sl<Dio>(instanceName: ApiClient.noneAuthInstance),
-                  connection: sl<ConnectionService>(),
-                ),
-                bearerClient: ApiClient.fromDio(
-                  dio: sl<Dio>(instanceName: ApiClient.bearerInstance),
-                  connection: sl<ConnectionService>(),
-                ),
+                noAuthClient: sl<ApiClient>(instanceName: ApiClient.noneAuthInstance),
+                bearerClient: sl<ApiClient>(instanceName: ApiClient.bearerInstance),
               ),
       )
       ..registerLazySingleton<AuthRepository>(

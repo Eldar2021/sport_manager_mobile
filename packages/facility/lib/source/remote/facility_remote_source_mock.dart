@@ -117,14 +117,14 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   }
 
   @override
-  Future<TableModel> createTable(String venueId, TableFormParam param) async {
+  Future<TableModel> createTable(TableFormParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
-    if (_tables.any((t) => t.venueId == venueId && t.number == param.number)) {
+    if (_tables.any((t) => t.venueId == param.venueId && t.number == param.number)) {
       throw const FacilityExc(FacilityErrorCode.tableNumberTaken);
     }
     final table = TableModel(
       id: 'table-${DateTime.now().millisecondsSinceEpoch}',
-      venueId: venueId,
+      venueId: param.venueId,
       number: param.number,
       name: param.name,
       description: param.description,
@@ -135,7 +135,7 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
       updatedAt: DateTime.now(),
     );
     _tables.add(table);
-    final venueIdx = _venues.indexWhere((v) => v.id == venueId);
+    final venueIdx = _venues.indexWhere((v) => v.id == param.venueId);
     if (venueIdx != -1) {
       final v = _venues[venueIdx];
       _venues[venueIdx] = VenueModel(

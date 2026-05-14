@@ -9,12 +9,10 @@ part 'table_form_state.dart';
 class TableFormCubit extends Cubit<TableFormState> {
   TableFormCubit(
     this._repository,
-    this._venueId,
     this._tableId,
   ) : super(const TableFormState());
 
   final FacilityRepository _repository;
-  final String _venueId;
   final String? _tableId;
 
   Future<void> submit(TableFormParam param) async {
@@ -24,7 +22,7 @@ class TableFormCubit extends Cubit<TableFormState> {
       if (_tableId != null) {
         result = await _repository.updateTable(_tableId, param);
       } else {
-        result = await _repository.createTable(_venueId, param);
+        result = await _repository.createTable(param);
       }
       emit(state.copyWith(submitStatus: RequestSuccess(result)));
     } on Object catch (e) {

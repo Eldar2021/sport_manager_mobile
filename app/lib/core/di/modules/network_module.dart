@@ -61,6 +61,20 @@ final class NetworkModule extends BaseDiModule {
       )
       ..registerSingleton<ConnectionService>(
         ConnectivityBasedConnectionChecker(),
+      )
+      ..registerLazySingleton<ApiClient>(
+        () => ApiClient.fromDio(
+          dio: sl<Dio>(instanceName: ApiClient.bearerInstance),
+          connection: sl<ConnectionService>(),
+        ),
+        instanceName: ApiClient.bearerInstance,
+      )
+      ..registerLazySingleton<ApiClient>(
+        () => ApiClient.fromDio(
+          dio: sl<Dio>(instanceName: ApiClient.noneAuthInstance),
+          connection: sl<ConnectionService>(),
+        ),
+        instanceName: ApiClient.noneAuthInstance,
       );
   }
 }

@@ -35,11 +35,8 @@ final class FacilityRepository {
     return _remote.getVenueTables(venueId);
   }
 
-  Future<TableModel> createTable(
-    String venueId,
-    TableFormParam param,
-  ) {
-    return _remote.createTable(venueId, param);
+  Future<TableModel> createTable(TableFormParam param) {
+    return _remote.createTable(param);
   }
 
   Future<TableModel> updateTable(
