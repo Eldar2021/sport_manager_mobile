@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:managers/managers.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/managers/managers.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -55,6 +58,7 @@ class _ManagersViewState extends State<ManagersView> {
       onConfirm: () async {
         try {
           await _cubit.deleteManager(manager.id);
+          if (mounted) unawaited(context.read<ProfileCubit>().fetchProfile());
         } on Object catch (e) {
           if (mounted) context.handleError(e);
         }
