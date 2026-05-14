@@ -29,7 +29,7 @@ mixin TableFormViewMixin on State<TableFormView> {
     final table = widget.extra.table;
     cubit = TableFormCubit(
       GetIt.I<FacilityRepository>(),
-      widget.extra.venueId,
+      table?.id,
     );
     formKey = GlobalKey<FormState>();
     nameCtr = TextEditingController(text: table?.name ?? '');

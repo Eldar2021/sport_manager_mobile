@@ -32,9 +32,12 @@ class TablesList extends StatelessWidget {
           table: table,
           onTap: isOwner
               ? () => context.push(
-                    AppRoutes.tableForm,
-                    extra: TableFormExtra(venueId: venueId, table: table),
-                  )
+                  AppRoutes.tableForm,
+                  extra: TableFormExtra(
+                    venueId: venueId,
+                    table: table,
+                  ),
+                )
               : null,
         );
       },

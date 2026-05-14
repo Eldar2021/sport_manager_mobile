@@ -91,10 +91,13 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   }
 
   @override
-  Future<TableModel> updateTable(String tableId, TableFormParam param) {
+  Future<TableModel> updateTable(
+    String tableId,
+    TableFormParam param,
+  ) {
     return _client
         .putType<TableModel>(
-          '$_baseUrlTable/table/$tableId',
+          '$_baseUrlTable/$tableId',
           fromJson: TableModel.fromJson,
           data: param.toJson(),
         )
@@ -103,6 +106,10 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
 
   @override
   Future<void> deleteTable(String tableId) {
-    return _client.delete<void>('$_baseUrlTable/table/$tableId').mapTo(FacilityExc.fromApiClientExc);
+    return _client
+        .delete<void>('$_baseUrlTable/$tableId')
+        .mapTo(
+          FacilityExc.fromApiClientExc,
+        );
   }
 }
