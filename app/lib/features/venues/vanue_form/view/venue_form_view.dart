@@ -85,10 +85,11 @@ class _VenueFormViewState extends State<VenueFormView> {
           child: BlocConsumer<VenueFormCubit, VenueFormState>(
             bloc: _cubit,
             listenWhen: (prev, next) => prev.reqStatus != next.reqStatus,
-            listener: (context, state) {
+            listener: (context, state) async {
               final status = state.reqStatus;
               if (status is RequestSuccess<VenueModel>) {
-                context.read<HomeCubit>().load();
+                await context.read<HomeCubit>().selectVenue(status.data.id);
+                if (!context.mounted) return;
                 context.pop(status.data);
               } else if (status is RequestFailure<VenueModel>) {
                 context.handleError(status.exception);
