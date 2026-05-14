@@ -34,7 +34,7 @@ class UserProfileExtraData extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (isOwner) ...[
-                _SubscriptionTile(data.profileData?.subscription.endDate ?? DateTime.now()),
+                _SubscriptionTile(data.profileData?.subscription.endDate),
                 const Divider(),
               ],
               ProfileItemTile(
@@ -72,7 +72,7 @@ class UserProfileExtraData extends StatelessWidget {
 class _SubscriptionTile extends StatelessWidget {
   const _SubscriptionTile(this.fallbackEndDate);
 
-  final DateTime fallbackEndDate;
+  final DateTime? fallbackEndDate;
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +99,11 @@ class _SubscriptionTile extends StatelessWidget {
 
   String _subtitle(BuildContext context, SubscriptionSummaryModel? s) {
     if (s == null) {
-      return context.l10n.profileSubscriptionActiveUntil(
-        _formatDate(context, fallbackEndDate),
-      );
+      return fallbackEndDate == null
+          ? context.l10n.subscriptionStatusActive
+          : context.l10n.profileSubscriptionActiveUntil(
+              _formatDate(context, fallbackEndDate!),
+            );
     }
     return switch (s.alert) {
       SubscriptionAlert.expired => context.l10n.profileSubscriptionExpired,

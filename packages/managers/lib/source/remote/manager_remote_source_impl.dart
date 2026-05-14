@@ -11,13 +11,13 @@ final class ManagerRemoteSourceImpl implements ManagerRemoteSource {
   @override
   Future<List<ManagerModel>> getManagers() {
     return _client.getListOfType<ManagerModel>(
-      '/managers',
+      '/api/v1/managers',
       fromJson: ManagerModel.fromJson,
     );
   }
 
   @override
   Future<void> deleteManager(String id) {
-    return _client.delete('/managers/$id');
+    return _client.delete('/api/v1/managers/$id');
   }
 }
