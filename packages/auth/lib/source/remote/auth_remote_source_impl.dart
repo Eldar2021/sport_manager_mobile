@@ -36,7 +36,7 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
 
   @override
   Future<AuthTokensModel> refresh(String refreshToken) {
-    return _noAuthClient.postType<AuthTokensModel>(
+    return _bearerClient.postType<AuthTokensModel>(
       '/auth/refresh',
       fromJson: AuthTokensModel.fromJson,
       data: {'refreshToken': refreshToken},
