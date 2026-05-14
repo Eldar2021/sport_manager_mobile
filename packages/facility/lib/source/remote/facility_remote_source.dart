@@ -18,7 +18,10 @@ abstract interface class FacilityRemoteSource {
 
   Future<List<TableModel>> getVenueTables(String venueId);
 
-  Future<TableModel> createTable(TableFormParam param);
+  Future<TableModel> createTable(
+    String venueId,
+    TableFormParam param,
+  );
 
   Future<TableModel> updateTable(
     String tableId,

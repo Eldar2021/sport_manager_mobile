@@ -7,7 +7,6 @@ part of 'table_form_param.dart';
 // **************************************************************************
 
 TableFormParam _$TableFormParamFromJson(Map<String, dynamic> json) => TableFormParam(
-  venueId: json['venueId'] as String,
   number: (json['number'] as num).toInt(),
   tarifAmount: (json['tarifAmount'] as num).toInt(),
   currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
@@ -17,7 +16,6 @@ TableFormParam _$TableFormParamFromJson(Map<String, dynamic> json) => TableFormP
 );
 
 Map<String, dynamic> _$TableFormParamToJson(TableFormParam instance) => <String, dynamic>{
-  'venueId': instance.venueId,
   'number': instance.number,
   'name': ?instance.name,
   'description': ?instance.description,

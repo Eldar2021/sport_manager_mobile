@@ -13,15 +13,13 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   final ApiClient _bearerClient;
   final ApiClient _noAuthClient;
 
-  static const String _authBaseUrl = '/api/v1/auth';
-
   @override
   Future<AuthResultModel> login({
     required String username,
     required String password,
   }) {
     return _noAuthClient.postType<AuthResultModel>(
-      '$_authBaseUrl/login',
+      '/auth/login',
       fromJson: AuthResultModel.fromJson,
       data: {'username': username, 'password': password},
     );
@@ -30,7 +28,7 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   @override
   Future<AuthResultModel> register(RegisterParam param) {
     return _noAuthClient.postType<AuthResultModel>(
-      '$_authBaseUrl/register',
+      '/auth/register',
       fromJson: AuthResultModel.fromJson,
       data: param.toJson(),
     );
@@ -39,7 +37,7 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   @override
   Future<AuthTokensModel> refresh(String refreshToken) {
     return _bearerClient.postType<AuthTokensModel>(
-      '$_authBaseUrl/refresh',
+      '/auth/refresh',
       fromJson: AuthTokensModel.fromJson,
       data: {'refreshToken': refreshToken},
     );
@@ -47,18 +45,18 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
 
   @override
   Future<void> logout() {
-    return _bearerClient.post<void>('$_authBaseUrl/logout');
+    return _bearerClient.post('/auth/logout');
   }
 
   @override
   Future<void> deleteAccount() {
-    return _bearerClient.delete('$_authBaseUrl/account');
+    return _bearerClient.delete('/auth/account');
   }
 
   @override
   Future<void> forgotPassword(String email) {
     return _noAuthClient.post(
-      '$_authBaseUrl/forgot-password',
+      '/auth/forgot-password',
       data: {'email': email},
     );
   }
@@ -69,7 +67,7 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
     required String newPassword,
   }) {
     return _noAuthClient.put<void>(
-      '$_authBaseUrl/update-password',
+      '/auth/update-password',
       data: {
         'login': login,
         'newPassword': newPassword,
@@ -80,7 +78,7 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   @override
   Future<InviteCodeModel> getInviteCode() {
     return _bearerClient.postType<InviteCodeModel>(
-      '$_authBaseUrl/invite-code',
+      '/auth/invite-code',
       fromJson: InviteCodeModel.fromJson,
     );
   }
@@ -88,7 +86,7 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   @override
   Future<ProfileModel> getProfile() {
     return _bearerClient.postType<ProfileModel>(
-      '$_authBaseUrl/profile',
+      '/auth/profile',
       fromJson: ProfileModel.fromJson,
     );
   }

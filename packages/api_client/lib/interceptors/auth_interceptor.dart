@@ -63,7 +63,7 @@ class AuthInterceptor extends QueuedInterceptor {
   Future<String?> refresh() async {
     try {
       final res = await dio.post<Map<String, dynamic>>(
-        '/api/v1/auth/refresh',
+        'auth/refresh',
         data: {
           'refreshToken': getRefreshToken(),
         },

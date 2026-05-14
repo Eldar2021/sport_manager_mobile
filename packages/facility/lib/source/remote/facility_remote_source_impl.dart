@@ -8,14 +8,11 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
 
   final ApiClient _client;
 
-  static const String _baseUrlVenue = '/api/v1/venue';
-  static const String _baseUrlTable = '/api/v1/table';
-
   @override
   Future<List<VenueModel>> getVenues() {
     return _client
         .getListOfType<VenueModel>(
-          '$_baseUrlVenue/list',
+          '/api/v1/venue/list',
           fromJson: VenueModel.fromJson,
         )
         .mapTo(FacilityExc.fromApiClientExc);
@@ -25,7 +22,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   Future<SelectedVenueModel> getSelected() {
     return _client
         .getType<SelectedVenueModel>(
-          '$_baseUrlVenue/selected',
+          '/api/v1/venue/selected',
           fromJson: SelectedVenueModel.fromJson,
         )
         .mapTo(FacilityExc.fromApiClientExc);
@@ -35,7 +32,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   Future<SelectedVenueModel> updateSelected(String venueId) {
     return _client
         .patchType<SelectedVenueModel>(
-          '$_baseUrlVenue/selected',
+          '/api/v1/venue/selected',
           fromJson: SelectedVenueModel.fromJson,
           data: {'venueId': venueId},
         )
@@ -46,7 +43,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   Future<VenueModel> createVenue(VenueFormParam param) {
     return _client
         .postType<VenueModel>(
-          '$_baseUrlVenue/create',
+          '/api/v1/venue/create',
           fromJson: VenueModel.fromJson,
           data: param.toJson(),
         )
@@ -57,7 +54,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   Future<VenueModel> updateVenue(String id, VenueFormParam param) {
     return _client
         .putType<VenueModel>(
-          '$_baseUrlVenue/$id',
+          '/api/v1/venue/$id',
           fromJson: VenueModel.fromJson,
           data: param.toJson(),
         )
@@ -66,26 +63,29 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
 
   @override
   Future<void> deleteVenue(String id) {
-    return _client.delete<void>('$_baseUrlVenue/$id').mapTo(FacilityExc.fromApiClientExc);
+    return _client.delete<void>('/api/v1/venue/$id').mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
   Future<List<TableModel>> getVenueTables(String venueId) {
     return _client
         .getListOfType<TableModel>(
-          '$_baseUrlVenue/$venueId/tables',
+          '/api/v1/venue/$venueId/tables',
           fromJson: TableModel.fromJson,
         )
         .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
-  Future<TableModel> createTable(TableFormParam param) {
+  Future<TableModel> createTable(String venueId, TableFormParam param) {
     return _client
         .postType<TableModel>(
-          '$_baseUrlTable/create',
+          '/api/v1/table/create',
           fromJson: TableModel.fromJson,
-          data: param.toJson(),
+          data: {
+            'venueId': venueId,
+            ...param.toJson(),
+          },
         )
         .mapTo(FacilityExc.fromApiClientExc);
   }
@@ -94,7 +94,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   Future<TableModel> updateTable(String tableId, TableFormParam param) {
     return _client
         .putType<TableModel>(
-          '$_baseUrlTable/table/$tableId',
+          '/api/v1/table/$tableId',
           fromJson: TableModel.fromJson,
           data: param.toJson(),
         )
@@ -103,6 +103,6 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
 
   @override
   Future<void> deleteTable(String tableId) {
-    return _client.delete<void>('$_baseUrlTable/table/$tableId').mapTo(FacilityExc.fromApiClientExc);
+    return _client.delete<void>('/api/v1/table/$tableId').mapTo(FacilityExc.fromApiClientExc);
   }
 }

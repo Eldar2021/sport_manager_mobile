@@ -13,12 +13,10 @@ final class SubscriptionRemoteSourceImpl implements SubscriptionRemoteSource {
 
   final ApiClient _client;
 
-  static const _baseUrl = 'api/v1/subscription';
-
   @override
   Future<SubscriptionDetailModel> getSubscription() {
     return _client.getType<SubscriptionDetailModel>(
-      _baseUrl,
+      '/subscription',
       fromJson: SubscriptionDetailModel.fromJson,
     );
   }
@@ -26,7 +24,7 @@ final class SubscriptionRemoteSourceImpl implements SubscriptionRemoteSource {
   @override
   Future<SubscriptionPricingModel> getPricing() {
     return _client.getType<SubscriptionPricingModel>(
-      '$_baseUrl/pricing',
+      '/subscription/pricing',
       fromJson: SubscriptionPricingModel.fromJson,
     );
   }
@@ -34,7 +32,7 @@ final class SubscriptionRemoteSourceImpl implements SubscriptionRemoteSource {
   @override
   Future<PaymentModel> createCheckout(CheckoutParam param) {
     return _client.postType<PaymentModel>(
-      '$_baseUrl/checkout',
+      '/subscription/checkout',
       data: param.toJson(),
       fromJson: PaymentModel.fromJson,
     );
@@ -43,7 +41,7 @@ final class SubscriptionRemoteSourceImpl implements SubscriptionRemoteSource {
   @override
   Future<PaymentModel> getPayment(String id) {
     return _client.getType<PaymentModel>(
-      '$_baseUrl/payment/$id',
+      '/subscription/payment/$id',
       fromJson: PaymentModel.fromJson,
     );
   }
@@ -54,7 +52,7 @@ final class SubscriptionRemoteSourceImpl implements SubscriptionRemoteSource {
     PaymentOutcome outcome,
   ) {
     return _client.postType<PaymentModel>(
-      '$_baseUrl/payment/$id/confirm',
+      '/subscription/payment/$id/confirm',
       data: <String, dynamic>{'outcome': _encodeOutcome(outcome)},
       fromJson: PaymentModel.fromJson,
     );
