@@ -92,7 +92,7 @@ class _VenuesListViewState extends State<VenuesListView> {
           ),
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
-        floatingActionButton: context.read<AuthCubit>().state.isOwner
+        floatingActionButton: context.select<AuthCubit, bool>((c) => c.state.isOwner)
             ? BlocBuilder<VenuesListCubit, DataState<List<VenueModel>>>(
                 bloc: _cubit,
                 builder: (context, state) {

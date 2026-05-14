@@ -51,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final isOwner = context.read<AuthCubit>().state.isOwner;
+    final isOwner = context.select<AuthCubit, bool>((c) => c.state.isOwner);
     return Scaffold(
       appBar: AppBar(
         title: BlocBuilder<HomeCubit, HomeState>(

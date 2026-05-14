@@ -41,7 +41,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    final isOwner = context.read<AuthCubit>().state.isOwner;
+    final isOwner = context.select<AuthCubit, bool>((c) => c.state.isOwner);
     return AppButtonScope(
       child: Scaffold(
         appBar: AppBar(

@@ -133,12 +133,13 @@ class _ProfileLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    final isOwner = context.read<AuthCubit>().state.isOwner;
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        UserProfileCardSkeleton(),
-        OwnerProfileExtraDataSkeleton(),
-        UserProfileExtraDataSkeleton(),
+        const UserProfileCardSkeleton(),
+        if (isOwner) const OwnerProfileExtraDataSkeleton(),
+        const UserProfileExtraDataSkeleton(),
       ],
     );
   }
