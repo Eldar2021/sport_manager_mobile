@@ -13,8 +13,16 @@
 
 ## 0. Ön koşullar (yayına başlamadan)
 
+> 🚨 **SUBMIT ÖNCESİ ZORUNLU — `BASE_URL` şu an `http://157.230.124.178:8080`**
+> Apple ATS HTTP'yi varsayılan reddeder. Submit'ten önce şunlar lazım:
+>
+> 1. Domain + HTTPS (Let's Encrypt veya Cloudflare proxy) → `api.dula.app` gibi
+> 2. `prod.env` BASE_URL güncellenecek
+> 3. dev backend ile prod backend ayrımı (v1.1'e ertelendi — demo hesap temiz tutulacak)
+
 - [ ] Apple Developer Program üyeliği aktif (yıllık 99 USD, Team `K9JN47N96M`)
 - [ ] App Store Connect erişimi (Admin veya App Manager rolü)
+- [ ] **🚨 Production backend HTTPS + domain'e taşındı (submit öncesi)**
 - [ ] Production backend URL'i hazır ve ayakta (`BASE_URL`)
 - [ ] Backend, App Store inceleyicisi için **demo hesap** sağlıyor (owner + manager)
 - [ ] Gizlilik politikası URL'i (HTTPS, herkese açık) — App Privacy zorunlu
