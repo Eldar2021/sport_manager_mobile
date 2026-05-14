@@ -26,15 +26,6 @@
 - [ ] Background Modes — yok
 - [ ] Associated Domains — yok (deeplink gerekirse eklenecek)
 
-## Yapılandırma kaynak dosyaları
-
-- iOS bundle: [app/ios/Runner.xcodeproj/project.pbxproj](../../../app/ios/Runner.xcodeproj/project.pbxproj)
-- Info.plist: [app/ios/Runner/Info.plist](../../../app/ios/Runner/Info.plist)
-- Flutter sürüm: [app/pubspec.yaml](../../../app/pubspec.yaml)
-- İkon kaynağı: [app/assets/images/app_icon.png](../../../app/assets/images/app_icon.png)
-- Launcher icons config: [app/flutter_launcher_icons.yaml](../../../app/flutter_launcher_icons.yaml)
-- Splash config: [app/flutter_native_splash.yaml](../../../app/flutter_native_splash.yaml)
-
 ## Encryption (ITSAppUsesNonExemptEncryption)
 
 `false` — uygulama HTTPS dışında özel kripto kullanmıyor.

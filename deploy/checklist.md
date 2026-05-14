@@ -29,12 +29,6 @@ Submit'e basmadan önce her satırı doğrula.
 - [ ] App Store provisioning profile aktif (Xcode otomatik yönetiyor)
 - [ ] Team `K9JN47N96M` doğrulandı
 
-## Capabilities
-
-- [ ] In-App Purchase açık (subscription kullanılacaksa)
-- [ ] Sign in with Apple (kullanılıyorsa)
-- [ ] Push Notifications (kullanılıyorsa)
-
 ## Görsel materyal
 
 - [ ] 1024×1024 App Store icon (PNG, alpha yok, sRGB) — `icons/app_store_icon_1024.png`
