@@ -1593,6 +1593,12 @@ abstract class AppLocalizations {
   /// **'Cancelled'**
   String get reportsLogFilterCancelled;
 
+  /// No description provided for @reportsLogStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get reportsLogStatusActive;
+
   /// No description provided for @reportsLogEmpty.
   ///
   /// In en, this message translates to:

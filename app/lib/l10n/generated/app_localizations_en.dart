@@ -890,6 +890,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportsLogFilterCancelled => 'Cancelled';
 
   @override
+  String get reportsLogStatusActive => 'In progress';
+
+  @override
   String get reportsLogEmpty => 'No sessions match this filter.';
 
   @override

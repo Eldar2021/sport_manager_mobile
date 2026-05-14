@@ -128,11 +128,13 @@ class _LogRow extends StatelessWidget {
     final tableLabel = entry.tableName == null || entry.tableName!.isEmpty
         ? '${l10n.reportsTableLabel} ${entry.tableNumber}'
         : '${l10n.reportsTableLabel} ${entry.tableNumber} · «${entry.tableName}»';
+    final (leadingIcon, leadingColor) = switch (entry.status) {
+      ManagerSessionLogStatus.active => (Icons.timelapse_outlined, context.colors.primary),
+      ManagerSessionLogStatus.completed => (Icons.check_circle_outline, context.appColors.success),
+      ManagerSessionLogStatus.cancelled => (Icons.cancel_outlined, context.colors.error),
+    };
     return ListTile(
-      leading: Icon(
-        entry.isCancelled ? Icons.cancel_outlined : Icons.check_circle_outline,
-        color: entry.isCancelled ? context.colors.error : context.appColors.success,
-      ),
+      leading: Icon(leadingIcon, color: leadingColor),
       title: Text(
         tableLabel,
         style: context.textTheme.bodyMedium,
@@ -144,12 +146,17 @@ class _LogRow extends StatelessWidget {
         '${entry.durationSeconds != null ? ' · ${ReportFormat.duration(entry.durationSeconds!)}' : ''}',
         style: context.appTextStyles.muted.labelSmall,
       ),
-      trailing: entry.isCancelled
-          ? Icon(Icons.block, size: 18, color: context.colors.error)
-          : Text(
-              ReportFormat.money(entry.totalAmount ?? 0, entry.currency),
-              style: context.textTheme.bodyMedium,
-            ),
+      trailing: switch (entry.status) {
+        ManagerSessionLogStatus.active => Text(
+          l10n.reportsLogStatusActive,
+          style: context.appTextStyles.muted.labelSmall,
+        ),
+        ManagerSessionLogStatus.completed => Text(
+          ReportFormat.money(entry.totalAmount ?? 0, entry.currency),
+          style: context.textTheme.bodyMedium,
+        ),
+        ManagerSessionLogStatus.cancelled => Icon(Icons.block, size: 18, color: context.colors.error),
+      },
     );
   }
 }

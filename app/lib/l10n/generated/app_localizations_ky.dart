@@ -886,6 +886,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsLogFilterCancelled => 'Жокко чыгарылган';
 
   @override
+  String get reportsLogStatusActive => 'Процессте';
+
+  @override
   String get reportsLogEmpty => 'Бул фильтрде сессия жок.';
 
   @override

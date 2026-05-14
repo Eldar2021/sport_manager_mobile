@@ -271,6 +271,7 @@
   "reportsSessionLogTitle": "Сессия логу",
   "reportsLogFilterAll": "Баары",
   "reportsLogFilterCancelled": "Жокко чыгарылган",
+  "reportsLogStatusActive": "Процессте",
   "reportsLogEmpty": "Бул фильтрде сессия жок.",
   "reportsForecastSummaryTitle": "Болжом",
   "reportsForecastVsPrevious": "мурунку мөөнөт менен",

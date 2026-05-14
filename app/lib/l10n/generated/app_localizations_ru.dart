@@ -905,6 +905,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsLogFilterCancelled => 'Отменённые';
 
   @override
+  String get reportsLogStatusActive => 'В процессе';
+
+  @override
   String get reportsLogEmpty => 'Нет сессий по этому фильтру.';
 
   @override

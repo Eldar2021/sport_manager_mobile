@@ -458,6 +458,7 @@
   "reportsSessionLogTitle": "Session log",
   "reportsLogFilterAll": "All",
   "reportsLogFilterCancelled": "Cancelled",
+  "reportsLogStatusActive": "In progress",
   "reportsLogEmpty": "No sessions match this filter.",
   "reportsForecastSummaryTitle": "Forecast",
   "reportsForecastVsPrevious": "vs previous period",

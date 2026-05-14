@@ -271,6 +271,7 @@
   "reportsSessionLogTitle": "Лог сессий",
   "reportsLogFilterAll": "Все",
   "reportsLogFilterCancelled": "Отменённые",
+  "reportsLogStatusActive": "В процессе",
   "reportsLogEmpty": "Нет сессий по этому фильтру.",
   "reportsForecastSummaryTitle": "Прогноз",
   "reportsForecastVsPrevious": "к прошлому периоду",
