@@ -20,47 +20,66 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
     required String username,
     required String password,
   }) {
-    return _noAuthClient.postType<AuthResultModel>(
-      '$_authBaseUrl/login',
-      fromJson: AuthResultModel.fromJson,
-      data: {'username': username, 'password': password},
-    );
+    return _noAuthClient
+        .postType<AuthResultModel>(
+          '$_authBaseUrl/login',
+          fromJson: AuthResultModel.fromJson,
+          data: {
+            'username': username,
+            'password': password,
+          },
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<AuthResultModel> register(RegisterParam param) {
-    return _noAuthClient.postType<AuthResultModel>(
-      '$_authBaseUrl/register',
-      fromJson: AuthResultModel.fromJson,
-      data: param.toJson(),
-    );
+    return _noAuthClient
+        .postType<AuthResultModel>(
+          '$_authBaseUrl/register',
+          fromJson: AuthResultModel.fromJson,
+          data: param.toJson(),
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<AuthTokensModel> refresh(String refreshToken) {
-    return _bearerClient.postType<AuthTokensModel>(
-      '$_authBaseUrl/refresh',
-      fromJson: AuthTokensModel.fromJson,
-      data: {'refreshToken': refreshToken},
-    );
+    return _bearerClient
+        .postType<AuthTokensModel>(
+          '$_authBaseUrl/refresh',
+          fromJson: AuthTokensModel.fromJson,
+          data: {'refreshToken': refreshToken},
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<void> logout() {
-    return _bearerClient.post<void>('$_authBaseUrl/logout');
+    return _bearerClient
+        .post<void>('$_authBaseUrl/logout')
+        .mapTo(
+          AuthException.fromApiClientExc,
+        );
   }
 
   @override
   Future<void> deleteAccount() {
-    return _bearerClient.delete('$_authBaseUrl/account');
+    return _bearerClient
+        .delete<void>('$_authBaseUrl/account')
+        .mapTo(
+          AuthException.fromApiClientExc,
+        );
   }
 
   @override
   Future<void> forgotPassword(String email) {
-    return _noAuthClient.post(
-      '$_authBaseUrl/forgot-password',
-      data: {'email': email},
-    );
+    return _noAuthClient
+        .post<void>(
+          '$_authBaseUrl/forgot-password',
+          data: {'email': email},
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
@@ -68,28 +87,34 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
     required String login,
     required String newPassword,
   }) {
-    return _bearerClient.post<void>(
-      '$_authBaseUrl/update-password',
-      data: {
-        'login': login,
-        'newPassword': newPassword,
-      },
-    );
+    return _bearerClient
+        .post<void>(
+          '$_authBaseUrl/update-password',
+          data: {
+            'login': login,
+            'newPassword': newPassword,
+          },
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<InviteCodeModel> getInviteCode() {
-    return _bearerClient.postType<InviteCodeModel>(
-      '$_authBaseUrl/invite-code',
-      fromJson: InviteCodeModel.fromJson,
-    );
+    return _bearerClient
+        .postType<InviteCodeModel>(
+          '$_authBaseUrl/invite-code',
+          fromJson: InviteCodeModel.fromJson,
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<ProfileModel> getProfile() {
-    return _bearerClient.getType<ProfileModel>(
-      '/api/v1/profile',
-      fromJson: ProfileModel.fromJson,
-    );
+    return _bearerClient
+        .getType<ProfileModel>(
+          '/api/v1/profile',
+          fromJson: ProfileModel.fromJson,
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 }
