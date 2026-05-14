@@ -11,12 +11,12 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 class ManagerReportDetailView extends StatefulWidget {
   const ManagerReportDetailView({
     required this.managerId,
-    this.venueId,
+    required this.venueId,
     super.key,
   });
 
   final String managerId;
-  final String? venueId;
+  final String venueId;
 
   @override
   State<ManagerReportDetailView> createState() => _ManagerReportDetailViewState();

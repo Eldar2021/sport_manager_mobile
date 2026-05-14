@@ -10,11 +10,15 @@ class ManagerReportDetailCubit extends Cubit<ManagerReportDetailState> {
   ManagerReportDetailCubit({
     required ReportsRepository repository,
     required this.managerId,
-    String? venueId,
+    required String venueId,
   }) : _repository = repository,
-       super(ManagerReportDetailState(
-         filter: ReportFilter.initial(DateTime.now()).copyWith(venueId: venueId),
-       ));
+       super(
+         ManagerReportDetailState(
+           filter: ReportFilter.initial(DateTime.now()).copyWith(
+             venueId: venueId,
+           ),
+         ),
+       );
 
   final ReportsRepository _repository;
   final String managerId;

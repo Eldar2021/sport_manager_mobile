@@ -11,12 +11,12 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 class TableReportDetailView extends StatefulWidget {
   const TableReportDetailView({
     required this.tableId,
-    this.venueId,
+    required this.venueId,
     super.key,
   });
 
   final String tableId;
-  final String? venueId;
+  final String venueId;
 
   @override
   State<TableReportDetailView> createState() => _TableReportDetailViewState();

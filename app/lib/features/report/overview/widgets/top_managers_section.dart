@@ -65,10 +65,7 @@ class _ManagerRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return ListTile(
-      onTap: () => context.push(
-        '${AppRoutes.report}/managers/${row.managerId}',
-        extra: venueId,
-      ),
+      onTap: () => context.push('${AppRoutes.report}/managers/${row.managerId}/$venueId'),
       leading: CircleAvatar(
         backgroundColor: context.colors.primaryContainer,
         child: Text(
