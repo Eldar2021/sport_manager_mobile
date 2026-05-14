@@ -68,7 +68,7 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
     required String login,
     required String newPassword,
   }) {
-    return _noAuthClient.put<void>(
+    return _bearerClient.post<void>(
       '$_authBaseUrl/update-password',
       data: {
         'login': login,
@@ -87,8 +87,8 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
 
   @override
   Future<ProfileModel> getProfile() {
-    return _bearerClient.postType<ProfileModel>(
-      '$_authBaseUrl/profile',
+    return _bearerClient.getType<ProfileModel>(
+      '/api/v1/profile',
       fromJson: ProfileModel.fromJson,
     );
   }

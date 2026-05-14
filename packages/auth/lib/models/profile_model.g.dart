@@ -8,16 +8,12 @@ part of 'profile_model.dart';
 
 ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) => ProfileModel(
   user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
-  venuesCount: (json['venuesCount'] as num?)?.toInt(),
-  managersCount: (json['managersCount'] as num?)?.toInt(),
-  subscriptionEndDate: json['subscriptionEndDate'] == null
+  profileData: json['profileData'] == null
       ? null
-      : DateTime.parse(json['subscriptionEndDate'] as String),
+      : ProfileDataModel.fromJson(json['profileData'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) => <String, dynamic>{
   'user': instance.user,
-  'venuesCount': instance.venuesCount,
-  'managersCount': instance.managersCount,
-  'subscriptionEndDate': instance.subscriptionEndDate?.toIso8601String(),
+  'profileData': instance.profileData,
 };
