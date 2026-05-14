@@ -28,7 +28,7 @@ class TablesRow extends StatelessWidget {
     final delta = row.deltaPercent;
     final deltaColor = delta == null ? null : (delta > 0 ? context.appColors.success : context.colors.error);
     return ListTile(
-      onTap: () => context.push('${AppRoutes.report}/tables/${row.tableId}'),
+      onTap: () => context.push('${AppRoutes.report}/tables/${row.tableId}/${row.venueId}'),
       title: Row(
         children: [
           Expanded(

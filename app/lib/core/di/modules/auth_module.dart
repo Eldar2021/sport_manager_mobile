@@ -26,8 +26,12 @@ final class AuthModule extends BaseDiModule {
         () => Env.isMock
             ? AuthRemoteSourceMock()
             : AuthRemoteSourceImpl(
-                ApiClient.fromDio(
+                noAuthClient: ApiClient.fromDio(
                   dio: sl<Dio>(instanceName: ApiClient.noneAuthInstance),
+                  connection: sl<ConnectionService>(),
+                ),
+                bearerClient: ApiClient.fromDio(
+                  dio: sl<Dio>(instanceName: ApiClient.bearerInstance),
                   connection: sl<ConnectionService>(),
                 ),
               ),

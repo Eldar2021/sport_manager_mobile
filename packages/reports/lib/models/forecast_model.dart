@@ -13,7 +13,7 @@ final class ForecastPointModel extends Equatable {
     required this.expected,
     required this.lower,
     required this.upper,
-    required this.isProjection,
+    required this.projection,
   });
 
   factory ForecastPointModel.fromJson(Map<String, dynamic> json) {
@@ -27,7 +27,7 @@ final class ForecastPointModel extends Equatable {
 
   /// `true` when this point is in the future (projected). `false` for actual
   /// historical values plotted on the same axis.
-  final bool isProjection;
+  final bool projection;
 
   Map<String, dynamic> toJson() => _$ForecastPointModelToJson(this);
 
@@ -37,7 +37,7 @@ final class ForecastPointModel extends Equatable {
     expected,
     lower,
     upper,
-    isProjection,
+    projection,
   ];
 }
 

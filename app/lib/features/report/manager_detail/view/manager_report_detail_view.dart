@@ -9,9 +9,14 @@ import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class ManagerReportDetailView extends StatefulWidget {
-  const ManagerReportDetailView(this.managerId, {super.key});
+  const ManagerReportDetailView({
+    required this.managerId,
+    required this.venueId,
+    super.key,
+  });
 
   final String managerId;
+  final String venueId;
 
   @override
   State<ManagerReportDetailView> createState() => _ManagerReportDetailViewState();
@@ -29,6 +34,7 @@ class _ManagerReportDetailViewState extends State<ManagerReportDetailView> with 
     _cubit = ManagerReportDetailCubit(
       repository: GetIt.I<ReportsRepository>(),
       managerId: widget.managerId,
+      venueId: widget.venueId,
     );
     _tabController = TabController(
       length: _periods.length,

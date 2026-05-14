@@ -10,8 +10,15 @@ class TableReportDetailCubit extends Cubit<TableReportDetailState> {
   TableReportDetailCubit({
     required ReportsRepository repository,
     required this.tableId,
+    required String venueId,
   }) : _repository = repository,
-       super(TableReportDetailState(filter: ReportFilter.initial(DateTime.now())));
+       super(
+         TableReportDetailState(
+           filter: ReportFilter.initial(DateTime.now()).copyWith(
+             venueId: venueId,
+           ),
+         ),
+       );
 
   final ReportsRepository _repository;
   final String tableId;

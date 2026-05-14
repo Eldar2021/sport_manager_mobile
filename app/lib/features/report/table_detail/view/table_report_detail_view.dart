@@ -9,9 +9,14 @@ import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class TableReportDetailView extends StatefulWidget {
-  const TableReportDetailView(this.tableId, {super.key});
+  const TableReportDetailView({
+    required this.tableId,
+    required this.venueId,
+    super.key,
+  });
 
   final String tableId;
+  final String venueId;
 
   @override
   State<TableReportDetailView> createState() => _TableReportDetailViewState();
@@ -29,6 +34,7 @@ class _TableReportDetailViewState extends State<TableReportDetailView> with Sing
     _cubit = TableReportDetailCubit(
       repository: GetIt.I<ReportsRepository>(),
       tableId: widget.tableId,
+      venueId: widget.venueId,
     );
     _tabController = TabController(
       length: _periods.length,
