@@ -65,6 +65,7 @@
   "homeAddTable": "Добавить стол",
   "homeTablesEmpty": "Столов пока нет",
   "homeTablesEmptySub": "Добавьте первый стол, чтобы менеджеры могли начинать сессии.",
+  "homeTablesEmptySubManager": "Столы появятся здесь, как только их добавит владелец.",
   "homeTableOccupied": "ЗАНЯТ",
   "homeTablePaused": "НА ПАУЗЕ",
   "homeTableFree": "СВОБОДЕН",

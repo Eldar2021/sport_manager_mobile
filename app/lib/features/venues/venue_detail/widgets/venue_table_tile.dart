@@ -12,7 +12,7 @@ class VenueTableTile extends StatelessWidget {
   });
 
   final TableModel table;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {

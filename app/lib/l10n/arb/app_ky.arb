@@ -65,6 +65,7 @@
   "homeAddTable": "Стол кошуу",
   "homeTablesEmpty": "Азырынча столдор жок",
   "homeTablesEmptySub": "Менеджерлер сессия баштай алышы үчүн биринчи столду кошуңуз.",
+  "homeTablesEmptySubManager": "Столдор ээси кошкондон кийин пайда болот.",
   "homeTableOccupied": "ИШЕНИМДЕ",
   "homeTablePaused": "ТЫНЫГУУ",
   "homeTableFree": "БОШ",

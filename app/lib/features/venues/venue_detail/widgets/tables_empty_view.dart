@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -24,10 +26,13 @@ class TablesEmptyView extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: AppSpacing.x1),
-          Text(
-            context.l10n.homeTablesEmptySub,
-            style: context.appTextStyles.muted.bodySmall,
-            textAlign: TextAlign.center,
+          BlocSelector<AuthCubit, AuthState, bool>(
+            selector: (state) => state.isManager,
+            builder: (context, isManager) => Text(
+              isManager ? context.l10n.homeTablesEmptySubManager : context.l10n.homeTablesEmptySub,
+              style: context.appTextStyles.muted.bodySmall,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

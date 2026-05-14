@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
@@ -39,16 +40,19 @@ class _VenueDetailViewState extends State<VenueDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    final isOwner = context.read<AuthCubit>().state.isOwner;
     return AppButtonScope(
       child: Scaffold(
         appBar: AppBar(
           title: Text(_venue.name),
           actions: [
-            AppEditDeleteMenu(
-              onEdit: _onEdit,
-              onDelete: _onDelete,
-            ),
-            const SizedBox(width: AppSpacing.x2),
+            if (isOwner) ...[
+              AppEditDeleteMenu(
+                onEdit: _onEdit,
+                onDelete: _onDelete,
+              ),
+              const SizedBox(width: AppSpacing.x2),
+            ],
           ],
         ),
         body: RefreshIndicator.adaptive(
@@ -96,6 +100,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
                           : TablesList(
                               tables: data,
                               venueId: _venue.id,
+                              isOwner: isOwner,
                             ),
                     ),
                   };
@@ -105,14 +110,16 @@ class _VenueDetailViewState extends State<VenueDetailView> {
           ),
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-          child: AppButton(
-            leading: const Icon(Icons.add_rounded),
-            onPressed: _onAddTable,
-            child: Text(context.l10n.homeAddTable),
-          ),
-        ),
+        floatingActionButton: isOwner
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+                child: AppButton(
+                  leading: const Icon(Icons.add_rounded),
+                  onPressed: _onAddTable,
+                  child: Text(context.l10n.homeAddTable),
+                ),
+              )
+            : null,
       ),
     );
   }

@@ -483,6 +483,12 @@ abstract class AppLocalizations {
   /// **'Add the first table so managers can start sessions.'**
   String get homeTablesEmptySub;
 
+  /// No description provided for @homeTablesEmptySubManager.
+  ///
+  /// In en, this message translates to:
+  /// **'Tables will appear here once the owner adds them.'**
+  String get homeTablesEmptySubManager;
+
   /// No description provided for @homeTableOccupied.
   ///
   /// In en, this message translates to:

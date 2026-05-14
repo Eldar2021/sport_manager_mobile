@@ -65,6 +65,7 @@
   "homeAddTable": "Add table",
   "homeTablesEmpty": "No tables yet",
   "homeTablesEmptySub": "Add the first table so managers can start sessions.",
+  "homeTablesEmptySubManager": "Tables will appear here once the owner adds them.",
   "homeTableOccupied": "OCCUPIED",
   "homeTablePaused": "PAUSED",
   "homeTableFree": "FREE",

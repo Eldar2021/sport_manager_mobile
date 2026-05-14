@@ -9,11 +9,13 @@ class TablesList extends StatelessWidget {
   const TablesList({
     required this.tables,
     required this.venueId,
+    required this.isOwner,
     super.key,
   });
 
   final List<TableModel> tables;
   final String venueId;
+  final bool isOwner;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +30,12 @@ class TablesList extends StatelessWidget {
         return VenueTableTile(
           key: ValueKey(table.id),
           table: table,
-          onTap: () => context.push(
-            AppRoutes.tableForm,
-            extra: TableFormExtra(venueId: venueId, table: table),
-          ),
+          onTap: isOwner
+              ? () => context.push(
+                    AppRoutes.tableForm,
+                    extra: TableFormExtra(venueId: venueId, table: table),
+                  )
+              : null,
         );
       },
     );

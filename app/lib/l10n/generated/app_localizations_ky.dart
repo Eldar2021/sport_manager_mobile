@@ -204,6 +204,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get homeTablesEmptySub => 'Менеджерлер сессия баштай алышы үчүн биринчи столду кошуңуз.';
 
   @override
+  String get homeTablesEmptySubManager => 'Столдор ээси кошкондон кийин пайда болот.';
+
+  @override
   String get homeTableOccupied => 'ИШЕНИМДЕ';
 
   @override
