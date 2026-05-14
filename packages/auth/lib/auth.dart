@@ -1,7 +1,6 @@
 /// Auth data layer — models, sources, repository
 library;
 
-export 'exception/auth_error_code.dart';
 export 'exception/auth_exception.dart';
 export 'models/auth_result_model.dart';
 export 'models/auth_tokens_model.dart';

@@ -1,4 +1,4 @@
-import 'package:api_client/clients/api_client.dart';
+import 'package:api_client/api_client.dart';
 import 'package:auth/auth.dart';
 import 'package:meta/meta.dart';
 
