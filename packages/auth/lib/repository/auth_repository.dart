@@ -57,12 +57,12 @@ final class AuthRepository {
   UserModel? getCachedUser() => _local.getCachedUser();
 
   Future<void> logout() async {
-    await _local.clearAll();
     try {
       await _remote.logout();
     } on Object catch (e) {
       log('remote logout failed (ignored): $e');
     }
+    await _local.clearAll();
   }
 
   Future<void> deleteAccount() async {
