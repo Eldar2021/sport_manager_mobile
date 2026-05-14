@@ -113,10 +113,8 @@ class _ProfileViewState extends State<ProfileView> {
             OutlinedButton.icon(
               style: OutlinedButton.styleFrom(
                 backgroundColor: AppColors.transparent,
-                side: BorderSide(
-                  color: context.appColors.onWarning.withValues(alpha: 0.5),
-                ),
-                foregroundColor: context.appColors.onWarning.withValues(alpha: 0.5),
+                foregroundColor: context.colors.error,
+                side: BorderSide(color: context.colors.error),
               ),
               onPressed: _onDeleteAccount,
               icon: const Icon(Icons.delete),
