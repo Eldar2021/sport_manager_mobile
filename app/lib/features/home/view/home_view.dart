@@ -7,6 +7,7 @@ import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
@@ -23,7 +24,10 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeCubit>().load();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileCubit>().fetchProfile();
+      context.read<HomeCubit>().load();
+    });
   }
 
   Future<void> _openVenueSelector(VenueModel current) async {

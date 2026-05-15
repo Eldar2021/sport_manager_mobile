@@ -17,12 +17,6 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _fetchProfile());
-  }
-
   Future<void> _fetchProfile() {
     return context.read<ProfileCubit>().fetchProfile();
   }
