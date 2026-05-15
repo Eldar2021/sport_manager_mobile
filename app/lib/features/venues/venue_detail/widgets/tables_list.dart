@@ -40,12 +40,10 @@ class TablesList extends StatelessWidget {
   }
 
   Future<void> _navToTable(BuildContext context, TableModel table) async {
-    final shouldUpdate = await context.push<bool>(
+    final result = await context.push<TableModel>(
       AppRoutes.tableForm,
       extra: TableFormExtra(venueId: venueId, table: table),
     );
-    if (shouldUpdate != null && shouldUpdate) {
-      onTableUpdated();
-    }
+    if (result != null) onTableUpdated();
   }
 }

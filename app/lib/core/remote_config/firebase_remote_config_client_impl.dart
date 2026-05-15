@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:core/core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
@@ -17,15 +15,7 @@ final class FirebaseRemoteConfigClientImpl implements RemoteConfigClient {
         minimumFetchInterval: const Duration(hours: 1),
       ),
     );
-    try {
-      await _remoteConfig.fetchAndActivate();
-    } on Object catch (e, s) {
-      log(
-        'RemoteConfig: fetchAndActivate failed, using defaults',
-        error: e,
-        stackTrace: s,
-      );
-    }
+    await _remoteConfig.activate();
   }
 
   @override

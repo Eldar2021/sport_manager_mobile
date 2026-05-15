@@ -1,7 +1,6 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/core/core.dart';
-import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -68,8 +67,8 @@ class FreeTableBody extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.x5),
-        const TableStatsCard(),
-        const SizedBox(height: AppSpacing.x4),
+        // const TableStatsCard(),
+        // const SizedBox(height: AppSpacing.x4),
       ],
     );
   }

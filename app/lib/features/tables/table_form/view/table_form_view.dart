@@ -67,6 +67,7 @@ class _TableFormViewState extends State<TableFormView> with TableFormViewMixin {
                 label: context.l10n.createTableNumberLabel,
                 hintText: context.l10n.createTableNumberHint,
                 keyboardType: TextInputType.number,
+                maxLength: 3,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (number) => InputValidators.emptyValidator(number, context),
               ),

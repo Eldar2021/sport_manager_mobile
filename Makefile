@@ -37,3 +37,18 @@ gen-splash:
 gen-assets:
 	cd app && dart run build_runner build --delete-conflicting-outputs
 	cd packages/core && dart run build_runner build --delete-conflicting-outputs
+
+build-apk-dev:
+ cd app && flutter build apk --dart-define-from-file=dev.env
+
+build-apk-prod:
+ cd app && flutter build apk --dart-define-from-file=prod.env
+
+build-ipa-dev:
+ cd app && flutter build ipa --dart-define-from-file=dev.env
+
+build-ipa-prod:
+ cd app && flutter build ipa --dart-define-from-file=prod.env
+
+build-aab-prod:
+ cd app && flutter build appbundle --dart-define-from-file=prod.env
