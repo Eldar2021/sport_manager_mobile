@@ -10,7 +10,8 @@ enum SubscriptionErrorCode {
   paymentProviderError,
   pricingMismatch,
   forbidden,
-  unknown;
+  unknown
+  ;
 
   factory SubscriptionErrorCode.fromString(String? code) {
     return switch (code) {

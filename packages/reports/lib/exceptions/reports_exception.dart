@@ -5,7 +5,8 @@ enum ReportsErrorCode {
   notFound,
   forbidden,
   notEnoughData,
-  unknown;
+  unknown
+  ;
 
   factory ReportsErrorCode.fromString(String? code) {
     return switch (code) {

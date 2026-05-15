@@ -5,7 +5,8 @@ enum ManagerErrorCode {
   notFound,
   forbidden,
   hasActiveSession,
-  unknown;
+  unknown
+  ;
 
   factory ManagerErrorCode.fromString(String? code) {
     return switch (code) {

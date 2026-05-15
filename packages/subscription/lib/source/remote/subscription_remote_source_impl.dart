@@ -14,7 +14,7 @@ final class SubscriptionRemoteSourceImpl implements SubscriptionRemoteSource {
 
   final ApiClient _client;
 
-  static const _baseUrl = 'api/v1/subscription';
+  static const _baseUrl = '/api/v1/subscription';
 
   @override
   Future<SubscriptionDetailModel> getSubscription() {
@@ -65,7 +65,9 @@ final class SubscriptionRemoteSourceImpl implements SubscriptionRemoteSource {
     return _client
         .postType<PaymentModel>(
           '$_baseUrl/payment/$id/confirm',
-          data: <String, dynamic>{'outcome': _encodeOutcome(outcome)},
+          data: <String, dynamic>{
+            'outcome': _encodeOutcome(outcome),
+          },
           fromJson: PaymentModel.fromJson,
         )
         .mapTo(SubscriptionExc.fromApiClientExc);

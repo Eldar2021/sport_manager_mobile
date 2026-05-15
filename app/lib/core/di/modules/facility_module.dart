@@ -13,6 +13,13 @@ final class FacilityModule extends BaseDiModule {
     super.register(sl);
 
     sl
+      ..registerLazySingleton<ApiClient>(
+        () => ApiClient.fromDio(
+          dio: sl<Dio>(instanceName: ApiClient.bearerInstance),
+          connection: sl<ConnectionService>(),
+        ),
+        instanceName: ApiClient.bearerInstance,
+      )
       ..registerLazySingleton<FacilityRemoteSource>(
         () => Env.isMock
             ? FacilityRemoteSourceMock()

@@ -8,8 +8,8 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
 
   final ApiClient _client;
 
-  static const String _baseUrlVenue = '/api/v1/venue';
-  static const String _baseUrlTable = '/api/v1/table';
+  static const _baseUrlVenue = '/api/v1/venue';
+  static const _baseUrlTable = '/api/v1/table';
 
   @override
   Future<List<VenueModel>> getVenues() {

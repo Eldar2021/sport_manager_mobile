@@ -22,7 +22,6 @@ final class TableFormParam extends Equatable {
   factory TableFormParam.fromJson(Map<String, dynamic> json) {
     return _$TableFormParamFromJson(json);
   }
-
   final String venueId;
   final int number;
   final String? name;
