@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:core/core.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -24,4 +26,6 @@ void main() async {
   ]);
 
   runApp(const MyAppWrapper());
+
+  unawaited(GetIt.I<RemoteConfigRepository>().fetch());
 }

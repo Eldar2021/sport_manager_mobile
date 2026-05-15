@@ -45,7 +45,7 @@ class HomeSuccess extends StatelessWidget {
               crossAxisCount: 2,
               mainAxisSpacing: AppSpacing.x3,
               crossAxisSpacing: AppSpacing.x3,
-              childAspectRatio: 1.4,
+              childAspectRatio: 1.2,
             ),
             itemCount: tables.length,
             itemBuilder: (context, index) {

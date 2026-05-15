@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -314,13 +315,9 @@ class _LoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = DefaultTextStyle.of(context).style.color ?? IconTheme.of(context).color;
-    return SizedBox(
-      width: size,
-      height: size,
-      child: CircularProgressIndicator(
-        strokeWidth: 2,
-        valueColor: AlwaysStoppedAnimation<Color?>(color),
-      ),
+    return CupertinoActivityIndicator(
+      radius: size / 2,
+      color: color,
     );
   }
 }
