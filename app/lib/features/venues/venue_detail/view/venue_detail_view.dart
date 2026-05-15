@@ -102,6 +102,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
                               tables: data,
                               venueId: _venue.id,
                               isOwner: isOwner,
+                              onTableUpdated: _cubit.load,
                             ),
                     ),
                   };

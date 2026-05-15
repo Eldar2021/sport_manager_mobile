@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class VenuesListEmpty extends StatelessWidget {
-  const VenuesListEmpty({super.key});
+  const VenuesListEmpty(this.onPressed, {super.key});
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class VenuesListEmpty extends StatelessWidget {
           const SizedBox(height: AppSpacing.x8),
           AppButton(
             leading: const Icon(Icons.add_rounded),
-            onPressed: () => context.push(AppRoutes.venueForm),
+            onPressed: onPressed,
             child: Text(context.l10n.homeCreateVenue),
           ),
         ],

@@ -66,7 +66,7 @@ class _VenuesListViewState extends State<VenuesListView> {
                   padding: EdgeInsets.symmetric(
                     vertical: MediaQuery.sizeOf(context).height * 0.1,
                   ),
-                  children: const [VenuesListEmpty()],
+                  children: [VenuesListEmpty(_onAddVenue)],
                 ),
                 DataSuccess<List<VenueModel>>(:final data) => ListView.separated(
                   physics: const AlwaysScrollableScrollPhysics(),

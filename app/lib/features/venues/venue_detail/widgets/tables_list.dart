@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -10,12 +11,14 @@ class TablesList extends StatelessWidget {
     required this.tables,
     required this.venueId,
     required this.isOwner,
+    required this.onTableUpdated,
     super.key,
   });
 
   final List<TableModel> tables;
   final String venueId;
   final bool isOwner;
+  final VoidCallback onTableUpdated;
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +33,19 @@ class TablesList extends StatelessWidget {
         return VenueTableTile(
           key: ValueKey(table.id),
           table: table,
-          onTap: isOwner
-              ? () => context.push(
-                  AppRoutes.tableForm,
-                  extra: TableFormExtra(
-                    venueId: venueId,
-                    table: table,
-                  ),
-                )
-              : null,
+          onTap: isOwner ? () => _navToTable(context, table) : null,
         );
       },
     );
+  }
+
+  Future<void> _navToTable(BuildContext context, TableModel table) async {
+    final shouldUpdate = await context.push<bool>(
+      AppRoutes.tableForm,
+      extra: TableFormExtra(venueId: venueId, table: table),
+    );
+    if (shouldUpdate != null && shouldUpdate) {
+      onTableUpdated();
+    }
   }
 }
