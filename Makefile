@@ -42,7 +42,7 @@ build-apk-dev:
 	cd app && flutter build apk --dart-define-from-file=dev.env
 
 build-apk-prod:
-	cd app && flutter build apk --dart-define-from-file=prod.env
+	cd app && flutter build apk --release --split-per-abi --dart-define-from-file=prod.env
 
 build-ipa-dev:
 	cd app && flutter build ipa --dart-define-from-file=dev.env
