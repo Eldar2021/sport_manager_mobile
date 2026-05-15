@@ -204,6 +204,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeTablesEmptySub => 'Добавьте первый стол, чтобы менеджеры могли начинать сессии.';
 
   @override
+  String get homeTablesEmptySubManager => 'Столы появятся здесь, как только их добавит владелец.';
+
+  @override
   String get homeTableOccupied => 'ЗАНЯТ';
 
   @override
@@ -900,6 +903,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get reportsLogFilterCancelled => 'Отменённые';
+
+  @override
+  String get reportsLogStatusActive => 'В процессе';
 
   @override
   String get reportsLogEmpty => 'Нет сессий по этому фильтру.';

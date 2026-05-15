@@ -109,7 +109,7 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
   }
 
   @override
-  Future<void> updatePassword({
+  Future<AuthTokensModel> updatePassword({
     required String login,
     required String newPassword,
   }) async {
@@ -117,6 +117,7 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     if (newPassword.length < 8) {
       throw const AuthException(AuthErrorCode.unknown, message: _weakPassword);
     }
+    return _tokens;
   }
 
   @override
@@ -143,9 +144,16 @@ final class AuthRemoteSourceMock implements AuthRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     return ProfileModel(
       user: _testOwner,
-      venuesCount: 3,
-      managersCount: 5,
-      subscriptionEndDate: DateTime.now().add(const Duration(days: 30)),
+      profileData: ProfileDataModel(
+        venuesCount: 3,
+        managersCount: 5,
+        subscription: ProfileSubscriptionModel(
+          endDate: DateTime.now().add(const Duration(days: 30)),
+          daysUntilExpiry: 30,
+          graceDaysRemaining: 0,
+          status: 'active',
+        ),
+      ),
     );
   }
 }

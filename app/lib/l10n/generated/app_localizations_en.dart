@@ -204,6 +204,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeTablesEmptySub => 'Add the first table so managers can start sessions.';
 
   @override
+  String get homeTablesEmptySubManager => 'Tables will appear here once the owner adds them.';
+
+  @override
   String get homeTableOccupied => 'OCCUPIED';
 
   @override
@@ -885,6 +888,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reportsLogFilterCancelled => 'Cancelled';
+
+  @override
+  String get reportsLogStatusActive => 'In progress';
 
   @override
   String get reportsLogEmpty => 'No sessions match this filter.';

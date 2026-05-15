@@ -1,4 +1,4 @@
-import 'package:api_client/clients/api_client.dart';
+import 'package:api_client/api_client.dart';
 import 'package:auth/auth.dart';
 import 'package:meta/meta.dart';
 
@@ -13,81 +13,109 @@ final class AuthRemoteSourceImpl implements AuthRemoteSource {
   final ApiClient _bearerClient;
   final ApiClient _noAuthClient;
 
+  static const String _authBaseUrl = '/api/v1/auth';
+
   @override
   Future<AuthResultModel> login({
     required String username,
     required String password,
   }) {
-    return _noAuthClient.postType<AuthResultModel>(
-      '/auth/login',
-      fromJson: AuthResultModel.fromJson,
-      data: {'username': username, 'password': password},
-    );
+    return _noAuthClient
+        .postType<AuthResultModel>(
+          '$_authBaseUrl/login',
+          fromJson: AuthResultModel.fromJson,
+          data: {
+            'username': username,
+            'password': password,
+          },
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<AuthResultModel> register(RegisterParam param) {
-    return _noAuthClient.postType<AuthResultModel>(
-      '/auth/register',
-      fromJson: AuthResultModel.fromJson,
-      data: param.toJson(),
-    );
+    return _noAuthClient
+        .postType<AuthResultModel>(
+          '$_authBaseUrl/register',
+          fromJson: AuthResultModel.fromJson,
+          data: param.toJson(),
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<AuthTokensModel> refresh(String refreshToken) {
-    return _bearerClient.postType<AuthTokensModel>(
-      '/auth/refresh',
-      fromJson: AuthTokensModel.fromJson,
-      data: {'refreshToken': refreshToken},
-    );
+    return _bearerClient
+        .postType<AuthTokensModel>(
+          '$_authBaseUrl/refresh',
+          fromJson: AuthTokensModel.fromJson,
+          data: {'refreshToken': refreshToken},
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<void> logout() {
-    return _bearerClient.post('/auth/logout');
+    return _bearerClient
+        .post<void>('$_authBaseUrl/logout')
+        .mapTo(
+          AuthException.fromApiClientExc,
+        );
   }
 
   @override
   Future<void> deleteAccount() {
-    return _bearerClient.delete('/auth/account');
+    return _bearerClient
+        .delete<void>('$_authBaseUrl/account')
+        .mapTo(
+          AuthException.fromApiClientExc,
+        );
   }
 
   @override
   Future<void> forgotPassword(String email) {
-    return _noAuthClient.post(
-      '/auth/forgot-password',
-      data: {'email': email},
-    );
+    return _noAuthClient
+        .post<void>(
+          '$_authBaseUrl/forgot-password',
+          data: {'email': email},
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
-  Future<void> updatePassword({
+  Future<AuthTokensModel> updatePassword({
     required String login,
     required String newPassword,
   }) {
-    return _noAuthClient.put<void>(
-      '/auth/update-password',
-      data: {
-        'login': login,
-        'newPassword': newPassword,
-      },
-    );
+    return _bearerClient
+        .postType<AuthTokensModel>(
+          '$_authBaseUrl/update-password',
+          fromJson: AuthTokensModel.fromJson,
+          data: {
+            'login': login,
+            'newPassword': newPassword,
+          },
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<InviteCodeModel> getInviteCode() {
-    return _bearerClient.postType<InviteCodeModel>(
-      '/auth/invite-code',
-      fromJson: InviteCodeModel.fromJson,
-    );
+    return _bearerClient
+        .postType<InviteCodeModel>(
+          '$_authBaseUrl/invite-code',
+          fromJson: InviteCodeModel.fromJson,
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 
   @override
   Future<ProfileModel> getProfile() {
-    return _bearerClient.postType<ProfileModel>(
-      '/auth/profile',
-      fromJson: ProfileModel.fromJson,
-    );
+    return _bearerClient
+        .getType<ProfileModel>(
+          '/api/v1/profile',
+          fromJson: ProfileModel.fromJson,
+        )
+        .mapTo(AuthException.fromApiClientExc);
   }
 }

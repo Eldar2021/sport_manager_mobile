@@ -29,7 +29,6 @@ mixin TableFormViewMixin on State<TableFormView> {
     final table = widget.extra.table;
     cubit = TableFormCubit(
       GetIt.I<FacilityRepository>(),
-      widget.extra.venueId,
       table?.id,
     );
     formKey = GlobalKey<FormState>();
@@ -45,6 +44,7 @@ mixin TableFormViewMixin on State<TableFormView> {
     if (!formKey.currentState!.validate()) return;
     cubit.submit(
       TableFormParam(
+        venueId: widget.extra.venueId,
         number: int.tryParse(numberCtr.text) ?? 0,
         name: nameCtr.text.trim(),
         description: descCtr.text.trim(),
@@ -77,7 +77,7 @@ mixin TableFormViewMixin on State<TableFormView> {
     final status = cubit.state.deleteStatus;
     if (status.isSuccess) {
       unawaited(context.read<HomeCubit>().load());
-      context.pop();
+      context.pop(true);
     } else if (status is RequestFailure<bool>) {
       context.handleError(status.exception);
     }

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
@@ -41,10 +42,11 @@ class _FreeTableViewState extends State<FreeTableView> {
         centerTitle: false,
         title: Text(_table.name ?? context.l10n.homeTableTitle(_table.number)),
         actions: [
-          AppEditDeleteMenu(
-            onEdit: _onEdit,
-            onDelete: _onDelete,
-          ),
+          if (context.read<AuthCubit>().state.isOwner)
+            AppEditDeleteMenu(
+              onEdit: _onEdit,
+              onDelete: _onDelete,
+            ),
         ],
       ),
       body: BlocListener<TableDetailCubit, TableDetailState>(

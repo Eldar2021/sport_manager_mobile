@@ -1,8 +1,7 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:sport_manager_mobile/app/app.dart';
-import 'package:sport_manager_mobile/features/tables/tables.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -41,22 +40,14 @@ class TablesEmpty extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: AppSpacing.x2),
-          Text(
-            context.l10n.homeTablesEmptySub,
-            style: context.textTheme.bodyMedium?.copyWith(
-              color: context.colors.onSurfaceVariant,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: AppSpacing.x8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x14),
-            child: FilledButton(
-              onPressed: () => context.push(
-                AppRoutes.tableForm,
-                extra: TableFormExtra(venueId: venue.id),
+          BlocSelector<AuthCubit, AuthState, bool>(
+            selector: (state) => state.isManager,
+            builder: (context, isManager) => Text(
+              isManager ? context.l10n.homeTablesEmptySubManager : context.l10n.homeTablesEmptySub,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: context.colors.onSurfaceVariant,
               ),
-              child: Text(context.l10n.homeAddTable),
+              textAlign: TextAlign.center,
             ),
           ),
         ],

@@ -13,8 +13,8 @@ class OwnerProfileExtraData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final venuesCount = data.venuesCount ?? 0;
-    final managersCount = data.managersCount ?? 0;
+    final venuesCount = data.profileData?.venuesCount ?? 0;
+    final managersCount = data.profileData?.managersCount ?? 0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,

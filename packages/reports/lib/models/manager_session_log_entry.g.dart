@@ -14,9 +14,9 @@ ManagerSessionLogEntry _$ManagerSessionLogEntryFromJson(
   tableNumber: (json['tableNumber'] as num).toInt(),
   venueName: json['venueName'] as String,
   startedAt: DateTime.parse(json['startedAt'] as String),
-  endedAt: DateTime.parse(json['endedAt'] as String),
   status: $enumDecode(_$ManagerSessionLogStatusEnumMap, json['status']),
   currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
+  endedAt: json['endedAt'] == null ? null : DateTime.parse(json['endedAt'] as String),
   tableName: json['tableName'] as String?,
   durationSeconds: (json['durationSeconds'] as num?)?.toInt(),
   totalAmount: (json['totalAmount'] as num?)?.toInt(),
@@ -32,7 +32,7 @@ Map<String, dynamic> _$ManagerSessionLogEntryToJson(
   'tableName': instance.tableName,
   'venueName': instance.venueName,
   'startedAt': instance.startedAt.toIso8601String(),
-  'endedAt': instance.endedAt.toIso8601String(),
+  'endedAt': instance.endedAt?.toIso8601String(),
   'status': _$ManagerSessionLogStatusEnumMap[instance.status]!,
   'currency': _$CurrencyEnumMap[instance.currency]!,
   'durationSeconds': instance.durationSeconds,
@@ -41,6 +41,7 @@ Map<String, dynamic> _$ManagerSessionLogEntryToJson(
 };
 
 const _$ManagerSessionLogStatusEnumMap = {
+  ManagerSessionLogStatus.active: 'ACTIVE',
   ManagerSessionLogStatus.completed: 'COMPLETED',
   ManagerSessionLogStatus.cancelled: 'CANCELLED',
 };

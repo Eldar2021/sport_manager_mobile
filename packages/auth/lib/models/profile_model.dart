@@ -1,3 +1,4 @@
+import 'package:auth/models/profile_data_model.dart';
 import 'package:auth/models/user_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -10,9 +11,7 @@ part 'profile_model.g.dart';
 final class ProfileModel extends Equatable {
   const ProfileModel({
     required this.user,
-    this.venuesCount,
-    this.managersCount,
-    this.subscriptionEndDate,
+    this.profileData,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
@@ -20,17 +19,15 @@ final class ProfileModel extends Equatable {
   }
 
   final UserModel user;
-  final int? venuesCount;
-  final int? managersCount;
-  final DateTime? subscriptionEndDate;
+  final ProfileDataModel? profileData;
 
-  Map<String, dynamic> toJson() => _$ProfileModelToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$ProfileModelToJson(this);
+  }
 
   @override
   List<Object?> get props => [
     user,
-    venuesCount,
-    managersCount,
-    subscriptionEndDate,
+    profileData,
   ];
 }

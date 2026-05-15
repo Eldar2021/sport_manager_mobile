@@ -7,7 +7,9 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
@@ -39,16 +41,19 @@ class _VenueDetailViewState extends State<VenueDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    final isOwner = context.select<AuthCubit, bool>((c) => c.state.isOwner);
     return AppButtonScope(
       child: Scaffold(
         appBar: AppBar(
           title: Text(_venue.name),
           actions: [
-            AppEditDeleteMenu(
-              onEdit: _onEdit,
-              onDelete: _onDelete,
-            ),
-            const SizedBox(width: AppSpacing.x2),
+            if (isOwner) ...[
+              AppEditDeleteMenu(
+                onEdit: _onEdit,
+                onDelete: _onDelete,
+              ),
+              const SizedBox(width: AppSpacing.x2),
+            ],
           ],
         ),
         body: RefreshIndicator.adaptive(
@@ -96,6 +101,8 @@ class _VenueDetailViewState extends State<VenueDetailView> {
                           : TablesList(
                               tables: data,
                               venueId: _venue.id,
+                              isOwner: isOwner,
+                              onTableUpdated: _cubit.load,
                             ),
                     ),
                   };
@@ -105,14 +112,16 @@ class _VenueDetailViewState extends State<VenueDetailView> {
           ),
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-          child: AppButton(
-            leading: const Icon(Icons.add_rounded),
-            onPressed: _onAddTable,
-            child: Text(context.l10n.homeAddTable),
-          ),
-        ),
+        floatingActionButton: isOwner
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+                child: AppButton(
+                  leading: const Icon(Icons.add_rounded),
+                  onPressed: _onAddTable,
+                  child: Text(context.l10n.homeAddTable),
+                ),
+              )
+            : null,
       ),
     );
   }
@@ -133,6 +142,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     if (mounted && updated != null) {
       setState(() => _venue = updated);
       unawaited(context.read<HomeCubit>().load());
+      unawaited(context.read<ProfileCubit>().fetchProfile());
     }
   }
 
@@ -149,6 +159,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     final status = _cubit.state.deleteStatus;
     if (status is RequestSuccess<bool>) {
       unawaited(context.read<HomeCubit>().load());
+      unawaited(context.read<ProfileCubit>().fetchProfile());
       context.pop(true);
     } else if (status is RequestFailure<bool>) {
       context.handleError(status.exception);

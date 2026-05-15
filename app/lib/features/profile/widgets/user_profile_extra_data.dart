@@ -34,7 +34,7 @@ class UserProfileExtraData extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (isOwner) ...[
-                _SubscriptionTile(data.subscriptionEndDate),
+                _SubscriptionTile(data.profileData?.subscription.endDate),
                 const Divider(),
               ],
               ProfileItemTile(

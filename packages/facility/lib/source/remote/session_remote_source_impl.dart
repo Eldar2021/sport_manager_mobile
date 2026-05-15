@@ -62,7 +62,7 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
         .postType<SessionModel>(
           '/api/v1/session/$sessionId/cancel',
           fromJson: SessionModel.fromJson,
-          data: {'reason': cancelReason},
+          data: {'reason': cancelReason ?? 'Canceled by user'},
         )
         .mapTo(FacilityExc.fromApiClientExc);
   }

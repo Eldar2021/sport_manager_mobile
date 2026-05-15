@@ -1,12 +1,13 @@
 /// Auth data layer — models, sources, repository
 library;
 
-export 'exception/auth_error_code.dart';
 export 'exception/auth_exception.dart';
 export 'models/auth_result_model.dart';
 export 'models/auth_tokens_model.dart';
 export 'models/invite_code_model.dart';
+export 'models/profile_data_model.dart';
 export 'models/profile_model.dart';
+export 'models/profile_subscription_model.dart';
 export 'models/register_param.dart';
 export 'models/user_model.dart';
 export 'models/user_role.dart';

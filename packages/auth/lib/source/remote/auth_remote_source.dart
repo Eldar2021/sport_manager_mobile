@@ -16,7 +16,7 @@ abstract interface class AuthRemoteSource {
 
   Future<void> forgotPassword(String email);
 
-  Future<void> updatePassword({
+  Future<AuthTokensModel> updatePassword({
     required String login,
     required String newPassword,
   });

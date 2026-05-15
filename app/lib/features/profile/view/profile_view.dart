@@ -1,7 +1,6 @@
 import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/env.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
@@ -18,22 +17,9 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  late final ProfileCubit _profileCubit;
-
-  @override
-  void initState() {
-    super.initState();
-    _profileCubit = ProfileCubit(GetIt.I<AuthRepository>());
-    _profileCubit.fetchProfile();
+  Future<void> _fetchProfile() {
+    return context.read<ProfileCubit>().fetchProfile();
   }
-
-  @override
-  void dispose() {
-    _profileCubit.close();
-    super.dispose();
-  }
-
-  Future<void> _refreshProfile() => _profileCubit.fetchProfile();
 
   void _openTalker(BuildContext context) {
     Navigator.of(context).push(
@@ -81,19 +67,18 @@ class _ProfileViewState extends State<ProfileView> {
         title: Text(context.l10n.navProfile),
       ),
       body: RefreshIndicator.adaptive(
-        onRefresh: _refreshProfile,
+        onRefresh: _fetchProfile,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(AppSpacing.x4),
           children: [
             BlocBuilder<ProfileCubit, DataState<ProfileModel>>(
-              bloc: _profileCubit,
               builder: (context, state) {
                 return switch (state) {
                   DataLoading<ProfileModel>() || DataInitial<ProfileModel>() => const _ProfileLoading(),
                   DataFailure<ProfileModel>() => ProfileErrorView(
                     error: state.exception,
-                    onRetry: _refreshProfile,
+                    onRetry: _fetchProfile,
                   ),
                   DataSuccess<ProfileModel>(:final data) => _ProfileLoaded(data),
                 };
@@ -113,10 +98,8 @@ class _ProfileViewState extends State<ProfileView> {
             OutlinedButton.icon(
               style: OutlinedButton.styleFrom(
                 backgroundColor: AppColors.transparent,
-                side: BorderSide(
-                  color: context.appColors.onWarning.withValues(alpha: 0.5),
-                ),
-                foregroundColor: context.appColors.onWarning.withValues(alpha: 0.5),
+                foregroundColor: context.colors.error,
+                side: BorderSide(color: context.colors.error),
               ),
               onPressed: _onDeleteAccount,
               icon: const Icon(Icons.delete),
@@ -144,12 +127,13 @@ class _ProfileLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    final isOwner = context.read<AuthCubit>().state.isOwner;
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        UserProfileCardSkeleton(),
-        OwnerProfileExtraDataSkeleton(),
-        UserProfileExtraDataSkeleton(),
+        const UserProfileCardSkeleton(),
+        if (isOwner) const OwnerProfileExtraDataSkeleton(),
+        const UserProfileExtraDataSkeleton(),
       ],
     );
   }

@@ -45,11 +45,12 @@ final class AuthRepository {
   Future<void> updatePassword({
     required String login,
     required String newPassword,
-  }) {
-    return _remote.updatePassword(
+  }) async {
+    final tokens = await _remote.updatePassword(
       login: login,
       newPassword: newPassword,
     );
+    await _local.saveTokens(tokens);
   }
 
   Future<AuthTokensModel?> getTokens() => _local.getTokens();
@@ -57,12 +58,12 @@ final class AuthRepository {
   UserModel? getCachedUser() => _local.getCachedUser();
 
   Future<void> logout() async {
-    await _local.clearAll();
     try {
       await _remote.logout();
     } on Object catch (e) {
       log('remote logout failed (ignored): $e');
     }
+    await _local.clearAll();
   }
 
   Future<void> deleteAccount() async {

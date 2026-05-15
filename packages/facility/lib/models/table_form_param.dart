@@ -10,6 +10,7 @@ part 'table_form_param.g.dart';
 @JsonSerializable(includeIfNull: false)
 final class TableFormParam extends Equatable {
   const TableFormParam({
+    required this.venueId,
     required this.number,
     required this.tarifAmount,
     required this.currency,
@@ -21,7 +22,7 @@ final class TableFormParam extends Equatable {
   factory TableFormParam.fromJson(Map<String, dynamic> json) {
     return _$TableFormParamFromJson(json);
   }
-
+  final String venueId;
   final int number;
   final String? name;
   final String? description;
@@ -35,6 +36,7 @@ final class TableFormParam extends Equatable {
 
   @override
   List<Object?> get props => [
+    venueId,
     number,
     name,
     description,

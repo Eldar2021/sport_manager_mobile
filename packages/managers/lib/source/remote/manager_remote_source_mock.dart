@@ -34,7 +34,7 @@ final class ManagerRemoteSourceMock implements ManagerRemoteSource {
   Future<void> deleteManager(String id) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     final index = _managers.indexWhere((m) => m.id == id);
-    if (index == -1) throw const ManagerException(ManagerErrorCode.notFound);
+    if (index == -1) throw const ManagerExc(ManagerErrorCode.notFound);
     _managers.removeAt(index);
   }
 }

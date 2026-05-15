@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -65,7 +66,7 @@ class _VenuesListViewState extends State<VenuesListView> {
                   padding: EdgeInsets.symmetric(
                     vertical: MediaQuery.sizeOf(context).height * 0.1,
                   ),
-                  children: const [VenuesListEmpty()],
+                  children: [VenuesListEmpty(_onAddVenue)],
                 ),
                 DataSuccess<List<VenueModel>>(:final data) => ListView.separated(
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -91,21 +92,23 @@ class _VenuesListViewState extends State<VenuesListView> {
           ),
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
-        floatingActionButton: BlocBuilder<VenuesListCubit, DataState<List<VenueModel>>>(
-          bloc: _cubit,
-          builder: (context, state) {
-            final hasVenues = state is DataSuccess<List<VenueModel>> && state.data.isNotEmpty;
-            if (!hasVenues) return const SizedBox.shrink();
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
-              child: AppButton(
-                leading: const Icon(Icons.add_rounded),
-                onPressed: _onAddVenue,
-                child: Text(context.l10n.homeNewVenue),
-              ),
-            );
-          },
-        ),
+        floatingActionButton: context.select<AuthCubit, bool>((c) => c.state.isOwner)
+            ? BlocBuilder<VenuesListCubit, DataState<List<VenueModel>>>(
+                bloc: _cubit,
+                builder: (context, state) {
+                  final hasVenues = state is DataSuccess<List<VenueModel>> && state.data.isNotEmpty;
+                  if (!hasVenues) return const SizedBox.shrink();
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+                    child: AppButton(
+                      leading: const Icon(Icons.add_rounded),
+                      onPressed: _onAddVenue,
+                      child: Text(context.l10n.homeNewVenue),
+                    ),
+                  );
+                },
+              )
+            : null,
       ),
     );
   }

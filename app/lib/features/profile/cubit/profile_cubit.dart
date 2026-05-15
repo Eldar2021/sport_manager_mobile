@@ -19,4 +19,8 @@ class ProfileCubit extends Cubit<DataState<ProfileModel>> {
       emit(DataFailure<ProfileModel>(e));
     }
   }
+
+  void clearState() {
+    emit(const DataInitial<ProfileModel>());
+  }
 }

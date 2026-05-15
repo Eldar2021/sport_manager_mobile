@@ -7,6 +7,8 @@ part 'manager_session_log_entry.g.dart';
 
 @JsonEnum()
 enum ManagerSessionLogStatus {
+  @JsonValue('ACTIVE')
+  active,
   @JsonValue('COMPLETED')
   completed,
   @JsonValue('CANCELLED')
@@ -25,9 +27,9 @@ final class ManagerSessionLogEntry extends Equatable {
     required this.tableNumber,
     required this.venueName,
     required this.startedAt,
-    required this.endedAt,
     required this.status,
     required this.currency,
+    this.endedAt,
     this.tableName,
     this.durationSeconds,
     this.totalAmount,
@@ -44,7 +46,7 @@ final class ManagerSessionLogEntry extends Equatable {
   final String? tableName;
   final String venueName;
   final DateTime startedAt;
-  final DateTime endedAt;
+  final DateTime? endedAt;
   final ManagerSessionLogStatus status;
   final Currency currency;
 
@@ -55,6 +57,7 @@ final class ManagerSessionLogEntry extends Equatable {
   // Filled for CANCELLED:
   final String? cancelReason;
 
+  bool get isActive => status == ManagerSessionLogStatus.active;
   bool get isCancelled => status == ManagerSessionLogStatus.cancelled;
 
   Map<String, dynamic> toJson() => _$ManagerSessionLogEntryToJson(this);
