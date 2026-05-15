@@ -39,19 +39,25 @@ class SessionActiveCubit extends Cubit<SessionActiveState> {
     emit(state.copyWith(elapsed: raw.isNegative ? Duration.zero : raw));
   }
 
-  Future<void> pauseSession() => _request(
-    () => _repo.pauseSession(state.session.id),
-    (res) => state.copyWith(session: res, pauseStatus: RequestSuccess(res)),
-    (e) => state.copyWith(pauseStatus: RequestFailure(e)),
-    state.copyWith(pauseStatus: const RequestLoading()),
-  );
+  Future<void> pauseSession() async {
+    if (state.pauseStatus is RequestLoading) return;
+    await _request(
+      () => _repo.pauseSession(state.session.id),
+      (res) => state.copyWith(session: res, pauseStatus: RequestSuccess(res)),
+      (e) => state.copyWith(pauseStatus: RequestFailure(e)),
+      state.copyWith(pauseStatus: const RequestLoading()),
+    );
+  }
 
-  Future<void> resumeSession() => _request(
-    () => _repo.resumeSession(state.session.id),
-    (res) => state.copyWith(session: res, resumeStatus: RequestSuccess(res)),
-    (e) => state.copyWith(resumeStatus: RequestFailure(e)),
-    state.copyWith(resumeStatus: const RequestLoading()),
-  );
+  Future<void> resumeSession() async {
+    if (state.resumeStatus is RequestLoading) return;
+    await _request(
+      () => _repo.resumeSession(state.session.id),
+      (res) => state.copyWith(session: res, resumeStatus: RequestSuccess(res)),
+      (e) => state.copyWith(resumeStatus: RequestFailure(e)),
+      state.copyWith(resumeStatus: const RequestLoading()),
+    );
+  }
 
   Future<void> _request<T>(
     Future<T> Function() action,
@@ -69,6 +75,7 @@ class SessionActiveCubit extends Cubit<SessionActiveState> {
   }
 
   Future<void> confirmStop() async {
+    if (state.stopStatus is RequestLoading) return;
     _stopTimer();
     emit(state.copyWith(stopStatus: const RequestLoading()));
     try {
@@ -85,6 +92,7 @@ class SessionActiveCubit extends Cubit<SessionActiveState> {
   }
 
   Future<void> cancelSession() async {
+    if (state.cancelStatus is RequestLoading) return;
     _stopTimer();
     emit(state.copyWith(cancelStatus: const RequestLoading()));
     try {

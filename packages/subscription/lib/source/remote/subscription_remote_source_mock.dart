@@ -118,10 +118,10 @@ final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
   Future<PaymentModel> createCheckout(CheckoutParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     if (param.months < _minDurationMonths || param.months > _maxDurationMonths) {
-      throw const SubscriptionException(SubscriptionErrorCode.invalidDuration);
+      throw const SubscriptionExc(SubscriptionErrorCode.invalidDuration);
     }
     if (_tableCount == 0) {
-      throw const SubscriptionException(SubscriptionErrorCode.noTables);
+      throw const SubscriptionExc(SubscriptionErrorCode.noTables);
     }
     final now = DateTime.now().toUtc();
     final payment = PaymentModel(
@@ -145,7 +145,7 @@ final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 300));
     final payment = _payments.where((p) => p.id == id).firstOrNull;
     if (payment == null) {
-      throw const SubscriptionException(SubscriptionErrorCode.paymentNotFound);
+      throw const SubscriptionExc(SubscriptionErrorCode.paymentNotFound);
     }
     return payment;
   }
@@ -158,11 +158,11 @@ final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
     await Future<void>.delayed(const Duration(milliseconds: 700));
     final index = _payments.indexWhere((p) => p.id == id);
     if (index == -1) {
-      throw const SubscriptionException(SubscriptionErrorCode.paymentNotFound);
+      throw const SubscriptionExc(SubscriptionErrorCode.paymentNotFound);
     }
     final existing = _payments[index];
     if (existing.status != PaymentStatus.pending) {
-      throw const SubscriptionException(SubscriptionErrorCode.paymentAlreadyProcessed);
+      throw const SubscriptionExc(SubscriptionErrorCode.paymentAlreadyProcessed);
     }
     final now = DateTime.now().toUtc();
     final updated = PaymentModel(

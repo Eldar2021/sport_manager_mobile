@@ -13,6 +13,7 @@ enum FacilityErrorCode {
   sessionNotFound,
   sessionNotActive,
   sessionNotPaused,
+  sessionAlreadyPaused,
   sessionAlreadyCompleted,
   cancelWindowExpired,
   invalidDiscount,
@@ -33,6 +34,7 @@ enum FacilityErrorCode {
       'SESSION_NOT_FOUND' => .sessionNotFound,
       'SESSION_NOT_ACTIVE' => .sessionNotActive,
       'SESSION_NOT_PAUSED' => .sessionNotPaused,
+      'SESSION_ALREADY_PAUSED' => .sessionAlreadyPaused,
       'SESSION_ALREADY_COMPLETED' => .sessionAlreadyCompleted,
       'CANCEL_WINDOW_EXPIRED' => .cancelWindowExpired,
       'INVALID_DISCOUNT' => .invalidDiscount,
@@ -68,6 +70,7 @@ final class FacilityExc extends AppException<FacilityErrorCode> {
     .sessionNotFound ||
     .sessionNotActive ||
     .sessionNotPaused ||
+    .sessionAlreadyPaused ||
     .sessionAlreadyCompleted ||
     .cancelWindowExpired ||
     .invalidDiscount ||
@@ -121,6 +124,11 @@ final class FacilityExc extends AppException<FacilityErrorCode> {
       en: 'Session is not paused',
       ru: 'Сессия не на паузе',
       ky: 'Сессия паузада эмес',
+    ),
+    .sessionAlreadyPaused => const BaseMessage(
+      en: 'Session is already paused',
+      ru: 'Сессия уже на паузе',
+      ky: 'Сессия буга чейин паузада',
     ),
     .sessionAlreadyCompleted => const BaseMessage(
       en: 'Session is already completed',

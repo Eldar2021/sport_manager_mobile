@@ -417,7 +417,7 @@ class _MockStore {
     final rows = managerRows(filter);
     final summary = rows.firstWhere(
       (m) => m.managerId == managerId,
-      orElse: () => throw const ReportsException(ReportsErrorCode.notFound),
+      orElse: () => throw const ReportsExc(ReportsErrorCode.notFound),
     );
     final scoped = _filtered(filter.range, venueId: filter.venueId).where((s) => s.managerId == managerId).toList()
       ..sort((a, b) => b.startedAt.compareTo(a.startedAt));
@@ -552,7 +552,7 @@ class _MockStore {
     final rows = tableRows(filter);
     final summary = rows.firstWhere(
       (t) => t.tableId == tableId,
-      orElse: () => throw const ReportsException(ReportsErrorCode.notFound),
+      orElse: () => throw const ReportsExc(ReportsErrorCode.notFound),
     );
     final scoped = _filtered(filter.range).where((s) => s.tableId == tableId && s.isCompleted).toList();
     // revenueSeries() ile aynı bucket mantığı — yıl için aylık, diğerleri

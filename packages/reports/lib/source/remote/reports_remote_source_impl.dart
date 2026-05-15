@@ -24,55 +24,67 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
 
   @override
   Future<List<ReportVenueModel>> getVenues() {
-    return _client.getListOfType<ReportVenueModel>(
-      '$_base/venues',
-      fromJson: ReportVenueModel.fromJson,
-    );
+    return _client
+        .getListOfType<ReportVenueModel>(
+          '$_base/venues',
+          fromJson: ReportVenueModel.fromJson,
+        )
+        .mapTo(ReportsExc.fromApiClientExc);
   }
 
   @override
   Future<ReportsSummaryModel> getSummary(ReportFilter filter) {
-    return _client.getType<ReportsSummaryModel>(
-      '$_base/overview',
-      params: _params(filter),
-      fromJson: ReportsSummaryModel.fromJson,
-    );
+    return _client
+        .getType<ReportsSummaryModel>(
+          '$_base/overview',
+          params: _params(filter),
+          fromJson: ReportsSummaryModel.fromJson,
+        )
+        .mapTo(ReportsExc.fromApiClientExc);
   }
 
   @override
   Future<List<RevenuePointModel>> getRevenueSeries(ReportFilter filter) {
-    return _client.getListOfType<RevenuePointModel>(
-      '$_base/revenue-series',
-      params: _params(filter),
-      fromJson: RevenuePointModel.fromJson,
-    );
+    return _client
+        .getListOfType<RevenuePointModel>(
+          '$_base/revenue-series',
+          params: _params(filter),
+          fromJson: RevenuePointModel.fromJson,
+        )
+        .mapTo(ReportsExc.fromApiClientExc);
   }
 
   @override
   Future<List<TableReportRowModel>> getTables(ReportFilter filter) {
-    return _client.getListOfType<TableReportRowModel>(
-      '$_base/tables',
-      params: _params(filter),
-      fromJson: TableReportRowModel.fromJson,
-    );
+    return _client
+        .getListOfType<TableReportRowModel>(
+          '$_base/tables',
+          params: _params(filter),
+          fromJson: TableReportRowModel.fromJson,
+        )
+        .mapTo(ReportsExc.fromApiClientExc);
   }
 
   @override
   Future<List<ManagerReportRowModel>> getManagers(ReportFilter filter) {
-    return _client.getListOfType<ManagerReportRowModel>(
-      '$_base/managers',
-      params: _params(filter),
-      fromJson: ManagerReportRowModel.fromJson,
-    );
+    return _client
+        .getListOfType<ManagerReportRowModel>(
+          '$_base/managers',
+          params: _params(filter),
+          fromJson: ManagerReportRowModel.fromJson,
+        )
+        .mapTo(ReportsExc.fromApiClientExc);
   }
 
   @override
   Future<ForecastModel> getForecast(ReportFilter filter) {
-    return _client.getType<ForecastModel>(
-      '$_base/forecast',
-      params: _params(filter),
-      fromJson: ForecastModel.fromJson,
-    );
+    return _client
+        .getType<ForecastModel>(
+          '$_base/forecast',
+          params: _params(filter),
+          fromJson: ForecastModel.fromJson,
+        )
+        .mapTo(ReportsExc.fromApiClientExc);
   }
 
   @override
@@ -80,11 +92,13 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
     String managerId,
     ReportFilter filter,
   ) {
-    return _client.getType<ManagerReportDetailModel>(
-      '$_base/managers/$managerId',
-      params: _params(filter),
-      fromJson: ManagerReportDetailModel.fromJson,
-    );
+    return _client
+        .getType<ManagerReportDetailModel>(
+          '$_base/managers/$managerId',
+          params: _params(filter),
+          fromJson: ManagerReportDetailModel.fromJson,
+        )
+        .mapTo(ReportsExc.fromApiClientExc);
   }
 
   @override
@@ -92,10 +106,12 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
     String tableId,
     ReportFilter filter,
   ) {
-    return _client.getType<TableReportDetailModel>(
-      '$_base/tables/$tableId',
-      params: _params(filter),
-      fromJson: TableReportDetailModel.fromJson,
-    );
+    return _client
+        .getType<TableReportDetailModel>(
+          '$_base/tables/$tableId',
+          params: _params(filter),
+          fromJson: TableReportDetailModel.fromJson,
+        )
+        .mapTo(ReportsExc.fromApiClientExc);
   }
 }
