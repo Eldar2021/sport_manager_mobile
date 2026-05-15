@@ -8,6 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
+import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -123,6 +125,12 @@ class _VenuesListViewState extends State<VenuesListView> {
 
   Future<void> _onAddVenue() async {
     final created = await context.push<VenueModel>(AppRoutes.venueForm);
-    if (created != null) unawaited(_cubit.load());
+    if (created != null) {
+      unawaited(_cubit.load());
+      if (mounted) {
+        unawaited(context.read<HomeCubit>().load());
+        unawaited(context.read<ProfileCubit>().fetchProfile());
+      }
+    }
   }
 }
