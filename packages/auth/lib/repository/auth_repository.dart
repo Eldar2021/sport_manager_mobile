@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:auth/auth.dart';
@@ -53,25 +54,37 @@ final class AuthRepository {
     await _local.saveTokens(tokens);
   }
 
-  Future<AuthTokensModel?> getTokens() => _local.getTokens();
+  Future<AuthTokensModel?> getTokens() {
+    return _local.getTokens();
+  }
 
-  UserModel? getCachedUser() => _local.getCachedUser();
+  UserModel? getCachedUser() {
+    return _local.getCachedUser();
+  }
 
   Future<void> logout() async {
+    await _local.clearAll();
     try {
-      await _remote.logout();
+      unawaited(_remote.logout());
     } on Object catch (e) {
       log('remote logout failed (ignored): $e');
     }
-    await _local.clearAll();
   }
 
   Future<void> deleteAccount() async {
-    await _remote.deleteAccount();
     await _local.clearAll();
+    try {
+      unawaited(_remote.deleteAccount());
+    } on Object catch (e) {
+      log('remote delete account failed (ignored): $e');
+    }
   }
 
-  Future<InviteCodeModel> getInviteCode() => _remote.getInviteCode();
+  Future<InviteCodeModel> getInviteCode() {
+    return _remote.getInviteCode();
+  }
 
-  Future<ProfileModel> getProfile() => _remote.getProfile();
+  Future<ProfileModel> getProfile() {
+    return _remote.getProfile();
+  }
 }

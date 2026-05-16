@@ -16,17 +16,19 @@ class AuthInterceptor extends QueuedInterceptor {
   final Future<void> Function() onLogout;
   final void Function(String, String) onRefreshedToken;
 
+  static const _baseEndpoint = '/api/v1/auth';
+
   @override
   Future<void> onError(
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
     if (err.response?.statusCode == 401) {
-      if (err.requestOptions.path.contains('auth/login')) {
+      if (err.requestOptions.path.contains('$_baseEndpoint/login')) {
         await onLogout();
         return handler.next(err);
       }
-      if (err.requestOptions.path.contains('auth/refresh')) {
+      if (err.requestOptions.path.contains('$_baseEndpoint/refresh')) {
         return handler.next(err);
       }
       try {
@@ -63,7 +65,7 @@ class AuthInterceptor extends QueuedInterceptor {
   Future<String?> refresh() async {
     try {
       final res = await dio.post<Map<String, dynamic>>(
-        'auth/refresh',
+        '$_baseEndpoint/refresh',
         data: {
           'refreshToken': getRefreshToken(),
         },
@@ -77,7 +79,7 @@ class AuthInterceptor extends QueuedInterceptor {
         await onLogout();
         throw ApiClientException(
           DioException(
-            requestOptions: RequestOptions(path: 'auth/refresh'),
+            requestOptions: RequestOptions(path: '$_baseEndpoint/refresh'),
             response: Response(
               requestOptions: RequestOptions(),
               statusCode: 401,
@@ -90,7 +92,7 @@ class AuthInterceptor extends QueuedInterceptor {
       await onLogout();
       throw ApiClientException(
         DioException(
-          requestOptions: RequestOptions(path: 'auth/refresh'),
+          requestOptions: RequestOptions(path: '$_baseEndpoint/refresh'),
           response: Response(
             requestOptions: RequestOptions(),
             statusCode: 401,
