@@ -160,6 +160,8 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     if (status is RequestSuccess<bool>) {
       unawaited(context.read<HomeCubit>().load());
       unawaited(context.read<ProfileCubit>().fetchProfile());
+      await WidgetsBinding.instance.endOfFrame;
+      if (!mounted) return;
       context.pop(true);
     } else if (status is RequestFailure<bool>) {
       context.handleError(status.exception);
