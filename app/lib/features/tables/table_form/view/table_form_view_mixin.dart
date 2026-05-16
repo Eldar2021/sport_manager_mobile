@@ -77,6 +77,8 @@ mixin TableFormViewMixin on State<TableFormView> {
     final status = cubit.state.deleteStatus;
     if (status.isSuccess) {
       unawaited(context.read<HomeCubit>().load());
+      await WidgetsBinding.instance.endOfFrame;
+      if (!mounted) return;
       context.pop(true);
     } else if (status is RequestFailure<bool>) {
       context.handleError(status.exception);
