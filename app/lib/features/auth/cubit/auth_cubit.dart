@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:auth/auth.dart';
@@ -8,9 +9,21 @@ import 'package:meta/meta.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._repository) : super(const AuthInitial());
+  AuthCubit(this._repository) : super(const AuthInitial()) {
+    _forceLogoutSub = _repository.onForceLogout.listen((_) {
+      if (state is! AuthUnauthenticated) emit(const AuthUnauthenticated());
+    });
+  }
 
   final AuthRepository _repository;
+
+  late final StreamSubscription<void> _forceLogoutSub;
+
+  @override
+  Future<void> close() {
+    _forceLogoutSub.cancel();
+    return super.close();
+  }
 
   Future<void> checkAuthStatus() async {
     try {

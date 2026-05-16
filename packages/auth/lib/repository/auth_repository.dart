@@ -1,11 +1,10 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:auth/auth.dart';
-import 'package:meta/meta.dart';
 
-@immutable
 final class AuthRepository {
-  const AuthRepository({
+  AuthRepository({
     required AuthRemoteSource remote,
     required AuthLocalSource local,
   }) : _remote = remote,
@@ -13,6 +12,14 @@ final class AuthRepository {
 
   final AuthRemoteSource _remote;
   final AuthLocalSource _local;
+
+  final _forceLogoutController = StreamController<void>.broadcast();
+
+  /// Emits when the session is terminated outside the UI (e.g. the
+  /// auth interceptor exhausts the refresh-token flow and calls
+  /// [logout]). `AuthCubit` listens to this so the router can redirect
+  /// to the unauthenticated stack.
+  Stream<void> get onForceLogout => _forceLogoutController.stream;
 
   Future<AuthResultModel> login({
     required String username,
@@ -53,25 +60,38 @@ final class AuthRepository {
     await _local.saveTokens(tokens);
   }
 
-  Future<AuthTokensModel?> getTokens() => _local.getTokens();
+  Future<AuthTokensModel?> getTokens() {
+    return _local.getTokens();
+  }
 
-  UserModel? getCachedUser() => _local.getCachedUser();
+  UserModel? getCachedUser() {
+    return _local.getCachedUser();
+  }
 
   Future<void> logout() async {
+    await _local.clearAll();
+    if (!_forceLogoutController.isClosed) _forceLogoutController.add(null);
     try {
-      await _remote.logout();
+      unawaited(_remote.logout());
     } on Object catch (e) {
       log('remote logout failed (ignored): $e');
     }
-    await _local.clearAll();
   }
 
   Future<void> deleteAccount() async {
-    await _remote.deleteAccount();
     await _local.clearAll();
+    try {
+      unawaited(_remote.deleteAccount());
+    } on Object catch (e) {
+      log('remote delete account failed (ignored): $e');
+    }
   }
 
-  Future<InviteCodeModel> getInviteCode() => _remote.getInviteCode();
+  Future<InviteCodeModel> getInviteCode() {
+    return _remote.getInviteCode();
+  }
 
-  Future<ProfileModel> getProfile() => _remote.getProfile();
+  Future<ProfileModel> getProfile() {
+    return _remote.getProfile();
+  }
 }

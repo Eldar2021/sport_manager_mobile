@@ -28,6 +28,8 @@ final class NetworkModule extends BaseDiModule {
 
     final bearerDio = Dio(baseOptions);
 
+    final noneDio = Dio(baseOptions)..interceptors.add(baseInterceptor);
+
     bearerDio.interceptors.addAll([
       baseInterceptor,
       BearerInterceptor(
@@ -35,7 +37,7 @@ final class NetworkModule extends BaseDiModule {
         getRefreshToken: () => GetIt.I<AuthLocalSource>().getRefreshTokenSync() ?? '',
       ),
       AuthInterceptor(
-        dio: bearerDio,
+        dio: noneDio,
         getRefreshToken: () => GetIt.I<AuthLocalSource>().getRefreshTokenSync() ?? '',
         onLogout: () => GetIt.I<AuthRepository>().logout(),
         onRefreshedToken: (accessToken, refreshToken) {
@@ -47,7 +49,6 @@ final class NetworkModule extends BaseDiModule {
       ?talkerLogger,
     ]);
 
-    final noneDio = Dio(baseOptions)..interceptors.add(baseInterceptor);
     if (talkerLogger != null) noneDio.interceptors.add(talkerLogger);
 
     sl
