@@ -40,7 +40,7 @@ class TablesList extends StatelessWidget {
   }
 
   Future<void> _navToTable(BuildContext context, TableModel table) async {
-    final result = await context.push<TableModel>(
+    final result = await context.push(
       AppRoutes.tableForm,
       extra: TableFormExtra(venueId: venueId, table: table),
     );

@@ -117,6 +117,8 @@ class _FreeTableViewState extends State<FreeTableView> {
     };
     if (deleteStatus.isSuccess) {
       unawaited(context.read<HomeCubit>().load());
+      await WidgetsBinding.instance.endOfFrame;
+      if (!mounted) return;
       context.pop();
     } else if (deleteStatus is RequestFailure<bool>) {
       context.handleError(deleteStatus.exception);
