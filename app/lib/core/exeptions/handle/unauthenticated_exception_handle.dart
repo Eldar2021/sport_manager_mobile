@@ -56,7 +56,13 @@ class UnauthenticatedExceptionHandle extends ErrorHandler {
   void _navigateToLogin(
     BuildContext context,
     UnauthenticatedExceptionHandleType type,
-  ) {}
+  ) {
+    // Dismiss the (barrierDismissible: false) dialog. Redirecting to the
+    // unauthenticated stack is driven by AuthCubit -> GoRouter once the
+    // session is cleared (see AuthRepository.onForceLogout), so this only
+    // needs to release the modal instead of trapping the user.
+    if (context.mounted) Navigator.of(context).pop();
+  }
 
   @override
   void handleAuthError(Object error, BuildContext context) {

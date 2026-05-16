@@ -2,11 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:auth/auth.dart';
-import 'package:meta/meta.dart';
 
-@immutable
 final class AuthRepository {
-  const AuthRepository({
+  AuthRepository({
     required AuthRemoteSource remote,
     required AuthLocalSource local,
   }) : _remote = remote,
@@ -14,6 +12,14 @@ final class AuthRepository {
 
   final AuthRemoteSource _remote;
   final AuthLocalSource _local;
+
+  final _forceLogoutController = StreamController<void>.broadcast();
+
+  /// Emits when the session is terminated outside the UI (e.g. the
+  /// auth interceptor exhausts the refresh-token flow and calls
+  /// [logout]). `AuthCubit` listens to this so the router can redirect
+  /// to the unauthenticated stack.
+  Stream<void> get onForceLogout => _forceLogoutController.stream;
 
   Future<AuthResultModel> login({
     required String username,
@@ -64,6 +70,7 @@ final class AuthRepository {
 
   Future<void> logout() async {
     await _local.clearAll();
+    if (!_forceLogoutController.isClosed) _forceLogoutController.add(null);
     try {
       unawaited(_remote.logout());
     } on Object catch (e) {
