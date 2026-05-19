@@ -5,7 +5,7 @@ import 'package:sport_manager_mobile/features/settings/settings.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-const _brandName = 'TableFlow';
+const _brandName = 'DuLa';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});
