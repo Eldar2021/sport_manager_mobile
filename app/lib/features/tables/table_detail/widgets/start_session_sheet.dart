@@ -57,6 +57,7 @@ class _StartSessionSheetState extends State<StartSessionSheet> {
           ),
           const SizedBox(height: AppSpacing.x4),
           AppTextField(
+            maxLength: 24,
             label: context.l10n.sessionCustomerName,
             controller: _controller,
             hintText: context.l10n.sessionCustomerNameHint,

@@ -35,6 +35,8 @@ class TableCardFooter extends StatelessWidget {
             color: context.colors.error,
             fontWeight: FontWeight.w600,
           ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       );
     }
