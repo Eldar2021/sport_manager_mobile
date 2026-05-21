@@ -143,7 +143,8 @@ class _LogRow extends StatelessWidget {
       ),
       subtitle: Text(
         '${df.format(entry.startedAt)}'
-        '${entry.durationSeconds != null ? ' · ${ReportFormat.duration(entry.durationSeconds!)}' : ''}',
+        '${entry.durationSeconds != null ? ' · ${ReportFormat.duration(entry.durationSeconds!)}' : ''}'
+        '${entry.customerName != null && entry.customerName!.isNotEmpty ? ' · ${entry.customerName}' : ''}',
         style: context.appTextStyles.muted.labelSmall,
       ),
       trailing: switch (entry.status) {

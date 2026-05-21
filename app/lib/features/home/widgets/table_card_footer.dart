@@ -13,13 +13,9 @@ class TableCardFooter extends StatelessWidget {
   String _statusLabel(BuildContext context, SessionModel session) {
     final name = session.customerName;
     if (session.isPaused) {
-      return name != null && name.isNotEmpty
-          ? context.l10n.homeTablePaused(name)
-          : context.l10n.homeTablePausedBase;
+      return name != null && name.isNotEmpty ? context.l10n.homeTablePaused(name) : context.l10n.homeTablePausedBase;
     }
-    return name != null && name.isNotEmpty
-        ? context.l10n.homeTableOccupied(name)
-        : context.l10n.homeTableOccupiedBase;
+    return name != null && name.isNotEmpty ? context.l10n.homeTableOccupied(name) : context.l10n.homeTableOccupiedBase;
   }
 
   @override
