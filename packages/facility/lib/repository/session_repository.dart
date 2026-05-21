@@ -8,8 +8,8 @@ final class SessionRepository {
 
   final SessionRemoteSource _remote;
 
-  Future<SessionModel> startSession(String tableId) {
-    return _remote.startSession(tableId);
+  Future<SessionModel> startSession(String tableId, String? customerName) {
+    return _remote.startSession(tableId, customerName);
   }
 
   Future<SessionModel> pauseSession(String sessionId) {

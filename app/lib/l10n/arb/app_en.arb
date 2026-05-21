@@ -66,8 +66,24 @@
   "homeTablesEmpty": "No tables yet",
   "homeTablesEmptySub": "Add the first table so managers can start sessions.",
   "homeTablesEmptySubManager": "Tables will appear here once the owner adds them.",
-  "homeTableOccupied": "OCCUPIED",
-  "homeTablePaused": "PAUSED",
+  "homeTableOccupied": "{customerName} · OCCUPIED",
+  "@homeTableOccupied": {
+    "placeholders": {
+      "customerName": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTableOccupiedBase": "OCCUPIED",
+  "homeTablePaused": "{customerName} · PAUSED",
+  "@homeTablePaused": {
+    "placeholders": {
+      "customerName": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTablePausedBase": "PAUSED",
   "homeTableFree": "FREE",
   "homeTableJustFreed": "✓ Done",
   "createTableTitle": "New table",
@@ -181,6 +197,8 @@
   "profileDeleteAccountConfirm": "Delete forever",
   "profileErrorTitle": "Couldn't load profile",
   "profileErrorSubtitle": "Check your connection and try again.",
+  "sessionCustomerName": "Customer name (optional)",
+  "sessionCustomerNameHint": "e.g. John Smith",
   "tableDetailStart": "START",
   "tableDetailStop": "STOP & CLOSE",
   "tableDetailElapsed": "ELAPSED",

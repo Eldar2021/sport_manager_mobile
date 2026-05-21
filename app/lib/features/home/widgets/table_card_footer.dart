@@ -10,20 +10,31 @@ class TableCardFooter extends StatelessWidget {
 
   final TableModel table;
 
+  String _statusLabel(BuildContext context, SessionModel session) {
+    final name = session.customerName;
+    if (session.isPaused) {
+      return name != null && name.isNotEmpty
+          ? context.l10n.homeTablePaused(name)
+          : context.l10n.homeTablePausedBase;
+    }
+    return name != null && name.isNotEmpty
+        ? context.l10n.homeTableOccupied(name)
+        : context.l10n.homeTableOccupiedBase;
+  }
+
   @override
   Widget build(BuildContext context) {
     final rate =
         '${table.tarifAmount} ${table.currency.localizedName(context.l10n).toLowerCase()}'
         ' ${table.tarifType.localizedUnit(context.l10n).toLowerCase()}';
     if (table.isOccupied) {
-      final isPaused = table.session!.isPaused;
       return ListTile(
         dense: true,
         contentPadding: EdgeInsets.zero,
         minTileHeight: 0,
         title: SessionTimer(table.session!),
         subtitle: Text(
-          isPaused ? context.l10n.homeTablePaused : context.l10n.homeTableOccupied,
+          _statusLabel(context, table.session!),
           style: context.textTheme.labelMedium?.copyWith(
             color: context.colors.error,
             fontWeight: FontWeight.w600,

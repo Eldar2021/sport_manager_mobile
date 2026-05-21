@@ -207,10 +207,20 @@ class AppLocalizationsKy extends AppLocalizations {
   String get homeTablesEmptySubManager => 'Столдор ээси кошкондон кийин пайда болот.';
 
   @override
-  String get homeTableOccupied => 'ИШЕНИМДЕ';
+  String homeTableOccupied(String customerName) {
+    return '$customerName · БОШ ЭМЕС';
+  }
 
   @override
-  String get homeTablePaused => 'ТЫНЫГУУ';
+  String get homeTableOccupiedBase => 'БОШ ЭМЕС';
+
+  @override
+  String homeTablePaused(String customerName) {
+    return '$customerName · ТОКТОТУЛДУ';
+  }
+
+  @override
+  String get homeTablePausedBase => 'ТОКТОТУЛДУ';
 
   @override
   String get homeTableFree => 'БОШ';
@@ -457,6 +467,12 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get profileErrorSubtitle => 'Туташууну текшерип, кайра аракет кылыңыз.';
+
+  @override
+  String get sessionCustomerName => 'Кардардын аты (милдеттүү эмес)';
+
+  @override
+  String get sessionCustomerNameHint => 'мис. Иван Иванов';
 
   @override
   String get tableDetailStart => 'БАШТОО';

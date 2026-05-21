@@ -492,14 +492,26 @@ abstract class AppLocalizations {
   /// No description provided for @homeTableOccupied.
   ///
   /// In en, this message translates to:
+  /// **'{customerName} · OCCUPIED'**
+  String homeTableOccupied(String customerName);
+
+  /// No description provided for @homeTableOccupiedBase.
+  ///
+  /// In en, this message translates to:
   /// **'OCCUPIED'**
-  String get homeTableOccupied;
+  String get homeTableOccupiedBase;
 
   /// No description provided for @homeTablePaused.
   ///
   /// In en, this message translates to:
+  /// **'{customerName} · PAUSED'**
+  String homeTablePaused(String customerName);
+
+  /// No description provided for @homeTablePausedBase.
+  ///
+  /// In en, this message translates to:
   /// **'PAUSED'**
-  String get homeTablePaused;
+  String get homeTablePausedBase;
 
   /// No description provided for @homeTableFree.
   ///
@@ -926,6 +938,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check your connection and try again.'**
   String get profileErrorSubtitle;
+
+  /// No description provided for @sessionCustomerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer name (optional)'**
+  String get sessionCustomerName;
+
+  /// No description provided for @sessionCustomerNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. John Smith'**
+  String get sessionCustomerNameHint;
 
   /// No description provided for @tableDetailStart.
   ///

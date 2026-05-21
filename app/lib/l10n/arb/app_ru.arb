@@ -66,8 +66,24 @@
   "homeTablesEmpty": "Столов пока нет",
   "homeTablesEmptySub": "Добавьте первый стол, чтобы менеджеры могли начинать сессии.",
   "homeTablesEmptySubManager": "Столы появятся здесь, как только их добавит владелец.",
-  "homeTableOccupied": "ЗАНЯТ",
-  "homeTablePaused": "НА ПАУЗЕ",
+  "homeTableOccupied": "{customerName} · ЗАНЯТ",
+  "@homeTableOccupied": {
+    "placeholders": {
+      "customerName": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTableOccupiedBase": "ЗАНЯТ",
+  "homeTablePaused": "{customerName} · НА ПАУЗЕ",
+  "@homeTablePaused": {
+    "placeholders": {
+      "customerName": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTablePausedBase": "НА ПАУЗЕ",
   "homeTableFree": "СВОБОДЕН",
   "homeTableJustFreed": "✓ Завершён",
   "createTableTitle": "Новый стол",
@@ -153,6 +169,8 @@
   "profileDeleteAccountConfirm": "Удалить навсегда",
   "profileErrorTitle": "Не удалось загрузить профиль",
   "profileErrorSubtitle": "Проверьте подключение и попробуйте снова.",
+  "sessionCustomerName": "Имя клиента (необязательно)",
+  "sessionCustomerNameHint": "напр. Иван Иванов",
   "tableDetailStart": "НАЧАТЬ",
   "tableDetailStop": "ОСТАНОВИТЬ И ЗАКРЫТЬ",
   "tableDetailElapsed": "ПРОШЛО",

@@ -24,6 +24,7 @@ SessionModel _$SessionModelFromJson(Map<String, dynamic> json) => SessionModel(
   discountPercent: (json['discountPercent'] as num?)?.toInt(),
   totalAmount: (json['totalAmount'] as num?)?.toInt(),
   cancelReason: json['cancelReason'] as String?,
+  customerName: json['customerName'] as String?,
 );
 
 Map<String, dynamic> _$SessionModelToJson(SessionModel instance) => <String, dynamic>{
@@ -31,6 +32,7 @@ Map<String, dynamic> _$SessionModelToJson(SessionModel instance) => <String, dyn
   'tableId': instance.tableId,
   'status': _$SessionStatusEnumMap[instance.status]!,
   'startedAt': instance.startedAt.toIso8601String(),
+  'customerName': instance.customerName,
   'totalPausedSeconds': instance.totalPausedSeconds,
   'pausedAt': instance.pausedAt?.toIso8601String(),
   'tarifAmountSnapshot': instance.tarifAmountSnapshot,

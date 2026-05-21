@@ -207,10 +207,20 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeTablesEmptySubManager => 'Столы появятся здесь, как только их добавит владелец.';
 
   @override
-  String get homeTableOccupied => 'ЗАНЯТ';
+  String homeTableOccupied(String customerName) {
+    return '$customerName · ЗАНЯТ';
+  }
 
   @override
-  String get homeTablePaused => 'НА ПАУЗЕ';
+  String get homeTableOccupiedBase => 'ЗАНЯТ';
+
+  @override
+  String homeTablePaused(String customerName) {
+    return '$customerName · НА ПАУЗЕ';
+  }
+
+  @override
+  String get homeTablePausedBase => 'НА ПАУЗЕ';
 
   @override
   String get homeTableFree => 'СВОБОДЕН';
@@ -466,6 +476,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get profileErrorSubtitle => 'Проверьте подключение и попробуйте снова.';
+
+  @override
+  String get sessionCustomerName => 'Имя клиента (необязательно)';
+
+  @override
+  String get sessionCustomerNameHint => 'напр. Иван Иванов';
 
   @override
   String get tableDetailStart => 'НАЧАТЬ';

@@ -9,12 +9,18 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
   final ApiClient _client;
 
   @override
-  Future<SessionModel> startSession(String tableId) {
+  Future<SessionModel> startSession(
+    String tableId,
+    String? customerName,
+  ) {
     return _client
         .postType<SessionModel>(
           '/api/v1/session/start',
           fromJson: SessionModel.fromJson,
-          data: {'tableId': tableId},
+          data: {
+            'tableId': tableId,
+            'customerName': ?customerName,
+          },
         )
         .mapTo(FacilityExc.fromApiClientExc);
   }

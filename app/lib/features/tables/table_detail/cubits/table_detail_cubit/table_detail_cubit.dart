@@ -22,12 +22,12 @@ class TableDetailCubit extends Cubit<TableDetailState> {
   final SessionRepository _sessionRepo;
   final FacilityRepository _facilityRepo;
 
-  Future<void> startSession() async {
+  Future<void> startSession(String? customerName) async {
     if (state is! TableDetailFree) return;
     final s = state as TableDetailFree;
     emit(s.copyWith(startStatus: const RequestLoading()));
     try {
-      final session = await _sessionRepo.startSession(s.table.id);
+      final session = await _sessionRepo.startSession(s.table.id, customerName);
       emit(TableDetailOccupied(table: s.table, session: session));
     } on Object catch (e) {
       emit(s.copyWith(startStatus: RequestFailure(e)));
