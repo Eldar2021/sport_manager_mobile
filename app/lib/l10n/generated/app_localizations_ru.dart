@@ -983,10 +983,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get currencyLabel => 'сом';
 
   @override
-  String get profileProductsTitle => 'Каталог товаров';
+  String get profileProductsTitle => 'Товары и цены';
 
   @override
-  String get profileProductsSubtitle => 'Напитки, еда, инвентарь';
+  String get profileProductsSubtitle => 'Напитки, еда, аренда';
 
   @override
   String get productsTitle => 'Товары';

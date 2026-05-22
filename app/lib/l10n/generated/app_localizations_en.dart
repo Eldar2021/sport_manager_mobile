@@ -967,10 +967,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get currencyLabel => 'som';
 
   @override
-  String get profileProductsTitle => 'Product catalog';
+  String get profileProductsTitle => 'Products and prices';
 
   @override
-  String get profileProductsSubtitle => 'Drinks, food, equipment';
+  String get profileProductsSubtitle => 'Drinks, food, rent';
 
   @override
   String get productsTitle => 'Products';

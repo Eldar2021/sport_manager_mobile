@@ -963,10 +963,10 @@ class AppLocalizationsKy extends AppLocalizations {
   String get currencyLabel => 'сом';
 
   @override
-  String get profileProductsTitle => 'Товарлар каталогу';
+  String get profileProductsTitle => 'Товарлар жана баалар';
 
   @override
-  String get profileProductsSubtitle => 'Суусундуктар, тамак-аш, инвентарь';
+  String get profileProductsSubtitle => 'Суусундуктар, тамак-аш, аренда';
 
   @override
   String get productsTitle => 'Товарлар';

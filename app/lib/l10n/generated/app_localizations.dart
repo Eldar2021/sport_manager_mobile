@@ -1734,13 +1734,13 @@ abstract class AppLocalizations {
   /// No description provided for @profileProductsTitle.
   ///
   /// In en, this message translates to:
-  /// **'Product catalog'**
+  /// **'Products and prices'**
   String get profileProductsTitle;
 
   /// No description provided for @profileProductsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Drinks, food, equipment'**
+  /// **'Drinks, food, rent'**
   String get profileProductsSubtitle;
 
   /// No description provided for @productsTitle.
