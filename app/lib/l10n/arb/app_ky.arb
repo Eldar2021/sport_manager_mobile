@@ -306,5 +306,44 @@
   "upgraderRequiredDescription": "Бул версия колдоого алынбайт. Улантуу үчүн колдонмону жаңыртыңыз.",
   "upgraderRecommendedDescription": "Жаңы версия жеткиликтүү. Мыкты тажрыйба үчүн жаңыртыңыз.",
   "upgraderUpdateButton": "Жаңыртуу",
-  "upgraderLaterButton": "Кийинчерээк"
+  "upgraderLaterButton": "Кийинчерээк",
+  "currencyLabel": "сом",
+  "profileProductsTitle": "Товарлар каталогу",
+  "profileProductsSubtitle": "Суусундуктар, тамак-аш, инвентарь",
+  "productsTitle": "Товарлар",
+  "productsAddButton": "Товар кошуу",
+  "productsCreateTitle": "Жаңы товар",
+  "productsEditTitle": "Товарды түзөтүү",
+  "productsCreateButton": "Түзүү",
+  "productsUpdateButton": "Сактоо",
+  "productsEmptyTitle": "Товарлар жок",
+  "productsEmptySubtitle": "Сатуу баштоо үчүн биринчи товарды кошуңуз.",
+  "productsDeleteTitle": "\"{name}\" жок кылуу?",
+  "@productsDeleteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "productsDeleteSubtitle": "Товар жашырылат жана активдүү сессияларда көрүнбөйт.",
+  "productsNameLabel": "Аталышы",
+  "productsNameHint": "мис. Суу 0.5л",
+  "productsPriceLabel": "Баасы (сом)",
+  "productsPriceHint": "мис. 50",
+  "productsPriceInvalid": "0дон чоң туура баа киргизиңиз",
+  "productsCategoryLabel": "Категория",
+  "productsUnitLabel": "Өлчөм бирдиги",
+  "productsDescriptionLabel": "Сүрөттөмө (милдеттүү эмес)",
+  "productsDescriptionHint": "Кыскача сүрөттөмө...",
+  "productsPhotoPickerLabel": "Сүрөт кошуу үчүн басыңыз",
+  "productCategoryDrink": "Суусундук",
+  "productCategoryFood": "Тамак-аш",
+  "productCategoryEquipment": "Инвентарь",
+  "productCategoryOther": "Башка",
+  "productUnitPiece": "Штука",
+  "productUnitKg": "кг",
+  "productUnitLitre": "Литр",
+  "productUnitPortion": "Порция",
+  "productUnitHour": "Саат"
 }

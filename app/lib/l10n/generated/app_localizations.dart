@@ -1724,6 +1724,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Later'**
   String get upgraderLaterButton;
+
+  /// No description provided for @currencyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'som'**
+  String get currencyLabel;
+
+  /// No description provided for @profileProductsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Product catalog'**
+  String get profileProductsTitle;
+
+  /// No description provided for @profileProductsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Drinks, food, equipment'**
+  String get profileProductsSubtitle;
+
+  /// No description provided for @productsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get productsTitle;
+
+  /// No description provided for @productsAddButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add product'**
+  String get productsAddButton;
+
+  /// No description provided for @productsCreateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New product'**
+  String get productsCreateTitle;
+
+  /// No description provided for @productsEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit product'**
+  String get productsEditTitle;
+
+  /// No description provided for @productsCreateButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get productsCreateButton;
+
+  /// No description provided for @productsUpdateButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get productsUpdateButton;
+
+  /// No description provided for @productsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No products yet'**
+  String get productsEmptyTitle;
+
+  /// No description provided for @productsEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first product to start selling.'**
+  String get productsEmptySubtitle;
+
+  /// No description provided for @productsDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete \"{name}\"?'**
+  String productsDeleteTitle(String name);
+
+  /// No description provided for @productsDeleteSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This product will be soft-deleted and won\'t appear in active sessions.'**
+  String get productsDeleteSubtitle;
+
+  /// No description provided for @productsNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get productsNameLabel;
+
+  /// No description provided for @productsNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Water 0.5L'**
+  String get productsNameHint;
+
+  /// No description provided for @productsPriceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Price (som)'**
+  String get productsPriceLabel;
+
+  /// No description provided for @productsPriceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 50'**
+  String get productsPriceHint;
+
+  /// No description provided for @productsPriceInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid price greater than 0'**
+  String get productsPriceInvalid;
+
+  /// No description provided for @productsCategoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get productsCategoryLabel;
+
+  /// No description provided for @productsUnitLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit'**
+  String get productsUnitLabel;
+
+  /// No description provided for @productsDescriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get productsDescriptionLabel;
+
+  /// No description provided for @productsDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Short description...'**
+  String get productsDescriptionHint;
+
+  /// No description provided for @productsPhotoPickerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to add photo'**
+  String get productsPhotoPickerLabel;
+
+  /// No description provided for @productCategoryDrink.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink'**
+  String get productCategoryDrink;
+
+  /// No description provided for @productCategoryFood.
+  ///
+  /// In en, this message translates to:
+  /// **'Food'**
+  String get productCategoryFood;
+
+  /// No description provided for @productCategoryEquipment.
+  ///
+  /// In en, this message translates to:
+  /// **'Equipment'**
+  String get productCategoryEquipment;
+
+  /// No description provided for @productCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get productCategoryOther;
+
+  /// No description provided for @productUnitPiece.
+  ///
+  /// In en, this message translates to:
+  /// **'Piece'**
+  String get productUnitPiece;
+
+  /// No description provided for @productUnitKg.
+  ///
+  /// In en, this message translates to:
+  /// **'kg'**
+  String get productUnitKg;
+
+  /// No description provided for @productUnitLitre.
+  ///
+  /// In en, this message translates to:
+  /// **'Litre'**
+  String get productUnitLitre;
+
+  /// No description provided for @productUnitPortion.
+  ///
+  /// In en, this message translates to:
+  /// **'Portion'**
+  String get productUnitPortion;
+
+  /// No description provided for @productUnitHour.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour'**
+  String get productUnitHour;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

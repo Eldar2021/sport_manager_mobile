@@ -30,6 +30,8 @@ dependencies:
   managers:
   subscription:
   reports:
+  product:
+  image_picker:
   cupertino_icons:
   get_it:
   toastification:

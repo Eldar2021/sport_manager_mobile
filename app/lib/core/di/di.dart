@@ -7,6 +7,7 @@ export 'modules/error_module.dart';
 export 'modules/facility_module.dart';
 export 'modules/managers_module.dart';
 export 'modules/network_module.dart';
+export 'modules/product_module.dart';
 export 'modules/reports_module.dart';
 export 'modules/subscription_module.dart';
 

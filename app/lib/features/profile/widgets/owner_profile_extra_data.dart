@@ -42,6 +42,19 @@ class OwnerProfileExtraData extends StatelessWidget {
               ),
               const Divider(),
               ProfileItemTile(
+                title: context.l10n.profileProductsTitle,
+                subtitle: context.l10n.profileProductsSubtitle,
+                iconBgColor: context.colors.tertiary.withValues(
+                  alpha: AppOpacity.tint,
+                ),
+                icon: Icon(
+                  Icons.inventory_2_outlined,
+                  color: context.colors.tertiary,
+                ),
+                onTap: () => context.push(AppRoutes.products),
+              ),
+              const Divider(),
+              ProfileItemTile(
                 title: context.l10n.profileManagersTitle,
                 subtitle: context.l10n.profileManagersSubtitle(managersCount),
                 iconBgColor: context.appColors.successContainer,

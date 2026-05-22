@@ -962,4 +962,102 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get upgraderLaterButton => 'Later';
+
+  @override
+  String get currencyLabel => 'som';
+
+  @override
+  String get profileProductsTitle => 'Product catalog';
+
+  @override
+  String get profileProductsSubtitle => 'Drinks, food, equipment';
+
+  @override
+  String get productsTitle => 'Products';
+
+  @override
+  String get productsAddButton => 'Add product';
+
+  @override
+  String get productsCreateTitle => 'New product';
+
+  @override
+  String get productsEditTitle => 'Edit product';
+
+  @override
+  String get productsCreateButton => 'Create';
+
+  @override
+  String get productsUpdateButton => 'Save';
+
+  @override
+  String get productsEmptyTitle => 'No products yet';
+
+  @override
+  String get productsEmptySubtitle => 'Add your first product to start selling.';
+
+  @override
+  String productsDeleteTitle(String name) {
+    return 'Delete \"$name\"?';
+  }
+
+  @override
+  String get productsDeleteSubtitle => 'This product will be soft-deleted and won\'t appear in active sessions.';
+
+  @override
+  String get productsNameLabel => 'Name';
+
+  @override
+  String get productsNameHint => 'e.g. Water 0.5L';
+
+  @override
+  String get productsPriceLabel => 'Price (som)';
+
+  @override
+  String get productsPriceHint => 'e.g. 50';
+
+  @override
+  String get productsPriceInvalid => 'Enter a valid price greater than 0';
+
+  @override
+  String get productsCategoryLabel => 'Category';
+
+  @override
+  String get productsUnitLabel => 'Unit';
+
+  @override
+  String get productsDescriptionLabel => 'Description (optional)';
+
+  @override
+  String get productsDescriptionHint => 'Short description...';
+
+  @override
+  String get productsPhotoPickerLabel => 'Tap to add photo';
+
+  @override
+  String get productCategoryDrink => 'Drink';
+
+  @override
+  String get productCategoryFood => 'Food';
+
+  @override
+  String get productCategoryEquipment => 'Equipment';
+
+  @override
+  String get productCategoryOther => 'Other';
+
+  @override
+  String get productUnitPiece => 'Piece';
+
+  @override
+  String get productUnitKg => 'kg';
+
+  @override
+  String get productUnitLitre => 'Litre';
+
+  @override
+  String get productUnitPortion => 'Portion';
+
+  @override
+  String get productUnitHour => 'Hour';
 }

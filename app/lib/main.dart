@@ -20,6 +20,7 @@ void main() async {
     const FacilityModule(),
     const ManagersModule(),
     const SubscriptionModule(),
+    const ProductModule(),
     const ReportsModule(),
   ]);
 

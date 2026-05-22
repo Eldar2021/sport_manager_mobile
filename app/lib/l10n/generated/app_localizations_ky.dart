@@ -958,4 +958,102 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get upgraderLaterButton => 'Кийинчерээк';
+
+  @override
+  String get currencyLabel => 'сом';
+
+  @override
+  String get profileProductsTitle => 'Товарлар каталогу';
+
+  @override
+  String get profileProductsSubtitle => 'Суусундуктар, тамак-аш, инвентарь';
+
+  @override
+  String get productsTitle => 'Товарлар';
+
+  @override
+  String get productsAddButton => 'Товар кошуу';
+
+  @override
+  String get productsCreateTitle => 'Жаңы товар';
+
+  @override
+  String get productsEditTitle => 'Товарды түзөтүү';
+
+  @override
+  String get productsCreateButton => 'Түзүү';
+
+  @override
+  String get productsUpdateButton => 'Сактоо';
+
+  @override
+  String get productsEmptyTitle => 'Товарлар жок';
+
+  @override
+  String get productsEmptySubtitle => 'Сатуу баштоо үчүн биринчи товарды кошуңуз.';
+
+  @override
+  String productsDeleteTitle(String name) {
+    return '\"$name\" жок кылуу?';
+  }
+
+  @override
+  String get productsDeleteSubtitle => 'Товар жашырылат жана активдүү сессияларда көрүнбөйт.';
+
+  @override
+  String get productsNameLabel => 'Аталышы';
+
+  @override
+  String get productsNameHint => 'мис. Суу 0.5л';
+
+  @override
+  String get productsPriceLabel => 'Баасы (сом)';
+
+  @override
+  String get productsPriceHint => 'мис. 50';
+
+  @override
+  String get productsPriceInvalid => '0дон чоң туура баа киргизиңиз';
+
+  @override
+  String get productsCategoryLabel => 'Категория';
+
+  @override
+  String get productsUnitLabel => 'Өлчөм бирдиги';
+
+  @override
+  String get productsDescriptionLabel => 'Сүрөттөмө (милдеттүү эмес)';
+
+  @override
+  String get productsDescriptionHint => 'Кыскача сүрөттөмө...';
+
+  @override
+  String get productsPhotoPickerLabel => 'Сүрөт кошуу үчүн басыңыз';
+
+  @override
+  String get productCategoryDrink => 'Суусундук';
+
+  @override
+  String get productCategoryFood => 'Тамак-аш';
+
+  @override
+  String get productCategoryEquipment => 'Инвентарь';
+
+  @override
+  String get productCategoryOther => 'Башка';
+
+  @override
+  String get productUnitPiece => 'Штука';
+
+  @override
+  String get productUnitKg => 'кг';
+
+  @override
+  String get productUnitLitre => 'Литр';
+
+  @override
+  String get productUnitPortion => 'Порция';
+
+  @override
+  String get productUnitHour => 'Саат';
 }
