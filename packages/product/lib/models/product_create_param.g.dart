@@ -13,6 +13,7 @@ ProductCreateParam _$ProductCreateParamFromJson(Map<String, dynamic> json) => Pr
   category: $enumDecode(_$ProductCategoryEnumMap, json['category']),
   description: json['description'] as String?,
   photoUrl: json['photoUrl'] as String?,
+  icon: json['icon'] as String?,
 );
 
 Map<String, dynamic> _$ProductCreateParamToJson(ProductCreateParam instance) => <String, dynamic>{
@@ -22,6 +23,7 @@ Map<String, dynamic> _$ProductCreateParamToJson(ProductCreateParam instance) => 
   'category': _$ProductCategoryEnumMap[instance.category]!,
   'description': ?instance.description,
   'photoUrl': ?instance.photoUrl,
+  'icon': ?instance.icon,
 };
 
 const _$ProductUnitEnumMap = {

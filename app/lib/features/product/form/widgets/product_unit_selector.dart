@@ -36,6 +36,7 @@ class ProductUnitSelector extends StatelessWidget {
                 return ChoiceChip(
                   label: Text(unit.localizedName(context.l10n)),
                   selected: isSelected,
+                  showCheckmark: false,
                   onSelected: (_) => onChanged(unit),
                 );
               })

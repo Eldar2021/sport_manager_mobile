@@ -17,6 +17,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
   updatedAt: DateTime.parse(json['updatedAt'] as String),
   description: json['description'] as String?,
   photoUrl: json['photoUrl'] as String?,
+  icon: json['icon'] as String?,
 );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) => <String, dynamic>{
@@ -28,6 +29,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) => <String, dyn
   'category': _$ProductCategoryEnumMap[instance.category]!,
   'description': instance.description,
   'photoUrl': instance.photoUrl,
+  'icon': instance.icon,
   'createdAt': instance.createdAt.toIso8601String(),
   'updatedAt': instance.updatedAt.toIso8601String(),
 };

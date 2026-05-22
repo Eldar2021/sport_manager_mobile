@@ -19,6 +19,7 @@ final class ProductModel extends Equatable {
     required this.updatedAt,
     this.description,
     this.photoUrl,
+    this.icon,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -33,6 +34,7 @@ final class ProductModel extends Equatable {
   final ProductCategory category;
   final String? description;
   final String? photoUrl;
+  final String? icon;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -50,6 +52,7 @@ final class ProductModel extends Equatable {
     category,
     description,
     photoUrl,
+    icon,
     updatedAt,
   ];
 }

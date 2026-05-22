@@ -6,9 +6,16 @@ import 'package:product/product.dart';
 final class ProductRepository {
   const ProductRepository(
     ProductRemoteSource remoteSource,
-  ) : _remote = remoteSource;
+    ProductLocalSource localSource,
+  ) : _remote = remoteSource,
+      _local = localSource;
 
   final ProductRemoteSource _remote;
+  final ProductLocalSource _local;
+
+  Map<ProductCategory, List<String>> getEmojisByCategory() {
+    return _local.getEmojisByCategory();
+  }
 
   Future<List<ProductModel>> getAll({
     ProductCategory? category,

@@ -14,15 +14,21 @@ final class ProductModule extends BaseDiModule {
     super.register(sl);
 
     sl
+      ..registerLazySingleton<ProductLocalSource>(
+        () => const ProductLocalSourceImpl(),
+      )
       ..registerLazySingleton<ProductRemoteSource>(
-        () => !Env.isMock
+        () => Env.isMock
             ? ProductRemoteSourceMock()
             : ProductRemoteSourceImpl(
                 sl<ApiClient>(instanceName: ApiClient.bearerInstance),
               ),
       )
       ..registerLazySingleton<ProductRepository>(
-        () => ProductRepository(sl<ProductRemoteSource>()),
+        () => ProductRepository(
+          sl<ProductRemoteSource>(),
+          sl<ProductLocalSource>(),
+        ),
       );
   }
 }

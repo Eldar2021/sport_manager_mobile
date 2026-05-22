@@ -31,12 +31,14 @@ class CategoryFilterBar extends StatelessWidget {
               ChoiceChip(
                 label: Text(context.l10n.productsFilterAll),
                 selected: state.category == null,
+                showCheckmark: false,
                 onSelected: (_) => cubit.load(clearCategory: true),
               ),
               for (final cat in ProductCategory.values)
                 ChoiceChip(
                   label: Text(cat.localizedName(context.l10n)),
                   selected: state.category == cat,
+                  showCheckmark: false,
                   onSelected: (_) => cubit.load(category: cat),
                 ),
             ],

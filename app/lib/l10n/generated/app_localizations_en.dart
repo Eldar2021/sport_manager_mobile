@@ -988,10 +988,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get productsEditTitle => 'Edit product';
 
   @override
-  String get productsCreateButton => 'Create';
+  String get productsCreateButton => 'Create product';
 
   @override
-  String get productsUpdateButton => 'Save';
+  String get productsUpdateButton => 'Update';
 
   @override
   String get productsEmptyTitle => 'No products yet';
@@ -1014,7 +1014,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get productsNameHint => 'e.g. Water 0.5L';
 
   @override
-  String get productsPriceLabel => 'Price (som)';
+  String get productsPriceLabel => 'Price';
 
   @override
   String get productsPriceHint => 'e.g. 50';
@@ -1035,7 +1035,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get productsDescriptionHint => 'Short description...';
 
   @override
-  String get productsPhotoPickerLabel => 'Tap to add photo';
+  String get productsPhotoSectionLabel => 'Photo (optional)';
+
+  @override
+  String get productsIconPickerLabel => 'Or choose an icon:';
+
+  @override
+  String get productsPhotoPickerLabel => 'Add';
 
   @override
   String get productCategoryDrink => 'Drinks';

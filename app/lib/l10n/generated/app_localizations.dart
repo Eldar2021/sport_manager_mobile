@@ -1776,13 +1776,13 @@ abstract class AppLocalizations {
   /// No description provided for @productsCreateButton.
   ///
   /// In en, this message translates to:
-  /// **'Create'**
+  /// **'Create product'**
   String get productsCreateButton;
 
   /// No description provided for @productsUpdateButton.
   ///
   /// In en, this message translates to:
-  /// **'Save'**
+  /// **'Update'**
   String get productsUpdateButton;
 
   /// No description provided for @productsEmptyTitle.
@@ -1824,7 +1824,7 @@ abstract class AppLocalizations {
   /// No description provided for @productsPriceLabel.
   ///
   /// In en, this message translates to:
-  /// **'Price (som)'**
+  /// **'Price'**
   String get productsPriceLabel;
 
   /// No description provided for @productsPriceHint.
@@ -1863,10 +1863,22 @@ abstract class AppLocalizations {
   /// **'Short description...'**
   String get productsDescriptionHint;
 
+  /// No description provided for @productsPhotoSectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo (optional)'**
+  String get productsPhotoSectionLabel;
+
+  /// No description provided for @productsIconPickerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Or choose an icon:'**
+  String get productsIconPickerLabel;
+
   /// No description provided for @productsPhotoPickerLabel.
   ///
   /// In en, this message translates to:
-  /// **'Tap to add photo'**
+  /// **'Add'**
   String get productsPhotoPickerLabel;
 
   /// No description provided for @productCategoryDrink.

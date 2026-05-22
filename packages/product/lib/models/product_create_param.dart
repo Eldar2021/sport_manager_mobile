@@ -15,6 +15,7 @@ final class ProductCreateParam extends Equatable {
     required this.category,
     this.description,
     this.photoUrl,
+    this.icon,
   });
 
   factory ProductCreateParam.fromJson(Map<String, dynamic> json) {
@@ -27,6 +28,7 @@ final class ProductCreateParam extends Equatable {
   final ProductCategory category;
   final String? description;
   final String? photoUrl;
+  final String? icon;
 
   Map<String, dynamic> toJson() {
     return _$ProductCreateParamToJson(this);
@@ -40,5 +42,6 @@ final class ProductCreateParam extends Equatable {
     category,
     description,
     photoUrl,
+    icon,
   ];
 }

@@ -984,10 +984,10 @@ class AppLocalizationsKy extends AppLocalizations {
   String get productsEditTitle => 'Товарды түзөтүү';
 
   @override
-  String get productsCreateButton => 'Түзүү';
+  String get productsCreateButton => 'Товар түзүү';
 
   @override
-  String get productsUpdateButton => 'Сактоо';
+  String get productsUpdateButton => 'Жаңыртуу';
 
   @override
   String get productsEmptyTitle => 'Товарлар жок';
@@ -1010,7 +1010,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get productsNameHint => 'мис. Суу 0.5л';
 
   @override
-  String get productsPriceLabel => 'Баасы (сом)';
+  String get productsPriceLabel => 'Баасы';
 
   @override
   String get productsPriceHint => 'мис. 50';
@@ -1031,7 +1031,13 @@ class AppLocalizationsKy extends AppLocalizations {
   String get productsDescriptionHint => 'Кыскача сүрөттөмө...';
 
   @override
-  String get productsPhotoPickerLabel => 'Сүрөт кошуу үчүн басыңыз';
+  String get productsPhotoSectionLabel => 'Сүрөт (кошумча)';
+
+  @override
+  String get productsIconPickerLabel => 'Же иконка тандаңыз:';
+
+  @override
+  String get productsPhotoPickerLabel => 'Кошуу';
 
   @override
   String get productCategoryDrink => 'Суусундуктар';

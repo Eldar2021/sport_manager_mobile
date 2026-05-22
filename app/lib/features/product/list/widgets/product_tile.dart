@@ -77,21 +77,22 @@ class _ProductThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final url = product.photoUrl;
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: SizedBox(
         width: 52,
         height: 52,
-        child: url != null
-            ? Image.network(
-                url,
-                fit: BoxFit.cover,
-                errorBuilder: (_, _, _) {
-                  return _IconFallback(product.category);
-                },
-              )
-            : _IconFallback(product.category),
+        child: switch ((product.photoUrl, product.icon)) {
+          (final url?, _) => Image.network(
+            url,
+            fit: BoxFit.cover,
+            errorBuilder: (_, _, _) => _IconFallback(product.category),
+          ),
+          (_, final emoji?) => Center(
+            child: Text(emoji, style: const TextStyle(fontSize: 28)),
+          ),
+          _ => _IconFallback(product.category),
+        },
       ),
     );
   }

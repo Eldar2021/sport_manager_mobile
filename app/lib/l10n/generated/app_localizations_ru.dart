@@ -1004,10 +1004,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get productsEditTitle => 'Редактировать товар';
 
   @override
-  String get productsCreateButton => 'Создать';
+  String get productsCreateButton => 'Создать товар';
 
   @override
-  String get productsUpdateButton => 'Сохранить';
+  String get productsUpdateButton => 'Обновить';
 
   @override
   String get productsEmptyTitle => 'Товаров пока нет';
@@ -1030,7 +1030,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get productsNameHint => 'напр. Вода 0.5л';
 
   @override
-  String get productsPriceLabel => 'Цена (сом)';
+  String get productsPriceLabel => 'Цена';
 
   @override
   String get productsPriceHint => 'напр. 50';
@@ -1051,7 +1051,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get productsDescriptionHint => 'Краткое описание...';
 
   @override
-  String get productsPhotoPickerLabel => 'Нажмите, чтобы добавить фото';
+  String get productsPhotoSectionLabel => 'Фото (необязательно)';
+
+  @override
+  String get productsIconPickerLabel => 'Или выберите иконку:';
+
+  @override
+  String get productsPhotoPickerLabel => 'Добавить';
 
   @override
   String get productCategoryDrink => 'Напитки';

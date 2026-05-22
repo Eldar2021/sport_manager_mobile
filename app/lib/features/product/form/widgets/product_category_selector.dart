@@ -27,20 +27,20 @@ class ProductCategorySelector extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.x2),
-        Wrap(
-          spacing: AppSpacing.x2,
-          runSpacing: AppSpacing.x2,
-          children: ProductCategory.values
-              .map((cat) {
-                final isSelected = cat == selected;
-                return ChoiceChip(
-                  avatar: Icon(cat.icon, size: 16),
-                  label: Text(cat.localizedName(context.l10n)),
-                  selected: isSelected,
-                  onSelected: (_) => onChanged(cat),
-                );
-              })
-              .toList(growable: false),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            spacing: AppSpacing.x2,
+            children: ProductCategory.values.map((cat) {
+              return ChoiceChip(
+                avatar: Icon(cat.icon, size: 16),
+                label: Text(cat.localizedName(context.l10n)),
+                selected: cat == selected,
+                showCheckmark: false,
+                onSelected: (_) => onChanged(cat),
+              );
+            }).toList(growable: false),
+          ),
         ),
       ],
     );
