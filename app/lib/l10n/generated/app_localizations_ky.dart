@@ -969,7 +969,10 @@ class AppLocalizationsKy extends AppLocalizations {
   String get profileProductsSubtitle => 'Суусундуктар, тамак-аш, аренда';
 
   @override
-  String get productsTitle => 'Товарлар';
+  String get productsTitle => 'Товарлар жана баалар';
+
+  @override
+  String get productsFilterAll => 'Баары';
 
   @override
   String get productsAddButton => 'Товар кошуу';
@@ -1031,13 +1034,13 @@ class AppLocalizationsKy extends AppLocalizations {
   String get productsPhotoPickerLabel => 'Сүрөт кошуу үчүн басыңыз';
 
   @override
-  String get productCategoryDrink => 'Суусундук';
+  String get productCategoryDrink => 'Суусундуктар';
 
   @override
   String get productCategoryFood => 'Тамак-аш';
 
   @override
-  String get productCategoryEquipment => 'Инвентарь';
+  String get productCategoryEquipment => 'Аренда';
 
   @override
   String get productCategoryOther => 'Башка';
@@ -1056,4 +1059,19 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get productUnitHour => 'Саат';
+
+  @override
+  String get productUnitPieceShort => 'шт';
+
+  @override
+  String get productUnitKgShort => 'кг';
+
+  @override
+  String get productUnitLitreShort => 'л';
+
+  @override
+  String get productUnitPortionShort => 'порц.';
+
+  @override
+  String get productUnitHourShort => 'саат';
 }

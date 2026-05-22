@@ -22,6 +22,8 @@ class OwnerProfileExtraDataSkeleton extends StatelessWidget {
               ProfileSectionSkeletonTile(),
               Divider(),
               ProfileSectionSkeletonTile(),
+              Divider(),
+              ProfileSectionSkeletonTile(),
             ],
           ),
         ),

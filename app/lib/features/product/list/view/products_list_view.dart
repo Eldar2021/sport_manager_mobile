@@ -55,55 +55,44 @@ class _ProductsListViewState extends State<ProductsListView> {
     return AppButtonScope(
       child: Scaffold(
         appBar: AppBar(title: Text(context.l10n.productsTitle)),
-        body: RefreshIndicator.adaptive(
-          onRefresh: _cubit.load,
-          child: BlocBuilder<ProductsListCubit, ProductsListState>(
-            bloc: _cubit,
-            buildWhen: (a, b) => a.products != b.products || a.deletingId != b.deletingId,
-            builder: (context, state) {
-              return switch (state.products) {
-                RequestInitial<List<ProductModel>>() || RequestLoading<List<ProductModel>>() => const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-                RequestFailure<List<ProductModel>>(:final exception) => ErrorBodyWidget(
-                  exception,
-                  onRetryPressed: _cubit.load,
-                ),
-                RequestSuccess<List<ProductModel>>(:final data) when data.isEmpty => const ProductsEmptyView(),
-                RequestSuccess<List<ProductModel>>(:final data) => ListView.separated(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.fromLTRB(
-                    AppSpacing.x4,
-                    AppSpacing.x2,
-                    AppSpacing.x4,
-                    kAppButtonFabClearance,
-                  ),
-                  itemCount: data.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x2),
-                  itemBuilder: (_, i) {
-                    return Card(
-                      margin: EdgeInsets.zero,
-                      child: ProductTile(
-                        data[i],
-                        key: ValueKey(data[i].id),
-                        isDeleting: state.deletingId == data[i].id,
-                        onEdit: () => context.push(
-                          AppRoutes.productForm,
-                          extra: data[i],
-                        ),
-                        onDelete: () => _onDelete(data[i]),
+        body: Column(
+          children: [
+            CategoryFilterBar(_cubit),
+            Expanded(
+              child: RefreshIndicator.adaptive(
+                onRefresh: _cubit.load,
+                child: BlocBuilder<ProductsListCubit, ProductsListState>(
+                  bloc: _cubit,
+                  buildWhen: (a, b) => a.products != b.products || a.deletingId != b.deletingId,
+                  builder: (context, state) {
+                    return switch (state.products) {
+                      RequestInitial<List<ProductModel>>() ||
+                      RequestLoading<List<ProductModel>>() => const ProductsListSkeleton(),
+                      RequestFailure<List<ProductModel>>(:final exception) => ErrorBodyWidget(
+                        exception,
+                        onRetryPressed: _cubit.load,
                       ),
-                    );
+                      RequestSuccess<List<ProductModel>>(:final data) when data.isEmpty => const ProductsEmptyView(),
+                      RequestSuccess<List<ProductModel>>(:final data) => ProductsListCard(
+                        data: data,
+                        deletingId: state.deletingId,
+                        onEdit: (p) => context.push(AppRoutes.productForm, extra: p),
+                        onDelete: _onDelete,
+                      ),
+                    };
                   },
                 ),
-              };
-            },
-          ),
+              ),
+            ),
+          ],
         ),
         floatingActionButtonLocation: kAppButtonFabLocation,
-        floatingActionButton: AppButton(
-          onPressed: () => context.push(AppRoutes.productForm),
-          child: Text(context.l10n.productsAddButton),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
+          child: AppButton(
+            onPressed: () => context.push(AppRoutes.productForm),
+            child: Text(context.l10n.productsAddButton),
+          ),
         ),
       ),
     );

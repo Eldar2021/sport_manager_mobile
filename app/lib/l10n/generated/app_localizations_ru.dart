@@ -989,7 +989,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileProductsSubtitle => 'Напитки, еда, аренда';
 
   @override
-  String get productsTitle => 'Товары';
+  String get productsTitle => 'Товары и цены';
+
+  @override
+  String get productsFilterAll => 'Все';
 
   @override
   String get productsAddButton => 'Добавить товар';
@@ -1051,16 +1054,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get productsPhotoPickerLabel => 'Нажмите, чтобы добавить фото';
 
   @override
-  String get productCategoryDrink => 'Напиток';
+  String get productCategoryDrink => 'Напитки';
 
   @override
   String get productCategoryFood => 'Еда';
 
   @override
-  String get productCategoryEquipment => 'Инвентарь';
+  String get productCategoryEquipment => 'Аренда';
 
   @override
-  String get productCategoryOther => 'Другое';
+  String get productCategoryOther => 'Прочее';
 
   @override
   String get productUnitPiece => 'Штука';
@@ -1076,4 +1079,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get productUnitHour => 'Час';
+
+  @override
+  String get productUnitPieceShort => 'шт';
+
+  @override
+  String get productUnitKgShort => 'кг';
+
+  @override
+  String get productUnitLitreShort => 'л';
+
+  @override
+  String get productUnitPortionShort => 'порц.';
+
+  @override
+  String get productUnitHourShort => 'ч';
 }

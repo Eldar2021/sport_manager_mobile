@@ -15,17 +15,20 @@ class ProductsListCubit extends Cubit<ProductsListState> {
 
   Future<void> load({
     ProductCategory? category,
+    bool clearCategory = false,
     String? search,
   }) async {
+    final effectiveCategory = clearCategory ? null : (category ?? state.category);
     emit(
       state.copyWith(
         products: const RequestLoading(),
-        category: category,
+        category: effectiveCategory,
+        clearCategory: clearCategory,
       ),
     );
     try {
       final products = await _repository.getAll(
-        category: state.category,
+        category: effectiveCategory,
         search: search,
       );
       emit(state.copyWith(products: RequestSuccess(products)));

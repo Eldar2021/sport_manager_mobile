@@ -1746,8 +1746,14 @@ abstract class AppLocalizations {
   /// No description provided for @productsTitle.
   ///
   /// In en, this message translates to:
-  /// **'Products'**
+  /// **'Products and prices'**
   String get productsTitle;
+
+  /// No description provided for @productsFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get productsFilterAll;
 
   /// No description provided for @productsAddButton.
   ///
@@ -1866,7 +1872,7 @@ abstract class AppLocalizations {
   /// No description provided for @productCategoryDrink.
   ///
   /// In en, this message translates to:
-  /// **'Drink'**
+  /// **'Drinks'**
   String get productCategoryDrink;
 
   /// No description provided for @productCategoryFood.
@@ -1878,7 +1884,7 @@ abstract class AppLocalizations {
   /// No description provided for @productCategoryEquipment.
   ///
   /// In en, this message translates to:
-  /// **'Equipment'**
+  /// **'Rental'**
   String get productCategoryEquipment;
 
   /// No description provided for @productCategoryOther.
@@ -1916,6 +1922,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hour'**
   String get productUnitHour;
+
+  /// No description provided for @productUnitPieceShort.
+  ///
+  /// In en, this message translates to:
+  /// **'pcs'**
+  String get productUnitPieceShort;
+
+  /// No description provided for @productUnitKgShort.
+  ///
+  /// In en, this message translates to:
+  /// **'kg'**
+  String get productUnitKgShort;
+
+  /// No description provided for @productUnitLitreShort.
+  ///
+  /// In en, this message translates to:
+  /// **'L'**
+  String get productUnitLitreShort;
+
+  /// No description provided for @productUnitPortionShort.
+  ///
+  /// In en, this message translates to:
+  /// **'port.'**
+  String get productUnitPortionShort;
+
+  /// No description provided for @productUnitHourShort.
+  ///
+  /// In en, this message translates to:
+  /// **'hr'**
+  String get productUnitHourShort;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

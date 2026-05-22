@@ -973,7 +973,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileProductsSubtitle => 'Drinks, food, rent';
 
   @override
-  String get productsTitle => 'Products';
+  String get productsTitle => 'Products and prices';
+
+  @override
+  String get productsFilterAll => 'All';
 
   @override
   String get productsAddButton => 'Add product';
@@ -1035,13 +1038,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get productsPhotoPickerLabel => 'Tap to add photo';
 
   @override
-  String get productCategoryDrink => 'Drink';
+  String get productCategoryDrink => 'Drinks';
 
   @override
   String get productCategoryFood => 'Food';
 
   @override
-  String get productCategoryEquipment => 'Equipment';
+  String get productCategoryEquipment => 'Rental';
 
   @override
   String get productCategoryOther => 'Other';
@@ -1060,4 +1063,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get productUnitHour => 'Hour';
+
+  @override
+  String get productUnitPieceShort => 'pcs';
+
+  @override
+  String get productUnitKgShort => 'kg';
+
+  @override
+  String get productUnitLitreShort => 'L';
+
+  @override
+  String get productUnitPortionShort => 'port.';
+
+  @override
+  String get productUnitHourShort => 'hr';
 }

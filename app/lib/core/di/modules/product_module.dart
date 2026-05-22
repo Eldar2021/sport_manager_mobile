@@ -15,7 +15,7 @@ final class ProductModule extends BaseDiModule {
 
     sl
       ..registerLazySingleton<ProductRemoteSource>(
-        () => Env.isMock
+        () => !Env.isMock
             ? ProductRemoteSourceMock()
             : ProductRemoteSourceImpl(
                 sl<ApiClient>(instanceName: ApiClient.bearerInstance),
