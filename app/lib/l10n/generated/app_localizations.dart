@@ -450,7 +450,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeNoVenuesSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Create your first venue to start adding tables and accepting sessions.'**
+  /// **'Create your first venue to start adding spots and accepting sessions.'**
   String get homeNoVenuesSubtitle;
 
   /// No description provided for @homeSelectVenue.
@@ -465,149 +465,155 @@ abstract class AppLocalizations {
   /// **'New venue'**
   String get homeNewVenue;
 
-  /// No description provided for @homeAddTable.
+  /// No description provided for @homeAddSpot.
   ///
   /// In en, this message translates to:
-  /// **'Add table'**
-  String get homeAddTable;
+  /// **'Add {spot}'**
+  String homeAddSpot(String spot);
 
-  /// No description provided for @homeTablesEmpty.
+  /// No description provided for @homeSpotsEmpty.
   ///
   /// In en, this message translates to:
-  /// **'No tables yet'**
-  String get homeTablesEmpty;
+  /// **'No {spotPlural} yet'**
+  String homeSpotsEmpty(String spotPlural);
 
-  /// No description provided for @homeTablesEmptySub.
+  /// No description provided for @homeSpotsEmptySub.
   ///
   /// In en, this message translates to:
-  /// **'Add the first table so managers can start sessions.'**
-  String get homeTablesEmptySub;
+  /// **'Add the first {spot} so managers can start sessions.'**
+  String homeSpotsEmptySub(String spot);
 
-  /// No description provided for @homeTablesEmptySubManager.
+  /// No description provided for @homeSpotsEmptySubManager.
   ///
   /// In en, this message translates to:
-  /// **'Tables will appear here once the owner adds them.'**
-  String get homeTablesEmptySubManager;
+  /// **'{spotPlural} will appear here once the owner adds them.'**
+  String homeSpotsEmptySubManager(String spotPlural);
 
-  /// No description provided for @homeTableOccupied.
+  /// No description provided for @homeSpotOccupied.
   ///
   /// In en, this message translates to:
   /// **'{customerName} · OCCUPIED'**
-  String homeTableOccupied(String customerName);
+  String homeSpotOccupied(String customerName);
 
-  /// No description provided for @homeTableOccupiedBase.
+  /// No description provided for @homeSpotOccupiedBase.
   ///
   /// In en, this message translates to:
   /// **'OCCUPIED'**
-  String get homeTableOccupiedBase;
+  String get homeSpotOccupiedBase;
 
-  /// No description provided for @homeTablePaused.
+  /// No description provided for @homeSpotPaused.
   ///
   /// In en, this message translates to:
   /// **'{customerName} · PAUSED'**
-  String homeTablePaused(String customerName);
+  String homeSpotPaused(String customerName);
 
-  /// No description provided for @homeTablePausedBase.
+  /// No description provided for @homeSpotPausedBase.
   ///
   /// In en, this message translates to:
   /// **'PAUSED'**
-  String get homeTablePausedBase;
+  String get homeSpotPausedBase;
 
-  /// No description provided for @homeTableFree.
+  /// No description provided for @homeSpotFree.
   ///
   /// In en, this message translates to:
   /// **'FREE'**
-  String get homeTableFree;
+  String get homeSpotFree;
 
-  /// No description provided for @homeTableJustFreed.
+  /// No description provided for @homeSpotJustFreed.
   ///
   /// In en, this message translates to:
   /// **'✓ Done'**
-  String get homeTableJustFreed;
+  String get homeSpotJustFreed;
 
-  /// No description provided for @createTableTitle.
+  /// No description provided for @createSpotTitle.
   ///
   /// In en, this message translates to:
-  /// **'New table'**
-  String get createTableTitle;
+  /// **'New spot'**
+  String get createSpotTitle;
 
-  /// No description provided for @createTableNumberLabel.
+  /// No description provided for @createSpotNumberLabel.
   ///
   /// In en, this message translates to:
-  /// **'Table number'**
-  String get createTableNumberLabel;
+  /// **'Spot number'**
+  String get createSpotNumberLabel;
 
-  /// No description provided for @createTableNumberHint.
+  /// No description provided for @createSpotNumberHint.
   ///
   /// In en, this message translates to:
   /// **'1'**
-  String get createTableNumberHint;
+  String get createSpotNumberHint;
 
-  /// No description provided for @createTableNameLabel.
+  /// No description provided for @createSpotNameLabel.
   ///
   /// In en, this message translates to:
-  /// **'Table name'**
-  String get createTableNameLabel;
+  /// **'Spot name'**
+  String get createSpotNameLabel;
 
-  /// No description provided for @createTableNameHint.
+  /// No description provided for @createSpotNameHint.
   ///
   /// In en, this message translates to:
-  /// **'Table 1'**
-  String get createTableNameHint;
+  /// **'Spot 1'**
+  String get createSpotNameHint;
 
-  /// No description provided for @createTableDescLabel.
+  /// No description provided for @createSpotDescLabel.
   ///
   /// In en, this message translates to:
   /// **'Description (tag)'**
-  String get createTableDescLabel;
+  String get createSpotDescLabel;
 
-  /// No description provided for @createTableDescHint.
+  /// No description provided for @createSpotDescHint.
   ///
   /// In en, this message translates to:
-  /// **'VIP room, window seat, snooker...'**
-  String get createTableDescHint;
+  /// **'VIP, window seat, snooker...'**
+  String get createSpotDescHint;
 
-  /// No description provided for @createTableDescPlaceholder.
+  /// No description provided for @createSpotDescPlaceholder.
   ///
   /// In en, this message translates to:
   /// **'Description'**
-  String get createTableDescPlaceholder;
+  String get createSpotDescPlaceholder;
 
-  /// No description provided for @createTableRateLabel.
+  /// No description provided for @createSpotRateLabel.
   ///
   /// In en, this message translates to:
   /// **'Rate'**
-  String get createTableRateLabel;
+  String get createSpotRateLabel;
 
-  /// No description provided for @createTableRateSuffix.
+  /// No description provided for @createSpotRateSuffix.
   ///
   /// In en, this message translates to:
   /// **'{currency}/{time_unit}'**
-  String createTableRateSuffix(Object currency, Object time_unit);
+  String createSpotRateSuffix(String currency, String time_unit);
 
-  /// No description provided for @createTableButton.
+  /// No description provided for @createSpotButton.
   ///
   /// In en, this message translates to:
-  /// **'Create table'**
-  String get createTableButton;
+  /// **'Create spot'**
+  String get createSpotButton;
 
-  /// No description provided for @editTableTitle.
+  /// No description provided for @editSpotTitle.
   ///
   /// In en, this message translates to:
-  /// **'Edit table'**
-  String get editTableTitle;
+  /// **'Edit spot'**
+  String get editSpotTitle;
 
-  /// No description provided for @updateTableButton.
+  /// No description provided for @updateSpotButton.
   ///
   /// In en, this message translates to:
-  /// **'Update table'**
-  String get updateTableButton;
+  /// **'Update spot'**
+  String get updateSpotButton;
 
-  /// No description provided for @deleteTableButton.
+  /// No description provided for @deleteSpotButton.
   ///
   /// In en, this message translates to:
   /// **'Delete'**
-  String get deleteTableButton;
+  String get deleteSpotButton;
+
+  /// No description provided for @deleteSpotSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Session history will be preserved, but the spot will disappear from the home page.'**
+  String get deleteSpotSubtitle;
 
   /// No description provided for @createVenueTitle.
   ///
@@ -618,7 +624,7 @@ abstract class AppLocalizations {
   /// No description provided for @createVenueSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Give your venue a name. Tables can be added later from the home page.'**
+  /// **'Give your venue a name. Spots can be added later from the home page.'**
   String get createVenueSubtitle;
 
   /// No description provided for @createVenueNameLabel.
@@ -648,7 +654,7 @@ abstract class AppLocalizations {
   /// No description provided for @createVenueInfoBanner.
   ///
   /// In en, this message translates to:
-  /// **'After creating the venue you will be able to add tables one by one with their own rate.'**
+  /// **'After creating the venue you will be able to add spots one by one with their own rate.'**
   String get createVenueInfoBanner;
 
   /// No description provided for @createVenueButton.
@@ -678,7 +684,7 @@ abstract class AppLocalizations {
   /// No description provided for @deleteVenueSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'All tables and session history will be preserved, but the venue will be removed.'**
+  /// **'All spots and session history will be preserved, but the venue will be removed.'**
   String get deleteVenueSubtitle;
 
   /// No description provided for @cancel.
@@ -687,23 +693,17 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
-  /// No description provided for @deleteTableSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Session history will be preserved, but the table will disappear from the home page.'**
-  String get deleteTableSubtitle;
-
   /// No description provided for @generalRetry.
   ///
   /// In en, this message translates to:
   /// **'Retry'**
   String get generalRetry;
 
-  /// No description provided for @createTableTarifTypeLabel.
+  /// No description provided for @createSpotTarifTypeLabel.
   ///
   /// In en, this message translates to:
   /// **'Tariff type'**
-  String get createTableTarifTypeLabel;
+  String get createSpotTarifTypeLabel;
 
   /// No description provided for @tarifTypeMinute.
   ///
@@ -723,11 +723,11 @@ abstract class AppLocalizations {
   /// **'Day'**
   String get tarifTypeDay;
 
-  /// No description provided for @createTableCurrencyLabel.
+  /// No description provided for @createSpotCurrencyLabel.
   ///
   /// In en, this message translates to:
   /// **'Currency'**
-  String get createTableCurrencyLabel;
+  String get createSpotCurrencyLabel;
 
   /// No description provided for @currencyKgs.
   ///
@@ -759,23 +759,23 @@ abstract class AppLocalizations {
   /// **'Lira'**
   String get currencyTry;
 
-  /// No description provided for @venueTablesCount.
+  /// No description provided for @venueSpotsCount.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =0{no tables} =1{1 table} other{{count} tables}}'**
-  String venueTablesCount(int count);
+  /// **'{count, plural, =0{no {spotPlural}} =1{1 {spot}} other{{count} {spotPlural}}}'**
+  String venueSpotsCount(int count, String spot, String spotPlural);
 
-  /// No description provided for @homeTableTitle.
+  /// No description provided for @homeSpotTitle.
   ///
   /// In en, this message translates to:
-  /// **'Table {number}'**
-  String homeTableTitle(int number);
+  /// **'{spotLabel} {number}'**
+  String homeSpotTitle(String spotLabel, int number);
 
-  /// No description provided for @homeTablesSection.
+  /// No description provided for @homeSpotsSection.
   ///
   /// In en, this message translates to:
-  /// **'TABLES · {count}'**
-  String homeTablesSection(int count);
+  /// **'{spotPlural} · {count}'**
+  String homeSpotsSection(String spotPlural, int count);
 
   /// No description provided for @profileSectionManagement.
   ///
@@ -951,131 +951,251 @@ abstract class AppLocalizations {
   /// **'e.g. John Smith'**
   String get sessionCustomerNameHint;
 
-  /// No description provided for @tableDetailStart.
+  /// No description provided for @spotDetailStart.
   ///
   /// In en, this message translates to:
   /// **'START'**
-  String get tableDetailStart;
+  String get spotDetailStart;
 
-  /// No description provided for @tableDetailStop.
+  /// No description provided for @spotDetailStop.
   ///
   /// In en, this message translates to:
   /// **'STOP & CLOSE'**
-  String get tableDetailStop;
+  String get spotDetailStop;
 
-  /// No description provided for @tableDetailElapsed.
+  /// No description provided for @spotDetailElapsed.
   ///
   /// In en, this message translates to:
   /// **'ELAPSED'**
-  String get tableDetailElapsed;
+  String get spotDetailElapsed;
 
-  /// No description provided for @tableDetailCurrentAmount.
+  /// No description provided for @spotDetailCurrentAmount.
   ///
   /// In en, this message translates to:
   /// **'CURRENT AMOUNT'**
-  String get tableDetailCurrentAmount;
+  String get spotDetailCurrentAmount;
 
-  /// No description provided for @tableDetailPause.
+  /// No description provided for @spotDetailPause.
   ///
   /// In en, this message translates to:
   /// **'PAUSE'**
-  String get tableDetailPause;
+  String get spotDetailPause;
 
-  /// No description provided for @tableDetailResume.
+  /// No description provided for @spotDetailResume.
   ///
   /// In en, this message translates to:
   /// **'CONTINUE'**
-  String get tableDetailResume;
+  String get spotDetailResume;
 
-  /// No description provided for @tableDetailStartTime.
+  /// No description provided for @spotDetailStartTime.
   ///
   /// In en, this message translates to:
   /// **'Start'**
-  String get tableDetailStartTime;
+  String get spotDetailStartTime;
 
-  /// No description provided for @tableDetailDuration.
+  /// No description provided for @spotDetailDuration.
   ///
   /// In en, this message translates to:
   /// **'Duration'**
-  String get tableDetailDuration;
+  String get spotDetailDuration;
 
-  /// No description provided for @tableDetailTariff.
+  /// No description provided for @spotDetailTariff.
   ///
   /// In en, this message translates to:
   /// **'Rate'**
-  String get tableDetailTariff;
+  String get spotDetailTariff;
 
-  /// No description provided for @tableDetailMistakeLaunch.
+  /// No description provided for @spotDetailMistakeLaunch.
   ///
   /// In en, this message translates to:
   /// **'Mistake launch'**
-  String get tableDetailMistakeLaunch;
+  String get spotDetailMistakeLaunch;
 
-  /// No description provided for @tableDetailMistakeLaunchTitle.
+  /// No description provided for @spotDetailMistakeLaunchTitle.
   ///
   /// In en, this message translates to:
   /// **'Cancel session?'**
-  String get tableDetailMistakeLaunchTitle;
+  String get spotDetailMistakeLaunchTitle;
 
-  /// No description provided for @tableDetailMistakeLaunchSubtitle.
+  /// No description provided for @spotDetailMistakeLaunchSubtitle.
   ///
   /// In en, this message translates to:
   /// **'The session will be cancelled. No charge will be applied.'**
-  String get tableDetailMistakeLaunchSubtitle;
+  String get spotDetailMistakeLaunchSubtitle;
 
-  /// No description provided for @tableDetailMistakeLaunchConfirm.
+  /// No description provided for @spotDetailMistakeLaunchConfirm.
   ///
   /// In en, this message translates to:
   /// **'Yes, cancel'**
-  String get tableDetailMistakeLaunchConfirm;
+  String get spotDetailMistakeLaunchConfirm;
 
-  /// No description provided for @tableDetailLastSession.
+  /// No description provided for @spotDetailLastSession.
   ///
   /// In en, this message translates to:
   /// **'Last session'**
-  String get tableDetailLastSession;
+  String get spotDetailLastSession;
 
-  /// No description provided for @tableDetailTodaySessions.
+  /// No description provided for @spotDetailTodaySessions.
   ///
   /// In en, this message translates to:
   /// **'Today\'s sessions'**
-  String get tableDetailTodaySessions;
+  String get spotDetailTodaySessions;
 
-  /// No description provided for @tableDetailPaymentTitle.
+  /// No description provided for @spotDetailPaymentTitle.
   ///
   /// In en, this message translates to:
   /// **'Payment summary'**
-  String get tableDetailPaymentTitle;
+  String get spotDetailPaymentTitle;
 
-  /// No description provided for @tableDetailSubtotal.
+  /// No description provided for @spotDetailSubtotal.
   ///
   /// In en, this message translates to:
   /// **'Subtotal'**
-  String get tableDetailSubtotal;
+  String get spotDetailSubtotal;
 
-  /// No description provided for @tableDetailDiscount.
+  /// No description provided for @spotDetailDiscount.
   ///
   /// In en, this message translates to:
   /// **'Discount'**
-  String get tableDetailDiscount;
+  String get spotDetailDiscount;
 
-  /// No description provided for @tableDetailToPay.
+  /// No description provided for @spotDetailToPay.
   ///
   /// In en, this message translates to:
   /// **'TO PAY'**
-  String get tableDetailToPay;
+  String get spotDetailToPay;
 
-  /// No description provided for @tableDetailConfirmAndClose.
+  /// No description provided for @spotDetailConfirmAndClose.
   ///
   /// In en, this message translates to:
   /// **'CONFIRM & CLOSE'**
-  String get tableDetailConfirmAndClose;
+  String get spotDetailConfirmAndClose;
 
-  /// No description provided for @tableDetailDurationMin.
+  /// No description provided for @spotDetailDurationMin.
   ///
   /// In en, this message translates to:
   /// **'{count} min'**
-  String tableDetailDurationMin(int count);
+  String spotDetailDurationMin(int count);
+
+  /// No description provided for @spotLabelTable.
+  ///
+  /// In en, this message translates to:
+  /// **'Table'**
+  String get spotLabelTable;
+
+  /// No description provided for @spotLabelConsole.
+  ///
+  /// In en, this message translates to:
+  /// **'Console'**
+  String get spotLabelConsole;
+
+  /// No description provided for @spotLabelCourt.
+  ///
+  /// In en, this message translates to:
+  /// **'Court'**
+  String get spotLabelCourt;
+
+  /// No description provided for @spotLabelBoard.
+  ///
+  /// In en, this message translates to:
+  /// **'Board'**
+  String get spotLabelBoard;
+
+  /// No description provided for @spotLabelPitch.
+  ///
+  /// In en, this message translates to:
+  /// **'Pitch'**
+  String get spotLabelPitch;
+
+  /// No description provided for @spotLabelTablePlural.
+  ///
+  /// In en, this message translates to:
+  /// **'Tables'**
+  String get spotLabelTablePlural;
+
+  /// No description provided for @spotLabelConsolePlural.
+  ///
+  /// In en, this message translates to:
+  /// **'Consoles'**
+  String get spotLabelConsolePlural;
+
+  /// No description provided for @spotLabelCourtPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'Courts'**
+  String get spotLabelCourtPlural;
+
+  /// No description provided for @spotLabelBoardPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'Boards'**
+  String get spotLabelBoardPlural;
+
+  /// No description provided for @spotLabelPitchPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'Pitches'**
+  String get spotLabelPitchPlural;
+
+  /// No description provided for @venueTypeTableTennis.
+  ///
+  /// In en, this message translates to:
+  /// **'Table Tennis'**
+  String get venueTypeTableTennis;
+
+  /// No description provided for @venueTypeBilliards.
+  ///
+  /// In en, this message translates to:
+  /// **'Billiards'**
+  String get venueTypeBilliards;
+
+  /// No description provided for @venueTypePlayStation.
+  ///
+  /// In en, this message translates to:
+  /// **'PlayStation'**
+  String get venueTypePlayStation;
+
+  /// No description provided for @venueTypeVolleyball.
+  ///
+  /// In en, this message translates to:
+  /// **'Volleyball'**
+  String get venueTypeVolleyball;
+
+  /// No description provided for @venueTypeBasketball.
+  ///
+  /// In en, this message translates to:
+  /// **'Basketball'**
+  String get venueTypeBasketball;
+
+  /// No description provided for @venueTypeChess.
+  ///
+  /// In en, this message translates to:
+  /// **'Chess'**
+  String get venueTypeChess;
+
+  /// No description provided for @venueTypeFootball.
+  ///
+  /// In en, this message translates to:
+  /// **'Football'**
+  String get venueTypeFootball;
+
+  /// No description provided for @venueFormTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get venueFormTypeLabel;
+
+  /// No description provided for @venueFormTypeImmutableHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type can\'t be changed after creation. Create a new venue if you switch sports.'**
+  String get venueFormTypeImmutableHint;
+
+  /// No description provided for @venueFormTypeRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a venue type'**
+  String get venueFormTypeRequiredError;
 
   /// No description provided for @menuEdit.
   ///
@@ -1173,23 +1293,11 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{1 day ago} other{{count} days ago}}'**
   String managersLastSeenDays(int count);
 
-  /// No description provided for @venueMetricTablesLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'TABLES'**
-  String get venueMetricTablesLabel;
-
-  /// No description provided for @venueDetailTablesHeader.
-  ///
-  /// In en, this message translates to:
-  /// **'HALL TABLES'**
-  String get venueDetailTablesHeader;
-
-  /// No description provided for @venueTablesCountSuffix.
+  /// No description provided for @venueSpotsCountSuffix.
   ///
   /// In en, this message translates to:
   /// **'{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}'**
-  String venueTablesCountSuffix(int count);
+  String venueSpotsCountSuffix(int count);
 
   /// No description provided for @subscriptionTitle.
   ///
@@ -1248,13 +1356,13 @@ abstract class AppLocalizations {
   /// No description provided for @subscriptionPlanCardPerTable.
   ///
   /// In en, this message translates to:
-  /// **'{price} {currency} / table / month'**
+  /// **'{price} {currency} / spot / month'**
   String subscriptionPlanCardPerTable(int price, String currency);
 
   /// No description provided for @subscriptionPlanCardMonthly.
   ///
   /// In en, this message translates to:
-  /// **'× {tableCount} tables = {monthly} {currency} / month'**
+  /// **'× {tableCount} spots = {monthly} {currency} / month'**
   String subscriptionPlanCardMonthly(int tableCount, int monthly, String currency);
 
   /// No description provided for @subscriptionDetailNextPayment.
@@ -1290,7 +1398,7 @@ abstract class AppLocalizations {
   /// No description provided for @subscriptionPaymentItemSummary.
   ///
   /// In en, this message translates to:
-  /// **'{months} months × {tableCount} tables'**
+  /// **'{months} months × {tableCount} spots'**
   String subscriptionPaymentItemSummary(int months, int tableCount);
 
   /// No description provided for @subscriptionAmountWithCurrency.
@@ -1314,7 +1422,7 @@ abstract class AppLocalizations {
   /// No description provided for @subscriptionCheckoutSummary.
   ///
   /// In en, this message translates to:
-  /// **'{tableCount} tables × {price} {currency} = {monthly} {currency} / month'**
+  /// **'{tableCount} spots × {price} {currency} = {monthly} {currency} / month'**
   String subscriptionCheckoutSummary(int tableCount, int price, int monthly, String currency);
 
   /// No description provided for @subscriptionCheckoutDuration.
@@ -1356,13 +1464,13 @@ abstract class AppLocalizations {
   /// No description provided for @subscriptionCheckoutNoTablesTitle.
   ///
   /// In en, this message translates to:
-  /// **'No tables yet'**
+  /// **'No spots yet'**
   String get subscriptionCheckoutNoTablesTitle;
 
   /// No description provided for @subscriptionCheckoutNoTablesSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Add at least one table to subscribe.'**
+  /// **'Add at least one spot to subscribe.'**
   String get subscriptionCheckoutNoTablesSubtitle;
 
   /// No description provided for @subscriptionCheckoutGoToVenues.
@@ -1503,11 +1611,11 @@ abstract class AppLocalizations {
   /// **'Manager'**
   String get reportsManagerDetailTitle;
 
-  /// No description provided for @reportsTableDetailTitle.
+  /// No description provided for @reportsSpotDetailTitle.
   ///
   /// In en, this message translates to:
-  /// **'Table'**
-  String get reportsTableDetailTitle;
+  /// **'Spot'**
+  String get reportsSpotDetailTitle;
 
   /// No description provided for @reportsPeriodToday.
   ///
@@ -1569,23 +1677,17 @@ abstract class AppLocalizations {
   /// **'Compare to previous period'**
   String get reportsRevenueChartCompareToggle;
 
-  /// No description provided for @reportsTablesTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Tables'**
-  String get reportsTablesTitle;
-
   /// No description provided for @reportsTopManagersTitle.
   ///
   /// In en, this message translates to:
   /// **'Managers'**
   String get reportsTopManagersTitle;
 
-  /// No description provided for @reportsTableLabel.
+  /// No description provided for @reportsSpotLabel.
   ///
   /// In en, this message translates to:
-  /// **'Table'**
-  String get reportsTableLabel;
+  /// **'Spot'**
+  String get reportsSpotLabel;
 
   /// No description provided for @reportsSessionsShort.
   ///
@@ -1659,17 +1761,17 @@ abstract class AppLocalizations {
   /// **'{current}  ·  vs {previous}'**
   String reportsComparisonCaption(String current, String previous);
 
-  /// No description provided for @reportsTableTrendTitle.
+  /// No description provided for @reportsSpotTrendTitle.
   ///
   /// In en, this message translates to:
   /// **'Revenue trend'**
-  String get reportsTableTrendTitle;
+  String get reportsSpotTrendTitle;
 
-  /// No description provided for @reportsTableHeatmapTitle.
+  /// No description provided for @reportsSpotHeatmapTitle.
   ///
   /// In en, this message translates to:
   /// **'Hour-of-day heatmap'**
-  String get reportsTableHeatmapTitle;
+  String get reportsSpotHeatmapTitle;
 
   /// No description provided for @reportsErrorTitle.
   ///

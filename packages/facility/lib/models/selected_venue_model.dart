@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:facility/models/table_model.dart';
+import 'package:facility/models/spot_model.dart';
 import 'package:facility/models/venue_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
@@ -11,7 +11,7 @@ part 'selected_venue_model.g.dart';
 final class SelectedVenueModel extends Equatable {
   const SelectedVenueModel({
     required this.venue,
-    required this.tables,
+    required this.spots,
   });
 
   factory SelectedVenueModel.fromJson(Map<String, dynamic> json) {
@@ -19,7 +19,7 @@ final class SelectedVenueModel extends Equatable {
   }
 
   final VenueModel venue;
-  final List<TableModel> tables;
+  final List<SpotModel> spots;
 
   Map<String, dynamic> toJson() {
     return _$SelectedVenueModelToJson(this);
@@ -28,6 +28,6 @@ final class SelectedVenueModel extends Equatable {
   @override
   List<Object?> get props => [
     venue,
-    tables,
+    spots,
   ];
 }

@@ -54,9 +54,9 @@ final class ReportsRemoteSourceMock implements ReportsRemoteSource {
   }
 
   @override
-  Future<List<TableReportRowModel>> getTables(ReportFilter filter) async {
+  Future<List<SpotReportRowModel>> getSpots(ReportFilter filter) async {
     await Future<void>.delayed(_delay);
-    return _store.tableRows(filter);
+    return _store.spotRows(filter);
   }
 
   @override
@@ -81,12 +81,12 @@ final class ReportsRemoteSourceMock implements ReportsRemoteSource {
   }
 
   @override
-  Future<TableReportDetailModel> getTableDetail(
-    String tableId,
+  Future<SpotReportDetailModel> getSpotDetail(
+    String spotId,
     ReportFilter filter,
   ) async {
     await Future<void>.delayed(_delay);
-    return _store.tableDetail(tableId, filter);
+    return _store.spotDetail(spotId, filter);
   }
 }
 
@@ -94,8 +94,8 @@ final class ReportsRemoteSourceMock implements ReportsRemoteSource {
 
 enum _MockSessionStatus { completed, cancelled }
 
-class _MockTable {
-  _MockTable({
+class _MockSpot {
+  _MockSpot({
     required this.id,
     required this.venueId,
     required this.number,
@@ -125,7 +125,7 @@ class _MockManager {
 class _MockSession {
   _MockSession({
     required this.id,
-    required this.tableId,
+    required this.spotId,
     required this.managerId,
     required this.startedAt,
     required this.endedAt,
@@ -135,7 +135,7 @@ class _MockSession {
   });
 
   final String id;
-  final String tableId;
+  final String spotId;
   final String managerId;
   final DateTime startedAt;
   final DateTime endedAt;
@@ -149,7 +149,7 @@ class _MockSession {
 class _MockStore {
   _MockStore._({
     required this.venues,
-    required this.tables,
+    required this.spots,
     required this.managers,
     required this.sessions,
     required this.now,
@@ -164,16 +164,16 @@ class _MockStore {
       const ReportVenueModel(id: 'v-3', name: 'Ош', number: 3),
     ];
 
-    final tables = <_MockTable>[
-      _MockTable(id: 't-1', venueId: 'v-1', number: 1, tarifAmount: 250, name: 'VIP'),
-      _MockTable(id: 't-2', venueId: 'v-1', number: 2, tarifAmount: 250, name: 'VIP'),
-      _MockTable(id: 't-3', venueId: 'v-1', number: 3, tarifAmount: 200, name: 'Стандарт'),
-      _MockTable(id: 't-4', venueId: 'v-1', number: 4, tarifAmount: 200, name: 'Стандарт'),
-      _MockTable(id: 't-5', venueId: 'v-2', number: 1, tarifAmount: 200),
-      _MockTable(id: 't-6', venueId: 'v-2', number: 2, tarifAmount: 180),
-      _MockTable(id: 't-7', venueId: 'v-2', number: 3, tarifAmount: 180),
-      _MockTable(id: 't-8', venueId: 'v-3', number: 1, tarifAmount: 150),
-      _MockTable(id: 't-9', venueId: 'v-3', number: 2, tarifAmount: 150),
+    final spots = <_MockSpot>[
+      _MockSpot(id: 't-1', venueId: 'v-1', number: 1, tarifAmount: 250, name: 'VIP'),
+      _MockSpot(id: 't-2', venueId: 'v-1', number: 2, tarifAmount: 250, name: 'VIP'),
+      _MockSpot(id: 't-3', venueId: 'v-1', number: 3, tarifAmount: 200, name: 'Стандарт'),
+      _MockSpot(id: 't-4', venueId: 'v-1', number: 4, tarifAmount: 200, name: 'Стандарт'),
+      _MockSpot(id: 't-5', venueId: 'v-2', number: 1, tarifAmount: 200),
+      _MockSpot(id: 't-6', venueId: 'v-2', number: 2, tarifAmount: 180),
+      _MockSpot(id: 't-7', venueId: 'v-2', number: 3, tarifAmount: 180),
+      _MockSpot(id: 't-8', venueId: 'v-3', number: 1, tarifAmount: 150),
+      _MockSpot(id: 't-9', venueId: 'v-3', number: 2, tarifAmount: 150),
     ];
 
     final managers = <_MockManager>[
@@ -204,7 +204,7 @@ class _MockStore {
       final weekendBoost = day.weekday >= 6 ? 1.4 : 1.0;
       final trendBoost = 0.8 + (d / 90) * 0.4;
 
-      for (final table in tables) {
+      for (final spot in spots) {
         final sessionCount = (rng.nextDouble() * 6 * weekendBoost * trendBoost).round();
         for (var s = 0; s < sessionCount; s++) {
           final manager = managers[rng.nextInt(managers.length)];
@@ -217,7 +217,7 @@ class _MockStore {
             sessions.add(
               _MockSession(
                 id: 'sess-${sessions.length}',
-                tableId: table.id,
+                spotId: spot.id,
                 managerId: manager.id,
                 startedAt: startedAt,
                 endedAt: startedAt.add(Duration(seconds: cancelDelaySec)),
@@ -232,12 +232,12 @@ class _MockStore {
           final durationMinutes = 30 + rng.nextInt(150); // 30-180 min
           final durationSec = durationMinutes * 60;
           final endedAt = startedAt.add(Duration(seconds: durationSec));
-          final total = (durationMinutes / 60.0 * table.tarifAmount).round();
+          final total = (durationMinutes / 60.0 * spot.tarifAmount).round();
 
           sessions.add(
             _MockSession(
               id: 'sess-${sessions.length}',
-              tableId: table.id,
+              spotId: spot.id,
               managerId: manager.id,
               startedAt: startedAt,
               endedAt: endedAt,
@@ -252,7 +252,7 @@ class _MockStore {
 
     return _MockStore._(
       venues: venues,
-      tables: tables,
+      spots: spots,
       managers: managers,
       sessions: sessions,
       now: now,
@@ -260,17 +260,17 @@ class _MockStore {
   }
 
   final List<ReportVenueModel> venues;
-  final List<_MockTable> tables;
+  final List<_MockSpot> spots;
   final List<_MockManager> managers;
   final List<_MockSession> sessions;
   final DateTime now;
 
   Iterable<_MockSession> _filtered(ReportRange range, {String? venueId}) {
-    final tablesInScope = venueId == null
-        ? tables.map((t) => t.id).toSet()
-        : tables.where((t) => t.venueId == venueId).map((t) => t.id).toSet();
+    final spotsInScope = venueId == null
+        ? spots.map((s) => s.id).toSet()
+        : spots.where((s) => s.venueId == venueId).map((s) => s.id).toSet();
     return sessions.where((s) {
-      if (!tablesInScope.contains(s.tableId)) return false;
+      if (!spotsInScope.contains(s.spotId)) return false;
       return !s.startedAt.isBefore(range.from) && s.startedAt.isBefore(range.to);
     });
   }
@@ -348,7 +348,7 @@ class _MockStore {
     ];
   }
 
-  List<TableReportRowModel> tableRows(ReportFilter filter) {
+  List<SpotReportRowModel> spotRows(ReportFilter filter) {
     final scoped = _filtered(filter.range, venueId: filter.venueId).toList();
     // Today periyodunda comparison'ı kapatıyoruz — yarım-gün vs tam-gün
     // karşılaştırması her zaman -100% sinyali verir, yanıltıcı.
@@ -356,23 +356,23 @@ class _MockStore {
         ? _filtered(filter.clippedPreviousRange, venueId: filter.venueId).toList()
         : const <_MockSession>[];
 
-    final out = <TableReportRowModel>[];
-    for (final t in tables) {
+    final out = <SpotReportRowModel>[];
+    for (final t in spots) {
       if (filter.venueId != null && t.venueId != filter.venueId) continue;
-      final rows = scoped.where((s) => s.tableId == t.id && s.isCompleted).toList();
+      final rows = scoped.where((s) => s.spotId == t.id && s.isCompleted).toList();
       final revenue = rows.fold<int>(0, (a, s) => a + s.totalAmount);
       final prevRevenue = prevScoped
-          .where((s) => s.tableId == t.id && s.isCompleted)
+          .where((s) => s.spotId == t.id && s.isCompleted)
           .fold<int>(0, (a, s) => a + s.totalAmount);
       final venue = venues.firstWhere((v) => v.id == t.venueId);
       final deltaPercent = !filter.compareToPrevious || prevRevenue == 0
           ? null
           : ((revenue - prevRevenue) / prevRevenue * 100).round();
       out.add(
-        TableReportRowModel(
-          tableId: t.id,
-          tableName: t.name,
-          tableNumber: t.number,
+        SpotReportRowModel(
+          spotId: t.id,
+          spotName: t.name,
+          spotNumber: t.number,
           venueId: t.venueId,
           venueName: venue.name,
           revenue: revenue,
@@ -423,14 +423,14 @@ class _MockStore {
       ..sort((a, b) => b.startedAt.compareTo(a.startedAt));
     final log = <ManagerSessionLogEntry>[];
     for (final s in scoped.take(40)) {
-      final table = tables.firstWhere((t) => t.id == s.tableId);
-      final venue = venues.firstWhere((v) => v.id == table.venueId);
+      final spot = spots.firstWhere((t) => t.id == s.spotId);
+      final venue = venues.firstWhere((v) => v.id == spot.venueId);
       log.add(
         ManagerSessionLogEntry(
           sessionId: s.id,
-          tableId: s.tableId,
-          tableName: table.name,
-          tableNumber: table.number,
+          spotId: s.spotId,
+          spotName: spot.name,
+          spotNumber: spot.number,
           venueName: venue.name,
           startedAt: s.startedAt,
           endedAt: s.endedAt,
@@ -548,15 +548,15 @@ class _MockStore {
     };
   }
 
-  TableReportDetailModel tableDetail(String tableId, ReportFilter filter) {
-    final rows = tableRows(filter);
+  SpotReportDetailModel spotDetail(String spotId, ReportFilter filter) {
+    final rows = spotRows(filter);
     final summary = rows.firstWhere(
-      (t) => t.tableId == tableId,
+      (t) => t.spotId == spotId,
       orElse: () => throw const ReportsExc(ReportsErrorCode.notFound),
     );
-    final scoped = _filtered(filter.range).where((s) => s.tableId == tableId && s.isCompleted).toList();
+    final scoped = _filtered(filter.range).where((s) => s.spotId == spotId && s.isCompleted).toList();
     // revenueSeries() ile aynı bucket mantığı — yıl için aylık, diğerleri
-    // için günlük. Tek farkı: scope tableId üzerine pre-filter edilmiş.
+    // için günlük. Tek farkı: scope spotId üzerine pre-filter edilmiş.
     final revenueSeries = filter.period == ReportPeriod.year
         ? _monthlyBuckets(filter, scoped)
         : _dailyBuckets(filter, scoped);
@@ -566,7 +566,7 @@ class _MockStore {
       heatmap[s.startedAt.weekday - 1][s.startedAt.hour] += s.totalAmount;
     }
 
-    return TableReportDetailModel(
+    return SpotReportDetailModel(
       summary: summary,
       revenueSeries: revenueSeries,
       hourHeatmap: heatmap,

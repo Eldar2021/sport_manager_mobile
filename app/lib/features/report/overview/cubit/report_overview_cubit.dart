@@ -56,7 +56,7 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
     await Future.wait([
       loadSummary(),
       loadRevenueSeries(),
-      loadTables(),
+      loadSpots(),
       loadManagers(),
       loadForecast(),
     ]);
@@ -82,13 +82,13 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
     }
   }
 
-  Future<void> loadTables() async {
-    emit(state.copyWith(tables: const RequestLoading()));
+  Future<void> loadSpots() async {
+    emit(state.copyWith(spots: const RequestLoading()));
     try {
-      final tables = await _repository.getTables(state.filter);
-      emit(state.copyWith(tables: RequestSuccess(tables)));
+      final spots = await _repository.getSpots(state.filter);
+      emit(state.copyWith(spots: RequestSuccess(spots)));
     } on Object catch (e) {
-      emit(state.copyWith(tables: RequestFailure(e)));
+      emit(state.copyWith(spots: RequestFailure(e)));
     }
   }
 

@@ -13,17 +13,17 @@
   "authTagline": "Цифровое управление залом",
   "authSignIn": "Войти",
   "authSignUp": "Регистрация",
-  "authSignInSubtitle": "Введите данные для входа",
+  "authSignInSubtitle": "Введите ваши данные",
   "authUsernameOrEmail": "Логин или email",
   "authPassword": "Пароль",
   "authForgotPassword": "Забыли пароль?",
   "authNoAccount": "Нет аккаунта?",
   "authChooseRole": "Кто вы?",
-  "authChooseRoleSubtitle": "Это определит доступные функции",
+  "authChooseRoleSubtitle": "От этого зависят доступные функции",
   "authOwnerTitle": "Владелец зала",
-  "authOwnerSubtitle": "Управляю одним или несколькими залами",
+  "authOwnerSubtitle": "Я управляю одним или несколькими залами",
   "authManagerTitle": "Менеджер зала",
-  "authManagerSubtitle": "Работаю на смене, нужен код приглашения",
+  "authManagerSubtitle": "Я работаю по сменам, нужен код приглашения",
   "authRegisterOwnerTitle": "Регистрация владельца",
   "authRegisterManagerTitle": "Регистрация менеджера",
   "authOwnerBadge": "Владелец",
@@ -33,22 +33,22 @@
   "authEmailLabel": "Email",
   "authInviteCodeLabel": "Код приглашения",
   "authUsernameLabel": "Логин",
-  "authConfirmPasswordLabel": "Повторите пароль",
-  "authVenueNameLabel": "Название заведения",
-  "authVenueNumberLabel": "Номер заведения",
-  "authAgreeTerms": "Согласен с условиями",
-  "authAgreeTermsError": "Необходимо согласиться с условиями",
+  "authConfirmPasswordLabel": "Подтвердите пароль",
+  "authVenueNameLabel": "Название зала",
+  "authVenueNumberLabel": "Номер зала",
+  "authAgreeTerms": "Я согласен с условиями",
+  "authAgreeTermsError": "Вы должны согласиться с условиями",
   "authCreateAccount": "Создать аккаунт",
   "authInviteCodeHint": "Получите код приглашения у владельца зала",
   "authFieldRequired": "Поле обязательно для заполнения",
-  "authPasswordMinLength": "Пароль должен содержать не менее 8 символов",
+  "authPasswordMinLength": "Пароль должен содержать минимум 8 символов",
   "authPasswordsDoNotMatch": "Пароли не совпадают",
   "authInvalidEmail": "Введите корректный email",
   "authInvalidPhone": "Введите корректный номер телефона",
   "authForgotPasswordTitle": "Восстановление пароля",
-  "authForgotPasswordBanner": "Введите логин или email — мы отправим ссылку для сброса пароля.",
-  "authForgotPasswordLoginEmailPlaceholder": "например, azamat@mail.kg",
-  "authForgotPasswordNoLink": "Не приходит ссылка?",
+  "authForgotPasswordBanner": "Введите ваш логин или email — мы отправим ссылку для сброса пароля.",
+  "authForgotPasswordLoginEmailPlaceholder": "напр., azamat@mail.kg",
+  "authForgotPasswordNoLink": "Ссылка не приходит?",
   "authForgotPasswordContactUs": "Свяжитесь с нами — WhatsApp, Telegram, email, звонок",
   "authForgotPasswordSendLink": "Отправить ссылку",
   "contactSupportTitle": "Связаться с поддержкой",
@@ -59,97 +59,139 @@
   "navProfile": "Профиль",
   "homeCreateVenue": "Создать зал",
   "homeNoVenuesTitle": "У вас пока нет залов",
-  "homeNoVenuesSubtitle": "Создайте первый зал, чтобы начать добавлять столы и принимать сессии.",
+  "homeNoVenuesSubtitle": "Создайте первый зал, чтобы начать добавлять позиции и принимать сессии.",
   "homeSelectVenue": "Выберите зал",
   "homeNewVenue": "Новый зал",
-  "homeAddTable": "Добавить стол",
-  "homeTablesEmpty": "Столов пока нет",
-  "homeTablesEmptySub": "Добавьте первый стол, чтобы менеджеры могли начинать сессии.",
-  "homeTablesEmptySubManager": "Столы появятся здесь, как только их добавит владелец.",
-  "homeTableOccupied": "{customerName} · ЗАНЯТ",
-  "@homeTableOccupied": {
+  "homeAddSpot": "Добавить {spot}",
+  "@homeAddSpot": {
     "placeholders": {
-      "customerName": {
-        "type": "String"
-      }
+      "spot": { "type": "String" }
     }
   },
-  "homeTableOccupiedBase": "ЗАНЯТ",
-  "homeTablePaused": "{customerName} · НА ПАУЗЕ",
-  "@homeTablePaused": {
+  "homeSpotsEmpty": "{spotPlural} пока нет",
+  "@homeSpotsEmpty": {
     "placeholders": {
-      "customerName": {
-        "type": "String"
-      }
+      "spotPlural": { "type": "String" }
     }
   },
-  "homeTablePausedBase": "НА ПАУЗЕ",
-  "homeTableFree": "СВОБОДЕН",
-  "homeTableJustFreed": "✓ Завершён",
-  "createTableTitle": "Новый стол",
-  "createTableNumberLabel": "Номер стола",
-  "createTableNumberHint": "1",
-  "createTableNameLabel": "Название стола",
-  "createTableNameHint": "Стол 1",
-  "createTableDescLabel": "Описание (ярлык)",
-  "createTableDescHint": "VIP зал, у окна, снукер...",
-  "createTableDescPlaceholder": "Описание",
-  "createTableRateLabel": "Тариф",
-  "createTableRateSuffix": "{currency}/{time_unit}",
-  "createTableButton": "Создать стол",
-  "editTableTitle": "Редактировать стол",
-  "updateTableButton": "Обновить",
-  "deleteTableButton": "Удалить",
+  "homeSpotsEmptySub": "Добавьте первую позицию ({spot}), чтобы менеджеры могли начинать сессии.",
+  "@homeSpotsEmptySub": {
+    "placeholders": {
+      "spot": { "type": "String" }
+    }
+  },
+  "homeSpotsEmptySubManager": "{spotPlural} появятся здесь, как только их добавит владелец.",
+  "@homeSpotsEmptySubManager": {
+    "placeholders": {
+      "spotPlural": { "type": "String" }
+    }
+  },
+  "homeSpotOccupied": "{customerName} · ЗАНЯТ",
+  "@homeSpotOccupied": {
+    "placeholders": {
+      "customerName": { "type": "String" }
+    }
+  },
+  "homeSpotOccupiedBase": "ЗАНЯТ",
+  "homeSpotPaused": "{customerName} · НА ПАУЗЕ",
+  "@homeSpotPaused": {
+    "placeholders": {
+      "customerName": { "type": "String" }
+    }
+  },
+  "homeSpotPausedBase": "НА ПАУЗЕ",
+  "homeSpotFree": "СВОБОДЕН",
+  "homeSpotJustFreed": "✓ Завершён",
+  "createSpotTitle": "Новая позиция",
+  "createSpotNumberLabel": "Номер позиции",
+  "createSpotNumberHint": "1",
+  "createSpotNameLabel": "Название позиции",
+  "createSpotNameHint": "Позиция 1",
+  "createSpotDescLabel": "Описание (ярлык)",
+  "createSpotDescHint": "VIP зал, у окна, снукер...",
+  "createSpotDescPlaceholder": "Описание",
+  "createSpotRateLabel": "Тариф",
+  "createSpotRateSuffix": "{currency}/{time_unit}",
+  "@createSpotRateSuffix": {
+    "placeholders": {
+      "currency": { "type": "String" },
+      "time_unit": { "type": "String" }
+    }
+  },
+  "createSpotButton": "Создать позицию",
+  "editSpotTitle": "Редактировать позицию",
+  "updateSpotButton": "Обновить",
+  "deleteSpotButton": "Удалить",
+  "deleteSpotSubtitle": "История сессий сохранится, но позиция исчезнет с главной страницы.",
   "createVenueTitle": "Создайте зал",
-  "createVenueSubtitle": "Дайте название вашему залу. Столы можно будет добавить позже с главной страницы.",
+  "createVenueSubtitle": "Дайте название вашему залу. Позиции можно будет добавить позже с главной страницы.",
   "createVenueNameLabel": "Название зала",
   "createVenueNameHint": "Центральный филиал",
   "createVenueNumberLabel": "Короткий код / номер (необязательно)",
   "createVenueNumberHint": "№ 1 или ЦФ",
-  "createVenueInfoBanner": "После создания зала вы сможете добавлять столы по одному с собственным тарифом.",
+  "createVenueInfoBanner": "После создания зала вы сможете добавлять позиции по одной с собственным тарифом.",
   "createVenueButton": "Создать зал →",
   "editVenueTitle": "Редактировать зал",
   "updateVenueButton": "Обновить",
   "deleteVenueButton": "Удалить",
-  "deleteVenueSubtitle": "Все столы и история сессий сохранятся, но зал будет удалён.",
+  "deleteVenueSubtitle": "Все позиции и история сессий сохранятся, но зал будет удалён.",
   "cancel": "Отмена",
-  "deleteTableSubtitle": "История сессий сохранится, но стол исчезнет с главной страницы.",
   "generalRetry": "Повторить",
-  "createTableTarifTypeLabel": "Тип тарифа",
+  "createSpotTarifTypeLabel": "Тип тарифа",
   "tarifTypeMinute": "Минута",
   "tarifTypeHour": "Час",
   "tarifTypeDay": "День",
-  "createTableCurrencyLabel": "Валюта",
+  "createSpotCurrencyLabel": "Валюта",
   "currencyKgs": "Сом",
   "currencyUsd": "Доллар",
   "currencyRub": "Рубль",
   "currencyKzt": "Тенге",
   "currencyTry": "Лира",
-  "venueTablesCount": "{count, plural, =0{нет столов} one{{count} стол} few{{count} стола} many{{count} столов} other{{count} столов}}",
-  "homeTableTitle": "Стол {number}",
-  "@homeTableTitle": {
+  "venueSpotsCount": "{count, plural, =0{нет {spotPlural}} =1{1 {spot}} other{{count} {spotPlural}}}",
+  "@venueSpotsCount": {
     "placeholders": {
-      "number": {
-        "type": "int"
-      }
+      "count": { "type": "int" },
+      "spot": { "type": "String" },
+      "spotPlural": { "type": "String" }
     }
   },
-  "homeTablesSection": "СТОЛЫ · {count}",
-  "@homeTablesSection": {
+  "homeSpotTitle": "{spotLabel} {number}",
+  "@homeSpotTitle": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "spotLabel": { "type": "String" },
+      "number": { "type": "int" }
+    }
+  },
+  "homeSpotsSection": "{spotPlural} · {count}",
+  "@homeSpotsSection": {
+    "placeholders": {
+      "spotPlural": { "type": "String" },
+      "count": { "type": "int" }
     }
   },
   "profileSectionManagement": "Управление",
   "profileManageVenuesTitle": "Управление залами",
   "profileManageVenuesSubtitle": "{count, plural, =0{нет залов} one{{count} зал} few{{count} зала} many{{count} залов} other{{count} залов}}",
+  "@profileManageVenuesSubtitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "profileManagersTitle": "Менеджеры",
   "profileManagersSubtitle": "{count, plural, =0{нет менеджеров} one{{count} менеджер} few{{count} менеджера} many{{count} менеджеров} other{{count} менеджеров}}",
+  "@profileManagersSubtitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "profileSectionAccount": "Аккаунт",
   "profileSubscriptionTitle": "Подписка",
   "profileSubscriptionActiveUntil": "Активна · до {date}",
+  "@profileSubscriptionActiveUntil": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
   "profileChangePasswordTitle": "Сменить пароль",
   "profileSettingsTitle": "Настройки",
   "profileSettingsSubtitle": "Тема, язык",
@@ -171,34 +213,52 @@
   "profileErrorSubtitle": "Проверьте подключение и попробуйте снова.",
   "sessionCustomerName": "Имя клиента (необязательно)",
   "sessionCustomerNameHint": "напр. Иван Иванов",
-  "tableDetailStart": "НАЧАТЬ",
-  "tableDetailStop": "ОСТАНОВИТЬ И ЗАКРЫТЬ",
-  "tableDetailElapsed": "ПРОШЛО",
-  "tableDetailCurrentAmount": "ТЕКУЩАЯ СУММА",
-  "tableDetailPause": "ПАУЗА",
-  "tableDetailResume": "ПРОДОЛЖИТЬ",
-  "tableDetailStartTime": "Начало",
-  "tableDetailDuration": "Длительность",
-  "tableDetailTariff": "Тариф",
-  "tableDetailMistakeLaunch": "Ошибочный запуск",
-  "tableDetailMistakeLaunchTitle": "Отменить сессию?",
-  "tableDetailMistakeLaunchSubtitle": "Сессия будет отменена без начисления оплаты.",
-  "tableDetailMistakeLaunchConfirm": "Да, отменить",
-  "tableDetailLastSession": "Прошлая сессия",
-  "tableDetailTodaySessions": "Сегодня сессий",
-  "tableDetailPaymentTitle": "Итоги оплаты",
-  "tableDetailSubtotal": "Подытог",
-  "tableDetailDiscount": "Скидка",
-  "tableDetailToPay": "К ОПЛАТЕ",
-  "tableDetailConfirmAndClose": "ПОДТВЕРДИТЬ И ЗАКРЫТЬ",
-  "tableDetailDurationMin": "{count} мин",
-  "@tableDetailDurationMin": {
+  "spotDetailStart": "НАЧАТЬ",
+  "spotDetailStop": "ОСТАНОВИТЬ И ЗАКРЫТЬ",
+  "spotDetailElapsed": "ПРОШЛО",
+  "spotDetailCurrentAmount": "ТЕКУЩАЯ СУММА",
+  "spotDetailPause": "ПАУЗА",
+  "spotDetailResume": "ПРОДОЛЖИТЬ",
+  "spotDetailStartTime": "Начало",
+  "spotDetailDuration": "Длительность",
+  "spotDetailTariff": "Тариф",
+  "spotDetailMistakeLaunch": "Ошибочный запуск",
+  "spotDetailMistakeLaunchTitle": "Отменить сессию?",
+  "spotDetailMistakeLaunchSubtitle": "Сессия будет отменена без начисления оплаты.",
+  "spotDetailMistakeLaunchConfirm": "Да, отменить",
+  "spotDetailLastSession": "Прошлая сессия",
+  "spotDetailTodaySessions": "Сегодня сессий",
+  "spotDetailPaymentTitle": "Итоги оплаты",
+  "spotDetailSubtotal": "Подытог",
+  "spotDetailDiscount": "Скидка",
+  "spotDetailToPay": "К ОПЛАТЕ",
+  "spotDetailConfirmAndClose": "ПОДТВЕРДИТЬ И ЗАКРЫТЬ",
+  "spotDetailDurationMin": "{count} мин",
+  "@spotDetailDurationMin": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" }
     }
   },
+  "spotLabelTable": "Стол",
+  "spotLabelConsole": "Консоль",
+  "spotLabelCourt": "Корт",
+  "spotLabelBoard": "Доска",
+  "spotLabelPitch": "Поле",
+  "spotLabelTablePlural": "Столы",
+  "spotLabelConsolePlural": "Консоли",
+  "spotLabelCourtPlural": "Корты",
+  "spotLabelBoardPlural": "Доски",
+  "spotLabelPitchPlural": "Поля",
+  "venueTypeTableTennis": "Настольный теннис",
+  "venueTypeBilliards": "Бильярд",
+  "venueTypePlayStation": "PlayStation",
+  "venueTypeVolleyball": "Волейбол",
+  "venueTypeBasketball": "Баскетбол",
+  "venueTypeChess": "Шахматы",
+  "venueTypeFootball": "Футбол",
+  "venueFormTypeLabel": "Тип",
+  "venueFormTypeImmutableHint": "Тип нельзя изменить после создания. Создайте новый зал, если меняется направление.",
+  "venueFormTypeRequiredError": "Выберите тип зала",
   "menuEdit": "Редактировать",
   "menuDelete": "Удалить",
   "managersInviteCodeLabel": "АКТИВНЫЙ КОД ПРИГЛАШЕНИЯ",
@@ -208,16 +268,39 @@
   "managersSectionLabel": "МЕНЕДЖЕРЫ",
   "managersInviteAction": "Пригласить менеджера",
   "managersDeleteTitle": "Удалить {name}?",
+  "@managersDeleteTitle": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
   "managersDeleteSubtitle": "Менеджер потеряет доступ к вашим залам. История его сессий сохранится.",
   "managersEmptyTitle": "Менеджеров пока нет",
   "managersEmptySubtitle": "Поделитесь кодом приглашения — менеджер сможет зарегистрироваться и выйти на смену.",
   "managersLastSeenJustNow": "онлайн",
   "managersLastSeenMinutes": "{count, plural, one{{count} мин назад} few{{count} мин назад} many{{count} мин назад} other{{count} мин назад}}",
+  "@managersLastSeenMinutes": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "managersLastSeenHours": "{count, plural, one{{count} час назад} few{{count} часа назад} many{{count} часов назад} other{{count} часов назад}}",
+  "@managersLastSeenHours": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "managersLastSeenDays": "{count, plural, one{{count} день назад} few{{count} дня назад} many{{count} дней назад} other{{count} дней назад}}",
-  "venueMetricTablesLabel": "СТОЛОВ",
-  "venueDetailTablesHeader": "СТОЛЫ ЗАЛА",
-  "venueTablesCountSuffix": "{count, plural, =0{0 шт.} one{{count} шт.} few{{count} шт.} many{{count} шт.} other{{count} шт.}}",
+  "@managersLastSeenDays": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "venueSpotsCountSuffix": "{count, plural, =0{0 шт.} one{{count} шт.} few{{count} шт.} many{{count} шт.} other{{count} шт.}}",
+  "@venueSpotsCountSuffix": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "subscriptionTitle": "Подписка",
   "subscriptionStatusActive": "Активна",
   "subscriptionStatusGrace": "Льготный период",
@@ -225,28 +308,89 @@
   "subscriptionSourceTrial": "Пробный период",
   "subscriptionSourcePaid": "Оплачена",
   "subscriptionWarningBanner": "{n, plural, =1{Подписка истекает через 1 день. Продлите, чтобы избежать перерыва.} other{Подписка истекает через {n} дн. Продлите, чтобы избежать перерыва.}}",
+  "@subscriptionWarningBanner": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "subscriptionGraceBanner": "{n, plural, =1{Подписка истекла. Остался 1 день льготного периода.} other{Подписка истекла. Осталось {n} дн. льготного периода.}}",
+  "@subscriptionGraceBanner": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "subscriptionExpiredBanner": "Подписка истекла. Продлите, чтобы пользоваться основными функциями.",
-  "subscriptionPlanCardPerTable": "{price} {currency} / стол / месяц",
-  "subscriptionPlanCardMonthly": "× {tableCount} столов = {monthly} {currency} / месяц",
+  "subscriptionPlanCardPerTable": "{price} {currency} / позиция / месяц",
+  "@subscriptionPlanCardPerTable": {
+    "placeholders": {
+      "price": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
+  "subscriptionPlanCardMonthly": "× {tableCount} позиций = {monthly} {currency} / месяц",
+  "@subscriptionPlanCardMonthly": {
+    "placeholders": {
+      "tableCount": { "type": "int" },
+      "monthly": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
   "subscriptionDetailNextPayment": "Следующий платёж",
   "subscriptionDetailLastPayment": "Последний платёж",
   "subscriptionDetailStatus": "Статус",
   "subscriptionPaymentHistoryTitle": "История платежей",
   "subscriptionPaymentHistoryEmpty": "Платежей пока нет",
-  "subscriptionPaymentItemSummary": "{months} мес × {tableCount} столов",
+  "subscriptionPaymentItemSummary": "{months} мес × {tableCount} позиций",
+  "@subscriptionPaymentItemSummary": {
+    "placeholders": {
+      "months": { "type": "int" },
+      "tableCount": { "type": "int" }
+    }
+  },
   "subscriptionAmountWithCurrency": "{amount} {currency}",
+  "@subscriptionAmountWithCurrency": {
+    "placeholders": {
+      "amount": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
   "subscriptionContinueCta": "Продлить подписку",
   "subscriptionCheckoutTitle": "Оплата",
-  "subscriptionCheckoutSummary": "{tableCount} столов × {price} {currency} = {monthly} {currency} / мес",
+  "subscriptionCheckoutSummary": "{tableCount} позиций × {price} {currency} = {monthly} {currency} / мес",
+  "@subscriptionCheckoutSummary": {
+    "placeholders": {
+      "tableCount": { "type": "int" },
+      "price": { "type": "int" },
+      "monthly": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
   "subscriptionCheckoutDuration": "Длительность",
   "subscriptionCheckoutMonthsLabel": "{n, plural, one{{n} мес} few{{n} мес} many{{n} мес} other{{n} мес}}",
+  "@subscriptionCheckoutMonthsLabel": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "subscriptionCheckoutTotal": "Итого",
   "subscriptionCheckoutTotalLine": "{months} мес × {monthly} {currency} = {total} {currency}",
+  "@subscriptionCheckoutTotalLine": {
+    "placeholders": {
+      "months": { "type": "int" },
+      "monthly": { "type": "int" },
+      "total": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
   "subscriptionCheckoutNewEndDate": "Новая дата окончания: {date}",
+  "@subscriptionCheckoutNewEndDate": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
   "subscriptionCheckoutPay": "Оплатить",
-  "subscriptionCheckoutNoTablesTitle": "Столов пока нет",
-  "subscriptionCheckoutNoTablesSubtitle": "Добавьте хотя бы один стол, чтобы оформить подписку.",
+  "subscriptionCheckoutNoTablesTitle": "Позиций пока нет",
+  "subscriptionCheckoutNoTablesSubtitle": "Добавьте хотя бы одну позицию, чтобы оформить подписку.",
   "subscriptionCheckoutGoToVenues": "К залам",
   "subscriptionPaymentMockTitle": "Тестовая оплата",
   "subscriptionPaymentMockSubtitle": "Интеграция с настоящей оплатой скоро. Симулируйте результат ниже.",
@@ -254,6 +398,11 @@
   "subscriptionPaymentSimulateFailure": "Имитировать ошибку",
   "subscriptionPaymentSuccessTitle": "Оплата прошла",
   "subscriptionPaymentSuccessBody": "Подписка продлена до {date}.",
+  "@subscriptionPaymentSuccessBody": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
   "subscriptionPaymentFailedTitle": "Оплата не прошла",
   "subscriptionPaymentFailedBody": "Что-то пошло не так. Попробуйте ещё раз.",
   "subscriptionPaymentRetry": "Попробовать снова",
@@ -266,11 +415,21 @@
   "subscriptionErrorSubtitle": "Проверьте подключение и попробуйте снова.",
   "subscriptionContactSupportAction": "Нужна помощь? Свяжитесь с поддержкой",
   "profileSubscriptionExpiresIn": "{n, plural, =1{Истекает через 1 день} other{Истекает через {n} дн.}}",
+  "@profileSubscriptionExpiresIn": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "profileSubscriptionGrace": "{n, plural, =1{Льготный · остался 1 день} other{Льготный · осталось {n} дн.}}",
+  "@profileSubscriptionGrace": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "profileSubscriptionExpired": "Истекла",
   "reportsOverviewTitle": "Отчёты",
   "reportsManagerDetailTitle": "Менеджер",
-  "reportsTableDetailTitle": "Стол",
+  "reportsSpotDetailTitle": "Позиция",
   "reportsPeriodToday": "Сегодня",
   "reportsPeriodWeek": "Неделя",
   "reportsPeriodMonth": "Месяц",
@@ -281,9 +440,8 @@
   "reportsKpiSessions": "Сессии",
   "reportsRevenueChartTitle": "Выручка по дням",
   "reportsRevenueChartCompareToggle": "Сравнить с прошлым периодом",
-  "reportsTablesTitle": "Столы",
   "reportsTopManagersTitle": "Менеджеры",
-  "reportsTableLabel": "Стол",
+  "reportsSpotLabel": "Позиция",
   "reportsSessionsShort": "сессий",
   "reportsCancelledShort": "отмен",
   "reportsSessionLogTitle": "Лог сессий",
@@ -294,10 +452,21 @@
   "reportsForecastSummaryTitle": "Прогноз",
   "reportsForecastVsPrevious": "к прошлому периоду",
   "reportsForecastVsRange": "к {previous}",
+  "@reportsForecastVsRange": {
+    "placeholders": {
+      "previous": { "type": "String" }
+    }
+  },
   "reportsForecastNoComparison": "Истории пока недостаточно",
   "reportsComparisonCaption": "{current}  ·  vs {previous}",
-  "reportsTableTrendTitle": "Тренд выручки",
-  "reportsTableHeatmapTitle": "Карта по часам",
+  "@reportsComparisonCaption": {
+    "placeholders": {
+      "current": { "type": "String" },
+      "previous": { "type": "String" }
+    }
+  },
+  "reportsSpotTrendTitle": "Тренд выручки",
+  "reportsSpotHeatmapTitle": "Карта по часам",
   "reportsErrorTitle": "Не удалось загрузить отчёт",
   "reportsEmptyTitle": "Данных пока нет",
   "reportsEmptySubtitle": "Начните сессии, чтобы здесь появились цифры.",

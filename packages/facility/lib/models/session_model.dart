@@ -11,7 +11,7 @@ part 'session_model.g.dart';
 final class SessionModel extends Equatable {
   const SessionModel({
     required this.id,
-    required this.tableId,
+    required this.spotId,
     required this.status,
     required this.startedAt,
     this.totalPausedSeconds = 0,
@@ -41,7 +41,7 @@ final class SessionModel extends Equatable {
   }
 
   final String id;
-  final String tableId;
+  final String spotId;
   final SessionStatus status;
   final DateTime startedAt;
   final String? customerName;
@@ -88,7 +88,7 @@ final class SessionModel extends Equatable {
   @override
   List<Object?> get props => [
     id,
-    tableId,
+    spotId,
     status,
     startedAt,
     totalPausedSeconds,

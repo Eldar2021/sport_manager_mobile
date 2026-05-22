@@ -9,7 +9,7 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   final ApiClient _client;
 
   static const _baseUrlVenue = '/api/v1/venue';
-  static const _baseUrlTable = '/api/v1/table';
+  static const _baseUrlSpot = '/api/v1/spot';
 
   @override
   Future<List<VenueModel>> getVenues() {
@@ -70,44 +70,44 @@ final class FacilityRemoteSourceImpl implements FacilityRemoteSource {
   }
 
   @override
-  Future<List<TableModel>> getVenueTables(String venueId) {
+  Future<List<SpotModel>> getVenueSpots(String venueId) {
     return _client
-        .getListOfType<TableModel>(
-          '$_baseUrlVenue/$venueId/tables',
-          fromJson: TableModel.fromJson,
+        .getListOfType<SpotModel>(
+          '$_baseUrlVenue/$venueId/spots',
+          fromJson: SpotModel.fromJson,
         )
         .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
-  Future<TableModel> createTable(TableFormParam param) {
+  Future<SpotModel> createSpot(SpotFormParam param) {
     return _client
-        .postType<TableModel>(
-          '$_baseUrlTable/create',
-          fromJson: TableModel.fromJson,
+        .postType<SpotModel>(
+          '$_baseUrlSpot/create',
+          fromJson: SpotModel.fromJson,
           data: param.toJson(),
         )
         .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
-  Future<TableModel> updateTable(
-    String tableId,
-    TableFormParam param,
+  Future<SpotModel> updateSpot(
+    String spotId,
+    SpotFormParam param,
   ) {
     return _client
-        .putType<TableModel>(
-          '$_baseUrlTable/$tableId',
-          fromJson: TableModel.fromJson,
+        .putType<SpotModel>(
+          '$_baseUrlSpot/$spotId',
+          fromJson: SpotModel.fromJson,
           data: param.toJson(),
         )
         .mapTo(FacilityExc.fromApiClientExc);
   }
 
   @override
-  Future<void> deleteTable(String tableId) {
+  Future<void> deleteSpot(String spotId) {
     return _client
-        .delete<void>('$_baseUrlTable/$tableId')
+        .delete<void>('$_baseUrlSpot/$spotId')
         .mapTo(
           FacilityExc.fromApiClientExc,
         );

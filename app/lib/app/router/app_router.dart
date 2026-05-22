@@ -12,8 +12,8 @@ import 'package:sport_manager_mobile/features/managers/managers.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
+import 'package:sport_manager_mobile/features/spots/spots.dart';
 import 'package:sport_manager_mobile/features/subscription/subscription.dart';
-import 'package:sport_manager_mobile/features/tables/tables.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:subscription/subscription.dart' show PaymentModel;
 import 'package:talker_flutter/talker_flutter.dart';
@@ -108,13 +108,13 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       ),
 
       GoRoute(
-        path: AppRoutes.tableForm,
-        builder: (_, state) => TableFormView(state.extra! as TableFormExtra),
+        path: AppRoutes.spotForm,
+        builder: (_, state) => SpotFormView(state.extra! as SpotFormExtra),
       ),
       GoRoute(
-        path: AppRoutes.tableDetail,
-        redirect: (_, state) => state.extra is TableModel ? null : AppRoutes.home,
-        builder: (_, state) => TableDetailView(state.extra! as TableModel),
+        path: AppRoutes.spotDetail,
+        redirect: (_, state) => state.extra is SpotModel ? null : AppRoutes.home,
+        builder: (_, state) => SpotDetailView(state.extra! as SpotModel),
       ),
 
       GoRoute(
@@ -169,10 +169,10 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
                     ),
                   ),
                   GoRoute(
-                    path: 'tables/:id/:venueId',
+                    path: 'spots/:id/:venueId',
                     parentNavigatorKey: rootNavigatorKey,
-                    builder: (_, state) => TableReportDetailView(
-                      tableId: state.pathParameters['id']!,
+                    builder: (_, state) => SpotReportDetailView(
+                      spotId: state.pathParameters['id']!,
                       venueId: state.pathParameters['venueId']!,
                     ),
                   ),
