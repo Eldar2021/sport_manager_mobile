@@ -66,8 +66,24 @@
   "homeTablesEmpty": "Азырынча столдор жок",
   "homeTablesEmptySub": "Менеджерлер сессия баштай алышы үчүн биринчи столду кошуңуз.",
   "homeTablesEmptySubManager": "Столдор ээси кошкондон кийин пайда болот.",
-  "homeTableOccupied": "ИШЕНИМДЕ",
-  "homeTablePaused": "ТЫНЫГУУ",
+  "homeTableOccupied": "{customerName} · БОШ ЭМЕС",
+  "@homeTableOccupied": {
+    "placeholders": {
+      "customerName": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTableOccupiedBase": "БОШ ЭМЕС",
+  "homeTablePaused": "{customerName} · ТОКТОТУЛДУ",
+  "@homeTablePaused": {
+    "placeholders": {
+      "customerName": {
+        "type": "String"
+      }
+    }
+  },
+  "homeTablePausedBase": "ТОКТОТУЛДУ",
   "homeTableFree": "БОШ",
   "homeTableJustFreed": "✓ Аяктады",
   "createTableTitle": "Жаңы стол",
@@ -153,6 +169,8 @@
   "profileDeleteAccountConfirm": "Биротоло өчүрүү",
   "profileErrorTitle": "Профилди жүктөө мүмкүн болбоду",
   "profileErrorSubtitle": "Туташууну текшерип, кайра аракет кылыңыз.",
+  "sessionCustomerName": "Кардардын аты (милдеттүү эмес)",
+  "sessionCustomerNameHint": "мис. Иван Иванов",
   "tableDetailStart": "БАШТОО",
   "tableDetailStop": "ТОКТОТУУ ЖАНА ЖАБУУ",
   "tableDetailElapsed": "ӨТКӨН",

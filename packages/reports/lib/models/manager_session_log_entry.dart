@@ -29,6 +29,7 @@ final class ManagerSessionLogEntry extends Equatable {
     required this.startedAt,
     required this.status,
     required this.currency,
+    this.customerName,
     this.endedAt,
     this.tableName,
     this.durationSeconds,
@@ -45,6 +46,7 @@ final class ManagerSessionLogEntry extends Equatable {
   final int tableNumber;
   final String? tableName;
   final String venueName;
+  final String? customerName;
   final DateTime startedAt;
   final DateTime? endedAt;
   final ManagerSessionLogStatus status;
@@ -69,6 +71,7 @@ final class ManagerSessionLogEntry extends Equatable {
     tableNumber,
     tableName,
     venueName,
+    customerName,
     startedAt,
     endedAt,
     status,

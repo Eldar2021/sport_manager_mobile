@@ -9,6 +9,7 @@ export 'widgets/occupied_table_body.dart';
 export 'widgets/occupied_table_footer.dart';
 export 'widgets/payment_summary_sheet.dart';
 export 'widgets/session_info_card.dart';
+export 'widgets/start_session_sheet.dart';
 export 'widgets/summary_card.dart';
 export 'widgets/table_info_row.dart';
 export 'widgets/table_stats_card.dart';

@@ -24,6 +24,7 @@ final class SessionModel extends Equatable {
     this.discountPercent,
     this.totalAmount,
     this.cancelReason,
+    this.customerName,
   });
 
   factory SessionModel.fromJson(Map<String, dynamic> json) {
@@ -43,6 +44,7 @@ final class SessionModel extends Equatable {
   final String tableId;
   final SessionStatus status;
   final DateTime startedAt;
+  final String? customerName;
 
   /// Accumulated paused seconds. Populated for ACTIVE / PAUSED sessions.
   final int totalPausedSeconds;

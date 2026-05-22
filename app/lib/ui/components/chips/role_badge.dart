@@ -19,6 +19,8 @@ class RoleBadge extends StatelessWidget {
       avatar: Icon(icon, color: color, size: 14),
       label: Text(
         label.toUpperCase(),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: context.textTheme.bodySmall?.copyWith(
           color: color,
           fontWeight: FontWeight.w600,

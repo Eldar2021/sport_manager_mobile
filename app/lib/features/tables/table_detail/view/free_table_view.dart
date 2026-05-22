@@ -71,7 +71,7 @@ class _FreeTableViewState extends State<FreeTableView> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
             child: FilledButton(
-              onPressed: isLoading ? null : widget.tableCubit.startSession,
+              onPressed: isLoading ? null : _onStartSession,
               style: FilledButton.styleFrom(
                 backgroundColor: context.appColors.success,
                 foregroundColor: context.appColors.onSuccess,
@@ -86,6 +86,13 @@ class _FreeTableViewState extends State<FreeTableView> {
         },
       ),
     );
+  }
+
+  Future<void> _onStartSession() async {
+    final customerName = await StartSessionSheet.show(context);
+    if (customerName == null || !mounted) return;
+
+    await widget.tableCubit.startSession(customerName.trim().isEmpty ? null : customerName.trim());
   }
 
   Future<void> _onEdit() async {

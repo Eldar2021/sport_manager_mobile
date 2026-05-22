@@ -207,10 +207,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeTablesEmptySubManager => 'Tables will appear here once the owner adds them.';
 
   @override
-  String get homeTableOccupied => 'OCCUPIED';
+  String homeTableOccupied(String customerName) {
+    return '$customerName · OCCUPIED';
+  }
 
   @override
-  String get homeTablePaused => 'PAUSED';
+  String get homeTableOccupiedBase => 'OCCUPIED';
+
+  @override
+  String homeTablePaused(String customerName) {
+    return '$customerName · PAUSED';
+  }
+
+  @override
+  String get homeTablePausedBase => 'PAUSED';
 
   @override
   String get homeTableFree => 'FREE';
@@ -462,6 +472,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileErrorSubtitle => 'Check your connection and try again.';
+
+  @override
+  String get sessionCustomerName => 'Customer name (optional)';
+
+  @override
+  String get sessionCustomerNameHint => 'e.g. John Smith';
 
   @override
   String get tableDetailStart => 'START';

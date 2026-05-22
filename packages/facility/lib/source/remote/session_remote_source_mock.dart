@@ -4,7 +4,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
   Map<String, SessionModel> get _sessions => MockData.sessions;
 
   @override
-  Future<SessionModel> startSession(String tableId) async {
+  Future<SessionModel> startSession(String tableId, String? customerName) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
 
     final hasActive = _sessions.values.any(

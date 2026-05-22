@@ -15,20 +15,26 @@ class OccupiedTableBody extends StatelessWidget {
   final VoidCallback onMistakeLaunch;
   final String currency;
 
+  String _statusLabel(BuildContext context, SessionModel session) {
+    final name = session.customerName;
+    if (session.isPaused) {
+      return name != null && name.isNotEmpty ? context.l10n.homeTablePaused(name) : context.l10n.homeTablePausedBase;
+    }
+    return name != null && name.isNotEmpty ? context.l10n.homeTableOccupied(name) : context.l10n.homeTableOccupiedBase;
+  }
+
   @override
   Widget build(BuildContext context) {
     final session = context.select<SessionActiveCubit, SessionModel>(
       (cubit) => cubit.state.session,
     );
 
-    final isPaused = session.isPaused;
-
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.x5),
       children: [
         RoleBadge(
-          label: isPaused ? context.l10n.homeTablePaused : context.l10n.homeTableOccupied,
-          color: isPaused ? context.colors.primary : context.colors.error,
+          label: _statusLabel(context, session),
+          color: session.isPaused ? context.colors.primary : context.colors.error,
           icon: Icons.circle,
         ),
         const SizedBox(height: AppSpacing.x5),
