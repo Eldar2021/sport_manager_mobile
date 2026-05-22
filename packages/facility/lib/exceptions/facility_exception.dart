@@ -18,6 +18,7 @@ enum FacilityErrorCode {
   cancelWindowExpired,
   invalidDiscount,
   sessionForbidden,
+  sessionItemNotFound,
   unknown
   ;
 
@@ -39,6 +40,7 @@ enum FacilityErrorCode {
       'CANCEL_WINDOW_EXPIRED' => .cancelWindowExpired,
       'INVALID_DISCOUNT' => .invalidDiscount,
       'SESSION_FORBIDDEN' => .sessionForbidden,
+      'SESSION_ITEM_NOT_FOUND' => .sessionItemNotFound,
       _ => .unknown,
     };
   }
@@ -74,7 +76,8 @@ final class FacilityExc extends AppException<FacilityErrorCode> {
     .sessionAlreadyCompleted ||
     .cancelWindowExpired ||
     .invalidDiscount ||
-    .sessionForbidden => BaseMessage.sessionError,
+    .sessionForbidden ||
+    .sessionItemNotFound => BaseMessage.sessionError,
     .unknown => BaseMessage.base,
   };
 
@@ -144,6 +147,11 @@ final class FacilityExc extends AppException<FacilityErrorCode> {
       en: 'Discount must be between 0 and 100',
       ru: 'Скидка должна быть от 0 до 100',
       ky: 'Арзандатуу 0 менен 100 арасында болушу керек',
+    ),
+    .sessionItemNotFound => const BaseMessage(
+      en: 'Product item not found in session',
+      ru: 'Товар не найден в сессии',
+      ky: 'Товар сессияда табылган жок',
     ),
     .venueForbidden || .tableForbidden || .sessionForbidden => const BaseMessage(
       en: 'You do not have permission to perform this action',

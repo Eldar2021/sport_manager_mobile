@@ -80,19 +80,21 @@ class _ProductsListViewState extends State<ProductsListView> {
                   ),
                   itemCount: data.length,
                   separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.x2),
-                  itemBuilder: (_, i) => Card(
-                    margin: EdgeInsets.zero,
-                    child: ProductTile(
-                      data[i],
-                      key: ValueKey(data[i].id),
-                      isDeleting: state.deletingId == data[i].id,
-                      onEdit: () => context.push(
-                        AppRoutes.productForm,
-                        extra: data[i],
+                  itemBuilder: (_, i) {
+                    return Card(
+                      margin: EdgeInsets.zero,
+                      child: ProductTile(
+                        data[i],
+                        key: ValueKey(data[i].id),
+                        isDeleting: state.deletingId == data[i].id,
+                        onEdit: () => context.push(
+                          AppRoutes.productForm,
+                          extra: data[i],
+                        ),
+                        onDelete: () => _onDelete(data[i]),
                       ),
-                      onDelete: () => _onDelete(data[i]),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               };
             },

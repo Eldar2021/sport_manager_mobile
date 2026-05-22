@@ -25,6 +25,14 @@ SessionModel _$SessionModelFromJson(Map<String, dynamic> json) => SessionModel(
   totalAmount: (json['totalAmount'] as num?)?.toInt(),
   cancelReason: json['cancelReason'] as String?,
   customerName: json['customerName'] as String?,
+  products:
+      (json['products'] as List<dynamic>?)
+          ?.map(
+            (e) => SessionProductItemModel.fromJson(e as Map<String, dynamic>),
+          )
+          .toList() ??
+      const [],
+  productsAmount: (json['productsAmount'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$SessionModelToJson(SessionModel instance) => <String, dynamic>{
@@ -43,6 +51,8 @@ Map<String, dynamic> _$SessionModelToJson(SessionModel instance) => <String, dyn
   'discountPercent': instance.discountPercent,
   'totalAmount': instance.totalAmount,
   'cancelReason': instance.cancelReason,
+  'products': instance.products,
+  'productsAmount': instance.productsAmount,
 };
 
 const _$SessionStatusEnumMap = {

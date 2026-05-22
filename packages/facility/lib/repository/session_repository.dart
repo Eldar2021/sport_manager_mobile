@@ -1,5 +1,4 @@
-import 'package:facility/models/session_model.dart';
-import 'package:facility/source/remote/session_remote_source.dart';
+import 'package:facility/facility.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -8,7 +7,10 @@ final class SessionRepository {
 
   final SessionRemoteSource _remote;
 
-  Future<SessionModel> startSession(String tableId, String? customerName) {
+  Future<SessionModel> startSession(
+    String tableId,
+    String? customerName,
+  ) {
     return _remote.startSession(tableId, customerName);
   }
 
@@ -32,5 +34,19 @@ final class SessionRepository {
     String? cancelReason,
   ) {
     return _remote.cancelSession(sessionId, cancelReason);
+  }
+
+  Future<SessionModel> addProductToSession(
+    String sessionId,
+    String productId,
+  ) {
+    return _remote.addProductToSession(sessionId, productId);
+  }
+
+  Future<SessionModel> removeProductFromSession(
+    String sessionId,
+    String itemId,
+  ) {
+    return _remote.removeProductFromSession(sessionId, itemId);
   }
 }

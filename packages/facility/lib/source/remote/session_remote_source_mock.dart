@@ -3,6 +3,8 @@ import 'package:facility/facility.dart';
 final class SessionRemoteSourceMock implements SessionRemoteSource {
   Map<String, SessionModel> get _sessions => MockData.sessions;
 
+  int _itemSeq = 1;
+
   @override
   Future<SessionModel> startSession(String tableId, String? customerName) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
@@ -148,6 +150,61 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
       startedAt: session.startedAt,
       endedAt: DateTime.now(),
       cancelReason: cancelReason,
+    );
+  }
+
+  @override
+  Future<SessionModel> addProductToSession(String sessionId, String productId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 400));
+    final session = _sessions[sessionId];
+    if (session == null) throw const FacilityExc(FacilityErrorCode.sessionNotFound);
+    if (!session.isActive && !session.isPaused) throw const FacilityExc(FacilityErrorCode.sessionNotActive);
+
+    final item = SessionProductItemModel(
+      id: 'item-${_itemSeq++}',
+      sessionId: sessionId,
+      productId: productId,
+      nameSnapshot: 'Товар $productId',
+      priceSnapshot: 50,
+      addedAt: DateTime.now(),
+    );
+    final updated = _rebuildWithItems(session, [...session.products, item]);
+    _sessions[sessionId] = updated;
+    MockData.updateTableSession(session.tableId, updated);
+    return updated;
+  }
+
+  @override
+  Future<SessionModel> removeProductFromSession(String sessionId, String itemId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 400));
+    final session = _sessions[sessionId];
+    if (session == null) throw const FacilityExc(FacilityErrorCode.sessionNotFound);
+    if (!session.isActive && !session.isPaused) throw const FacilityExc(FacilityErrorCode.sessionNotActive);
+
+    final exists = session.products.any((i) => i.id == itemId);
+    if (!exists) throw const FacilityExc(FacilityErrorCode.sessionItemNotFound);
+
+    final remaining = session.products.where((i) => i.id != itemId).toList(growable: false);
+    final updated = _rebuildWithItems(session, remaining);
+    _sessions[sessionId] = updated;
+    MockData.updateTableSession(session.tableId, updated);
+    return updated;
+  }
+
+  SessionModel _rebuildWithItems(SessionModel s, List<SessionProductItemModel> items) {
+    final productsAmount = items.fold(0, (sum, i) => sum + i.priceSnapshot);
+    return SessionModel(
+      id: s.id,
+      tableId: s.tableId,
+      status: s.status,
+      startedAt: s.startedAt,
+      totalPausedSeconds: s.totalPausedSeconds,
+      pausedAt: s.pausedAt,
+      tarifAmountSnapshot: s.tarifAmountSnapshot,
+      tarifTypeSnapshot: s.tarifTypeSnapshot,
+      customerName: s.customerName,
+      products: items,
+      productsAmount: productsAmount,
     );
   }
 }
