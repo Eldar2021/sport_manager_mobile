@@ -76,7 +76,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                       RequestSuccess<List<ProductModel>>(:final data) => ProductsListCard(
                         data: data,
                         deletingId: state.deletingId,
-                        onEdit: (p) => _navProductForm(),
+                        onEdit: (p) => _navProductForm(product: p),
                         onDelete: _onDelete,
                       ),
                     };
@@ -98,8 +98,8 @@ class _ProductsListViewState extends State<ProductsListView> {
     );
   }
 
-  Future<void> _navProductForm() async {
-    final result = await context.push<ProductModel>(AppRoutes.productForm);
+  Future<void> _navProductForm({ProductModel? product}) async {
+    final result = await context.push<ProductModel>(AppRoutes.productForm, extra: product);
     if (result != null) await _cubit.load();
   }
 }
