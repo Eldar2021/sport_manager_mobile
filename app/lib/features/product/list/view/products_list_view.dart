@@ -34,9 +34,9 @@ class _ProductsListViewState extends State<ProductsListView> {
   }
 
   Future<void> _onDelete(ProductModel product) {
-    return AppDestructiveSheet.show(
+    return AppDestructiveDialog.show(
       context,
-      icon: Icons.inventory_2_outlined,
+      icon: Icons.delete_outline,
       title: context.l10n.productsDeleteTitle(product.name),
       subtitle: context.l10n.productsDeleteSubtitle,
       confirmLabel: context.l10n.menuDelete,

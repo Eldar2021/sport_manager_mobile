@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:product/product.dart';
 import 'package:sport_manager_mobile/core/core.dart';
@@ -42,30 +43,25 @@ class ProductTile extends StatelessWidget {
         subtitle,
         style: context.appTextStyles.muted.bodySmall,
       ),
-      trailing: isDeleting
-          ? const SizedBox(
-              width: 20,
-              height: 20,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            )
-          : Row(
-              mainAxisSize: MainAxisSize.min,
-              spacing: AppSpacing.x2,
-              children: [
-                _ActionButton(
-                  icon: Icons.edit_outlined,
-                  color: context.colors.primary,
-                  backgroundColor: context.colors.primary.withValues(alpha: 0.12),
-                  onTap: onEdit,
-                ),
-                _ActionButton(
-                  icon: Icons.delete_outline,
-                  color: context.colors.error,
-                  backgroundColor: context.colors.error.withValues(alpha: 0.1),
-                  onTap: onDelete,
-                ),
-              ],
-            ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: AppSpacing.x2,
+        children: [
+          _ActionButton(
+            icon: Icons.edit_outlined,
+            color: context.colors.primary,
+            backgroundColor: context.colors.primary.withValues(alpha: 0.12),
+            onTap: isDeleting ? null : onEdit,
+          ),
+          _ActionButton(
+            icon: Icons.delete_outline,
+            color: context.colors.error,
+            backgroundColor: context.colors.error.withValues(alpha: 0.1),
+            onTap: isDeleting ? null : onDelete,
+            isLoading: isDeleting,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -124,22 +120,22 @@ class _ActionButton extends StatelessWidget {
     required this.color,
     required this.backgroundColor,
     required this.onTap,
+    this.isLoading = false,
   });
 
   final IconData icon;
   final Color color;
   final Color backgroundColor;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onTap,
-      icon: Icon(
-        icon,
-        color: color,
-        size: 20,
-      ),
+      icon: isLoading
+          ? CupertinoActivityIndicator(color: color, radius: 9)
+          : Icon(icon, color: color, size: 20),
       style: IconButton.styleFrom(
         backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
