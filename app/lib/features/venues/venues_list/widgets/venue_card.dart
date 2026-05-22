@@ -1,6 +1,6 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
-import 'package:sport_manager_mobile/l10n/l10n.dart';
+import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class VenueCard extends StatelessWidget {
@@ -28,7 +28,7 @@ class VenueCard extends StatelessWidget {
             width: AppSpacing.x10,
             height: AppSpacing.x10,
             child: Icon(
-              Icons.location_on_outlined,
+              venue.type.icon,
               color: context.colors.primary,
               size: AppSpacing.x5,
             ),
@@ -45,7 +45,7 @@ class VenueCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  context.l10n.venueMetricTablesLabel,
+                  venue.type.spotLabelPlural(context).toUpperCase(),
                   style: context.textTheme.bodySmall?.copyWith(
                     color: context.colors.onSurfaceVariant,
                     fontWeight: FontWeight.w700,
@@ -53,7 +53,7 @@ class VenueCard extends StatelessWidget {
                 ),
                 const SizedBox(width: AppSpacing.x2),
                 Text(
-                  '${venue.tableCount}',
+                  '${venue.spotCount}',
                   style: context.textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w800,
                   ),

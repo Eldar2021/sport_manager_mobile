@@ -3,7 +3,7 @@ import 'package:facility/facility.dart';
 
 final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   static List<VenueModel> get _venues => MockData.venues;
-  static List<TableModel> get _tables => MockData.tables;
+  static List<SpotModel> get _spots => MockData.spots;
 
   String _selectedVenueId = 'venue-001';
 
@@ -27,8 +27,8 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
         ),
       ),
     );
-    final tables = _tables.where((t) => t.venueId == venue.id).toList();
-    return SelectedVenueModel(venue: venue, tables: tables);
+    final spots = _spots.where((s) => s.venueId == venue.id).toList();
+    return SelectedVenueModel(venue: venue, spots: spots);
   }
 
   @override
@@ -55,9 +55,10 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
       id: 'venue-${DateTime.now().millisecondsSinceEpoch}',
       name: param.name,
       number: param.number,
+      type: param.type,
       address: param.address,
       selected: isFirst,
-      tableCount: 0,
+      spotCount: 0,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
@@ -78,9 +79,10 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
       id: id,
       name: param.name,
       number: param.number,
+      type: _venues[index].type,
       address: param.address,
       selected: _venues[index].selected,
-      tableCount: _venues[index].tableCount,
+      spotCount: _venues[index].spotCount,
       createdAt: _venues[index].createdAt,
       updatedAt: DateTime.now(),
     );
@@ -95,11 +97,11 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
       (v) => v.id == id,
       orElse: () => throw const FacilityExc(FacilityErrorCode.venueNotFound),
     );
-    final hasActiveSession = _tables.any(
-      (t) => t.venueId == id && t.session != null,
+    final hasActiveSession = _spots.any(
+      (s) => s.venueId == id && s.session != null,
     );
-    if (hasActiveSession) throw const FacilityExc(FacilityErrorCode.tableHasActiveSession);
-    _tables.removeWhere((t) => t.venueId == id);
+    if (hasActiveSession) throw const FacilityExc(FacilityErrorCode.spotHasActiveSession);
+    _spots.removeWhere((s) => s.venueId == id);
     _venues.removeWhere((v) => v.id == id);
     if (venue.selected && _venues.isNotEmpty) {
       _selectedVenueId = _venues.first.id;
@@ -108,22 +110,22 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
   }
 
   @override
-  Future<List<TableModel>> getVenueTables(String venueId) async {
+  Future<List<SpotModel>> getVenueSpots(String venueId) async {
     await Future<void>.delayed(const Duration(milliseconds: 700));
     if (!_venues.any((v) => v.id == venueId)) {
       throw const FacilityExc(FacilityErrorCode.venueNotFound);
     }
-    return List.unmodifiable(_tables.where((t) => t.venueId == venueId));
+    return List.unmodifiable(_spots.where((s) => s.venueId == venueId));
   }
 
   @override
-  Future<TableModel> createTable(TableFormParam param) async {
+  Future<SpotModel> createSpot(SpotFormParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
-    if (_tables.any((t) => t.venueId == param.venueId && t.number == param.number)) {
-      throw const FacilityExc(FacilityErrorCode.tableNumberTaken);
+    if (_spots.any((s) => s.venueId == param.venueId && s.number == param.number)) {
+      throw const FacilityExc(FacilityErrorCode.spotNumberTaken);
     }
-    final table = TableModel(
-      id: 'table-${DateTime.now().millisecondsSinceEpoch}',
+    final spot = SpotModel(
+      id: 'spot-${DateTime.now().millisecondsSinceEpoch}',
       venueId: param.venueId,
       number: param.number,
       name: param.name,
@@ -134,7 +136,7 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
-    _tables.add(table);
+    _spots.add(spot);
     final venueIdx = _venues.indexWhere((v) => v.id == param.venueId);
     if (venueIdx != -1) {
       final v = _venues[venueIdx];
@@ -142,26 +144,27 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
         id: v.id,
         name: v.name,
         number: v.number,
+        type: v.type,
         address: v.address,
         selected: v.selected,
-        tableCount: v.tableCount + 1,
+        spotCount: v.spotCount + 1,
         createdAt: v.createdAt,
         updatedAt: DateTime.now(),
       );
     }
-    return table;
+    return spot;
   }
 
   @override
-  Future<TableModel> updateTable(String id, TableFormParam param) async {
+  Future<SpotModel> updateSpot(String id, SpotFormParam param) async {
     await Future<void>.delayed(const Duration(milliseconds: 600));
-    final index = _tables.indexWhere((t) => t.id == id);
-    if (index == -1) throw const FacilityExc(FacilityErrorCode.tableNotFound);
-    final old = _tables[index];
-    if (_tables.any((t) => t.venueId == old.venueId && t.number == param.number && t.id != id)) {
-      throw const FacilityExc(FacilityErrorCode.tableNumberTaken);
+    final index = _spots.indexWhere((s) => s.id == id);
+    if (index == -1) throw const FacilityExc(FacilityErrorCode.spotNotFound);
+    final old = _spots[index];
+    if (_spots.any((s) => s.venueId == old.venueId && s.number == param.number && s.id != id)) {
+      throw const FacilityExc(FacilityErrorCode.spotNumberTaken);
     }
-    final updated = TableModel(
+    final updated = SpotModel(
       id: id,
       venueId: old.venueId,
       number: param.number,
@@ -174,29 +177,30 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
       createdAt: old.createdAt,
       updatedAt: DateTime.now(),
     );
-    _tables[index] = updated;
+    _spots[index] = updated;
     return updated;
   }
 
   @override
-  Future<void> deleteTable(String id) async {
+  Future<void> deleteSpot(String id) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    final table = _tables.firstWhere(
-      (t) => t.id == id,
-      orElse: () => throw const FacilityExc(FacilityErrorCode.tableNotFound),
+    final spot = _spots.firstWhere(
+      (s) => s.id == id,
+      orElse: () => throw const FacilityExc(FacilityErrorCode.spotNotFound),
     );
-    if (table.session != null) throw const FacilityExc(FacilityErrorCode.tableHasActiveSession);
-    _tables.removeWhere((t) => t.id == id);
-    final venueIdx = _venues.indexWhere((v) => v.id == table.venueId);
+    if (spot.session != null) throw const FacilityExc(FacilityErrorCode.spotHasActiveSession);
+    _spots.removeWhere((s) => s.id == id);
+    final venueIdx = _venues.indexWhere((v) => v.id == spot.venueId);
     if (venueIdx != -1) {
       final v = _venues[venueIdx];
       _venues[venueIdx] = VenueModel(
         id: v.id,
         name: v.name,
         number: v.number,
+        type: v.type,
         address: v.address,
         selected: v.selected,
-        tableCount: v.tableCount - 1,
+        spotCount: v.spotCount - 1,
         createdAt: v.createdAt,
         updatedAt: DateTime.now(),
       );
@@ -207,9 +211,10 @@ final class FacilityRemoteSourceMock implements FacilityRemoteSource {
     id: v.id,
     name: v.name,
     number: v.number,
+    type: v.type,
     address: v.address,
     selected: selected,
-    tableCount: v.tableCount,
+    spotCount: v.spotCount,
     createdAt: v.createdAt,
     updatedAt: v.updatedAt,
   );

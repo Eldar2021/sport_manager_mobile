@@ -4,24 +4,24 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
   Map<String, SessionModel> get _sessions => MockData.sessions;
 
   @override
-  Future<SessionModel> startSession(String tableId, String? customerName) async {
+  Future<SessionModel> startSession(String spotId, String? customerName) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
 
     final hasActive = _sessions.values.any(
-      (s) => s.tableId == tableId && (s.isActive || s.isPaused),
+      (s) => s.spotId == spotId && (s.isActive || s.isPaused),
     );
-    if (hasActive) throw const FacilityExc(FacilityErrorCode.tableHasActiveSession);
+    if (hasActive) throw const FacilityExc(FacilityErrorCode.spotHasActiveSession);
 
     final session = SessionModel(
       id: 'session-${DateTime.now().millisecondsSinceEpoch}',
-      tableId: tableId,
+      spotId: spotId,
       status: SessionStatus.active,
       startedAt: DateTime.now(),
       tarifAmountSnapshot: 500,
       tarifTypeSnapshot: TarifType.hour,
     );
     _sessions[session.id] = session;
-    MockData.updateTableSession(tableId, session);
+    MockData.updateSpotSession(spotId, session);
     return session;
   }
 
@@ -35,7 +35,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
 
     final paused = SessionModel(
       id: session.id,
-      tableId: session.tableId,
+      spotId: session.spotId,
       status: SessionStatus.paused,
       startedAt: session.startedAt,
       totalPausedSeconds: session.totalPausedSeconds,
@@ -44,7 +44,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
       tarifTypeSnapshot: session.tarifTypeSnapshot,
     );
     _sessions[sessionId] = paused;
-    MockData.updateTableSession(session.tableId, paused);
+    MockData.updateSpotSession(session.spotId, paused);
     return paused;
   }
 
@@ -59,7 +59,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
     final extra = session.pausedAt != null ? DateTime.now().difference(session.pausedAt!).inSeconds : 0;
     final resumed = SessionModel(
       id: session.id,
-      tableId: session.tableId,
+      spotId: session.spotId,
       status: SessionStatus.active,
       startedAt: session.startedAt,
       totalPausedSeconds: session.totalPausedSeconds + extra,
@@ -67,7 +67,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
       tarifTypeSnapshot: session.tarifTypeSnapshot,
     );
     _sessions[sessionId] = resumed;
-    MockData.updateTableSession(session.tableId, resumed);
+    MockData.updateSpotSession(session.spotId, resumed);
     return resumed;
   }
 
@@ -91,7 +91,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
       final extra = DateTime.now().difference(session.pausedAt!).inSeconds;
       session = SessionModel(
         id: session.id,
-        tableId: session.tableId,
+        spotId: session.spotId,
         status: SessionStatus.active,
         startedAt: session.startedAt,
         totalPausedSeconds: session.totalPausedSeconds + extra,
@@ -115,7 +115,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
 
     return SessionModel(
       id: session.id,
-      tableId: session.tableId,
+      spotId: session.spotId,
       status: SessionStatus.completed,
       startedAt: session.startedAt,
       endedAt: endedAt,
@@ -143,7 +143,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
 
     return SessionModel(
       id: session.id,
-      tableId: session.tableId,
+      spotId: session.spotId,
       status: SessionStatus.cancelled,
       startedAt: session.startedAt,
       endedAt: DateTime.now(),

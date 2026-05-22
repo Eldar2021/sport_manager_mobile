@@ -3,28 +3,28 @@ part of 'venue_detail_cubit.dart';
 @immutable
 final class VenueDetailState extends Equatable {
   const VenueDetailState({
-    this.tables = const RequestInitial(),
+    this.spots = const RequestInitial(),
     this.deleteStatus = const RequestInitial(),
   });
 
-  final RequestStatus<List<TableModel>> tables;
+  final RequestStatus<List<SpotModel>> spots;
   final RequestStatus<bool> deleteStatus;
 
   bool get isDeleting => deleteStatus.isLoading;
 
   VenueDetailState copyWith({
-    RequestStatus<List<TableModel>>? tables,
+    RequestStatus<List<SpotModel>>? spots,
     RequestStatus<bool>? deleteStatus,
   }) {
     return VenueDetailState(
-      tables: tables ?? this.tables,
+      spots: spots ?? this.spots,
       deleteStatus: deleteStatus ?? this.deleteStatus,
     );
   }
 
   @override
   List<Object?> get props => [
-    tables,
+    spots,
     deleteStatus,
   ];
 }

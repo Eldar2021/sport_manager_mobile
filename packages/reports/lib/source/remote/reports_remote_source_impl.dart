@@ -55,12 +55,12 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
   }
 
   @override
-  Future<List<TableReportRowModel>> getTables(ReportFilter filter) {
+  Future<List<SpotReportRowModel>> getSpots(ReportFilter filter) {
     return _client
-        .getListOfType<TableReportRowModel>(
-          '$_base/tables',
+        .getListOfType<SpotReportRowModel>(
+          '$_base/spots',
           params: _params(filter),
-          fromJson: TableReportRowModel.fromJson,
+          fromJson: SpotReportRowModel.fromJson,
         )
         .mapTo(ReportsExc.fromApiClientExc);
   }
@@ -102,15 +102,15 @@ final class ReportsRemoteSourceImpl implements ReportsRemoteSource {
   }
 
   @override
-  Future<TableReportDetailModel> getTableDetail(
-    String tableId,
+  Future<SpotReportDetailModel> getSpotDetail(
+    String spotId,
     ReportFilter filter,
   ) {
     return _client
-        .getType<TableReportDetailModel>(
-          '$_base/tables/$tableId',
+        .getType<SpotReportDetailModel>(
+          '$_base/spots/$spotId',
           params: _params(filter),
-          fromJson: TableReportDetailModel.fromJson,
+          fromJson: SpotReportDetailModel.fromJson,
         )
         .mapTo(ReportsExc.fromApiClientExc);
   }

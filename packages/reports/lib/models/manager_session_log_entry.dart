@@ -23,15 +23,15 @@ enum ManagerSessionLogStatus {
 final class ManagerSessionLogEntry extends Equatable {
   const ManagerSessionLogEntry({
     required this.sessionId,
-    required this.tableId,
-    required this.tableNumber,
+    required this.spotId,
+    required this.spotNumber,
     required this.venueName,
     required this.startedAt,
     required this.status,
     required this.currency,
     this.customerName,
     this.endedAt,
-    this.tableName,
+    this.spotName,
     this.durationSeconds,
     this.totalAmount,
     this.cancelReason,
@@ -42,9 +42,9 @@ final class ManagerSessionLogEntry extends Equatable {
   }
 
   final String sessionId;
-  final String tableId;
-  final int tableNumber;
-  final String? tableName;
+  final String spotId;
+  final int spotNumber;
+  final String? spotName;
   final String venueName;
   final String? customerName;
   final DateTime startedAt;
@@ -67,9 +67,9 @@ final class ManagerSessionLogEntry extends Equatable {
   @override
   List<Object?> get props => [
     sessionId,
-    tableId,
-    tableNumber,
-    tableName,
+    spotId,
+    spotNumber,
+    spotName,
     venueName,
     customerName,
     startedAt,

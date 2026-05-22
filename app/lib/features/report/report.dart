@@ -1,6 +1,6 @@
 export 'manager_detail/manager_detail.dart';
 export 'overview/overview.dart';
-export 'table_detail/table_detail.dart';
+export 'spot_detail/spot_detail.dart';
 export 'utils/report_format.dart';
 export 'widgets/report_comparison_label.dart';
 export 'widgets/report_kpi_card.dart';

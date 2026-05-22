@@ -8,7 +8,7 @@ import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
-import 'package:sport_manager_mobile/features/tables/tables.dart';
+import 'package:sport_manager_mobile/features/spots/spots.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -60,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         title: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) => switch (state) {
-            HomeLoaded(:final venue) || HomeNoTables(:final venue) => VenueListTile(
+            HomeLoaded(:final venue) || HomeNoSpots(:final venue) => VenueListTile(
               venue: venue,
               onTap: () => _openVenueSelector(venue),
             ),
@@ -73,13 +73,13 @@ class _HomeViewState extends State<HomeView> {
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) => switch (state) {
             HomeNoVenue() => const VenuesEmpty(),
-            HomeNoTables(:final venue) => TablesEmpty(venue),
-            HomeLoaded(:final venue, :final tables) => HomeSuccess(
+            HomeNoSpots(:final venue) => SpotsEmpty(venue),
+            HomeLoaded(:final venue, :final spots) => HomeSuccess(
               venue: venue,
-              tables: tables,
-              onTableTap: (table) => context.push(
-                AppRoutes.tableDetail,
-                extra: table,
+              spots: spots,
+              onSpotTap: (spot) => context.push(
+                AppRoutes.spotDetail,
+                extra: spot,
               ),
             ),
             HomeLoading() => const HomeSkeleton(),
@@ -93,10 +93,10 @@ class _HomeViewState extends State<HomeView> {
       floatingActionButton: isOwner
           ? BlocBuilder<HomeCubit, HomeState>(
               builder: (context, state) => switch (state) {
-                HomeLoaded(:final venue) || HomeNoTables(:final venue) => FloatingActionButton(
+                HomeLoaded(:final venue) || HomeNoSpots(:final venue) => FloatingActionButton(
                   onPressed: () => context.push(
-                    AppRoutes.tableForm,
-                    extra: TableFormExtra(venueId: venue.id),
+                    AppRoutes.spotForm,
+                    extra: SpotFormExtra(venueId: venue.id),
                   ),
                   child: const Icon(Icons.add_rounded),
                 ),

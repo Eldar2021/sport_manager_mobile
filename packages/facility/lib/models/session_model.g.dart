@@ -8,7 +8,7 @@ part of 'session_model.dart';
 
 SessionModel _$SessionModelFromJson(Map<String, dynamic> json) => SessionModel(
   id: json['id'] as String,
-  tableId: json['tableId'] as String,
+  spotId: json['spotId'] as String,
   status: $enumDecode(_$SessionStatusEnumMap, json['status']),
   startedAt: DateTime.parse(json['startedAt'] as String),
   totalPausedSeconds: (json['totalPausedSeconds'] as num?)?.toInt() ?? 0,
@@ -29,7 +29,7 @@ SessionModel _$SessionModelFromJson(Map<String, dynamic> json) => SessionModel(
 
 Map<String, dynamic> _$SessionModelToJson(SessionModel instance) => <String, dynamic>{
   'id': instance.id,
-  'tableId': instance.tableId,
+  'spotId': instance.spotId,
   'status': _$SessionStatusEnumMap[instance.status]!,
   'startedAt': instance.startedAt.toIso8601String(),
   'customerName': instance.customerName,

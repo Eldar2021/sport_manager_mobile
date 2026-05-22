@@ -186,7 +186,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get homeNoVenuesTitle => 'Азырынча залдарыңыз жок';
 
   @override
-  String get homeNoVenuesSubtitle => 'Столдорду кошуп, сессияларды кабыл алуу үчүн биринчи залыңызды түзүңүз.';
+  String get homeNoVenuesSubtitle => 'Позицияларды кошуп, сессияларды кабыл алуу үчүн биринчи залыңызды түзүңүз.';
 
   @override
   String get homeSelectVenue => 'Зал тандоо';
@@ -195,88 +195,99 @@ class AppLocalizationsKy extends AppLocalizations {
   String get homeNewVenue => 'Жаңы зал';
 
   @override
-  String get homeAddTable => 'Стол кошуу';
+  String homeAddSpot(String spot) {
+    return '$spot кошуу';
+  }
 
   @override
-  String get homeTablesEmpty => 'Азырынча столдор жок';
+  String homeSpotsEmpty(String spotPlural) {
+    return 'Азырынча $spotPlural жок';
+  }
 
   @override
-  String get homeTablesEmptySub => 'Менеджерлер сессия баштай алышы үчүн биринчи столду кошуңуз.';
+  String homeSpotsEmptySub(String spot) {
+    return 'Менеджерлер сессия баштай алышы үчүн биринчи $spot кошуңуз.';
+  }
 
   @override
-  String get homeTablesEmptySubManager => 'Столдор ээси кошкондон кийин пайда болот.';
+  String homeSpotsEmptySubManager(String spotPlural) {
+    return '$spotPlural ээси кошкондон кийин пайда болот.';
+  }
 
   @override
-  String homeTableOccupied(String customerName) {
+  String homeSpotOccupied(String customerName) {
     return '$customerName · БОШ ЭМЕС';
   }
 
   @override
-  String get homeTableOccupiedBase => 'БОШ ЭМЕС';
+  String get homeSpotOccupiedBase => 'БОШ ЭМЕС';
 
   @override
-  String homeTablePaused(String customerName) {
+  String homeSpotPaused(String customerName) {
     return '$customerName · ТОКТОТУЛДУ';
   }
 
   @override
-  String get homeTablePausedBase => 'ТОКТОТУЛДУ';
+  String get homeSpotPausedBase => 'ТОКТОТУЛДУ';
 
   @override
-  String get homeTableFree => 'БОШ';
+  String get homeSpotFree => 'БОШ';
 
   @override
-  String get homeTableJustFreed => '✓ Аяктады';
+  String get homeSpotJustFreed => '✓ Аяктады';
 
   @override
-  String get createTableTitle => 'Жаңы стол';
+  String get createSpotTitle => 'Жаңы позиция';
 
   @override
-  String get createTableNumberLabel => 'Стол номери';
+  String get createSpotNumberLabel => 'Позиция номери';
 
   @override
-  String get createTableNumberHint => '1';
+  String get createSpotNumberHint => '1';
 
   @override
-  String get createTableNameLabel => 'Стол аты';
+  String get createSpotNameLabel => 'Позиция аты';
 
   @override
-  String get createTableNameHint => 'Стол 1';
+  String get createSpotNameHint => 'Позиция 1';
 
   @override
-  String get createTableDescLabel => 'Сыпаттама (белги)';
+  String get createSpotDescLabel => 'Сыпаттама (белги)';
 
   @override
-  String get createTableDescHint => 'VIP зал, терезенин жанында, снукер...';
+  String get createSpotDescHint => 'VIP зал, терезенин жанында, снукер...';
 
   @override
-  String get createTableDescPlaceholder => 'Сыпаттама';
+  String get createSpotDescPlaceholder => 'Сыпаттама';
 
   @override
-  String get createTableRateLabel => 'Тариф';
+  String get createSpotRateLabel => 'Тариф';
 
   @override
-  String createTableRateSuffix(Object currency, Object time_unit) {
+  String createSpotRateSuffix(String currency, String time_unit) {
     return '$currency/$time_unit';
   }
 
   @override
-  String get createTableButton => 'Стол түзүү';
+  String get createSpotButton => 'Позиция түзүү';
 
   @override
-  String get editTableTitle => 'Столду өзгөртүү';
+  String get editSpotTitle => 'Позицияны өзгөртүү';
 
   @override
-  String get updateTableButton => 'Жаңыртуу';
+  String get updateSpotButton => 'Жаңыртуу';
 
   @override
-  String get deleteTableButton => 'Жок кылуу';
+  String get deleteSpotButton => 'Жок кылуу';
+
+  @override
+  String get deleteSpotSubtitle => 'Сессиялардын тарыхы сакталат, бирок позиция башкы баракчадан жоголот.';
 
   @override
   String get createVenueTitle => 'Залды түзүңүз';
 
   @override
-  String get createVenueSubtitle => 'Залыңызга ат бериңиз. Столдорду кийинчерек башкы баракчадан кошсо болот.';
+  String get createVenueSubtitle => 'Залыңызга ат бериңиз. Позицияларды кийинчерек башкы баракчадан кошсо болот.';
 
   @override
   String get createVenueNameLabel => 'Зал аты';
@@ -291,7 +302,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get createVenueNumberHint => '№ 1 же БФ';
 
   @override
-  String get createVenueInfoBanner => 'Зал түзүлгөндөн кийин столдорду бирден өз тарифи менен кошо аласыз.';
+  String get createVenueInfoBanner => 'Зал түзүлгөндөн кийин позицияларды бирден өз тарифи менен кошо аласыз.';
 
   @override
   String get createVenueButton => 'Зал түзүү →';
@@ -306,19 +317,16 @@ class AppLocalizationsKy extends AppLocalizations {
   String get deleteVenueButton => 'Жок кылуу';
 
   @override
-  String get deleteVenueSubtitle => 'Бардык столдор жана сессиялардын тарыхы сакталат, бирок зал жок кылынат.';
+  String get deleteVenueSubtitle => 'Бардык позициялар жана сессиялардын тарыхы сакталат, бирок зал жок кылынат.';
 
   @override
   String get cancel => 'Жокко чыгаруу';
 
   @override
-  String get deleteTableSubtitle => 'Сессиялардын тарыхы сакталат, бирок стол башкы баракчадан жоголот.';
-
-  @override
   String get generalRetry => 'Кайталоо';
 
   @override
-  String get createTableTarifTypeLabel => 'Тариф түрү';
+  String get createSpotTarifTypeLabel => 'Тариф түрү';
 
   @override
   String get tarifTypeMinute => 'Мүнөт';
@@ -330,7 +338,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get tarifTypeDay => 'Күн';
 
   @override
-  String get createTableCurrencyLabel => 'Валюта';
+  String get createSpotCurrencyLabel => 'Валюта';
 
   @override
   String get currencyKgs => 'Сом';
@@ -348,24 +356,24 @@ class AppLocalizationsKy extends AppLocalizations {
   String get currencyTry => 'Лира';
 
   @override
-  String venueTablesCount(int count) {
+  String venueSpotsCount(int count, String spot, String spotPlural) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count стол',
-      zero: 'стол жок',
+      other: '$count $spot',
+      zero: '$spotPlural жок',
     );
     return '$_temp0';
   }
 
   @override
-  String homeTableTitle(int number) {
-    return 'Стол $number';
+  String homeSpotTitle(String spotLabel, int number) {
+    return '$spotLabel $number';
   }
 
   @override
-  String homeTablesSection(int count) {
-    return 'СТОЛДОР · $count';
+  String homeSpotsSection(String spotPlural, int count) {
+    return '$spotPlural · $count';
   }
 
   @override
@@ -475,69 +483,129 @@ class AppLocalizationsKy extends AppLocalizations {
   String get sessionCustomerNameHint => 'мис. Иван Иванов';
 
   @override
-  String get tableDetailStart => 'БАШТОО';
+  String get spotDetailStart => 'БАШТОО';
 
   @override
-  String get tableDetailStop => 'ТОКТОТУУ ЖАНА ЖАБУУ';
+  String get spotDetailStop => 'ТОКТОТУУ ЖАНА ЖАБУУ';
 
   @override
-  String get tableDetailElapsed => 'ӨТКӨН';
+  String get spotDetailElapsed => 'ӨТКӨН';
 
   @override
-  String get tableDetailCurrentAmount => 'УЧУРДАГЫ СУММА';
+  String get spotDetailCurrentAmount => 'УЧУРДАГЫ СУММА';
 
   @override
-  String get tableDetailPause => 'ТЫНЫГУУ';
+  String get spotDetailPause => 'ТЫНЫГУУ';
 
   @override
-  String get tableDetailResume => 'УЛАНТУУ';
+  String get spotDetailResume => 'УЛАНТУУ';
 
   @override
-  String get tableDetailStartTime => 'Башталышы';
+  String get spotDetailStartTime => 'Башталышы';
 
   @override
-  String get tableDetailDuration => 'Узактыгы';
+  String get spotDetailDuration => 'Узактыгы';
 
   @override
-  String get tableDetailTariff => 'Тариф';
+  String get spotDetailTariff => 'Тариф';
 
   @override
-  String get tableDetailMistakeLaunch => 'Ката иш-аракет';
+  String get spotDetailMistakeLaunch => 'Ката иш-аракет';
 
   @override
-  String get tableDetailMistakeLaunchTitle => 'Сессияны жокко чыгаруу?';
+  String get spotDetailMistakeLaunchTitle => 'Сессияны жокко чыгаруу?';
 
   @override
-  String get tableDetailMistakeLaunchSubtitle => 'Сессия төлөмсүз жокко чыгарылат.';
+  String get spotDetailMistakeLaunchSubtitle => 'Сессия төлөмсүз жокко чыгарылат.';
 
   @override
-  String get tableDetailMistakeLaunchConfirm => 'Ооба, жокко чыгаруу';
+  String get spotDetailMistakeLaunchConfirm => 'Ооба, жокко чыгаруу';
 
   @override
-  String get tableDetailLastSession => 'Акыркы сессия';
+  String get spotDetailLastSession => 'Акыркы сессия';
 
   @override
-  String get tableDetailTodaySessions => 'Бүгүнкү сессиялар';
+  String get spotDetailTodaySessions => 'Бүгүнкү сессиялар';
 
   @override
-  String get tableDetailPaymentTitle => 'Төлөм корутундусу';
+  String get spotDetailPaymentTitle => 'Төлөм корутундусу';
 
   @override
-  String get tableDetailSubtotal => 'Аралык жыйынтык';
+  String get spotDetailSubtotal => 'Аралык жыйынтык';
 
   @override
-  String get tableDetailDiscount => 'Арзандатуу';
+  String get spotDetailDiscount => 'Арзандатуу';
 
   @override
-  String get tableDetailToPay => 'ТӨЛӨНҮҮГӨ';
+  String get spotDetailToPay => 'ТӨЛӨНҮҮГӨ';
 
   @override
-  String get tableDetailConfirmAndClose => 'ЫРАСТОО ЖАНА ЖАБУУ';
+  String get spotDetailConfirmAndClose => 'ЫРАСТОО ЖАНА ЖАБУУ';
 
   @override
-  String tableDetailDurationMin(int count) {
+  String spotDetailDurationMin(int count) {
     return '$count мин';
   }
+
+  @override
+  String get spotLabelTable => 'Үстөл';
+
+  @override
+  String get spotLabelConsole => 'Консоль';
+
+  @override
+  String get spotLabelCourt => 'Аянтча';
+
+  @override
+  String get spotLabelBoard => 'Тактай';
+
+  @override
+  String get spotLabelPitch => 'Талаа';
+
+  @override
+  String get spotLabelTablePlural => 'Үстөлдөр';
+
+  @override
+  String get spotLabelConsolePlural => 'Консолдор';
+
+  @override
+  String get spotLabelCourtPlural => 'Аянтчалар';
+
+  @override
+  String get spotLabelBoardPlural => 'Тактайлар';
+
+  @override
+  String get spotLabelPitchPlural => 'Талаалар';
+
+  @override
+  String get venueTypeTableTennis => 'Үстөл теннис';
+
+  @override
+  String get venueTypeBilliards => 'Бильярд';
+
+  @override
+  String get venueTypePlayStation => 'PlayStation';
+
+  @override
+  String get venueTypeVolleyball => 'Волейбол';
+
+  @override
+  String get venueTypeBasketball => 'Баскетбол';
+
+  @override
+  String get venueTypeChess => 'Шахмат';
+
+  @override
+  String get venueTypeFootball => 'Футбол';
+
+  @override
+  String get venueFormTypeLabel => 'Тип';
+
+  @override
+  String get venueFormTypeImmutableHint => 'Тип түзүлгөндөн кийин өзгөртүлбөйт. Спорт түрү өзгөрсө, жаңы зал түзүңүз.';
+
+  @override
+  String get venueFormTypeRequiredError => 'Залдын типин тандаңыз';
 
   @override
   String get menuEdit => 'Өзгөртүү';
@@ -615,13 +683,7 @@ class AppLocalizationsKy extends AppLocalizations {
   }
 
   @override
-  String get venueMetricTablesLabel => 'СТОЛДОР';
-
-  @override
-  String get venueDetailTablesHeader => 'ЗАЛДЫН СТОЛДОРУ';
-
-  @override
-  String venueTablesCountSuffix(int count) {
+  String venueSpotsCountSuffix(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -676,12 +738,12 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String subscriptionPlanCardPerTable(int price, String currency) {
-    return '$price $currency / стол / ай';
+    return '$price $currency / позиция / ай';
   }
 
   @override
   String subscriptionPlanCardMonthly(int tableCount, int monthly, String currency) {
-    return '× $tableCount стол = $monthly $currency / ай';
+    return '× $tableCount позиция = $monthly $currency / ай';
   }
 
   @override
@@ -701,7 +763,7 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String subscriptionPaymentItemSummary(int months, int tableCount) {
-    return '$months ай × $tableCount стол';
+    return '$months ай × $tableCount позиция';
   }
 
   @override
@@ -717,7 +779,7 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String subscriptionCheckoutSummary(int tableCount, int price, int monthly, String currency) {
-    return '$tableCount стол × $price $currency = $monthly $currency / ай';
+    return '$tableCount позиция × $price $currency = $monthly $currency / ай';
   }
 
   @override
@@ -751,10 +813,10 @@ class AppLocalizationsKy extends AppLocalizations {
   String get subscriptionCheckoutPay => 'Төлөө';
 
   @override
-  String get subscriptionCheckoutNoTablesTitle => 'Стол али жок';
+  String get subscriptionCheckoutNoTablesTitle => 'Позиция али жок';
 
   @override
-  String get subscriptionCheckoutNoTablesSubtitle => 'Жазылуу үчүн жок дегенде бир стол кошуңуз.';
+  String get subscriptionCheckoutNoTablesSubtitle => 'Жазылуу үчүн жок дегенде бир позиция кошуңуз.';
 
   @override
   String get subscriptionCheckoutGoToVenues => 'Залдарга өтүү';
@@ -845,7 +907,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsManagerDetailTitle => 'Менеджер';
 
   @override
-  String get reportsTableDetailTitle => 'Стол';
+  String get reportsSpotDetailTitle => 'Позиция';
 
   @override
   String get reportsPeriodToday => 'Бүгүн';
@@ -878,13 +940,10 @@ class AppLocalizationsKy extends AppLocalizations {
   String get reportsRevenueChartCompareToggle => 'Мурунку мөөнөт менен салыштыруу';
 
   @override
-  String get reportsTablesTitle => 'Столдор';
-
-  @override
   String get reportsTopManagersTitle => 'Менеджерлер';
 
   @override
-  String get reportsTableLabel => 'Стол';
+  String get reportsSpotLabel => 'Позиция';
 
   @override
   String get reportsSessionsShort => 'сессия';
@@ -927,10 +986,10 @@ class AppLocalizationsKy extends AppLocalizations {
   }
 
   @override
-  String get reportsTableTrendTitle => 'Киреше трендине';
+  String get reportsSpotTrendTitle => 'Киреше трендине';
 
   @override
-  String get reportsTableHeatmapTitle => 'Саат боюнча карта';
+  String get reportsSpotHeatmapTitle => 'Саат боюнча карта';
 
   @override
   String get reportsErrorTitle => 'Отчётту жүктөө мүмкүн эмес';

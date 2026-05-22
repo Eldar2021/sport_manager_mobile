@@ -1,5 +1,6 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -54,7 +55,7 @@ class VenueListTile extends StatelessWidget {
         ],
       ),
       subtitle: Text(
-        '№ ${venue.number} · ${l10n.venueTablesCount(venue.tableCount)}',
+        '№ ${venue.number} · ${l10n.venueSpotsCount(venue.spotCount, venue.type.spotLabel(context), venue.type.spotLabelPlural(context))}',
         style: context.textTheme.bodySmall?.copyWith(
           color: context.colors.onSurfaceVariant,
         ),

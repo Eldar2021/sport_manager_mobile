@@ -19,8 +19,8 @@ final class ReportsRepository {
     return _remote.getRevenueSeries(filter);
   }
 
-  Future<List<TableReportRowModel>> getTables(ReportFilter filter) {
-    return _remote.getTables(filter);
+  Future<List<SpotReportRowModel>> getSpots(ReportFilter filter) {
+    return _remote.getSpots(filter);
   }
 
   Future<List<ManagerReportRowModel>> getManagers(ReportFilter filter) {
@@ -38,10 +38,10 @@ final class ReportsRepository {
     return _remote.getManagerDetail(managerId, filter);
   }
 
-  Future<TableReportDetailModel> getTableDetail(
-    String tableId,
+  Future<SpotReportDetailModel> getSpotDetail(
+    String spotId,
     ReportFilter filter,
   ) {
-    return _remote.getTableDetail(tableId, filter);
+    return _remote.getSpotDetail(spotId, filter);
   }
 }

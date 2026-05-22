@@ -9,11 +9,11 @@ abstract final class AppRoutes {
   static const home = '/home';
   static const report = '/report';
   static const reportManager = '/report/managers/:id/:venueId';
-  static const reportTable = '/report/tables/:id/:venueId';
+  static const reportSpot = '/report/spots/:id/:venueId';
   static const profile = '/profile';
   static const settings = '/settings';
-  static const tableForm = '/tables/form';
-  static const tableDetail = '/tables/detail';
+  static const spotForm = '/spots/form';
+  static const spotDetail = '/spots/detail';
   static const venueForm = '/venues/form';
   static const venuesList = '/venues';
   static const venueDetail = '/venues/detail';

@@ -82,10 +82,10 @@ final class BaseMessage {
     ky: 'Жай катасы',
   );
 
-  static const tableError = BaseMessage(
-    en: 'Table Error',
-    ru: 'Ошибка стола',
-    ky: 'Стол катасы',
+  static const spotError = BaseMessage(
+    en: 'Spot Error',
+    ru: 'Ошибка позиции',
+    ky: 'Позиция катасы',
   );
 
   static const sessionError = BaseMessage(

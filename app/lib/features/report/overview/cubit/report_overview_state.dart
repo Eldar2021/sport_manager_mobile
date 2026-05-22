@@ -7,7 +7,7 @@ final class ReportOverviewState extends Equatable {
     this.venues = const RequestInitial(),
     this.summary = const RequestInitial(),
     this.revenue = const RequestInitial(),
-    this.tables = const RequestInitial(),
+    this.spots = const RequestInitial(),
     this.managers = const RequestInitial(),
     this.forecast = const RequestInitial(),
   });
@@ -16,7 +16,7 @@ final class ReportOverviewState extends Equatable {
   final RequestStatus<List<ReportVenueModel>> venues;
   final RequestStatus<ReportsSummaryModel> summary;
   final RequestStatus<List<RevenuePointModel>> revenue;
-  final RequestStatus<List<TableReportRowModel>> tables;
+  final RequestStatus<List<SpotReportRowModel>> spots;
   final RequestStatus<List<ManagerReportRowModel>> managers;
   final RequestStatus<ForecastModel> forecast;
 
@@ -25,7 +25,7 @@ final class ReportOverviewState extends Equatable {
     RequestStatus<List<ReportVenueModel>>? venues,
     RequestStatus<ReportsSummaryModel>? summary,
     RequestStatus<List<RevenuePointModel>>? revenue,
-    RequestStatus<List<TableReportRowModel>>? tables,
+    RequestStatus<List<SpotReportRowModel>>? spots,
     RequestStatus<List<ManagerReportRowModel>>? managers,
     RequestStatus<ForecastModel>? forecast,
   }) {
@@ -34,7 +34,7 @@ final class ReportOverviewState extends Equatable {
       venues: venues ?? this.venues,
       summary: summary ?? this.summary,
       revenue: revenue ?? this.revenue,
-      tables: tables ?? this.tables,
+      spots: spots ?? this.spots,
       managers: managers ?? this.managers,
       forecast: forecast ?? this.forecast,
     );
@@ -46,7 +46,7 @@ final class ReportOverviewState extends Equatable {
     venues,
     summary,
     revenue,
-    tables,
+    spots,
     managers,
     forecast,
   ];

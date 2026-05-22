@@ -10,7 +10,7 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
 
   @override
   Future<SessionModel> startSession(
-    String tableId,
+    String spotId,
     String? customerName,
   ) {
     return _client
@@ -18,7 +18,7 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
           '/api/v1/session/start',
           fromJson: SessionModel.fromJson,
           data: {
-            'tableId': tableId,
+            'spotId': spotId,
             'customerName': ?customerName,
           },
         )

@@ -12,7 +12,7 @@ class VenueDetailSkeleton extends StatelessWidget {
       padding: EdgeInsets.zero,
       itemCount: 5,
       separatorBuilder: (_, _) => const Divider(height: 1),
-      itemBuilder: (_, _) => const VenueTableTileSkeleton(),
+      itemBuilder: (_, _) => const VenueSpotTileSkeleton(),
     );
   }
 }

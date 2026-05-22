@@ -1,20 +1,21 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
+import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class HomeSuccess extends StatelessWidget {
   const HomeSuccess({
     required this.venue,
-    required this.tables,
-    required this.onTableTap,
+    required this.spots,
+    required this.onSpotTap,
     super.key,
   });
 
   final VenueModel venue;
-  final List<TableModel> tables;
-  final void Function(TableModel) onTableTap;
+  final List<SpotModel> spots;
+  final void Function(SpotModel) onSpotTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class HomeSuccess extends StatelessWidget {
           ),
           sliver: SliverToBoxAdapter(
             child: Text(
-              context.l10n.homeTablesSection(tables.length),
+              context.l10n.homeSpotsSection(venue.type.spotLabelPlural(context).toUpperCase(), spots.length),
               style: context.textTheme.bodySmall?.copyWith(
                 color: context.colors.onSurfaceVariant,
                 fontWeight: FontWeight.w700,
@@ -47,13 +48,14 @@ class HomeSuccess extends StatelessWidget {
               crossAxisSpacing: AppSpacing.x3,
               childAspectRatio: 1.2,
             ),
-            itemCount: tables.length,
+            itemCount: spots.length,
             itemBuilder: (context, index) {
-              final table = tables[index];
-              return TableCard(
-                key: ValueKey(table.id),
-                table,
-                onTap: () => onTableTap(table),
+              final spot = spots[index];
+              return SpotCard(
+                key: ValueKey(spot.id),
+                spot,
+                venueType: venue.type,
+                onTap: () => onSpotTap(spot),
               );
             },
           ),

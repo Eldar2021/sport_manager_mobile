@@ -1,7 +1,9 @@
+import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:reports/reports.dart';
+import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -44,6 +46,14 @@ class _ReportOverviewViewState extends State<ReportOverviewView> with SingleTick
   void _onTabChanged() {
     if (_tabController.indexIsChanging) return;
     _cubit.changePeriod(_periods[_tabController.index]);
+  }
+
+  VenueType _resolveVenueType(BuildContext context) {
+    final state = context.read<HomeCubit>().state;
+    return switch (state) {
+      HomeLoaded(:final venue) || HomeNoSpots(:final venue) => venue.type,
+      _ => VenueType.billiards,
+    };
   }
 
   @override
@@ -105,7 +115,7 @@ class _ReportOverviewViewState extends State<ReportOverviewView> with SingleTick
                         const SizedBox(height: AppSpacing.x4),
                         ForecastSummaryCard(_cubit),
                         const SizedBox(height: AppSpacing.x6),
-                        TablesSection(_cubit),
+                        SpotsSection(cubit: _cubit, venueType: _resolveVenueType(context)),
                         const SizedBox(height: AppSpacing.x6),
                         TopManagersSection(_cubit),
                       ],

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:facility/models/venue_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -10,6 +11,7 @@ final class VenueFormParam extends Equatable {
   const VenueFormParam({
     required this.name,
     required this.number,
+    required this.type,
     this.address,
   });
 
@@ -19,6 +21,7 @@ final class VenueFormParam extends Equatable {
 
   final String name;
   final int number;
+  final VenueType type;
   final String? address;
 
   Map<String, dynamic> toJson() {
@@ -29,6 +32,7 @@ final class VenueFormParam extends Equatable {
   List<Object?> get props => [
     name,
     number,
+    type,
     address,
   ];
 }

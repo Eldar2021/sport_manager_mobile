@@ -125,9 +125,9 @@ class _LogRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final df = DateFormat('dd.MM HH:mm', Localizations.localeOf(context).languageCode);
-    final tableLabel = entry.tableName == null || entry.tableName!.isEmpty
-        ? '${l10n.reportsTableLabel} ${entry.tableNumber}'
-        : '${l10n.reportsTableLabel} ${entry.tableNumber} · «${entry.tableName}»';
+    final spotLabel = entry.spotName == null || entry.spotName!.isEmpty
+        ? '${l10n.reportsSpotLabel} ${entry.spotNumber}'
+        : '${l10n.reportsSpotLabel} ${entry.spotNumber} · «${entry.spotName}»';
     final (leadingIcon, leadingColor) = switch (entry.status) {
       ManagerSessionLogStatus.active => (Icons.timelapse_outlined, context.colors.primary),
       ManagerSessionLogStatus.completed => (Icons.check_circle_outline, context.appColors.success),
@@ -136,7 +136,7 @@ class _LogRow extends StatelessWidget {
     return ListTile(
       leading: Icon(leadingIcon, color: leadingColor),
       title: Text(
-        tableLabel,
+        spotLabel,
         style: context.textTheme.bodyMedium,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
