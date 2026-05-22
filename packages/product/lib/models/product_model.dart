@@ -16,7 +16,7 @@ final class ProductModel extends Equatable {
     required this.unit,
     required this.category,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     this.description,
     this.photoUrl,
     this.icon,
@@ -36,7 +36,7 @@ final class ProductModel extends Equatable {
   final String? photoUrl;
   final String? icon;
   final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
 
   Map<String, dynamic> toJson() {
     return _$ProductModelToJson(this);

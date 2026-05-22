@@ -14,7 +14,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
   unit: $enumDecode(_$ProductUnitEnumMap, json['unit']),
   category: $enumDecode(_$ProductCategoryEnumMap, json['category']),
   createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: DateTime.parse(json['updatedAt'] as String),
+  updatedAt: json['updatedAt'] == null ? null : DateTime.parse(json['updatedAt'] as String),
   description: json['description'] as String?,
   photoUrl: json['photoUrl'] as String?,
   icon: json['icon'] as String?,
@@ -31,7 +31,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) => <String, dyn
   'photoUrl': instance.photoUrl,
   'icon': instance.icon,
   'createdAt': instance.createdAt.toIso8601String(),
-  'updatedAt': instance.updatedAt.toIso8601String(),
+  'updatedAt': instance.updatedAt?.toIso8601String(),
 };
 
 const _$ProductUnitEnumMap = {
