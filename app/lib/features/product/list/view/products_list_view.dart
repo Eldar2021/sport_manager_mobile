@@ -76,7 +76,7 @@ class _ProductsListViewState extends State<ProductsListView> {
                       RequestSuccess<List<ProductModel>>(:final data) => ProductsListCard(
                         data: data,
                         deletingId: state.deletingId,
-                        onEdit: (p) => context.push(AppRoutes.productForm, extra: p),
+                        onEdit: (p) => _navProductForm(),
                         onDelete: _onDelete,
                       ),
                     };
@@ -90,11 +90,16 @@ class _ProductsListViewState extends State<ProductsListView> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
           child: AppButton(
-            onPressed: () => context.push(AppRoutes.productForm),
+            onPressed: _navProductForm,
             child: Text(context.l10n.productsAddButton),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _navProductForm() async {
+    final result = await context.push<ProductModel>(AppRoutes.productForm);
+    if (result != null) await _cubit.load();
   }
 }
