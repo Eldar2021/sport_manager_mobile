@@ -24,15 +24,25 @@ final class ProductRepository {
     return _remote.getAll(category: category, search: search);
   }
 
-  Future<ProductModel> getById(String id) => _remote.getById(id);
+  Future<ProductModel> getById(String id) {
+    return _remote.getById(id);
+  }
 
-  Future<ProductModel> create(ProductCreateParam param) => _remote.create(param);
+  Future<ProductModel> create(ProductCreateParam param) {
+    return _remote.create(param);
+  }
 
-  Future<ProductModel> update(String id, ProductCreateParam param) => _remote.update(id, param);
+  Future<ProductModel> update(String id, ProductCreateParam param) {
+    return _remote.update(id, param);
+  }
 
-  Future<void> delete(String id) => _remote.delete(id);
+  Future<void> delete(String id) {
+    return _remote.delete(id);
+  }
 
-  Future<ProductPhotoResponse> uploadPhoto(File file) => _remote.uploadPhoto(file);
+  Future<ProductPhotoResponse> uploadPhoto(File file) {
+    return _remote.uploadPhoto(file);
+  }
 
   Future<ProductReportSummaryModel> getProductsReport(
     String venueId,

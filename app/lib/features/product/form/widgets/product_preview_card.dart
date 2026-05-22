@@ -49,7 +49,10 @@ class ProductPreviewCard extends StatelessWidget {
           category.localizedName(context.l10n).toUpperCase(),
           style: context.appTextStyles.muted.labelSmall,
         ),
-        trailing: _PriceBadge(price: price, unit: unit),
+        trailing: _PriceBadge(
+          price: price,
+          unit: unit,
+        ),
       ),
     );
   }
@@ -82,7 +85,10 @@ class _PreviewThumbnail extends StatelessWidget {
           (null, final emoji?) => ColoredBox(
             color: context.colors.primaryContainer,
             child: Center(
-              child: Text(emoji, style: const TextStyle(fontSize: 28)),
+              child: Text(
+                emoji,
+                style: const TextStyle(fontSize: 28),
+              ),
             ),
           ),
           _ => _fallback(context),
@@ -91,16 +97,25 @@ class _PreviewThumbnail extends StatelessWidget {
     );
   }
 
-  Widget _fallback(BuildContext context) => ColoredBox(
-    color: context.colors.primaryContainer,
-    child: Center(
-      child: Icon(category.icon, size: 26, color: context.colors.primary),
-    ),
-  );
+  Widget _fallback(BuildContext context) {
+    return ColoredBox(
+      color: context.colors.primaryContainer,
+      child: Center(
+        child: Icon(
+          category.icon,
+          size: 26,
+          color: context.colors.primary,
+        ),
+      ),
+    );
+  }
 }
 
 class _PriceBadge extends StatelessWidget {
-  const _PriceBadge({required this.price, required this.unit});
+  const _PriceBadge({
+    required this.price,
+    required this.unit,
+  });
 
   final String price;
   final ProductUnit unit;
