@@ -18,8 +18,8 @@ final class HomeNoVenue extends HomeState {
   List<Object?> get props => [];
 }
 
-final class HomeNoTables extends HomeState {
-  const HomeNoTables(this.venue);
+final class HomeNoSpots extends HomeState {
+  const HomeNoSpots(this.venue);
 
   final VenueModel venue;
 
@@ -30,14 +30,14 @@ final class HomeNoTables extends HomeState {
 final class HomeLoaded extends HomeState {
   const HomeLoaded({
     required this.venue,
-    required this.tables,
+    required this.spots,
   });
 
   final VenueModel venue;
-  final List<TableModel> tables;
+  final List<SpotModel> spots;
 
   @override
-  List<Object?> get props => [venue, tables];
+  List<Object?> get props => [venue, spots];
 }
 
 final class HomeFailure extends HomeState {

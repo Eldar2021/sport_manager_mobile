@@ -7,11 +7,8 @@ final class SessionRepository {
 
   final SessionRemoteSource _remote;
 
-  Future<SessionModel> startSession(
-    String tableId,
-    String? customerName,
-  ) {
-    return _remote.startSession(tableId, customerName);
+  Future<SessionModel> startSession(String spotId, String? customerName) {
+    return _remote.startSession(spotId, customerName);
   }
 
   Future<SessionModel> pauseSession(String sessionId) {

@@ -59,94 +59,114 @@
   "navProfile": "Profile",
   "homeCreateVenue": "Create venue",
   "homeNoVenuesTitle": "You have no venues yet",
-  "homeNoVenuesSubtitle": "Create your first venue to start adding tables and accepting sessions.",
+  "homeNoVenuesSubtitle": "Create your first venue to start adding spots and accepting sessions.",
   "homeSelectVenue": "Select venue",
   "homeNewVenue": "New venue",
-  "homeAddTable": "Add table",
-  "homeTablesEmpty": "No tables yet",
-  "homeTablesEmptySub": "Add the first table so managers can start sessions.",
-  "homeTablesEmptySubManager": "Tables will appear here once the owner adds them.",
-  "homeTableOccupied": "{customerName} · OCCUPIED",
-  "@homeTableOccupied": {
+  "homeAddSpot": "Add {spot}",
+  "@homeAddSpot": {
     "placeholders": {
-      "customerName": {
-        "type": "String"
-      }
+      "spot": { "type": "String" }
     }
   },
-  "homeTableOccupiedBase": "OCCUPIED",
-  "homeTablePaused": "{customerName} · PAUSED",
-  "@homeTablePaused": {
+  "homeSpotsEmpty": "No {spotPlural} yet",
+  "@homeSpotsEmpty": {
     "placeholders": {
-      "customerName": {
-        "type": "String"
-      }
+      "spotPlural": { "type": "String" }
     }
   },
-  "homeTablePausedBase": "PAUSED",
-  "homeTableFree": "FREE",
-  "homeTableJustFreed": "✓ Done",
-  "createTableTitle": "New table",
-  "createTableNumberLabel": "Table number",
-  "createTableNumberHint": "1",
-  "createTableNameLabel": "Table name",
-  "createTableNameHint": "Table 1",
-  "createTableDescLabel": "Description (tag)",
-  "createTableDescHint": "VIP room, window seat, snooker...",
-  "createTableDescPlaceholder": "Description",
-  "createTableRateLabel": "Rate",
-  "createTableRateSuffix": "{currency}/{time_unit}",
-  "createTableButton": "Create table",
-  "editTableTitle": "Edit table",
-  "updateTableButton": "Update table",
-  "deleteTableButton": "Delete",
+  "homeSpotsEmptySub": "Add the first {spot} so managers can start sessions.",
+  "@homeSpotsEmptySub": {
+    "placeholders": {
+      "spot": { "type": "String" }
+    }
+  },
+  "homeSpotsEmptySubManager": "{spotPlural} will appear here once the owner adds them.",
+  "@homeSpotsEmptySubManager": {
+    "placeholders": {
+      "spotPlural": { "type": "String" }
+    }
+  },
+  "homeSpotOccupied": "{customerName} · OCCUPIED",
+  "@homeSpotOccupied": {
+    "placeholders": {
+      "customerName": { "type": "String" }
+    }
+  },
+  "homeSpotOccupiedBase": "OCCUPIED",
+  "homeSpotPaused": "{customerName} · PAUSED",
+  "@homeSpotPaused": {
+    "placeholders": {
+      "customerName": { "type": "String" }
+    }
+  },
+  "homeSpotPausedBase": "PAUSED",
+  "homeSpotFree": "FREE",
+  "homeSpotJustFreed": "✓ Done",
+  "createSpotTitle": "New spot",
+  "createSpotNumberLabel": "Spot number",
+  "createSpotNumberHint": "1",
+  "createSpotNameLabel": "Spot name",
+  "createSpotNameHint": "Spot 1",
+  "createSpotDescLabel": "Description (tag)",
+  "createSpotDescHint": "VIP, window seat, snooker...",
+  "createSpotDescPlaceholder": "Description",
+  "createSpotRateLabel": "Rate",
+  "createSpotRateSuffix": "{currency}/{time_unit}",
+  "@createSpotRateSuffix": {
+    "placeholders": {
+      "currency": { "type": "String" },
+      "time_unit": { "type": "String" }
+    }
+  },
+  "createSpotButton": "Create spot",
+  "editSpotTitle": "Edit spot",
+  "updateSpotButton": "Update spot",
+  "deleteSpotButton": "Delete",
+  "deleteSpotSubtitle": "Session history will be preserved, but the spot will disappear from the home page.",
   "createVenueTitle": "Create your venue",
-  "createVenueSubtitle": "Give your venue a name. Tables can be added later from the home page.",
+  "createVenueSubtitle": "Give your venue a name. Spots can be added later from the home page.",
   "createVenueNameLabel": "Venue name",
   "createVenueNameHint": "Central branch",
   "createVenueNumberLabel": "Short code / number (optional)",
   "createVenueNumberHint": "No. 1 or CF",
-  "createVenueInfoBanner": "After creating the venue you will be able to add tables one by one with their own rate.",
+  "createVenueInfoBanner": "After creating the venue you will be able to add spots one by one with their own rate.",
   "createVenueButton": "Create venue →",
   "editVenueTitle": "Edit venue",
   "updateVenueButton": "Update",
   "deleteVenueButton": "Delete",
-  "deleteVenueSubtitle": "All tables and session history will be preserved, but the venue will be removed.",
+  "deleteVenueSubtitle": "All spots and session history will be preserved, but the venue will be removed.",
   "cancel": "Cancel",
-  "deleteTableSubtitle": "Session history will be preserved, but the table will disappear from the home page.",
   "generalRetry": "Retry",
-  "createTableTarifTypeLabel": "Tariff type",
+  "createSpotTarifTypeLabel": "Tariff type",
   "tarifTypeMinute": "Minute",
   "tarifTypeHour": "Hour",
   "tarifTypeDay": "Day",
-  "createTableCurrencyLabel": "Currency",
+  "createSpotCurrencyLabel": "Currency",
   "currencyKgs": "Som",
   "currencyUsd": "Dollar",
   "currencyRub": "Ruble",
   "currencyKzt": "Tenge",
   "currencyTry": "Lira",
-  "venueTablesCount": "{count, plural, =0{no tables} =1{1 table} other{{count} tables}}",
-  "@venueTablesCount": {
+  "venueSpotsCount": "{count, plural, =0{no {spotPlural}} =1{1 {spot}} other{{count} {spotPlural}}}",
+  "@venueSpotsCount": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" },
+      "spot": { "type": "String" },
+      "spotPlural": { "type": "String" }
     }
   },
-  "homeTableTitle": "Table {number}",
-  "@homeTableTitle": {
+  "homeSpotTitle": "{spotLabel} {number}",
+  "@homeSpotTitle": {
     "placeholders": {
-      "number": {
-        "type": "int"
-      }
+      "spotLabel": { "type": "String" },
+      "number": { "type": "int" }
     }
   },
-  "homeTablesSection": "TABLES · {count}",
-  "@homeTablesSection": {
+  "homeSpotsSection": "{spotPlural} · {count}",
+  "@homeSpotsSection": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "spotPlural": { "type": "String" },
+      "count": { "type": "int" }
     }
   },
   "profileSectionManagement": "Management",
@@ -154,18 +174,14 @@
   "profileManageVenuesSubtitle": "{count, plural, =0{No venues} =1{1 venue} other{{count} venues}}",
   "@profileManageVenuesSubtitle": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" }
     }
   },
   "profileManagersTitle": "Managers",
   "profileManagersSubtitle": "{count, plural, =0{No managers} =1{1 manager} other{{count} managers}}",
   "@profileManagersSubtitle": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" }
     }
   },
   "profileSectionAccount": "Account",
@@ -173,9 +189,7 @@
   "profileSubscriptionActiveUntil": "Active · until {date}",
   "@profileSubscriptionActiveUntil": {
     "placeholders": {
-      "date": {
-        "type": "String"
-      }
+      "date": { "type": "String" }
     }
   },
   "profileChangePasswordTitle": "Change password",
@@ -199,34 +213,52 @@
   "profileErrorSubtitle": "Check your connection and try again.",
   "sessionCustomerName": "Customer name (optional)",
   "sessionCustomerNameHint": "e.g. John Smith",
-  "tableDetailStart": "START",
-  "tableDetailStop": "STOP & CLOSE",
-  "tableDetailElapsed": "ELAPSED",
-  "tableDetailCurrentAmount": "CURRENT AMOUNT",
-  "tableDetailPause": "PAUSE",
-  "tableDetailResume": "CONTINUE",
-  "tableDetailStartTime": "Start",
-  "tableDetailDuration": "Duration",
-  "tableDetailTariff": "Rate",
-  "tableDetailMistakeLaunch": "Mistake launch",
-  "tableDetailMistakeLaunchTitle": "Cancel session?",
-  "tableDetailMistakeLaunchSubtitle": "The session will be cancelled. No charge will be applied.",
-  "tableDetailMistakeLaunchConfirm": "Yes, cancel",
-  "tableDetailLastSession": "Last session",
-  "tableDetailTodaySessions": "Today's sessions",
-  "tableDetailPaymentTitle": "Payment summary",
-  "tableDetailSubtotal": "Subtotal",
-  "tableDetailDiscount": "Discount",
-  "tableDetailToPay": "TO PAY",
-  "tableDetailConfirmAndClose": "CONFIRM & CLOSE",
-  "tableDetailDurationMin": "{count} min",
-  "@tableDetailDurationMin": {
+  "spotDetailStart": "START",
+  "spotDetailStop": "STOP & CLOSE",
+  "spotDetailElapsed": "ELAPSED",
+  "spotDetailCurrentAmount": "CURRENT AMOUNT",
+  "spotDetailPause": "PAUSE",
+  "spotDetailResume": "CONTINUE",
+  "spotDetailStartTime": "Start",
+  "spotDetailDuration": "Duration",
+  "spotDetailTariff": "Rate",
+  "spotDetailMistakeLaunch": "Mistake launch",
+  "spotDetailMistakeLaunchTitle": "Cancel session?",
+  "spotDetailMistakeLaunchSubtitle": "The session will be cancelled. No charge will be applied.",
+  "spotDetailMistakeLaunchConfirm": "Yes, cancel",
+  "spotDetailLastSession": "Last session",
+  "spotDetailTodaySessions": "Today's sessions",
+  "spotDetailPaymentTitle": "Payment summary",
+  "spotDetailSubtotal": "Subtotal",
+  "spotDetailDiscount": "Discount",
+  "spotDetailToPay": "TO PAY",
+  "spotDetailConfirmAndClose": "CONFIRM & CLOSE",
+  "spotDetailDurationMin": "{count} min",
+  "@spotDetailDurationMin": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" }
     }
   },
+  "spotLabelTable": "Table",
+  "spotLabelConsole": "Console",
+  "spotLabelCourt": "Court",
+  "spotLabelBoard": "Board",
+  "spotLabelPitch": "Pitch",
+  "spotLabelTablePlural": "Tables",
+  "spotLabelConsolePlural": "Consoles",
+  "spotLabelCourtPlural": "Courts",
+  "spotLabelBoardPlural": "Boards",
+  "spotLabelPitchPlural": "Pitches",
+  "venueTypeTableTennis": "Table Tennis",
+  "venueTypeBilliards": "Billiards",
+  "venueTypePlayStation": "PlayStation",
+  "venueTypeVolleyball": "Volleyball",
+  "venueTypeBasketball": "Basketball",
+  "venueTypeChess": "Chess",
+  "venueTypeFootball": "Football",
+  "venueFormTypeLabel": "Type",
+  "venueFormTypeImmutableHint": "Type can't be changed after creation. Create a new venue if you switch sports.",
+  "venueFormTypeRequiredError": "Please select a venue type",
   "menuEdit": "Edit",
   "menuDelete": "Delete",
   "managersInviteCodeLabel": "ACTIVE INVITE CODE",
@@ -238,9 +270,7 @@
   "managersDeleteTitle": "Remove {name}?",
   "@managersDeleteTitle": {
     "placeholders": {
-      "name": {
-        "type": "String"
-      }
+      "name": { "type": "String" }
     }
   },
   "managersDeleteSubtitle": "The manager will lose access to your venues. Their session history is kept.",
@@ -250,35 +280,25 @@
   "managersLastSeenMinutes": "{count, plural, =1{1 min ago} other{{count} min ago}}",
   "@managersLastSeenMinutes": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" }
     }
   },
   "managersLastSeenHours": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
   "@managersLastSeenHours": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" }
     }
   },
   "managersLastSeenDays": "{count, plural, =1{1 day ago} other{{count} days ago}}",
   "@managersLastSeenDays": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" }
     }
   },
-  "venueMetricTablesLabel": "TABLES",
-  "venueDetailTablesHeader": "HALL TABLES",
-  "venueTablesCountSuffix": "{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}",
-  "@venueTablesCountSuffix": {
+  "venueSpotsCountSuffix": "{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}",
+  "@venueSpotsCountSuffix": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" }
     }
   },
   "subscriptionTitle": "Subscription",
@@ -290,43 +310,29 @@
   "subscriptionWarningBanner": "{n, plural, =1{Your subscription expires in 1 day. Renew to avoid interruption.} other{Your subscription expires in {n} days. Renew to avoid interruption.}}",
   "@subscriptionWarningBanner": {
     "placeholders": {
-      "n": {
-        "type": "int"
-      }
+      "n": { "type": "int" }
     }
   },
   "subscriptionGraceBanner": "{n, plural, =1{Subscription expired. 1 day of grace period left.} other{Subscription expired. {n} days of grace period left.}}",
   "@subscriptionGraceBanner": {
     "placeholders": {
-      "n": {
-        "type": "int"
-      }
+      "n": { "type": "int" }
     }
   },
   "subscriptionExpiredBanner": "Subscription expired. Renew to use core features.",
-  "subscriptionPlanCardPerTable": "{price} {currency} / table / month",
+  "subscriptionPlanCardPerTable": "{price} {currency} / spot / month",
   "@subscriptionPlanCardPerTable": {
     "placeholders": {
-      "price": {
-        "type": "int"
-      },
-      "currency": {
-        "type": "String"
-      }
+      "price": { "type": "int" },
+      "currency": { "type": "String" }
     }
   },
-  "subscriptionPlanCardMonthly": "× {tableCount} tables = {monthly} {currency} / month",
+  "subscriptionPlanCardMonthly": "× {tableCount} spots = {monthly} {currency} / month",
   "@subscriptionPlanCardMonthly": {
     "placeholders": {
-      "tableCount": {
-        "type": "int"
-      },
-      "monthly": {
-        "type": "int"
-      },
-      "currency": {
-        "type": "String"
-      }
+      "tableCount": { "type": "int" },
+      "monthly": { "type": "int" },
+      "currency": { "type": "String" }
     }
   },
   "subscriptionDetailNextPayment": "Next payment",
@@ -334,85 +340,57 @@
   "subscriptionDetailStatus": "Status",
   "subscriptionPaymentHistoryTitle": "Payment history",
   "subscriptionPaymentHistoryEmpty": "No payments yet",
-  "subscriptionPaymentItemSummary": "{months} months × {tableCount} tables",
+  "subscriptionPaymentItemSummary": "{months} months × {tableCount} spots",
   "@subscriptionPaymentItemSummary": {
     "placeholders": {
-      "months": {
-        "type": "int"
-      },
-      "tableCount": {
-        "type": "int"
-      }
+      "months": { "type": "int" },
+      "tableCount": { "type": "int" }
     }
   },
   "subscriptionAmountWithCurrency": "{amount} {currency}",
   "@subscriptionAmountWithCurrency": {
     "placeholders": {
-      "amount": {
-        "type": "int"
-      },
-      "currency": {
-        "type": "String"
-      }
+      "amount": { "type": "int" },
+      "currency": { "type": "String" }
     }
   },
   "subscriptionContinueCta": "Continue subscription",
   "subscriptionCheckoutTitle": "Checkout",
-  "subscriptionCheckoutSummary": "{tableCount} tables × {price} {currency} = {monthly} {currency} / month",
+  "subscriptionCheckoutSummary": "{tableCount} spots × {price} {currency} = {monthly} {currency} / month",
   "@subscriptionCheckoutSummary": {
     "placeholders": {
-      "tableCount": {
-        "type": "int"
-      },
-      "price": {
-        "type": "int"
-      },
-      "monthly": {
-        "type": "int"
-      },
-      "currency": {
-        "type": "String"
-      }
+      "tableCount": { "type": "int" },
+      "price": { "type": "int" },
+      "monthly": { "type": "int" },
+      "currency": { "type": "String" }
     }
   },
   "subscriptionCheckoutDuration": "Duration",
   "subscriptionCheckoutMonthsLabel": "{n, plural, =1{1 month} other{{n} months}}",
   "@subscriptionCheckoutMonthsLabel": {
     "placeholders": {
-      "n": {
-        "type": "int"
-      }
+      "n": { "type": "int" }
     }
   },
   "subscriptionCheckoutTotal": "Total",
   "subscriptionCheckoutTotalLine": "{months} months × {monthly} {currency} = {total} {currency}",
   "@subscriptionCheckoutTotalLine": {
     "placeholders": {
-      "months": {
-        "type": "int"
-      },
-      "monthly": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      },
-      "currency": {
-        "type": "String"
-      }
+      "months": { "type": "int" },
+      "monthly": { "type": "int" },
+      "total": { "type": "int" },
+      "currency": { "type": "String" }
     }
   },
   "subscriptionCheckoutNewEndDate": "New end date: {date}",
   "@subscriptionCheckoutNewEndDate": {
     "placeholders": {
-      "date": {
-        "type": "String"
-      }
+      "date": { "type": "String" }
     }
   },
   "subscriptionCheckoutPay": "Pay",
-  "subscriptionCheckoutNoTablesTitle": "No tables yet",
-  "subscriptionCheckoutNoTablesSubtitle": "Add at least one table to subscribe.",
+  "subscriptionCheckoutNoTablesTitle": "No spots yet",
+  "subscriptionCheckoutNoTablesSubtitle": "Add at least one spot to subscribe.",
   "subscriptionCheckoutGoToVenues": "Go to venues",
   "subscriptionPaymentMockTitle": "Mock payment",
   "subscriptionPaymentMockSubtitle": "Real payment integration is coming soon. Simulate the outcome below.",
@@ -422,9 +400,7 @@
   "subscriptionPaymentSuccessBody": "Subscription extended until {date}.",
   "@subscriptionPaymentSuccessBody": {
     "placeholders": {
-      "date": {
-        "type": "String"
-      }
+      "date": { "type": "String" }
     }
   },
   "subscriptionPaymentFailedTitle": "Payment failed",
@@ -441,23 +417,19 @@
   "profileSubscriptionExpiresIn": "{n, plural, =1{Expires in 1 day} other{Expires in {n} days}}",
   "@profileSubscriptionExpiresIn": {
     "placeholders": {
-      "n": {
-        "type": "int"
-      }
+      "n": { "type": "int" }
     }
   },
   "profileSubscriptionGrace": "{n, plural, =1{Grace · 1 day left} other{Grace · {n} days left}}",
   "@profileSubscriptionGrace": {
     "placeholders": {
-      "n": {
-        "type": "int"
-      }
+      "n": { "type": "int" }
     }
   },
   "profileSubscriptionExpired": "Expired",
   "reportsOverviewTitle": "Reports",
   "reportsManagerDetailTitle": "Manager",
-  "reportsTableDetailTitle": "Table",
+  "reportsSpotDetailTitle": "Spot",
   "reportsPeriodToday": "Today",
   "reportsPeriodWeek": "Week",
   "reportsPeriodMonth": "Month",
@@ -468,9 +440,8 @@
   "reportsKpiSessions": "Sessions",
   "reportsRevenueChartTitle": "Revenue by day",
   "reportsRevenueChartCompareToggle": "Compare to previous period",
-  "reportsTablesTitle": "Tables",
   "reportsTopManagersTitle": "Managers",
-  "reportsTableLabel": "Table",
+  "reportsSpotLabel": "Spot",
   "reportsSessionsShort": "sessions",
   "reportsCancelledShort": "cancels",
   "reportsSessionLogTitle": "Session log",
@@ -483,25 +454,19 @@
   "reportsForecastVsRange": "vs {previous}",
   "@reportsForecastVsRange": {
     "placeholders": {
-      "previous": {
-        "type": "String"
-      }
+      "previous": { "type": "String" }
     }
   },
   "reportsForecastNoComparison": "Not enough history yet",
   "reportsComparisonCaption": "{current}  ·  vs {previous}",
   "@reportsComparisonCaption": {
     "placeholders": {
-      "current": {
-        "type": "String"
-      },
-      "previous": {
-        "type": "String"
-      }
+      "current": { "type": "String" },
+      "previous": { "type": "String" }
     }
   },
-  "reportsTableTrendTitle": "Revenue trend",
-  "reportsTableHeatmapTitle": "Hour-of-day heatmap",
+  "reportsSpotTrendTitle": "Revenue trend",
+  "reportsSpotHeatmapTitle": "Hour-of-day heatmap",
   "reportsErrorTitle": "Couldn't load report",
   "reportsEmptyTitle": "No data yet",
   "reportsEmptySubtitle": "Start sessions to populate this report.",

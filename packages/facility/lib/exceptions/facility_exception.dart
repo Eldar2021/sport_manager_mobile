@@ -4,12 +4,13 @@ import 'package:core/core.dart';
 enum FacilityErrorCode {
   venueNotFound,
   venueNumberTaken,
-  venueHasTables,
+  venueHasSpots,
   venueForbidden,
-  tableNotFound,
-  tableNumberTaken,
-  tableHasActiveSession,
-  tableForbidden,
+  spotNotFound,
+  spotNumberTaken,
+  spotHasActiveSession,
+  spotForbidden,
+  noSpots,
   sessionNotFound,
   sessionNotActive,
   sessionNotPaused,
@@ -26,12 +27,13 @@ enum FacilityErrorCode {
     return switch (code) {
       'VENUE_NOT_FOUND' => .venueNotFound,
       'VENUE_NUMBER_TAKEN' => .venueNumberTaken,
-      'VENUE_HAS_TABLES' => .venueHasTables,
+      'VENUE_HAS_SPOTS' || 'VENUE_HAS_TABLES' => .venueHasSpots,
       'VENUE_FORBIDDEN' => .venueForbidden,
-      'TABLE_NOT_FOUND' => .tableNotFound,
-      'TABLE_NUMBER_TAKEN' => .tableNumberTaken,
-      'TABLE_HAS_ACTIVE_SESSION' => .tableHasActiveSession,
-      'TABLE_FORBIDDEN' => .tableForbidden,
+      'SPOT_NOT_FOUND' || 'TABLE_NOT_FOUND' => .spotNotFound,
+      'SPOT_NUMBER_TAKEN' || 'TABLE_NUMBER_TAKEN' => .spotNumberTaken,
+      'SPOT_HAS_ACTIVE_SESSION' || 'TABLE_HAS_ACTIVE_SESSION' => .spotHasActiveSession,
+      'SPOT_FORBIDDEN' || 'TABLE_FORBIDDEN' => .spotForbidden,
+      'NO_SPOTS' || 'NO_TABLES' => .noSpots,
       'SESSION_NOT_FOUND' => .sessionNotFound,
       'SESSION_NOT_ACTIVE' => .sessionNotActive,
       'SESSION_NOT_PAUSED' => .sessionNotPaused,
@@ -67,8 +69,8 @@ final class FacilityExc extends AppException<FacilityErrorCode> {
   );
 
   BaseMessage get _title => switch (error) {
-    .venueNotFound || .venueNumberTaken || .venueHasTables || .venueForbidden => BaseMessage.venueError,
-    .tableNotFound || .tableNumberTaken || .tableHasActiveSession || .tableForbidden => BaseMessage.tableError,
+    .venueNotFound || .venueNumberTaken || .venueHasSpots || .venueForbidden => BaseMessage.venueError,
+    .spotNotFound || .spotNumberTaken || .spotHasActiveSession || .spotForbidden || .noSpots => BaseMessage.spotError,
     .sessionNotFound ||
     .sessionNotActive ||
     .sessionNotPaused ||
@@ -93,25 +95,30 @@ final class FacilityExc extends AppException<FacilityErrorCode> {
       ru: 'Заведение с таким номером уже существует',
       ky: 'Бул номер менен жай буга чейин бар',
     ),
-    .venueHasTables => const BaseMessage(
-      en: 'Cannot delete a venue that has tables',
-      ru: 'Нельзя удалить заведение, в котором есть столы',
-      ky: 'Столдору бар жайды жок кылуу мүмкүн эмес',
+    .venueHasSpots => const BaseMessage(
+      en: 'Cannot delete a venue that has spots',
+      ru: 'Нельзя удалить заведение, в котором есть позиции',
+      ky: 'Позициялары бар жайды жок кылуу мүмкүн эмес',
     ),
-    .tableNotFound => const BaseMessage(
-      en: 'Table not found',
-      ru: 'Стол не найден',
-      ky: 'Стол табылган жок',
+    .spotNotFound => const BaseMessage(
+      en: 'Spot not found',
+      ru: 'Позиция не найдена',
+      ky: 'Позиция табылган жок',
     ),
-    .tableNumberTaken => const BaseMessage(
-      en: 'A table with this number already exists',
-      ru: 'Стол с таким номером уже существует',
-      ky: 'Бул номер менен стол буга чейин бар',
+    .spotNumberTaken => const BaseMessage(
+      en: 'A spot with this number already exists',
+      ru: 'Позиция с таким номером уже существует',
+      ky: 'Бул номер менен позиция буга чейин бар',
     ),
-    .tableHasActiveSession => const BaseMessage(
-      en: 'Table has an active session',
-      ru: 'За столом идёт активная сессия',
-      ky: 'Столдо активдүү сессия бар',
+    .spotHasActiveSession => const BaseMessage(
+      en: 'Spot has an active session',
+      ru: 'На позиции идёт активная сессия',
+      ky: 'Позицияда активдүү сессия бар',
+    ),
+    .noSpots => const BaseMessage(
+      en: 'No spots available',
+      ru: 'Нет доступных позиций',
+      ky: 'Жеткиликтүү позициялар жок',
     ),
     .sessionNotFound => const BaseMessage(
       en: 'Session not found',
@@ -153,7 +160,7 @@ final class FacilityExc extends AppException<FacilityErrorCode> {
       ru: 'Товар не найден в сессии',
       ky: 'Товар сессияда табылган жок',
     ),
-    .venueForbidden || .tableForbidden || .sessionForbidden => const BaseMessage(
+    .venueForbidden || .spotForbidden || .sessionForbidden => const BaseMessage(
       en: 'You do not have permission to perform this action',
       ru: 'У вас нет прав для выполнения этого действия',
       ky: 'Сизде бул аракетти аткаруу укугу жок',

@@ -24,13 +24,16 @@ class _VenueFormViewState extends State<VenueFormView> {
   late final GlobalKey<FormState> _formKey;
   late final TextEditingController _nameCtr;
   late final TextEditingController _numberCtr;
+  bool _typeError = false;
+
+  bool get _isEdit => widget.venue != null;
 
   @override
   void initState() {
     super.initState();
     _cubit = VenueFormCubit(
       repository: GetIt.I<FacilityRepository>(),
-      venueId: widget.venue?.id,
+      venue: widget.venue,
     );
     _formKey = GlobalKey<FormState>();
     _nameCtr = TextEditingController(text: widget.venue?.name ?? '');
@@ -39,13 +42,15 @@ class _VenueFormViewState extends State<VenueFormView> {
 
   @override
   Widget build(BuildContext context) {
-    final isEdit = widget.venue != null;
+    final labelStyle = context.textTheme.bodySmall?.copyWith(
+      color: context.colors.onSurfaceVariant,
+    );
 
     return AppButtonScope(
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            isEdit ? context.l10n.editVenueTitle : context.l10n.createVenueTitle,
+            _isEdit ? context.l10n.editVenueTitle : context.l10n.createVenueTitle,
           ),
         ),
         body: Form(
@@ -72,7 +77,38 @@ class _VenueFormViewState extends State<VenueFormView> {
                 validator: (v) => InputValidators.emptyValidator(v, context),
                 keyboardType: TextInputType.number,
               ),
-              if (!isEdit) ...[
+              const SizedBox(height: AppSpacing.x4),
+              Text(context.l10n.venueFormTypeLabel, style: labelStyle),
+              const SizedBox(height: AppSpacing.x2),
+              BlocBuilder<VenueFormCubit, VenueFormState>(
+                bloc: _cubit,
+                buildWhen: (p, n) => p.selectedType != n.selectedType,
+                builder: (_, state) => VenueTypePicker(
+                  selected: state.selectedType,
+                  enabled: !_isEdit,
+                  onChanged: (type) {
+                    setState(() => _typeError = false);
+                    _cubit.selectType(type);
+                  },
+                ),
+              ),
+              if (_isEdit)
+                Padding(
+                  padding: const EdgeInsets.only(top: AppSpacing.x2),
+                  child: Text(
+                    context.l10n.venueFormTypeImmutableHint,
+                    style: context.appTextStyles.muted.bodySmall,
+                  ),
+                ),
+              if (_typeError)
+                Padding(
+                  padding: const EdgeInsets.only(top: AppSpacing.x2),
+                  child: Text(
+                    context.l10n.venueFormTypeRequiredError,
+                    style: context.appTextStyles.error.bodySmall,
+                  ),
+                ),
+              if (!_isEdit) ...[
                 const SizedBox(height: AppSpacing.x5),
                 AppBanner(context.l10n.createVenueInfoBanner),
               ],
@@ -101,7 +137,7 @@ class _VenueFormViewState extends State<VenueFormView> {
                 onPressed: _submitForm,
                 isLoading: state.isLoading,
                 child: Text(
-                  isEdit ? context.l10n.updateVenueButton : context.l10n.createVenueButton,
+                  _isEdit ? context.l10n.updateVenueButton : context.l10n.createVenueButton,
                 ),
               );
             },
@@ -112,6 +148,12 @@ class _VenueFormViewState extends State<VenueFormView> {
   }
 
   void _submitForm() {
+    final selectedType = _cubit.state.selectedType;
+    if (selectedType == null) {
+      setState(() => _typeError = true);
+      _formKey.currentState!.validate();
+      return;
+    }
     if (!_formKey.currentState!.validate()) return;
 
     final number = int.tryParse(_numberCtr.text.trim()) ?? 0;
@@ -119,6 +161,7 @@ class _VenueFormViewState extends State<VenueFormView> {
       VenueFormParam(
         name: _nameCtr.text,
         number: number,
+        type: selectedType,
       ),
     );
   }

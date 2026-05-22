@@ -7,7 +7,7 @@ abstract interface class ReportsRemoteSource {
 
   Future<List<RevenuePointModel>> getRevenueSeries(ReportFilter filter);
 
-  Future<List<TableReportRowModel>> getTables(ReportFilter filter);
+  Future<List<SpotReportRowModel>> getSpots(ReportFilter filter);
 
   Future<List<ManagerReportRowModel>> getManagers(ReportFilter filter);
 
@@ -18,8 +18,8 @@ abstract interface class ReportsRemoteSource {
     ReportFilter filter,
   );
 
-  Future<TableReportDetailModel> getTableDetail(
-    String tableId,
+  Future<SpotReportDetailModel> getSpotDetail(
+    String spotId,
     ReportFilter filter,
   );
 }

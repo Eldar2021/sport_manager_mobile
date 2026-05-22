@@ -31,22 +31,22 @@ final class FacilityRepository {
     return _remote.deleteVenue(id);
   }
 
-  Future<List<TableModel>> getVenueTables(String venueId) {
-    return _remote.getVenueTables(venueId);
+  Future<List<SpotModel>> getVenueSpots(String venueId) {
+    return _remote.getVenueSpots(venueId);
   }
 
-  Future<TableModel> createTable(TableFormParam param) {
-    return _remote.createTable(param);
+  Future<SpotModel> createSpot(SpotFormParam param) {
+    return _remote.createSpot(param);
   }
 
-  Future<TableModel> updateTable(
-    String tableId,
-    TableFormParam param,
+  Future<SpotModel> updateSpot(
+    String spotId,
+    SpotFormParam param,
   ) {
-    return _remote.updateTable(tableId, param);
+    return _remote.updateSpot(spotId, param);
   }
 
-  Future<void> deleteTable(String tableId) {
-    return _remote.deleteTable(tableId);
+  Future<void> deleteSpot(String spotId) {
+    return _remote.deleteSpot(spotId);
   }
 }

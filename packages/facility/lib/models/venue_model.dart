@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:facility/models/venue_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -11,8 +12,9 @@ final class VenueModel extends Equatable {
     required this.id,
     required this.name,
     required this.number,
+    required this.type,
     required this.selected,
-    required this.tableCount,
+    required this.spotCount,
     required this.createdAt,
     required this.updatedAt,
     this.address,
@@ -25,9 +27,10 @@ final class VenueModel extends Equatable {
   final String id;
   final String name;
   final int number;
+  final VenueType type;
   final String? address;
   final bool selected;
-  final int tableCount;
+  final int spotCount;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -40,9 +43,10 @@ final class VenueModel extends Equatable {
     id,
     name,
     number,
+    type,
     address,
     selected,
-    tableCount,
+    spotCount,
     createdAt,
     updatedAt,
   ];

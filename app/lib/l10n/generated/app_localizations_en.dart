@@ -186,7 +186,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeNoVenuesTitle => 'You have no venues yet';
 
   @override
-  String get homeNoVenuesSubtitle => 'Create your first venue to start adding tables and accepting sessions.';
+  String get homeNoVenuesSubtitle => 'Create your first venue to start adding spots and accepting sessions.';
 
   @override
   String get homeSelectVenue => 'Select venue';
@@ -195,88 +195,99 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeNewVenue => 'New venue';
 
   @override
-  String get homeAddTable => 'Add table';
+  String homeAddSpot(String spot) {
+    return 'Add $spot';
+  }
 
   @override
-  String get homeTablesEmpty => 'No tables yet';
+  String homeSpotsEmpty(String spotPlural) {
+    return 'No $spotPlural yet';
+  }
 
   @override
-  String get homeTablesEmptySub => 'Add the first table so managers can start sessions.';
+  String homeSpotsEmptySub(String spot) {
+    return 'Add the first $spot so managers can start sessions.';
+  }
 
   @override
-  String get homeTablesEmptySubManager => 'Tables will appear here once the owner adds them.';
+  String homeSpotsEmptySubManager(String spotPlural) {
+    return '$spotPlural will appear here once the owner adds them.';
+  }
 
   @override
-  String homeTableOccupied(String customerName) {
+  String homeSpotOccupied(String customerName) {
     return '$customerName · OCCUPIED';
   }
 
   @override
-  String get homeTableOccupiedBase => 'OCCUPIED';
+  String get homeSpotOccupiedBase => 'OCCUPIED';
 
   @override
-  String homeTablePaused(String customerName) {
+  String homeSpotPaused(String customerName) {
     return '$customerName · PAUSED';
   }
 
   @override
-  String get homeTablePausedBase => 'PAUSED';
+  String get homeSpotPausedBase => 'PAUSED';
 
   @override
-  String get homeTableFree => 'FREE';
+  String get homeSpotFree => 'FREE';
 
   @override
-  String get homeTableJustFreed => '✓ Done';
+  String get homeSpotJustFreed => '✓ Done';
 
   @override
-  String get createTableTitle => 'New table';
+  String get createSpotTitle => 'New spot';
 
   @override
-  String get createTableNumberLabel => 'Table number';
+  String get createSpotNumberLabel => 'Spot number';
 
   @override
-  String get createTableNumberHint => '1';
+  String get createSpotNumberHint => '1';
 
   @override
-  String get createTableNameLabel => 'Table name';
+  String get createSpotNameLabel => 'Spot name';
 
   @override
-  String get createTableNameHint => 'Table 1';
+  String get createSpotNameHint => 'Spot 1';
 
   @override
-  String get createTableDescLabel => 'Description (tag)';
+  String get createSpotDescLabel => 'Description (tag)';
 
   @override
-  String get createTableDescHint => 'VIP room, window seat, snooker...';
+  String get createSpotDescHint => 'VIP, window seat, snooker...';
 
   @override
-  String get createTableDescPlaceholder => 'Description';
+  String get createSpotDescPlaceholder => 'Description';
 
   @override
-  String get createTableRateLabel => 'Rate';
+  String get createSpotRateLabel => 'Rate';
 
   @override
-  String createTableRateSuffix(Object currency, Object time_unit) {
+  String createSpotRateSuffix(String currency, String time_unit) {
     return '$currency/$time_unit';
   }
 
   @override
-  String get createTableButton => 'Create table';
+  String get createSpotButton => 'Create spot';
 
   @override
-  String get editTableTitle => 'Edit table';
+  String get editSpotTitle => 'Edit spot';
 
   @override
-  String get updateTableButton => 'Update table';
+  String get updateSpotButton => 'Update spot';
 
   @override
-  String get deleteTableButton => 'Delete';
+  String get deleteSpotButton => 'Delete';
+
+  @override
+  String get deleteSpotSubtitle => 'Session history will be preserved, but the spot will disappear from the home page.';
 
   @override
   String get createVenueTitle => 'Create your venue';
 
   @override
-  String get createVenueSubtitle => 'Give your venue a name. Tables can be added later from the home page.';
+  String get createVenueSubtitle => 'Give your venue a name. Spots can be added later from the home page.';
 
   @override
   String get createVenueNameLabel => 'Venue name';
@@ -292,7 +303,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createVenueInfoBanner =>
-      'After creating the venue you will be able to add tables one by one with their own rate.';
+      'After creating the venue you will be able to add spots one by one with their own rate.';
 
   @override
   String get createVenueButton => 'Create venue →';
@@ -307,20 +318,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteVenueButton => 'Delete';
 
   @override
-  String get deleteVenueSubtitle => 'All tables and session history will be preserved, but the venue will be removed.';
+  String get deleteVenueSubtitle => 'All spots and session history will be preserved, but the venue will be removed.';
 
   @override
   String get cancel => 'Cancel';
 
   @override
-  String get deleteTableSubtitle =>
-      'Session history will be preserved, but the table will disappear from the home page.';
-
-  @override
   String get generalRetry => 'Retry';
 
   @override
-  String get createTableTarifTypeLabel => 'Tariff type';
+  String get createSpotTarifTypeLabel => 'Tariff type';
 
   @override
   String get tarifTypeMinute => 'Minute';
@@ -332,7 +339,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tarifTypeDay => 'Day';
 
   @override
-  String get createTableCurrencyLabel => 'Currency';
+  String get createSpotCurrencyLabel => 'Currency';
 
   @override
   String get currencyKgs => 'Som';
@@ -350,25 +357,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get currencyTry => 'Lira';
 
   @override
-  String venueTablesCount(int count) {
+  String venueSpotsCount(int count, String spot, String spotPlural) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count tables',
-      one: '1 table',
-      zero: 'no tables',
+      other: '$count $spotPlural',
+      one: '1 $spot',
+      zero: 'no $spotPlural',
     );
     return '$_temp0';
   }
 
   @override
-  String homeTableTitle(int number) {
-    return 'Table $number';
+  String homeSpotTitle(String spotLabel, int number) {
+    return '$spotLabel $number';
   }
 
   @override
-  String homeTablesSection(int count) {
-    return 'TABLES · $count';
+  String homeSpotsSection(String spotPlural, int count) {
+    return '$spotPlural · $count';
   }
 
   @override
@@ -480,69 +487,130 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sessionCustomerNameHint => 'e.g. John Smith';
 
   @override
-  String get tableDetailStart => 'START';
+  String get spotDetailStart => 'START';
 
   @override
-  String get tableDetailStop => 'STOP & CLOSE';
+  String get spotDetailStop => 'STOP & CLOSE';
 
   @override
-  String get tableDetailElapsed => 'ELAPSED';
+  String get spotDetailElapsed => 'ELAPSED';
 
   @override
-  String get tableDetailCurrentAmount => 'CURRENT AMOUNT';
+  String get spotDetailCurrentAmount => 'CURRENT AMOUNT';
 
   @override
-  String get tableDetailPause => 'PAUSE';
+  String get spotDetailPause => 'PAUSE';
 
   @override
-  String get tableDetailResume => 'CONTINUE';
+  String get spotDetailResume => 'CONTINUE';
 
   @override
-  String get tableDetailStartTime => 'Start';
+  String get spotDetailStartTime => 'Start';
 
   @override
-  String get tableDetailDuration => 'Duration';
+  String get spotDetailDuration => 'Duration';
 
   @override
-  String get tableDetailTariff => 'Rate';
+  String get spotDetailTariff => 'Rate';
 
   @override
-  String get tableDetailMistakeLaunch => 'Mistake launch';
+  String get spotDetailMistakeLaunch => 'Mistake launch';
 
   @override
-  String get tableDetailMistakeLaunchTitle => 'Cancel session?';
+  String get spotDetailMistakeLaunchTitle => 'Cancel session?';
 
   @override
-  String get tableDetailMistakeLaunchSubtitle => 'The session will be cancelled. No charge will be applied.';
+  String get spotDetailMistakeLaunchSubtitle => 'The session will be cancelled. No charge will be applied.';
 
   @override
-  String get tableDetailMistakeLaunchConfirm => 'Yes, cancel';
+  String get spotDetailMistakeLaunchConfirm => 'Yes, cancel';
 
   @override
-  String get tableDetailLastSession => 'Last session';
+  String get spotDetailLastSession => 'Last session';
 
   @override
-  String get tableDetailTodaySessions => 'Today\'s sessions';
+  String get spotDetailTodaySessions => 'Today\'s sessions';
 
   @override
-  String get tableDetailPaymentTitle => 'Payment summary';
+  String get spotDetailPaymentTitle => 'Payment summary';
 
   @override
-  String get tableDetailSubtotal => 'Subtotal';
+  String get spotDetailSubtotal => 'Subtotal';
 
   @override
-  String get tableDetailDiscount => 'Discount';
+  String get spotDetailDiscount => 'Discount';
 
   @override
-  String get tableDetailToPay => 'TO PAY';
+  String get spotDetailToPay => 'TO PAY';
 
   @override
-  String get tableDetailConfirmAndClose => 'CONFIRM & CLOSE';
+  String get spotDetailConfirmAndClose => 'CONFIRM & CLOSE';
 
   @override
-  String tableDetailDurationMin(int count) {
+  String spotDetailDurationMin(int count) {
     return '$count min';
   }
+
+  @override
+  String get spotLabelTable => 'Table';
+
+  @override
+  String get spotLabelConsole => 'Console';
+
+  @override
+  String get spotLabelCourt => 'Court';
+
+  @override
+  String get spotLabelBoard => 'Board';
+
+  @override
+  String get spotLabelPitch => 'Pitch';
+
+  @override
+  String get spotLabelTablePlural => 'Tables';
+
+  @override
+  String get spotLabelConsolePlural => 'Consoles';
+
+  @override
+  String get spotLabelCourtPlural => 'Courts';
+
+  @override
+  String get spotLabelBoardPlural => 'Boards';
+
+  @override
+  String get spotLabelPitchPlural => 'Pitches';
+
+  @override
+  String get venueTypeTableTennis => 'Table Tennis';
+
+  @override
+  String get venueTypeBilliards => 'Billiards';
+
+  @override
+  String get venueTypePlayStation => 'PlayStation';
+
+  @override
+  String get venueTypeVolleyball => 'Volleyball';
+
+  @override
+  String get venueTypeBasketball => 'Basketball';
+
+  @override
+  String get venueTypeChess => 'Chess';
+
+  @override
+  String get venueTypeFootball => 'Football';
+
+  @override
+  String get venueFormTypeLabel => 'Type';
+
+  @override
+  String get venueFormTypeImmutableHint =>
+      'Type can\'t be changed after creation. Create a new venue if you switch sports.';
+
+  @override
+  String get venueFormTypeRequiredError => 'Please select a venue type';
 
   @override
   String get menuEdit => 'Edit';
@@ -619,13 +687,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get venueMetricTablesLabel => 'TABLES';
-
-  @override
-  String get venueDetailTablesHeader => 'HALL TABLES';
-
-  @override
-  String venueTablesCountSuffix(int count) {
+  String venueSpotsCountSuffix(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -681,12 +743,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String subscriptionPlanCardPerTable(int price, String currency) {
-    return '$price $currency / table / month';
+    return '$price $currency / spot / month';
   }
 
   @override
   String subscriptionPlanCardMonthly(int tableCount, int monthly, String currency) {
-    return '× $tableCount tables = $monthly $currency / month';
+    return '× $tableCount spots = $monthly $currency / month';
   }
 
   @override
@@ -706,7 +768,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String subscriptionPaymentItemSummary(int months, int tableCount) {
-    return '$months months × $tableCount tables';
+    return '$months months × $tableCount spots';
   }
 
   @override
@@ -722,7 +784,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String subscriptionCheckoutSummary(int tableCount, int price, int monthly, String currency) {
-    return '$tableCount tables × $price $currency = $monthly $currency / month';
+    return '$tableCount spots × $price $currency = $monthly $currency / month';
   }
 
   @override
@@ -756,10 +818,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get subscriptionCheckoutPay => 'Pay';
 
   @override
-  String get subscriptionCheckoutNoTablesTitle => 'No tables yet';
+  String get subscriptionCheckoutNoTablesTitle => 'No spots yet';
 
   @override
-  String get subscriptionCheckoutNoTablesSubtitle => 'Add at least one table to subscribe.';
+  String get subscriptionCheckoutNoTablesSubtitle => 'Add at least one spot to subscribe.';
 
   @override
   String get subscriptionCheckoutGoToVenues => 'Go to venues';
@@ -849,7 +911,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportsManagerDetailTitle => 'Manager';
 
   @override
-  String get reportsTableDetailTitle => 'Table';
+  String get reportsSpotDetailTitle => 'Spot';
 
   @override
   String get reportsPeriodToday => 'Today';
@@ -882,13 +944,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportsRevenueChartCompareToggle => 'Compare to previous period';
 
   @override
-  String get reportsTablesTitle => 'Tables';
-
-  @override
   String get reportsTopManagersTitle => 'Managers';
 
   @override
-  String get reportsTableLabel => 'Table';
+  String get reportsSpotLabel => 'Spot';
 
   @override
   String get reportsSessionsShort => 'sessions';
@@ -931,10 +990,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get reportsTableTrendTitle => 'Revenue trend';
+  String get reportsSpotTrendTitle => 'Revenue trend';
 
   @override
-  String get reportsTableHeatmapTitle => 'Hour-of-day heatmap';
+  String get reportsSpotHeatmapTitle => 'Hour-of-day heatmap';
 
   @override
   String get reportsErrorTitle => 'Couldn\'t load report';

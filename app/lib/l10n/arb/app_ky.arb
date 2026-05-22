@@ -59,97 +59,139 @@
   "navProfile": "Профиль",
   "homeCreateVenue": "Зал түзүү",
   "homeNoVenuesTitle": "Азырынча залдарыңыз жок",
-  "homeNoVenuesSubtitle": "Столдорду кошуп, сессияларды кабыл алуу үчүн биринчи залыңызды түзүңүз.",
+  "homeNoVenuesSubtitle": "Позицияларды кошуп, сессияларды кабыл алуу үчүн биринчи залыңызды түзүңүз.",
   "homeSelectVenue": "Зал тандоо",
   "homeNewVenue": "Жаңы зал",
-  "homeAddTable": "Стол кошуу",
-  "homeTablesEmpty": "Азырынча столдор жок",
-  "homeTablesEmptySub": "Менеджерлер сессия баштай алышы үчүн биринчи столду кошуңуз.",
-  "homeTablesEmptySubManager": "Столдор ээси кошкондон кийин пайда болот.",
-  "homeTableOccupied": "{customerName} · БОШ ЭМЕС",
-  "@homeTableOccupied": {
+  "homeAddSpot": "{spot} кошуу",
+  "@homeAddSpot": {
     "placeholders": {
-      "customerName": {
-        "type": "String"
-      }
+      "spot": { "type": "String" }
     }
   },
-  "homeTableOccupiedBase": "БОШ ЭМЕС",
-  "homeTablePaused": "{customerName} · ТОКТОТУЛДУ",
-  "@homeTablePaused": {
+  "homeSpotsEmpty": "Азырынча {spotPlural} жок",
+  "@homeSpotsEmpty": {
     "placeholders": {
-      "customerName": {
-        "type": "String"
-      }
+      "spotPlural": { "type": "String" }
     }
   },
-  "homeTablePausedBase": "ТОКТОТУЛДУ",
-  "homeTableFree": "БОШ",
-  "homeTableJustFreed": "✓ Аяктады",
-  "createTableTitle": "Жаңы стол",
-  "createTableNumberLabel": "Стол номери",
-  "createTableNumberHint": "1",
-  "createTableNameLabel": "Стол аты",
-  "createTableNameHint": "Стол 1",
-  "createTableDescLabel": "Сыпаттама (белги)",
-  "createTableDescHint": "VIP зал, терезенин жанында, снукер...",
-  "createTableDescPlaceholder": "Сыпаттама",
-  "createTableRateLabel": "Тариф",
-  "createTableRateSuffix": "{currency}/{time_unit}",
-  "createTableButton": "Стол түзүү",
-  "editTableTitle": "Столду өзгөртүү",
-  "updateTableButton": "Жаңыртуу",
-  "deleteTableButton": "Жок кылуу",
+  "homeSpotsEmptySub": "Менеджерлер сессия баштай алышы үчүн биринчи {spot} кошуңуз.",
+  "@homeSpotsEmptySub": {
+    "placeholders": {
+      "spot": { "type": "String" }
+    }
+  },
+  "homeSpotsEmptySubManager": "{spotPlural} ээси кошкондон кийин пайда болот.",
+  "@homeSpotsEmptySubManager": {
+    "placeholders": {
+      "spotPlural": { "type": "String" }
+    }
+  },
+  "homeSpotOccupied": "{customerName} · БОШ ЭМЕС",
+  "@homeSpotOccupied": {
+    "placeholders": {
+      "customerName": { "type": "String" }
+    }
+  },
+  "homeSpotOccupiedBase": "БОШ ЭМЕС",
+  "homeSpotPaused": "{customerName} · ТОКТОТУЛДУ",
+  "@homeSpotPaused": {
+    "placeholders": {
+      "customerName": { "type": "String" }
+    }
+  },
+  "homeSpotPausedBase": "ТОКТОТУЛДУ",
+  "homeSpotFree": "БОШ",
+  "homeSpotJustFreed": "✓ Аяктады",
+  "createSpotTitle": "Жаңы позиция",
+  "createSpotNumberLabel": "Позиция номери",
+  "createSpotNumberHint": "1",
+  "createSpotNameLabel": "Позиция аты",
+  "createSpotNameHint": "Позиция 1",
+  "createSpotDescLabel": "Сыпаттама (белги)",
+  "createSpotDescHint": "VIP зал, терезенин жанында, снукер...",
+  "createSpotDescPlaceholder": "Сыпаттама",
+  "createSpotRateLabel": "Тариф",
+  "createSpotRateSuffix": "{currency}/{time_unit}",
+  "@createSpotRateSuffix": {
+    "placeholders": {
+      "currency": { "type": "String" },
+      "time_unit": { "type": "String" }
+    }
+  },
+  "createSpotButton": "Позиция түзүү",
+  "editSpotTitle": "Позицияны өзгөртүү",
+  "updateSpotButton": "Жаңыртуу",
+  "deleteSpotButton": "Жок кылуу",
+  "deleteSpotSubtitle": "Сессиялардын тарыхы сакталат, бирок позиция башкы баракчадан жоголот.",
   "createVenueTitle": "Залды түзүңүз",
-  "createVenueSubtitle": "Залыңызга ат бериңиз. Столдорду кийинчерек башкы баракчадан кошсо болот.",
+  "createVenueSubtitle": "Залыңызга ат бериңиз. Позицияларды кийинчерек башкы баракчадан кошсо болот.",
   "createVenueNameLabel": "Зал аты",
   "createVenueNameHint": "Борбордук филиал",
   "createVenueNumberLabel": "Кыска код / номер (милдеттүү эмес)",
   "createVenueNumberHint": "№ 1 же БФ",
-  "createVenueInfoBanner": "Зал түзүлгөндөн кийин столдорду бирден өз тарифи менен кошо аласыз.",
+  "createVenueInfoBanner": "Зал түзүлгөндөн кийин позицияларды бирден өз тарифи менен кошо аласыз.",
   "createVenueButton": "Зал түзүү →",
   "editVenueTitle": "Залды өзгөртүү",
   "updateVenueButton": "Жаңыртуу",
   "deleteVenueButton": "Жок кылуу",
-  "deleteVenueSubtitle": "Бардык столдор жана сессиялардын тарыхы сакталат, бирок зал жок кылынат.",
+  "deleteVenueSubtitle": "Бардык позициялар жана сессиялардын тарыхы сакталат, бирок зал жок кылынат.",
   "cancel": "Жокко чыгаруу",
-  "deleteTableSubtitle": "Сессиялардын тарыхы сакталат, бирок стол башкы баракчадан жоголот.",
   "generalRetry": "Кайталоо",
-  "createTableTarifTypeLabel": "Тариф түрү",
+  "createSpotTarifTypeLabel": "Тариф түрү",
   "tarifTypeMinute": "Мүнөт",
   "tarifTypeHour": "Саат",
   "tarifTypeDay": "Күн",
-  "createTableCurrencyLabel": "Валюта",
+  "createSpotCurrencyLabel": "Валюта",
   "currencyKgs": "Сом",
   "currencyUsd": "Доллар",
   "currencyRub": "Рубль",
   "currencyKzt": "Теңге",
   "currencyTry": "Лира",
-  "venueTablesCount": "{count, plural, =0{стол жок} other{{count} стол}}",
-  "homeTableTitle": "Стол {number}",
-  "@homeTableTitle": {
+  "venueSpotsCount": "{count, plural, =0{{spotPlural} жок} other{{count} {spot}}}",
+  "@venueSpotsCount": {
     "placeholders": {
-      "number": {
-        "type": "int"
-      }
+      "count": { "type": "int" },
+      "spot": { "type": "String" },
+      "spotPlural": { "type": "String" }
     }
   },
-  "homeTablesSection": "СТОЛДОР · {count}",
-  "@homeTablesSection": {
+  "homeSpotTitle": "{spotLabel} {number}",
+  "@homeSpotTitle": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "spotLabel": { "type": "String" },
+      "number": { "type": "int" }
+    }
+  },
+  "homeSpotsSection": "{spotPlural} · {count}",
+  "@homeSpotsSection": {
+    "placeholders": {
+      "spotPlural": { "type": "String" },
+      "count": { "type": "int" }
     }
   },
   "profileSectionManagement": "Башкаруу",
   "profileManageVenuesTitle": "Залдарды башкаруу",
   "profileManageVenuesSubtitle": "{count, plural, =0{зал жок} other{{count} зал}}",
+  "@profileManageVenuesSubtitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "profileManagersTitle": "Менеджерлер",
   "profileManagersSubtitle": "{count, plural, =0{менеджер жок} other{{count} менеджер}}",
+  "@profileManagersSubtitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "profileSectionAccount": "Аккаунт",
   "profileSubscriptionTitle": "Жазылуу",
   "profileSubscriptionActiveUntil": "Активдүү · {date} чейин",
+  "@profileSubscriptionActiveUntil": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
   "profileChangePasswordTitle": "Сырсөздү өзгөртүү",
   "profileSettingsTitle": "Жөндөөлөр",
   "profileSettingsSubtitle": "Тема, тил",
@@ -171,34 +213,52 @@
   "profileErrorSubtitle": "Туташууну текшерип, кайра аракет кылыңыз.",
   "sessionCustomerName": "Кардардын аты (милдеттүү эмес)",
   "sessionCustomerNameHint": "мис. Иван Иванов",
-  "tableDetailStart": "БАШТОО",
-  "tableDetailStop": "ТОКТОТУУ ЖАНА ЖАБУУ",
-  "tableDetailElapsed": "ӨТКӨН",
-  "tableDetailCurrentAmount": "УЧУРДАГЫ СУММА",
-  "tableDetailPause": "ТЫНЫГУУ",
-  "tableDetailResume": "УЛАНТУУ",
-  "tableDetailStartTime": "Башталышы",
-  "tableDetailDuration": "Узактыгы",
-  "tableDetailTariff": "Тариф",
-  "tableDetailMistakeLaunch": "Ката иш-аракет",
-  "tableDetailMistakeLaunchTitle": "Сессияны жокко чыгаруу?",
-  "tableDetailMistakeLaunchSubtitle": "Сессия төлөмсүз жокко чыгарылат.",
-  "tableDetailMistakeLaunchConfirm": "Ооба, жокко чыгаруу",
-  "tableDetailLastSession": "Акыркы сессия",
-  "tableDetailTodaySessions": "Бүгүнкү сессиялар",
-  "tableDetailPaymentTitle": "Төлөм корутундусу",
-  "tableDetailSubtotal": "Аралык жыйынтык",
-  "tableDetailDiscount": "Арзандатуу",
-  "tableDetailToPay": "ТӨЛӨНҮҮГӨ",
-  "tableDetailConfirmAndClose": "ЫРАСТОО ЖАНА ЖАБУУ",
-  "tableDetailDurationMin": "{count} мин",
-  "@tableDetailDurationMin": {
+  "spotDetailStart": "БАШТОО",
+  "spotDetailStop": "ТОКТОТУУ ЖАНА ЖАБУУ",
+  "spotDetailElapsed": "ӨТКӨН",
+  "spotDetailCurrentAmount": "УЧУРДАГЫ СУММА",
+  "spotDetailPause": "ТЫНЫГУУ",
+  "spotDetailResume": "УЛАНТУУ",
+  "spotDetailStartTime": "Башталышы",
+  "spotDetailDuration": "Узактыгы",
+  "spotDetailTariff": "Тариф",
+  "spotDetailMistakeLaunch": "Ката иш-аракет",
+  "spotDetailMistakeLaunchTitle": "Сессияны жокко чыгаруу?",
+  "spotDetailMistakeLaunchSubtitle": "Сессия төлөмсүз жокко чыгарылат.",
+  "spotDetailMistakeLaunchConfirm": "Ооба, жокко чыгаруу",
+  "spotDetailLastSession": "Акыркы сессия",
+  "spotDetailTodaySessions": "Бүгүнкү сессиялар",
+  "spotDetailPaymentTitle": "Төлөм корутундусу",
+  "spotDetailSubtotal": "Аралык жыйынтык",
+  "spotDetailDiscount": "Арзандатуу",
+  "spotDetailToPay": "ТӨЛӨНҮҮГӨ",
+  "spotDetailConfirmAndClose": "ЫРАСТОО ЖАНА ЖАБУУ",
+  "spotDetailDurationMin": "{count} мин",
+  "@spotDetailDurationMin": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": { "type": "int" }
     }
   },
+  "spotLabelTable": "Үстөл",
+  "spotLabelConsole": "Консоль",
+  "spotLabelCourt": "Аянтча",
+  "spotLabelBoard": "Тактай",
+  "spotLabelPitch": "Талаа",
+  "spotLabelTablePlural": "Үстөлдөр",
+  "spotLabelConsolePlural": "Консолдор",
+  "spotLabelCourtPlural": "Аянтчалар",
+  "spotLabelBoardPlural": "Тактайлар",
+  "spotLabelPitchPlural": "Талаалар",
+  "venueTypeTableTennis": "Үстөл теннис",
+  "venueTypeBilliards": "Бильярд",
+  "venueTypePlayStation": "PlayStation",
+  "venueTypeVolleyball": "Волейбол",
+  "venueTypeBasketball": "Баскетбол",
+  "venueTypeChess": "Шахмат",
+  "venueTypeFootball": "Футбол",
+  "venueFormTypeLabel": "Тип",
+  "venueFormTypeImmutableHint": "Тип түзүлгөндөн кийин өзгөртүлбөйт. Спорт түрү өзгөрсө, жаңы зал түзүңүз.",
+  "venueFormTypeRequiredError": "Залдын типин тандаңыз",
   "menuEdit": "Өзгөртүү",
   "menuDelete": "Жок кылуу",
   "managersInviteCodeLabel": "АКТИВДҮҮ ЧАКЫРУУ КОДУ",
@@ -208,16 +268,39 @@
   "managersSectionLabel": "МЕНЕДЖЕРЛЕР",
   "managersInviteAction": "Менеджер чакыруу",
   "managersDeleteTitle": "{name} чыгарылсынбы?",
+  "@managersDeleteTitle": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
   "managersDeleteSubtitle": "Менеджер сиздин залдарга кирүү мүмкүндүгүн жоготот. Анын сессияларынын тарыхы сакталат.",
   "managersEmptyTitle": "Азырынча менеджер жок",
   "managersEmptySubtitle": "Чакыруу кодун бөлүшүңүз — менеджер катталып, кезмеге чыга алат.",
   "managersLastSeenJustNow": "онлайн",
   "managersLastSeenMinutes": "{count, plural, =1{1 мүн мурун} other{{count} мүн мурун}}",
+  "@managersLastSeenMinutes": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "managersLastSeenHours": "{count, plural, =1{1 саат мурун} other{{count} саат мурун}}",
+  "@managersLastSeenHours": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "managersLastSeenDays": "{count, plural, =1{1 күн мурун} other{{count} күн мурун}}",
-  "venueMetricTablesLabel": "СТОЛДОР",
-  "venueDetailTablesHeader": "ЗАЛДЫН СТОЛДОРУ",
-  "venueTablesCountSuffix": "{count, plural, =0{0 даана} other{{count} даана}}",
+  "@managersLastSeenDays": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "venueSpotsCountSuffix": "{count, plural, =0{0 даана} other{{count} даана}}",
+  "@venueSpotsCountSuffix": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "subscriptionTitle": "Жазылуу",
   "subscriptionStatusActive": "Активдүү",
   "subscriptionStatusGrace": "Жеңилдик мөөнөтү",
@@ -225,28 +308,89 @@
   "subscriptionSourceTrial": "Сыноо мөөнөтү",
   "subscriptionSourcePaid": "Төлөнгөн",
   "subscriptionWarningBanner": "{n, plural, =1{Жазылууңуздун 1 күнү калды. Үзгүлтүксүздүк үчүн узартыңыз.} other{Жазылууңуздун {n} күнү калды. Үзгүлтүксүздүк үчүн узартыңыз.}}",
+  "@subscriptionWarningBanner": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "subscriptionGraceBanner": "{n, plural, =1{Жазылуу бүттү. Жеңилдик мөөнөтүнүн 1 күнү калды.} other{Жазылуу бүттү. Жеңилдик мөөнөтүнүн {n} күнү калды.}}",
+  "@subscriptionGraceBanner": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "subscriptionExpiredBanner": "Жазылуу бүттү. Негизги функцияларды колдонуу үчүн узартыңыз.",
-  "subscriptionPlanCardPerTable": "{price} {currency} / стол / ай",
-  "subscriptionPlanCardMonthly": "× {tableCount} стол = {monthly} {currency} / ай",
+  "subscriptionPlanCardPerTable": "{price} {currency} / позиция / ай",
+  "@subscriptionPlanCardPerTable": {
+    "placeholders": {
+      "price": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
+  "subscriptionPlanCardMonthly": "× {tableCount} позиция = {monthly} {currency} / ай",
+  "@subscriptionPlanCardMonthly": {
+    "placeholders": {
+      "tableCount": { "type": "int" },
+      "monthly": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
   "subscriptionDetailNextPayment": "Кийинки төлөм",
   "subscriptionDetailLastPayment": "Акыркы төлөм",
   "subscriptionDetailStatus": "Статус",
   "subscriptionPaymentHistoryTitle": "Төлөм тарыхы",
   "subscriptionPaymentHistoryEmpty": "Төлөм али жок",
-  "subscriptionPaymentItemSummary": "{months} ай × {tableCount} стол",
+  "subscriptionPaymentItemSummary": "{months} ай × {tableCount} позиция",
+  "@subscriptionPaymentItemSummary": {
+    "placeholders": {
+      "months": { "type": "int" },
+      "tableCount": { "type": "int" }
+    }
+  },
   "subscriptionAmountWithCurrency": "{amount} {currency}",
+  "@subscriptionAmountWithCurrency": {
+    "placeholders": {
+      "amount": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
   "subscriptionContinueCta": "Жазылууну улантуу",
   "subscriptionCheckoutTitle": "Төлөө",
-  "subscriptionCheckoutSummary": "{tableCount} стол × {price} {currency} = {monthly} {currency} / ай",
+  "subscriptionCheckoutSummary": "{tableCount} позиция × {price} {currency} = {monthly} {currency} / ай",
+  "@subscriptionCheckoutSummary": {
+    "placeholders": {
+      "tableCount": { "type": "int" },
+      "price": { "type": "int" },
+      "monthly": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
   "subscriptionCheckoutDuration": "Узактык",
   "subscriptionCheckoutMonthsLabel": "{n, plural, =1{1 ай} other{{n} ай}}",
+  "@subscriptionCheckoutMonthsLabel": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "subscriptionCheckoutTotal": "Жалпы",
   "subscriptionCheckoutTotalLine": "{months} ай × {monthly} {currency} = {total} {currency}",
+  "@subscriptionCheckoutTotalLine": {
+    "placeholders": {
+      "months": { "type": "int" },
+      "monthly": { "type": "int" },
+      "total": { "type": "int" },
+      "currency": { "type": "String" }
+    }
+  },
   "subscriptionCheckoutNewEndDate": "Жаңы бүтүү күнү: {date}",
+  "@subscriptionCheckoutNewEndDate": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
   "subscriptionCheckoutPay": "Төлөө",
-  "subscriptionCheckoutNoTablesTitle": "Стол али жок",
-  "subscriptionCheckoutNoTablesSubtitle": "Жазылуу үчүн жок дегенде бир стол кошуңуз.",
+  "subscriptionCheckoutNoTablesTitle": "Позиция али жок",
+  "subscriptionCheckoutNoTablesSubtitle": "Жазылуу үчүн жок дегенде бир позиция кошуңуз.",
   "subscriptionCheckoutGoToVenues": "Залдарга өтүү",
   "subscriptionPaymentMockTitle": "Тесттик төлөм",
   "subscriptionPaymentMockSubtitle": "Чыныгы төлөм интеграциясы жакында. Натыйжаны төмөндө симуляция кылыңыз.",
@@ -254,6 +398,11 @@
   "subscriptionPaymentSimulateFailure": "Катаны симуляция кылуу",
   "subscriptionPaymentSuccessTitle": "Төлөм ийгиликтүү",
   "subscriptionPaymentSuccessBody": "Жазылуу {date} чейин узартылды.",
+  "@subscriptionPaymentSuccessBody": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
   "subscriptionPaymentFailedTitle": "Төлөм ишке ашпады",
   "subscriptionPaymentFailedBody": "Бир нерсе туура эмес болду. Кайра аракет кылыңыз.",
   "subscriptionPaymentRetry": "Кайра аракет кылуу",
@@ -266,11 +415,21 @@
   "subscriptionErrorSubtitle": "Туташууну текшерип, кайра аракет кылыңыз.",
   "subscriptionContactSupportAction": "Жардам керекпи? Колдоо менен байланышыңыз",
   "profileSubscriptionExpiresIn": "{n, plural, =1{1 күндө бүтөт} other{{n} күндө бүтөт}}",
+  "@profileSubscriptionExpiresIn": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "profileSubscriptionGrace": "{n, plural, =1{Жеңилдик · 1 күн калды} other{Жеңилдик · {n} күн калды}}",
+  "@profileSubscriptionGrace": {
+    "placeholders": {
+      "n": { "type": "int" }
+    }
+  },
   "profileSubscriptionExpired": "Бүттү",
   "reportsOverviewTitle": "Отчёттор",
   "reportsManagerDetailTitle": "Менеджер",
-  "reportsTableDetailTitle": "Стол",
+  "reportsSpotDetailTitle": "Позиция",
   "reportsPeriodToday": "Бүгүн",
   "reportsPeriodWeek": "Жума",
   "reportsPeriodMonth": "Ай",
@@ -281,9 +440,8 @@
   "reportsKpiSessions": "Сессиялар",
   "reportsRevenueChartTitle": "Күн боюнча киреше",
   "reportsRevenueChartCompareToggle": "Мурунку мөөнөт менен салыштыруу",
-  "reportsTablesTitle": "Столдор",
   "reportsTopManagersTitle": "Менеджерлер",
-  "reportsTableLabel": "Стол",
+  "reportsSpotLabel": "Позиция",
   "reportsSessionsShort": "сессия",
   "reportsCancelledShort": "жокко чыгаруу",
   "reportsSessionLogTitle": "Сессия логу",
@@ -294,10 +452,21 @@
   "reportsForecastSummaryTitle": "Болжом",
   "reportsForecastVsPrevious": "мурунку мөөнөт менен",
   "reportsForecastVsRange": "{previous} менен",
+  "@reportsForecastVsRange": {
+    "placeholders": {
+      "previous": { "type": "String" }
+    }
+  },
   "reportsForecastNoComparison": "Тарых али жетишсиз",
   "reportsComparisonCaption": "{current}  ·  vs {previous}",
-  "reportsTableTrendTitle": "Киреше трендине",
-  "reportsTableHeatmapTitle": "Саат боюнча карта",
+  "@reportsComparisonCaption": {
+    "placeholders": {
+      "current": { "type": "String" },
+      "previous": { "type": "String" }
+    }
+  },
+  "reportsSpotTrendTitle": "Киреше трендине",
+  "reportsSpotHeatmapTitle": "Саат боюнча карта",
   "reportsErrorTitle": "Отчётту жүктөө мүмкүн эмес",
   "reportsEmptyTitle": "Маалымат али жок",
   "reportsEmptySubtitle": "Сессияларды баштап, бул жерди толтуруңуз.",

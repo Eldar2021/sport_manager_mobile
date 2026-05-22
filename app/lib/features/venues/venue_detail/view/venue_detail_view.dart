@@ -10,7 +10,7 @@ import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
-import 'package:sport_manager_mobile/features/tables/tables.dart';
+import 'package:sport_manager_mobile/features/spots/spots.dart';
 import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
@@ -42,6 +42,7 @@ class _VenueDetailViewState extends State<VenueDetailView> {
   @override
   Widget build(BuildContext context) {
     final isOwner = context.select<AuthCubit, bool>((c) => c.state.isOwner);
+    final spotLabelUpper = _venue.type.spotLabelPlural(context).toUpperCase();
     return AppButtonScope(
       child: Scaffold(
         appBar: AppBar(
@@ -69,20 +70,22 @@ class _VenueDetailViewState extends State<VenueDetailView> {
             children: [
               VenueDetailHeaderCard(
                 venue: _venue,
-                tableCount: _venue.tableCount,
+                spotCount: _venue.spotCount,
               ),
               const SizedBox(height: AppSpacing.x4),
               BlocBuilder<VenueDetailCubit, VenueDetailState>(
                 bloc: _cubit,
-                buildWhen: (prev, next) => prev.tables != next.tables,
+                buildWhen: (prev, next) => prev.spots != next.spots,
                 builder: (context, state) {
-                  return switch (state.tables) {
-                    RequestInitial<List<TableModel>>() || RequestLoading<List<TableModel>>() => const TablesSection(
-                      count: null,
-                      child: VenueDetailSkeleton(),
+                  return switch (state.spots) {
+                    RequestInitial<List<SpotModel>>() || RequestLoading<List<SpotModel>>() => VenueSpotsSection(
+                      headerLabel: spotLabelUpper,
+                      countSuffix: null,
+                      child: const VenueDetailSkeleton(),
                     ),
-                    RequestFailure<List<TableModel>>(:final exception) => TablesSection(
-                      count: null,
+                    RequestFailure<List<SpotModel>>(:final exception) => VenueSpotsSection(
+                      headerLabel: spotLabelUpper,
+                      countSuffix: null,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: AppSpacing.x6),
                         child: ErrorBodyWidget(
@@ -91,18 +94,20 @@ class _VenueDetailViewState extends State<VenueDetailView> {
                         ),
                       ),
                     ),
-                    RequestSuccess<List<TableModel>>(:final data) => TablesSection(
-                      count: data.length,
+                    RequestSuccess<List<SpotModel>>(:final data) => VenueSpotsSection(
+                      headerLabel: spotLabelUpper,
+                      countSuffix: context.l10n.venueSpotsCountSuffix(data.length),
                       child: data.isEmpty
-                          ? const Padding(
-                              padding: EdgeInsets.symmetric(vertical: AppSpacing.x10),
-                              child: TablesEmptyView(),
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(vertical: AppSpacing.x10),
+                              child: SpotsEmptyView(venueType: _venue.type),
                             )
-                          : TablesList(
-                              tables: data,
+                          : SpotsList(
+                              spots: data,
                               venueId: _venue.id,
+                              venueType: _venue.type,
                               isOwner: isOwner,
-                              onTableUpdated: _cubit.load,
+                              onSpotUpdated: _cubit.load,
                             ),
                     ),
                   };
@@ -117,8 +122,8 @@ class _VenueDetailViewState extends State<VenueDetailView> {
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x4),
                 child: AppButton(
                   leading: const Icon(Icons.add_rounded),
-                  onPressed: _onAddTable,
-                  child: Text(context.l10n.homeAddTable),
+                  onPressed: _onAddSpot,
+                  child: Text(context.l10n.homeAddSpot(_venue.type.spotLabel(context))),
                 ),
               )
             : null,
@@ -126,10 +131,10 @@ class _VenueDetailViewState extends State<VenueDetailView> {
     );
   }
 
-  Future<void> _onAddTable() async {
+  Future<void> _onAddSpot() async {
     final added = await context.push(
-      AppRoutes.tableForm,
-      extra: TableFormExtra(venueId: _venue.id),
+      AppRoutes.spotForm,
+      extra: SpotFormExtra(venueId: _venue.id),
     );
     if (added != null) unawaited(_cubit.load());
   }

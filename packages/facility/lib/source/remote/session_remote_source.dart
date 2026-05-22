@@ -1,10 +1,7 @@
 import 'package:facility/facility.dart';
 
 abstract interface class SessionRemoteSource {
-  Future<SessionModel> startSession(
-    String tableId,
-    String? customerName,
-  );
+  Future<SessionModel> startSession(String spotId, String? customerName);
 
   Future<SessionModel> pauseSession(String sessionId);
 

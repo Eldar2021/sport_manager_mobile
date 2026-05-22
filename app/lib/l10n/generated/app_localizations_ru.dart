@@ -48,7 +48,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authSignUp => 'Регистрация';
 
   @override
-  String get authSignInSubtitle => 'Введите данные для входа';
+  String get authSignInSubtitle => 'Введите ваши данные';
 
   @override
   String get authUsernameOrEmail => 'Логин или email';
@@ -66,19 +66,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authChooseRole => 'Кто вы?';
 
   @override
-  String get authChooseRoleSubtitle => 'Это определит доступные функции';
+  String get authChooseRoleSubtitle => 'От этого зависят доступные функции';
 
   @override
   String get authOwnerTitle => 'Владелец зала';
 
   @override
-  String get authOwnerSubtitle => 'Управляю одним или несколькими залами';
+  String get authOwnerSubtitle => 'Я управляю одним или несколькими залами';
 
   @override
   String get authManagerTitle => 'Менеджер зала';
 
   @override
-  String get authManagerSubtitle => 'Работаю на смене, нужен код приглашения';
+  String get authManagerSubtitle => 'Я работаю по сменам, нужен код приглашения';
 
   @override
   String get authRegisterOwnerTitle => 'Регистрация владельца';
@@ -108,19 +108,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authUsernameLabel => 'Логин';
 
   @override
-  String get authConfirmPasswordLabel => 'Повторите пароль';
+  String get authConfirmPasswordLabel => 'Подтвердите пароль';
 
   @override
-  String get authVenueNameLabel => 'Название заведения';
+  String get authVenueNameLabel => 'Название зала';
 
   @override
-  String get authVenueNumberLabel => 'Номер заведения';
+  String get authVenueNumberLabel => 'Номер зала';
 
   @override
-  String get authAgreeTerms => 'Согласен с условиями';
+  String get authAgreeTerms => 'Я согласен с условиями';
 
   @override
-  String get authAgreeTermsError => 'Необходимо согласиться с условиями';
+  String get authAgreeTermsError => 'Вы должны согласиться с условиями';
 
   @override
   String get authCreateAccount => 'Создать аккаунт';
@@ -132,7 +132,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authFieldRequired => 'Поле обязательно для заполнения';
 
   @override
-  String get authPasswordMinLength => 'Пароль должен содержать не менее 8 символов';
+  String get authPasswordMinLength => 'Пароль должен содержать минимум 8 символов';
 
   @override
   String get authPasswordsDoNotMatch => 'Пароли не совпадают';
@@ -147,13 +147,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authForgotPasswordTitle => 'Восстановление пароля';
 
   @override
-  String get authForgotPasswordBanner => 'Введите логин или email — мы отправим ссылку для сброса пароля.';
+  String get authForgotPasswordBanner => 'Введите ваш логин или email — мы отправим ссылку для сброса пароля.';
 
   @override
-  String get authForgotPasswordLoginEmailPlaceholder => 'например, azamat@mail.kg';
+  String get authForgotPasswordLoginEmailPlaceholder => 'напр., azamat@mail.kg';
 
   @override
-  String get authForgotPasswordNoLink => 'Не приходит ссылка?';
+  String get authForgotPasswordNoLink => 'Ссылка не приходит?';
 
   @override
   String get authForgotPasswordContactUs => 'Свяжитесь с нами — WhatsApp, Telegram, email, звонок';
@@ -186,7 +186,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeNoVenuesTitle => 'У вас пока нет залов';
 
   @override
-  String get homeNoVenuesSubtitle => 'Создайте первый зал, чтобы начать добавлять столы и принимать сессии.';
+  String get homeNoVenuesSubtitle => 'Создайте первый зал, чтобы начать добавлять позиции и принимать сессии.';
 
   @override
   String get homeSelectVenue => 'Выберите зал';
@@ -195,88 +195,100 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeNewVenue => 'Новый зал';
 
   @override
-  String get homeAddTable => 'Добавить стол';
+  String homeAddSpot(String spot) {
+    return 'Добавить $spot';
+  }
 
   @override
-  String get homeTablesEmpty => 'Столов пока нет';
+  String homeSpotsEmpty(String spotPlural) {
+    return '$spotPlural пока нет';
+  }
 
   @override
-  String get homeTablesEmptySub => 'Добавьте первый стол, чтобы менеджеры могли начинать сессии.';
+  String homeSpotsEmptySub(String spot) {
+    return 'Добавьте первую позицию ($spot), чтобы менеджеры могли начинать сессии.';
+  }
 
   @override
-  String get homeTablesEmptySubManager => 'Столы появятся здесь, как только их добавит владелец.';
+  String homeSpotsEmptySubManager(String spotPlural) {
+    return '$spotPlural появятся здесь, как только их добавит владелец.';
+  }
 
   @override
-  String homeTableOccupied(String customerName) {
+  String homeSpotOccupied(String customerName) {
     return '$customerName · ЗАНЯТ';
   }
 
   @override
-  String get homeTableOccupiedBase => 'ЗАНЯТ';
+  String get homeSpotOccupiedBase => 'ЗАНЯТ';
 
   @override
-  String homeTablePaused(String customerName) {
+  String homeSpotPaused(String customerName) {
     return '$customerName · НА ПАУЗЕ';
   }
 
   @override
-  String get homeTablePausedBase => 'НА ПАУЗЕ';
+  String get homeSpotPausedBase => 'НА ПАУЗЕ';
 
   @override
-  String get homeTableFree => 'СВОБОДЕН';
+  String get homeSpotFree => 'СВОБОДЕН';
 
   @override
-  String get homeTableJustFreed => '✓ Завершён';
+  String get homeSpotJustFreed => '✓ Завершён';
 
   @override
-  String get createTableTitle => 'Новый стол';
+  String get createSpotTitle => 'Новая позиция';
 
   @override
-  String get createTableNumberLabel => 'Номер стола';
+  String get createSpotNumberLabel => 'Номер позиции';
 
   @override
-  String get createTableNumberHint => '1';
+  String get createSpotNumberHint => '1';
 
   @override
-  String get createTableNameLabel => 'Название стола';
+  String get createSpotNameLabel => 'Название позиции';
 
   @override
-  String get createTableNameHint => 'Стол 1';
+  String get createSpotNameHint => 'Позиция 1';
 
   @override
-  String get createTableDescLabel => 'Описание (ярлык)';
+  String get createSpotDescLabel => 'Описание (ярлык)';
 
   @override
-  String get createTableDescHint => 'VIP зал, у окна, снукер...';
+  String get createSpotDescHint => 'VIP зал, у окна, снукер...';
 
   @override
-  String get createTableDescPlaceholder => 'Описание';
+  String get createSpotDescPlaceholder => 'Описание';
 
   @override
-  String get createTableRateLabel => 'Тариф';
+  String get createSpotRateLabel => 'Тариф';
 
   @override
-  String createTableRateSuffix(Object currency, Object time_unit) {
+  String createSpotRateSuffix(String currency, String time_unit) {
     return '$currency/$time_unit';
   }
 
   @override
-  String get createTableButton => 'Создать стол';
+  String get createSpotButton => 'Создать позицию';
 
   @override
-  String get editTableTitle => 'Редактировать стол';
+  String get editSpotTitle => 'Редактировать позицию';
 
   @override
-  String get updateTableButton => 'Обновить';
+  String get updateSpotButton => 'Обновить';
 
   @override
-  String get deleteTableButton => 'Удалить';
+  String get deleteSpotButton => 'Удалить';
+
+  @override
+  String get deleteSpotSubtitle => 'История сессий сохранится, но позиция исчезнет с главной страницы.';
 
   @override
   String get createVenueTitle => 'Создайте зал';
 
   @override
-  String get createVenueSubtitle => 'Дайте название вашему залу. Столы можно будет добавить позже с главной страницы.';
+  String get createVenueSubtitle =>
+      'Дайте название вашему залу. Позиции можно будет добавить позже с главной страницы.';
 
   @override
   String get createVenueNameLabel => 'Название зала';
@@ -291,7 +303,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get createVenueNumberHint => '№ 1 или ЦФ';
 
   @override
-  String get createVenueInfoBanner => 'После создания зала вы сможете добавлять столы по одному с собственным тарифом.';
+  String get createVenueInfoBanner =>
+      'После создания зала вы сможете добавлять позиции по одной с собственным тарифом.';
 
   @override
   String get createVenueButton => 'Создать зал →';
@@ -306,19 +319,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get deleteVenueButton => 'Удалить';
 
   @override
-  String get deleteVenueSubtitle => 'Все столы и история сессий сохранятся, но зал будет удалён.';
+  String get deleteVenueSubtitle => 'Все позиции и история сессий сохранятся, но зал будет удалён.';
 
   @override
   String get cancel => 'Отмена';
 
   @override
-  String get deleteTableSubtitle => 'История сессий сохранится, но стол исчезнет с главной страницы.';
-
-  @override
   String get generalRetry => 'Повторить';
 
   @override
-  String get createTableTarifTypeLabel => 'Тип тарифа';
+  String get createSpotTarifTypeLabel => 'Тип тарифа';
 
   @override
   String get tarifTypeMinute => 'Минута';
@@ -330,7 +340,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tarifTypeDay => 'День';
 
   @override
-  String get createTableCurrencyLabel => 'Валюта';
+  String get createSpotCurrencyLabel => 'Валюта';
 
   @override
   String get currencyKgs => 'Сом';
@@ -348,27 +358,25 @@ class AppLocalizationsRu extends AppLocalizations {
   String get currencyTry => 'Лира';
 
   @override
-  String venueTablesCount(int count) {
+  String venueSpotsCount(int count, String spot, String spotPlural) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count столов',
-      many: '$count столов',
-      few: '$count стола',
-      one: '$count стол',
-      zero: 'нет столов',
+      other: '$count $spotPlural',
+      one: '1 $spot',
+      zero: 'нет $spotPlural',
     );
     return '$_temp0';
   }
 
   @override
-  String homeTableTitle(int number) {
-    return 'Стол $number';
+  String homeSpotTitle(String spotLabel, int number) {
+    return '$spotLabel $number';
   }
 
   @override
-  String homeTablesSection(int count) {
-    return 'СТОЛЫ · $count';
+  String homeSpotsSection(String spotPlural, int count) {
+    return '$spotPlural · $count';
   }
 
   @override
@@ -484,69 +492,130 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sessionCustomerNameHint => 'напр. Иван Иванов';
 
   @override
-  String get tableDetailStart => 'НАЧАТЬ';
+  String get spotDetailStart => 'НАЧАТЬ';
 
   @override
-  String get tableDetailStop => 'ОСТАНОВИТЬ И ЗАКРЫТЬ';
+  String get spotDetailStop => 'ОСТАНОВИТЬ И ЗАКРЫТЬ';
 
   @override
-  String get tableDetailElapsed => 'ПРОШЛО';
+  String get spotDetailElapsed => 'ПРОШЛО';
 
   @override
-  String get tableDetailCurrentAmount => 'ТЕКУЩАЯ СУММА';
+  String get spotDetailCurrentAmount => 'ТЕКУЩАЯ СУММА';
 
   @override
-  String get tableDetailPause => 'ПАУЗА';
+  String get spotDetailPause => 'ПАУЗА';
 
   @override
-  String get tableDetailResume => 'ПРОДОЛЖИТЬ';
+  String get spotDetailResume => 'ПРОДОЛЖИТЬ';
 
   @override
-  String get tableDetailStartTime => 'Начало';
+  String get spotDetailStartTime => 'Начало';
 
   @override
-  String get tableDetailDuration => 'Длительность';
+  String get spotDetailDuration => 'Длительность';
 
   @override
-  String get tableDetailTariff => 'Тариф';
+  String get spotDetailTariff => 'Тариф';
 
   @override
-  String get tableDetailMistakeLaunch => 'Ошибочный запуск';
+  String get spotDetailMistakeLaunch => 'Ошибочный запуск';
 
   @override
-  String get tableDetailMistakeLaunchTitle => 'Отменить сессию?';
+  String get spotDetailMistakeLaunchTitle => 'Отменить сессию?';
 
   @override
-  String get tableDetailMistakeLaunchSubtitle => 'Сессия будет отменена без начисления оплаты.';
+  String get spotDetailMistakeLaunchSubtitle => 'Сессия будет отменена без начисления оплаты.';
 
   @override
-  String get tableDetailMistakeLaunchConfirm => 'Да, отменить';
+  String get spotDetailMistakeLaunchConfirm => 'Да, отменить';
 
   @override
-  String get tableDetailLastSession => 'Прошлая сессия';
+  String get spotDetailLastSession => 'Прошлая сессия';
 
   @override
-  String get tableDetailTodaySessions => 'Сегодня сессий';
+  String get spotDetailTodaySessions => 'Сегодня сессий';
 
   @override
-  String get tableDetailPaymentTitle => 'Итоги оплаты';
+  String get spotDetailPaymentTitle => 'Итоги оплаты';
 
   @override
-  String get tableDetailSubtotal => 'Подытог';
+  String get spotDetailSubtotal => 'Подытог';
 
   @override
-  String get tableDetailDiscount => 'Скидка';
+  String get spotDetailDiscount => 'Скидка';
 
   @override
-  String get tableDetailToPay => 'К ОПЛАТЕ';
+  String get spotDetailToPay => 'К ОПЛАТЕ';
 
   @override
-  String get tableDetailConfirmAndClose => 'ПОДТВЕРДИТЬ И ЗАКРЫТЬ';
+  String get spotDetailConfirmAndClose => 'ПОДТВЕРДИТЬ И ЗАКРЫТЬ';
 
   @override
-  String tableDetailDurationMin(int count) {
+  String spotDetailDurationMin(int count) {
     return '$count мин';
   }
+
+  @override
+  String get spotLabelTable => 'Стол';
+
+  @override
+  String get spotLabelConsole => 'Консоль';
+
+  @override
+  String get spotLabelCourt => 'Корт';
+
+  @override
+  String get spotLabelBoard => 'Доска';
+
+  @override
+  String get spotLabelPitch => 'Поле';
+
+  @override
+  String get spotLabelTablePlural => 'Столы';
+
+  @override
+  String get spotLabelConsolePlural => 'Консоли';
+
+  @override
+  String get spotLabelCourtPlural => 'Корты';
+
+  @override
+  String get spotLabelBoardPlural => 'Доски';
+
+  @override
+  String get spotLabelPitchPlural => 'Поля';
+
+  @override
+  String get venueTypeTableTennis => 'Настольный теннис';
+
+  @override
+  String get venueTypeBilliards => 'Бильярд';
+
+  @override
+  String get venueTypePlayStation => 'PlayStation';
+
+  @override
+  String get venueTypeVolleyball => 'Волейбол';
+
+  @override
+  String get venueTypeBasketball => 'Баскетбол';
+
+  @override
+  String get venueTypeChess => 'Шахматы';
+
+  @override
+  String get venueTypeFootball => 'Футбол';
+
+  @override
+  String get venueFormTypeLabel => 'Тип';
+
+  @override
+  String get venueFormTypeImmutableHint =>
+      'Тип нельзя изменить после создания. Создайте новый зал, если меняется направление.';
+
+  @override
+  String get venueFormTypeRequiredError => 'Выберите тип зала';
 
   @override
   String get menuEdit => 'Редактировать';
@@ -630,13 +699,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get venueMetricTablesLabel => 'СТОЛОВ';
-
-  @override
-  String get venueDetailTablesHeader => 'СТОЛЫ ЗАЛА';
-
-  @override
-  String venueTablesCountSuffix(int count) {
+  String venueSpotsCountSuffix(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -694,12 +757,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String subscriptionPlanCardPerTable(int price, String currency) {
-    return '$price $currency / стол / месяц';
+    return '$price $currency / позиция / месяц';
   }
 
   @override
   String subscriptionPlanCardMonthly(int tableCount, int monthly, String currency) {
-    return '× $tableCount столов = $monthly $currency / месяц';
+    return '× $tableCount позиций = $monthly $currency / месяц';
   }
 
   @override
@@ -719,7 +782,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String subscriptionPaymentItemSummary(int months, int tableCount) {
-    return '$months мес × $tableCount столов';
+    return '$months мес × $tableCount позиций';
   }
 
   @override
@@ -735,7 +798,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String subscriptionCheckoutSummary(int tableCount, int price, int monthly, String currency) {
-    return '$tableCount столов × $price $currency = $monthly $currency / мес';
+    return '$tableCount позиций × $price $currency = $monthly $currency / мес';
   }
 
   @override
@@ -771,10 +834,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get subscriptionCheckoutPay => 'Оплатить';
 
   @override
-  String get subscriptionCheckoutNoTablesTitle => 'Столов пока нет';
+  String get subscriptionCheckoutNoTablesTitle => 'Позиций пока нет';
 
   @override
-  String get subscriptionCheckoutNoTablesSubtitle => 'Добавьте хотя бы один стол, чтобы оформить подписку.';
+  String get subscriptionCheckoutNoTablesSubtitle => 'Добавьте хотя бы одну позицию, чтобы оформить подписку.';
 
   @override
   String get subscriptionCheckoutGoToVenues => 'К залам';
@@ -864,7 +927,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsManagerDetailTitle => 'Менеджер';
 
   @override
-  String get reportsTableDetailTitle => 'Стол';
+  String get reportsSpotDetailTitle => 'Позиция';
 
   @override
   String get reportsPeriodToday => 'Сегодня';
@@ -897,13 +960,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reportsRevenueChartCompareToggle => 'Сравнить с прошлым периодом';
 
   @override
-  String get reportsTablesTitle => 'Столы';
-
-  @override
   String get reportsTopManagersTitle => 'Менеджеры';
 
   @override
-  String get reportsTableLabel => 'Стол';
+  String get reportsSpotLabel => 'Позиция';
 
   @override
   String get reportsSessionsShort => 'сессий';
@@ -946,10 +1006,10 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get reportsTableTrendTitle => 'Тренд выручки';
+  String get reportsSpotTrendTitle => 'Тренд выручки';
 
   @override
-  String get reportsTableHeatmapTitle => 'Карта по часам';
+  String get reportsSpotHeatmapTitle => 'Карта по часам';
 
   @override
   String get reportsErrorTitle => 'Не удалось загрузить отчёт';

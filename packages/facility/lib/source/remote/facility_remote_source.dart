@@ -16,14 +16,14 @@ abstract interface class FacilityRemoteSource {
 
   Future<void> deleteVenue(String id);
 
-  Future<List<TableModel>> getVenueTables(String venueId);
+  Future<List<SpotModel>> getVenueSpots(String venueId);
 
-  Future<TableModel> createTable(TableFormParam param);
+  Future<SpotModel> createSpot(SpotFormParam param);
 
-  Future<TableModel> updateTable(
-    String tableId,
-    TableFormParam param,
+  Future<SpotModel> updateSpot(
+    String spotId,
+    SpotFormParam param,
   );
 
-  Future<void> deleteTable(String tableId);
+  Future<void> deleteSpot(String spotId);
 }

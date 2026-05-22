@@ -9,13 +9,19 @@ part 'venue_form_state.dart';
 class VenueFormCubit extends Cubit<VenueFormState> {
   VenueFormCubit({
     required FacilityRepository repository,
-    String? venueId,
+    VenueModel? venue,
   }) : _repository = repository,
-       _venueId = venueId,
-       super(const VenueFormState());
+       _venueId = venue?.id,
+       super(VenueFormState(selectedType: venue?.type));
 
   final FacilityRepository _repository;
   final String? _venueId;
+
+  bool get isEdit => _venueId != null;
+
+  void selectType(VenueType type) {
+    emit(state.copyWith(selectedType: type));
+  }
 
   Future<void> submit(VenueFormParam param) async {
     if (state.isLoading) return;

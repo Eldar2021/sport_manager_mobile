@@ -1,5 +1,6 @@
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
+import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -32,7 +33,7 @@ class VenueItem extends StatelessWidget {
           ),
           child: Center(
             child: Icon(
-              Icons.location_on_outlined,
+              venue.type.icon,
               color: isSelected ? context.colors.onPrimary : context.colors.onSurfaceVariant,
               size: 18,
             ),
@@ -44,7 +45,7 @@ class VenueItem extends StatelessWidget {
         style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
       ),
       subtitle: Text(
-        '№ ${venue.number} · ${context.l10n.venueTablesCount(venue.tableCount)}',
+        '№ ${venue.number} · ${context.l10n.venueSpotsCount(venue.spotCount, venue.type.spotLabel(context), venue.type.spotLabelPlural(context))}',
         style: context.appTextStyles.muted.bodySmall,
       ),
       trailing: isSelected

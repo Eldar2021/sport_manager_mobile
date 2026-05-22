@@ -23,15 +23,15 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       emit(const HomeLoading());
       final response = await action();
-      if (response.tables.isNotEmpty) {
+      if (response.spots.isNotEmpty) {
         emit(
           HomeLoaded(
             venue: response.venue,
-            tables: response.tables,
+            spots: response.spots,
           ),
         );
       } else {
-        emit(HomeNoTables(response.venue));
+        emit(HomeNoSpots(response.venue));
       }
     } on FacilityExc catch (e) {
       emit(switch (e.error) {

@@ -8,10 +8,10 @@ part of 'selected_venue_model.dart';
 
 SelectedVenueModel _$SelectedVenueModelFromJson(Map<String, dynamic> json) => SelectedVenueModel(
   venue: VenueModel.fromJson(json['venue'] as Map<String, dynamic>),
-  tables: (json['tables'] as List<dynamic>).map((e) => TableModel.fromJson(e as Map<String, dynamic>)).toList(),
+  spots: (json['spots'] as List<dynamic>).map((e) => SpotModel.fromJson(e as Map<String, dynamic>)).toList(),
 );
 
 Map<String, dynamic> _$SelectedVenueModelToJson(SelectedVenueModel instance) => <String, dynamic>{
   'venue': instance.venue,
-  'tables': instance.tables,
+  'spots': instance.spots,
 };

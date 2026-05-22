@@ -20,14 +20,14 @@ class VenueDetailCubit extends Cubit<VenueDetailState> {
   final String _venueId;
 
   Future<void> load() async {
-    if (state.tables.isLoading) return;
-    emit(state.copyWith(tables: const RequestLoading()));
+    if (state.spots.isLoading) return;
+    emit(state.copyWith(spots: const RequestLoading()));
     try {
-      final tables = await _repository.getVenueTables(_venueId);
-      emit(state.copyWith(tables: RequestSuccess(tables)));
+      final spots = await _repository.getVenueSpots(_venueId);
+      emit(state.copyWith(spots: RequestSuccess(spots)));
     } on Object catch (e) {
-      log('Failed to load venue tables', error: e);
-      emit(state.copyWith(tables: RequestFailure(e)));
+      log('Failed to load venue spots', error: e);
+      emit(state.copyWith(spots: RequestFailure(e)));
     }
   }
 
