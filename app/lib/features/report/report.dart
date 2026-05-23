@@ -1,5 +1,7 @@
 export 'manager_detail/manager_detail.dart';
 export 'overview/overview.dart';
+export 'product_detail/product_detail.dart';
+export 'products/products.dart';
 export 'spot_detail/spot_detail.dart';
 export 'utils/report_format.dart';
 export 'widgets/report_comparison_label.dart';

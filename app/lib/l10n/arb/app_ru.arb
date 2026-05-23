@@ -624,5 +624,34 @@
   "productUnitKgShort": "кг",
   "productUnitLitreShort": "л",
   "productUnitPortionShort": "порц.",
-  "productUnitHourShort": "ч"
+  "productUnitHourShort": "ч",
+  "reportsTopProductsTitle": "Топ товаров",
+  "reportsProductsTitle": "Товары",
+  "reportsSeeAll": "Все",
+  "reportsProductDetailTitle": "Продажи товара",
+  "reportsProductSoldLabel": "ПРОДАНО",
+  "reportsProductRevenueLabel": "ВЫРУЧКА",
+  "reportsProductCurrentPrice": "Текущая цена: {price} / шт",
+  "@reportsProductCurrentPrice": {
+    "placeholders": {
+      "price": { "type": "String" }
+    }
+  },
+  "reportsProductSalesLogTitle": "Журнал продаж",
+  "reportsProductPriceAtTime": "Тогда: {old} · сейчас: {current}",
+  "@reportsProductPriceAtTime": {
+    "placeholders": {
+      "old": { "type": "String" },
+      "current": { "type": "String" }
+    }
+  },
+  "productDeletedBadge": "Товар удалён",
+  "reportsProductPriceHistoryTitle": "История цен",
+  "reportsProductPriceHistorySubtitle": "Продавался по {count} разным ценам",
+  "@reportsProductPriceHistorySubtitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "reportsProductPriceNowBadge": "СЕЙЧАС"
 }

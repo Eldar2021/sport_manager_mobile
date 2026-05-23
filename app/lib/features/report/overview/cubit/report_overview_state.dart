@@ -10,6 +10,7 @@ final class ReportOverviewState extends Equatable {
     this.spots = const RequestInitial(),
     this.managers = const RequestInitial(),
     this.forecast = const RequestInitial(),
+    this.products = const RequestInitial(),
   });
 
   final ReportFilter filter;
@@ -19,6 +20,7 @@ final class ReportOverviewState extends Equatable {
   final RequestStatus<List<SpotReportRowModel>> spots;
   final RequestStatus<List<ManagerReportRowModel>> managers;
   final RequestStatus<ForecastModel> forecast;
+  final RequestStatus<ProductReportSummaryModel> products;
 
   ReportOverviewState copyWith({
     ReportFilter? filter,
@@ -28,6 +30,7 @@ final class ReportOverviewState extends Equatable {
     RequestStatus<List<SpotReportRowModel>>? spots,
     RequestStatus<List<ManagerReportRowModel>>? managers,
     RequestStatus<ForecastModel>? forecast,
+    RequestStatus<ProductReportSummaryModel>? products,
   }) {
     return ReportOverviewState(
       filter: filter ?? this.filter,
@@ -37,6 +40,7 @@ final class ReportOverviewState extends Equatable {
       spots: spots ?? this.spots,
       managers: managers ?? this.managers,
       forecast: forecast ?? this.forecast,
+      products: products ?? this.products,
     );
   }
 
@@ -49,5 +53,6 @@ final class ReportOverviewState extends Equatable {
     spots,
     managers,
     forecast,
+    products,
   ];
 }
