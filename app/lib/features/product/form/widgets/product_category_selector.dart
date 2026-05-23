@@ -31,15 +31,17 @@ class ProductCategorySelector extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             spacing: AppSpacing.x2,
-            children: ProductCategory.values.map((cat) {
-              return ChoiceChip(
-                avatar: Icon(cat.icon, size: 16),
-                label: Text(cat.localizedName(context.l10n)),
-                selected: cat == selected,
-                showCheckmark: false,
-                onSelected: (_) => onChanged(cat),
-              );
-            }).toList(growable: false),
+            children: ProductCategory.values
+                .map((cat) {
+                  return ChoiceChip(
+                    avatar: Icon(cat.icon, size: 16),
+                    label: Text(cat.localizedName(context.l10n)),
+                    selected: cat == selected,
+                    showCheckmark: false,
+                    onSelected: (_) => onChanged(cat),
+                  );
+                })
+                .toList(growable: false),
           ),
         ),
       ],

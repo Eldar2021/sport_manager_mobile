@@ -522,5 +522,34 @@
   "productUnitKgShort": "кг",
   "productUnitLitreShort": "л",
   "productUnitPortionShort": "порц.",
-  "productUnitHourShort": "саат"
+  "productUnitHourShort": "саат",
+  "reportsTopProductsTitle": "Жогорку товарлар",
+  "reportsProductsTitle": "Товарлар",
+  "reportsSeeAll": "Баарын кёр",
+  "reportsProductDetailTitle": "Товар сатуулары",
+  "reportsProductSoldLabel": "САТЫЛГАН",
+  "reportsProductRevenueLabel": "ТҮШҮМ",
+  "reportsProductCurrentPrice": "Учурдагы баасы: {price} / шт",
+  "@reportsProductCurrentPrice": {
+    "placeholders": {
+      "price": { "type": "String" }
+    }
+  },
+  "reportsProductSalesLogTitle": "Сатуу журналы",
+  "reportsProductPriceAtTime": "Ошондо: {old} · азыр: {current}",
+  "@reportsProductPriceAtTime": {
+    "placeholders": {
+      "old": { "type": "String" },
+      "current": { "type": "String" }
+    }
+  },
+  "productDeletedBadge": "Бул товар жоюлган",
+  "reportsProductPriceHistoryTitle": "Баалар тарыхы",
+  "reportsProductPriceHistorySubtitle": "{count} башка баада сатылган",
+  "@reportsProductPriceHistorySubtitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "reportsProductPriceNowBadge": "АЗЫР"
 }

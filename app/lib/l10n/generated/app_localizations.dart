@@ -2066,6 +2066,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'hr'**
   String get productUnitHourShort;
+
+  /// No description provided for @reportsTopProductsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Top products'**
+  String get reportsTopProductsTitle;
+
+  /// No description provided for @reportsProductsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get reportsProductsTitle;
+
+  /// No description provided for @reportsSeeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get reportsSeeAll;
+
+  /// No description provided for @reportsProductDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Product sales'**
+  String get reportsProductDetailTitle;
+
+  /// No description provided for @reportsProductSoldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'SOLD'**
+  String get reportsProductSoldLabel;
+
+  /// No description provided for @reportsProductRevenueLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'REVENUE'**
+  String get reportsProductRevenueLabel;
+
+  /// No description provided for @reportsProductCurrentPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Current price: {price} / pc'**
+  String reportsProductCurrentPrice(String price);
+
+  /// No description provided for @reportsProductSalesLogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales log'**
+  String get reportsProductSalesLogTitle;
+
+  /// No description provided for @reportsProductPriceAtTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Then: {old} · now: {current}'**
+  String reportsProductPriceAtTime(String old, String current);
+
+  /// No description provided for @productDeletedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'This product has been deleted'**
+  String get productDeletedBadge;
+
+  /// No description provided for @reportsProductPriceHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Price history'**
+  String get reportsProductPriceHistoryTitle;
+
+  /// No description provided for @reportsProductPriceHistorySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sold at {count} different prices'**
+  String reportsProductPriceHistorySubtitle(int count);
+
+  /// No description provided for @reportsProductPriceNowBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'NOW'**
+  String get reportsProductPriceNowBadge;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

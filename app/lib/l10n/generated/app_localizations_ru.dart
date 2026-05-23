@@ -1160,4 +1160,49 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get productUnitHourShort => 'ч';
+
+  @override
+  String get reportsTopProductsTitle => 'Топ товаров';
+
+  @override
+  String get reportsProductsTitle => 'Товары';
+
+  @override
+  String get reportsSeeAll => 'Все';
+
+  @override
+  String get reportsProductDetailTitle => 'Продажи товара';
+
+  @override
+  String get reportsProductSoldLabel => 'ПРОДАНО';
+
+  @override
+  String get reportsProductRevenueLabel => 'ВЫРУЧКА';
+
+  @override
+  String reportsProductCurrentPrice(String price) {
+    return 'Текущая цена: $price / шт';
+  }
+
+  @override
+  String get reportsProductSalesLogTitle => 'Журнал продаж';
+
+  @override
+  String reportsProductPriceAtTime(String old, String current) {
+    return 'Тогда: $old · сейчас: $current';
+  }
+
+  @override
+  String get productDeletedBadge => 'Товар удалён';
+
+  @override
+  String get reportsProductPriceHistoryTitle => 'История цен';
+
+  @override
+  String reportsProductPriceHistorySubtitle(int count) {
+    return 'Продавался по $count разным ценам';
+  }
+
+  @override
+  String get reportsProductPriceNowBadge => 'СЕЙЧАС';
 }

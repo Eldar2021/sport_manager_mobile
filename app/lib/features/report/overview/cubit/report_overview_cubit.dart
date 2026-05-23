@@ -2,16 +2,27 @@ import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:product/product.dart';
 import 'package:reports/reports.dart';
 
 part 'report_overview_state.dart';
 
 class ReportOverviewCubit extends Cubit<ReportOverviewState> {
-  ReportOverviewCubit(ReportsRepository repository)
-    : _repository = repository,
-      super(ReportOverviewState(filter: ReportFilter.initial(DateTime.now())));
+  ReportOverviewCubit(
+    ReportsRepository repository,
+    ProductRepository productRepository,
+  ) : _repository = repository,
+      _productRepository = productRepository,
+      super(
+        ReportOverviewState(
+          filter: ReportFilter.initial(
+            DateTime.now(),
+          ),
+        ),
+      );
 
   final ReportsRepository _repository;
+  final ProductRepository _productRepository;
 
   /// First load: fetch venues, auto-select the first venue, then refresh
   /// every section against that venue.
@@ -59,6 +70,7 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
       loadSpots(),
       loadManagers(),
       loadForecast(),
+      loadProducts(),
     ]);
   }
 
@@ -99,6 +111,28 @@ class ReportOverviewCubit extends Cubit<ReportOverviewState> {
       emit(state.copyWith(managers: RequestSuccess(managers)));
     } on Object catch (e) {
       emit(state.copyWith(managers: RequestFailure(e)));
+    }
+  }
+
+  Future<void> loadProducts() async {
+    final venueId = state.filter.venueId;
+    if (venueId == null) {
+      emit(state.copyWith(products: const RequestInitial()));
+      return;
+    }
+    emit(state.copyWith(products: const RequestLoading()));
+    try {
+      final result = await _productRepository.getProductsReport(
+        venueId,
+        ProductReportFilter(
+          period: state.filter.period.wireValue,
+          from: state.filter.range.from.toIso8601String(),
+          to: state.filter.range.to.toIso8601String(),
+        ),
+      );
+      emit(state.copyWith(products: RequestSuccess(result)));
+    } on Object catch (e) {
+      emit(state.copyWith(products: RequestFailure(e)));
     }
   }
 

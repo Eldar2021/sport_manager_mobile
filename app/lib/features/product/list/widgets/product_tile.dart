@@ -134,8 +134,15 @@ class _ActionButton extends StatelessWidget {
     return IconButton(
       onPressed: onTap,
       icon: isLoading
-          ? CupertinoActivityIndicator(color: color, radius: 9)
-          : Icon(icon, color: color, size: 20),
+          ? CupertinoActivityIndicator(
+              color: color,
+              radius: 9,
+            )
+          : Icon(
+              icon,
+              color: color,
+              size: 20,
+            ),
       style: IconButton.styleFrom(
         backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
