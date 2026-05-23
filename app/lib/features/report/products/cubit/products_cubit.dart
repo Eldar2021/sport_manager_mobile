@@ -57,8 +57,18 @@ class ProductsCubit extends Cubit<ProductsState> {
   }
 
   ProductReportFilter _toFilter() => ProductReportFilter(
-    period: state.filter.period.wireValue,
-    from: state.filter.range.from.toIso8601String(),
-    to: state.filter.range.to.toIso8601String(),
+    period: _periodValue(state.filter.period),
+    from: state.filter.range.from.toUtc().toIso8601String(),
+    to: state.filter.range.to.toUtc().toIso8601String(),
   );
+
+  static String _periodValue(ReportPeriod period) {
+    return switch (period) {
+      ReportPeriod.today => 'day',
+      ReportPeriod.week => 'week',
+      ReportPeriod.month => 'month',
+      ReportPeriod.year => 'year',
+      ReportPeriod.custom => 'custom',
+    };
+  }
 }
