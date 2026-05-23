@@ -3,7 +3,7 @@ import 'package:core/core.dart';
 
 enum SubscriptionErrorCode {
   subscriptionRequired,
-  noTables,
+  noSpots,
   invalidDuration,
   paymentNotFound,
   paymentAlreadyProcessed,
@@ -16,7 +16,7 @@ enum SubscriptionErrorCode {
   factory SubscriptionErrorCode.fromString(String? code) {
     return switch (code) {
       'SUBSCRIPTION_REQUIRED' => .subscriptionRequired,
-      'NO_TABLES' => .noTables,
+      'NO_TABLES' => .noSpots,
       'INVALID_DURATION' => .invalidDuration,
       'PAYMENT_NOT_FOUND' => .paymentNotFound,
       'PAYMENT_ALREADY_PROCESSED' => .paymentAlreadyProcessed,
@@ -54,7 +54,7 @@ final class SubscriptionExc extends AppException<SubscriptionErrorCode> {
       ru: 'Ошибка оплаты',
       ky: 'Төлөм катасы',
     ),
-    .subscriptionRequired || .noTables || .invalidDuration || .forbidden || .unknown => BaseMessage.base,
+    .subscriptionRequired || .noSpots || .invalidDuration || .forbidden || .unknown => BaseMessage.base,
   };
 
   @override
@@ -64,7 +64,7 @@ final class SubscriptionExc extends AppException<SubscriptionErrorCode> {
       ru: 'Подписка истекла. Продлите её, чтобы продолжить пользоваться основными функциями.',
       ky: 'Жазылуу бүттү. Негизги функцияларды колдонуу үчүн узартыңыз.',
     ),
-    .noTables => const BaseMessage(
+    .noSpots => const BaseMessage(
       en: 'Add at least one table before subscribing.',
       ru: 'Добавьте хотя бы один стол, чтобы оформить подписку.',
       ky: 'Жазылуу үчүн жок дегенде бир стол кошуңуз.',

@@ -65,38 +65,50 @@
   "homeAddSpot": "{spot} кошуу",
   "@homeAddSpot": {
     "placeholders": {
-      "spot": { "type": "String" }
+      "spot": {
+        "type": "String"
+      }
     }
   },
   "homeSpotsEmpty": "Азырынча {spotPlural} жок",
   "@homeSpotsEmpty": {
     "placeholders": {
-      "spotPlural": { "type": "String" }
+      "spotPlural": {
+        "type": "String"
+      }
     }
   },
   "homeSpotsEmptySub": "Менеджерлер сессия баштай алышы үчүн биринчи {spot} кошуңуз.",
   "@homeSpotsEmptySub": {
     "placeholders": {
-      "spot": { "type": "String" }
+      "spot": {
+        "type": "String"
+      }
     }
   },
   "homeSpotsEmptySubManager": "{spotPlural} ээси кошкондон кийин пайда болот.",
   "@homeSpotsEmptySubManager": {
     "placeholders": {
-      "spotPlural": { "type": "String" }
+      "spotPlural": {
+        "type": "String"
+      }
     }
   },
   "homeSpotOccupied": "{customerName} · БОШ ЭМЕС",
   "@homeSpotOccupied": {
     "placeholders": {
-      "customerName": { "type": "String" }
+      "customerName": {
+        "type": "String"
+      }
     }
   },
   "homeSpotOccupiedBase": "БОШ ЭМЕС",
   "homeSpotPaused": "{customerName} · ТОКТОТУЛДУ",
   "@homeSpotPaused": {
     "placeholders": {
-      "customerName": { "type": "String" }
+      "customerName": {
+        "type": "String"
+      }
     }
   },
   "homeSpotPausedBase": "ТОКТОТУЛДУ",
@@ -114,8 +126,12 @@
   "createSpotRateSuffix": "{currency}/{time_unit}",
   "@createSpotRateSuffix": {
     "placeholders": {
-      "currency": { "type": "String" },
-      "time_unit": { "type": "String" }
+      "currency": {
+        "type": "String"
+      },
+      "time_unit": {
+        "type": "String"
+      }
     }
   },
   "createSpotButton": "Позиция түзүү",
@@ -150,23 +166,37 @@
   "venueSpotsCount": "{count, plural, =0{{spotPlural} жок} other{{count} {spot}}}",
   "@venueSpotsCount": {
     "placeholders": {
-      "count": { "type": "int" },
-      "spot": { "type": "String" },
-      "spotPlural": { "type": "String" }
+      "count": {
+        "type": "int"
+      },
+      "spot": {
+        "type": "String"
+      },
+      "spotPlural": {
+        "type": "String"
+      }
     }
   },
   "homeSpotTitle": "{spotLabel} {number}",
   "@homeSpotTitle": {
     "placeholders": {
-      "spotLabel": { "type": "String" },
-      "number": { "type": "int" }
+      "spotLabel": {
+        "type": "String"
+      },
+      "number": {
+        "type": "int"
+      }
     }
   },
   "homeSpotsSection": "{spotPlural} · {count}",
   "@homeSpotsSection": {
     "placeholders": {
-      "spotPlural": { "type": "String" },
-      "count": { "type": "int" }
+      "spotPlural": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
     }
   },
   "profileSectionManagement": "Башкаруу",
@@ -174,14 +204,18 @@
   "profileManageVenuesSubtitle": "{count, plural, =0{зал жок} other{{count} зал}}",
   "@profileManageVenuesSubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "profileManagersTitle": "Менеджерлер",
   "profileManagersSubtitle": "{count, plural, =0{менеджер жок} other{{count} менеджер}}",
   "@profileManagersSubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "profileSectionAccount": "Аккаунт",
@@ -189,7 +223,9 @@
   "profileSubscriptionActiveUntil": "Активдүү · {date} чейин",
   "@profileSubscriptionActiveUntil": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "profileChangePasswordTitle": "Сырсөздү өзгөртүү",
@@ -236,20 +272,22 @@
   "spotDetailDurationMin": "{count} мин",
   "@spotDetailDurationMin": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
-  "spotLabelTable": "Үстөл",
+  "spotLabelSpot": "Үстөл",
   "spotLabelConsole": "Консоль",
   "spotLabelCourt": "Аянтча",
   "spotLabelBoard": "Тактай",
   "spotLabelPitch": "Талаа",
-  "spotLabelTablePlural": "Үстөлдөр",
+  "spotLabelSpotPlural": "Үстөлдөр",
   "spotLabelConsolePlural": "Консолдор",
   "spotLabelCourtPlural": "Аянтчалар",
   "spotLabelBoardPlural": "Тактайлар",
   "spotLabelPitchPlural": "Талаалар",
-  "venueTypeTableTennis": "Үстөл теннис",
+  "venueTypeSpotTennis": "Үстөл теннис",
   "venueTypeBilliards": "Бильярд",
   "venueTypePlayStation": "PlayStation",
   "venueTypeVolleyball": "Волейбол",
@@ -270,7 +308,9 @@
   "managersDeleteTitle": "{name} чыгарылсынбы?",
   "@managersDeleteTitle": {
     "placeholders": {
-      "name": { "type": "String" }
+      "name": {
+        "type": "String"
+      }
     }
   },
   "managersDeleteSubtitle": "Менеджер сиздин залдарга кирүү мүмкүндүгүн жоготот. Анын сессияларынын тарыхы сакталат.",
@@ -280,25 +320,33 @@
   "managersLastSeenMinutes": "{count, plural, =1{1 мүн мурун} other{{count} мүн мурун}}",
   "@managersLastSeenMinutes": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "managersLastSeenHours": "{count, plural, =1{1 саат мурун} other{{count} саат мурун}}",
   "@managersLastSeenHours": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "managersLastSeenDays": "{count, plural, =1{1 күн мурун} other{{count} күн мурун}}",
   "@managersLastSeenDays": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "venueSpotsCountSuffix": "{count, plural, =0{0 даана} other{{count} даана}}",
   "@venueSpotsCountSuffix": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "subscriptionTitle": "Жазылуу",
@@ -310,29 +358,43 @@
   "subscriptionWarningBanner": "{n, plural, =1{Жазылууңуздун 1 күнү калды. Үзгүлтүксүздүк үчүн узартыңыз.} other{Жазылууңуздун {n} күнү калды. Үзгүлтүксүздүк үчүн узартыңыз.}}",
   "@subscriptionWarningBanner": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "subscriptionGraceBanner": "{n, plural, =1{Жазылуу бүттү. Жеңилдик мөөнөтүнүн 1 күнү калды.} other{Жазылуу бүттү. Жеңилдик мөөнөтүнүн {n} күнү калды.}}",
   "@subscriptionGraceBanner": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "subscriptionExpiredBanner": "Жазылуу бүттү. Негизги функцияларды колдонуу үчүн узартыңыз.",
-  "subscriptionPlanCardPerTable": "{price} {currency} / позиция / ай",
-  "@subscriptionPlanCardPerTable": {
+  "subscriptionPlanCardPerSpot": "{price} {currency} / позиция / ай",
+  "@subscriptionPlanCardPerSpot": {
     "placeholders": {
-      "price": { "type": "int" },
-      "currency": { "type": "String" }
+      "price": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionPlanCardMonthly": "× {tableCount} позиция = {monthly} {currency} / ай",
   "@subscriptionPlanCardMonthly": {
     "placeholders": {
-      "tableCount": { "type": "int" },
-      "monthly": { "type": "int" },
-      "currency": { "type": "String" }
+      "tableCount": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionDetailNextPayment": "Кийинки төлөм",
@@ -343,15 +405,23 @@
   "subscriptionPaymentItemSummary": "{months} ай × {tableCount} позиция",
   "@subscriptionPaymentItemSummary": {
     "placeholders": {
-      "months": { "type": "int" },
-      "tableCount": { "type": "int" }
+      "months": {
+        "type": "int"
+      },
+      "tableCount": {
+        "type": "int"
+      }
     }
   },
   "subscriptionAmountWithCurrency": "{amount} {currency}",
   "@subscriptionAmountWithCurrency": {
     "placeholders": {
-      "amount": { "type": "int" },
-      "currency": { "type": "String" }
+      "amount": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionContinueCta": "Жазылууну улантуу",
@@ -359,38 +429,58 @@
   "subscriptionCheckoutSummary": "{tableCount} позиция × {price} {currency} = {monthly} {currency} / ай",
   "@subscriptionCheckoutSummary": {
     "placeholders": {
-      "tableCount": { "type": "int" },
-      "price": { "type": "int" },
-      "monthly": { "type": "int" },
-      "currency": { "type": "String" }
+      "tableCount": {
+        "type": "int"
+      },
+      "price": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionCheckoutDuration": "Узактык",
   "subscriptionCheckoutMonthsLabel": "{n, plural, =1{1 ай} other{{n} ай}}",
   "@subscriptionCheckoutMonthsLabel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "subscriptionCheckoutTotal": "Жалпы",
   "subscriptionCheckoutTotalLine": "{months} ай × {monthly} {currency} = {total} {currency}",
   "@subscriptionCheckoutTotalLine": {
     "placeholders": {
-      "months": { "type": "int" },
-      "monthly": { "type": "int" },
-      "total": { "type": "int" },
-      "currency": { "type": "String" }
+      "months": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionCheckoutNewEndDate": "Жаңы бүтүү күнү: {date}",
   "@subscriptionCheckoutNewEndDate": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "subscriptionCheckoutPay": "Төлөө",
-  "subscriptionCheckoutNoTablesTitle": "Позиция али жок",
-  "subscriptionCheckoutNoTablesSubtitle": "Жазылуу үчүн жок дегенде бир позиция кошуңуз.",
+  "subscriptionCheckoutNoSpotsTitle": "Позиция али жок",
+  "subscriptionCheckoutNoSpotsSubtitle": "Жазылуу үчүн жок дегенде бир позиция кошуңуз.",
   "subscriptionCheckoutGoToVenues": "Залдарга өтүү",
   "subscriptionPaymentMockTitle": "Тесттик төлөм",
   "subscriptionPaymentMockSubtitle": "Чыныгы төлөм интеграциясы жакында. Натыйжаны төмөндө симуляция кылыңыз.",
@@ -400,7 +490,9 @@
   "subscriptionPaymentSuccessBody": "Жазылуу {date} чейин узартылды.",
   "@subscriptionPaymentSuccessBody": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "subscriptionPaymentFailedTitle": "Төлөм ишке ашпады",
@@ -417,13 +509,17 @@
   "profileSubscriptionExpiresIn": "{n, plural, =1{1 күндө бүтөт} other{{n} күндө бүтөт}}",
   "@profileSubscriptionExpiresIn": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "profileSubscriptionGrace": "{n, plural, =1{Жеңилдик · 1 күн калды} other{Жеңилдик · {n} күн калды}}",
   "@profileSubscriptionGrace": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "profileSubscriptionExpired": "Бүттү",
@@ -454,15 +550,21 @@
   "reportsForecastVsRange": "{previous} менен",
   "@reportsForecastVsRange": {
     "placeholders": {
-      "previous": { "type": "String" }
+      "previous": {
+        "type": "String"
+      }
     }
   },
   "reportsForecastNoComparison": "Тарых али жетишсиз",
   "reportsComparisonCaption": "{current}  ·  vs {previous}",
   "@reportsComparisonCaption": {
     "placeholders": {
-      "current": { "type": "String" },
-      "previous": { "type": "String" }
+      "current": {
+        "type": "String"
+      },
+      "previous": {
+        "type": "String"
+      }
     }
   },
   "reportsSpotTrendTitle": "Киреше трендине",

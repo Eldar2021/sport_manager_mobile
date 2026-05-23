@@ -51,7 +51,7 @@ class _PaymentTile extends StatelessWidget {
       subtitle: Text(
         context.l10n.subscriptionPaymentItemSummary(
           payment.months,
-          payment.tableCountSnapshot,
+          payment.spotCountSnapshot,
         ),
       ),
       trailing: Row(

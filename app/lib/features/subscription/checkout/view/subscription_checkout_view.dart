@@ -66,7 +66,7 @@ class _SubscriptionCheckoutViewState extends State<SubscriptionCheckoutView> {
           buildWhen: (a, b) => a.pricing != b.pricing,
           builder: (_, state) => switch (state.pricing) {
             RequestSuccess<SubscriptionPricingModel>(:final data) when data.tableCount == 0 =>
-              const SubscriptionNoTables(),
+              const SubscriptionNoSpots(),
             RequestSuccess<SubscriptionPricingModel>(:final data) => SubscriptionCheckoutContent(
               cubit: _cubit,
               pricing: data,

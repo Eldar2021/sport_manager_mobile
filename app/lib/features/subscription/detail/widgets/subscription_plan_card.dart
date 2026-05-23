@@ -7,20 +7,20 @@ import 'package:subscription/subscription.dart';
 class SubscriptionPlanCard extends StatelessWidget {
   const SubscriptionPlanCard({
     required this.subscription,
-    required this.pricePerTable,
+    required this.pricePerSpot,
     required this.tableCount,
     required this.currency,
     super.key,
   });
 
   final SubscriptionModel subscription;
-  final int pricePerTable;
+  final int pricePerSpot;
   final int tableCount;
   final String currency;
 
   @override
   Widget build(BuildContext context) {
-    final monthly = pricePerTable * tableCount;
+    final monthly = pricePerSpot * tableCount;
     return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -42,8 +42,8 @@ class SubscriptionPlanCard extends StatelessWidget {
             SubscriptionStatusBadge(subscription.status),
             const SizedBox(height: AppSpacing.x4),
             Text(
-              context.l10n.subscriptionPlanCardPerTable(
-                pricePerTable,
+              context.l10n.subscriptionPlanCardPerSpot(
+                pricePerSpot,
                 currency,
               ),
               style: context.textTheme.headlineMedium?.copyWith(

@@ -178,7 +178,7 @@ final class SubscriptionSummaryModel extends Equatable {
 // subscription_exception.dart
 enum SubscriptionErrorCode {
   subscriptionRequired,    // 403 SUBSCRIPTION_REQUIRED → expired/grace@0
-  noTables,                // 422 NO_TABLES
+  noSpots,                 // 422 NO_TABLES
   invalidDuration,         // 422 INVALID_DURATION
   paymentNotFound,         // 404 PAYMENT_NOT_FOUND
   paymentAlreadyProcessed, // 409 PAYMENT_ALREADY_PROCESSED
@@ -204,7 +204,7 @@ final class SubscriptionException extends AppException<SubscriptionErrorCode> {
       ru: 'Подписка истекла. Продлите её, чтобы продолжить пользоваться основными функциями.',
       ky: 'Жазылуу бүттү. Негизги функцияларды колдонуу үчүн узартыңыз.',
     ),
-    SubscriptionErrorCode.noTables => const BaseMessage(...),
+    SubscriptionErrorCode.noSpots => const BaseMessage(...),
     // ...
   };
 }
@@ -278,7 +278,7 @@ Mock — `Env.isMock` için. `AuthRemoteSourceMock` kalıbı:
 final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
   // İç state: tek SubscriptionModel + List<PaymentModel> (in-memory).
   // - getSubscription: state'i döner; expiry hesabını anlık yapar.
-  // - getPricing: const config — pricePerTable=200, currency=KGS, tableCount=10 (mock owner için).
+  // - getPricing: const config — pricePerSpot=200, currency=KGS, tableCount=10 (mock owner için).
   // - createCheckout: yeni Payment(PENDING) ekler, paymentUrl=null döner.
   // - confirmMockPayment(PAID): subscription'ı uzatır, payment'ı PAID yapar.
   // Test kolaylığı: dev menüsünden state'i sıfırlamak / GRACE simüle etmek.
@@ -514,7 +514,7 @@ app/lib/features/subscription/
 
 - `StatefulWidget` + `SubscriptionCheckoutCubit`.
 - `loadPricing()` → state: `RequestStatus<SubscriptionPricingModel>` + `int months` (1'den başlar).
-- `tableCount = 0` → `SubscriptionEmptyNoTables` (Add table CTA).
+- `tableCount = 0` → `SubscriptionEmptyNoSpots` (Add table CTA).
 - Yapı: pricing özet kartı → `SubscriptionDurationPicker` (chips: 1/3/6/12 + numeric stepper) → `SubscriptionTotalCard` (animated total + new endDate preview) → `AppButton(isLoading)` "Pay".
 - "Pay" → `cubit.checkout()` → success'te `context.push(AppRoutes.subscriptionPayment, extra: payment)` ve sayfayı `pushReplacement` etmek yerine push (kullanıcı geri gelirse pricing yine geçerli).
 - AppBar action: `ContactSupportSheet`.
@@ -569,7 +569,7 @@ abstract final class SubscriptionGate {
 **Kullanım yerleri** (Home'daki yazma aksiyonları):
 
 - `home_view.dart`'ta masa kartı tap → `SubscriptionGate.guard(context, action: () => _startSession(...))`.
-- Venue/table form'larında "Save" → aynı.
+- Venue/spot form'larında "Save" → aynı.
 - Manager invite section → aynı.
 
 > Manager için: `SubscriptionGate.guard` AuthCubit role'üne bakar; manager ise direkt action çalıştırır (sunucu zaten kontrol ediyor; mobile soft-block sadece owner için).
@@ -657,7 +657,7 @@ Subscription da kullanacak → **shared component**. Plan:
 | `subscriptionWarningBanner`          | Your subscription expires in {n} days. Renew to avoid interruption. |
 | `subscriptionGraceBanner`            | Subscription expired. {n} day(s) of grace period left.              |
 | `subscriptionExpiredBanner`          | Subscription expired. Renew to use core features.                   |
-| `subscriptionPlanCardPerTable`       | {price} {currency} / table / month                                  |
+| `subscriptionPlanCardPerSpot`        | {price} {currency} / table / month                                  |
 | `subscriptionPlanCardMonthly`        | × {tableCount} tables = {monthly} {currency} / month                |
 | `subscriptionDetailNextPayment`      | Next payment                                                        |
 | `subscriptionDetailLastPayment`      | Last payment                                                        |
@@ -671,7 +671,7 @@ Subscription da kullanacak → **shared component**. Plan:
 | `subscriptionCheckoutTotal`          | Total                                                               |
 | `subscriptionCheckoutNewEndDate`     | New end date: {date}                                                |
 | `subscriptionCheckoutPay`            | Pay                                                                 |
-| `subscriptionCheckoutNoTables`       | Add at least one table to subscribe                                 |
+| `subscriptionCheckoutNoSpots`        | Add at least one table to subscribe                                 |
 | `subscriptionCheckoutGoToVenues`     | Go to venues                                                        |
 | `subscriptionPaymentMockTitle`       | Mock payment                                                        |
 | `subscriptionPaymentSimulateSuccess` | Simulate success                                                    |
@@ -752,7 +752,7 @@ MVP için **yeni dependency yok**.
 
 1. `SubscriptionGate` helper.
 2. Home masa kartı tap'ında `SubscriptionGate.guard`.
-3. Venue/table form save'lerinde guard.
+3. Venue/spot form save'lerinde guard.
 4. Manager invite section'da guard.
 5. `SubscriptionBlockedDialog`.
 6. `SubscriptionExpirationHandler` (interceptor değil, `ErrorHandler` registration; backend yarış için).

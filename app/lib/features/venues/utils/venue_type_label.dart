@@ -7,7 +7,7 @@ import 'package:sport_manager_mobile/l10n/l10n.dart';
 /// type-aware label here.
 extension VenueTypeX on VenueType {
   String spotLabel(BuildContext c) => switch (this) {
-    VenueType.tableTennis || VenueType.billiards => c.l10n.spotLabelTable,
+    VenueType.tableTennis || VenueType.billiards => c.l10n.spotLabelSpot,
     VenueType.playStation => c.l10n.spotLabelConsole,
     VenueType.volleyball || VenueType.basketball => c.l10n.spotLabelCourt,
     VenueType.chess => c.l10n.spotLabelBoard,
@@ -15,7 +15,7 @@ extension VenueTypeX on VenueType {
   };
 
   String spotLabelPlural(BuildContext c) => switch (this) {
-    VenueType.tableTennis || VenueType.billiards => c.l10n.spotLabelTablePlural,
+    VenueType.tableTennis || VenueType.billiards => c.l10n.spotLabelSpotPlural,
     VenueType.playStation => c.l10n.spotLabelConsolePlural,
     VenueType.volleyball || VenueType.basketball => c.l10n.spotLabelCourtPlural,
     VenueType.chess => c.l10n.spotLabelBoardPlural,
@@ -23,7 +23,7 @@ extension VenueTypeX on VenueType {
   };
 
   String typeName(BuildContext c) => switch (this) {
-    VenueType.tableTennis => c.l10n.venueTypeTableTennis,
+    VenueType.tableTennis => c.l10n.venueTypeSpotTennis,
     VenueType.billiards => c.l10n.venueTypeBilliards,
     VenueType.playStation => c.l10n.venueTypePlayStation,
     VenueType.volleyball => c.l10n.venueTypeVolleyball,

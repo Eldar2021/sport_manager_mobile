@@ -34,7 +34,7 @@ The exception lives at the **package boundary**, not the domain-noun boundary.
 ```dart
 // Bad — three sibling exceptions for one package
 class VenueException   extends AppException<VenueErrorCode> { ... }
-class TableException   extends AppException<TableErrorCode> { ... }
+class SpotException   extends AppException<SpotErrorCode> { ... }
 class SessionException extends AppException<SessionErrorCode> { ... }
 ```
 

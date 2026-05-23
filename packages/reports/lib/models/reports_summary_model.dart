@@ -8,7 +8,7 @@ part 'reports_summary_model.g.dart';
 /// Top-level KPI summary for the Reports overview. MVP scope is **revenue
 /// + sessions** only — average-duration / occupancy / active-now were
 /// dropped because synthetic data made the deltas meaningless and the
-/// owner can read those signals from Table Detail (which keeps the per-
+/// owner can read those signals from Spot Detail (which keeps the per-
 /// table revenue/session view).
 @immutable
 @JsonSerializable()

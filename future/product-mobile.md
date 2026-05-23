@@ -20,7 +20,7 @@ Product mevcut **package + feature** kalıbına oturur — `subscription` ile bi
 
 - **`packages/product/`** — yeni veri katmanı (managers/subscription paketi şablonu). Models, sources, repository, `ProductExc`.
 - **`features/product/`** — Owner profil altından açılan ürün yönetimi feature'ı. Sub-screen'ler: `list/`, `form/` (create+update aynı sayfa).
-- **Session entegrasyonu** — mevcut `features/facility/` (session/table) akışına iki ek widget: `AddProductSheet` (bottom sheet) + `SessionProductsList` (aktif session ekranında). Repository çağrıları `FacilityRepository` üzerinden değil, yeni `ProductRepository` üzerinden.
+- **Session entegrasyonu** — mevcut `features/facility/` (session/spot) akışına iki ek widget: `AddProductSheet` (bottom sheet) + `SessionProductsList` (aktif session ekranında). Repository çağrıları `FacilityRepository` üzerinden değil, yeni `ProductRepository` üzerinden.
 - **Reports entegrasyonu** — mevcut `features/reports/` içine yeni sub-screen `products/` (kategori breakdown listesi) + `product_detail/` (tek ürünün satış geçmişi).
 - **Page-level cubit'ler** (`ProductFormCubit`, `AddProductSheetCubit`, `ProductReportCubit`) — single-page kuralı: `BlocProvider` YOK, `late final` field + `bloc:` ile geçilir, `dispose`'da `close()`.
 - **Owner-only sayfaların görünürlüğü** mevcut `AuthCubit.user.role` üzerinden kontrol edilir; Manager profil ekranında "Ürünler" satırı gözükmez.
