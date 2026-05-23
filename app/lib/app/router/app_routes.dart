@@ -21,4 +21,6 @@ abstract final class AppRoutes {
   static const subscription = '/subscription';
   static const subscriptionCheckout = '/subscription/checkout';
   static const subscriptionPayment = '/subscription/payment';
+  static const products = '/products';
+  static const productForm = '/products/form';
 }

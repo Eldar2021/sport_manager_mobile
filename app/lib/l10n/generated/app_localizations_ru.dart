@@ -1038,4 +1038,126 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get upgraderLaterButton => 'Позже';
+
+  @override
+  String get currencyLabel => 'сом';
+
+  @override
+  String get profileProductsTitle => 'Товары и цены';
+
+  @override
+  String get profileProductsSubtitle => 'Напитки, еда, аренда';
+
+  @override
+  String get productsTitle => 'Товары и цены';
+
+  @override
+  String get productsFilterAll => 'Все';
+
+  @override
+  String get productsAddButton => 'Добавить товар';
+
+  @override
+  String get productsCreateTitle => 'Новый товар';
+
+  @override
+  String get productsEditTitle => 'Редактировать товар';
+
+  @override
+  String get productsCreateButton => 'Создать товар';
+
+  @override
+  String get productsUpdateButton => 'Обновить';
+
+  @override
+  String get productsEmptyTitle => 'Товаров пока нет';
+
+  @override
+  String get productsEmptySubtitle => 'Добавьте первый товар для начала продаж.';
+
+  @override
+  String productsDeleteTitle(String name) {
+    return 'Удалить \"$name\"?';
+  }
+
+  @override
+  String get productsDeleteSubtitle => 'Товар будет скрыт и не будет отображаться в активных сессиях.';
+
+  @override
+  String get productsNameLabel => 'Название';
+
+  @override
+  String get productsNameHint => 'напр. Вода 0.5л';
+
+  @override
+  String get productsPriceLabel => 'Цена';
+
+  @override
+  String get productsPriceHint => 'напр. 50';
+
+  @override
+  String get productsPriceInvalid => 'Введите корректную цену больше 0';
+
+  @override
+  String get productsCategoryLabel => 'Категория';
+
+  @override
+  String get productsUnitLabel => 'Единица измерения';
+
+  @override
+  String get productsDescriptionLabel => 'Описание (необязательно)';
+
+  @override
+  String get productsDescriptionHint => 'Краткое описание...';
+
+  @override
+  String get productsPhotoSectionLabel => 'Фото (необязательно)';
+
+  @override
+  String get productsIconPickerLabel => 'Или выберите иконку:';
+
+  @override
+  String get productsPhotoPickerLabel => 'Добавить';
+
+  @override
+  String get productCategoryDrink => 'Напитки';
+
+  @override
+  String get productCategoryFood => 'Еда';
+
+  @override
+  String get productCategoryEquipment => 'Аренда';
+
+  @override
+  String get productCategoryOther => 'Прочее';
+
+  @override
+  String get productUnitPiece => 'Штука';
+
+  @override
+  String get productUnitKg => 'кг';
+
+  @override
+  String get productUnitLitre => 'Литр';
+
+  @override
+  String get productUnitPortion => 'Порция';
+
+  @override
+  String get productUnitHour => 'Час';
+
+  @override
+  String get productUnitPieceShort => 'шт';
+
+  @override
+  String get productUnitKgShort => 'кг';
+
+  @override
+  String get productUnitLitreShort => 'л';
+
+  @override
+  String get productUnitPortionShort => 'порц.';
+
+  @override
+  String get productUnitHourShort => 'ч';
 }

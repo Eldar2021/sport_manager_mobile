@@ -475,5 +475,52 @@
   "upgraderRequiredDescription": "Бул версия колдоого алынбайт. Улантуу үчүн колдонмону жаңыртыңыз.",
   "upgraderRecommendedDescription": "Жаңы версия жеткиликтүү. Мыкты тажрыйба үчүн жаңыртыңыз.",
   "upgraderUpdateButton": "Жаңыртуу",
-  "upgraderLaterButton": "Кийинчерээк"
+  "upgraderLaterButton": "Кийинчерээк",
+  "currencyLabel": "сом",
+  "profileProductsTitle": "Товарлар жана баалар",
+  "profileProductsSubtitle": "Суусундуктар, тамак-аш, аренда",
+  "productsTitle": "Товарлар жана баалар",
+  "productsFilterAll": "Баары",
+  "productsAddButton": "Товар кошуу",
+  "productsCreateTitle": "Жаңы товар",
+  "productsEditTitle": "Товарды түзөтүү",
+  "productsCreateButton": "Товар түзүү",
+  "productsUpdateButton": "Жаңыртуу",
+  "productsEmptyTitle": "Товарлар жок",
+  "productsEmptySubtitle": "Сатуу баштоо үчүн биринчи товарды кошуңуз.",
+  "productsDeleteTitle": "\"{name}\" жок кылуу?",
+  "@productsDeleteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "productsDeleteSubtitle": "Товар жашырылат жана активдүү сессияларда көрүнбөйт.",
+  "productsNameLabel": "Аталышы",
+  "productsNameHint": "мис. Суу 0.5л",
+  "productsPriceLabel": "Баасы",
+  "productsPriceHint": "мис. 50",
+  "productsPriceInvalid": "0дон чоң туура баа киргизиңиз",
+  "productsCategoryLabel": "Категория",
+  "productsUnitLabel": "Өлчөм бирдиги",
+  "productsDescriptionLabel": "Сүрөттөмө (милдеттүү эмес)",
+  "productsDescriptionHint": "Кыскача сүрөттөмө...",
+  "productsPhotoSectionLabel": "Сүрөт (кошумча)",
+  "productsIconPickerLabel": "Же иконка тандаңыз:",
+  "productsPhotoPickerLabel": "Кошуу",
+  "productCategoryDrink": "Суусундуктар",
+  "productCategoryFood": "Тамак-аш",
+  "productCategoryEquipment": "Аренда",
+  "productCategoryOther": "Башка",
+  "productUnitPiece": "Штука",
+  "productUnitKg": "кг",
+  "productUnitLitre": "Литр",
+  "productUnitPortion": "Порция",
+  "productUnitHour": "Саат",
+  "productUnitPieceShort": "шт",
+  "productUnitKgShort": "кг",
+  "productUnitLitreShort": "л",
+  "productUnitPortionShort": "порц.",
+  "productUnitHourShort": "саат"
 }

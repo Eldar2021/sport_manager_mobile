@@ -1,4 +1,5 @@
 export 'banner/app_banner.dart';
+export 'body/app_destructive_dialog.dart';
 export 'body/app_destructive_sheet.dart';
 export 'button/app_button.dart';
 export 'button/app_button_scope.dart';

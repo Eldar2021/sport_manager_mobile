@@ -475,5 +475,52 @@
   "upgraderRequiredDescription": "Эта версия больше не поддерживается. Обновите приложение, чтобы продолжить.",
   "upgraderRecommendedDescription": "Доступна новая версия. Обновите для лучшего опыта.",
   "upgraderUpdateButton": "Обновить",
-  "upgraderLaterButton": "Позже"
+  "upgraderLaterButton": "Позже",
+  "currencyLabel": "сом",
+  "profileProductsTitle": "Товары и цены",
+  "profileProductsSubtitle": "Напитки, еда, аренда",
+  "productsTitle": "Товары и цены",
+  "productsFilterAll": "Все",
+  "productsAddButton": "Добавить товар",
+  "productsCreateTitle": "Новый товар",
+  "productsEditTitle": "Редактировать товар",
+  "productsCreateButton": "Создать товар",
+  "productsUpdateButton": "Обновить",
+  "productsEmptyTitle": "Товаров пока нет",
+  "productsEmptySubtitle": "Добавьте первый товар для начала продаж.",
+  "productsDeleteTitle": "Удалить \"{name}\"?",
+  "@productsDeleteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "productsDeleteSubtitle": "Товар будет скрыт и не будет отображаться в активных сессиях.",
+  "productsNameLabel": "Название",
+  "productsNameHint": "напр. Вода 0.5л",
+  "productsPriceLabel": "Цена",
+  "productsPriceHint": "напр. 50",
+  "productsPriceInvalid": "Введите корректную цену больше 0",
+  "productsCategoryLabel": "Категория",
+  "productsUnitLabel": "Единица измерения",
+  "productsDescriptionLabel": "Описание (необязательно)",
+  "productsDescriptionHint": "Краткое описание...",
+  "productsPhotoSectionLabel": "Фото (необязательно)",
+  "productsIconPickerLabel": "Или выберите иконку:",
+  "productsPhotoPickerLabel": "Добавить",
+  "productCategoryDrink": "Напитки",
+  "productCategoryFood": "Еда",
+  "productCategoryEquipment": "Аренда",
+  "productCategoryOther": "Прочее",
+  "productUnitPiece": "Штука",
+  "productUnitKg": "кг",
+  "productUnitLitre": "Литр",
+  "productUnitPortion": "Порция",
+  "productUnitHour": "Час",
+  "productUnitPieceShort": "шт",
+  "productUnitKgShort": "кг",
+  "productUnitLitreShort": "л",
+  "productUnitPortionShort": "порц.",
+  "productUnitHourShort": "ч"
 }

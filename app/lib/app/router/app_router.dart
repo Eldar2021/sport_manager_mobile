@@ -2,6 +2,7 @@ import 'package:auth/auth.dart';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:product/product.dart';
 import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/core/core.dart';
 import 'package:sport_manager_mobile/env.dart';
@@ -9,6 +10,7 @@ import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/main/main.dart';
 import 'package:sport_manager_mobile/features/managers/managers.dart';
+import 'package:sport_manager_mobile/features/product/product.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
 import 'package:sport_manager_mobile/features/settings/settings.dart';
@@ -125,6 +127,16 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
       GoRoute(
         path: AppRoutes.settings,
         builder: (_, _) => const SettingsView(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.products,
+        builder: (_, _) => const ProductsListView(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.productForm,
+        builder: (_, state) => ProductFormView(state.extra as ProductModel?),
       ),
 
       GoRoute(

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:facility/models/session_status.dart';
-import 'package:facility/models/tarif_type.dart';
+import 'package:facility/facility.dart';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -25,6 +25,8 @@ final class SessionModel extends Equatable {
     this.totalAmount,
     this.cancelReason,
     this.customerName,
+    this.products = const [],
+    this.productsAmount = 0,
   });
 
   factory SessionModel.fromJson(Map<String, dynamic> json) {
@@ -76,6 +78,9 @@ final class SessionModel extends Equatable {
   /// Null when status is COMPLETED.
   final String? cancelReason;
 
+  final List<SessionProductItemModel> products;
+  final int productsAmount;
+
   bool get isActive => status == SessionStatus.active;
   bool get isPaused => status == SessionStatus.paused;
   bool get isCompleted => status == SessionStatus.completed;
@@ -101,5 +106,7 @@ final class SessionModel extends Equatable {
     discountPercent,
     totalAmount,
     cancelReason,
+    products,
+    productsAmount,
   ];
 }

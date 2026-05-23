@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:api_client/api_client.dart';
 
@@ -303,5 +304,22 @@ class ApiClient with ConverterMixin {
       data: data,
       params: params,
     ).then((v) => convertListOfType<T>(v, fromJson));
+  }
+
+  Future<T> postMultipart<T>(
+    String path, {
+    required FromJson<T> fromJson,
+    required Map<String, File> files,
+    PostApiParams? params,
+  }) async {
+    final formData = FormData.fromMap({
+      for (final entry in files.entries) entry.key: await MultipartFile.fromFile(entry.value.path),
+    });
+    return postType<T>(
+      path,
+      fromJson: fromJson,
+      data: formData,
+      params: params,
+    );
   }
 }

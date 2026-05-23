@@ -6,6 +6,8 @@ export 'di/di.dart';
 export 'exeptions/exeption.dart';
 export 'exeptions/extension/error_handler_context_extension.dart';
 export 'extension/currency_extension.dart';
+export 'extension/product_category_extension.dart';
+export 'extension/product_unit_extension.dart';
 export 'extension/tarif_type_extension.dart';
 export 'observability/app_talker.dart';
 export 'observability/talker_dev_overlay.dart';

@@ -16,4 +16,14 @@ abstract interface class SessionRemoteSource {
     String sessionId,
     String? cancelReason,
   );
+
+  Future<SessionModel> addProductToSession(
+    String sessionId,
+    String productId,
+  );
+
+  Future<SessionModel> removeProductFromSession(
+    String sessionId,
+    String itemId,
+  );
 }

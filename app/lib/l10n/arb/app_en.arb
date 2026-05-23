@@ -475,5 +475,52 @@
   "upgraderRequiredDescription": "This version is no longer supported. Please update the app to continue.",
   "upgraderRecommendedDescription": "A new version is available. Update for the best experience.",
   "upgraderUpdateButton": "Update",
-  "upgraderLaterButton": "Later"
+  "upgraderLaterButton": "Later",
+  "currencyLabel": "som",
+  "profileProductsTitle": "Products and prices",
+  "profileProductsSubtitle": "Drinks, food, rent",
+  "productsTitle": "Products and prices",
+  "productsFilterAll": "All",
+  "productsAddButton": "Add product",
+  "productsCreateTitle": "New product",
+  "productsEditTitle": "Edit product",
+  "productsCreateButton": "Create product",
+  "productsUpdateButton": "Update",
+  "productsEmptyTitle": "No products yet",
+  "productsEmptySubtitle": "Add your first product to start selling.",
+  "productsDeleteTitle": "Delete \"{name}\"?",
+  "@productsDeleteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "productsDeleteSubtitle": "This product will be soft-deleted and won't appear in active sessions.",
+  "productsNameLabel": "Name",
+  "productsNameHint": "e.g. Water 0.5L",
+  "productsPriceLabel": "Price",
+  "productsPriceHint": "e.g. 50",
+  "productsPriceInvalid": "Enter a valid price greater than 0",
+  "productsCategoryLabel": "Category",
+  "productsUnitLabel": "Unit",
+  "productsDescriptionLabel": "Description (optional)",
+  "productsDescriptionHint": "Short description...",
+  "productsPhotoSectionLabel": "Photo (optional)",
+  "productsIconPickerLabel": "Or choose an icon:",
+  "productsPhotoPickerLabel": "Add",
+  "productCategoryDrink": "Drinks",
+  "productCategoryFood": "Food",
+  "productCategoryEquipment": "Rental",
+  "productCategoryOther": "Other",
+  "productUnitPiece": "Piece",
+  "productUnitKg": "kg",
+  "productUnitLitre": "Litre",
+  "productUnitPortion": "Portion",
+  "productUnitHour": "Hour",
+  "productUnitPieceShort": "pcs",
+  "productUnitKgShort": "kg",
+  "productUnitLitreShort": "L",
+  "productUnitPortionShort": "port.",
+  "productUnitHourShort": "hr"
 }
