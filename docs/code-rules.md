@@ -186,11 +186,11 @@ final class VenuesState extends Equatable {
   });
 
   final RequestStatus<List<VenueModel>> venues;
-  final RequestStatus<List<TableModel>> tables;
+  final RequestStatus<List<SpotModel>> tables;
 
   VenuesState copyWith({
     RequestStatus<List<VenueModel>>? venues,
-    RequestStatus<List<TableModel>>? tables,
+    RequestStatus<List<SpotModel>>? tables,
   }) => VenuesState(
     venues: venues ?? this.venues,
     tables: tables ?? this.tables,
@@ -721,10 +721,10 @@ Don't use private methods to build widgets:
 
 ```dart
 // Bad
-Widget _buildTableCard() { return ...; }
+Widget _buildSpotCard() { return ...; }
 
 // Good — separate class in its own file
-class TableCard extends StatelessWidget { ... }
+class SpotCard extends StatelessWidget { ... }
 ```
 
 ### View file size

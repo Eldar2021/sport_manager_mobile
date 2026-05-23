@@ -4,8 +4,8 @@ import 'package:sport_manager_mobile/app/app.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
-class SubscriptionNoTables extends StatelessWidget {
-  const SubscriptionNoTables({super.key});
+class SubscriptionNoSpots extends StatelessWidget {
+  const SubscriptionNoSpots({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class SubscriptionNoTables extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.x3),
           Text(
-            context.l10n.subscriptionCheckoutNoTablesTitle,
+            context.l10n.subscriptionCheckoutNoSpotsTitle,
             style: context.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w700,
             ),
@@ -29,7 +29,7 @@ class SubscriptionNoTables extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.x2),
           Text(
-            context.l10n.subscriptionCheckoutNoTablesSubtitle,
+            context.l10n.subscriptionCheckoutNoSpotsSubtitle,
             style: context.appTextStyles.muted.bodyMedium,
             textAlign: TextAlign.center,
           ),

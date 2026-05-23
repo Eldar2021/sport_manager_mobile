@@ -14,8 +14,8 @@ final class PaymentModel extends Equatable {
     required this.amount,
     required this.currency,
     required this.months,
-    required this.tableCountSnapshot,
-    required this.pricePerTableSnapshot,
+    required this.spotCountSnapshot,
+    required this.pricePerSpotSnapshot,
     required this.status,
     required this.provider,
     required this.createdAt,
@@ -35,8 +35,8 @@ final class PaymentModel extends Equatable {
   final int amount;
   final String currency;
   final int months;
-  final int tableCountSnapshot;
-  final int pricePerTableSnapshot;
+  final int spotCountSnapshot;
+  final int? pricePerSpotSnapshot;
   final PaymentStatus status;
   final String? paymentUrl;
   final String provider;
@@ -57,8 +57,8 @@ final class PaymentModel extends Equatable {
     amount,
     currency,
     months,
-    tableCountSnapshot,
-    pricePerTableSnapshot,
+    spotCountSnapshot,
+    pricePerSpotSnapshot,
     status,
     paymentUrl,
     provider,

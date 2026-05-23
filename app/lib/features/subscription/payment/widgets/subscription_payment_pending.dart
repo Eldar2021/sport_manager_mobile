@@ -72,7 +72,7 @@ class _Summary extends StatelessWidget {
             Text(
               context.l10n.subscriptionPaymentItemSummary(
                 payment.months,
-                payment.tableCountSnapshot,
+                payment.spotCountSnapshot,
               ),
               style: context.appTextStyles.muted.bodySmall,
             ),

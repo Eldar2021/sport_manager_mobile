@@ -8,7 +8,7 @@ part 'subscription_pricing_model.g.dart';
 @JsonSerializable()
 final class SubscriptionPricingModel extends Equatable {
   const SubscriptionPricingModel({
-    required this.pricePerTable,
+    required this.pricePerSpot,
     required this.currency,
     required this.tableCount,
     required this.monthlyAmount,
@@ -23,7 +23,7 @@ final class SubscriptionPricingModel extends Equatable {
     return _$SubscriptionPricingModelFromJson(json);
   }
 
-  final int pricePerTable;
+  final int pricePerSpot;
   final String currency;
   final int tableCount;
   final int monthlyAmount;
@@ -35,11 +35,11 @@ final class SubscriptionPricingModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$SubscriptionPricingModelToJson(this);
 
-  int totalAmountFor(int months) => pricePerTable * tableCount * months;
+  int totalAmountFor(int months) => pricePerSpot * tableCount * months;
 
   @override
   List<Object?> get props => [
-    pricePerTable,
+    pricePerSpot,
     currency,
     tableCount,
     monthlyAmount,

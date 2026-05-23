@@ -557,7 +557,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get spotLabelTable => 'Стол';
+  String get spotLabelSpot => 'Стол';
 
   @override
   String get spotLabelConsole => 'Консоль';
@@ -572,7 +572,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get spotLabelPitch => 'Поле';
 
   @override
-  String get spotLabelTablePlural => 'Столы';
+  String get spotLabelSpotPlural => 'Столы';
 
   @override
   String get spotLabelConsolePlural => 'Консоли';
@@ -587,7 +587,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get spotLabelPitchPlural => 'Поля';
 
   @override
-  String get venueTypeTableTennis => 'Настольный теннис';
+  String get venueTypeSpotTennis => 'Настольный теннис';
 
   @override
   String get venueTypeBilliards => 'Бильярд';
@@ -756,7 +756,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get subscriptionExpiredBanner => 'Подписка истекла. Продлите, чтобы пользоваться основными функциями.';
 
   @override
-  String subscriptionPlanCardPerTable(int price, String currency) {
+  String subscriptionPlanCardPerSpot(int price, String currency) {
     return '$price $currency / позиция / месяц';
   }
 
@@ -834,10 +834,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get subscriptionCheckoutPay => 'Оплатить';
 
   @override
-  String get subscriptionCheckoutNoTablesTitle => 'Позиций пока нет';
+  String get subscriptionCheckoutNoSpotsTitle => 'Позиций пока нет';
 
   @override
-  String get subscriptionCheckoutNoTablesSubtitle => 'Добавьте хотя бы одну позицию, чтобы оформить подписку.';
+  String get subscriptionCheckoutNoSpotsSubtitle => 'Добавьте хотя бы одну позицию, чтобы оформить подписку.';
 
   @override
   String get subscriptionCheckoutGoToVenues => 'К залам';
