@@ -65,38 +65,50 @@
   "homeAddSpot": "Add {spot}",
   "@homeAddSpot": {
     "placeholders": {
-      "spot": { "type": "String" }
+      "spot": {
+        "type": "String"
+      }
     }
   },
   "homeSpotsEmpty": "No {spotPlural} yet",
   "@homeSpotsEmpty": {
     "placeholders": {
-      "spotPlural": { "type": "String" }
+      "spotPlural": {
+        "type": "String"
+      }
     }
   },
   "homeSpotsEmptySub": "Add the first {spot} so managers can start sessions.",
   "@homeSpotsEmptySub": {
     "placeholders": {
-      "spot": { "type": "String" }
+      "spot": {
+        "type": "String"
+      }
     }
   },
   "homeSpotsEmptySubManager": "{spotPlural} will appear here once the owner adds them.",
   "@homeSpotsEmptySubManager": {
     "placeholders": {
-      "spotPlural": { "type": "String" }
+      "spotPlural": {
+        "type": "String"
+      }
     }
   },
   "homeSpotOccupied": "{customerName} · OCCUPIED",
   "@homeSpotOccupied": {
     "placeholders": {
-      "customerName": { "type": "String" }
+      "customerName": {
+        "type": "String"
+      }
     }
   },
   "homeSpotOccupiedBase": "OCCUPIED",
   "homeSpotPaused": "{customerName} · PAUSED",
   "@homeSpotPaused": {
     "placeholders": {
-      "customerName": { "type": "String" }
+      "customerName": {
+        "type": "String"
+      }
     }
   },
   "homeSpotPausedBase": "PAUSED",
@@ -114,8 +126,12 @@
   "createSpotRateSuffix": "{currency}/{time_unit}",
   "@createSpotRateSuffix": {
     "placeholders": {
-      "currency": { "type": "String" },
-      "time_unit": { "type": "String" }
+      "currency": {
+        "type": "String"
+      },
+      "time_unit": {
+        "type": "String"
+      }
     }
   },
   "createSpotButton": "Create spot",
@@ -150,23 +166,37 @@
   "venueSpotsCount": "{count, plural, =0{no {spotPlural}} =1{1 {spot}} other{{count} {spotPlural}}}",
   "@venueSpotsCount": {
     "placeholders": {
-      "count": { "type": "int" },
-      "spot": { "type": "String" },
-      "spotPlural": { "type": "String" }
+      "count": {
+        "type": "int"
+      },
+      "spot": {
+        "type": "String"
+      },
+      "spotPlural": {
+        "type": "String"
+      }
     }
   },
   "homeSpotTitle": "{spotLabel} {number}",
   "@homeSpotTitle": {
     "placeholders": {
-      "spotLabel": { "type": "String" },
-      "number": { "type": "int" }
+      "spotLabel": {
+        "type": "String"
+      },
+      "number": {
+        "type": "int"
+      }
     }
   },
   "homeSpotsSection": "{spotPlural} · {count}",
   "@homeSpotsSection": {
     "placeholders": {
-      "spotPlural": { "type": "String" },
-      "count": { "type": "int" }
+      "spotPlural": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
     }
   },
   "profileSectionManagement": "Management",
@@ -174,14 +204,18 @@
   "profileManageVenuesSubtitle": "{count, plural, =0{No venues} =1{1 venue} other{{count} venues}}",
   "@profileManageVenuesSubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "profileManagersTitle": "Managers",
   "profileManagersSubtitle": "{count, plural, =0{No managers} =1{1 manager} other{{count} managers}}",
   "@profileManagersSubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "profileSectionAccount": "Account",
@@ -189,7 +223,9 @@
   "profileSubscriptionActiveUntil": "Active · until {date}",
   "@profileSubscriptionActiveUntil": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "profileChangePasswordTitle": "Change password",
@@ -236,20 +272,22 @@
   "spotDetailDurationMin": "{count} min",
   "@spotDetailDurationMin": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
-  "spotLabelTable": "Table",
+  "spotLabelSpot": "Spot",
   "spotLabelConsole": "Console",
   "spotLabelCourt": "Court",
   "spotLabelBoard": "Board",
   "spotLabelPitch": "Pitch",
-  "spotLabelTablePlural": "Tables",
+  "spotLabelSpotPlural": "Spots",
   "spotLabelConsolePlural": "Consoles",
   "spotLabelCourtPlural": "Courts",
   "spotLabelBoardPlural": "Boards",
   "spotLabelPitchPlural": "Pitches",
-  "venueTypeTableTennis": "Table Tennis",
+  "venueTypeSpotTennis": "Spot Tennis",
   "venueTypeBilliards": "Billiards",
   "venueTypePlayStation": "PlayStation",
   "venueTypeVolleyball": "Volleyball",
@@ -270,7 +308,9 @@
   "managersDeleteTitle": "Remove {name}?",
   "@managersDeleteTitle": {
     "placeholders": {
-      "name": { "type": "String" }
+      "name": {
+        "type": "String"
+      }
     }
   },
   "managersDeleteSubtitle": "The manager will lose access to your venues. Their session history is kept.",
@@ -280,25 +320,33 @@
   "managersLastSeenMinutes": "{count, plural, =1{1 min ago} other{{count} min ago}}",
   "@managersLastSeenMinutes": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "managersLastSeenHours": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
   "@managersLastSeenHours": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "managersLastSeenDays": "{count, plural, =1{1 day ago} other{{count} days ago}}",
   "@managersLastSeenDays": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "venueSpotsCountSuffix": "{count, plural, =0{0 pcs} =1{1 pc} other{{count} pcs}}",
   "@venueSpotsCountSuffix": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "subscriptionTitle": "Subscription",
@@ -310,29 +358,43 @@
   "subscriptionWarningBanner": "{n, plural, =1{Your subscription expires in 1 day. Renew to avoid interruption.} other{Your subscription expires in {n} days. Renew to avoid interruption.}}",
   "@subscriptionWarningBanner": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "subscriptionGraceBanner": "{n, plural, =1{Subscription expired. 1 day of grace period left.} other{Subscription expired. {n} days of grace period left.}}",
   "@subscriptionGraceBanner": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "subscriptionExpiredBanner": "Subscription expired. Renew to use core features.",
-  "subscriptionPlanCardPerTable": "{price} {currency} / spot / month",
-  "@subscriptionPlanCardPerTable": {
+  "subscriptionPlanCardPerSpot": "{price} {currency} / spot / month",
+  "@subscriptionPlanCardPerSpot": {
     "placeholders": {
-      "price": { "type": "int" },
-      "currency": { "type": "String" }
+      "price": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionPlanCardMonthly": "× {tableCount} spots = {monthly} {currency} / month",
   "@subscriptionPlanCardMonthly": {
     "placeholders": {
-      "tableCount": { "type": "int" },
-      "monthly": { "type": "int" },
-      "currency": { "type": "String" }
+      "tableCount": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionDetailNextPayment": "Next payment",
@@ -343,15 +405,23 @@
   "subscriptionPaymentItemSummary": "{months} months × {tableCount} spots",
   "@subscriptionPaymentItemSummary": {
     "placeholders": {
-      "months": { "type": "int" },
-      "tableCount": { "type": "int" }
+      "months": {
+        "type": "int"
+      },
+      "tableCount": {
+        "type": "int"
+      }
     }
   },
   "subscriptionAmountWithCurrency": "{amount} {currency}",
   "@subscriptionAmountWithCurrency": {
     "placeholders": {
-      "amount": { "type": "int" },
-      "currency": { "type": "String" }
+      "amount": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionContinueCta": "Continue subscription",
@@ -359,38 +429,58 @@
   "subscriptionCheckoutSummary": "{tableCount} spots × {price} {currency} = {monthly} {currency} / month",
   "@subscriptionCheckoutSummary": {
     "placeholders": {
-      "tableCount": { "type": "int" },
-      "price": { "type": "int" },
-      "monthly": { "type": "int" },
-      "currency": { "type": "String" }
+      "tableCount": {
+        "type": "int"
+      },
+      "price": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionCheckoutDuration": "Duration",
   "subscriptionCheckoutMonthsLabel": "{n, plural, =1{1 month} other{{n} months}}",
   "@subscriptionCheckoutMonthsLabel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "subscriptionCheckoutTotal": "Total",
   "subscriptionCheckoutTotalLine": "{months} months × {monthly} {currency} = {total} {currency}",
   "@subscriptionCheckoutTotalLine": {
     "placeholders": {
-      "months": { "type": "int" },
-      "monthly": { "type": "int" },
-      "total": { "type": "int" },
-      "currency": { "type": "String" }
+      "months": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionCheckoutNewEndDate": "New end date: {date}",
   "@subscriptionCheckoutNewEndDate": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "subscriptionCheckoutPay": "Pay",
-  "subscriptionCheckoutNoTablesTitle": "No spots yet",
-  "subscriptionCheckoutNoTablesSubtitle": "Add at least one spot to subscribe.",
+  "subscriptionCheckoutNoSpotsTitle": "No spots yet",
+  "subscriptionCheckoutNoSpotsSubtitle": "Add at least one spot to subscribe.",
   "subscriptionCheckoutGoToVenues": "Go to venues",
   "subscriptionPaymentMockTitle": "Mock payment",
   "subscriptionPaymentMockSubtitle": "Real payment integration is coming soon. Simulate the outcome below.",
@@ -400,7 +490,9 @@
   "subscriptionPaymentSuccessBody": "Subscription extended until {date}.",
   "@subscriptionPaymentSuccessBody": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "subscriptionPaymentFailedTitle": "Payment failed",
@@ -417,13 +509,17 @@
   "profileSubscriptionExpiresIn": "{n, plural, =1{Expires in 1 day} other{Expires in {n} days}}",
   "@profileSubscriptionExpiresIn": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "profileSubscriptionGrace": "{n, plural, =1{Grace · 1 day left} other{Grace · {n} days left}}",
   "@profileSubscriptionGrace": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "profileSubscriptionExpired": "Expired",
@@ -454,15 +550,21 @@
   "reportsForecastVsRange": "vs {previous}",
   "@reportsForecastVsRange": {
     "placeholders": {
-      "previous": { "type": "String" }
+      "previous": {
+        "type": "String"
+      }
     }
   },
   "reportsForecastNoComparison": "Not enough history yet",
   "reportsComparisonCaption": "{current}  ·  vs {previous}",
   "@reportsComparisonCaption": {
     "placeholders": {
-      "current": { "type": "String" },
-      "previous": { "type": "String" }
+      "current": {
+        "type": "String"
+      },
+      "previous": {
+        "type": "String"
+      }
     }
   },
   "reportsSpotTrendTitle": "Revenue trend",

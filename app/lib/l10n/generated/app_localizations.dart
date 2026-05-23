@@ -1077,11 +1077,11 @@ abstract class AppLocalizations {
   /// **'{count} min'**
   String spotDetailDurationMin(int count);
 
-  /// No description provided for @spotLabelTable.
+  /// No description provided for @spotLabelSpot.
   ///
   /// In en, this message translates to:
-  /// **'Table'**
-  String get spotLabelTable;
+  /// **'Spot'**
+  String get spotLabelSpot;
 
   /// No description provided for @spotLabelConsole.
   ///
@@ -1107,11 +1107,11 @@ abstract class AppLocalizations {
   /// **'Pitch'**
   String get spotLabelPitch;
 
-  /// No description provided for @spotLabelTablePlural.
+  /// No description provided for @spotLabelSpotPlural.
   ///
   /// In en, this message translates to:
-  /// **'Tables'**
-  String get spotLabelTablePlural;
+  /// **'Spots'**
+  String get spotLabelSpotPlural;
 
   /// No description provided for @spotLabelConsolePlural.
   ///
@@ -1137,11 +1137,11 @@ abstract class AppLocalizations {
   /// **'Pitches'**
   String get spotLabelPitchPlural;
 
-  /// No description provided for @venueTypeTableTennis.
+  /// No description provided for @venueTypeSpotTennis.
   ///
   /// In en, this message translates to:
-  /// **'Table Tennis'**
-  String get venueTypeTableTennis;
+  /// **'Spot Tennis'**
+  String get venueTypeSpotTennis;
 
   /// No description provided for @venueTypeBilliards.
   ///
@@ -1353,11 +1353,11 @@ abstract class AppLocalizations {
   /// **'Subscription expired. Renew to use core features.'**
   String get subscriptionExpiredBanner;
 
-  /// No description provided for @subscriptionPlanCardPerTable.
+  /// No description provided for @subscriptionPlanCardPerSpot.
   ///
   /// In en, this message translates to:
   /// **'{price} {currency} / spot / month'**
-  String subscriptionPlanCardPerTable(int price, String currency);
+  String subscriptionPlanCardPerSpot(int price, String currency);
 
   /// No description provided for @subscriptionPlanCardMonthly.
   ///
@@ -1461,17 +1461,17 @@ abstract class AppLocalizations {
   /// **'Pay'**
   String get subscriptionCheckoutPay;
 
-  /// No description provided for @subscriptionCheckoutNoTablesTitle.
+  /// No description provided for @subscriptionCheckoutNoSpotsTitle.
   ///
   /// In en, this message translates to:
   /// **'No spots yet'**
-  String get subscriptionCheckoutNoTablesTitle;
+  String get subscriptionCheckoutNoSpotsTitle;
 
-  /// No description provided for @subscriptionCheckoutNoTablesSubtitle.
+  /// No description provided for @subscriptionCheckoutNoSpotsSubtitle.
   ///
   /// In en, this message translates to:
   /// **'Add at least one spot to subscribe.'**
-  String get subscriptionCheckoutNoTablesSubtitle;
+  String get subscriptionCheckoutNoSpotsSubtitle;
 
   /// No description provided for @subscriptionCheckoutGoToVenues.
   ///

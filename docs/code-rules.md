@@ -145,7 +145,7 @@ import 'package:api_client/api_client.dart';
 import 'package:storage_client/storage_client.dart';
 
 // 5. Relative imports
-import '../widgets/table_card.dart';
+import '../widgets/spot_card.dart';
 ```
 
 ---
@@ -186,11 +186,11 @@ final class VenuesState extends Equatable {
   });
 
   final RequestStatus<List<VenueModel>> venues;
-  final RequestStatus<List<TableModel>> tables;
+  final RequestStatus<List<SpotModel>> tables;
 
   VenuesState copyWith({
     RequestStatus<List<VenueModel>>? venues,
-    RequestStatus<List<TableModel>>? tables,
+    RequestStatus<List<SpotModel>>? tables,
   }) => VenuesState(
     venues: venues ?? this.venues,
     tables: tables ?? this.tables,
@@ -449,7 +449,7 @@ file.
 // features/report/report.dart
 export 'manager_detail/manager_detail.dart';
 export 'overview/overview.dart';
-export 'table_detail/table_detail.dart';
+export 'table_detail/spot_detail.dart';
 export 'utils/report_format.dart';
 export 'widgets/manager_risk_badge.dart';
 export 'widgets/report_kpi_card.dart';
@@ -721,10 +721,10 @@ Don't use private methods to build widgets:
 
 ```dart
 // Bad
-Widget _buildTableCard() { return ...; }
+Widget _buildSpotCard() { return ...; }
 
 // Good — separate class in its own file
-class TableCard extends StatelessWidget { ... }
+class SpotCard extends StatelessWidget { ... }
 ```
 
 ### View file size

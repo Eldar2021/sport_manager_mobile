@@ -9,7 +9,7 @@ part of 'subscription_pricing_model.dart';
 SubscriptionPricingModel _$SubscriptionPricingModelFromJson(
   Map<String, dynamic> json,
 ) => SubscriptionPricingModel(
-  pricePerTable: (json['pricePerTable'] as num).toInt(),
+  pricePerSpot: (json['pricePerSpot'] as num).toInt(),
   currency: json['currency'] as String,
   tableCount: (json['tableCount'] as num).toInt(),
   monthlyAmount: (json['monthlyAmount'] as num).toInt(),
@@ -23,7 +23,7 @@ SubscriptionPricingModel _$SubscriptionPricingModelFromJson(
 Map<String, dynamic> _$SubscriptionPricingModelToJson(
   SubscriptionPricingModel instance,
 ) => <String, dynamic>{
-  'pricePerTable': instance.pricePerTable,
+  'pricePerSpot': instance.pricePerSpot,
   'currency': instance.currency,
   'tableCount': instance.tableCount,
   'monthlyAmount': instance.monthlyAmount,

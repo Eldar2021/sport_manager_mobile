@@ -548,7 +548,7 @@ class AppLocalizationsKy extends AppLocalizations {
   }
 
   @override
-  String get spotLabelTable => 'Үстөл';
+  String get spotLabelSpot => 'Үстөл';
 
   @override
   String get spotLabelConsole => 'Консоль';
@@ -563,7 +563,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get spotLabelPitch => 'Талаа';
 
   @override
-  String get spotLabelTablePlural => 'Үстөлдөр';
+  String get spotLabelSpotPlural => 'Үстөлдөр';
 
   @override
   String get spotLabelConsolePlural => 'Консолдор';
@@ -578,7 +578,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get spotLabelPitchPlural => 'Талаалар';
 
   @override
-  String get venueTypeTableTennis => 'Үстөл теннис';
+  String get venueTypeSpotTennis => 'Үстөл теннис';
 
   @override
   String get venueTypeBilliards => 'Бильярд';
@@ -737,7 +737,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get subscriptionExpiredBanner => 'Жазылуу бүттү. Негизги функцияларды колдонуу үчүн узартыңыз.';
 
   @override
-  String subscriptionPlanCardPerTable(int price, String currency) {
+  String subscriptionPlanCardPerSpot(int price, String currency) {
     return '$price $currency / позиция / ай';
   }
 
@@ -813,10 +813,10 @@ class AppLocalizationsKy extends AppLocalizations {
   String get subscriptionCheckoutPay => 'Төлөө';
 
   @override
-  String get subscriptionCheckoutNoTablesTitle => 'Позиция али жок';
+  String get subscriptionCheckoutNoSpotsTitle => 'Позиция али жок';
 
   @override
-  String get subscriptionCheckoutNoTablesSubtitle => 'Жазылуу үчүн жок дегенде бир позиция кошуңуз.';
+  String get subscriptionCheckoutNoSpotsSubtitle => 'Жазылуу үчүн жок дегенде бир позиция кошуңуз.';
 
   @override
   String get subscriptionCheckoutGoToVenues => 'Залдарга өтүү';

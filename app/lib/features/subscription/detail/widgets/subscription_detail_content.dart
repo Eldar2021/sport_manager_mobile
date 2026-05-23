@@ -32,8 +32,8 @@ class SubscriptionDetailContent extends StatelessWidget {
         ],
         SubscriptionPlanCard(
           subscription: s,
-          pricePerTable: last?.pricePerTableSnapshot ?? 0,
-          tableCount: last?.tableCountSnapshot ?? 0,
+          pricePerSpot: last?.pricePerSpotSnapshot ?? 0,
+          tableCount: last?.spotCountSnapshot ?? 0,
           currency: last?.currency ?? 'KGS',
         ),
         const SizedBox(height: AppSpacing.x4),

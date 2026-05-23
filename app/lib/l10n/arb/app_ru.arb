@@ -65,38 +65,50 @@
   "homeAddSpot": "Добавить {spot}",
   "@homeAddSpot": {
     "placeholders": {
-      "spot": { "type": "String" }
+      "spot": {
+        "type": "String"
+      }
     }
   },
   "homeSpotsEmpty": "{spotPlural} пока нет",
   "@homeSpotsEmpty": {
     "placeholders": {
-      "spotPlural": { "type": "String" }
+      "spotPlural": {
+        "type": "String"
+      }
     }
   },
   "homeSpotsEmptySub": "Добавьте первую позицию ({spot}), чтобы менеджеры могли начинать сессии.",
   "@homeSpotsEmptySub": {
     "placeholders": {
-      "spot": { "type": "String" }
+      "spot": {
+        "type": "String"
+      }
     }
   },
   "homeSpotsEmptySubManager": "{spotPlural} появятся здесь, как только их добавит владелец.",
   "@homeSpotsEmptySubManager": {
     "placeholders": {
-      "spotPlural": { "type": "String" }
+      "spotPlural": {
+        "type": "String"
+      }
     }
   },
   "homeSpotOccupied": "{customerName} · ЗАНЯТ",
   "@homeSpotOccupied": {
     "placeholders": {
-      "customerName": { "type": "String" }
+      "customerName": {
+        "type": "String"
+      }
     }
   },
   "homeSpotOccupiedBase": "ЗАНЯТ",
   "homeSpotPaused": "{customerName} · НА ПАУЗЕ",
   "@homeSpotPaused": {
     "placeholders": {
-      "customerName": { "type": "String" }
+      "customerName": {
+        "type": "String"
+      }
     }
   },
   "homeSpotPausedBase": "НА ПАУЗЕ",
@@ -114,8 +126,12 @@
   "createSpotRateSuffix": "{currency}/{time_unit}",
   "@createSpotRateSuffix": {
     "placeholders": {
-      "currency": { "type": "String" },
-      "time_unit": { "type": "String" }
+      "currency": {
+        "type": "String"
+      },
+      "time_unit": {
+        "type": "String"
+      }
     }
   },
   "createSpotButton": "Создать позицию",
@@ -150,23 +166,37 @@
   "venueSpotsCount": "{count, plural, =0{нет {spotPlural}} =1{1 {spot}} other{{count} {spotPlural}}}",
   "@venueSpotsCount": {
     "placeholders": {
-      "count": { "type": "int" },
-      "spot": { "type": "String" },
-      "spotPlural": { "type": "String" }
+      "count": {
+        "type": "int"
+      },
+      "spot": {
+        "type": "String"
+      },
+      "spotPlural": {
+        "type": "String"
+      }
     }
   },
   "homeSpotTitle": "{spotLabel} {number}",
   "@homeSpotTitle": {
     "placeholders": {
-      "spotLabel": { "type": "String" },
-      "number": { "type": "int" }
+      "spotLabel": {
+        "type": "String"
+      },
+      "number": {
+        "type": "int"
+      }
     }
   },
   "homeSpotsSection": "{spotPlural} · {count}",
   "@homeSpotsSection": {
     "placeholders": {
-      "spotPlural": { "type": "String" },
-      "count": { "type": "int" }
+      "spotPlural": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
     }
   },
   "profileSectionManagement": "Управление",
@@ -174,14 +204,18 @@
   "profileManageVenuesSubtitle": "{count, plural, =0{нет залов} one{{count} зал} few{{count} зала} many{{count} залов} other{{count} залов}}",
   "@profileManageVenuesSubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "profileManagersTitle": "Менеджеры",
   "profileManagersSubtitle": "{count, plural, =0{нет менеджеров} one{{count} менеджер} few{{count} менеджера} many{{count} менеджеров} other{{count} менеджеров}}",
   "@profileManagersSubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "profileSectionAccount": "Аккаунт",
@@ -189,7 +223,9 @@
   "profileSubscriptionActiveUntil": "Активна · до {date}",
   "@profileSubscriptionActiveUntil": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "profileChangePasswordTitle": "Сменить пароль",
@@ -236,20 +272,22 @@
   "spotDetailDurationMin": "{count} мин",
   "@spotDetailDurationMin": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
-  "spotLabelTable": "Стол",
+  "spotLabelSpot": "Стол",
   "spotLabelConsole": "Консоль",
   "spotLabelCourt": "Корт",
   "spotLabelBoard": "Доска",
   "spotLabelPitch": "Поле",
-  "spotLabelTablePlural": "Столы",
+  "spotLabelSpotPlural": "Столы",
   "spotLabelConsolePlural": "Консоли",
   "spotLabelCourtPlural": "Корты",
   "spotLabelBoardPlural": "Доски",
   "spotLabelPitchPlural": "Поля",
-  "venueTypeTableTennis": "Настольный теннис",
+  "venueTypeSpotTennis": "Настольный теннис",
   "venueTypeBilliards": "Бильярд",
   "venueTypePlayStation": "PlayStation",
   "venueTypeVolleyball": "Волейбол",
@@ -270,7 +308,9 @@
   "managersDeleteTitle": "Удалить {name}?",
   "@managersDeleteTitle": {
     "placeholders": {
-      "name": { "type": "String" }
+      "name": {
+        "type": "String"
+      }
     }
   },
   "managersDeleteSubtitle": "Менеджер потеряет доступ к вашим залам. История его сессий сохранится.",
@@ -280,25 +320,33 @@
   "managersLastSeenMinutes": "{count, plural, one{{count} мин назад} few{{count} мин назад} many{{count} мин назад} other{{count} мин назад}}",
   "@managersLastSeenMinutes": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "managersLastSeenHours": "{count, plural, one{{count} час назад} few{{count} часа назад} many{{count} часов назад} other{{count} часов назад}}",
   "@managersLastSeenHours": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "managersLastSeenDays": "{count, plural, one{{count} день назад} few{{count} дня назад} many{{count} дней назад} other{{count} дней назад}}",
   "@managersLastSeenDays": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "venueSpotsCountSuffix": "{count, plural, =0{0 шт.} one{{count} шт.} few{{count} шт.} many{{count} шт.} other{{count} шт.}}",
   "@venueSpotsCountSuffix": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "subscriptionTitle": "Подписка",
@@ -310,29 +358,43 @@
   "subscriptionWarningBanner": "{n, plural, =1{Подписка истекает через 1 день. Продлите, чтобы избежать перерыва.} other{Подписка истекает через {n} дн. Продлите, чтобы избежать перерыва.}}",
   "@subscriptionWarningBanner": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "subscriptionGraceBanner": "{n, plural, =1{Подписка истекла. Остался 1 день льготного периода.} other{Подписка истекла. Осталось {n} дн. льготного периода.}}",
   "@subscriptionGraceBanner": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "subscriptionExpiredBanner": "Подписка истекла. Продлите, чтобы пользоваться основными функциями.",
-  "subscriptionPlanCardPerTable": "{price} {currency} / позиция / месяц",
-  "@subscriptionPlanCardPerTable": {
+  "subscriptionPlanCardPerSpot": "{price} {currency} / позиция / месяц",
+  "@subscriptionPlanCardPerSpot": {
     "placeholders": {
-      "price": { "type": "int" },
-      "currency": { "type": "String" }
+      "price": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionPlanCardMonthly": "× {tableCount} позиций = {monthly} {currency} / месяц",
   "@subscriptionPlanCardMonthly": {
     "placeholders": {
-      "tableCount": { "type": "int" },
-      "monthly": { "type": "int" },
-      "currency": { "type": "String" }
+      "tableCount": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionDetailNextPayment": "Следующий платёж",
@@ -343,15 +405,23 @@
   "subscriptionPaymentItemSummary": "{months} мес × {tableCount} позиций",
   "@subscriptionPaymentItemSummary": {
     "placeholders": {
-      "months": { "type": "int" },
-      "tableCount": { "type": "int" }
+      "months": {
+        "type": "int"
+      },
+      "tableCount": {
+        "type": "int"
+      }
     }
   },
   "subscriptionAmountWithCurrency": "{amount} {currency}",
   "@subscriptionAmountWithCurrency": {
     "placeholders": {
-      "amount": { "type": "int" },
-      "currency": { "type": "String" }
+      "amount": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionContinueCta": "Продлить подписку",
@@ -359,38 +429,58 @@
   "subscriptionCheckoutSummary": "{tableCount} позиций × {price} {currency} = {monthly} {currency} / мес",
   "@subscriptionCheckoutSummary": {
     "placeholders": {
-      "tableCount": { "type": "int" },
-      "price": { "type": "int" },
-      "monthly": { "type": "int" },
-      "currency": { "type": "String" }
+      "tableCount": {
+        "type": "int"
+      },
+      "price": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionCheckoutDuration": "Длительность",
   "subscriptionCheckoutMonthsLabel": "{n, plural, one{{n} мес} few{{n} мес} many{{n} мес} other{{n} мес}}",
   "@subscriptionCheckoutMonthsLabel": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "subscriptionCheckoutTotal": "Итого",
   "subscriptionCheckoutTotalLine": "{months} мес × {monthly} {currency} = {total} {currency}",
   "@subscriptionCheckoutTotalLine": {
     "placeholders": {
-      "months": { "type": "int" },
-      "monthly": { "type": "int" },
-      "total": { "type": "int" },
-      "currency": { "type": "String" }
+      "months": {
+        "type": "int"
+      },
+      "monthly": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "currency": {
+        "type": "String"
+      }
     }
   },
   "subscriptionCheckoutNewEndDate": "Новая дата окончания: {date}",
   "@subscriptionCheckoutNewEndDate": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "subscriptionCheckoutPay": "Оплатить",
-  "subscriptionCheckoutNoTablesTitle": "Позиций пока нет",
-  "subscriptionCheckoutNoTablesSubtitle": "Добавьте хотя бы одну позицию, чтобы оформить подписку.",
+  "subscriptionCheckoutNoSpotsTitle": "Позиций пока нет",
+  "subscriptionCheckoutNoSpotsSubtitle": "Добавьте хотя бы одну позицию, чтобы оформить подписку.",
   "subscriptionCheckoutGoToVenues": "К залам",
   "subscriptionPaymentMockTitle": "Тестовая оплата",
   "subscriptionPaymentMockSubtitle": "Интеграция с настоящей оплатой скоро. Симулируйте результат ниже.",
@@ -400,7 +490,9 @@
   "subscriptionPaymentSuccessBody": "Подписка продлена до {date}.",
   "@subscriptionPaymentSuccessBody": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "subscriptionPaymentFailedTitle": "Оплата не прошла",
@@ -417,13 +509,17 @@
   "profileSubscriptionExpiresIn": "{n, plural, =1{Истекает через 1 день} other{Истекает через {n} дн.}}",
   "@profileSubscriptionExpiresIn": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "profileSubscriptionGrace": "{n, plural, =1{Льготный · остался 1 день} other{Льготный · осталось {n} дн.}}",
   "@profileSubscriptionGrace": {
     "placeholders": {
-      "n": { "type": "int" }
+      "n": {
+        "type": "int"
+      }
     }
   },
   "profileSubscriptionExpired": "Истекла",
@@ -454,15 +550,21 @@
   "reportsForecastVsRange": "к {previous}",
   "@reportsForecastVsRange": {
     "placeholders": {
-      "previous": { "type": "String" }
+      "previous": {
+        "type": "String"
+      }
     }
   },
   "reportsForecastNoComparison": "Истории пока недостаточно",
   "reportsComparisonCaption": "{current}  ·  vs {previous}",
   "@reportsComparisonCaption": {
     "placeholders": {
-      "current": { "type": "String" },
-      "previous": { "type": "String" }
+      "current": {
+        "type": "String"
+      },
+      "previous": {
+        "type": "String"
+      }
     }
   },
   "reportsSpotTrendTitle": "Тренд выручки",

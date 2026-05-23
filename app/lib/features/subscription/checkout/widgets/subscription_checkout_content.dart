@@ -58,7 +58,7 @@ class _SummaryCard extends StatelessWidget {
         child: Text(
           context.l10n.subscriptionCheckoutSummary(
             pricing.tableCount,
-            pricing.pricePerTable,
+            pricing.pricePerSpot,
             pricing.monthlyAmount,
             pricing.currency,
           ),

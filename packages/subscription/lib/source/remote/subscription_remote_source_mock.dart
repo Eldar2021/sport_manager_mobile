@@ -31,7 +31,7 @@ final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
 
   static const _ownerId = 'user-001';
   static const _subscriptionId = 'sub-001';
-  static const _pricePerTable = 200;
+  static const _pricePerSpot = 200;
   static const _currency = 'KGS';
   static const _tableCount = 10;
   static const _gracePeriodDays = 5;
@@ -102,10 +102,10 @@ final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
   Future<SubscriptionPricingModel> getPricing() async {
     await Future<void>.delayed(const Duration(milliseconds: 300));
     return const SubscriptionPricingModel(
-      pricePerTable: _pricePerTable,
+      pricePerSpot: _pricePerSpot,
       currency: _currency,
       tableCount: _tableCount,
-      monthlyAmount: _pricePerTable * _tableCount,
+      monthlyAmount: _pricePerSpot * _tableCount,
       minDurationMonths: _minDurationMonths,
       maxDurationMonths: _maxDurationMonths,
       gracePeriodDays: _gracePeriodDays,
@@ -121,17 +121,17 @@ final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
       throw const SubscriptionExc(SubscriptionErrorCode.invalidDuration);
     }
     if (_tableCount == 0) {
-      throw const SubscriptionExc(SubscriptionErrorCode.noTables);
+      throw const SubscriptionExc(SubscriptionErrorCode.noSpots);
     }
     final now = DateTime.now().toUtc();
     final payment = PaymentModel(
       id: _nextPaymentId(),
       subscriptionId: _subscriptionId,
-      amount: _pricePerTable * _tableCount * param.months,
+      amount: _pricePerSpot * _tableCount * param.months,
       currency: _currency,
       months: param.months,
-      tableCountSnapshot: _tableCount,
-      pricePerTableSnapshot: _pricePerTable,
+      spotCountSnapshot: _tableCount,
+      pricePerSpotSnapshot: _pricePerSpot,
       status: PaymentStatus.pending,
       provider: 'MOCK',
       createdAt: now,
@@ -171,8 +171,8 @@ final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
       amount: existing.amount,
       currency: existing.currency,
       months: existing.months,
-      tableCountSnapshot: existing.tableCountSnapshot,
-      pricePerTableSnapshot: existing.pricePerTableSnapshot,
+      spotCountSnapshot: existing.spotCountSnapshot,
+      pricePerSpotSnapshot: existing.pricePerSpotSnapshot,
       status: outcome == PaymentOutcome.paid ? PaymentStatus.paid : PaymentStatus.failed,
       provider: existing.provider,
       providerPaymentId: existing.providerPaymentId,
@@ -242,11 +242,11 @@ final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
       PaymentModel(
         id: 'pay-1',
         subscriptionId: _subscriptionId,
-        amount: _pricePerTable * _tableCount,
+        amount: _pricePerSpot * _tableCount,
         currency: _currency,
         months: 1,
-        tableCountSnapshot: _tableCount,
-        pricePerTableSnapshot: _pricePerTable,
+        spotCountSnapshot: _tableCount,
+        pricePerSpotSnapshot: _pricePerSpot,
         status: PaymentStatus.paid,
         provider: 'MOCK',
         createdAt: twoMonthsAgo,
@@ -255,11 +255,11 @@ final class SubscriptionRemoteSourceMock implements SubscriptionRemoteSource {
       PaymentModel(
         id: 'pay-2',
         subscriptionId: _subscriptionId,
-        amount: _pricePerTable * _tableCount,
+        amount: _pricePerSpot * _tableCount,
         currency: _currency,
         months: 1,
-        tableCountSnapshot: _tableCount,
-        pricePerTableSnapshot: _pricePerTable,
+        spotCountSnapshot: _tableCount,
+        pricePerSpotSnapshot: _pricePerSpot,
         status: PaymentStatus.paid,
         provider: 'MOCK',
         createdAt: oneMonthAgo,
