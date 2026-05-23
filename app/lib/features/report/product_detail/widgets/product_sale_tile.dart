@@ -16,47 +16,32 @@ class ProductSaleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final locale = Localizations.localeOf(context).toString();
     final date = DateFormat('dd MMM yyyy HH:mm', locale).format(sale.soldAt.toLocal());
-    final priceStr = _fmt(sale.priceSnapshot, context.l10n);
-    final currentStr = _fmt(currentPrice, context.l10n);
+    final priceStr = _fmt(sale.priceSnapshot, l10n);
     final hasDiff = sale.priceSnapshot != currentPrice;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.x4,
-        vertical: AppSpacing.x3,
+        vertical: AppSpacing.x1,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  date,
-                  style: context.textTheme.bodyMedium,
-                ),
-                if (hasDiff)
-                  Padding(
-                    padding: const EdgeInsets.only(top: AppSpacing.x1),
-                    child: Text(
-                      context.l10n.reportsProductPriceAtTime(priceStr, currentStr),
-                      style: context.appTextStyles.muted.labelSmall,
-                    ),
-                  ),
-              ],
-            ),
-          ),
-          const SizedBox(width: AppSpacing.x3),
-          Text(
-            priceStr,
-            style: context.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
+      title: Text(
+        date,
+        style: context.textTheme.bodyMedium,
+      ),
+      subtitle: hasDiff
+          ? Text(
+              l10n.reportsProductPriceAtTime(priceStr, _fmt(currentPrice, l10n)),
+              style: context.appTextStyles.muted.labelSmall,
+            )
+          : null,
+      trailing: Text(
+        priceStr,
+        style: context.textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
