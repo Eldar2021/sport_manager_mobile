@@ -569,7 +569,7 @@ abstract final class SubscriptionGate {
 **Kullanım yerleri** (Home'daki yazma aksiyonları):
 
 - `home_view.dart`'ta masa kartı tap → `SubscriptionGate.guard(context, action: () => _startSession(...))`.
-- Venue/table form'larında "Save" → aynı.
+- Venue/spot form'larında "Save" → aynı.
 - Manager invite section → aynı.
 
 > Manager için: `SubscriptionGate.guard` AuthCubit role'üne bakar; manager ise direkt action çalıştırır (sunucu zaten kontrol ediyor; mobile soft-block sadece owner için).
@@ -752,7 +752,7 @@ MVP için **yeni dependency yok**.
 
 1. `SubscriptionGate` helper.
 2. Home masa kartı tap'ında `SubscriptionGate.guard`.
-3. Venue/table form save'lerinde guard.
+3. Venue/spot form save'lerinde guard.
 4. Manager invite section'da guard.
 5. `SubscriptionBlockedDialog`.
 6. `SubscriptionExpirationHandler` (interceptor değil, `ErrorHandler` registration; backend yarış için).
