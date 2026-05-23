@@ -52,7 +52,7 @@ class TopProductsSection extends StatelessWidget {
               context.l10n.reportsEmptySubtitle,
             ),
             RequestSuccess<ProductReportSummaryModel>(:final data) => ProductsTopList(
-              items: data.items.take(3).toList(),
+              items: data.items.take(5).toList(),
               venueId: state.filter.venueId ?? '',
             ),
           },
