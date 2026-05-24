@@ -44,7 +44,13 @@ class SummaryCard extends StatelessWidget {
                   label: context.l10n.spotDetailGameTime,
                   value: '$timeAmount $currency',
                 ),
-                const SizedBox(height: AppSpacing.x4),
+                const SizedBox(height: AppSpacing.x2),
+                Divider(
+                  color: context.colors.outline,
+                  height: 1,
+                ),
+                const SizedBox(height: AppSpacing.x2),
+                ProductsBreakdown(currency),
               ],
             );
           },

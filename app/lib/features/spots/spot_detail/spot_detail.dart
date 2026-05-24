@@ -15,6 +15,7 @@ export 'widgets/occupied_spot_footer.dart';
 export 'widgets/payment_summary_sheet.dart';
 export 'widgets/product_grid_shimmer.dart';
 export 'widgets/product_icon_box.dart';
+export 'widgets/products_breakdown.dart';
 export 'widgets/session_info_card.dart';
 export 'widgets/session_product_item_tile.dart';
 export 'widgets/session_products_list.dart';
