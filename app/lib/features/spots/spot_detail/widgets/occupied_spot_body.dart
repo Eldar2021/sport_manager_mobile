@@ -8,11 +8,13 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 class OccupiedSpotBody extends StatelessWidget {
   const OccupiedSpotBody({
     required this.onMistakeLaunch,
+    required this.onAddProduct,
     required this.currency,
     super.key,
   });
 
   final VoidCallback onMistakeLaunch;
+  final VoidCallback onAddProduct;
   final String currency;
 
   String _statusLabel(BuildContext context, SessionModel session) {
@@ -93,6 +95,11 @@ class OccupiedSpotBody extends StatelessWidget {
               currency: currency,
             );
           },
+        ),
+        const SizedBox(height: AppSpacing.x4),
+        SessionProductsList(
+          currency: currency,
+          onAddProduct: onAddProduct,
         ),
         const SizedBox(height: AppSpacing.x4),
 

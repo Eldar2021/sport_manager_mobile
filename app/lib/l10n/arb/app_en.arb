@@ -653,5 +653,31 @@
       "count": { "type": "int" }
     }
   },
-  "reportsProductPriceNowBadge": "NOW"
+  "reportsProductPriceNowBadge": "NOW",
+  "sessionOrderSection": "ORDER · {count}",
+  "@sessionOrderSection": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "sessionOrderSectionLabel": "ORDER",
+  "sessionOrderEmpty": "Guests asked for water or a snack? Add it — the amount will go to the final bill.",
+  "sessionAddProduct": "Add product",
+  "sessionRemoveProductTitle": "Remove from order?",
+  "sessionRemoveProductSubtitle": "This item will be removed from the order.",
+  "sessionRemoveProductConfirm": "Remove",
+  "spotDetailGameTime": "Game time",
+  "spotDetailProductsTotal": "Products",
+  "addProductSheetTitle": "Add product",
+  "addProductQuantityLabel": "QUANTITY",
+  "addProductTotalLabel": "TOTAL",
+  "addProductConfirm": "Confirm",
+  "paymentProductsSection": "PRODUCTS · {count}",
+  "@paymentProductsSection": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "paymentProductsTotal": "Products total",
+  "paymentSubtotalLine": "Subtotal"
 }

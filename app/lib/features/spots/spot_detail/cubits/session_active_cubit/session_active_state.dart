@@ -17,6 +17,8 @@ final class SessionActiveState extends Equatable {
     this.customDiscount,
     this.pauseStatus = const RequestInitial(),
     this.resumeStatus = const RequestInitial(),
+    this.addProductStatus = const RequestInitial(),
+    this.removeProductStatus = const RequestInitial(),
   });
 
   final SessionModel session;
@@ -24,13 +26,15 @@ final class SessionActiveState extends Equatable {
   final RequestStatus<SessionModel> cancelStatus;
   final RequestStatus<SessionModel> pauseStatus;
   final RequestStatus<SessionModel> resumeStatus;
+  final RequestStatus<SessionModel> addProductStatus;
+  final RequestStatus<void> removeProductStatus;
   final Duration elapsed;
   final int selectedDiscount;
   final int? customDiscount;
 
   int get effectiveDiscount => customDiscount ?? selectedDiscount;
 
-  int get currentAmount {
+  int get timeAmount {
     final tarif = session.tarifAmountSnapshot ?? 0;
     final divisor = switch (session.tarifTypeSnapshot) {
       TarifType.hour => 3600.0,
@@ -41,12 +45,16 @@ final class SessionActiveState extends Equatable {
     return (elapsed.inSeconds.clamp(0, double.maxFinite.toInt()) / divisor * tarif).round();
   }
 
+  int get currentAmount => timeAmount + session.productsAmount;
+
   SessionActiveState copyWith({
     SessionModel? session,
     RequestStatus<SessionModel>? stopStatus,
     RequestStatus<SessionModel>? cancelStatus,
     RequestStatus<SessionModel>? pauseStatus,
     RequestStatus<SessionModel>? resumeStatus,
+    RequestStatus<SessionModel>? addProductStatus,
+    RequestStatus<void>? removeProductStatus,
     Duration? elapsed,
     int? selectedDiscount,
     Object? customDiscount = _absent,
@@ -57,6 +65,8 @@ final class SessionActiveState extends Equatable {
       cancelStatus: cancelStatus ?? this.cancelStatus,
       pauseStatus: pauseStatus ?? this.pauseStatus,
       resumeStatus: resumeStatus ?? this.resumeStatus,
+      addProductStatus: addProductStatus ?? this.addProductStatus,
+      removeProductStatus: removeProductStatus ?? this.removeProductStatus,
       elapsed: elapsed ?? this.elapsed,
       selectedDiscount: selectedDiscount ?? this.selectedDiscount,
       customDiscount: customDiscount is _Absent ? this.customDiscount : customDiscount as int?,
@@ -70,6 +80,8 @@ final class SessionActiveState extends Equatable {
     cancelStatus,
     pauseStatus,
     resumeStatus,
+    addProductStatus,
+    removeProductStatus,
     elapsed,
     selectedDiscount,
     customDiscount,

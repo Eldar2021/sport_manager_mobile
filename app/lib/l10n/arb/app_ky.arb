@@ -653,5 +653,31 @@
       "count": { "type": "int" }
     }
   },
-  "reportsProductPriceNowBadge": "АЗЫР"
+  "reportsProductPriceNowBadge": "АЗЫР",
+  "sessionOrderSection": "ЗАКАЗ · {count}",
+  "@sessionOrderSection": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "sessionOrderSectionLabel": "БУЙРУТМА",
+  "sessionOrderEmpty": "Конок суу же тамак суранды? Кошуңуз — сумма акыркы эсепке кирет.",
+  "sessionAddProduct": "Товар кошуу",
+  "sessionRemoveProductTitle": "Заказдан алып салуу?",
+  "sessionRemoveProductSubtitle": "Бул пункт заказдан жок кылынат.",
+  "sessionRemoveProductConfirm": "Алып салуу",
+  "spotDetailGameTime": "Оюн убактысы",
+  "spotDetailProductsTotal": "Товарлар",
+  "addProductSheetTitle": "Товар кошуу",
+  "addProductQuantityLabel": "САН",
+  "addProductTotalLabel": "СУММА",
+  "addProductConfirm": "Ырастоо",
+  "paymentProductsSection": "ТОВАРЛАР · {count}",
+  "@paymentProductsSection": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "paymentProductsTotal": "Товарлар, жыйынтык",
+  "paymentSubtotalLine": "Жыйынтык"
 }

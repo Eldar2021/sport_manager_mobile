@@ -1184,4 +1184,56 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get reportsProductPriceNowBadge => 'АЗЫР';
+
+  @override
+  String sessionOrderSection(int count) {
+    return 'ЗАКАЗ · $count';
+  }
+
+  @override
+  String get sessionOrderSectionLabel => 'БУЙРУТМА';
+
+  @override
+  String get sessionOrderEmpty => 'Конок суу же тамак суранды? Кошуңуз — сумма акыркы эсепке кирет.';
+
+  @override
+  String get sessionAddProduct => 'Товар кошуу';
+
+  @override
+  String get sessionRemoveProductTitle => 'Заказдан алып салуу?';
+
+  @override
+  String get sessionRemoveProductSubtitle => 'Бул пункт заказдан жок кылынат.';
+
+  @override
+  String get sessionRemoveProductConfirm => 'Алып салуу';
+
+  @override
+  String get spotDetailGameTime => 'Оюн убактысы';
+
+  @override
+  String get spotDetailProductsTotal => 'Товарлар';
+
+  @override
+  String get addProductSheetTitle => 'Товар кошуу';
+
+  @override
+  String get addProductQuantityLabel => 'САН';
+
+  @override
+  String get addProductTotalLabel => 'СУММА';
+
+  @override
+  String get addProductConfirm => 'Ырастоо';
+
+  @override
+  String paymentProductsSection(int count) {
+    return 'ТОВАРЛАР · $count';
+  }
+
+  @override
+  String get paymentProductsTotal => 'Товарлар, жыйынтык';
+
+  @override
+  String get paymentSubtotalLine => 'Жыйынтык';
 }

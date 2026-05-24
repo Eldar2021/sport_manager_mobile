@@ -25,7 +25,7 @@ class PaymentSummarySheet extends StatelessWidget {
         '${DateFormat('HH:mm').format(session.startedAt)} → ${DateFormat('HH:mm').format(DateTime.now())}';
     final tag = spot.description;
 
-    return Padding(
+    return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
         AppSpacing.x4,
         AppSpacing.x4,
@@ -70,6 +70,7 @@ class PaymentSummarySheet extends StatelessWidget {
             tarif: session.tarifAmountSnapshot ?? 0,
             currency: currency,
           ),
+          _ProductsBreakdown(currency: currency),
           const SizedBox(height: AppSpacing.x4),
           ToPayTile(currency),
           const SizedBox(height: AppSpacing.x3),
@@ -100,6 +101,139 @@ class PaymentSummarySheet extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ProductsBreakdown extends StatelessWidget {
+  const _ProductsBreakdown({required this.currency});
+
+  final String currency;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<SessionActiveCubit, SessionActiveState, (List<SessionProductItemModel>, int, int)>(
+      selector: (s) => (s.session.products, s.session.productsAmount, s.currentAmount),
+      builder: (context, data) {
+        final (products, productsAmount, subtotal) = data;
+        if (products.isEmpty) return const SizedBox.shrink();
+        return DecoratedBox(
+          decoration: BoxDecoration(
+            color: context.colors.outlineVariant,
+            borderRadius: AppRadius.buttonBorderRadius,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.x2),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: AppSpacing.x2),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x2),
+                  child: Text(
+                    context.l10n.paymentProductsSection(products.length),
+                    style: context.textTheme.labelSmall?.copyWith(
+                      color: context.colors.onSurfaceVariant,
+                      letterSpacing: 1.2,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.x2),
+                for (final item in products)
+                  _PaymentProductRow(item: item, currency: currency),
+                const SizedBox(height: AppSpacing.x2),
+                Divider(color: context.colors.outline, height: 1),
+                const SizedBox(height: AppSpacing.x2),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x2),
+                  child: SpotInfoRow(
+                    label: context.l10n.paymentProductsTotal,
+                    value: '$productsAmount $currency',
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.x2),
+                Divider(color: context.colors.outline, height: 1),
+                const SizedBox(height: AppSpacing.x2),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x2),
+                  child: SpotInfoRow(
+                    label: context.l10n.paymentSubtotalLine,
+                    value: '$subtotal $currency',
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.x4),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _PaymentProductRow extends StatelessWidget {
+  const _PaymentProductRow({required this.item, required this.currency});
+
+  final SessionProductItemModel item;
+  final String currency;
+
+  String _unitShort(AppLocalizations l10n) {
+    return switch (item.unitSnapshot) {
+      'KG' => l10n.productUnitKgShort,
+      'LITRE' => l10n.productUnitLitreShort,
+      'PORTION' => l10n.productUnitPortionShort,
+      'HOUR' => l10n.productUnitHourShort,
+      _ => l10n.productUnitPieceShort,
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final unitShort = _unitShort(context.l10n);
+    return ListTile(
+      dense: true,
+      contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.x2),
+      leading: _PaymentProductIcon(categorySnapshot: item.categorySnapshot),
+      title: Text(
+        item.nameSnapshot,
+        style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+      ),
+      subtitle: Text(
+        '1 $unitShort × ${item.priceSnapshot} $currency',
+        style: context.textTheme.bodySmall?.copyWith(
+          color: context.colors.onSurfaceVariant,
+        ),
+      ),
+      trailing: Text(
+        '${item.priceSnapshot} $currency',
+        style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+}
+
+class _PaymentProductIcon extends StatelessWidget {
+  const _PaymentProductIcon({required this.categorySnapshot});
+
+  final String categorySnapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    final icon = switch (categorySnapshot) {
+      'DRINK' => Icons.local_drink_outlined,
+      'FOOD' => Icons.restaurant_outlined,
+      'EQUIPMENT' => Icons.sports_tennis_outlined,
+      _ => Icons.shopping_bag_outlined,
+    };
+    return Container(
+      width: 32,
+      height: 32,
+      decoration: BoxDecoration(
+        color: context.colors.surface,
+        borderRadius: BorderRadius.circular(AppSpacing.x1),
+      ),
+      child: Icon(icon, size: 16, color: context.colors.onSurfaceVariant),
     );
   }
 }

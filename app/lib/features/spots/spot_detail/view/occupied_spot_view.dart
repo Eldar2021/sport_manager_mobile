@@ -76,6 +76,13 @@ class _OccupiedSpotViewState extends State<OccupiedSpotView> {
     );
   }
 
+  void _showAddProductSheet() {
+    AddProductSheet.show(
+      context,
+      currency: widget.spot.currency.localizedName(context.l10n),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,10 +140,29 @@ class _OccupiedSpotViewState extends State<OccupiedSpotView> {
                 }
               },
             ),
+            BlocListener<SessionActiveCubit, SessionActiveState>(
+              bloc: _sessionCubit,
+              listenWhen: (p, c) => p.removeProductStatus != c.removeProductStatus,
+              listener: (context, state) {
+                if (state.removeProductStatus.isFailure) {
+                  context.handleError((state.removeProductStatus as RequestFailure<void>).exception);
+                }
+              },
+            ),
+            BlocListener<SessionActiveCubit, SessionActiveState>(
+              bloc: _sessionCubit,
+              listenWhen: (p, c) => p.addProductStatus != c.addProductStatus,
+              listener: (context, state) {
+                if (state.addProductStatus.isFailure) {
+                  context.handleError((state.addProductStatus as RequestFailure<SessionModel>).exception);
+                }
+              },
+            ),
           ],
           child: OccupiedSpotBody(
             currency: widget.spot.currency.localizedName(context.l10n),
             onMistakeLaunch: _showCancelConfirm,
+            onAddProduct: _showAddProductSheet,
           ),
         ),
       ),

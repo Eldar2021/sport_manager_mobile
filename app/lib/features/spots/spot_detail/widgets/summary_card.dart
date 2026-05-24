@@ -24,9 +24,9 @@ class SummaryCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.x2),
         child: BlocSelector<SessionActiveCubit, SessionActiveState, (int, int)>(
-          selector: (s) => (s.elapsed.inMinutes, s.currentAmount),
+          selector: (s) => (s.elapsed.inMinutes, s.timeAmount),
           builder: (context, data) {
-            final (minutes, subtotal) = data;
+            final (minutes, timeAmount) = data;
             return Column(
               children: [
                 const SizedBox(height: AppSpacing.x2),
@@ -40,11 +40,9 @@ class SummaryCard extends StatelessWidget {
                   value: '$tarif $currency',
                 ),
                 const SizedBox(height: AppSpacing.x2),
-                Divider(color: context.colors.outline, height: 1),
-                const SizedBox(height: AppSpacing.x2),
                 SpotInfoRow(
-                  label: context.l10n.spotDetailSubtotal,
-                  value: '$subtotal $currency',
+                  label: context.l10n.spotDetailGameTime,
+                  value: '$timeAmount $currency',
                 ),
                 const SizedBox(height: AppSpacing.x4),
               ],

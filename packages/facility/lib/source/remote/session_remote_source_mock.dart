@@ -5,6 +5,17 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
 
   int _itemSeq = 1;
 
+  static const _products = <String, (String, int, String, String)>{
+    'prod-1': ('Вода 0.5л', 50, 'PIECE', 'DRINK'),
+    'prod-2': ('Чай', 30, 'PIECE', 'DRINK'),
+    'prod-3': ('Аренда шара', 200, 'HOUR', 'EQUIPMENT'),
+    'prod-4': ('Кола 0.5л', 90, 'PIECE', 'DRINK'),
+    'prod-5': ('Самса', 80, 'PIECE', 'FOOD'),
+    'prod-6': ('Чипсы', 100, 'PIECE', 'FOOD'),
+    'prod-7': ('Орешки', 70, 'PORTION', 'FOOD'),
+    'prod-8': ('Шар запасной', 200, 'PIECE', 'EQUIPMENT'),
+  };
+
   @override
   Future<SessionModel> startSession(String spotId, String? customerName) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
@@ -160,12 +171,16 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
     if (session == null) throw const FacilityExc(FacilityErrorCode.sessionNotFound);
     if (!session.isActive && !session.isPaused) throw const FacilityExc(FacilityErrorCode.sessionNotActive);
 
+    final (name, price, unit, category) = _products[productId] ?? ('Товар', 50, 'PIECE', 'OTHER');
     final item = SessionProductItemModel(
       id: 'item-${_itemSeq++}',
       sessionId: sessionId,
       productId: productId,
-      nameSnapshot: 'Товар $productId',
-      priceSnapshot: 50,
+      nameSnapshot: name,
+      priceSnapshot: price,
+      unitSnapshot: unit,
+      categorySnapshot: category,
+      addedBy: 'mock-user',
       addedAt: DateTime.now(),
     );
     final updated = _rebuildWithItems(session, [...session.products, item]);
