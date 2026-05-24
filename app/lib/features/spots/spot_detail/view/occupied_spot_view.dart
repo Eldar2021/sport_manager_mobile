@@ -147,6 +147,8 @@ class _OccupiedSpotViewState extends State<OccupiedSpotView> {
               listener: (context, state) {
                 if (state.removeProductStatus.isFailure) {
                   context.handleError((state.removeProductStatus as RequestFailure<void>).exception);
+                } else if (state.removeProductStatus.isSuccess) {
+                  widget.spotCubit.updateSession(state.session);
                 }
               },
             ),
@@ -156,6 +158,8 @@ class _OccupiedSpotViewState extends State<OccupiedSpotView> {
               listener: (context, state) {
                 if (state.addProductStatus.isFailure) {
                   context.handleError((state.addProductStatus as RequestFailure<SessionModel>).exception);
+                } else if (state.addProductStatus.isSuccess) {
+                  widget.spotCubit.updateSession(state.session);
                 }
               },
             ),

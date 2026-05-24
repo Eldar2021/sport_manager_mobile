@@ -74,14 +74,14 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
   }
 
   @override
-  Future<SessionProductItemModel> addProductToSession(
+  Future<SessionModel> addProductToSession(
     String sessionId,
     String productId,
   ) {
     return _client
-        .postType<SessionProductItemModel>(
+        .postType<SessionModel>(
           '/api/v1/session/$sessionId/products',
-          fromJson: SessionProductItemModel.fromJson,
+          fromJson: SessionModel.fromJson,
           data: {'productId': productId},
         )
         .mapTo(FacilityExc.fromApiClientExc);

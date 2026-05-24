@@ -41,6 +41,11 @@ class SpotDetailCubit extends Cubit<SpotDetailState> {
     );
   }
 
+  void updateSession(SessionModel session) {
+    if (state is! SpotDetailOccupied) return;
+    emit((state as SpotDetailOccupied).copyWith(session: session));
+  }
+
   void onSessionEnded() {
     if (state is! SpotDetailOccupied) return;
     final spot = (state as SpotDetailOccupied).spot;

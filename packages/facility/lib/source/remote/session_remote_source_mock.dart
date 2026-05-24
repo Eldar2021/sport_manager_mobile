@@ -165,7 +165,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
   }
 
   @override
-  Future<SessionProductItemModel> addProductToSession(String sessionId, String productId) async {
+  Future<SessionModel> addProductToSession(String sessionId, String productId) async {
     await Future<void>.delayed(const Duration(milliseconds: 400));
     final session = _sessions[sessionId];
     if (session == null) throw const FacilityExc(FacilityErrorCode.sessionNotFound);
@@ -186,7 +186,7 @@ final class SessionRemoteSourceMock implements SessionRemoteSource {
     final updated = _rebuildWithItems(session, [...session.products, item]);
     _sessions[sessionId] = updated;
     MockData.updateSpotSession(session.spotId, updated);
-    return item;
+    return updated;
   }
 
   @override
