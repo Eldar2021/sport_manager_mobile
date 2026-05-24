@@ -80,6 +80,7 @@ class _OccupiedSpotViewState extends State<OccupiedSpotView> {
     AddProductSheet.show(
       context,
       currency: widget.spot.currency.localizedName(context.l10n),
+      sessionCubit: _sessionCubit,
     );
   }
 

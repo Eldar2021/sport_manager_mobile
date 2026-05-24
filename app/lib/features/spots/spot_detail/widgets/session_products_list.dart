@@ -36,7 +36,8 @@ class SessionProductsList extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                Flexible(
+
+                IntrinsicWidth(
                   child: FilledButton.icon(
                     onPressed: onAddProduct,
                     icon: const Icon(Icons.add, size: 16),
@@ -46,6 +47,7 @@ class SessionProductsList extends StatelessWidget {
                         horizontal: AppSpacing.x3,
                         vertical: AppSpacing.x2,
                       ),
+                      minimumSize: Size.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       textStyle: context.textTheme.labelMedium,
                     ),

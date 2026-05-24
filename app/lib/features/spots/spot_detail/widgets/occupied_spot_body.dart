@@ -96,13 +96,13 @@ class OccupiedSpotBody extends StatelessWidget {
             );
           },
         ),
+
         const SizedBox(height: AppSpacing.x4),
         SessionProductsList(
           currency: currency,
           onAddProduct: onAddProduct,
         ),
         const SizedBox(height: AppSpacing.x4),
-
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x16),
           child: AppOutlinedButton(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:product/product.dart';
 import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/spots/spots.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -21,11 +22,13 @@ class AddProductGridItem extends StatelessWidget {
     final unitShort = product.unit.localizedShortName(context.l10n);
     return GestureDetector(
       onTap: onTap,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: context.colors.surface,
+      child: Card(
+        color: context.colors.surface,
+        surfaceTintColor: context.colors.surface,
+        elevation: 0.5,
+        shape: RoundedRectangleBorder(
           borderRadius: AppRadius.cardBorderRadius,
-          border: Border.all(
+          side: BorderSide(
             color: context.colors.outlineVariant,
           ),
         ),
@@ -34,30 +37,33 @@ class AddProductGridItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _ProductIconBox(product),
+              ProductIconBox(
+                product,
+                size: 56,
+              ),
               const SizedBox(height: AppSpacing.x2),
               Text(
                 product.name,
-                style: context.textTheme.bodyMedium?.copyWith(
+                style: context.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: AppSpacing.x1),
+              const Spacer(),
               RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                       text: '${product.price} ',
-                      style: context.textTheme.bodyMedium?.copyWith(
+                      style: context.textTheme.bodyLarge?.copyWith(
                         color: context.colors.primary,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     TextSpan(
                       text: '${currency.toLowerCase()}/$unitShort',
-                      style: context.textTheme.bodySmall?.copyWith(
+                      style: context.textTheme.bodyMedium?.copyWith(
                         color: context.colors.onSurfaceVariant,
                       ),
                     ),
@@ -65,52 +71,6 @@ class AddProductGridItem extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ProductIconBox extends StatelessWidget {
-  const _ProductIconBox(this.product);
-
-  final ProductModel product;
-
-  @override
-  Widget build(BuildContext context) {
-    if (product.icon != null && product.icon!.isNotEmpty) {
-      return SizedBox(
-        width: 44,
-        height: 44,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: context.colors.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(AppSpacing.x2),
-          ),
-          child: Center(
-            child: Text(
-              product.icon!,
-              style: const TextStyle(fontSize: 24),
-            ),
-          ),
-        ),
-      );
-    }
-    final icon = product.category.icon;
-    return SizedBox(
-      width: 44,
-      height: 44,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: context.colors.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(AppSpacing.x2),
-        ),
-        child: Center(
-          child: Icon(
-            icon,
-            size: 22,
-            color: context.colors.onSurfaceVariant,
           ),
         ),
       ),
