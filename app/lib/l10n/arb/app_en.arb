@@ -624,5 +624,34 @@
   "productUnitKgShort": "kg",
   "productUnitLitreShort": "L",
   "productUnitPortionShort": "port.",
-  "productUnitHourShort": "hr"
+  "productUnitHourShort": "hr",
+  "reportsTopProductsTitle": "Top products",
+  "reportsProductsTitle": "Products",
+  "reportsSeeAll": "See all",
+  "reportsProductDetailTitle": "Product sales",
+  "reportsProductSoldLabel": "SOLD",
+  "reportsProductRevenueLabel": "REVENUE",
+  "reportsProductCurrentPrice": "Current price: {price} / pc",
+  "@reportsProductCurrentPrice": {
+    "placeholders": {
+      "price": { "type": "String" }
+    }
+  },
+  "reportsProductSalesLogTitle": "Sales log",
+  "reportsProductPriceAtTime": "Then: {old} · now: {current}",
+  "@reportsProductPriceAtTime": {
+    "placeholders": {
+      "old": { "type": "String" },
+      "current": { "type": "String" }
+    }
+  },
+  "productDeletedBadge": "This product has been deleted",
+  "reportsProductPriceHistoryTitle": "Price history",
+  "reportsProductPriceHistorySubtitle": "Sold at {count} different prices",
+  "@reportsProductPriceHistorySubtitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "reportsProductPriceNowBadge": "NOW"
 }

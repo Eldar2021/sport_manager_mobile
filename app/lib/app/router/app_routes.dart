@@ -23,4 +23,6 @@ abstract final class AppRoutes {
   static const subscriptionPayment = '/subscription/payment';
   static const products = '/products';
   static const productForm = '/products/form';
+  static const reportsVenueProducts = '/reports/venue/:venueId/products';
+  static const reportsVenueProductDetail = '/reports/venue/:venueId/product/:productId';
 }

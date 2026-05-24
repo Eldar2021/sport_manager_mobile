@@ -1143,4 +1143,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get productUnitHourShort => 'hr';
+
+  @override
+  String get reportsTopProductsTitle => 'Top products';
+
+  @override
+  String get reportsProductsTitle => 'Products';
+
+  @override
+  String get reportsSeeAll => 'See all';
+
+  @override
+  String get reportsProductDetailTitle => 'Product sales';
+
+  @override
+  String get reportsProductSoldLabel => 'SOLD';
+
+  @override
+  String get reportsProductRevenueLabel => 'REVENUE';
+
+  @override
+  String reportsProductCurrentPrice(String price) {
+    return 'Current price: $price / pc';
+  }
+
+  @override
+  String get reportsProductSalesLogTitle => 'Sales log';
+
+  @override
+  String reportsProductPriceAtTime(String old, String current) {
+    return 'Then: $old · now: $current';
+  }
+
+  @override
+  String get productDeletedBadge => 'This product has been deleted';
+
+  @override
+  String get reportsProductPriceHistoryTitle => 'Price history';
+
+  @override
+  String reportsProductPriceHistorySubtitle(int count) {
+    return 'Sold at $count different prices';
+  }
+
+  @override
+  String get reportsProductPriceNowBadge => 'NOW';
 }

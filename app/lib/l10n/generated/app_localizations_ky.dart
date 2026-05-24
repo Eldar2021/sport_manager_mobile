@@ -1139,4 +1139,49 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get productUnitHourShort => 'саат';
+
+  @override
+  String get reportsTopProductsTitle => 'Жогорку товарлар';
+
+  @override
+  String get reportsProductsTitle => 'Товарлар';
+
+  @override
+  String get reportsSeeAll => 'Баарын кёр';
+
+  @override
+  String get reportsProductDetailTitle => 'Товар сатуулары';
+
+  @override
+  String get reportsProductSoldLabel => 'САТЫЛГАН';
+
+  @override
+  String get reportsProductRevenueLabel => 'ТҮШҮМ';
+
+  @override
+  String reportsProductCurrentPrice(String price) {
+    return 'Учурдагы баасы: $price / шт';
+  }
+
+  @override
+  String get reportsProductSalesLogTitle => 'Сатуу журналы';
+
+  @override
+  String reportsProductPriceAtTime(String old, String current) {
+    return 'Ошондо: $old · азыр: $current';
+  }
+
+  @override
+  String get productDeletedBadge => 'Бул товар жоюлган';
+
+  @override
+  String get reportsProductPriceHistoryTitle => 'Баалар тарыхы';
+
+  @override
+  String reportsProductPriceHistorySubtitle(int count) {
+    return '$count башка баада сатылган';
+  }
+
+  @override
+  String get reportsProductPriceNowBadge => 'АЗЫР';
 }

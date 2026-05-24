@@ -2,6 +2,7 @@ import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:product/product.dart';
 import 'package:reports/reports.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/report/report.dart';
@@ -24,7 +25,10 @@ class _ReportOverviewViewState extends State<ReportOverviewView> with SingleTick
   @override
   void initState() {
     super.initState();
-    _cubit = ReportOverviewCubit(GetIt.I<ReportsRepository>());
+    _cubit = ReportOverviewCubit(
+      GetIt.I<ReportsRepository>(),
+      GetIt.I<ProductRepository>(),
+    );
     _tabController = TabController(
       length: _periods.length,
       vsync: this,
@@ -118,6 +122,8 @@ class _ReportOverviewViewState extends State<ReportOverviewView> with SingleTick
                         SpotsSection(cubit: _cubit, venueType: _resolveVenueType(context)),
                         const SizedBox(height: AppSpacing.x6),
                         TopManagersSection(_cubit),
+                        const SizedBox(height: AppSpacing.x6),
+                        TopProductsSection(_cubit),
                       ],
                     ),
                   ),
