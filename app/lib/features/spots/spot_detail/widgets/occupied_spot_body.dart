@@ -103,15 +103,23 @@ class OccupiedSpotBody extends StatelessWidget {
           onAddProduct: onAddProduct,
         ),
         const SizedBox(height: AppSpacing.x4),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x16),
-          child: AppOutlinedButton(
-            title: context.l10n.spotDetailMistakeLaunch,
-            icon: Icons.cancel_outlined,
-            onTap: onMistakeLaunch,
+        IntrinsicWidth(
+          child: FilledButton.icon(
+            onPressed: onMistakeLaunch,
+            icon: const Icon(Icons.cancel_outlined, size: 16),
+            label: Text(context.l10n.spotDetailMistakeLaunch),
+            style: FilledButton.styleFrom(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.x3,
+                vertical: AppSpacing.x2,
+              ),
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              textStyle: context.textTheme.labelMedium,
+            ),
           ),
         ),
-        const SizedBox(height: AppSpacing.x4),
+        const SizedBox(height: kAppButtonFabClearance),
       ],
     );
   }

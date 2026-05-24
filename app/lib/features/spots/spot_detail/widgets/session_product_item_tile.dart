@@ -30,8 +30,7 @@ class SessionProductItemTile extends StatelessWidget {
     final unitShort = _unitShort(context.l10n);
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.x3,
-        vertical: AppSpacing.x1,
+        horizontal: AppSpacing.x2,
       ),
       leading: _ProductIcon(item.categorySnapshot),
       title: Text(

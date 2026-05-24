@@ -123,22 +123,21 @@ class _ProductsCard extends StatelessWidget {
         borderRadius: AppRadius.cardBorderRadius,
         boxShadow: context.appColors.shadowSm,
       ),
-      child: Column(
-        children: [
-          for (int i = 0; i < products.length; i++) ...[
-            if (i > 0)
-              Divider(
-                color: context.colors.outlineVariant,
-                height: 1,
-                indent: AppSpacing.x4,
-              ),
-            SessionProductItemTile(
-              products[i],
-              currency: currency,
-              onRemove: () => _confirmRemove(context, cubit, products[i]),
-            ),
-          ],
-        ],
+      child: ListView.separated(
+        shrinkWrap: true,
+        padding: EdgeInsets.zero,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: products.length,
+        itemBuilder: (_, i) => SessionProductItemTile(
+          products[i],
+          currency: currency,
+          onRemove: () => _confirmRemove(context, cubit, products[i]),
+        ),
+        separatorBuilder: (_, _) => Divider(
+          color: context.colors.outlineVariant,
+          height: 1,
+          indent: AppSpacing.x4,
+        ),
       ),
     );
   }
