@@ -17,7 +17,7 @@ abstract interface class SessionRemoteSource {
     String? cancelReason,
   );
 
-  Future<SessionModel> addProductToSession(
+  Future<SessionProductItemModel> addProductToSession(
     String sessionId,
     String productId,
   );

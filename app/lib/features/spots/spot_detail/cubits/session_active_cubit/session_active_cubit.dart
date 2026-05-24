@@ -124,18 +124,12 @@ class SessionActiveCubit extends Cubit<SessionActiveState> {
 
   Future<void> addProductItem(String productId, {int quantity = 1}) async {
     if (state.addProductStatus is RequestLoading) return;
-    emit(
-      state.copyWith(
-        addProductStatus: const RequestLoading(),
-      ),
-    );
+    emit(state.copyWith(addProductStatus: const RequestLoading()));
     try {
       var session = state.session;
       for (var i = 0; i < quantity; i++) {
-        session = await _repo.addProductToSession(
-          session.id,
-          productId,
-        );
+        final item = await _repo.addProductToSession(session.id, productId);
+        session = _sessionWithItem(session, item);
       }
       emit(
         state.copyWith(
@@ -144,12 +138,32 @@ class SessionActiveCubit extends Cubit<SessionActiveState> {
         ),
       );
     } on Object catch (e) {
-      emit(
-        state.copyWith(
-          addProductStatus: RequestFailure(e),
-        ),
-      );
+      emit(state.copyWith(addProductStatus: RequestFailure(e)));
     }
+  }
+
+  SessionModel _sessionWithItem(SessionModel s, SessionProductItemModel item) {
+    final updated = [...s.products, item];
+    final productsAmount = updated.fold(0, (sum, p) => sum + p.priceSnapshot);
+    return SessionModel(
+      id: s.id,
+      spotId: s.spotId,
+      status: s.status,
+      startedAt: s.startedAt,
+      customerName: s.customerName,
+      totalPausedSeconds: s.totalPausedSeconds,
+      pausedAt: s.pausedAt,
+      tarifAmountSnapshot: s.tarifAmountSnapshot,
+      tarifTypeSnapshot: s.tarifTypeSnapshot,
+      endedAt: s.endedAt,
+      durationSeconds: s.durationSeconds,
+      subtotal: s.subtotal,
+      discountPercent: s.discountPercent,
+      totalAmount: s.totalAmount,
+      cancelReason: s.cancelReason,
+      products: updated,
+      productsAmount: productsAmount,
+    );
   }
 
   Future<void> removeProductItem(String itemId) async {

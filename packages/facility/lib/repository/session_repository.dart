@@ -33,7 +33,7 @@ final class SessionRepository {
     return _remote.cancelSession(sessionId, cancelReason);
   }
 
-  Future<SessionModel> addProductToSession(
+  Future<SessionProductItemModel> addProductToSession(
     String sessionId,
     String productId,
   ) {
