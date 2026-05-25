@@ -28,6 +28,8 @@ class _ProductPhotoPickerState extends State<ProductPhotoPicker> {
     final xFile = await _picker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 80,
+      maxWidth: 1080,
+      maxHeight: 1080,
     );
     if (xFile == null) return;
     widget.onPicked(File(xFile.path));
