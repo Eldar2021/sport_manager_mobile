@@ -94,12 +94,20 @@ class _ProductFormViewState extends State<ProductFormView> with ProductFormMixin
                     height: 100,
                     child: BlocBuilder<ProductFormCubit, ProductFormState>(
                       bloc: cubit,
-                      buildWhen: (a, b) => a.photoUrl != b.photoUrl || a.isUploading != b.isUploading,
+                      buildWhen: (a, b) =>
+                          a.photoUrl != b.photoUrl ||
+                          a.isUploading != b.isUploading ||
+                          a.icon != b.icon,
                       builder: (_, state) {
                         return ProductPhotoPicker(
                           initialUrl: state.photoUrl,
                           isLoading: state.isUploading,
-                          onPicked: cubit.uploadPhoto,
+                          icon: state.icon,
+                          onPicked: (file) {
+                            iconNotifier.value = null;
+                            cubit.uploadPhoto(file);
+                          },
+                          onDeleted: cubit.removePhoto,
                         );
                       },
                     ),
@@ -123,7 +131,10 @@ class _ProductFormViewState extends State<ProductFormView> with ProductFormMixin
                             return ProductIconPicker(
                               emojis: emojisByCategory[categoryNotifier.value] ?? [],
                               selected: iconNotifier.value,
-                              onChanged: (v) => iconNotifier.value = v,
+                              onChanged: (v) {
+                                iconNotifier.value = v;
+                                cubit.setIcon(v);
+                              },
                             );
                           },
                         ),
@@ -132,7 +143,6 @@ class _ProductFormViewState extends State<ProductFormView> with ProductFormMixin
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpacing.x4),
               AppTextField(
                 controller: nameCtr,
                 label: context.l10n.productsNameLabel,

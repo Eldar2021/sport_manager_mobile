@@ -3,7 +3,11 @@ import 'package:product/product.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
 class ProductIconBox extends StatelessWidget {
-  const ProductIconBox(this.product, {this.size = 44, super.key});
+  const ProductIconBox(
+    this.product, {
+    this.size = 44,
+    super.key,
+  });
 
   final ProductModel product;
   final double size;
@@ -23,8 +27,24 @@ class ProductIconBox extends StatelessWidget {
   }
 
   Widget _child(BuildContext context) {
-    if (product.icon != null && product.icon!.isNotEmpty) {
-      return Text(product.icon!, style: TextStyle(fontSize: size * 0.55));
+    final photoUrl = product.photoUrl;
+    if (photoUrl != null && photoUrl.isNotEmpty) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(AppSpacing.x2),
+        child: Image.network(
+          photoUrl,
+          width: size,
+          height: size,
+          fit: BoxFit.cover,
+        ),
+      );
+    }
+    final icon = product.icon;
+    if (icon != null && icon.isNotEmpty) {
+      return Text(
+        icon,
+        style: TextStyle(fontSize: size * 0.55),
+      );
     }
     return Icon(
       product.category.icon,
