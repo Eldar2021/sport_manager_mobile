@@ -1476,9 +1476,4 @@ class AppLocalizationsKy extends AppLocalizations {
     );
     return '$_temp0';
   }
-
-  @override
-  String managerReportsSpotTitle(int number) {
-    return 'Стол $number';
-  }
 }

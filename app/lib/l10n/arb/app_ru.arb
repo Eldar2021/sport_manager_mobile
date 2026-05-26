@@ -832,13 +832,5 @@
         "type": "int"
       }
     }
-  },
-  "managerReportsSpotTitle": "Стол {number}",
-  "@managerReportsSpotTitle": {
-    "placeholders": {
-      "number": {
-        "type": "int"
-      }
-    }
   }
 }

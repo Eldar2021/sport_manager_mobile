@@ -10,6 +10,8 @@ export 'extension/product_category_extension.dart';
 export 'extension/product_unit_extension.dart';
 export 'extension/tarif_type_extension.dart';
 export 'observability/app_talker.dart';
+export 'observability/dev_overlay_toggle.dart';
+export 'observability/dev_overlay_trigger.dart';
 export 'observability/talker_dev_overlay.dart';
 export 'remote_config/remote_config.dart';
 export 'state/data_state.dart';

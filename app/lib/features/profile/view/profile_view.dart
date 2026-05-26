@@ -2,12 +2,10 @@ import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_manager_mobile/core/core.dart';
-import 'package:sport_manager_mobile/env.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
-import 'package:talker_flutter/talker_flutter.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -19,12 +17,6 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   Future<void> _fetchProfile() {
     return context.read<ProfileCubit>().fetchProfile();
-  }
-
-  void _openTalker(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (_) => TalkerScreen(talker: talker)),
-    );
   }
 
   Future<void> _onLogout() {
@@ -107,8 +99,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: AppSpacing.x6),
             Align(
-              child: GestureDetector(
-                onLongPress: Env.isDev ? () => _openTalker(context) : null,
+              child: DevOverlayTrigger(
                 child: Text(
                   'Dula MVP',
                   style: context.appTextStyles.disabled.bodySmall,

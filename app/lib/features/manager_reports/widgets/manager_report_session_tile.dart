@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:manager_reports/manager_reports.dart';
 import 'package:sport_manager_mobile/features/manager_reports/manager_reports.dart';
+import 'package:sport_manager_mobile/features/venues/venues.dart';
 import 'package:sport_manager_mobile/l10n/l10n.dart';
 import 'package:sport_manager_mobile/ui/ui.dart';
 
@@ -19,7 +20,7 @@ class ManagerReportSessionTile extends StatelessWidget {
         '${ManagerReportFormat.timeOfDay(session.startedAt)} →'
         ' ${ManagerReportFormat.timeOfDay(session.endedAt)}';
     final duration = ManagerReportFormat.duration(session.durationSeconds, l10n);
-    final spotTitle = session.spotName ?? l10n.managerReportsSpotTitle(session.spotNumber);
+    final spotTitle = session.spotName ?? l10n.homeSpotTitle(session.venueType.spotLabel(context), session.spotNumber);
 
     return Card(
       margin: EdgeInsets.zero,

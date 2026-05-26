@@ -2672,12 +2672,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, one{{count} session} other{{count} sessions}}'**
   String managerReportsSessionsCount(int count);
-
-  /// No description provided for @managerReportsSpotTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Table {number}'**
-  String managerReportsSpotTitle(int number);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
