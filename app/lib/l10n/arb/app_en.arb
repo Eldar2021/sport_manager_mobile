@@ -832,13 +832,5 @@
         "type": "int"
       }
     }
-  },
-  "managerReportsSpotTitle": "Table {number}",
-  "@managerReportsSpotTitle": {
-    "placeholders": {
-      "number": {
-        "type": "int"
-      }
-    }
   }
 }
