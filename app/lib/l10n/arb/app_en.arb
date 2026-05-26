@@ -634,15 +634,21 @@
   "reportsProductCurrentPrice": "Current price: {price} / pc",
   "@reportsProductCurrentPrice": {
     "placeholders": {
-      "price": { "type": "String" }
+      "price": {
+        "type": "String"
+      }
     }
   },
   "reportsProductSalesLogTitle": "Sales log",
   "reportsProductPriceAtTime": "Then: {old} · now: {current}",
   "@reportsProductPriceAtTime": {
     "placeholders": {
-      "old": { "type": "String" },
-      "current": { "type": "String" }
+      "old": {
+        "type": "String"
+      },
+      "current": {
+        "type": "String"
+      }
     }
   },
   "productDeletedBadge": "This product has been deleted",
@@ -650,14 +656,18 @@
   "reportsProductPriceHistorySubtitle": "Sold at {count} different prices",
   "@reportsProductPriceHistorySubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "reportsProductPriceNowBadge": "NOW",
   "sessionOrderSection": "ORDER · {count}",
   "@sessionOrderSection": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "sessionOrderSectionLabel": "ORDER",
@@ -675,9 +685,160 @@
   "paymentProductsSection": "PRODUCTS · {count}",
   "@paymentProductsSection": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "paymentProductsTotal": "Products total",
-  "paymentSubtotalLine": "Subtotal"
+  "paymentSubtotalLine": "Subtotal",
+  "managerReportsTitle": "My reports",
+  "managerReportsBackToDay": "Day",
+  "managerReportsPeriodToday": "Today",
+  "managerReportsPeriodWeek": "Week",
+  "managerReportsPeriodMonth": "Month",
+  "managerReportsPeriodYear": "Year",
+  "managerReportsHeaderToday": "TODAY · {dayOfWeek}",
+  "@managerReportsHeaderToday": {
+    "placeholders": {
+      "dayOfWeek": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsHeaderWeek": "THIS WEEK",
+  "managerReportsHeaderMonth": "THIS MONTH",
+  "managerReportsHeaderYear": "THIS YEAR",
+  "managerReportsSummaryEarnedToday": "EARNED TODAY",
+  "managerReportsSummaryEarnedWeek": "EARNED THIS WEEK",
+  "managerReportsSummaryEarnedMonth": "EARNED THIS MONTH",
+  "managerReportsSummaryEarnedYear": "EARNED THIS YEAR",
+  "managerReportsSummaryTotal": "TOTAL",
+  "managerReportsSummarySessions": "SESSIONS",
+  "managerReportsSummaryOnShift": "ON SHIFT",
+  "managerReportsSessionsListLabel": "SESSIONS · {count}",
+  "@managerReportsSessionsListLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsSessionsEmpty": "No completed sessions yet today.",
+  "managerReportsDayOff": "Off day",
+  "managerReportsNowBadge": "NOW",
+  "managerReportsSessionsAbbr": "ses.",
+  "managerReportsWeekRangeTitle": "{from} — {to}",
+  "@managerReportsWeekRangeTitle": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsMonthDetailSummary": "{month} · TOTAL",
+  "@managerReportsMonthDetailSummary": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsDayOfWeekMon": "MONDAY",
+  "managerReportsDayOfWeekTue": "TUESDAY",
+  "managerReportsDayOfWeekWed": "WEDNESDAY",
+  "managerReportsDayOfWeekThu": "THURSDAY",
+  "managerReportsDayOfWeekFri": "FRIDAY",
+  "managerReportsDayOfWeekSat": "SATURDAY",
+  "managerReportsDayOfWeekSun": "SUNDAY",
+  "managerReportsDayOfWeekShortMon": "MON",
+  "managerReportsDayOfWeekShortTue": "TUE",
+  "managerReportsDayOfWeekShortWed": "WED",
+  "managerReportsDayOfWeekShortThu": "THU",
+  "managerReportsDayOfWeekShortFri": "FRI",
+  "managerReportsDayOfWeekShortSat": "SAT",
+  "managerReportsDayOfWeekShortSun": "SUN",
+  "managerReportsMonthShortJan": "Jan",
+  "managerReportsMonthShortFeb": "Feb",
+  "managerReportsMonthShortMar": "Mar",
+  "managerReportsMonthShortApr": "Apr",
+  "managerReportsMonthShortMay": "May",
+  "managerReportsMonthShortJun": "Jun",
+  "managerReportsMonthShortJul": "Jul",
+  "managerReportsMonthShortAug": "Aug",
+  "managerReportsMonthShortSep": "Sep",
+  "managerReportsMonthShortOct": "Oct",
+  "managerReportsMonthShortNov": "Nov",
+  "managerReportsMonthShortDec": "Dec",
+  "managerReportsMonthLongJan": "January",
+  "managerReportsMonthLongFeb": "February",
+  "managerReportsMonthLongMar": "March",
+  "managerReportsMonthLongApr": "April",
+  "managerReportsMonthLongMay": "May",
+  "managerReportsMonthLongJun": "June",
+  "managerReportsMonthLongJul": "July",
+  "managerReportsMonthLongAug": "August",
+  "managerReportsMonthLongSep": "September",
+  "managerReportsMonthLongOct": "October",
+  "managerReportsMonthLongNov": "November",
+  "managerReportsMonthLongDec": "December",
+  "managerReportsDurationHm": "{h}h {m}m",
+  "@managerReportsDurationHm": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsDurationH": "{h}h",
+  "@managerReportsDurationH": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsDurationM": "{m} min",
+  "@managerReportsDurationM": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsCurrencyKgs": "som",
+  "managerReportsCurrencyUsd": "$",
+  "managerReportsCurrencyRub": "₽",
+  "managerReportsCurrencyKzt": "₸",
+  "managerReportsCurrencyTry": "₺",
+  "managerReportsProductsBadge": "+ products {amount}",
+  "@managerReportsProductsBadge": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsSessionsCount": "{count, plural, one{{count} session} other{{count} sessions}}",
+  "@managerReportsSessionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsSpotTitle": "Table {number}",
+  "@managerReportsSpotTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  }
 }

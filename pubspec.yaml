@@ -16,6 +16,7 @@ workspace:
   - packages/subscription
   - packages/reports
   - packages/product
+  - packages/manager_reports
 
 dependencies:
   meta: ^1.17.0

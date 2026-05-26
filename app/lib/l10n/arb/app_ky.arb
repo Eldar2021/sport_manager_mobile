@@ -634,15 +634,21 @@
   "reportsProductCurrentPrice": "Учурдагы баасы: {price} / шт",
   "@reportsProductCurrentPrice": {
     "placeholders": {
-      "price": { "type": "String" }
+      "price": {
+        "type": "String"
+      }
     }
   },
   "reportsProductSalesLogTitle": "Сатуу журналы",
   "reportsProductPriceAtTime": "Ошондо: {old} · азыр: {current}",
   "@reportsProductPriceAtTime": {
     "placeholders": {
-      "old": { "type": "String" },
-      "current": { "type": "String" }
+      "old": {
+        "type": "String"
+      },
+      "current": {
+        "type": "String"
+      }
     }
   },
   "productDeletedBadge": "Бул товар жоюлган",
@@ -650,14 +656,18 @@
   "reportsProductPriceHistorySubtitle": "{count} башка баада сатылган",
   "@reportsProductPriceHistorySubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "reportsProductPriceNowBadge": "АЗЫР",
   "sessionOrderSection": "ЗАКАЗ · {count}",
   "@sessionOrderSection": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "sessionOrderSectionLabel": "БУЙРУТМА",
@@ -675,9 +685,160 @@
   "paymentProductsSection": "ТОВАРЛАР · {count}",
   "@paymentProductsSection": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "paymentProductsTotal": "Товарлар, жыйынтык",
-  "paymentSubtotalLine": "Жыйынтык"
+  "paymentSubtotalLine": "Жыйынтык",
+  "managerReportsTitle": "Менин отчётторум",
+  "managerReportsBackToDay": "Күн",
+  "managerReportsPeriodToday": "Бүгүн",
+  "managerReportsPeriodWeek": "Жума",
+  "managerReportsPeriodMonth": "Ай",
+  "managerReportsPeriodYear": "Жыл",
+  "managerReportsHeaderToday": "БҮГҮН · {dayOfWeek}",
+  "@managerReportsHeaderToday": {
+    "placeholders": {
+      "dayOfWeek": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsHeaderWeek": "БУЛ ЖУМА",
+  "managerReportsHeaderMonth": "БУЛ АЙ",
+  "managerReportsHeaderYear": "БУЛ ЖЫЛ",
+  "managerReportsSummaryEarnedToday": "БҮГҮН ТАПКАНЫМ",
+  "managerReportsSummaryEarnedWeek": "ЖУМАДА ТАПКАНЫМ",
+  "managerReportsSummaryEarnedMonth": "АЙДА ТАПКАНЫМ",
+  "managerReportsSummaryEarnedYear": "ЖЫЛДА ТАПКАНЫМ",
+  "managerReportsSummaryTotal": "ЖЫЙЫНТЫК",
+  "managerReportsSummarySessions": "СЕССИЯЛАР",
+  "managerReportsSummaryOnShift": "СМЕНАДА",
+  "managerReportsSessionsListLabel": "СЕССИЯЛАР · {count}",
+  "@managerReportsSessionsListLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsSessionsEmpty": "Бүгүн али аяктаган сессия жок.",
+  "managerReportsDayOff": "Эс алуу",
+  "managerReportsNowBadge": "АЗЫР",
+  "managerReportsSessionsAbbr": "сес.",
+  "managerReportsWeekRangeTitle": "{from} — {to}",
+  "@managerReportsWeekRangeTitle": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsMonthDetailSummary": "{month} · ЖЫЙЫНТЫК",
+  "@managerReportsMonthDetailSummary": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsDayOfWeekMon": "ДҮЙШӨМБҮ",
+  "managerReportsDayOfWeekTue": "ШЕЙШЕМБИ",
+  "managerReportsDayOfWeekWed": "ШАРШЕМБИ",
+  "managerReportsDayOfWeekThu": "БЕЙШЕМБИ",
+  "managerReportsDayOfWeekFri": "ЖУМА",
+  "managerReportsDayOfWeekSat": "ИШЕМБИ",
+  "managerReportsDayOfWeekSun": "ЖЕКШЕМБИ",
+  "managerReportsDayOfWeekShortMon": "ДШ",
+  "managerReportsDayOfWeekShortTue": "ШШ",
+  "managerReportsDayOfWeekShortWed": "ШР",
+  "managerReportsDayOfWeekShortThu": "БШ",
+  "managerReportsDayOfWeekShortFri": "ЖМ",
+  "managerReportsDayOfWeekShortSat": "ИШ",
+  "managerReportsDayOfWeekShortSun": "ЖК",
+  "managerReportsMonthShortJan": "Янв",
+  "managerReportsMonthShortFeb": "Фев",
+  "managerReportsMonthShortMar": "Мар",
+  "managerReportsMonthShortApr": "Апр",
+  "managerReportsMonthShortMay": "Май",
+  "managerReportsMonthShortJun": "Июн",
+  "managerReportsMonthShortJul": "Июл",
+  "managerReportsMonthShortAug": "Авг",
+  "managerReportsMonthShortSep": "Сен",
+  "managerReportsMonthShortOct": "Окт",
+  "managerReportsMonthShortNov": "Ноя",
+  "managerReportsMonthShortDec": "Дек",
+  "managerReportsMonthLongJan": "Январь",
+  "managerReportsMonthLongFeb": "Февраль",
+  "managerReportsMonthLongMar": "Март",
+  "managerReportsMonthLongApr": "Апрель",
+  "managerReportsMonthLongMay": "Май",
+  "managerReportsMonthLongJun": "Июнь",
+  "managerReportsMonthLongJul": "Июль",
+  "managerReportsMonthLongAug": "Август",
+  "managerReportsMonthLongSep": "Сентябрь",
+  "managerReportsMonthLongOct": "Октябрь",
+  "managerReportsMonthLongNov": "Ноябрь",
+  "managerReportsMonthLongDec": "Декабрь",
+  "managerReportsDurationHm": "{h}с {m}м",
+  "@managerReportsDurationHm": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsDurationH": "{h}с",
+  "@managerReportsDurationH": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsDurationM": "{m} мин",
+  "@managerReportsDurationM": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsCurrencyKgs": "сом",
+  "managerReportsCurrencyUsd": "$",
+  "managerReportsCurrencyRub": "₽",
+  "managerReportsCurrencyKzt": "₸",
+  "managerReportsCurrencyTry": "₺",
+  "managerReportsProductsBadge": "+ товарлар {amount}",
+  "@managerReportsProductsBadge": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsSessionsCount": "{count, plural, one{{count} сессия} other{{count} сессия}}",
+  "@managerReportsSessionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsSpotTitle": "Стол {number}",
+  "@managerReportsSpotTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  }
 }

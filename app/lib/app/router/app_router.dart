@@ -1,6 +1,7 @@
 import 'package:auth/auth.dart';
 import 'package:facility/facility.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:product/product.dart';
 import 'package:reports/reports.dart';
@@ -10,6 +11,7 @@ import 'package:sport_manager_mobile/env.dart';
 import 'package:sport_manager_mobile/features/auth/auth.dart';
 import 'package:sport_manager_mobile/features/home/home.dart';
 import 'package:sport_manager_mobile/features/main/main.dart';
+import 'package:sport_manager_mobile/features/manager_reports/manager_reports.dart';
 import 'package:sport_manager_mobile/features/managers/managers.dart';
 import 'package:sport_manager_mobile/features/product/product.dart';
 import 'package:sport_manager_mobile/features/profile/profile.dart';
@@ -187,7 +189,10 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
             routes: [
               GoRoute(
                 path: AppRoutes.report,
-                builder: (_, _) => const ReportOverviewView(),
+                builder: (context, _) {
+                  final isManager = context.read<AuthCubit>().state.isManager;
+                  return isManager ? const ManagerReportsView() : const ReportOverviewView();
+                },
                 routes: [
                   GoRoute(
                     path: 'managers/:id/:venueId',
@@ -204,6 +209,22 @@ GoRouter appRouter(AuthCubit authCubit, {GlobalKey<NavigatorState>? navigatorKey
                       spotId: state.pathParameters['id']!,
                       venueId: state.pathParameters['venueId']!,
                     ),
+                  ),
+                  GoRoute(
+                    path: 'days/:date',
+                    builder: (_, state) => DayDetailView(
+                      date: DateTime.parse(state.pathParameters['date']!),
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'months/:yearMonth',
+                    builder: (_, state) {
+                      final parts = state.pathParameters['yearMonth']!.split('-');
+                      return MonthDetailView(
+                        year: int.parse(parts[0]),
+                        month: int.parse(parts[1]),
+                      );
+                    },
                   ),
                 ],
               ),

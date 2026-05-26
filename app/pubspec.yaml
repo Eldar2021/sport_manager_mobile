@@ -30,6 +30,7 @@ dependencies:
   managers:
   subscription:
   reports:
+  manager_reports:
   product:
   image_picker:
   cupertino_icons:

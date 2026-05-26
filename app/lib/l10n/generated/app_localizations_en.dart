@@ -1240,4 +1240,249 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get paymentSubtotalLine => 'Subtotal';
+
+  @override
+  String get managerReportsTitle => 'My reports';
+
+  @override
+  String get managerReportsBackToDay => 'Day';
+
+  @override
+  String get managerReportsPeriodToday => 'Today';
+
+  @override
+  String get managerReportsPeriodWeek => 'Week';
+
+  @override
+  String get managerReportsPeriodMonth => 'Month';
+
+  @override
+  String get managerReportsPeriodYear => 'Year';
+
+  @override
+  String managerReportsHeaderToday(String dayOfWeek) {
+    return 'TODAY · $dayOfWeek';
+  }
+
+  @override
+  String get managerReportsHeaderWeek => 'THIS WEEK';
+
+  @override
+  String get managerReportsHeaderMonth => 'THIS MONTH';
+
+  @override
+  String get managerReportsHeaderYear => 'THIS YEAR';
+
+  @override
+  String get managerReportsSummaryEarnedToday => 'EARNED TODAY';
+
+  @override
+  String get managerReportsSummaryEarnedWeek => 'EARNED THIS WEEK';
+
+  @override
+  String get managerReportsSummaryEarnedMonth => 'EARNED THIS MONTH';
+
+  @override
+  String get managerReportsSummaryEarnedYear => 'EARNED THIS YEAR';
+
+  @override
+  String get managerReportsSummaryTotal => 'TOTAL';
+
+  @override
+  String get managerReportsSummarySessions => 'SESSIONS';
+
+  @override
+  String get managerReportsSummaryOnShift => 'ON SHIFT';
+
+  @override
+  String managerReportsSessionsListLabel(int count) {
+    return 'SESSIONS · $count';
+  }
+
+  @override
+  String get managerReportsSessionsEmpty => 'No completed sessions yet today.';
+
+  @override
+  String get managerReportsDayOff => 'Off day';
+
+  @override
+  String get managerReportsNowBadge => 'NOW';
+
+  @override
+  String get managerReportsSessionsAbbr => 'ses.';
+
+  @override
+  String managerReportsWeekRangeTitle(String from, String to) {
+    return '$from — $to';
+  }
+
+  @override
+  String managerReportsMonthDetailSummary(String month) {
+    return '$month · TOTAL';
+  }
+
+  @override
+  String get managerReportsDayOfWeekMon => 'MONDAY';
+
+  @override
+  String get managerReportsDayOfWeekTue => 'TUESDAY';
+
+  @override
+  String get managerReportsDayOfWeekWed => 'WEDNESDAY';
+
+  @override
+  String get managerReportsDayOfWeekThu => 'THURSDAY';
+
+  @override
+  String get managerReportsDayOfWeekFri => 'FRIDAY';
+
+  @override
+  String get managerReportsDayOfWeekSat => 'SATURDAY';
+
+  @override
+  String get managerReportsDayOfWeekSun => 'SUNDAY';
+
+  @override
+  String get managerReportsDayOfWeekShortMon => 'MON';
+
+  @override
+  String get managerReportsDayOfWeekShortTue => 'TUE';
+
+  @override
+  String get managerReportsDayOfWeekShortWed => 'WED';
+
+  @override
+  String get managerReportsDayOfWeekShortThu => 'THU';
+
+  @override
+  String get managerReportsDayOfWeekShortFri => 'FRI';
+
+  @override
+  String get managerReportsDayOfWeekShortSat => 'SAT';
+
+  @override
+  String get managerReportsDayOfWeekShortSun => 'SUN';
+
+  @override
+  String get managerReportsMonthShortJan => 'Jan';
+
+  @override
+  String get managerReportsMonthShortFeb => 'Feb';
+
+  @override
+  String get managerReportsMonthShortMar => 'Mar';
+
+  @override
+  String get managerReportsMonthShortApr => 'Apr';
+
+  @override
+  String get managerReportsMonthShortMay => 'May';
+
+  @override
+  String get managerReportsMonthShortJun => 'Jun';
+
+  @override
+  String get managerReportsMonthShortJul => 'Jul';
+
+  @override
+  String get managerReportsMonthShortAug => 'Aug';
+
+  @override
+  String get managerReportsMonthShortSep => 'Sep';
+
+  @override
+  String get managerReportsMonthShortOct => 'Oct';
+
+  @override
+  String get managerReportsMonthShortNov => 'Nov';
+
+  @override
+  String get managerReportsMonthShortDec => 'Dec';
+
+  @override
+  String get managerReportsMonthLongJan => 'January';
+
+  @override
+  String get managerReportsMonthLongFeb => 'February';
+
+  @override
+  String get managerReportsMonthLongMar => 'March';
+
+  @override
+  String get managerReportsMonthLongApr => 'April';
+
+  @override
+  String get managerReportsMonthLongMay => 'May';
+
+  @override
+  String get managerReportsMonthLongJun => 'June';
+
+  @override
+  String get managerReportsMonthLongJul => 'July';
+
+  @override
+  String get managerReportsMonthLongAug => 'August';
+
+  @override
+  String get managerReportsMonthLongSep => 'September';
+
+  @override
+  String get managerReportsMonthLongOct => 'October';
+
+  @override
+  String get managerReportsMonthLongNov => 'November';
+
+  @override
+  String get managerReportsMonthLongDec => 'December';
+
+  @override
+  String managerReportsDurationHm(int h, int m) {
+    return '${h}h ${m}m';
+  }
+
+  @override
+  String managerReportsDurationH(int h) {
+    return '${h}h';
+  }
+
+  @override
+  String managerReportsDurationM(int m) {
+    return '$m min';
+  }
+
+  @override
+  String get managerReportsCurrencyKgs => 'som';
+
+  @override
+  String get managerReportsCurrencyUsd => '\$';
+
+  @override
+  String get managerReportsCurrencyRub => '₽';
+
+  @override
+  String get managerReportsCurrencyKzt => '₸';
+
+  @override
+  String get managerReportsCurrencyTry => '₺';
+
+  @override
+  String managerReportsProductsBadge(String amount) {
+    return '+ products $amount';
+  }
+
+  @override
+  String managerReportsSessionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count sessions',
+      one: '$count session',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String managerReportsSpotTitle(int number) {
+    return 'Table $number';
+  }
 }
