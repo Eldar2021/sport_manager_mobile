@@ -95,9 +95,7 @@ class _ProductFormViewState extends State<ProductFormView> with ProductFormMixin
                     child: BlocBuilder<ProductFormCubit, ProductFormState>(
                       bloc: cubit,
                       buildWhen: (a, b) =>
-                          a.photoUrl != b.photoUrl ||
-                          a.isUploading != b.isUploading ||
-                          a.icon != b.icon,
+                          a.photoUrl != b.photoUrl || a.isUploading != b.isUploading || a.icon != b.icon,
                       builder: (_, state) {
                         return ProductPhotoPicker(
                           initialUrl: state.photoUrl,

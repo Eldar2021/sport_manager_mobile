@@ -35,8 +35,11 @@ final class DayCardModel extends Equatable {
   final Currency currency;
   final int sessions;
   final int shiftSeconds;
+  @JsonKey(name: 'today')
   final bool isToday;
+  @JsonKey(name: 'future')
   final bool isFuture;
+  @JsonKey(name: 'dayOff')
   final bool isDayOff;
 
   Map<String, dynamic> toJson() => _$DayCardModelToJson(this);

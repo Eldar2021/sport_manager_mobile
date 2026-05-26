@@ -14,8 +14,8 @@ MonthCardModel _$MonthCardModelFromJson(Map<String, dynamic> json) => MonthCardM
   currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
   sessions: (json['sessions'] as num).toInt(),
   shiftSeconds: (json['shiftSeconds'] as num).toInt(),
-  isCurrent: json['isCurrent'] as bool,
-  isFuture: json['isFuture'] as bool,
+  isCurrent: json['current'] as bool,
+  isFuture: json['future'] as bool,
   progressRatio: (json['progressRatio'] as num).toDouble(),
 );
 
@@ -27,8 +27,8 @@ Map<String, dynamic> _$MonthCardModelToJson(MonthCardModel instance) => <String,
   'currency': _$CurrencyEnumMap[instance.currency]!,
   'sessions': instance.sessions,
   'shiftSeconds': instance.shiftSeconds,
-  'isCurrent': instance.isCurrent,
-  'isFuture': instance.isFuture,
+  'current': instance.isCurrent,
+  'future': instance.isFuture,
   'progressRatio': instance.progressRatio,
 };
 

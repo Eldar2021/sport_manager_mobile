@@ -35,7 +35,9 @@ final class MonthCardModel extends Equatable {
   final Currency currency;
   final int sessions;
   final int shiftSeconds;
+  @JsonKey(name: 'current')
   final bool isCurrent;
+  @JsonKey(name: 'future')
   final bool isFuture;
 
   /// `revenue / max(revenue across the 12 months)`; 0.0 when no data.

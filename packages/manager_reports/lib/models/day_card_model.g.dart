@@ -15,9 +15,9 @@ DayCardModel _$DayCardModelFromJson(Map<String, dynamic> json) => DayCardModel(
   currency: $enumDecode(_$CurrencyEnumMap, json['currency']),
   sessions: (json['sessions'] as num).toInt(),
   shiftSeconds: (json['shiftSeconds'] as num).toInt(),
-  isToday: json['isToday'] as bool,
-  isFuture: json['isFuture'] as bool,
-  isDayOff: json['isDayOff'] as bool,
+  isToday: json['today'] as bool,
+  isFuture: json['future'] as bool,
+  isDayOff: json['dayOff'] as bool,
 );
 
 Map<String, dynamic> _$DayCardModelToJson(DayCardModel instance) => <String, dynamic>{
@@ -29,9 +29,9 @@ Map<String, dynamic> _$DayCardModelToJson(DayCardModel instance) => <String, dyn
   'currency': _$CurrencyEnumMap[instance.currency]!,
   'sessions': instance.sessions,
   'shiftSeconds': instance.shiftSeconds,
-  'isToday': instance.isToday,
-  'isFuture': instance.isFuture,
-  'isDayOff': instance.isDayOff,
+  'today': instance.isToday,
+  'future': instance.isFuture,
+  'dayOff': instance.isDayOff,
 };
 
 const _$DayOfWeekEnumMap = {

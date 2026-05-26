@@ -70,21 +70,9 @@ class ManagerReportSummaryCard extends StatelessWidget {
                   const SizedBox(height: AppSpacing.x2),
                   _AmountRow(amount: revenue, currency: currency),
                   const SizedBox(height: AppSpacing.x4),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _MetricCell(
-                          label: l10n.managerReportsSummarySessions,
-                          value: ManagerReportFormat.amount(sessions),
-                        ),
-                      ),
-                      Expanded(
-                        child: _MetricCell(
-                          label: l10n.managerReportsSummaryOnShift,
-                          value: ManagerReportFormat.duration(shiftSeconds, l10n),
-                        ),
-                      ),
-                    ],
+                  _MetricCell(
+                    label: l10n.managerReportsSummarySessions,
+                    value: ManagerReportFormat.amount(sessions),
                   ),
                 ],
               ),
