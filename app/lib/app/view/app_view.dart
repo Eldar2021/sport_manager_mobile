@@ -127,12 +127,17 @@ class _MyAppState extends State<MyApp> {
                 onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
                 child: child,
               );
-              if (!Env.isDev) return wrapped;
-              return Stack(
-                children: [
-                  Positioned.fill(child: wrapped),
-                  TalkerDevOverlay(_navigatorKey),
-                ],
+              return ValueListenableBuilder<bool>(
+                valueListenable: devOverlayEnabled,
+                builder: (_, enabled, _) {
+                  if (!enabled && !Env.isDev) return wrapped;
+                  return Stack(
+                    children: [
+                      Positioned.fill(child: wrapped),
+                      TalkerDevOverlay(_navigatorKey),
+                    ],
+                  );
+                },
               );
             },
           );
