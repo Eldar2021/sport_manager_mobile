@@ -70,6 +70,7 @@ mixin ProductFormMixin on State<ProductFormView> {
   void onCategoryChanged(ProductCategory c) {
     if (iconNotifier.value != null && !(emojisByCategory[c]?.contains(iconNotifier.value) ?? false)) {
       iconNotifier.value = null;
+      cubit.setIcon(null);
     }
     categoryNotifier.value = c;
   }

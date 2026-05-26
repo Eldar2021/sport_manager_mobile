@@ -13,25 +13,60 @@ class ProductFormCubit extends Cubit<ProductFormState> {
     ProductModel? existing,
   }) : _repository = productRepository,
        _productId = existing?.id,
-       super(ProductFormState(photoUrl: existing?.photoUrl));
+       super(
+         ProductFormState(
+           photoUrl: existing?.photoUrl,
+           icon: existing?.icon,
+         ),
+       );
 
   final ProductRepository _repository;
   final String? _productId;
 
   Future<void> uploadPhoto(File file) async {
     if (state.isUploading) return;
-    emit(state.copyWith(uploadStatus: const RequestLoading()));
+    emit(
+      ProductFormState(
+        submitStatus: state.submitStatus,
+        uploadStatus: const RequestLoading(),
+      ),
+    );
     try {
       final response = await _repository.uploadPhoto(file);
       emit(
-        state.copyWith(
+        ProductFormState(
+          submitStatus: state.submitStatus,
           uploadStatus: RequestSuccess(response.url),
           photoUrl: response.url,
         ),
       );
     } on Object catch (e) {
-      emit(state.copyWith(uploadStatus: RequestFailure(e)));
+      emit(
+        state.copyWith(
+          uploadStatus: RequestFailure(e),
+        ),
+      );
     }
+  }
+
+  void removePhoto() {
+    emit(
+      ProductFormState(
+        icon: state.icon,
+        submitStatus: state.submitStatus,
+      ),
+    );
+  }
+
+  void setIcon(String? icon) {
+    emit(
+      ProductFormState(
+        icon: icon,
+        submitStatus: state.submitStatus,
+        photoUrl: icon != null ? null : state.photoUrl,
+        uploadStatus: icon != null ? const RequestInitial() : state.uploadStatus,
+      ),
+    );
   }
 
   Future<void> submit(ProductCreateParam param) async {

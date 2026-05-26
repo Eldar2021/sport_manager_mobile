@@ -8,11 +8,13 @@ import 'package:sport_manager_mobile/ui/ui.dart';
 class OccupiedSpotBody extends StatelessWidget {
   const OccupiedSpotBody({
     required this.onMistakeLaunch,
+    required this.onAddProduct,
     required this.currency,
     super.key,
   });
 
   final VoidCallback onMistakeLaunch;
+  final VoidCallback onAddProduct;
   final String currency;
 
   String _statusLabel(BuildContext context, SessionModel session) {
@@ -94,17 +96,30 @@ class OccupiedSpotBody extends StatelessWidget {
             );
           },
         ),
-        const SizedBox(height: AppSpacing.x4),
 
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x16),
-          child: AppOutlinedButton(
-            title: context.l10n.spotDetailMistakeLaunch,
-            icon: Icons.cancel_outlined,
-            onTap: onMistakeLaunch,
-          ),
+        const SizedBox(height: AppSpacing.x4),
+        SessionProductsList(
+          currency: currency,
+          onAddProduct: onAddProduct,
         ),
         const SizedBox(height: AppSpacing.x4),
+        IntrinsicWidth(
+          child: FilledButton.icon(
+            onPressed: onMistakeLaunch,
+            icon: const Icon(Icons.cancel_outlined, size: 16),
+            label: Text(context.l10n.spotDetailMistakeLaunch),
+            style: FilledButton.styleFrom(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.x3,
+                vertical: AppSpacing.x2,
+              ),
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              textStyle: context.textTheme.labelMedium,
+            ),
+          ),
+        ),
+        const SizedBox(height: kAppButtonFabClearance),
       ],
     );
   }

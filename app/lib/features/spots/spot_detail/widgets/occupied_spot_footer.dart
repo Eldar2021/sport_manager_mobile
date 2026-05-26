@@ -25,34 +25,35 @@ class OccupiedSpotFooter extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.x4,
           ),
-          child: Column(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              FilledButton.icon(
+              Expanded(
+                child: FilledButton(
+                  onPressed: isPaused ? null : onStopPressed,
+                  style: FilledButton.styleFrom(
+                    backgroundColor: context.colors.error,
+                    foregroundColor: context.colors.onError,
+                    minimumSize: const Size(double.infinity, AppSpacing.x16),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: AppRadius.buttonBorderRadius,
+                    ),
+                  ),
+                  child: state.stopStatus.isLoading ? const AppActivityIndicator() : Text(context.l10n.spotDetailStop),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.x2),
+              FilledButton(
                 onPressed: isPaused ? sessionCubit.resumeSession : sessionCubit.pauseSession,
-                icon: Icon(isPaused ? Icons.play_arrow_rounded : Icons.pause_rounded),
                 style: FilledButton.styleFrom(
                   backgroundColor: isPaused ? context.appColors.success : context.colors.primary,
                   foregroundColor: context.colors.onPrimary,
-                  minimumSize: const Size(double.infinity, AppSpacing.x16),
+                  minimumSize: const Size(AppSpacing.x16, AppSpacing.x16),
                   shape: const RoundedRectangleBorder(
                     borderRadius: AppRadius.buttonBorderRadius,
                   ),
                 ),
-                label: Text(isPaused ? context.l10n.spotDetailResume : context.l10n.spotDetailPause),
-              ),
-              const SizedBox(height: AppSpacing.x3),
-              FilledButton(
-                onPressed: isPaused ? null : onStopPressed,
-                style: FilledButton.styleFrom(
-                  backgroundColor: context.colors.error,
-                  foregroundColor: context.colors.onError,
-                  minimumSize: const Size(double.infinity, AppSpacing.x16),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: AppRadius.buttonBorderRadius,
-                  ),
-                ),
-                child: state.stopStatus.isLoading ? const AppActivityIndicator() : Text(context.l10n.spotDetailStop),
+                child: Icon(isPaused ? Icons.play_arrow_rounded : Icons.pause_rounded),
               ),
             ],
           ),

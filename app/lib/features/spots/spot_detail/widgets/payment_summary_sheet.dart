@@ -25,7 +25,7 @@ class PaymentSummarySheet extends StatelessWidget {
         '${DateFormat('HH:mm').format(session.startedAt)} → ${DateFormat('HH:mm').format(DateTime.now())}';
     final tag = spot.description;
 
-    return Padding(
+    return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
         AppSpacing.x4,
         AppSpacing.x4,

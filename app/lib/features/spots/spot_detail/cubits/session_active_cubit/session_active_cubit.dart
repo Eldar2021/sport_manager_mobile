@@ -122,6 +122,73 @@ class SessionActiveCubit extends Cubit<SessionActiveState> {
     emit(state.copyWith(customDiscount: value));
   }
 
+  Future<void> addProductItem(String productId, {int quantity = 1}) async {
+    if (state.addProductStatus is RequestLoading) return;
+    emit(state.copyWith(addProductStatus: const RequestLoading()));
+    try {
+      var session = state.session;
+      for (var i = 0; i < quantity; i++) {
+        session = await _repo.addProductToSession(session.id, productId);
+      }
+      emit(
+        state.copyWith(
+          session: session,
+          addProductStatus: RequestSuccess(session),
+        ),
+      );
+    } on Object catch (e) {
+      emit(state.copyWith(addProductStatus: RequestFailure(e)));
+    }
+  }
+
+  Future<void> removeProductItem(String itemId) async {
+    final original = state.session;
+    final optimistic = _sessionWithoutItem(original, itemId);
+    emit(
+      state.copyWith(
+        session: optimistic,
+        removeProductStatus: const RequestLoading(),
+      ),
+    );
+    try {
+      final updated = await _repo.removeProductFromSession(
+        original.id,
+        itemId,
+      );
+      emit(
+        state.copyWith(
+          session: updated,
+          removeProductStatus: const RequestSuccess(null),
+        ),
+      );
+    } on Object catch (e) {
+      emit(
+        state.copyWith(
+          session: original,
+          removeProductStatus: RequestFailure(e),
+        ),
+      );
+    }
+  }
+
+  SessionModel _sessionWithoutItem(SessionModel s, String itemId) {
+    final remaining = s.products.where((i) => i.id != itemId).toList(growable: false);
+    final productsAmount = remaining.fold(0, (sum, i) => sum + i.priceSnapshot);
+    return SessionModel(
+      id: s.id,
+      spotId: s.spotId,
+      status: s.status,
+      startedAt: s.startedAt,
+      totalPausedSeconds: s.totalPausedSeconds,
+      pausedAt: s.pausedAt,
+      tarifAmountSnapshot: s.tarifAmountSnapshot,
+      tarifTypeSnapshot: s.tarifTypeSnapshot,
+      customerName: s.customerName,
+      products: remaining,
+      productsAmount: productsAmount,
+    );
+  }
+
   void updateSession(SessionModel session) {
     emit(state.copyWith(session: session));
   }

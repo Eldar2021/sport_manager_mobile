@@ -13,20 +13,40 @@ final class SessionProductItemModel extends Equatable {
     required this.productId,
     required this.nameSnapshot,
     required this.priceSnapshot,
+    required this.unitSnapshot,
+    required this.categorySnapshot,
+    required this.addedBy,
     required this.addedAt,
   });
 
-  factory SessionProductItemModel.fromJson(Map<String, dynamic> json) => _$SessionProductItemModelFromJson(json);
+  factory SessionProductItemModel.fromJson(Map<String, dynamic> json) {
+    return _$SessionProductItemModelFromJson(json);
+  }
 
   final String id;
   final String sessionId;
   final String productId;
   final String nameSnapshot;
   final int priceSnapshot;
+  final String unitSnapshot;
+  final String categorySnapshot;
+  final String addedBy;
   final DateTime addedAt;
 
-  Map<String, dynamic> toJson() => _$SessionProductItemModelToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$SessionProductItemModelToJson(this);
+  }
 
   @override
-  List<Object?> get props => [id, sessionId, productId, nameSnapshot, priceSnapshot, addedAt];
+  List<Object?> get props => [
+    id,
+    sessionId,
+    productId,
+    nameSnapshot,
+    priceSnapshot,
+    unitSnapshot,
+    categorySnapshot,
+    addedBy,
+    addedAt,
+  ];
 }

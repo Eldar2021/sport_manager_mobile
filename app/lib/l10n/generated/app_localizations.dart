@@ -2144,6 +2144,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'NOW'**
   String get reportsProductPriceNowBadge;
+
+  /// No description provided for @sessionOrderSection.
+  ///
+  /// In en, this message translates to:
+  /// **'ORDER · {count}'**
+  String sessionOrderSection(int count);
+
+  /// No description provided for @sessionOrderSectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ORDER'**
+  String get sessionOrderSectionLabel;
+
+  /// No description provided for @sessionOrderEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Guests asked for water or a snack? Add it — the amount will go to the final bill.'**
+  String get sessionOrderEmpty;
+
+  /// No description provided for @sessionAddProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Add product'**
+  String get sessionAddProduct;
+
+  /// No description provided for @sessionRemoveProductTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from order?'**
+  String get sessionRemoveProductTitle;
+
+  /// No description provided for @sessionRemoveProductSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This item will be removed from the order.'**
+  String get sessionRemoveProductSubtitle;
+
+  /// No description provided for @sessionRemoveProductConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get sessionRemoveProductConfirm;
+
+  /// No description provided for @spotDetailGameTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Game time'**
+  String get spotDetailGameTime;
+
+  /// No description provided for @spotDetailProductsTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get spotDetailProductsTotal;
+
+  /// No description provided for @addProductSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add product'**
+  String get addProductSheetTitle;
+
+  /// No description provided for @addProductQuantityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'QUANTITY'**
+  String get addProductQuantityLabel;
+
+  /// No description provided for @addProductTotalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TOTAL'**
+  String get addProductTotalLabel;
+
+  /// No description provided for @addProductConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get addProductConfirm;
+
+  /// No description provided for @paymentProductsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'PRODUCTS · {count}'**
+  String paymentProductsSection(int count);
+
+  /// No description provided for @paymentProductsTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Products total'**
+  String get paymentProductsTotal;
+
+  /// No description provided for @paymentSubtotalLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get paymentSubtotalLine;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

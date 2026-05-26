@@ -1205,4 +1205,56 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get reportsProductPriceNowBadge => 'СЕЙЧАС';
+
+  @override
+  String sessionOrderSection(int count) {
+    return 'ЗАКАЗ · $count';
+  }
+
+  @override
+  String get sessionOrderSectionLabel => 'ЗАКАЗ';
+
+  @override
+  String get sessionOrderEmpty => 'Гости попросили воду или закуску? Добавьте — сумма уйдёт в итоговый счёт.';
+
+  @override
+  String get sessionAddProduct => 'Добавить товар';
+
+  @override
+  String get sessionRemoveProductTitle => 'Убрать из заказа?';
+
+  @override
+  String get sessionRemoveProductSubtitle => 'Позиция будет удалена из заказа.';
+
+  @override
+  String get sessionRemoveProductConfirm => 'Убрать';
+
+  @override
+  String get spotDetailGameTime => 'Время игры';
+
+  @override
+  String get spotDetailProductsTotal => 'Товары';
+
+  @override
+  String get addProductSheetTitle => 'Добавить товар';
+
+  @override
+  String get addProductQuantityLabel => 'КОЛ-ВО';
+
+  @override
+  String get addProductTotalLabel => 'СУММА';
+
+  @override
+  String get addProductConfirm => 'Подтвердить';
+
+  @override
+  String paymentProductsSection(int count) {
+    return 'ТОВАРЫ · $count';
+  }
+
+  @override
+  String get paymentProductsTotal => 'Товары, итог';
+
+  @override
+  String get paymentSubtotalLine => 'Подытог';
 }

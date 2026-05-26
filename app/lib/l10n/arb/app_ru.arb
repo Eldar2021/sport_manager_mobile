@@ -653,5 +653,31 @@
       "count": { "type": "int" }
     }
   },
-  "reportsProductPriceNowBadge": "СЕЙЧАС"
+  "reportsProductPriceNowBadge": "СЕЙЧАС",
+  "sessionOrderSection": "ЗАКАЗ · {count}",
+  "@sessionOrderSection": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "sessionOrderSectionLabel": "ЗАКАЗ",
+  "sessionOrderEmpty": "Гости попросили воду или закуску? Добавьте — сумма уйдёт в итоговый счёт.",
+  "sessionAddProduct": "Добавить товар",
+  "sessionRemoveProductTitle": "Убрать из заказа?",
+  "sessionRemoveProductSubtitle": "Позиция будет удалена из заказа.",
+  "sessionRemoveProductConfirm": "Убрать",
+  "spotDetailGameTime": "Время игры",
+  "spotDetailProductsTotal": "Товары",
+  "addProductSheetTitle": "Добавить товар",
+  "addProductQuantityLabel": "КОЛ-ВО",
+  "addProductTotalLabel": "СУММА",
+  "addProductConfirm": "Подтвердить",
+  "paymentProductsSection": "ТОВАРЫ · {count}",
+  "@paymentProductsSection": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "paymentProductsTotal": "Товары, итог",
+  "paymentSubtotalLine": "Подытог"
 }

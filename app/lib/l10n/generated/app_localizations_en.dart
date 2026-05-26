@@ -1188,4 +1188,56 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reportsProductPriceNowBadge => 'NOW';
+
+  @override
+  String sessionOrderSection(int count) {
+    return 'ORDER · $count';
+  }
+
+  @override
+  String get sessionOrderSectionLabel => 'ORDER';
+
+  @override
+  String get sessionOrderEmpty => 'Guests asked for water or a snack? Add it — the amount will go to the final bill.';
+
+  @override
+  String get sessionAddProduct => 'Add product';
+
+  @override
+  String get sessionRemoveProductTitle => 'Remove from order?';
+
+  @override
+  String get sessionRemoveProductSubtitle => 'This item will be removed from the order.';
+
+  @override
+  String get sessionRemoveProductConfirm => 'Remove';
+
+  @override
+  String get spotDetailGameTime => 'Game time';
+
+  @override
+  String get spotDetailProductsTotal => 'Products';
+
+  @override
+  String get addProductSheetTitle => 'Add product';
+
+  @override
+  String get addProductQuantityLabel => 'QUANTITY';
+
+  @override
+  String get addProductTotalLabel => 'TOTAL';
+
+  @override
+  String get addProductConfirm => 'Confirm';
+
+  @override
+  String paymentProductsSection(int count) {
+    return 'PRODUCTS · $count';
+  }
+
+  @override
+  String get paymentProductsTotal => 'Products total';
+
+  @override
+  String get paymentSubtotalLine => 'Subtotal';
 }

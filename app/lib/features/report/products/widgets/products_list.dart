@@ -18,6 +18,7 @@ class ProductsList extends StatelessWidget {
     return Card(
       margin: EdgeInsets.zero,
       child: ListView.separated(
+        padding: EdgeInsets.zero,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: items.length,

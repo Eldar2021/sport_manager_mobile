@@ -80,7 +80,7 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
   ) {
     return _client
         .postType<SessionModel>(
-          '/api/v1/session/$sessionId/items',
+          '/api/v1/session/$sessionId/products',
           fromJson: SessionModel.fromJson,
           data: {'productId': productId},
         )
@@ -94,7 +94,7 @@ final class SessionRemoteSourceImpl implements SessionRemoteSource {
   ) {
     return _client
         .deleteType<SessionModel>(
-          '/api/v1/session/$sessionId/items/$itemId',
+          '/api/v1/session/$sessionId/products/$itemId',
           fromJson: SessionModel.fromJson,
         )
         .mapTo(FacilityExc.fromApiClientExc);
