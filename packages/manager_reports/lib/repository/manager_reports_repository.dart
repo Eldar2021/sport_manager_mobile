@@ -7,15 +7,26 @@ final class ManagerReportsRepository {
 
   final ManagerReportsRemoteSource _remote;
 
-  Future<DayReportModel> getToday({String? timezone}) => _remote.getToday(timezone: timezone);
+  Future<DayReportModel> getToday({String? timezone}) {
+    return _remote.getToday(timezone: timezone);
+  }
 
-  Future<WeekReportModel> getWeek({String? timezone}) => _remote.getWeek(timezone: timezone);
+  Future<WeekReportModel> getWeek({String? timezone}) {
+    return _remote.getWeek(timezone: timezone);
+  }
 
-  Future<MonthReportModel> getMonth({String? timezone}) => _remote.getMonth(timezone: timezone);
+  Future<MonthReportModel> getMonth({String? timezone}) {
+    return _remote.getMonth(timezone: timezone);
+  }
 
-  Future<YearReportModel> getYear({String? timezone}) => _remote.getYear(timezone: timezone);
+  Future<YearReportModel> getYear({String? timezone}) {
+    return _remote.getYear(timezone: timezone);
+  }
 
-  Future<DayReportModel> getDayDetail(DateTime date, {String? timezone}) {
+  Future<DayReportModel> getDayDetail(
+    DateTime date, {
+    String? timezone,
+  }) {
     return _remote.getDayDetail(date, timezone: timezone);
   }
 
@@ -24,6 +35,10 @@ final class ManagerReportsRepository {
     required int month,
     String? timezone,
   }) {
-    return _remote.getMonthDetail(year: year, month: month, timezone: timezone);
+    return _remote.getMonthDetail(
+      year: year,
+      month: month,
+      timezone: timezone,
+    );
   }
 }

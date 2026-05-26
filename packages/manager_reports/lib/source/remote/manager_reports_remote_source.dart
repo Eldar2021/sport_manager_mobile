@@ -14,7 +14,10 @@ abstract interface class ManagerReportsRemoteSource {
   Future<YearReportModel> getYear({String? timezone});
 
   /// `date` is interpreted in the user's local timezone (`YYYY-MM-DD`).
-  Future<DayReportModel> getDayDetail(DateTime date, {String? timezone});
+  Future<DayReportModel> getDayDetail(
+    DateTime date, {
+    String? timezone,
+  });
 
   /// `year` + `month` (1-12) → `YYYY-MM` on the wire.
   Future<MonthReportModel> getMonthDetail({
