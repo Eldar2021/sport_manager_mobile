@@ -5,6 +5,7 @@ export 'modules/auth_module.dart';
 export 'modules/core_module.dart';
 export 'modules/error_module.dart';
 export 'modules/facility_module.dart';
+export 'modules/manager_reports_module.dart';
 export 'modules/managers_module.dart';
 export 'modules/network_module.dart';
 export 'modules/product_module.dart';

@@ -1,0 +1,150 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:manager_reports/manager_reports.dart';
+import 'package:sport_manager_mobile/core/core.dart';
+import 'package:sport_manager_mobile/features/manager_reports/manager_reports.dart';
+import 'package:sport_manager_mobile/l10n/l10n.dart';
+import 'package:sport_manager_mobile/ui/ui.dart';
+
+/// `?period=TODAY` view — header + orange card + chronological session list.
+/// Also serves as the visual template for `DayDetailView`.
+class TodayView extends StatefulWidget {
+  const TodayView({super.key});
+
+  @override
+  State<TodayView> createState() => _TodayViewState();
+}
+
+class _TodayViewState extends State<TodayView> with AutomaticKeepAliveClientMixin {
+  late final TodayCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = TodayCubit(
+      GetIt.I<ManagerReportsRepository>(),
+    )..load();
+  }
+
+  @override
+  void dispose() {
+    _cubit.close();
+    super.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return RefreshIndicator.adaptive(
+      onRefresh: _cubit.load,
+      child: BlocBuilder<TodayCubit, DataState<DayReportModel>>(
+        bloc: _cubit,
+        builder: (_, state) => switch (state) {
+          DataInitial() || DataLoading() => const ManagerReportSkeleton(),
+          DataFailure(:final exception) => _FailureBody(
+            exception: exception,
+            onRetry: _cubit.load,
+          ),
+          DataSuccess(:final data) => _TodayBody(data),
+        },
+      ),
+    );
+  }
+}
+
+class _TodayBody extends StatelessWidget {
+  const _TodayBody(this.data);
+
+  final DayReportModel data;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final sessions = data.sessions;
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.x4,
+        AppSpacing.x4,
+        AppSpacing.x4,
+        AppSpacing.x8,
+      ),
+      children: [
+        ManagerReportHeader(
+          eyebrow: l10n.managerReportsHeaderToday(
+            ManagerReportFormat.dayOfWeekFull(data.dayOfWeek, l10n),
+          ),
+          title: ManagerReportFormat.fullDate(data.date, l10n),
+        ),
+        const SizedBox(height: AppSpacing.x3),
+        ManagerReportSummaryCard(
+          title: l10n.managerReportsSummaryEarnedToday,
+          revenue: data.summary.revenue,
+          currency: data.summary.currency,
+          sessions: data.summary.sessions,
+          shiftSeconds: data.summary.shiftSeconds,
+        ),
+        const SizedBox(height: AppSpacing.x4),
+        if (sessions.isEmpty)
+          const _EmptySessions()
+        else ...[
+          Text(
+            l10n.managerReportsSessionsListLabel(sessions.length),
+            style: context.textTheme.labelSmall?.copyWith(
+              color: context.colors.onSurfaceVariant,
+              letterSpacing: 1.2,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.x2),
+          for (final s in sessions) ...[
+            ManagerReportSessionTile(s),
+            const SizedBox(height: AppSpacing.x2),
+          ],
+        ],
+      ],
+    );
+  }
+}
+
+class _EmptySessions extends StatelessWidget {
+  const _EmptySessions();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.x6),
+      child: Text(
+        context.l10n.managerReportsSessionsEmpty,
+        textAlign: TextAlign.center,
+        style: context.appTextStyles.muted.bodyMedium,
+      ),
+    );
+  }
+}
+
+class _FailureBody extends StatelessWidget {
+  const _FailureBody({
+    required this.exception,
+    required this.onRetry,
+  });
+
+  final Object exception;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        const SizedBox(height: AppSpacing.x10),
+        ErrorBodyWidget(
+          exception,
+          onRetryPressed: onRetry,
+        ),
+      ],
+    );
+  }
+}

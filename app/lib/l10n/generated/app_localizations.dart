@@ -2240,6 +2240,444 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Subtotal'**
   String get paymentSubtotalLine;
+
+  /// No description provided for @managerReportsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My reports'**
+  String get managerReportsTitle;
+
+  /// No description provided for @managerReportsBackToDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get managerReportsBackToDay;
+
+  /// No description provided for @managerReportsPeriodToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get managerReportsPeriodToday;
+
+  /// No description provided for @managerReportsPeriodWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get managerReportsPeriodWeek;
+
+  /// No description provided for @managerReportsPeriodMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get managerReportsPeriodMonth;
+
+  /// No description provided for @managerReportsPeriodYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get managerReportsPeriodYear;
+
+  /// No description provided for @managerReportsHeaderToday.
+  ///
+  /// In en, this message translates to:
+  /// **'TODAY · {dayOfWeek}'**
+  String managerReportsHeaderToday(String dayOfWeek);
+
+  /// No description provided for @managerReportsHeaderWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'THIS WEEK'**
+  String get managerReportsHeaderWeek;
+
+  /// No description provided for @managerReportsHeaderMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'THIS MONTH'**
+  String get managerReportsHeaderMonth;
+
+  /// No description provided for @managerReportsHeaderYear.
+  ///
+  /// In en, this message translates to:
+  /// **'THIS YEAR'**
+  String get managerReportsHeaderYear;
+
+  /// No description provided for @managerReportsSummaryEarnedToday.
+  ///
+  /// In en, this message translates to:
+  /// **'EARNED TODAY'**
+  String get managerReportsSummaryEarnedToday;
+
+  /// No description provided for @managerReportsSummaryEarnedWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'EARNED THIS WEEK'**
+  String get managerReportsSummaryEarnedWeek;
+
+  /// No description provided for @managerReportsSummaryEarnedMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'EARNED THIS MONTH'**
+  String get managerReportsSummaryEarnedMonth;
+
+  /// No description provided for @managerReportsSummaryEarnedYear.
+  ///
+  /// In en, this message translates to:
+  /// **'EARNED THIS YEAR'**
+  String get managerReportsSummaryEarnedYear;
+
+  /// No description provided for @managerReportsSummaryTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'TOTAL'**
+  String get managerReportsSummaryTotal;
+
+  /// No description provided for @managerReportsSummarySessions.
+  ///
+  /// In en, this message translates to:
+  /// **'SESSIONS'**
+  String get managerReportsSummarySessions;
+
+  /// No description provided for @managerReportsSummaryOnShift.
+  ///
+  /// In en, this message translates to:
+  /// **'ON SHIFT'**
+  String get managerReportsSummaryOnShift;
+
+  /// No description provided for @managerReportsSessionsListLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'SESSIONS · {count}'**
+  String managerReportsSessionsListLabel(int count);
+
+  /// No description provided for @managerReportsSessionsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No completed sessions yet today.'**
+  String get managerReportsSessionsEmpty;
+
+  /// No description provided for @managerReportsDayOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off day'**
+  String get managerReportsDayOff;
+
+  /// No description provided for @managerReportsNowBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'NOW'**
+  String get managerReportsNowBadge;
+
+  /// No description provided for @managerReportsSessionsAbbr.
+  ///
+  /// In en, this message translates to:
+  /// **'ses.'**
+  String get managerReportsSessionsAbbr;
+
+  /// No description provided for @managerReportsWeekRangeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} — {to}'**
+  String managerReportsWeekRangeTitle(String from, String to);
+
+  /// No description provided for @managerReportsMonthDetailSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{month} · TOTAL'**
+  String managerReportsMonthDetailSummary(String month);
+
+  /// No description provided for @managerReportsDayOfWeekMon.
+  ///
+  /// In en, this message translates to:
+  /// **'MONDAY'**
+  String get managerReportsDayOfWeekMon;
+
+  /// No description provided for @managerReportsDayOfWeekTue.
+  ///
+  /// In en, this message translates to:
+  /// **'TUESDAY'**
+  String get managerReportsDayOfWeekTue;
+
+  /// No description provided for @managerReportsDayOfWeekWed.
+  ///
+  /// In en, this message translates to:
+  /// **'WEDNESDAY'**
+  String get managerReportsDayOfWeekWed;
+
+  /// No description provided for @managerReportsDayOfWeekThu.
+  ///
+  /// In en, this message translates to:
+  /// **'THURSDAY'**
+  String get managerReportsDayOfWeekThu;
+
+  /// No description provided for @managerReportsDayOfWeekFri.
+  ///
+  /// In en, this message translates to:
+  /// **'FRIDAY'**
+  String get managerReportsDayOfWeekFri;
+
+  /// No description provided for @managerReportsDayOfWeekSat.
+  ///
+  /// In en, this message translates to:
+  /// **'SATURDAY'**
+  String get managerReportsDayOfWeekSat;
+
+  /// No description provided for @managerReportsDayOfWeekSun.
+  ///
+  /// In en, this message translates to:
+  /// **'SUNDAY'**
+  String get managerReportsDayOfWeekSun;
+
+  /// No description provided for @managerReportsDayOfWeekShortMon.
+  ///
+  /// In en, this message translates to:
+  /// **'MON'**
+  String get managerReportsDayOfWeekShortMon;
+
+  /// No description provided for @managerReportsDayOfWeekShortTue.
+  ///
+  /// In en, this message translates to:
+  /// **'TUE'**
+  String get managerReportsDayOfWeekShortTue;
+
+  /// No description provided for @managerReportsDayOfWeekShortWed.
+  ///
+  /// In en, this message translates to:
+  /// **'WED'**
+  String get managerReportsDayOfWeekShortWed;
+
+  /// No description provided for @managerReportsDayOfWeekShortThu.
+  ///
+  /// In en, this message translates to:
+  /// **'THU'**
+  String get managerReportsDayOfWeekShortThu;
+
+  /// No description provided for @managerReportsDayOfWeekShortFri.
+  ///
+  /// In en, this message translates to:
+  /// **'FRI'**
+  String get managerReportsDayOfWeekShortFri;
+
+  /// No description provided for @managerReportsDayOfWeekShortSat.
+  ///
+  /// In en, this message translates to:
+  /// **'SAT'**
+  String get managerReportsDayOfWeekShortSat;
+
+  /// No description provided for @managerReportsDayOfWeekShortSun.
+  ///
+  /// In en, this message translates to:
+  /// **'SUN'**
+  String get managerReportsDayOfWeekShortSun;
+
+  /// No description provided for @managerReportsMonthShortJan.
+  ///
+  /// In en, this message translates to:
+  /// **'Jan'**
+  String get managerReportsMonthShortJan;
+
+  /// No description provided for @managerReportsMonthShortFeb.
+  ///
+  /// In en, this message translates to:
+  /// **'Feb'**
+  String get managerReportsMonthShortFeb;
+
+  /// No description provided for @managerReportsMonthShortMar.
+  ///
+  /// In en, this message translates to:
+  /// **'Mar'**
+  String get managerReportsMonthShortMar;
+
+  /// No description provided for @managerReportsMonthShortApr.
+  ///
+  /// In en, this message translates to:
+  /// **'Apr'**
+  String get managerReportsMonthShortApr;
+
+  /// No description provided for @managerReportsMonthShortMay.
+  ///
+  /// In en, this message translates to:
+  /// **'May'**
+  String get managerReportsMonthShortMay;
+
+  /// No description provided for @managerReportsMonthShortJun.
+  ///
+  /// In en, this message translates to:
+  /// **'Jun'**
+  String get managerReportsMonthShortJun;
+
+  /// No description provided for @managerReportsMonthShortJul.
+  ///
+  /// In en, this message translates to:
+  /// **'Jul'**
+  String get managerReportsMonthShortJul;
+
+  /// No description provided for @managerReportsMonthShortAug.
+  ///
+  /// In en, this message translates to:
+  /// **'Aug'**
+  String get managerReportsMonthShortAug;
+
+  /// No description provided for @managerReportsMonthShortSep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sep'**
+  String get managerReportsMonthShortSep;
+
+  /// No description provided for @managerReportsMonthShortOct.
+  ///
+  /// In en, this message translates to:
+  /// **'Oct'**
+  String get managerReportsMonthShortOct;
+
+  /// No description provided for @managerReportsMonthShortNov.
+  ///
+  /// In en, this message translates to:
+  /// **'Nov'**
+  String get managerReportsMonthShortNov;
+
+  /// No description provided for @managerReportsMonthShortDec.
+  ///
+  /// In en, this message translates to:
+  /// **'Dec'**
+  String get managerReportsMonthShortDec;
+
+  /// No description provided for @managerReportsMonthLongJan.
+  ///
+  /// In en, this message translates to:
+  /// **'January'**
+  String get managerReportsMonthLongJan;
+
+  /// No description provided for @managerReportsMonthLongFeb.
+  ///
+  /// In en, this message translates to:
+  /// **'February'**
+  String get managerReportsMonthLongFeb;
+
+  /// No description provided for @managerReportsMonthLongMar.
+  ///
+  /// In en, this message translates to:
+  /// **'March'**
+  String get managerReportsMonthLongMar;
+
+  /// No description provided for @managerReportsMonthLongApr.
+  ///
+  /// In en, this message translates to:
+  /// **'April'**
+  String get managerReportsMonthLongApr;
+
+  /// No description provided for @managerReportsMonthLongMay.
+  ///
+  /// In en, this message translates to:
+  /// **'May'**
+  String get managerReportsMonthLongMay;
+
+  /// No description provided for @managerReportsMonthLongJun.
+  ///
+  /// In en, this message translates to:
+  /// **'June'**
+  String get managerReportsMonthLongJun;
+
+  /// No description provided for @managerReportsMonthLongJul.
+  ///
+  /// In en, this message translates to:
+  /// **'July'**
+  String get managerReportsMonthLongJul;
+
+  /// No description provided for @managerReportsMonthLongAug.
+  ///
+  /// In en, this message translates to:
+  /// **'August'**
+  String get managerReportsMonthLongAug;
+
+  /// No description provided for @managerReportsMonthLongSep.
+  ///
+  /// In en, this message translates to:
+  /// **'September'**
+  String get managerReportsMonthLongSep;
+
+  /// No description provided for @managerReportsMonthLongOct.
+  ///
+  /// In en, this message translates to:
+  /// **'October'**
+  String get managerReportsMonthLongOct;
+
+  /// No description provided for @managerReportsMonthLongNov.
+  ///
+  /// In en, this message translates to:
+  /// **'November'**
+  String get managerReportsMonthLongNov;
+
+  /// No description provided for @managerReportsMonthLongDec.
+  ///
+  /// In en, this message translates to:
+  /// **'December'**
+  String get managerReportsMonthLongDec;
+
+  /// No description provided for @managerReportsDurationHm.
+  ///
+  /// In en, this message translates to:
+  /// **'{h}h {m}m'**
+  String managerReportsDurationHm(int h, int m);
+
+  /// No description provided for @managerReportsDurationH.
+  ///
+  /// In en, this message translates to:
+  /// **'{h}h'**
+  String managerReportsDurationH(int h);
+
+  /// No description provided for @managerReportsDurationM.
+  ///
+  /// In en, this message translates to:
+  /// **'{m} min'**
+  String managerReportsDurationM(int m);
+
+  /// No description provided for @managerReportsCurrencyKgs.
+  ///
+  /// In en, this message translates to:
+  /// **'som'**
+  String get managerReportsCurrencyKgs;
+
+  /// No description provided for @managerReportsCurrencyUsd.
+  ///
+  /// In en, this message translates to:
+  /// **'\$'**
+  String get managerReportsCurrencyUsd;
+
+  /// No description provided for @managerReportsCurrencyRub.
+  ///
+  /// In en, this message translates to:
+  /// **'₽'**
+  String get managerReportsCurrencyRub;
+
+  /// No description provided for @managerReportsCurrencyKzt.
+  ///
+  /// In en, this message translates to:
+  /// **'₸'**
+  String get managerReportsCurrencyKzt;
+
+  /// No description provided for @managerReportsCurrencyTry.
+  ///
+  /// In en, this message translates to:
+  /// **'₺'**
+  String get managerReportsCurrencyTry;
+
+  /// No description provided for @managerReportsProductsBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'+ products {amount}'**
+  String managerReportsProductsBadge(String amount);
+
+  /// No description provided for @managerReportsSessionsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} session} other{{count} sessions}}'**
+  String managerReportsSessionsCount(int count);
+
+  /// No description provided for @managerReportsSpotTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Table {number}'**
+  String managerReportsSpotTitle(int number);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

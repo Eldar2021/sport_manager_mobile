@@ -634,15 +634,21 @@
   "reportsProductCurrentPrice": "Текущая цена: {price} / шт",
   "@reportsProductCurrentPrice": {
     "placeholders": {
-      "price": { "type": "String" }
+      "price": {
+        "type": "String"
+      }
     }
   },
   "reportsProductSalesLogTitle": "Журнал продаж",
   "reportsProductPriceAtTime": "Тогда: {old} · сейчас: {current}",
   "@reportsProductPriceAtTime": {
     "placeholders": {
-      "old": { "type": "String" },
-      "current": { "type": "String" }
+      "old": {
+        "type": "String"
+      },
+      "current": {
+        "type": "String"
+      }
     }
   },
   "productDeletedBadge": "Товар удалён",
@@ -650,14 +656,18 @@
   "reportsProductPriceHistorySubtitle": "Продавался по {count} разным ценам",
   "@reportsProductPriceHistorySubtitle": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "reportsProductPriceNowBadge": "СЕЙЧАС",
   "sessionOrderSection": "ЗАКАЗ · {count}",
   "@sessionOrderSection": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "sessionOrderSectionLabel": "ЗАКАЗ",
@@ -675,9 +685,160 @@
   "paymentProductsSection": "ТОВАРЫ · {count}",
   "@paymentProductsSection": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "paymentProductsTotal": "Товары, итог",
-  "paymentSubtotalLine": "Подытог"
+  "paymentSubtotalLine": "Подытог",
+  "managerReportsTitle": "Мои отчёты",
+  "managerReportsBackToDay": "День",
+  "managerReportsPeriodToday": "Сегодня",
+  "managerReportsPeriodWeek": "Неделя",
+  "managerReportsPeriodMonth": "Месяц",
+  "managerReportsPeriodYear": "Год",
+  "managerReportsHeaderToday": "СЕГОДНЯ · {dayOfWeek}",
+  "@managerReportsHeaderToday": {
+    "placeholders": {
+      "dayOfWeek": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsHeaderWeek": "ЭТА НЕДЕЛЯ",
+  "managerReportsHeaderMonth": "ЭТОТ МЕСЯЦ",
+  "managerReportsHeaderYear": "ЭТОТ ГОД",
+  "managerReportsSummaryEarnedToday": "ЗАРАБОТАНО ЗА ДЕНЬ",
+  "managerReportsSummaryEarnedWeek": "ЗАРАБОТАНО ЗА НЕДЕЛЮ",
+  "managerReportsSummaryEarnedMonth": "ЗАРАБОТАНО ЗА МЕСЯЦ",
+  "managerReportsSummaryEarnedYear": "ЗАРАБОТАНО ЗА ГОД",
+  "managerReportsSummaryTotal": "ИТОГ",
+  "managerReportsSummarySessions": "СЕССИЙ",
+  "managerReportsSummaryOnShift": "НА СМЕНЕ",
+  "managerReportsSessionsListLabel": "СЕССИИ · {count}",
+  "@managerReportsSessionsListLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsSessionsEmpty": "Сегодня ещё нет завершённых сессий.",
+  "managerReportsDayOff": "Выходной",
+  "managerReportsNowBadge": "СЕЙЧАС",
+  "managerReportsSessionsAbbr": "сес.",
+  "managerReportsWeekRangeTitle": "{from} — {to}",
+  "@managerReportsWeekRangeTitle": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsMonthDetailSummary": "{month} · ИТОГ",
+  "@managerReportsMonthDetailSummary": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsDayOfWeekMon": "ПОНЕДЕЛЬНИК",
+  "managerReportsDayOfWeekTue": "ВТОРНИК",
+  "managerReportsDayOfWeekWed": "СРЕДА",
+  "managerReportsDayOfWeekThu": "ЧЕТВЕРГ",
+  "managerReportsDayOfWeekFri": "ПЯТНИЦА",
+  "managerReportsDayOfWeekSat": "СУББОТА",
+  "managerReportsDayOfWeekSun": "ВОСКРЕСЕНЬЕ",
+  "managerReportsDayOfWeekShortMon": "ПН",
+  "managerReportsDayOfWeekShortTue": "ВТ",
+  "managerReportsDayOfWeekShortWed": "СР",
+  "managerReportsDayOfWeekShortThu": "ЧТ",
+  "managerReportsDayOfWeekShortFri": "ПТ",
+  "managerReportsDayOfWeekShortSat": "СБ",
+  "managerReportsDayOfWeekShortSun": "ВС",
+  "managerReportsMonthShortJan": "Янв",
+  "managerReportsMonthShortFeb": "Фев",
+  "managerReportsMonthShortMar": "Мар",
+  "managerReportsMonthShortApr": "Апр",
+  "managerReportsMonthShortMay": "Май",
+  "managerReportsMonthShortJun": "Июн",
+  "managerReportsMonthShortJul": "Июл",
+  "managerReportsMonthShortAug": "Авг",
+  "managerReportsMonthShortSep": "Сен",
+  "managerReportsMonthShortOct": "Окт",
+  "managerReportsMonthShortNov": "Ноя",
+  "managerReportsMonthShortDec": "Дек",
+  "managerReportsMonthLongJan": "Январь",
+  "managerReportsMonthLongFeb": "Февраль",
+  "managerReportsMonthLongMar": "Март",
+  "managerReportsMonthLongApr": "Апрель",
+  "managerReportsMonthLongMay": "Май",
+  "managerReportsMonthLongJun": "Июнь",
+  "managerReportsMonthLongJul": "Июль",
+  "managerReportsMonthLongAug": "Август",
+  "managerReportsMonthLongSep": "Сентябрь",
+  "managerReportsMonthLongOct": "Октябрь",
+  "managerReportsMonthLongNov": "Ноябрь",
+  "managerReportsMonthLongDec": "Декабрь",
+  "managerReportsDurationHm": "{h}ч {m}м",
+  "@managerReportsDurationHm": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsDurationH": "{h}ч",
+  "@managerReportsDurationH": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsDurationM": "{m} мин",
+  "@managerReportsDurationM": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsCurrencyKgs": "сом",
+  "managerReportsCurrencyUsd": "$",
+  "managerReportsCurrencyRub": "₽",
+  "managerReportsCurrencyKzt": "₸",
+  "managerReportsCurrencyTry": "₺",
+  "managerReportsProductsBadge": "+ товары {amount}",
+  "@managerReportsProductsBadge": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "managerReportsSessionsCount": "{count, plural, one{{count} сессия} few{{count} сессии} other{{count} сессий}}",
+  "@managerReportsSessionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "managerReportsSpotTitle": "Стол {number}",
+  "@managerReportsSpotTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  }
 }

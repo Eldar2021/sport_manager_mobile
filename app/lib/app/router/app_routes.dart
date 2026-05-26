@@ -25,4 +25,6 @@ abstract final class AppRoutes {
   static const productForm = '/products/form';
   static const reportsVenueProducts = '/reports/venue/:venueId/products';
   static const reportsVenueProductDetail = '/reports/venue/:venueId/product/:productId';
+  static const managerReportsDay = '/report/days/:date';
+  static const managerReportsMonth = '/report/months/:yearMonth';
 }

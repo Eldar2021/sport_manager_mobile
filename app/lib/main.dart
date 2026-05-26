@@ -22,6 +22,7 @@ void main() async {
     const SubscriptionModule(),
     const ProductModule(),
     const ReportsModule(),
+    const ManagerReportsModule(),
   ]);
 
   runApp(const MyAppWrapper());

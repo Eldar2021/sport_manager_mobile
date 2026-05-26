@@ -1257,4 +1257,250 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get paymentSubtotalLine => 'Подытог';
+
+  @override
+  String get managerReportsTitle => 'Мои отчёты';
+
+  @override
+  String get managerReportsBackToDay => 'День';
+
+  @override
+  String get managerReportsPeriodToday => 'Сегодня';
+
+  @override
+  String get managerReportsPeriodWeek => 'Неделя';
+
+  @override
+  String get managerReportsPeriodMonth => 'Месяц';
+
+  @override
+  String get managerReportsPeriodYear => 'Год';
+
+  @override
+  String managerReportsHeaderToday(String dayOfWeek) {
+    return 'СЕГОДНЯ · $dayOfWeek';
+  }
+
+  @override
+  String get managerReportsHeaderWeek => 'ЭТА НЕДЕЛЯ';
+
+  @override
+  String get managerReportsHeaderMonth => 'ЭТОТ МЕСЯЦ';
+
+  @override
+  String get managerReportsHeaderYear => 'ЭТОТ ГОД';
+
+  @override
+  String get managerReportsSummaryEarnedToday => 'ЗАРАБОТАНО ЗА ДЕНЬ';
+
+  @override
+  String get managerReportsSummaryEarnedWeek => 'ЗАРАБОТАНО ЗА НЕДЕЛЮ';
+
+  @override
+  String get managerReportsSummaryEarnedMonth => 'ЗАРАБОТАНО ЗА МЕСЯЦ';
+
+  @override
+  String get managerReportsSummaryEarnedYear => 'ЗАРАБОТАНО ЗА ГОД';
+
+  @override
+  String get managerReportsSummaryTotal => 'ИТОГ';
+
+  @override
+  String get managerReportsSummarySessions => 'СЕССИЙ';
+
+  @override
+  String get managerReportsSummaryOnShift => 'НА СМЕНЕ';
+
+  @override
+  String managerReportsSessionsListLabel(int count) {
+    return 'СЕССИИ · $count';
+  }
+
+  @override
+  String get managerReportsSessionsEmpty => 'Сегодня ещё нет завершённых сессий.';
+
+  @override
+  String get managerReportsDayOff => 'Выходной';
+
+  @override
+  String get managerReportsNowBadge => 'СЕЙЧАС';
+
+  @override
+  String get managerReportsSessionsAbbr => 'сес.';
+
+  @override
+  String managerReportsWeekRangeTitle(String from, String to) {
+    return '$from — $to';
+  }
+
+  @override
+  String managerReportsMonthDetailSummary(String month) {
+    return '$month · ИТОГ';
+  }
+
+  @override
+  String get managerReportsDayOfWeekMon => 'ПОНЕДЕЛЬНИК';
+
+  @override
+  String get managerReportsDayOfWeekTue => 'ВТОРНИК';
+
+  @override
+  String get managerReportsDayOfWeekWed => 'СРЕДА';
+
+  @override
+  String get managerReportsDayOfWeekThu => 'ЧЕТВЕРГ';
+
+  @override
+  String get managerReportsDayOfWeekFri => 'ПЯТНИЦА';
+
+  @override
+  String get managerReportsDayOfWeekSat => 'СУББОТА';
+
+  @override
+  String get managerReportsDayOfWeekSun => 'ВОСКРЕСЕНЬЕ';
+
+  @override
+  String get managerReportsDayOfWeekShortMon => 'ПН';
+
+  @override
+  String get managerReportsDayOfWeekShortTue => 'ВТ';
+
+  @override
+  String get managerReportsDayOfWeekShortWed => 'СР';
+
+  @override
+  String get managerReportsDayOfWeekShortThu => 'ЧТ';
+
+  @override
+  String get managerReportsDayOfWeekShortFri => 'ПТ';
+
+  @override
+  String get managerReportsDayOfWeekShortSat => 'СБ';
+
+  @override
+  String get managerReportsDayOfWeekShortSun => 'ВС';
+
+  @override
+  String get managerReportsMonthShortJan => 'Янв';
+
+  @override
+  String get managerReportsMonthShortFeb => 'Фев';
+
+  @override
+  String get managerReportsMonthShortMar => 'Мар';
+
+  @override
+  String get managerReportsMonthShortApr => 'Апр';
+
+  @override
+  String get managerReportsMonthShortMay => 'Май';
+
+  @override
+  String get managerReportsMonthShortJun => 'Июн';
+
+  @override
+  String get managerReportsMonthShortJul => 'Июл';
+
+  @override
+  String get managerReportsMonthShortAug => 'Авг';
+
+  @override
+  String get managerReportsMonthShortSep => 'Сен';
+
+  @override
+  String get managerReportsMonthShortOct => 'Окт';
+
+  @override
+  String get managerReportsMonthShortNov => 'Ноя';
+
+  @override
+  String get managerReportsMonthShortDec => 'Дек';
+
+  @override
+  String get managerReportsMonthLongJan => 'Январь';
+
+  @override
+  String get managerReportsMonthLongFeb => 'Февраль';
+
+  @override
+  String get managerReportsMonthLongMar => 'Март';
+
+  @override
+  String get managerReportsMonthLongApr => 'Апрель';
+
+  @override
+  String get managerReportsMonthLongMay => 'Май';
+
+  @override
+  String get managerReportsMonthLongJun => 'Июнь';
+
+  @override
+  String get managerReportsMonthLongJul => 'Июль';
+
+  @override
+  String get managerReportsMonthLongAug => 'Август';
+
+  @override
+  String get managerReportsMonthLongSep => 'Сентябрь';
+
+  @override
+  String get managerReportsMonthLongOct => 'Октябрь';
+
+  @override
+  String get managerReportsMonthLongNov => 'Ноябрь';
+
+  @override
+  String get managerReportsMonthLongDec => 'Декабрь';
+
+  @override
+  String managerReportsDurationHm(int h, int m) {
+    return '$hч $mм';
+  }
+
+  @override
+  String managerReportsDurationH(int h) {
+    return '$hч';
+  }
+
+  @override
+  String managerReportsDurationM(int m) {
+    return '$m мин';
+  }
+
+  @override
+  String get managerReportsCurrencyKgs => 'сом';
+
+  @override
+  String get managerReportsCurrencyUsd => '\$';
+
+  @override
+  String get managerReportsCurrencyRub => '₽';
+
+  @override
+  String get managerReportsCurrencyKzt => '₸';
+
+  @override
+  String get managerReportsCurrencyTry => '₺';
+
+  @override
+  String managerReportsProductsBadge(String amount) {
+    return '+ товары $amount';
+  }
+
+  @override
+  String managerReportsSessionsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count сессий',
+      few: '$count сессии',
+      one: '$count сессия',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String managerReportsSpotTitle(int number) {
+    return 'Стол $number';
+  }
 }
